@@ -20,5 +20,6 @@ $page->start();
 
 echo "Current user status: ", $settings->status.PHP_EOL;
 print_r($settings->log);
+print_r($settings->settings['userlist']);
 //unset($_SERVER['REQUEST_URI']);
 $exectime = round((microtime(true) - $exectime), 3);

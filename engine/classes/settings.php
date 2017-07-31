@@ -33,9 +33,7 @@ class Settings {
         $this->getConfig();
         $this->getUsersList();
         $this->settings['autoload'] = array(CLASSES, CONTROLS);
-        $this->access = AccessControl::getInstance();
         $this->status = AccessControl::$accessdescriptor;
-        echo AccessControl::$accessdescriptor.PHP_EOL;
         $this->exec = $exectime;
     }
 
@@ -49,6 +47,10 @@ class Settings {
 
     private function getUsersList() {
         $this->settings['userlist'] = XML::XMLtoArray(XML::getXML(CONFIG.'userlist.xml'));
+    }
+
+    private function getCurrentUser() {
+        
     }
 
     public function __wakeup() {

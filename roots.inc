@@ -14,6 +14,7 @@ define('CONFIG', ENGINE.DS.'config'.DS);
 define('CONFIG_XML', CONFIG.DS.'xml'.DS);
 define('CONTROLS', ENGINE.'controls'.DS);
 define('CLASSES', ENGINE.'classes'.DS);
+define('INTERFACES', ENGINE.'interfaces'.DS);
 define('TRAITS', ENGINE.'traits'.DS);
 define('MODELS', ENGINE.'models'.DS);
 define('VIEWS', ENGINE.'views'.DS);
@@ -33,3 +34,4 @@ define('CSS', HTML.'css'.DS);
 */
 
 define('AUTOLOAD', ENGINE.'autoload.php');
+define('COMPOSER_AUTOLOAD', VENDOR.'autoload.php');

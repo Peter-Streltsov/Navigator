@@ -8,7 +8,7 @@ class Autoload {
 
     public function __construct() {
         spl_autoload_extensions('.php');
-        self::register();
+        static::register();
     }
 
     public static function loadtraits($trait) {
@@ -18,8 +18,14 @@ class Autoload {
         }
     }
 
+    public static function loadInterfaces() {
+        $interfaces = glob(INTERFACES, '*.php');
+        foreach ($interfaces as $file) {
+            require_once $file;
+        }
+    }
+
     public static function loadclass($class) {
-        //echo "loadclass autoload function".PHP_EOL;
         $class = strtolower($class);
         $filesystem = array(CLASSES, CONTROLS, MODELS, VIEWS);
         $class = explode("\\", $class);
@@ -46,5 +52,6 @@ class Autoload {
         spl_autoload_register(__NAMESPACE__.'\Autoload::loadclass');
         spl_autoload_register(__NAMESPACE__.'\Autoload::loadtraits');
         spl_autoload_register(__NAMESPACE__.'\Autoload::loadmodels');
+        spl_autoload_register(__NAMESPACE__.'\Autoload::loadInterfaces');
     }
 }

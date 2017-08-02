@@ -19,8 +19,6 @@ class Navigator {
 
     public function __construct() {
         global $settings;
-        //$settings->log[] = $settings->getMessage();
-        //$test = Settings::getInstance();
         $this->request();
     }
 
@@ -59,8 +57,6 @@ class Navigator {
         if ($this->action === null) {
             $this->action = 'index';
         }
-        /*$settings::$log[] = "Navigator->Controller: ".$this->controller;
-        $settings::$log[] = "Navigator->Action: ".$this->action;*/
         $this->controller = 'Controls\\'.$this->controller;
         $page = new $this->controller;
         $action = $this->action;

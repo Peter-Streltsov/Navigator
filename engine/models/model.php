@@ -10,10 +10,14 @@ abstract class Model {
     public function __construct() {
         global $settings;
         $this->quasiconstructor();
-        //$settings->log['model'] = static::$classname;
     }
 
     protected function quasiconstructor() {
+
+    }
+
+    protected function SQLquery($query) {
+        return \Classes\Settings::$connection->query($query);
     }
 
     public function index() {

@@ -19,9 +19,9 @@ class Autoload {
     }
 
     public static function loadInterfaces($interface) {
-        $filename = INTERFACES.$interface.'.php';
-        if (is_file($filename)) {
-            require_once $filename;
+        $files = glob(INTERFACES.'*.php');
+        foreach ($files as $file) {
+            require_once $file;
         }
     }
 

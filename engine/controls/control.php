@@ -7,8 +7,9 @@
 namespace Controls;
 
 use \Traits\Utils as Utils;
+use \Interfaces\Controller as Controller;
 
-abstract class Control {
+abstract class Control implements Controller {
 
     use Utils;
 

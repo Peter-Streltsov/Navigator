@@ -15,8 +15,7 @@ abstract class Control implements Controller {
 
     private static $model;
     public static $classname;
-    //Определяет доступ к контроллеру в целом
-    private $accesslevel;
+    private $accesslevel;  //Определяет доступ к контроллеру в целом
     private $view;
     private $layout = 'page.html';
     private $template;
@@ -26,6 +25,6 @@ abstract class Control implements Controller {
         global $exectime;
     }
 
-    protected function index() {
+    public function index() {
     }
 }

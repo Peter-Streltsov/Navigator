@@ -2,13 +2,14 @@
 
 namespace Models;
 
+use \Classes\Settings as Settings;
+
 abstract class Model {
 
     public $data;
     public static $classname = __CLASS__;
 
     public function __construct() {
-        global $settings;
         $this->quasiconstructor();
     }
 
@@ -21,6 +22,6 @@ abstract class Model {
     }
 
     public function index() {
-         return "Model is not specified - index function loaded";
+         return "Model is not specified - empty index method loaded";
     }
 }

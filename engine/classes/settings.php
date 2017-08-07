@@ -2,19 +2,23 @@
 
 namespace Classes;
 
+use \Classes\Connection as Connection;
+use \Classes\AccessControl as AccessControl;
+use \Traits\XML as XML;
+
 class Settings {
 
     /*
     * Singletone class for application settings and user parameters
     */
 
-    //use xml;
+    use XML;
 
-    public $settings = array();  //Various parameters and general settings
-    public $parameters = array();  // User parameters
+    public static $settings = array();  //Various parameters and general settings
+    public static $parameters = array();  // User parameters
+    public static $time;
     public static $connection;  // Databases connections ???
-    public $log = array();  //Log - loading classes and methods
-    public $exec;  //Время выполнения скрипта
+    public static $log = array();  //Log - loading classes and methods
     public $model;
     public $view;
     public static $descriptor_databaseuser;
@@ -24,14 +28,12 @@ class Settings {
     private static $_instance = null;
 
     private function __construct() {
-        global $exectime;
         //$this->getConfig();
-        $this->getUsersList();
+        static::getUsersList();
         static::$descriptor_databasetype = 'mysql';
         static::$descriptor_databaseuser = 'root';
-        static::$connection = \Classes\Connection::getInstance();
-        $this->descriptor_userstatus = \Classes\AccessControl::$accessdescriptor;
-        $this->exec = $exectime;
+        static::$connection = Connection::getInstance();
+        $this->descriptor_userstatus = AccessControl::$accessdescriptor;
     }
 
 
@@ -42,7 +44,7 @@ class Settings {
         $this->settings['config'] = $configfile; 
     }
 
-    private function getUsersList() {
+    private static function getUsersList() {
         //$this->settings['userlist'] = XML::XMLtoArray(XML::getXML(CONFIG.'userlist.xml'));
     }
 
@@ -64,5 +66,4 @@ class Settings {
         }
         return self::$_instance;
     }
-
-}
+} // end class

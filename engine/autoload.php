@@ -18,10 +18,10 @@ class Autoload {
         }
     }
 
-    public static function loadInterfaces() {
-        $interfaces = glob(INTERFACES, '*.php');
-        foreach ($interfaces as $file) {
-            require_once $file;
+    public static function loadInterfaces($interface) {
+        $filename = INTERFACES.$interface.'.php';
+        if (is_file($filename)) {
+            require_once $filename;
         }
     }
 

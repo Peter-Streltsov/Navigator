@@ -49,19 +49,15 @@ class Navigator {
                 }
     }
 
-    private function response() {
-        
-    }
-
     public function start() {
         if ($this->action === null) {
             $this->action = 'index';
         }
-        $this->controller = 'Controls\\'.$this->controller;
+        $this->controller = '\Controls\\'.$this->controller;
         $page = new $this->controller;
         $action = $this->action;
         if (php_sapi_name() === 'cli') {
-            $settings->log[] = 'Navigator-> you are running from CLI!';
+            \Classes\Settings::$log[] = 'Navigator-> you are running from CLI!';
             return;
         }
         else {

@@ -9,6 +9,7 @@ define('ROOT', dirname(realpath(__FILE__)));
 define('DATA', ROOT.DS.'data'.DS);
 define('XML', ROOT.DS.'XML'.DS);
 define('VENDOR', ROOT.DS.'vendor'.DS);
+define('TWIG', VENDOR.'twig'.DS);
 define('ENGINE', ROOT.DS.'engine'.DS);
 define('CONFIG', ENGINE.DS.'config'.DS);
 define('CONFIG_XML', CONFIG.DS.'xml'.DS);
@@ -30,7 +31,7 @@ define('BOOTSTRAP', HTML.'bootstrap'.DS);
 define('CSS', HTML.'css'.DS);
 
 /*
-*
+* autoloader files
 */
 
 define('AUTOLOAD', ENGINE.'autoload.php');

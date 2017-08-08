@@ -57,7 +57,7 @@ class Navigator {
         $page = new $this->controller;
         $action = $this->action;
         if (php_sapi_name() === 'cli') {
-            \Classes\Settings::$log[] = 'Navigator-> you are running from CLI!';
+            \Classes\Settings::$log['exit'] = __CLASS__.': you are running from CLI!';
             return;
         }
         else {

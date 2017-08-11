@@ -1,5 +1,7 @@
 <?php
 
+use \Classes\Settings as Settings;
+
 //require_once TRAITS.'xml.php';
 
 class Autoload {
@@ -26,6 +28,7 @@ class Autoload {
     }
 
     public static function loadclass($class) {
+        $autoload[] = $class;
         $class = strtolower($class);
         $filesystem = array(CLASSES, CONTROLS, MODELS, VIEWS);
         $class = explode("\\", $class);
@@ -42,6 +45,7 @@ class Autoload {
                 break;
             }
         }
+        Settings::$autoload[] = $autoload;
     }
 
     private static function loadmodels($modelclass) {

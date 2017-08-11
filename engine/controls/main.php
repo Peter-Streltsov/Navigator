@@ -15,7 +15,7 @@ class Main extends Control {
     public function __construct() {
         global $settings;
         $this->getStatus();
-        $this->model = 'Main';
+        static::$model = 'Main';
         $this->view = 'Main';
     }
 
@@ -23,5 +23,9 @@ class Main extends Control {
         $tpl = 'main.tpl';
         include LAYOUTS.'userlist.html';
         Settings::$log[] = "Index page from class Main loaded!";
+    }
+
+    public function logStatus() {
+        
     }
 }// end class

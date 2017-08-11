@@ -6,9 +6,10 @@
 
 namespace Classes;
 
-use Controls;
-use Models;
-use Views;
+use \Controls;
+use \Models;
+use \Views;
+use \Controls\Settings as Setings;
 
 class Navigator {
 
@@ -56,7 +57,7 @@ class Navigator {
         $this->controller = '\Controls\\'.$this->controller;
         $page = new $this->controller;
         $action = $this->action;
-        if (php_sapi_name() === 'cli') {
+        /*if (php_sapi_name() === 'cli') {
             \Classes\Settings::$log['exit'] = __CLASS__.': you are running from CLI!';
             return;
         }
@@ -64,6 +65,11 @@ class Navigator {
             if (method_exists($page, $action)) {
                 return $page->$action();
             }
-        }
+        }*/
+        $page->$action();
+    }
+
+    private function error() {
+        Settings::$log['current_controller'] = 'requested controller does not exist';
     }
 }

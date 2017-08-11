@@ -2,7 +2,7 @@
 
 namespace Classes;
 
-use \Classes\Connection as Connection;
+use \Database\Connection as Connection;
 use \Classes\AccessControl as AccessControl;
 use \Traits\XML as XML;
 
@@ -19,6 +19,7 @@ class Settings {
     public static $time;
     public static $connection;  // Databases connections ???
     public static $log = array();  //Log - loading classes and methods
+    public static $autoload = array(); // Logs autoloader function
     public $model;
     public $view;
     public static $descriptor_databaseuser;
@@ -32,16 +33,14 @@ class Settings {
         static::getUsersList();
         static::$descriptor_databasetype = 'mysql';
         static::$descriptor_databaseuser = 'root';
-        static::$connection = Connection::getInstance();
+        static::$connection = Connection::getConnection();
         $this->descriptor_userstatus = AccessControl::$accessdescriptor;
     }
 
 
     //Загрузка конфигурационного файла
     private function getConfig() {
-        $configfile = XML::getXML(CONFIG.'config.xml');
-        $configfile = XML::XMLtoArray($configfile);
-        $this->settings['config'] = $configfile; 
+
     }
 
     private static function getUsersList() {

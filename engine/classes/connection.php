@@ -1,13 +1,16 @@
 <?php
 
 namespace Classes;
+
 use \PDO;
 
 class Connection {
 
     public static $connection;
     private $type;
-    private $databaseuser;
+    private $host;
+    private $user;
+    private $password;
     private static $_instance = null;
 
     private function __construct() {
@@ -52,7 +55,7 @@ class Connection {
 
     }
 
-    public static function getInstance() {
+    public static function getConnection() {
         if (is_null(self::$_instance)) {
             self::$_instance = new self();
         }

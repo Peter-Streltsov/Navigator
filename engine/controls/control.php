@@ -8,12 +8,13 @@ namespace Controls;
 
 use \Traits\Utils as Utils;
 use \Interfaces\Controller as Controller;
+use \Models;
 
 abstract class Control implements Controller {
 
     use Utils;
 
-    private static $model;
+    public static $model;
     public static $classname;
     private $accesslevel;  //Определяет доступ к контроллеру в целом
     private $view;

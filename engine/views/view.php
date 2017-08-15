@@ -2,20 +2,24 @@
 
 namespace Views;
 
+use Controls;
+use \Controls\Settings as Settings;
+
 abstract class View {
 
-    private $landing = 'page';
+    private $loader;
+    private $twig;
 
-    private function __construct() {
-        global $settings;
-        $settings->log['viewclass'] = __CLASS__;
+    public static $layout;
+
+    public function __construct() {
+        /*Twig_Autoloader::register();
+        $this->loader = new Twig_Loader_Filesystem(TEMPLATES);
+        $this->twig = new Twig_Environment($loader, array('cache' => TWIG_CACHE));
+        var_dump($this->twig);*/
     }
 
-    private function quasiconstructor() {
-        
-    }
-
-    private function render() {
+    private function generate() {
         
     }
 

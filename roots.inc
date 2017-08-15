@@ -21,18 +21,20 @@ define('MODELS', ENGINE.'models'.DS);
 define('VIEWS', ENGINE.'views'.DS);
 
 /*
-*
+* HTML
 */
 
 define('HTML', ROOT.'assets'.DS);
 define('LAYOUTS', HTML.'layouts'.DS);
 define('TEMPLATES', HTML.'tpl'.DS);
+define('TWIG_CACHE', TEMPLATES.'cache'.DS);
 define('BOOTSTRAP', HTML.'bootstrap'.DS);
 define('CSS', HTML.'css'.DS);
 
 /*
-* autoloader files
+* autoloaders and configuration files
 */
 
+define('ROUTES', CONFIG.'routes.php');
 define('AUTOLOAD', ENGINE.'autoload.php');
 define('COMPOSER_AUTOLOAD', VENDOR.'autoload.php');

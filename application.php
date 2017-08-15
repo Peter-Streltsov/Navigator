@@ -14,6 +14,8 @@ require_once COMPOSER_AUTOLOAD;
 
 new Autoload;
 
+require_once ROUTES;
+
 $settings = Settings::getInstance();
 
 $page = new Navigator;
@@ -21,6 +23,7 @@ $page = new Navigator;
 $page->start();
 
 if (php_sapi_name() === 'cli') {
+    echo "Page will not be loaded - you are running from CLI!".PHP_EOL;
     echo "Current user status: ", $settings->descriptor_userstatus.PHP_EOL;
     //print_r(Settings::$autoload);
     print_r(Settings::$log);

@@ -27,7 +27,7 @@ define('VIEWS', ENGINE.'views'.DS);
 define('HTML', ROOT.'assets'.DS);
 define('LAYOUTS', HTML.'layouts'.DS);
 define('TEMPLATES', HTML.'tpl'.DS);
-define('TWIG_CACHE', TEMPLATES.'cache'.DS);
+define('TWIG_CACHE', HTML.'cache'.DS);
 define('BOOTSTRAP', HTML.'bootstrap'.DS);
 define('CSS', HTML.'css'.DS);
 
@@ -36,5 +36,6 @@ define('CSS', HTML.'css'.DS);
 */
 
 define('ROUTES', CONFIG.'routes.php');
+define('CONNECTIONS', CONFIG.'connections.php');
 define('AUTOLOAD', ENGINE.'autoload.php');
 define('COMPOSER_AUTOLOAD', VENDOR.'autoload.php');

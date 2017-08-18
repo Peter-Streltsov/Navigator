@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
 * Router class
 */
 
@@ -17,10 +17,30 @@ class Navigator {
     private $route;
     private $controller;
     private $action = null;
+    private $indexcontroller = null;
+
+    public static $index = null;
+    public static $routes = array();
 
     public function __construct() {
-        global $settings;
         $this->request();
+        static::Route();
+    }
+
+    public static function Index($string) {
+        static::$index = $string;
+    }
+
+    public static function Route($string = null) {
+        static::$routes[] = $string;
+    }
+
+    private function setIndex() {
+        if (static::$index == null) {
+            if ($_SERVER['REQUEST_URI'] == '/') {
+                $this->indexcontroller = 'main';
+            }
+        }
     }
 
     private function request() {
@@ -57,16 +77,20 @@ class Navigator {
         $this->controller = '\Controls\\'.$this->controller;
         $page = new $this->controller;
         $action = $this->action;
-        /*if (php_sapi_name() === 'cli') {
-            \Classes\Settings::$log['exit'] = __CLASS__.': you are running from CLI!';
+        if (php_sapi_name() === 'cli') {
+            echo "Page will not be loaded. You are running from CLI!".PHP_EOL;
+            echo "Current user status: ", Settings::$descriptor_userstatus.PHP_EOL;
+            print_r(Settings::$log);
             return;
         }
         else {
             if (method_exists($page, $action)) {
-                return $page->$action();
+                //echo "Method found".PHP_EOL;
+                echo $action.PHP_EOL;
+                $page->$action();
             }
-        }*/
-        $page->$action();
+        }
+        //$page->$action();
     }
 
     private function error() {

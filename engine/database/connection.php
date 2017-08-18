@@ -19,37 +19,6 @@ class Connection {
 
     } //end construct
 
-    private function defineMethod($type) {
-        if (preg_match("/sql/", $this->type)) {
-            switch ($this->type) {
-                case 'mysql':
-                return static::connectSQL($this->databaseuser, null);
-                break;
-                default:
-                return static::connectSQL($this->databaseuser, null);
-                break;
-            }
-        }
-        else {
-            exit('non SQL database!');
-        }
-    }
-
-    private function generateDsn() {
-
-    }
-
-    public static function connectSQL($user, $password = null) {
-        try {
-            static::$connection = new PDO("mysql:host=localhost;dbname=generic", $user, $password);
-        } catch (PDOException $exception) {
-            throw new DatabaseException($exception->getMessage(), $exception->getCode());
-        }
-        static::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        static::$connection->exec("set names utf8");
-        return static::$connection;
-    }
-
     private static function generateDns($type, $host, $databasename) {
         return $type.':host='.$host.';dbname='.$databasename;
     }

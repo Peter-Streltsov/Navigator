@@ -38,14 +38,16 @@ class Navigator {
     private function setIndex() {
         if (static::$index == null) {
             if ($_SERVER['REQUEST_URI'] == '/') {
-                $this->indexcontroller = 'main';
+                //$this->indexcontroller = 'main';
+                $this->indexcontroller = 'scintometrics';
             }
         }
     }
 
     private function request() {
         if (!isset($_SERVER['REQUEST_URI'])) {
-            $this->controller = 'Main';
+            //$this->controller = 'Main';
+            $this->controller = 'Scientometrics';
             $this->action = 'index';
         }
         else {
@@ -58,7 +60,7 @@ class Navigator {
                     $this->controller = $parts[0];
                     }
                     else {
-                        $this->controller = 'Main';
+                        $this->controller = 'Scientometrics';
                         }
                 if (count($parts) > 1) {
                     $this->action = $parts[1];
@@ -68,6 +70,10 @@ class Navigator {
                         }
                     }
                 }
+    }
+
+    private function response() {
+        
     }
 
     public function start() {
@@ -86,14 +92,18 @@ class Navigator {
         else {
             if (method_exists($page, $action)) {
                 //echo "Method found".PHP_EOL;
-                echo $action.PHP_EOL;
+                //echo $action.PHP_EOL;
                 $page->$action();
             }
         }
         //$page->$action();
     }
 
-    private function error() {
+    private function CLI() {
+
+    }
+
+    private function errorPage404() {
         Settings::$log['current_controller'] = 'requested controller does not exist';
     }
 }

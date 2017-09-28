@@ -14,33 +14,35 @@ class Settings {
 
     use XML;
 
+    private $configuration;
     public static $settings = array();  //Various parameters and general settings
     public static $parameters = array();  // User parameters
     public static $time;
     public static $connection;  // Databases connections ???
     public static $log = array();  //Log - loading classes and methods
     public static $autoload = array(); // Logs autoloader function
-    public $model;
-    public $view;
+    public static $model;
+    public static $view;
     public static $descriptor_databaseuser;
     public static $descriptor_databasepassword = null;
     public static $descriptor_databasetype;  //Тип подключаемой базы данных
-    public $descriptor_userstatus;  // Current user status
+    public static $descriptor_userstatus;  // Current user status
     private static $_instance = null;
 
     private function __construct() {
         //$this->getConfig();
-        static::getUsersList();
+        //static::getUsersList();
         static::$descriptor_databasetype = 'mysql';
         static::$descriptor_databaseuser = 'root';
-        static::$connection = Connection::getConnection();
-        $this->descriptor_userstatus = AccessControl::$accessdescriptor;
+        static::$descriptor_userstatus = AccessControl::$accessdescriptor;
+        $this->configuration = $this->getConfig();
+        //print_r($this->configuration);
     }
 
 
     //Загрузка конфигурационного файла
     private function getConfig() {
-
+        return parse_ini_file(CONFIG.'config.ini');
     }
 
     private static function getUsersList() {

@@ -1,7 +1,7 @@
 <?php
 
 /*
-* filesystem constants
+* filesystem configuration constants
 */
 
 define('DS', DIRECTORY_SEPARATOR);
@@ -13,6 +13,7 @@ define('TWIG', VENDOR.'twig'.DS);
 define('ENGINE', ROOT.'engine'.DS);
 define('CONFIG', ROOT.'config'.DS);
 define('CONTROLS', ENGINE.'controls'.DS);
+define('ACTIVERECORDS', CONTROLS.'activerecords');
 define('CLASSES', ENGINE.'classes'.DS);
 define('DATABASE', ENGINE.'database'.DS);
 define('INTERFACES', ENGINE.'interfaces'.DS);

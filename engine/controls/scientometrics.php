@@ -4,59 +4,61 @@ namespace Controls;
 
 use \Controls\Settings as Settings;
 use \Traits\Utils as Utils;
-//use \Twig_Autoloader as Twig_Autoloader;
+use \Models\Scientometrics_model;
+use \Database\Connection as Conection;
 
 class Scientometrics extends Control {
 
     use Utils;
 
-    public function __construct() {
-        static::$model = new \Models\Scientometrics_Model;
-        $this->view = new \Views\Scientometrics_View(static::$model);
-        static::getStatus();
-    }
-
     public function index() {
-        $method = __FUNCTION__;
-        $this->view->$method();
-    }
-
-    public function logStatus() {
-
+        $connection = Conection::getInstance();
+        $this->model = new \Models\Scientometrics_Model($connection::$connections['scientometrics']);
+        $data['data'] = 'Электронная наукометрическая база данных сведений о результативности деятельности научных сотрудников ЦЕИ РАН';
+        $this->generate('page.html', $data, 'main.tpl');
     }
 
     public function userlist() {
-        $method = __FUNCTION__;
-        $this->view->$method();
+        $connection = Conection::getInstance();
+        $this->model = new \Models\Scientometrics_Model($connection::$connections['scientometrics']);
+        $data['data'] = $this->model->userlist();
+        //print_r($data['data']);
+        $this->generate('page.html', $data, 'users.tpl');
     }
 
     public function editUser() {
+        $this->model = new \Models\Scientometics_model();
 
     }
 
     public function addArticle() {
+        $this->model = new \Models\Scientometics_model();
 
     }
 
     public function addReport() {
+        $this->model = new \Models\Scientometics_model();
 
     }
 
     public function addDissertation() {
+        $this->model = new \Models\Scientometics_model();
         
     }
 
     public function statisctics() {
+        $this->model = new \Models\Scientometics_model();
 
     }
 
     public function setValues() {
+        $this->model = new \Models\Scientometics_model();
 
     }
 
     public function controlPanel() {
-        $method = __FUNCTION__;
-        $this->view->$method();
+        $content['data'] = '';
+        $this->generate('page.html', $content, 'controlpanel.tpl');
     }
 
     private function load() {

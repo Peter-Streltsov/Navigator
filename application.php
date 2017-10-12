@@ -31,6 +31,8 @@ $page = new Navigator; //core
 
 new Application(); //bootstrap or here
 
+//print_r(Settings::$autoload);
+
 $page->start(); // core - start - rename to runtime and move to core(?)
 
 $exectime = round((microtime(true) - $exectime), 3);

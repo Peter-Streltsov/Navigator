@@ -2,8 +2,6 @@
 
 use \Classes\Settings as Settings;
 
-//require_once TRAITS.'xml.php';
-
 class Autoload {
 
     private $filesystem = array(CLASSES, CONTROLS, MODELS, VIEWS);
@@ -28,9 +26,9 @@ class Autoload {
     }
 
     public static function loadclass($class) {
-        $autoload[] = $class;
+        $autoload = $class;
         $class = strtolower($class);
-        $filesystem = array(CLASSES, CONTROLS, MODELS, VIEWS);
+        $filesystem = array(CLASSES, CONTROLS, MODELS, DATABASE, ACTIVERECORDS, TRAITS, VIEWS);
         $class = explode("\\", $class);
         if (count($class) > 1) {
             $class = array_diff($class, array());
@@ -44,12 +42,18 @@ class Autoload {
                 include $filename;
                 break;
             }
+            //print_r($settings->log);
         }
         Settings::$autoload[] = $autoload;
     }
 
     private static function loadmodels($modelclass) {
-        spl_autoload($modelclass);
+        //$modelclass = strtolower($modelclass);
+        //spl_autoload($modelclass);
+        $files = glob(MODELS.'*.php');
+        foreach ($files as $file) {
+            require_once $file;
+        }
     }
 
     private static function register() {

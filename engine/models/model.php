@@ -7,13 +7,10 @@ use \Classes\Settings as Settings;
 abstract class Model {
 
     public $data;
+    private $connection;
     public static $classname = __CLASS__;
 
     public function __construct() {
-        $this->quasiconstructor();
-    }
-
-    protected function quasiconstructor() {
 
     }
 

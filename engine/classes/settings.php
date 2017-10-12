@@ -12,7 +12,7 @@ class Settings {
     * Singletone class for application settings and user parameters
     */
 
-    use XML;
+    //use XML;
 
     private $configuration;
     public static $settings = array();  //Various parameters and general settings

@@ -9,6 +9,7 @@ use \Classes\Settings as Settings;
 use \Database\Connection as Connection;
 use \Classes\Application as Application;
 
+session_start();
 $exectime = microtime(true);
 
 //$_SERVER['REQUEST_URI'] = 'main/index';

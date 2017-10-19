@@ -11,40 +11,69 @@ use \Models;
 use \Views;
 use \Controls\Settings as Setings;
 
-class Navigator {
+class Navigator
+{
 
     private $settings;
     private $route;
     private $controller;
     private $action = null;
     private $indexcontroller = null;
+    private $handlers = array();
 
     public static $index = null;
     public static $routes = array();
 
-    public function __construct() {
+    public function __construct()
+    {
+        print_r(static::$routes);
         $this->request();
-        static::Route();
+        $this->directRequest();
+        //static::Route();
+    } // end function
+
+    public function get($route, $handler)
+    {
+        $this->append($route, $handler);
+    } // end function
+
+    public function post()
+    {
+
     }
 
-    public static function Index($string) {
+    public static function Index($string)
+    {
         static::$index = $string;
-    }
+    } // end function
 
-    public static function Route($string = null) {
+    public static function Route($string = null)
+    {
         static::$routes[] = $string;
-    }
+    } // end function
 
-    private function setIndex() {
+    private function append($route, $handler)
+    {
+        $this->handlers[] = [$route, $handler];
+    } // end function
+
+    private function request()
+    {
+
+    } // end function
+
+    private function setIndex()
+    {
         if (static::$index == null) {
             if ($_SERVER['REQUEST_URI'] == '/') {
                 //$this->indexcontroller = 'main';
                 $this->indexcontroller = 'scintometrics';
             }
         }
-    }
+    } // end function
 
-    private function request() {
+    private function directRequest()
+    {
         if (!isset($_SERVER['REQUEST_URI'])) {
             //$this->controller = 'Main';
             $this->controller = 'Scientometrics';
@@ -70,11 +99,7 @@ class Navigator {
                         }
                     }
                 }
-    }
-
-    private function response() {
-        
-    }
+    } // end function
 
     public function start() {
         if ($this->action === null) {
@@ -97,13 +122,10 @@ class Navigator {
             }
         }
         //$page->$action();
-    }
-
-    private function CLI() {
-
-    }
+    } // end function
 
     private function errorPage404() {
         Settings::$log['current_controller'] = 'requested controller does not exist';
-    }
-}
+    } // end function
+
+} // end class

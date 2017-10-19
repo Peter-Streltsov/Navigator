@@ -12,34 +12,49 @@ class Scientometrics_Model extends Model {
 
     private $connection;
 
-    public function __construct($connection = null) {
+    public function __construct($connection = null)
+    {
         $this->connection = $connection;
     }
 
-    private function connect() {
+    private function connect()
+    {
         return $this->connection;
     }
 
-    public function userlist() {
-         $result = $this->connection->prepare('SELECT setting, name, surname FROM authors');
-         $result->execute();
-         $result = $result->fetchAll(PDO::FETCH_ASSOC);
-         return $result;
-    }
-
-    public function editUser() {
+    private function query($query)
+    {
 
     }
 
-    public function addArticle() {
+    // общий список пользователей
+    public function userlist()
+    {
+        $result = $this->connection->prepare('SELECT id, setting, name, lastname, position, education, degree FROM authors');
+        $result->execute();
+        $result = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function userData($id)
+    {
+        $result = $this->connection->prepare("SELECT id, setting, name, lastname, position, education, degree FROM authors WHERE id=$id");
+        $result->execute();
+        return $result = $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function addArticle()
+    {
 
     }
 
-    public function addReport() {
+    public function addReport()
+    {
 
     }
 
-    public function addDissertation() {
+    public function addDissertation()
+    {
 
     }
 }

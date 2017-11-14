@@ -12,18 +12,12 @@ $configuration = [
 
 $application = new \Slim\App($configuration);
 
+// Containers
 $container = $application->getContainer();
 
-$container['views'] = function ($c) {
-    $view = new \Slim\Views\Twig('public/views', [
-        'cache' => false
-    ]);
-
-    $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
-    $view->addExtension(new \Slim\Views\TwigExtension($c['router'], $basePath));
-
-    return $view;
-};
+/**
+ * Routes
+ */
 
 // index page
 $application->get('/', function($request, $response) {

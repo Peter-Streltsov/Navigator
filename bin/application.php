@@ -12,6 +12,14 @@ $configuration = [
 
 $application = new \Slim\App($configuration);
 
+// Middleware
+// test
+$application->add(function($request, $response, $next) {
+    $response->getBody()->write('before app middleware');
+    $response = $next($request, $response);
+    return $response;
+});
+
 // Containers
 $container = $application->getContainer();
 

@@ -13,9 +13,12 @@ $configuration = [
 $application = new \Slim\App($configuration);
 
 // Middleware
-// test
-$application->add(function($request, $response, $next) {
-    $response->getBody()->write('before app middleware');
+
+//databaseconnection
+$application->add(function($request, $response, $next) use($application) {
+    $container = $application->getContainer();
+    $dsn = 'mysql:host=localhost;dbname=scientometrics';
+    $container['databaseconnection'] = new \PDO($dsn, 'root', '');
     $response = $next($request, $response);
     return $response;
 });
@@ -29,7 +32,12 @@ $container = $application->getContainer();
 
 // index page
 $application->get('/', function($request, $response) {
-    echo "index page";
+    var_dump($this->databaseconnection);
+    $response->getBody()->write('index page');
+});
+
+$application->get('/test', function($request, $response) {
+    $response->getBody()->write('test');
 });
 
 // total userlist or userinfo on single user

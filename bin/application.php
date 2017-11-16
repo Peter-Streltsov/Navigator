@@ -31,12 +31,21 @@ $application->get('/test', function($request, $response) {
 });
 
 // total userlist or userinfo on single user
-$application->get('/users/(:id)', function($request, $response, $id) {
+$application->get('/users/{:id}', function($request, $response, $id) {
     if (!isset($id)) {
         echo "exact user information";
     } else {
         echo "users list";
     }
+});
+
+$application->get('/edituser/{id}', function($request, $response, $id) {
+    //var_dump($id);
+    $response->getBody()->write("edit user - id:".$id['id']);
+});
+
+$application->get('/adduser', function($request, $response) {
+    $response->getBody()->write('adding user');
 });
 
 $application->get('/controlpanel', function($request, $response) {

@@ -5,3 +5,7 @@
 * /models
 * /public
 * /vendor
+
+### Dependencies
+* Slim PHP Framework
+* 

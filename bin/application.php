@@ -12,19 +12,9 @@ $configuration = [
 
 $application = new \Slim\App($configuration);
 
-// Middleware
+require_once CUSTOM_MIDDLEWARE; 
 
-//databaseconnection
-$application->add(function($request, $response, $next) use($application) {
-    $container = $application->getContainer();
-    $dsn = 'mysql:host=localhost;dbname=scientometrics';
-    $container['databaseconnection'] = new \PDO($dsn, 'root', '');
-    $response = $next($request, $response);
-    return $response;
-});
-
-// Containers
-$container = $application->getContainer();
+require_once CONTAINERS;
 
 /**
  * Routes
@@ -53,4 +43,5 @@ $application->get('/controlpanel', function($request, $response) {
     echo "controlpanel mockup";
 });
 
+// run
 $application->run();

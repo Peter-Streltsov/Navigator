@@ -2,6 +2,7 @@
 
 namespace Scientometrics\Bin;
 
+$container = $application->getContainer();
 
 // Twig container
 $container['views'] = function ($c) {

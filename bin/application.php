@@ -3,6 +3,7 @@
 namespace Scientometrics\Bin;
 
 use Slim\App;
+use Telegram\Bot\Api;
 
 $configuration = [
     'settings' => [
@@ -31,8 +32,8 @@ $application->get('/test', function($request, $response) {
 });
 
 // total userlist or userinfo on single user
-$application->get('/users/{:id}', function($request, $response, $id) {
-    if (!isset($id)) {
+$application->get('/users/{id}', function($request, $response, $id) {
+    if (isset($id['id'])) {
         echo "exact user information";
     } else {
         echo "users list";

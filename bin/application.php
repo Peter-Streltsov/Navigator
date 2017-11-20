@@ -49,6 +49,10 @@ $application->get('/adduser', function($request, $response) {
     $response->getBody()->write('adding user');
 });
 
+$application->get('/bot', function($request, $response) {
+    $response->getBody()->write('telegram bot');
+});
+
 $application->get('/controlpanel', function($request, $response) {
     echo "controlpanel mockup";
 });

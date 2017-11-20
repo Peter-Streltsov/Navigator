@@ -25,7 +25,7 @@ require_once CONTAINERS;
 // index page
 $application->get('/', function($request, $response) {
     //var_dump($this->databaseconnection);
-    new Articles();
+    new Models\Articles();
     $response->getBody()->write('index page');
 });
 

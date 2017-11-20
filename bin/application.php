@@ -4,6 +4,7 @@ namespace Scientometrics\Bin;
 
 use Slim\App;
 use Telegram\Bot\Api;
+use Scientometrics\Models as Models;
 
 $configuration = [
     'settings' => [
@@ -23,7 +24,8 @@ require_once CONTAINERS;
 
 // index page
 $application->get('/', function($request, $response) {
-    var_dump($this->databaseconnection);
+    //var_dump($this->databaseconnection);
+    new Articles();
     $response->getBody()->write('index page');
 });
 

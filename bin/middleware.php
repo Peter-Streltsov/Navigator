@@ -22,6 +22,7 @@ $application->add(function($request, $response, $next) use($application) {
         $e->getMessage();
     }
     finally {
+        $container['databaseconnection'] = 'connection failed';
         $response = $next($request, $response);
         return $response;
     }

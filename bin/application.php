@@ -25,7 +25,6 @@ require_once CONTAINERS;
 // index page
 $application->get('/', function($request, $response) {
     //var_dump($this->databaseconnection);
-    new Models\Articles();
     $response->getBody()->write('index page');
 });
 
@@ -36,9 +35,9 @@ $application->get('/test', function($request, $response) {
 // total userlist or userinfo on single user
 $application->get('/users/{id}', function($request, $response, $id) {
     if (isset($id['id'])) {
-        echo "exact user information";
+        $response->getBody()->write('information on user with id='.$id['id']);
     } else {
-        echo "users list";
+        $response->getBody()->write('general userlist');
     }
 });
 

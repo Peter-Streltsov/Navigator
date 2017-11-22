@@ -9,12 +9,9 @@ use Telegram\Bot\Commands\Command;
  * custom slim-php middleware
  */
 
-
 // database connection
-$application->add(function($request, $response, $next) use($application) {
-    $container = $application->getContainer();
+$application->add(function($request, $response, $next) use($application, $container) {
     $dsn = 'mysql:host=localhost;dbname=scientometrics';
-
     try {
         $container['databaseconnection'] = new \PDO($dsn, 'root', '');
     }
@@ -28,10 +25,14 @@ $application->add(function($request, $response, $next) use($application) {
     }
 });
 
+// adding Fluent container
+$application->add(function($request, $response, $next) use($application, $container) {
+    $container['fluent'] = new \FluentPDO($container['pdo']);
+});
+
 
 // adding telegram bot
-$application->add(function($request, $response, $next) use($application) {
-    $container = $application->getContainer();
+$application->add(function($request, $response, $next) use($application, $container) {
     $container['bot'] = new Api('token', true);
     $response = $next($request, $response);
     return $response;

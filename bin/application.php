@@ -14,9 +14,9 @@ $configuration = [
 
 $application = new \Slim\App($configuration);
 
-require_once CUSTOM_MIDDLEWARE; 
-
 require_once CONTAINERS;
+
+require_once CUSTOM_MIDDLEWARE; 
 
 /**
  * Routes

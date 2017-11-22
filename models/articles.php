@@ -2,13 +2,8 @@
 
 namespace Scientometrics\Models;
 
-class Articles
+class Articles extends Users
 {
-    private $id;
-    private $name;
-    private $lastname;
-    private $position;
-    private $edu;
 
     public function __construct()
     {

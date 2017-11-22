@@ -15,3 +15,8 @@ $container['views'] = function ($c) {
 
     return $view;
 };
+
+$container['pdo'] = function() {
+    $dsn = 'mysql:host=localhost;dbname=scientometrics';
+    return new \PDO($dsn, 'root', '');
+};

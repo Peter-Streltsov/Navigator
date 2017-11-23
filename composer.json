@@ -9,7 +9,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Scientometrics\\": "models"
+            "Scientometrics\\Models\\": "models"
         }
     }
 }

@@ -10,15 +10,19 @@ class Users
     private $position;
     private $edu;
 
-    private $pdo;
     private $fluent;
     
-    public function __construct(\PDO $pdo)
+    public function __construct(\FluentPDO $fluent)
     {
-        if($pdo) {
-            $this->pdo = $pdo;
-        }
+        $this->fluent = $fluent;
+    }
 
-        $this->fluent = new FluentPDO($this->pdo);
+    public function userlist()
+    {
+        $userlist = $this->fluent->from('authors')->select('id', 'name', 'lastname')->orderBy('id');
+        foreach ($userlist as $user) {
+            $data[] = $user;
+        }
+        return $data;
     }
 }

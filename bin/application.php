@@ -5,6 +5,8 @@ namespace Scientometrics\Bin;
 use Slim\App;
 use Telegram\Bot\Api;
 use Scientometrics\Models as Models;
+use Scientometrics\Config as Config;
+use Scientometrics\Bot as Bot;
 
 $configuration = [
     'settings' => [
@@ -21,6 +23,10 @@ require_once CUSTOM_MIDDLEWARE;
 /**
  * Routes
  */
+
+ /**
+  * GET contollers
+  */
 
 // index page
 $application->get('/', function($request, $response) {
@@ -42,7 +48,7 @@ $application->get('/users', function($request, $response, $id) {
 
 // exact user data/информация о конкретном пользователе
 $application->get('user/{id}', function($request, $response, $id) {
-
+    $users = new Models\Users($this->fluent);
 });
 
 //
@@ -51,9 +57,9 @@ $application->get('/edituser/{id}', function($request, $response, $id) {
     $response->getBody()->write("edit user - id:".$id['id']);
 });
 
-// adding user
-$application->get('/adduser', function($request, $response) {
-    $response->getBody()->write('adding user');
+// getting exact article by id
+$application->get('/article/{id}', function($request, $response, $id) {
+    $article = new Models\Articles($this->fluent);
 });
 
 // telegram bot
@@ -64,6 +70,23 @@ $application->get('/bot', function($request, $response) {
 // control panel - admin only access
 $application->get('/controlpanel', function($request, $response) {
     echo "controlpanel mockup";
+});
+
+/**
+ * POST contollers
+ */
+
+// adding user
+$application->post('/adduser', function($request, $response) {
+    $user = new Models\Users($this->fluent);
+    $response->getBody()->write('adding user');
+});
+
+// adding article
+$application->post('/addarticle', function($request, $response){
+    $user = new Models\Users($this->fluent); //???
+    $article = new Models\Articles($this->fluent);
+    $response->getBody()->write('adding another article');
 });
 
 

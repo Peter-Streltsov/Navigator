@@ -64,4 +64,24 @@ class Users extends Models\BaseModel
      * getters
      */
 
+     public function getName()
+     {
+         return $this->name;
+     } // end function
+
+     public function getLastname()
+     {
+         return $this->lastname;
+     } // end function
+
+     public function getPosition()
+     {
+         return $this->position;
+     } // end function
+
+     public function getEdu()
+     {
+         return $this->edu;
+     } // end function
+
 } // end class

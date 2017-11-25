@@ -41,7 +41,62 @@ class Users extends Models\BaseModel
 
     public function findUser()
     {
+        $this->fluent->insertInto('authors')->values($this->name, $this->lastname);
+    } // end function
 
+    /**
+     * setters
+     */
+
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    } // end function
+
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+        return $this;
+    } // end function
+
+    public function setPosition()
+    {
+        $this->position = $position;
+        return $this;
+    } // end function
+
+    public function setEdu($edu)
+    {
+        $this->edu = $edu;
+        return $this;
+    } // end function
+
+    /**
+     * getters
+     */
+
+     public function getName()
+     {
+         return $this->name;
+     } // end function
+
+     public function getLastname()
+     {
+         return $this->lastname;
+     } // end function
+
+     public function getPosition()
+     {
+         return $this->position;
+     } // end function
+
+     public function getEdu()
+     {
+         return $this->edu;
+     } // end function
+
+<<<<<<< HEAD
     }
 
 
@@ -103,4 +158,6 @@ class Users extends Models\BaseModel
         return $this->edu;
     } // end function
 
+=======
+>>>>>>> master
 } // end class

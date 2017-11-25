@@ -27,8 +27,41 @@ class Users extends Models\BaseModel
         return $user;
     }
 
-    public function adduser(array $parameters)
+    public function adduser()
     {
+        $this->fluent->insertInto('authors')->values($this->name, $this->lastname);
+    } // end function
 
-    }
+    /**
+     * setters
+     */
+
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    } // end function
+
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+        return $this;
+    } // end function
+
+    public function setPosition()
+    {
+        $this->position = $position;
+        return $this;
+    } // end function
+
+    public function setEdu($edu)
+    {
+        $this->edu = $edu;
+        return $this;
+    } // end function
+
+    /**
+     * getters
+     */
+
 } // end class

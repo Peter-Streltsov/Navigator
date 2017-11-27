@@ -12,18 +12,20 @@ class Users extends Models\BaseModel
     private $position;
     private $edu;
 
+    // getting full list of registered authors (not users!)
     public function userlist()
     {
-        $userlist = $this->fluent->from('authors')->select('id', 'name', 'lastname')->orderBy('id');
+        $userlist = $this->fluent->from('authors')->leftJoin('positions ON authors.position_key = positions.id')->select('authors.id', 'authors.name', 'authors.lastname', 'positions.position')->orderBy('id');
         foreach ($userlist as $user) {
             $data[] = $user;
         }
         return $data;
     } // end function
 
+    // getting exact author by author's id
     public function getUser($id)
     {
-        $user['userdata'] = $this->fluent->from('authors')->select('id', 'name', 'lastname');
+        $user['userdata'] = $this->fluent->from('authors')->leftJoin()->select('name', 'lastname')->where();
         return $user;
     } // end function
 
@@ -47,6 +49,16 @@ class Users extends Models\BaseModel
     /**
      * setters
      */
+
+    public function setUser()
+    {
+        $this->name = $name;
+        $this->lastname = $lastname;
+        $this->position = $position;
+        $this->edu = $edu;
+        $this->grade = $grade;
+        return $this;
+    }
 
     public function setName($name)
     {

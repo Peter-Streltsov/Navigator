@@ -10,11 +10,10 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        '2371fe58591751a9b725c6706865644e' => __DIR__ . '/..' . '/lichtner/fluentpdo/FluentPDO/FluentPDO.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -53,14 +52,6 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
-        ),
-        'M' => 
-        array (
-            'Monolog\\' => 8,
-        ),
-        'L' => 
-        array (
-            'Longman\\TelegramBot\\' => 20,
         ),
         'I' => 
         array (
@@ -176,14 +167,6 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'Monolog\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
-        ),
-        'Longman\\TelegramBot\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/longman/telegram-bot/src',
         ),
         'Interop\\Container\\' => 
         array (

@@ -41,14 +41,15 @@ $application->get('/test', function($request, $response) {
 
 // total userlist/таблица с данными всех пользователей
 $application->get('/users', function($request, $response, $id) {
-    $users = new Models\Users($this->fluent);
+    $users = new Models\Users($this->pdo);
     $data['users'] = $users->userlist();
-    //var_dump($data['users']);
+    var_dump($data['users']);
+    //var_dump($data['users2']);
 });
 
 // exact user data/информация о конкретном пользователе
 $application->get('user/{id}', function($request, $response, $id) {
-    $users = new Models\Users($this->fluent);
+    $users = new Models\Users($this->pdo);
 });
 
 //
@@ -59,7 +60,7 @@ $application->get('/edituser/{id}', function($request, $response, $id) {
 
 // getting exact article by id
 $application->get('/article/{id}', function($request, $response, $id) {
-    $article = new Models\Articles($this->fluent);
+    $article = new Models\Articles($this->pdo);
 });
 
 // telegram bot
@@ -78,13 +79,13 @@ $application->get('/controlpanel', function($request, $response) {
 
 // adding user
 $application->post('/adduser', function($request, $response) {
-    $user = new Models\Users($this->fluent);
+    $user = new Models\Users($this->pdo);
     $response->getBody()->write('adding user');
 });
 
 // adding article
 $application->post('/addarticle', function($request, $response){
-    $user = new Models\Users($this->fluent); //???
+    $user = new Models\Users($this->pdo); //???
     $article = new Models\Articles($this->fluent);
     $response->getBody()->write('adding another article');
 });

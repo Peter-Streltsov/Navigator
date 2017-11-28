@@ -77,6 +77,7 @@ $application->get('/articles/get/{id}', function($request, $response, $id) {
 $application->get('/monographies', function($request, $response) {
     $monographies = new Models\Monographies($this->pdo, $this->fluent);
     $data['monographies'] = $monographies->monographiesList();
+    var_dump($data['monographies']);
 });
 
 // monography by id

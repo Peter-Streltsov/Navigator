@@ -14,7 +14,12 @@ class Monographies extends Models\BaseModel
 
     public function monographiesList()
     {
-        $this->fluent->from('monographies');
+        $result = $this->fluent->from('monographies');
+        foreach ($result as $book)
+        {
+            $data[] = $book;
+        }
+        return $data;
     }
 
     public function monographyById()

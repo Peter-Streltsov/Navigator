@@ -48,8 +48,11 @@ $application->get('/users', function($request, $response, $id) {
 });
 
 // exact user data/информация о конкретном пользователе
-$application->get('user/{id}', function($request, $response, $id) {
-    $users = new Models\Users($this->pdo);
+$application->get('/user/{id}', function($request, $response, $id) {
+    $users = new Models\Users($this->pdo, $this->fluent);
+    $data['user'] = $users->getUser($id['id']);
+    var_dump($data['user']);
+    //$response->getBody()->write($id['id']);
 });
 
 //

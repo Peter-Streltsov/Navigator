@@ -15,20 +15,28 @@ class Users extends Models\BaseModel
     // getting full list of registered authors (not users!)
     public function userlist()
     {
-        $data['users'] = $this->pdo->prepare('select authors.name, authors.lastname, positions.position from authors left join positions on authors.position_key=positions.id');
-        $data['users']->execute();
-        return $data['users']->fetchAll(\PDO::FETCH_ASSOC);
+        $data = $this->pdo->prepare('select authors.id, authors.name, authors.lastname, positions.position from authors left join positions on authors.position_key=positions.id');
+        return $this->getArray($data);
     } // end function
 
     // getting exact author by author's id
     public function getUser($id)
     {
+        $result = $this->fluent->from('authors')
+                                    ->select(null)
+                                    ->select(array('authors.name', 'authors.lastname'))
+                                    ->leftJoin('positions ON authors.position_key=positions.id')
+                                    ->select('positions.position');
 
+        foreach ($result as $user) {
+            $data[] = $user;
+        }
+        return $data;
     } // end function
 
 
     // adding new user
-    public function addUser()
+    public function saveUser()
     {
 
     } // end function

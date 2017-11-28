@@ -20,3 +20,7 @@ $container['pdo'] = function() {
     $dsn = 'mysql:host=localhost;dbname=scientometrics';
     return new \PDO($dsn, 'root', '');
 };
+
+/*$conatiner['fluent'] = function() use($container) {
+    return new \FluentPDO($container['pdo']);
+};*/

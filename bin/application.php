@@ -48,7 +48,7 @@ $application->get('/users', function($request, $response, $id) {
 });
 
 // exact user data/информация о конкретном пользователе
-$application->get('/user/{id}', function($request, $response, $id) {
+$application->get('/users/get/{id}', function($request, $response, $id) {
     $users = new Models\Users($this->pdo, $this->fluent);
     $data['user'] = $users->getUser($id['id']);
     var_dump($data['user']);
@@ -56,14 +56,33 @@ $application->get('/user/{id}', function($request, $response, $id) {
 });
 
 //
-$application->get('/edituser/{id}', function($request, $response, $id) {
+$application->get('/users/edit/{id}', function($request, $response, $id) {
     //var_dump($id);
     $response->getBody()->write("edit user - id:".$id['id']);
 });
 
+// articles list
+$application->get('/articles', function($request, $response){
+    $articles = new Models\Articles($this->pdo, $this->fluent);
+    $data['articles'] = $articles->articlesList();
+    var_dump($data['articles']);
+});
+
 // getting exact article by id
-$application->get('/article/{id}', function($request, $response, $id) {
+$application->get('/articles/get/{id}', function($request, $response, $id) {
     $article = new Models\Articles($this->pdo);
+});
+
+// monographies list
+$application->get('/monographies', function($request, $response) {
+    $monographies = new Models\Monographies($this->pdo, $this->fluent);
+    $data['monographies'] = $monographies->monographiesList();
+});
+
+// monography by id
+$application->get('/monographies/get/{id}', function($request, $response, $id) {
+    $monographies = new Models\Monographies($this->pdo, $this->fluent);
+    $data['monographies'] = $monographies->monographyById($id['id']);
 });
 
 // telegram bot
@@ -81,13 +100,21 @@ $application->get('/controlpanel', function($request, $response) {
  */
 
 // adding user
-$application->post('/adduser', function($request, $response) {
+$application->post('/users/add', function($request, $response) {
     $user = new Models\Users($this->pdo);
+
+    $user->setName($_POST['name'])
+                                ->setLastname($_POST['lastname'])
+                                ->setPosition($_POST['position'])
+                                ->setEdu($_POST['edu'])
+                                ->setGrade($_POST['grade'])
+                                ->saveUser();
+
     $response->getBody()->write('adding user');
 });
 
 // adding article
-$application->post('/addarticle', function($request, $response){
+$application->post('/articles/add', function($request, $response){
     $user = new Models\Users($this->pdo); //???
     $article = new Models\Articles($this->fluent);
     $response->getBody()->write('adding another article');

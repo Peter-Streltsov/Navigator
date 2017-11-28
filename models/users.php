@@ -25,6 +25,7 @@ class Users extends Models\BaseModel
         $result = $this->fluent->from('authors')
                                     ->select(null)
                                     ->select(array('authors.name', 'authors.lastname'))
+                                    ->where('authors.id', $id)
                                     ->leftJoin('positions ON authors.position_key=positions.id')
                                     ->select('positions.position');
 
@@ -38,7 +39,13 @@ class Users extends Models\BaseModel
     // adding new user
     public function saveUser()
     {
-
+        $name = $this->name;
+        $lastname = $this->lastname;
+        $position = $this->fluent->from('positions')->select(null)->select('id')->where('position', $this->position);
+        $edu = $this->edu;
+        $grade = $this->grade;
+        $values = [$name, $lastname, $position, $edu, $grade];
+        $this->fluent->insertInto('authors')->values($values);
     } // end function
 
     public function deleteUser()
@@ -54,16 +61,6 @@ class Users extends Models\BaseModel
     /**
      * setters
      */
-
-    public function setUser()
-    {
-        $this->name = $name;
-        $this->lastname = $lastname;
-        $this->position = $position;
-        $this->edu = $edu;
-        $this->grade = $grade;
-        return $this;
-    }
 
     public function setName($name)
     {

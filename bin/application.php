@@ -91,6 +91,12 @@ $application->get('/bot', function($request, $response) {
     $response->getBody()->write('telegram bot');
 });
 
+// creating tables
+$application->get('/createdatabaselayout', function($request, $response) {
+    $database = new Models\Layout($this->pdo);
+    $database->createLayout();
+});
+
 // control panel - admin only access
 $application->get('/controlpanel', function($request, $response) {
     echo "controlpanel mockup";

@@ -22,15 +22,23 @@ class Layout extends BaseModel
 
     private function createAuthors()
     {
-        if ($this->pdo->query("CREATE TABLE IF NOT EXISTS `authors2` 
-                                                                (`id` int(11) NOT NULL AUTO_INCREMENT,
-                                                                `name` varchar(30) NOT NULL,
-                                                                `lastname` varchar(30) NOT NULL,
-                                                                PRIMARY KEY (`id`)) Engine=InnoDB DEFAULT CHARSET=utf8;")) 
-                                            {
-            echo "таблица 'authors' создана;<br>";
-        } else {
-            echo "не получилось создать таблицу 'authors';<br>";
+        if ($this->pdo->query("CREATE TABLE scientometrics.authors2 (
+            id int(11) NOT NULL AUTO_INCREMENT,
+            name varchar(50) NOT NULL,
+            lastname varchar(50) NOT NULL,
+            position_key int(11) DEFAULT NULL,
+            PRIMARY KEY (id),
+            CONSTRAINT FK_authors2_position_key FOREIGN KEY (position_key)
+            REFERENCES scientometrics.positions (id) ON DELETE NO ACTION ON UPDATE RESTRICT)
+            ENGINE = INNODB
+            AUTO_INCREMENT = 9
+            AVG_ROW_LENGTH = 3276
+            CHARACTER SET utf8
+            COLLATE utf8_general_ci;")) 
+            {
+                echo "таблица 'authors' создана;<br>";
+            } else {
+                echo "не получилось создать таблицу 'authors';<br>";
         }
     } // end function
 

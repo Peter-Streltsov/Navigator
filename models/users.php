@@ -40,7 +40,7 @@ class Users extends Models\BaseModel
 
     public function getUserIndex($id)
     {
-        
+
     }
 
 
@@ -65,7 +65,7 @@ class Users extends Models\BaseModel
     } // end function
 
 
-    public function updateUser()
+    public function updateUser(array $parameters)
     {
         $this->fluent->update();
     }

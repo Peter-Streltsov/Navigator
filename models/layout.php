@@ -11,6 +11,7 @@ class Layout extends BaseModel
 {
     public function createLayout()
     {
+        $this->createPositions();
         $this->createAuthors();
         $this->createArticles();
         $this->createMonographies();
@@ -40,6 +41,32 @@ class Layout extends BaseModel
             } else {
                 echo "не получилось создать таблицу 'authors';<br>";
         }
+    } // end function
+
+    private function createPositions()
+    {
+        if ($this->pdo->query("CREATE TABLE scientometrics.positions2 (
+            id int(11) NOT NULL AUTO_INCREMENT,
+            `position` varchar(255) NOT NULL,
+            `key` varchar(255) NOT NULL,
+            PRIMARY KEY (id))
+            ENGINE = INNODB
+            AUTO_INCREMENT = 6
+            AVG_ROW_LENGTH = 3276
+            CHARACTER SET utf8
+            COLLATE utf8_general_ci;
+            "))
+            {
+                echo "таблица 'positions' создана;<br>";
+            } else {
+                echo "не получилось создать таблицу 'positions';<br>";
+            }
+    } // end function
+
+
+    private function createArticlesAuthors()
+    {
+
     } // end function
 
     private function createArticles()

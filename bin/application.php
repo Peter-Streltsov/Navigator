@@ -99,7 +99,7 @@ $application->get('/createdatabaselayout', function($request, $response) {
 
 // control panel - admin only access
 $application->get('/controlpanel', function($request, $response) {
-    echo "controlpanel mockup";
+    $response->getBody()->write("controlpanel mockup");
 });
 
 /**

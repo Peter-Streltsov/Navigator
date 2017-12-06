@@ -2,18 +2,22 @@
 
 namespace Scientometrics\Models;
 
-class Layout extends BaseModel
-
 /**
  * class contains several private methods creating database layout
  */
 
+class Layout extends BaseModel
+
 {
+    /**
+     * @return void
+     */
     public function createLayout()
     {
         $this->createPositions();
         $this->createAuthors();
         $this->createArticles();
+        $this->createArticlesAuthors();
         $this->createMonographies();
         $this->createReports();
         $this->createConferencies();
@@ -21,6 +25,9 @@ class Layout extends BaseModel
         echo "перенаправление в течение 3 секунд;<br>";
     }
 
+    /**
+     * @return void
+     */
     private function createAuthors()
     {
         if ($this->pdo->query("CREATE TABLE scientometrics.authors2 (
@@ -43,6 +50,9 @@ class Layout extends BaseModel
         }
     } // end function
 
+    /**
+     * @return void
+     */
     private function createPositions()
     {
         if ($this->pdo->query("CREATE TABLE scientometrics.positions2 (
@@ -64,11 +74,33 @@ class Layout extends BaseModel
     } // end function
 
 
+    /**
+     * @return void
+     */
     private function createArticlesAuthors()
     {
-
+        if ($this->pdo->query("CREATE TABLE scientometrics.articles_authors2 (
+            id int(11) NOT NULL AUTO_INCREMENT,
+            name varchar(50) DEFAULT NULL,
+            lastname varchar(255) DEFAULT NULL,
+            articles_key int(11) DEFAULT NULL,
+            PRIMARY KEY (id),
+            CONSTRAINT FK_articles_authors_articles2_k FOREIGN KEY (articles_key)
+            REFERENCES scientometrics.articles (id) ON DELETE NO ACTION ON UPDATE RESTRICT)
+            ENGINE = INNODB
+            AUTO_INCREMENT = 1
+            CHARACTER SET utf8
+            COLLATE utf8_general_ci;")) 
+            {
+                echo "таблица 'articles_authors' создана;<br>";
+            } else {
+                echo "не получилось создать таблицу 'articles_authors';<br>";
+            }
     } // end function
 
+    /**
+     * @return void
+     */
     private function createArticles()
     {
         if ($this->pdo->query("CREATE TABLE IF NOT EXISTS `articles2` 

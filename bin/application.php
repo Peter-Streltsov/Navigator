@@ -73,6 +73,11 @@ $application->get('/articles/get/{id}', function($request, $response, $id) {
     $this->views->render($response, 'articledata.twig.html', $data);
 });
 
+// adding article
+$application->get('/articles/add', function($request, $response) {
+    $this->views->render($response, 'addarticle.twig.html');
+});
+
 // monographies list
 $application->get('/monographies', function($request, $response) {
     $monographies = new Models\Monographies($this->pdo, $this->fluent);
@@ -126,6 +131,11 @@ $application->post('/articles/add', function($request, $response){
     $user = new Models\Users($this->pdo); //???
     $article = new Models\Articles($this->fluent);
     $response->getBody()->write('adding another article');
+});
+
+// authorization
+$application->post('/authorize', function($request, $response) {
+    $response->getBody()->write('authorization mockup');
 });
 
 

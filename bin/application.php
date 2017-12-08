@@ -43,6 +43,7 @@ $application->get('/test', function($request, $response) {
 $application->get('/users', function($request, $response, $id) {
     $users = new Models\Users($this->pdo);
     $data['users'] = $users->userlist();
+    //var_dump($data['users']);
     $this->views->render($response, 'userlist.twig.html', $data);
 });
 

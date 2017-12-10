@@ -31,7 +31,8 @@ require_once CUSTOM_MIDDLEWARE;
 // index page
 $application->get('/', function($request, $response) {
     //var_dump($this->databaseconnection);
-    $this->views->render($response, 'index.twig.html');
+    $data['page'] = (new Models\Page())->getData();
+    $this->views->render($response, 'index.twig.html', $data);
 });
 
 // testing url
@@ -101,6 +102,10 @@ $application->get('/bot', function($request, $response) {
 $application->get('/createdatabaselayout', function($request, $response) {
     $database = new Models\Layout($this->pdo);
     $database->createLayout();
+});
+
+$application->get('/stat', function($request, $response) {
+    $this->views->render($response, 'stat.twig.html');
 });
 
 // control panel - admin only access

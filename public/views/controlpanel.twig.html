@@ -2,4 +2,48 @@
 
 {% block template %}
 
+<div class="panel panel-default">
+        <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Сотрудники</a></li>
+                <li><a data-toggle="tab" href="#menu1">Публикации</a></li>
+                <li><a data-toggle="tab" href="#menu2">Параметры</a></li>
+              </ul>
+              
+              <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                        <div class="well">Добавление новых пользователей, редактирование и удаление существующих данных</div>
+                  <h3>HOME</h3>
+                  <p>Some content.</p>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                        <div class="well">Добавление новых пользователей, редактирование и удаление существующих данных</div>
+                  <h3>Menu 1</h3>
+                  <p>Some content in menu 1.</p>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                        <center>
+                        <div class="well">Управление приложением</div>
+                        <div style="width: 55pc;">
+                            <br>
+                            <div class="panel panel-default">
+                                    <div class="panel-heading">Технические данные</div>
+                                    <div class="panel-body">
+                                            <a href="/suspend" class="btn btn-warning" role="button">Редактировать коэффициенты</a>
+                                            <a href="/suspend" class="btn btn-warning" role="button">Редактировать права администраторов</a>
+                                    </div>
+                                  </div>
+                                  <br>
+                                <div class="panel panel-default">
+                                        <div class="panel-heading">Параметры работы</div>
+                                        <div class="panel-body">
+                                                <a href="/suspend" class="btn btn-danger" role="button">Приостановить работу приложения</a>
+                                        </div>
+                                      </div>
+                                      <br><br>
+                        </div>
+                        </center>
+                        </div>
+                    </div>
+</div>
+
 {% endblock %}

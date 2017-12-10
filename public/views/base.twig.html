@@ -18,12 +18,13 @@
                         <ul class="nav navbar-nav">
                             <li><a href="/" style="font-size: 12pt;"><span class="glyphicon glyphicon-home"></span> Главная</a></li>
                             <li><a href="/users" style="font-size: 12pt;"><span class="glyphicon glyphicon-list"></span> Список пользователей</a></li>
-                            <li><a href="/#" style="font-size: 12pt;"><span class="glyphicon glyphicon-equalizer"></span> Статистика</a></li>
+                            <li><a href="/stat" style="font-size: 12pt;"><span class="glyphicon glyphicon-equalizer"></span> Статистика</a></li>
                             <li><a href="/controlpanel" style="font-size: 12pt;"><span class="glyphicon glyphicon-cog"></span> Панель управления</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <!--<li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> About</a></li>-->
-                            <li><a href="/login" style="font-size: 12 pt;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            {{ page.login | raw }}
+                            <!--<li><a href="/login" style="font-size: 12 pt;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
                         </ul>
                     </div>
                 </nav>

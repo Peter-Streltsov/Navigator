@@ -1,5 +1,43 @@
 {% extends 'base.twig.html' %}
 
 {% block template %}
+<center>
+<div style="width:50pc;" class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Создать нового пользователя</h3>
+    </div>
+    <div class="panel-body">
+        <form action="/action_page.php" method="post">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Имя</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Фамилия</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Электронная почта</span>
+              <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Образование</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Учёная степень</span>
+              <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Должность</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+          </div>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-default">Сохранить</button>
+        </form> 
+    </div>
+  </div>
+</center>
 
 {% endblock %}

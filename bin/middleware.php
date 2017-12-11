@@ -9,6 +9,13 @@ use Telegram\Bot\Commands\Command;
  * custom slim-php middleware
  */
 
+//
+$application->add(function($request, $response, $next) {
+    session_start();
+    $_SESSION['status'] = 'session started';
+    return $response = $next($request, $response);
+});
+
 // fluentpdo container
 $application->add(function($request, $response, $next) use($application, $container) {
     $container['fluent'] = new \FluentPDO($container['pdo']);

@@ -37,11 +37,12 @@ $application->get('/', function($request, $response) {
 
 // testing url
 $application->get('/test', function($request, $response) {
-    $response->getBody()->write('test');
+    $response->getBody()->write($_SESSION['status']);
 });
 
 // total userlist/таблица с данными всех пользователей
 $application->get('/users', function($request, $response, $id) {
+    $data['page'] = (new Models\Page())->getData();
     $users = new Models\Users($this->pdo);
     $data['users'] = $users->userlist();
     //var_dump($data['users']);
@@ -58,6 +59,10 @@ $application->get('/users/get/{id}', function($request, $response, $id) {
 //
 $application->get('/users/edit/{id}', function($request, $response, $id) {
     $response->getBody()->write("edit user - id:".$id['id']);
+});
+
+$application->get('/users/add', function($request, $response) {
+    $this->views->render($response, 'adduser.twig.html');
 });
 
 // articles list
@@ -105,13 +110,15 @@ $application->get('/createdatabaselayout', function($request, $response) {
 });
 
 $application->get('/stat', function($request, $response) {
-    $this->views->render($response, 'stat.twig.html');
+    $data['page'] = (new Models\Page())->getData();
+    $this->views->render($response, 'stat.twig.html', $data);
 });
 
 // control panel - admin only access
 $application->get('/controlpanel', function($request, $response) {
+    $data['page'] = (new Models\Page())->getData();
     //$response->getBody()->write("controlpanel mockup");
-    $this->views->render($response, 'controlpanel.twig.html');
+    $this->views->render($response, 'controlpanel.twig.html', $data);
 });
 
 /**
@@ -123,11 +130,11 @@ $application->post('/users/add', function($request, $response) {
     $user = new Models\Users($this->pdo);
 
     $user->setName($_POST['name'])
-                                ->setLastname($_POST['lastname'])
-                                ->setPosition($_POST['position'])
-                                ->setEdu($_POST['edu'])
-                                ->setGrade($_POST['grade'])
-                                ->saveUser();
+        ->setLastname($_POST['lastname'])
+        ->setPosition($_POST['position'])
+        ->setEdu($_POST['edu'])
+        ->setGrade($_POST['grade'])
+        ->saveUser();
 
     $response->getBody()->write('adding user');
 });

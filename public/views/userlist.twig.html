@@ -18,15 +18,7 @@
       {% for user in users %}
         <tr>
           <td style="text-align: right;">{{ user.name }} {{ user.lastname }}<div class="dropdown" style="display: inline;">
-            <button class="btn btn-primary dropdown-toggle" style="background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button" data-toggle="dropdown"><span class="glyphicons glyphicons-arrow-down"></span><span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <form action="/scientometrics/userdata" method="post">
-                <li><button class="list-group-item"><input class="btn" type="hidden" name="id" value="1"/>Data</button></li>
-              </form>
-                <li><button>Edit</button></li>
-              <li><form action="/scientometrics/edituser" method="post"><button class="btn" style="font-size: 12pt; height: 20pt;" name="id" value="{{ users.id }}" type="submit" >Data</button></form></li>
-              <li><form action="/scientometrics/edituser" method="post"><button class="btn" name="id" value="{{ users.id }}" type="submit" >Edit</button></form></li>
-            </ul>
+            <button class="btn btn-primary dropdown-toggle" style="background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button" data-toggle="dropdown">Подробнее</button>
           </div></td>
           <!--<td>{{ users.setting }}</td>-->
           <td style="text-align: center;">{{ user.position }}</td>

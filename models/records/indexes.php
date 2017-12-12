@@ -1,6 +1,6 @@
 <?php
 
-namespace Scientometrics\Models;
+namespace Scientometrics\Models\Records;
 
 /**
  * works with custom indexes for publications

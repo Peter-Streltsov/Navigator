@@ -9,6 +9,7 @@
     "autoload": {
         "psr-4": {
             "Scientometrics\\Models\\": "models",
+            "Scientometrics\\Models\\Records\\": "models/records",
             "Scientometrics\\Config\\": "config",
             "Scientometrics\\Exceptions\\": "exceptions"
         }

@@ -5,6 +5,7 @@ namespace Scientometrics\Bin;
 use Slim\App;
 use Telegram\Bot\Api;
 use Scientometrics\Models as Models;
+use Scientometrics\Models\Records as Records;
 use Scientometrics\Config as Config;
 use Scientometrics\Bot as Bot;
 
@@ -43,7 +44,7 @@ $application->get('/test', function($request, $response) {
 // total userlist/таблица с данными всех пользователей
 $application->get('/users', function($request, $response, $id) {
     $data['page'] = (new Models\Page())->getData();
-    $users = new Models\Authors($this->pdo);
+    $users = new Records\Authors($this->pdo);
     $data['users'] = $users->userlist();
     //var_dump($data['users']);
     $this->views->render($response, 'userlist.twig.html', $data);
@@ -51,7 +52,7 @@ $application->get('/users', function($request, $response, $id) {
 
 // exact user data/информация о конкретном пользователе
 $application->get('/users/get/{id}', function($request, $response, $id) {
-    $users = new Models\Authors($this->pdo, $this->fluent);
+    $users = new Records\Authors($this->pdo, $this->fluent);
     $data['user'] = $users->getUser($id['id']);
     $this->views->render($response, 'userdata.twig.html', $data);
 });
@@ -64,7 +65,7 @@ $application->get('/users/edit/{id}', function($request, $response, $id) {
 // input page for adding new user
 $application->get('/users/add', function($request, $response) {
     $data['page'] = (new Models\Page())->getData();
-    $data['positions'] = (new Models\Positions($this->pdo, $this->fluent))->getPositions();
+    $data['positions'] = (new Records\Positions($this->pdo, $this->fluent))->getPositions();
     $this->views->render($response, 'adduser.twig.html', $data);
 });
 
@@ -76,7 +77,7 @@ $application->get('/users/personal/{id}', function($request, $response, $id) {
 
 // articles list
 $application->get('/articles', function($request, $response){
-    $articles = new Models\Articles($this->pdo, $this->fluent);
+    $articles = new Records\Articles($this->pdo, $this->fluent);
     $data['articles'] = $articles->articlesList();
     //var_dump($data['articles']);
     $this->views->render($response, 'articleslist.twig.html', $data);
@@ -84,7 +85,7 @@ $application->get('/articles', function($request, $response){
 
 // getting exact article by id
 $application->get('/articles/get/{id}', function($request, $response, $id) {
-    $article = new Models\Articles($this->pdo);
+    $article = new Records\Articles($this->pdo);
     $data['article'] = $article->getArticlesList();
     $this->views->render($response, 'articledata.twig.html', $data);
 });
@@ -96,14 +97,14 @@ $application->get('/articles/add', function($request, $response) {
 
 // monographies list
 $application->get('/monographies', function($request, $response) {
-    $monographies = new Models\Monographies($this->pdo, $this->fluent);
+    $monographies = new Records\Monographies($this->pdo, $this->fluent);
     $data['monographies'] = $monographies->monographiesList();
     var_dump($data['monographies']);
 });
 
 // monography by id
 $application->get('/monographies/get/{id}', function($request, $response, $id) {
-    $monographies = new Models\Monographies($this->pdo, $this->fluent);
+    $monographies = new Records\Monographies($this->pdo, $this->fluent);
     $data['monographies'] = $monographies->monographyById($id['id']);
 });
 
@@ -127,7 +128,7 @@ $application->get('/stat', function($request, $response) {
 // control panel - admin only access
 $application->get('/controlpanel', function($request, $response) {
     $data['page'] = (new Models\Page())->getData();
-    $users = new Models\Authors($this->pdo);
+    $users = new Records\Authors($this->pdo);
     $data['users'] = $users->userlist();
     //$response->getBody()->write("controlpanel mockup");
     $this->views->render($response, 'controlpanel.twig.html', $data);
@@ -139,7 +140,7 @@ $application->get('/controlpanel', function($request, $response) {
 
 // adding user
 $application->post('/users/add', function($request, $response) {
-    $user = new Models\Authors($this->pdo, $this->fluent);
+    $user = new Records\Authors($this->pdo, $this->fluent);
 
     var_dump($_POST);
     /*$user->setName($_POST['name'])
@@ -154,8 +155,8 @@ $application->post('/users/add', function($request, $response) {
 
 // adding article
 $application->post('/articles/add', function($request, $response){
-    $user = new Models\Authors($this->pdo); //???
-    $article = new Models\Articles($this->fluent);
+    $user = new Records\Authors($this->pdo); //???
+    $article = new Records\Articles($this->fluent);
     $response->getBody()->write('adding another article');
 });
 

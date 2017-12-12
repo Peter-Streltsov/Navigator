@@ -7,30 +7,34 @@
       <h3 class="panel-title">Создать нового пользователя</h3>
     </div>
     <div class="panel-body">
-        <form action="/action_page.php" method="post">
+        <form action="/users/add" method="post">
           <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Имя</span>
-            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+            <span style="min-width: 20pc;" class="input-group-addon" id="basic-addon1">Имя</span>
+            <input name="name" style="width: 28pc;" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
           </div>
           <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Фамилия</span>
-            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+            <span style="min-width: 20pc;" class="input-group-addon" id="basic-addon1">Фамилия</span>
+            <input name="lastname" style="width: 28pc;" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
           </div>
           <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1">Электронная почта</span>
-              <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+              <span style="min-width: 20pc;" class="input-group-addon" id="basic-addon1">Электронная почта</span>
+              <input name="email" style="width: 28pc;" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
           </div>
           <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Образование</span>
-            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+            <span style="min-width: 20pc;" class="input-group-addon" id="basic-addon1">Образование</span>
+            <input name="edu" style="width: 28pc;" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
           </div>
           <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1">Учёная степень</span>
-              <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+              <span style="min-width: 20pc;" class="input-group-addon" id="basic-addon1">Учёная степень</span>
+              <input style="width: 28pc;" type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
           </div>
           <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Должность</span>
-            <input type="text" class="form-control" placeholder="" aria-describedby="basic-addon1">
+              <span style="min-width: 20pc;" class="input-group-addon" id="basic-addon1">Должность</span>
+              <select name ="position" id="lunch" class="form-control" data-live-search="true" title="Please select a lunch ...">
+                {% for position in positions %}
+                <option value="{{ position.position }}">{{ position.position }}</option>
+                {% endfor %}
+              </select>
           </div>
           <br>
           <br>

@@ -17,8 +17,8 @@
         </thead>
       {% for user in users %}
         <tr>
-          <td style="text-align: right;">{{ user.name }} {{ user.lastname }}<div class="dropdown" style="display: inline;">
-            <button class="btn btn-primary dropdown-toggle" style="background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button" data-toggle="dropdown">Подробнее</button>
+          <td style="font-size: 13pt; text-align: right;"><center>{{ user.name }} {{ user.lastname }}</center><div class="dropdown">
+            <button class="btn btn-primary" style="margin-top: -1.8pc; max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 10pt;" type="button" data-toggle="dropdown">Подробнее</button>
           </div></td>
           <!--<td>{{ users.setting }}</td>-->
           <td style="text-align: center;">{{ user.position }}</td>

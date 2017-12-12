@@ -43,7 +43,7 @@ $application->get('/test', function($request, $response) {
 // total userlist/таблица с данными всех пользователей
 $application->get('/users', function($request, $response, $id) {
     $data['page'] = (new Models\Page())->getData();
-    $users = new Models\Users($this->pdo);
+    $users = new Models\Authors($this->pdo);
     $data['users'] = $users->userlist();
     //var_dump($data['users']);
     $this->views->render($response, 'userlist.twig.html', $data);
@@ -51,18 +51,27 @@ $application->get('/users', function($request, $response, $id) {
 
 // exact user data/информация о конкретном пользователе
 $application->get('/users/get/{id}', function($request, $response, $id) {
-    $users = new Models\Users($this->pdo, $this->fluent);
+    $users = new Models\Authors($this->pdo, $this->fluent);
     $data['user'] = $users->getUser($id['id']);
     $this->views->render($response, 'userdata.twig.html', $data);
 });
 
-//
+// edit user by id
 $application->get('/users/edit/{id}', function($request, $response, $id) {
     $response->getBody()->write("edit user - id:".$id['id']);
 });
 
+// input page for adding new user
 $application->get('/users/add', function($request, $response) {
-    $this->views->render($response, 'adduser.twig.html');
+    $data['page'] = (new Models\Page())->getData();
+    $data['positions'] = (new Models\Positions($this->pdo, $this->fluent))->getPositions();
+    $this->views->render($response, 'adduser.twig.html', $data);
+});
+
+// personal user page
+$application->get('/users/personal/{id}', function($request, $response, $id) {
+    $data = array();
+    $this->views->render($response, 'personal.twig.html', $data);
 });
 
 // articles list
@@ -109,6 +118,7 @@ $application->get('/createdatabaselayout', function($request, $response) {
     $database->createLayout();
 });
 
+// general statistics
 $application->get('/stat', function($request, $response) {
     $data['page'] = (new Models\Page())->getData();
     $this->views->render($response, 'stat.twig.html', $data);
@@ -117,6 +127,8 @@ $application->get('/stat', function($request, $response) {
 // control panel - admin only access
 $application->get('/controlpanel', function($request, $response) {
     $data['page'] = (new Models\Page())->getData();
+    $users = new Models\Authors($this->pdo);
+    $data['users'] = $users->userlist();
     //$response->getBody()->write("controlpanel mockup");
     $this->views->render($response, 'controlpanel.twig.html', $data);
 });
@@ -127,21 +139,22 @@ $application->get('/controlpanel', function($request, $response) {
 
 // adding user
 $application->post('/users/add', function($request, $response) {
-    $user = new Models\Users($this->pdo);
+    $user = new Models\Authors($this->pdo, $this->fluent);
 
-    $user->setName($_POST['name'])
+    var_dump($_POST);
+    /*$user->setName($_POST['name'])
         ->setLastname($_POST['lastname'])
         ->setPosition($_POST['position'])
         ->setEdu($_POST['edu'])
         ->setGrade($_POST['grade'])
-        ->saveUser();
+        ->saveUser();*/
 
     $response->getBody()->write('adding user');
 });
 
 // adding article
 $application->post('/articles/add', function($request, $response){
-    $user = new Models\Users($this->pdo); //???
+    $user = new Models\Authors($this->pdo); //???
     $article = new Models\Articles($this->fluent);
     $response->getBody()->write('adding another article');
 });

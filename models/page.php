@@ -10,6 +10,8 @@ namespace Scientometrics\Models;
 class Page
 {
     private $auth;
+    private $organisation;
+    private $user;
 
     /**
      * contains complete pagedata
@@ -19,6 +21,9 @@ class Page
 
     public function __construct()
     {
+        $this->organisation = 'ЦЕИ РАН';
+        $this->user = '%USERNAME%';
+        $this->pagedata['user'] = $this->user;
         $this->getAuthStatus();
         $this->userMenu();
         return $this;
@@ -41,15 +46,15 @@ class Page
             $this->pagedata['login'] = "
             <div class=\"dropdown\">
             <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\"
-            style=\"color: #fff; background-color: #ccc; margin-right: 0.5pc; margin-top: 0.5pc;\">
+            style=\"color: #fff; background-color: #8fabd1; margin-right: 0.5pc; margin-top: 0.5pc;\">
               %UserName%
               <span class=\"caret\"></span>
             </button>
             <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">
-              <li><a href=\"/users/personal/id\">Личный кабинет</a></li>
+              <li><a href=\"/users/personal/1\">Личный кабинет</a></li>
               <li><a href=\"#\">Сообщение администратору</a></li>
               <li role=\"separator\" class=\"divider\"></li>
-              <li><a href=\"#\">Выход</a></li>
+              <li><a href=\"/users/logout\">Выход</a></li>
             </ul>
           </div>
             ";

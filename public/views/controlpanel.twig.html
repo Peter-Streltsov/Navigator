@@ -5,26 +5,73 @@
 <div class="panel panel-default">
         <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Сотрудники</a></li>
-                <li><a data-toggle="tab" href="#menu1">Публикации</a></li>
+                <li><a data-toggle="tab" href="#menu1">Научные результаты</a></li>
                 <li><a data-toggle="tab" href="#menu2">Параметры</a></li>
               </ul>
               
               <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
-                        <div class="well">Добавление новых пользователей, редактирование и удаление существующих данных</div>
-                  <h3>HOME</h3>
-                  <p>Some content.</p>
+                        <div class="well">Добавление новых пользователей, редактирование и удаление существующих данных
+                                <br>
+                                <br>
+                                <input class="form-control" id="myInput" type="text" placeholder="Поиск по имени..">
+                                <br></div>
+                                    <table class="table table-hover" id="myList" style="background-color: #fff;">
+                                        <thead style="font-style: italic; font-size: 16pt;">
+                                            <td>Имя, фамилия</td>
+                                            <td></td>
+                                            <td>Должность</td>
+                                            <td>Индекс</td>
+                                        </thead>
+                                      {% for user in users %}
+                                        <tr>
+                                          <td style="font-size: 13pt; text-align: center;">{{ user.name }} {{ user.lastname }}
+                                          </td>
+                                                  <td>
+                                                <div class="dropdown">
+                                                          <button class="btn btn-primary" style="max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button" data-toggle="dropdown">Подробнее</button>
+                                                          <a href="/users" class="btn btn-primary" style="max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button">Редактировать данные</a>
+                                                        </div>
+                                                </td>
+                                          <!--<td>{{ users.setting }}</td>-->
+                                          <td style="text-align: center;">{{ user.position }}</td>
+                                          {% for item in data %}
+                                            <td>{{ item }}</td>
+                                            {% endfor %}
+                                            <td></td>
+                                          </tr>
+                                          {% endfor %}
+                                        </table>
+                                        <script>
+                                        $(document).ready(function(){
+                                          $("#myInput").on("keyup", function() {
+                                            var value = $(this).val().toLowerCase();
+                                            $("#myList tr").each(function() {
+                                              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                              });
+                                            });
+                                          });
+                                          </script>
                 </div>
                 <div id="menu1" class="tab-pane fade">
-                        <div class="well">Добавление новых пользователей, редактирование и удаление существующих данных</div>
-                  <h3>Menu 1</h3>
-                  <p>Some content in menu 1.</p>
+                                <div class="well">Монографии</div>
+                                <ul class="nav nav-tabs">
+                                                <li class="active"><a data-toggle="tab" href="#home">Статьи</a></li>
+                                                <li><a data-toggle="tab" href="#menu1">Монографии</a></li>
+                                                <li><a data-toggle="tab" href="#menu2">Доклады и конференции</a></li>
+                                              </ul>
+                        <!--<div class="well">Статьи</div>
+                        <h3>Menu 1</h3>
+                        <p>Some content in menu 1.</p>
+                        <div class="well">Монографии</div>
+                        <div class="well">Доклады и конференции</div>-->
                 </div>
                 <div id="menu2" class="tab-pane fade">
                         <center>
                         <div class="well">Управление приложением</div>
                         <div style="width: 55pc;">
                             <br>
+                            <table>
                             <div class="panel panel-default">
                                     <div class="panel-heading">Технические данные</div>
                                     <div class="panel-body">
@@ -39,8 +86,8 @@
                                                 <a href="/suspend" class="btn btn-danger" role="button">Приостановить работу приложения</a>
                                         </div>
                                       </div>
-                                      <br><br>
-                        </div>
+                                      <br><br>  
+                                </div></div>
                         </center>
                         </div>
                     </div>

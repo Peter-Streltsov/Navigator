@@ -3,15 +3,14 @@
 namespace Scientometrics\Models;
 
 /**
- * class for collecting page data (menus, authorization status, etc..)
+ * class for collecting page data (menu options, authorization status, etc..)
  * @since 0.3
  */
 
 class Page
 {
     private $auth;
-    private $organisation;
-    private $user;
+    private $data = array();
 
     /**
      * contains complete pagedata
@@ -20,10 +19,8 @@ class Page
     private $pagedata = array();
 
     public function __construct()
-    {
-        $this->organisation = 'ЦЕИ РАН';
-        $this->user = '%USERNAME%';
-        $this->pagedata['user'] = $this->user;
+    {;
+        $this->pagedata['user'] = '%USERNAME%';
         $this->getAuthStatus();
         $this->userMenu();
         return $this;
@@ -34,7 +31,7 @@ class Page
      */
     private function getAuthStatus()
     {
-
+        $this->pagedata['auth'] = 'administrator';
     }
 
     /**
@@ -62,6 +59,20 @@ class Page
         else {
             $this->pagedata['login'] = "<li><a href=\"/login\" style=\"font-size: 12 pt;\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
         }
+    }
+
+    public function general()
+    {
+        $this->getAuthStatus();
+        $this->userMenu();
+        return $this;
+    }
+
+    public function extended()
+    {
+        $this->getAuthStatus();
+        $this->userMenu();
+        return $this;
     }
 
     public function getData()

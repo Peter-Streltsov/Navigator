@@ -1,12 +1,12 @@
 <?php
 
-namespace Scientometrics\Models;
+namespace Scientometrics\Models\Service;
 
 /**
  * class contains several private methods creating database layout
  */
 
-class Layout extends BaseModel
+class Layout
 
 {
     /**

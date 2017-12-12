@@ -22,6 +22,7 @@ $container['pdo'] = function() {
     return new \PDO($dsn, 'root', '');
 };
 
-/*$conatiner['fluent'] = function() use($container) {
-    return new \FluentPDO($container['pdo']);
-};*/
+// model for page data
+$conatainer['pagedata'] = function() {
+    return new Models\Page();
+};

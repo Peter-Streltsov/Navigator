@@ -4,8 +4,10 @@ namespace Scientometrics\Config;
 
 class Connections
 {
-    public function __construct()
+    private $instance;
+
+    public static function generateDsn($driver, $host, $dbname)
     {
-        echo "Connections";
+        return $driver.$host.$dbname;
     }
 }

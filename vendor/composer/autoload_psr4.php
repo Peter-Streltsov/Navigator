@@ -14,6 +14,7 @@ return array(
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'Slim\\Views\\' => array($vendorDir . '/slim/twig-view/src'),
     'Slim\\' => array($vendorDir . '/slim/slim/Slim'),
+    'Scientometrics\\Models\\Service\\' => array($baseDir . '/models/service'),
     'Scientometrics\\Models\\Records\\' => array($baseDir . '/models/records'),
     'Scientometrics\\Models\\' => array($baseDir . '/models'),
     'Scientometrics\\Exceptions\\' => array($baseDir . '/exceptions'),

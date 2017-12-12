@@ -2,26 +2,29 @@
 
 {% block template %}
 <div class="jumbotron">
-    <h2>Список сотрудников ЦЕИ РАН</h2>
+    <h3>Список сотрудников ЦЕИ РАН</h3>
     <br>
     <div class="container">
         <input class="form-control" id="myInput" type="text" placeholder="Поиск по имени..">
         <br>
     </div>
     <br>
-    <table class="table table-hover" id="myList" style="background-color: #fff;">
+    <table class="table table-hover" id="myList" style="vertical-align: middle; background-color: #fff;">
         <thead style="font-style: italic; font-size: 16pt;">
             <td>Имя, фамилия</td>
-            <!--<td>Код</td>-->
+            <td></td>
             <td>Должность</td>
         </thead>
       {% for user in users %}
         <tr>
-          <td style="font-size: 13pt; text-align: right;"><center>{{ user.name }} {{ user.lastname }}</center><div class="dropdown">
-            <button class="btn btn-primary" style="margin-top: -1.8pc; max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 10pt;" type="button" data-toggle="dropdown">Подробнее</button>
-          </div></td>
-          <!--<td>{{ users.setting }}</td>-->
-          <td style="text-align: center;">{{ user.position }}</td>
+          <td style="color: gray; font-size: 13pt; text-align: right;"><center>{{ user.name }} {{ user.lastname }}</center>
+        </td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-primary" style="max-width: 2pc; max-height: 2pc; background-color: #d3d3d3; color: #000; font-size: 10pt;" type="button" data-toggle="dropdown"><span style="color: gray;" class="glyphicon glyphicon-user"></span></button>
+            </div>
+          </td>
+          <td style="color: gray; text-align: center;">{{ user.position }}</td>
           {% for item in data %}
             <td>{{ item }}</td>
             {% endfor %}

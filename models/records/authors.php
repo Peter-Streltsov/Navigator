@@ -2,9 +2,9 @@
 
 namespace Scientometrics\Models\Records;
 
-use Scientometrics\Models as Models;
+use Scientometrics\Models\Records as Records;
 
-class Authors extends Models\BaseModel
+class Authors extends Records\BaseModel
 {
     private $id;
     private $name;

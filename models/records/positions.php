@@ -2,11 +2,13 @@
 
 namespace Scientometrics\Models\Records;
 
+use Scientometrics\Models\Records as Records;
+
 /**
  * 
  */
 
-class Positions extends BaseModel
+class Positions extends Records\BaseModel
 {
     private $id;
     private $position;

@@ -2,10 +2,12 @@
 
 namespace Scientometrics\Models\Records;
 
+use Scientometrics\Models\Records as Records;
+
 /**
  * works with custom indexes for publications
  */
-class Indexes extends BaseModel
+class Indexes extends Records\BaseModel
 {
     private $id;
     private $name;

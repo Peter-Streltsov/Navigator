@@ -2,12 +2,13 @@
 
 namespace Scientometrics\Models\Records;
 
+use Scientometrics\Models\Records as Records;
 
 /**
  * 
  */
 
-class Reports extends BaseModel
+class Reports extends Records\BaseModel
 {
 
 }

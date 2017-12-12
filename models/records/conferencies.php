@@ -2,9 +2,9 @@
 
 namespace Scientometrics\Models\Records;
 
-use Scientometrics\Models as Models;
+use Scientometrics\Models\Records as Records;
 
-class Conferencies extends Models\BaseModel
+class Conferencies extends Records\BaseModel
 {
     public function conferenciesList()
     {

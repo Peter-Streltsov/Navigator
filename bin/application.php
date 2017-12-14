@@ -32,7 +32,7 @@ require_once CUSTOM_MIDDLEWARE;
 // index page
 $application->get('/', function($request, $response) {
     //var_dump($this->databaseconnection);
-    $data['page'] = (new Models\Page())->getData();
+    $data['page'] = (new Models\Page())->common()->getData();
     $this->views->render($response, 'index.twig.html', $data);
 });
 
@@ -43,7 +43,7 @@ $application->get('/test', function($request, $response) {
 
 // total userlist/таблица с данными всех пользователей
 $application->get('/users', function($request, $response, $id) {
-    $data['page'] = (new Models\Page())->getData();
+    $data['page'] = (new Models\Page())->common()->getData();
     $users = new Records\Authors($this->pdo);
     $data['users'] = $users->userlist();
     //var_dump($data['users']);
@@ -64,15 +64,22 @@ $application->get('/users/edit/{id}', function($request, $response, $id) {
 
 // input page for adding new user
 $application->get('/users/add', function($request, $response) {
-    $data['page'] = (new Models\Page())->getData();
+    $data['page'] = (new Models\Page())->common()->getData();
     $data['positions'] = (new Records\Positions($this->pdo, $this->fluent))->getPositions();
     $this->views->render($response, 'adduser.twig.html', $data);
 });
 
 // personal user page
 $application->get('/users/personal/{id}', function($request, $response, $id) {
-    $data = array();
+    $data['page'] = (new Models\Page())->common()->getData();
     $this->views->render($response, 'personal.twig.html', $data);
+});
+
+// logging out
+$application->get('/users/logout', function($request, $response) {
+    /*$response->getBody()->write('Logging out<br>');
+    $response->getBody()->write('Redirect in 3 seconds');*/
+    header("Location: /");
 });
 
 // articles list

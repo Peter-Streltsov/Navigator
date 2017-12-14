@@ -17,28 +17,26 @@
                                 <input class="form-control" id="myInput" type="text" placeholder="Поиск по имени..">
                                 <br></div>
                                     <table class="table table-hover" id="myList" style="background-color: #fff;">
-                                        <thead style="font-style: italic; font-size: 16pt;">
+                                        <thead style="font-style: italic; font-size: 12pt;">
                                             <td>Имя, фамилия</td>
                                             <td></td>
                                             <td>Должность</td>
                                             <td>Индекс</td>
                                         </thead>
                                       {% for user in users %}
-                                        <tr>
-                                          <td style="font-size: 13pt; text-align: center;">{{ user.name }} {{ user.lastname }}
+                                        <tr style="font-size: 10pt;">
+                                          <td style="text-align: center;">{{ user.name }} {{ user.lastname }}</td>
+                                          <td>
+                                            <div class="dropdown">
+                                              <button class="btn btn-primary" style="max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button" data-toggle="dropdown"><span style="color: gray;" class="glyphicon glyphicon-user"></span></button>
+                                              <a href="/users" class="btn btn-primary" style="max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button"><span style="color: gray;" class="glyphicon glyphicon-edit"></span></a>
+                                            </div>
                                           </td>
-                                                  <td>
-                                                <div class="dropdown">
-                                                          <button class="btn btn-primary" style="max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button" data-toggle="dropdown">Подробнее</button>
-                                                          <a href="/users" class="btn btn-primary" style="max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button">Редактировать данные</a>
-                                                        </div>
-                                                </td>
-                                          <!--<td>{{ users.setting }}</td>-->
                                           <td style="text-align: center;">{{ user.position }}</td>
                                           {% for item in data %}
                                             <td>{{ item }}</td>
                                             {% endfor %}
-                                            <td></td>
+                                            <td style="text-align: center;"><span class="badge">0</span></td>
                                           </tr>
                                           {% endfor %}
                                         </table>
@@ -61,27 +59,61 @@
                                                 <li><a data-toggle="tab" href="#menu2">Доклады и конференции</a></li>
                                               </ul>
                 </div>
+                <!-- controls -->
                 <div id="menu2" class="tab-pane fade">
                         <center>
                         <div class="well">Управление приложением</div>
-                        <div style="width: 55pc;">
+                        <div style="width: 70pc;">
                             <br>
                             <table>
-                            <div class="panel panel-default">
-                                    <div class="panel-heading">Технические данные</div>
+                              <tr>
+                                <td>
+                                  <div style="min-width: 27pc; min-height: 15pc;" class="panel panel-default">
+                                    <div class="panel-heading">Пользователи</div>
                                     <div class="panel-body">
-                                            <a href="/suspend" class="btn btn-warning" role="button">Редактировать коэффициенты</a>
-                                            <a href="/suspend" class="btn btn-warning" role="button">Редактировать права администраторов</a>
+                                      <a style="min-width: 25pc;" href="/users/add" class="btn btn-default" role="button">Создать пользователя</a>
+                                      <br>
+                                      <br>
+                                      <a style="min-width: 25pc;" href="/suspend" class="btn btn-default" role="button">Редактировать коэффициенты</a>
+                                      <br>
+                                      <br>
+                                      <a style="min-width: 25pc;" href="/suspend" class="btn btn-default" role="button">Редактировать права администраторов</a>
                                     </div>
                                   </div>
-                                  <br>
-                                <div class="panel panel-default">
+                                </td>
+                                <td style="width: 8pc;">
+                                </td>
+                                <td>
+                                  <div style="min-width: 27pc; min-height: 15pc;" class="panel panel-default">
+                                      <div class="panel-heading">Технические данные</div>
+                                      <div class="panel-body">
+                                        <a style="min-width: 25pc;" href="/users/add" class="btn btn-default" role="button">Создать пользователя</a>
+                                        <br>
+                                        <br>
+                                        <a style="min-width: 25pc;" href="/suspend" class="btn btn-default" role="button">Редактировать коэффициенты</a>
+                                        <br>
+                                        <br>
+                                        <a style="min-width: 25pc;" href="/suspend" class="btn btn-default" role="button">Редактировать права администраторов</a>
+                                      </div>
+                                  </div>
+                                </td>
+                                  <br><br>
+                              </tr>
+                              <tr>
+                                <td>
+                                    <div style="min-width: 27pc; min-height: 15pc;" class="panel panel-default">
                                         <div class="panel-heading">Параметры работы</div>
                                         <div class="panel-body">
-                                                <a href="/suspend" class="btn btn-danger" role="button">Приостановить работу приложения</a>
+                                          <a style="min-width: 25pc;" href="/suspend" class="btn btn-info" role="button">Параметры бота</a>
+                                          <br>
+                                          <br>
+                                          <a style="min-width: 25pc;" href="/suspend" class="btn btn-danger" role="button">Приостановить работу приложения</a>
                                         </div>
                                       </div>
-                                      <br><br>
+                                </td>
+                                <td style="width: 8pc;"></td>
+                                <td></td>
+                              </tr>
                             </table>
                           </div>
                         </center>

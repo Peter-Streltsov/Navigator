@@ -41,7 +41,7 @@ class Authors extends Records\BaseModel
     public function getUserIndex($id)
     {
 
-    }
+    } // end function
 
 
     // adding new user

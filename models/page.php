@@ -61,7 +61,7 @@ class Page
         }
     }
 
-    public function general()
+    public function common()
     {
         $this->getAuthStatus();
         $this->userMenu();

@@ -34,16 +34,17 @@ class Articles extends Records\BaseModel
     {
     } // end function
 
-    public function getArticleById($id)
+    public function getById($id)
     {
+        $data = array();
         $result = $this->fluent->from('articles')
                                     ->select(null)
-                                    ->select(array(
-                                        'articles.title',
-                                        'articles.magazine',
-                                        'articles.year'
-                                    ))
+                                    ->select(array('articles.title', 'articles.magazine', 'articles.year'))
                                     ->where('id', $id);
+        foreach ($result as $article) {
+            $data[] = $article;
+        }
+        return $data;
     } // end function
 
     public function addArticle()

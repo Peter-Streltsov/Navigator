@@ -1,12 +1,12 @@
 <?php
 
-namespace Scientometrics\Models;
+namespace Scientometrics\Models\Entities;
 
 /**
  * 
  */
 
-class Articles extends Model
+class Articles extends Entities\Model
 {
     public function getList()
     {

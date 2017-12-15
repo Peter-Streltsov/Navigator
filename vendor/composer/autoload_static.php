@@ -39,6 +39,7 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
             'Slim\\' => 5,
             'Scientometrics\\Models\\Service\\' => 30,
             'Scientometrics\\Models\\Records\\' => 30,
+            'Scientometrics\\Models\\Entities\\' => 31,
             'Scientometrics\\Models\\' => 22,
             'Scientometrics\\Exceptions\\' => 26,
             'Scientometrics\\Config\\' => 22,
@@ -119,6 +120,10 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Models\\Records\\' => 
         array (
             0 => __DIR__ . '/../..' . '/models/records',
+        ),
+        'Scientometrics\\Models\\Entities\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/models/entities',
         ),
         'Scientometrics\\Models\\' => 
         array (
@@ -1042,8 +1047,9 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Config\\Connections' => __DIR__ . '/../..' . '/config/connections.php',
         'Scientometrics\\Exceptions\\GeneralApplication' => __DIR__ . '/../..' . '/exceptions/generalapplication.php',
         'Scientometrics\\Exceptions\\LowModel' => __DIR__ . '/../..' . '/exceptions/lowmodel.php',
-        'Scientometrics\\Models\\Articles' => __DIR__ . '/../..' . '/models/articles.php',
-        'Scientometrics\\Models\\Models' => __DIR__ . '/../..' . '/models/model.php',
+        'Scientometrics\\Models\\Entities\\Articles' => __DIR__ . '/../..' . '/models/entities/articles.php',
+        'Scientometrics\\Models\\Entities\\Users' => __DIR__ . '/../..' . '/models/entities/users.php',
+        'Scientometrics\\Models\\Models' => __DIR__ . '/../..' . '/models/entities/model.php',
         'Scientometrics\\Models\\Page' => __DIR__ . '/../..' . '/models/page.php',
         'Scientometrics\\Models\\Records\\Articles' => __DIR__ . '/../..' . '/models/records/articles.php',
         'Scientometrics\\Models\\Records\\Authors' => __DIR__ . '/../..' . '/models/records/authors.php',
@@ -1055,7 +1061,6 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Models\\Records\\Reports' => __DIR__ . '/../..' . '/models/records/reports.php',
         'Scientometrics\\Models\\Records\\Users' => __DIR__ . '/../..' . '/models/records/users.php',
         'Scientometrics\\Models\\Service\\Layout' => __DIR__ . '/../..' . '/models/service/layout.php',
-        'Scientometrics\\Models\\Users' => __DIR__ . '/../..' . '/models/users.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',

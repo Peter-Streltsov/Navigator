@@ -16,6 +16,7 @@ return array(
     'Slim\\' => array($vendorDir . '/slim/slim/Slim'),
     'Scientometrics\\Models\\Service\\' => array($baseDir . '/models/service'),
     'Scientometrics\\Models\\Records\\' => array($baseDir . '/models/records'),
+    'Scientometrics\\Models\\Entities\\' => array($baseDir . '/models/entities'),
     'Scientometrics\\Models\\' => array($baseDir . '/models'),
     'Scientometrics\\Exceptions\\' => array($baseDir . '/exceptions'),
     'Scientometrics\\Config\\' => array($baseDir . '/config'),

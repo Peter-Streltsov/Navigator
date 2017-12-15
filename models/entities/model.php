@@ -1,6 +1,6 @@
 <?php
 
-namespace Scientometrics\Models;
+namespace Scientometrics\Models\Entities;
 
 use Scinetometrics\Models\Records as Records;
 

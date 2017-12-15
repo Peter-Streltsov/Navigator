@@ -135,11 +135,17 @@ $application->get('/stat', function($request, $response) {
 // control panel - admin only access
 $application->get('/controlpanel', function($request, $response) {
     $data['page'] = (new Models\Page())->getData();
-    $users = new Records\Authors($this->pdo);
-    $data['users'] = $users->userlist();
-    //$response->getBody()->write("controlpanel mockup");
+    $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->userlist();
+    foreach ($data['users'] as $user) {
+        //echo $user['id'];
+        $index = (new Records\Articles($this->pdo, $this->fluent))->getById($user['id']);
+        var_dump($index);
+        //$index = array_sum($index);
+    }
     $this->views->render($response, 'controlpanel.twig.html', $data);
 });
+
+
 
 /**
  * POST contollers

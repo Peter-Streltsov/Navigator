@@ -76,6 +76,11 @@ $application->get('/users/personal/{id}', function($request, $response, $id) {
     $this->views->render($response, 'personal.twig.html', $data);
 });
 
+// issue message
+$application->get('/users/personal/message/{id}', function($request, $response, $id) {
+    return $this->views->render($response, 'message.twig.html');
+});
+
 // logging out
 $application->get('/users/logout', function($request, $response) {
     /*$response->getBody()->write('Logging out<br>');
@@ -162,6 +167,7 @@ $application->post('/users/add', function($request, $response) use($application)
         ->setLastname($_POST['lastname'])
         ->setPosition($_POST['position'])
         ->setEdu($_POST['edu'])
+        ->setExpirience($_POST['expirience'])
         ->setGrade($_POST['grade'])
         ->setAge($_POST['age'])
         ->setAdded()

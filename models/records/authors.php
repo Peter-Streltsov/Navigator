@@ -13,6 +13,7 @@ class Authors extends Records\BaseModel
     private $lastname;
     private $position;
     private $edu;
+    private $expirience;
     private $added;
     private $age;
 
@@ -52,16 +53,16 @@ class Authors extends Records\BaseModel
     // adding new user
     public function save()
     {
-        $values = ['name'=>$this->name, 'lastname'=>"$this->lastname", 'position_key'=>"$this->position"];
-        //$query = "INSERT INTO authors (authors.name, authors.lastname, authors.position_key, authors.age) VALUES($this->name, $this->lastname, $this->position, $this->age)";
-        $query = "INSERT INTO authors (authors.name, authors.lastname, authors.position_key) VALUES(:name, :lastname, :position_key)";
+        $this->added = date('Y-m-d');
+        $query = "INSERT INTO authors (authors.name, authors.lastname, authors.position_key, authors.added, authors.age, authors.expirience) VALUES(:name, :lastname, :position_key, :added, :age, :expirience)";
         try {
             $result = $this->pdo->prepare($query);
-            //$result->bindParam(':name', $this->name, \PDO::PARAM_STR);
-            //$result->bindParam(':lastname', $this->lastname, \PDO::PARAM_STR);
-            //$result->bindParam(':position_key', $this->position, \PDO::PARAM_INT);
-            $result->execute(array(':name'=>$this->name, ':lastname'=>$this->lastname, ':position_key'=>$this->position));
-            //, ':position_key'=>$this->position));
+            $result->execute(array(':name'=>$this->name,
+                ':lastname'=>$this->lastname,
+                ':position_key'=>$this->position,
+                ':added'=>$this->added,
+                ':age'=>$this->age,
+                ':expirience'=>$this->expirience));
         } catch (\PDOException $e) {
             echo "PDO Error". $e;
         }
@@ -125,6 +126,12 @@ class Authors extends Records\BaseModel
     public function setEdu($edu)
     {
         $this->edu = $edu;
+        return $this;
+    } // end function
+
+    public function setExpirience($expirience)
+    {
+        $this->expirience = $expirience;
         return $this;
     } // end function
 

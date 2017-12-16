@@ -20,7 +20,7 @@ class Page
 
     public function __construct()
     {;
-        $this->pagedata['user'] = '%USERNAME%';
+        $this->pagedata['user'] = 'administrator';
         $this->getAuthStatus();
         $this->userMenu();
         return $this;
@@ -44,7 +44,7 @@ class Page
             <div class=\"dropdown\">
             <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\"
             style=\"color: #fff; background-color: #8fabd1; margin-right: 0.5pc; margin-top: 0.5pc;\">
-              %UserName%
+              administrator
               <span class=\"caret\"></span>
             </button>
             <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">

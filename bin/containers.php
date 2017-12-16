@@ -19,7 +19,7 @@ $container['views'] = function ($c) {
 // pdo object container
 $container['pdo'] = function() {
     $dsn = 'mysql:host=localhost;dbname=scientometrics';
-    return new \PDO($dsn, 'root', '');
+    return new \PDO($dsn, 'root', '', array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 };
 
 // model for page data

@@ -14,13 +14,14 @@
                         <div class="well">Добавление новых пользователей, редактирование и удаление существующих данных
                                 <br>
                                 <br>
-                                <input class="form-control" id="myInput" type="text" placeholder="Поиск по имени..">
+                                <input class="form-control" id="myInput" type="text" placeholder="Поиск по имени, должности или учёной степени..">
                                 <br></div>
                                     <table class="table table-hover" id="myList" style="background-color: #fff;">
                                         <thead style="font-style: italic; font-size: 12pt;">
                                             <td>Имя, фамилия</td>
                                             <td></td>
                                             <td>Должность</td>
+                                            <td>Учёная степень</td>
                                             <td>Индекс</td>
                                         </thead>
                                       {% for user in users %}
@@ -33,10 +34,11 @@
                                             </div>
                                           </td>
                                           <td style="text-align: center;">{{ user.position }}</td>
-                                          {% for item in data %}
+                                            {% for item in data %}
                                             <td>{{ item }}</td>
                                             {% endfor %}
-                                            <td style="text-align: center;"><span class="badge">0</span></td>
+                                            <td></td>
+                                           <td style="text-align: center;"><span class="badge">0</span></td>
                                           </tr>
                                           {% endfor %}
                                         </table>
@@ -61,61 +63,39 @@
                 </div>
                 <!-- controls -->
                 <div id="menu2" class="tab-pane fade">
+                    <div class="well">Управление приложением</div>
                         <center>
-                        <div class="well">Управление приложением</div>
-                        <div style="width: 70pc;">
-                            <br>
-                            <table>
-                              <tr>
-                                <td>
-                                  <div style="min-width: 27pc; min-height: 15pc;" class="panel panel-default">
+                          <table class="table">
+                            <tr>
+                                <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
                                     <div class="panel-heading">Пользователи</div>
                                     <div class="panel-body">
-                                      <a style="min-width: 25pc;" href="/users/add" class="btn btn-default" role="button">Создать пользователя</a>
-                                      <br>
-                                      <br>
-                                      <a style="min-width: 25pc;" href="/suspend" class="btn btn-default" role="button">Редактировать коэффициенты</a>
-                                      <br>
-                                      <br>
-                                      <a style="min-width: 25pc;" href="/suspend" class="btn btn-default" role="button">Редактировать права администраторов</a>
+                                      <a style="min-width: 22pc;" href="/users/add" class="btn btn-default" role="button">Создать пользователя</a>
+                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-default" role="button">Удалить пользователей</a>
+                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-default" role="button">Редактировать права администраторов</a>
                                     </div>
                                   </div>
-                                </td>
-                                <td style="width: 8pc;">
-                                </td>
-                                <td>
-                                  <div style="min-width: 27pc; min-height: 15pc;" class="panel panel-default">
-                                      <div class="panel-heading">Технические данные</div>
-                                      <div class="panel-body">
-                                        <a style="min-width: 25pc;" href="/users/add" class="btn btn-default" role="button">Создать пользователя</a>
-                                        <br>
-                                        <br>
-                                        <a style="min-width: 25pc;" href="/suspend" class="btn btn-default" role="button">Редактировать коэффициенты</a>
-                                        <br>
-                                        <br>
-                                        <a style="min-width: 25pc;" href="/suspend" class="btn btn-default" role="button">Редактировать права администраторов</a>
-                                      </div>
+                            </tr>
+                            <tr>
+                                <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
+                                    <div class="panel-heading">Вспомогательные данные</div>
+                                    <div class="panel-body">
+                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-default" role="button">Редактировать коэффициенты</a>
+                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-default" role="button">Редактировать права администраторов</a>
+                                    </div>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
+                                    <div class="panel-heading">Параметры работы</div>
+                                    <div class="panel-body">
+                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-info" role="button">Параметры бота</a>
+                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-warning" role="button">Сбросить лог</a>
+                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-danger" role="button">Приостановить работу приложения</a>
+                                    </div>
                                   </div>
-                                </td>
-                                  <br><br>
-                              </tr>
-                              <tr>
-                                <td>
-                                    <div style="min-width: 27pc; min-height: 15pc;" class="panel panel-default">
-                                        <div class="panel-heading">Параметры работы</div>
-                                        <div class="panel-body">
-                                          <a style="min-width: 25pc;" href="/suspend" class="btn btn-info" role="button">Параметры бота</a>
-                                          <br>
-                                          <br>
-                                          <a style="min-width: 25pc;" href="/suspend" class="btn btn-danger" role="button">Приостановить работу приложения</a>
-                                        </div>
-                                      </div>
-                                </td>
-                                <td style="width: 8pc;"></td>
-                                <td></td>
-                              </tr>
-                            </table>
-                          </div>
+                            </tr>
+                          </table>
                         </center>
                       </div>
                     </div>

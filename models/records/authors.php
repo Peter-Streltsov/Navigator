@@ -4,6 +4,8 @@ namespace Scientometrics\Models\Records;
 
 use Scientometrics\Models\Records as Records;
 
+header("Content-Type: text/html; charset=utf-8");
+
 class Authors extends Records\BaseModel
 {
     private $id;
@@ -11,13 +13,16 @@ class Authors extends Records\BaseModel
     private $lastname;
     private $position;
     private $edu;
+    private $added;
+    private $age;
 
 
     // getting full list of registered authors (not users!)
     public function userlist()
     {
-        $data = $this->pdo->prepare('select authors.id, authors.name, authors.lastname, positions.position from authors left join positions on authors.position_key=positions.id');
-        return $this->getArray($data);
+        $this->data = $this->pdo->prepare('select authors.id, authors.name, authors.lastname, positions.position from authors left join positions on authors.position_key=positions.id');
+        $this->data = $this->getArray($this->data);
+        return $this;
     } // end function
 
 
@@ -37,19 +42,30 @@ class Authors extends Records\BaseModel
         return $data;
     } // end function
 
-
-    public function getUserIndex($id)
+    public function joinArticles()
     {
+        foreach ($this->data as $user) {
 
-    } // end function
-
+        }
+    }
 
     // adding new user
-    public function saveUser()
+    public function save()
     {
-        $position = $this->fluent->from('positions')->select(null)->select('id')->where('position', $this->position);
-        $values = [$this->name, $this->lastname, $position, $this->edu, $this->grade];
-        $this->fluent->insertInto('authors')->values($values);
+        $values = ['name'=>$this->name, 'lastname'=>"$this->lastname", 'position_key'=>"$this->position"];
+        //$query = "INSERT INTO authors (authors.name, authors.lastname, authors.position_key, authors.age) VALUES($this->name, $this->lastname, $this->position, $this->age)";
+        $query = "INSERT INTO authors (authors.name, authors.lastname, authors.position_key) VALUES(:name, :lastname, :position_key)";
+        try {
+            $result = $this->pdo->prepare($query);
+            //$result->bindParam(':name', $this->name, \PDO::PARAM_STR);
+            //$result->bindParam(':lastname', $this->lastname, \PDO::PARAM_STR);
+            //$result->bindParam(':position_key', $this->position, \PDO::PARAM_INT);
+            $result->execute(array(':name'=>$this->name, ':lastname'=>$this->lastname, ':position_key'=>$this->position));
+            //, ':position_key'=>$this->position));
+        } catch (\PDOException $e) {
+            echo "PDO Error". $e;
+        }
+        echo $query.PHP_EOL;
     } // end function
 
 
@@ -88,16 +104,33 @@ class Authors extends Records\BaseModel
     } // end function
 
 
-    public function setPosition()
+    public function setPosition($position)
     {
         $this->position = $position;
         return $this;
     } // end function
 
+    public function setAdded()
+    {
+        $this->added = date('Y-m-d');
+        return $this;
+    }
+
+    public function setAge($date)
+    {
+        $this->age = $date;
+        return $this;
+    }
 
     public function setEdu($edu)
     {
         $this->edu = $edu;
+        return $this;
+    } // end function
+
+    public function setGrade($grade)
+    {
+        $this->grade = $grade;
         return $this;
     } // end function
 
@@ -127,5 +160,10 @@ class Authors extends Records\BaseModel
      {
          return $this->edu;
      } // end function
+
+     public function getData()
+     {
+         return $this->data;
+     }
 
     }

@@ -12,6 +12,8 @@ class Articles extends Records\BaseModel
     private $publisher;
     private $author; // can be array
 
+    private $data;
+
     // list of all articles
     public function articlesList()
     {
@@ -27,7 +29,8 @@ class Articles extends Records\BaseModel
             $data[] = $article;
         }
 
-        return $data;
+        //return $data;
+        return $this;
     } // end function
 
     public function getArticlesByUser($userid)
@@ -36,15 +39,15 @@ class Articles extends Records\BaseModel
 
     public function getById($id)
     {
-        $data = array();
+        //$data = array();
         $result = $this->fluent->from('articles')
                                     ->select(null)
                                     ->select(array('articles.title', 'articles.magazine', 'articles.year'))
-                                    ->where('id', $id);
+                                    ->where('articles.id', $id);
         foreach ($result as $article) {
-            $data[] = $article;
+            $this->data[] = $article;
         }
-        return $data;
+        return $this->data;
     } // end function
 
     public function addArticle()
@@ -68,17 +71,26 @@ class Articles extends Records\BaseModel
 
     public function setYear()
     {
-
+        return $this;
     } // end function
 
     public function setPublisher()
     {
-
+        return $this;
     } // end function
 
     public function setAuthor()
     {
-
+        return $this;
     } // end function
+
+    /**
+     * 
+     */
+
+    public function getData()
+    {
+        return $this->data;
+    }
 
 } // end class

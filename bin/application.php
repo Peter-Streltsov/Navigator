@@ -45,7 +45,7 @@ $application->get('/test', function($request, $response) {
 $application->get('/users', function($request, $response, $id) {
     $data['page'] = (new Models\Page())->common()->getData();
     $users = new Records\Authors($this->pdo);
-    $data['users'] = $users->userlist();
+    $data['users'] = $users->userlist()->getData();
     //var_dump($data['users']);
     $this->views->render($response, 'userlist.twig.html', $data);
 });
@@ -66,6 +66,7 @@ $application->get('/users/edit/{id}', function($request, $response, $id) {
 $application->get('/users/add', function($request, $response) {
     $data['page'] = (new Models\Page())->common()->getData();
     $data['positions'] = (new Records\Positions($this->pdo, $this->fluent))->getPositions();
+    $data['grades'] = (new Records\Grades($this->pdo, $this->fluent))->getGrades();
     $this->views->render($response, 'adduser.twig.html', $data);
 });
 
@@ -79,7 +80,6 @@ $application->get('/users/personal/{id}', function($request, $response, $id) {
 $application->get('/users/logout', function($request, $response) {
     /*$response->getBody()->write('Logging out<br>');
     $response->getBody()->write('Redirect in 3 seconds');*/
-    header("Location: /");
 });
 
 // articles list
@@ -135,11 +135,12 @@ $application->get('/stat', function($request, $response) {
 // control panel - admin only access
 $application->get('/controlpanel', function($request, $response) {
     $data['page'] = (new Models\Page())->getData();
-    $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->userlist();
+    $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->userlist()->getData();
+    $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->articleslist()->getData();
     foreach ($data['users'] as $user) {
         //echo $user['id'];
         $index = (new Records\Articles($this->pdo, $this->fluent))->getById($user['id']);
-        var_dump($index);
+        //var_dump($index);
         //$index = array_sum($index);
     }
     $this->views->render($response, 'controlpanel.twig.html', $data);
@@ -152,18 +153,22 @@ $application->get('/controlpanel', function($request, $response) {
  */
 
 // adding user
-$application->post('/users/add', function($request, $response) {
+$application->post('/users/add', function($request, $response) use($application) {
+    header("Content-Type: text/html; charset=utf-8");
     $user = new Records\Authors($this->pdo, $this->fluent);
-
-    var_dump($_POST);
-    /*$user->setName($_POST['name'])
+    $_POST['added'] = date('Y-m-d');
+    //var_dump($_POST);
+    $user->setName($_POST['name'])
         ->setLastname($_POST['lastname'])
         ->setPosition($_POST['position'])
         ->setEdu($_POST['edu'])
         ->setGrade($_POST['grade'])
-        ->saveUser();*/
+        ->setAge($_POST['age'])
+        ->setAdded()
+        ->save();
 
-    $response->getBody()->write('adding user');
+    //var_dump($user);
+    return $response->withRedirect('/controlpanel');
 });
 
 // adding article

@@ -48,10 +48,11 @@ class Page
               <span class=\"caret\"></span>
             </button>
             <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">
-              <li><a href=\"/users/personal/1\">Личный кабинет</a></li>
-              <li><a href=\"#\">Сообщение администратору</a></li>
+              <li><a href=\"/users/personal/1\"><span class=\"glyphicon glyphicon-user\"> Личный кабинет</span></a></li>
+              <li><a href=\"#\"><span class=\"glyphicon glyphicon-comment\">  Сообщение администратору</span>
+              </a></li>
               <li role=\"separator\" class=\"divider\"></li>
-              <li><a href=\"/users/logout\">Выход</a></li>
+              <li><a href=\"/users/logout\"><span class=\"glyphicon glyphicon-log-out\">  Выход</span></a></li>
             </ul>
           </div>
             ";

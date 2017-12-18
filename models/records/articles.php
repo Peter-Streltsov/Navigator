@@ -15,21 +15,22 @@ class Articles extends Records\BaseModel
     private $data;
 
     // list of all articles
-    public function articlesList()
+    public function list()
     {
         $result = $this->fluent->from('articles')
                                     ->select(null)
                                     ->select(array(
                                         'articles.title',
+                                        'articles.subtitle',
                                         'articles.magazine',
+                                        'articles.country',
                                         'articles.year'
                                     ));
 
         foreach ($result as $article) {
-            $data[] = $article;
+            $this->data[] = $article;
         }
 
-        //return $data;
         return $this;
     } // end function
 

@@ -14,24 +14,56 @@
                         <div class="well">Добавление новых пользователей, редактирование и удаление существующих данных
                                 <br>
                                 <br>
-                                <input class="form-control" id="myInput" type="text" placeholder="Поиск по имени, должности или учёной степени..">
+                                <input class="form-control" id="myInput" type="text" placeholder="Поиск">
                                 <br></div>
                                     <table class="table table-hover" id="myList" style="background-color: #fff;">
-                                        <thead style="font-style: italic; font-size: 12pt;">
-                                            <td>Имя, фамилия</td>
-                                            <td></td>
-                                            <td>Должность</td>
-                                            <td>Учёная степень</td>
-                                            <td>Индекс</td>
+                                        <thead style="background-color: lightgray;" class="thead-default">
+                                          <tr>
+                                            <th>Имя, фамилия</th>
+                                            <th>Статус пользователя/действия</th>
+                                            <th>Должность</th>
+                                            <th>Учёная степень</th>
+                                            <th>Индекс</th>
+                                          </tr>
                                         </thead>
+                                        <tbody>
                                       {% for user in users %}
                                         <tr style="font-size: 10pt;">
-                                          <td style="text-align: center;">{{ user.name }} {{ user.lastname }}</td>
+                                          <td style="text-align: center;">{{ user.name }} {{ user.secondname }} {{ user.lastname }}</td>
                                           <td>
-                                            <div class="dropdown">
-                                              <button class="btn btn-primary" style="max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button" data-toggle="dropdown"><span style="color: gray;" class="glyphicon glyphicon-user"></span></button>
-                                              <a href="/users" class="btn btn-primary" style="max-height: 2.5pc; background-color: #d3d3d3; color: #000; font-size: 8pt;" type="button"><span style="color: gray;" class="glyphicon glyphicon-edit"></span></a>
-                                            </div>
+                                            <div class="btn-group">
+                                                <a class="btn btn-default" href="#"><i class="icon-user icon-white"></i> Пользователь</a>
+                                                <a style="background-color: lightgray;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                                                <ul class="dropdown-menu">
+                                                  <li><a href="/users/edit/{{user.id}}"><span class="glyphicon glyphicon-pencil">  Редактировать</span></a></li>
+                                                  <li><a data-toggle="modal" data-target="#myModal{{ user.id }}"><span class="glyphicon glyphicon-list-alt">  Подробные данные</span></a></li>
+                                                  <li class="divider"></li>
+                                                  <li><a href="/control/make/{{ user.id }}"><i class="i"></i> Сделать администратором</a></li>
+                                                </ul>
+                                              </div>
+                                              <!-- Modal -->
+                                              <div id="myModal{{ user.id }}" class="modal fade" role="dialog">
+                                                <div style="min-width: 50pc;" class="modal-dialog">
+                                                  <!-- Modal content-->
+                                                  <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading"><h3>{{ user.name }} {{ user.secondname }} {{ user.lastname }}</h3></div>
+                                                            <div class="panel-body">
+                                                                <table class="table table-striped">
+                                                                    <tr><td>Должность: {{ user.position }}</td><td></td><td>Стаж:</td><td></td></tr>
+                                                                    <tr><td>Публикаций:</td><td></td><td>Научная степень: {{ user.grade }}</td><td></td></tr>
+                                                                  </table>
+                                                            </div>
+                                                          </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <button style="font-size: 10pt;" type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <!-- END MODAL -->
                                           </td>
                                           <td style="text-align: center;">{{ user.position }}</td>
                                             {% for item in data %}
@@ -41,6 +73,7 @@
                                            <td style="text-align: center;"><span class="badge">0</span></td>
                                           </tr>
                                           {% endfor %}
+                                        </tbody>
                                         </table>
                                         <script>
                                         $(document).ready(function(){
@@ -53,59 +86,88 @@
                                           });
                                           </script>
                 </div>
-                <div id="menu1" class="tab-pane fade">
-                                <div class="well">Монографии</div>
-                                <ul class="nav nav-tabs">
-                                                <li class="active"><a data-toggle="tab" href="#home">Статьи</a></li>
-                                                <li><a data-toggle="tab" href="#menu1">Монографии</a></li>
-                                                <li><a data-toggle="tab" href="#menu2">Доклады и конференции</a></li>
-                                              </ul>
-                </div>
+
+                <!-- SCIENCE -->
+                <div id="menu1" class="tab-pane fade in active">
+                          <div>
+                              <ul class="nav nav-tabs">
+                                  <li class="active"><a data-toggle="tab" href="#articles">Статьи</a></li>
+                                  <li><a data-toggle="tab" href="#menu1">Научные результаты</a></li>
+                                  <li><a data-toggle="tab" href="#reports">Параметры</a></li>
+                                </ul>
+
+                          <table class="table table-hover" id="" style="background-color: #fff;">
+                              <div class="well">
+                                  <br>
+                                  <input class="form-control" id="myInput" type="text" placeholder="Поиск">
+                                  <br>
+                                </div>
+                              <thead style="background-color: lightgray;" class="thead-default">
+                                <tr>
+                                  <th>Название</th>
+                                  <th>Издание</th>
+                                  <th>Год издания</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                            {% for article in articles %}
+                              <tr style="font-size: 10pt;">
+                                <td style="text-align: center;">{{ article.title }}<br>{{ article.subtitle }}</td>
+                                <td style="text-align: center;">{{ article.magazine }}</td>
+                                <td style="text-align: center;"><span class="badge">0</span></td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                              </table>
+                          </div>
+                          </div>
                 <!-- controls -->
                 <div id="menu2" class="tab-pane fade">
-                    <div class="well">Управление приложением</div>
-                        <center>
-                          <table class="table">
-                            <tr>
-                              <td>
-                                <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
-                                    <div class="panel-heading">Пользователи</div>
-                                    <div class="panel-body">
-                                        <div class="btn-group-vertical">
-                                            <a href="/users/add" type="button" class="btn btn-default">Создать пользователя</a>
-                                            <a href="/suspend" type="button" class="btn btn-default">Удалить пользователя</a>
-                                            <a href="/suspend" type="button" class="btn btn-default">Редактировать права администраторов</a>
-                                          </div>
-                                        </div>
-                                      </div>
-                              </td>
-                              <td>
-                                  <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
-                                      <div class="panel-heading">Вспомогательные данные</div>
-                                      <div class="panel-body">
-                                          <div class="btn-group-vertical">
-                                              <a href="/users/add" type="button" class="btn btn-default">Редактировать коэффициенты</a>
-                                              <a href="/suspend" type="button" class="btn btn-default">Редактировать список должностей</a>
-                                              <a href="/suspend" type="button" class="btn btn-default">Редактировать список учёных степеней</a>
-                                            </div>
-                                      </div>
-                                  </div>
-                              </td>
-                            </tr>
-                            <tr>
-                                <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
-                                    <div class="panel-heading">Параметры работы</div>
-                                    <div class="panel-body">
-                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-info" role="button">Параметры бота</a>
-                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-warning" role="button">Сбросить лог</a>
-                                      <a style="min-width: 22pc;" href="/suspend" class="btn btn-danger" role="button">Приостановить работу приложения</a>
-                                    </div>
-                                  </div>
-                            </tr>
-                          </table>
-                        </center>
-                      </div>
-                    </div>
+                  <div class="well">Управление приложением</div>
+                    <table class="table">
+                      <tr>
+                        <td>
+                          <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
+                            <div class="panel-heading">Пользователи</div>
+                            <div class="panel-body">
+                              <div class="btn-group-vertical">
+                                <a href="/users/add" type="button" class="btn btn-default">Создать пользователя</a>
+                                <a href="/suspend" type="button" class="btn btn-default">Удалить пользователя</a>
+                                <a href="/suspend" type="button" class="btn btn-default">Редактировать права администраторов</a>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
+                            <div class="panel-heading">Вспомогательные данные</div>
+                            <div class="panel-body">
+                              <div class="btn-group-vertical">
+                                <a href="/users/add" type="button" class="btn btn-default">Редактировать коэффициенты</a>
+                                <a href="/suspend" type="button" class="btn btn-default">Редактировать список должностей</a>
+                                <a href="/suspend" type="button" class="btn btn-default">Редактировать список учёных степеней</a>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
+                            <div class="panel-heading">Параметры работы</div>
+                            <div class="panel-body">
+                              <div class="btn-group-vertical">
+                                <a href="/" type="button" class="btn btn-default">Параметры бота</a>
+                                <a href="/" style="background-color: rgb(247, 200, 112);"  type="button" class="btn btn-warning">Сбросить логи</a>
+                                <a href="/suspend" style="background-color: rgb(224, 147, 111);"  type="button" class="btn btn-danger">Приостановить работу приложения</a>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
+                </div>
+            </div>
 
 {% endblock %}

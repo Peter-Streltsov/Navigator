@@ -10,6 +10,7 @@ class Authors extends Records\BaseModel
 {
     private $id;
     private $name;
+    private $secondname;
     private $lastname;
     private $position;
     private $edu;
@@ -19,9 +20,9 @@ class Authors extends Records\BaseModel
 
 
     // getting full list of registered authors (not users!)
-    public function userlist()
+    public function list()
     {
-        $this->data = $this->pdo->prepare('select authors.id, authors.name, authors.lastname, positions.position from authors left join positions on authors.position_key=positions.id');
+        $this->data = $this->pdo->prepare('select authors.id, authors.name, authors.secondname, authors.lastname, positions.position from authors left join positions on authors.position_key=positions.id left join grades on authors.grade_key=grades.id');
         $this->data = $this->getArray($this->data);
         return $this;
     } // end function
@@ -32,7 +33,7 @@ class Authors extends Records\BaseModel
     {
         $result = $this->fluent->from('authors')
                                     ->select(null)
-                                    ->select(array('authors.name', 'authors.lastname'))
+                                    ->select(array('authors.name', 'authors.secondname', 'authors.lastname', 'authors.position_key'))
                                     ->where('authors.id', $id)
                                     ->leftJoin('positions ON authors.position_key=positions.id')
                                     ->select('positions.position');
@@ -54,15 +55,10 @@ class Authors extends Records\BaseModel
     public function save()
     {
         $this->added = date('Y-m-d');
-        $query = "INSERT INTO authors (authors.name, authors.lastname, authors.position_key, authors.added, authors.age, authors.expirience) VALUES(:name, :lastname, :position_key, :added, :age, :expirience)";
+        $query = "INSERT INTO authors (authors.name, authors.secondname, authors.lastname, authors.position_key, authors.added, authors.age, authors.expirience) VALUES(:name, :secondname, :lastname, :position_key, :added, :age, :expirience)";
         try {
             $result = $this->pdo->prepare($query);
-            $result->execute(array(':name'=>$this->name,
-                ':lastname'=>$this->lastname,
-                ':position_key'=>$this->position,
-                ':added'=>$this->added,
-                ':age'=>$this->age,
-                ':expirience'=>$this->expirience));
+            $result->execute(array(':name'=>$this->name, ':secondname'=>$this->secondname, ':lastname'=>$this->lastname, ':position_key'=>$this->position, ':added'=>$this->added, ':age'=>$this->age, ':expirience'=>$this->expirience));
         } catch (\PDOException $e) {
             echo "PDO Error". $e;
         }
@@ -94,6 +90,12 @@ class Authors extends Records\BaseModel
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    } // end function
+
+    public function setSecondname($secondname)
+    {
+        $this->secondname = $secondname;
         return $this;
     } // end function
 

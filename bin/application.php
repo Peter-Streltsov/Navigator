@@ -6,6 +6,7 @@ use Slim\App;
 use Telegram\Bot\Api;
 use Scientometrics\Models as Models;
 use Scientometrics\Models\Records as Records;
+use Scientometrics\Models\Service as Service;
 use Scientometrics\Config as Config;
 use Scientometrics\Bot as Bot;
 
@@ -140,9 +141,12 @@ $application->get('/control', function($request, $response) {
     $data['page'] = (new Models\Page())->getData();
     $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
     $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
-    var_dump($data['articles']);
+    //var_dump($data['users']);
     foreach ($data['users'] as $user) {
         $index = (new Records\Articles($this->pdo, $this->fluent))->getById($user['id']);
+    }
+    if (isset($_SESSION['messages'])) {
+        $data['page']['messages'] = $_SESSION['messages'];
     }
     $this->views->render($response, 'controlpanel.twig.html', $data);
 });
@@ -169,7 +173,15 @@ $application->post('/users/add', function($request, $response) use($application)
         ->setAdded()
         ->save();
 
-    return $response->withRedirect('/controlpanel');
+    $messages = new Service\Messages();
+    $messages->setSuccess("Пользователь ".$_POST['name']." ".$_POST['lastname']." успешно создан");
+
+    $data['messages'] = $messages->getData();
+
+    $_SESSION['messages'] = $data['messages'];
+
+    return $response->withRedirect('/control');
+    //return $this->views->render($response, 'controlpanel.twig.html', $data);
 });
 
 // adding article

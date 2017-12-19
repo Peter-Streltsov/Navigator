@@ -5,18 +5,30 @@
 <div class="panel panel-default">
         <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Сотрудники</a></li>
-                <li><a data-toggle="tab" href="#menu1">Научные результаты</a></li>
-                <li><a data-toggle="tab" href="#menu2">Параметры</a></li>
+                <li><a data-toggle="tab" href="#menu1"><span style="font-size: 12pt;" class="glyphicon glyphicon-book">  Публикации</span></a></li>
+                <li><a data-toggle="tab" href="#menu2"><span style="font-size: 12pt;" class="glyphicon glyphicon-cog">  Параметры</span></a></li>
               </ul>
               
               <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
                         <div class="well">Добавление новых пользователей, редактирование и удаление существующих данных
+                          <!--<button onclick ="$('#userlist').tableExport({type:'excel',htmlContent:'true',escape:'true'});">PDF</button>
+                          <button onclick ="alert('Alert'); return false;">PDF</button>-->
                                 <br>
                                 <br>
                                 <input class="form-control" id="myInput" type="text" placeholder="Поиск">
-                                <br></div>
-                                    <table class="table table-hover" id="myList" style="background-color: #fff;">
+                                <br>
+                                <div class="btn-group">
+                                    <a class="btn btn-default" href="#"><i class="icon-user icon-white"></i><span class="glyphicon glyphicon-export">  Экспорт</span></a>
+                                    <a style="background-color: lightgray;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                      <li><a onclick ="$('#userlist').tableExport({type:'pdf',pdfFontSize:5,htmlContent:'true',escape:'true'});"><span class="glyphicon glyphicon-pencil" style="color: red;">  PDF</span></a></li>
+                                      <li><a onclick ="$('#customers').tableExport({type:'pdf',htmlContent:'true',escape:'false'});"><span class="glyphicon glyphicon-list-alt" style="color: green;">  XLS</span></a></li>
+                                    </ul>
+                                  </div>
+                                  <br>
+                              </div>
+                                    <table data-tableexport-display="none" style="margin-top: -1.3pc;" class="table table-hover" id="userlist">
                                         <thead style="background-color: lightgray;" class="thead-default">
                                           <tr>
                                             <th>Имя, фамилия</th>
@@ -36,16 +48,16 @@
                                                 <a style="background-color: lightgray;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                                                 <ul class="dropdown-menu">
                                                   <li><a href="/users/edit/{{user.id}}"><span class="glyphicon glyphicon-pencil">  Редактировать</span></a></li>
-                                                  <li><a data-toggle="modal" data-target="#myModal{{ user.id }}"><span class="glyphicon glyphicon-list-alt">  Подробные данные</span></a></li>
+                                                  <li><a href="" data-toggle="modal" data-target="#myModal{{ user.id }}"><span class="glyphicon glyphicon-list-alt">  Подробные данные</span></a></li>
                                                   <li class="divider"></li>
-                                                  <li><a href="/control/make/{{ user.id }}"><i class="i"></i> Сделать администратором</a></li>
+                                                  <li><a href="/control/make/{{ user.id }}"><i class="i"></i><span class="glyphicon glyphicon-exclamation-sign">  Сделать администратором</span></a></li>
                                                 </ul>
                                               </div>
                                               <!-- Modal -->
                                               <div id="myModal{{ user.id }}" class="modal fade" role="dialog">
                                                 <div style="min-width: 50pc;" class="modal-dialog">
                                                   <!-- Modal content-->
-                                                  <div class="modal-content">
+                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <div class="panel panel-default">
                                                             <div class="panel-heading"><h3>{{ user.name }} {{ user.secondname }} {{ user.lastname }}</h3></div>
@@ -69,58 +81,113 @@
                                             {% for item in data %}
                                             <td>{{ item }}</td>
                                             {% endfor %}
-                                            <td></td>
+                                            <td>{{ user.grade }}</td>
                                            <td style="text-align: center;"><span class="badge">0</span></td>
                                           </tr>
                                           {% endfor %}
                                         </tbody>
                                         </table>
+                                        <!--<table id="customers" class="table table-striped" >
+                                            <thead>			
+                                              <tr class='warning'>
+                                                <th>Страна</th>
+                                                <th>Население</th>
+                                                <th>Date</th>
+                                                <th>%ge</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td>Chinna</td>
+                                                <td>1,363,480,000</td>
+                                                <td>March 24, 2014</td>
+                                                <td>19.1</td>
+                                              </tr>
+                                              <tr>
+                                                <td>India</td>
+                                                <td>1,241,900,000</td>
+                                                <td>March 24, 2014</td>
+                                                <td>17.4</td>
+                                              </tr>
+                                              <tr>
+                                                <td>United States</td>
+                                                <td>317,746,000</td>
+                                                <td>March 24, 2014</td>
+                                                <td>4.44</td>
+                                              </tr>
+                                              <tr>
+                                                <td>Indonesia</td>
+                                                <td>249,866,000</td>
+                                                <td>July 1, 2013</td>
+                                                <td>3.49</td>
+                                              </tr>
+                                              <tr>
+                                                <td>Brazil</td>
+                                                <td>201,032,714</td>
+                                                <td>July 1, 2013</td>
+                                                <td>2.81</td>
+                                              </tr>
+                                            </tbody>
+                                          </table>-->
                                         <script>
                                         $(document).ready(function(){
                                           $("#myInput").on("keyup", function() {
                                             var value = $(this).val().toLowerCase();
-                                            $("#myList tr").each(function() {
+                                            $("#userlist tr").each(function() {
                                               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                                               });
                                             });
                                           });
                                           </script>
+                                          <!--<script>
+                                          $('.exportbutton').click(function() {
+                                            alert('pdf');
+                                            //$('#userlist').tableExport({type:'pdf',escape:'false'});
+                                          }
+                                          </script>-->
                 </div>
 
                 <!-- SCIENCE -->
+                <div id="menu1" class="tab-pane fade">
+                    <table style="margin-top: -1.3pc;" class="table table-hover" id="menu1" style="background-color: #fff;">
+                        <div class="well">
+                            <br>
+                            <input class="form-control" type="text" placeholder="Поиск">
+                            <br>
+                          </div>
+                        <thead style="background-color: lightgray;" class="thead-default">
+                          <tr>
+                            <th>Название</th>
+                            <th>Издание</th>
+                            <th>Автор(ы)</th>
+                            <th>Год издания</th>
+                            <th>Страна издания</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                      {% for article in articles %}
+                        <tr style="font-size: 10pt;">
+                          <td style="text-align: left;">{{ article.title }}<br>{{ article.subtitle }}</td>
+                          <td style="text-align: left;">{{ article.magazine }}</td>
+                          <td></td>
+                          <td style="text-align: left;"><span class="badge">0</span></td>
+                          <td></td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                <!--<div class="tab-content">
                 <div id="menu1" class="tab-pane fade in active">
-                          <div>
                               <ul class="nav nav-tabs">
                                   <li class="active"><a data-toggle="tab" href="#articles">Статьи</a></li>
-                                  <li><a data-toggle="tab" href="#menu1">Научные результаты</a></li>
+                                  <li><a data-toggle="tab" href="#">Научные результаты</a></li>
                                   <li><a data-toggle="tab" href="#reports">Параметры</a></li>
                                 </ul>
 
-                          <table class="table table-hover" id="" style="background-color: #fff;">
-                              <div class="well">
-                                  <br>
-                                  <input class="form-control" id="myInput" type="text" placeholder="Поиск">
-                                  <br>
-                                </div>
-                              <thead style="background-color: lightgray;" class="thead-default">
-                                <tr>
-                                  <th>Название</th>
-                                  <th>Издание</th>
-                                  <th>Год издания</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                            {% for article in articles %}
-                              <tr style="font-size: 10pt;">
-                                <td style="text-align: center;">{{ article.title }}<br>{{ article.subtitle }}</td>
-                                <td style="text-align: center;">{{ article.magazine }}</td>
-                                <td style="text-align: center;"><span class="badge">0</span></td>
-                                </tr>
-                                {% endfor %}
-                              </tbody>
-                              </table>
+                          
                           </div>
-                          </div>
+                </div>-->
                 <!-- controls -->
                 <div id="menu2" class="tab-pane fade">
                   <div class="well">Управление приложением</div>

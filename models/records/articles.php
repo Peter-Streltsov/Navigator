@@ -20,6 +20,7 @@ class Articles extends Records\BaseModel
         $result = $this->fluent->from('articles')
                                     ->select(null)
                                     ->select(array(
+                                        'articles.id',
                                         'articles.title',
                                         'articles.subtitle',
                                         'articles.magazine',
@@ -29,6 +30,15 @@ class Articles extends Records\BaseModel
 
         foreach ($result as $article) {
             $this->data[] = $article;
+        }
+
+        foreach ($this->data as $key => $article) {
+            $authors = $this->fluent->from('articles_authors')->select(null)->select(array('name', 'lastname'))->where('articles_key', $article['id']);
+            foreach ($authors as $author) {
+                if (is_array($author)) {
+                    $this->data[$key]['authors'][] = $author['name']." ".$author['lastname'];
+                }
+            }
         }
 
         return $this;

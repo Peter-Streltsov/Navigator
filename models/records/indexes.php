@@ -13,10 +13,12 @@ class Indexes extends Records\BaseModel
     private $name;
     private $index;
 
+    private $data;
+
     public function getIndexes()
     {
-        $this->fluent->from('indexes')->select(null)->select('indexes.id', 'indexes.name', 'indexes.index');
-        //return $this;
+        $this->fluent->from('indexes_publications')->select(null)->select('indexes.id', 'indexes.name', 'indexes.value');
+        return $this;
     } // end function
 
     public function setName($name)
@@ -40,7 +42,7 @@ class Indexes extends Records\BaseModel
     // adding new category
     public function save()
     {
-        $this->fluent->insert('indexes')->values($this->name, $this->index);
+        $this->fluent->insertInto('indexes')->values($this->name, $this->index);
     } // end function
 
 } // end class

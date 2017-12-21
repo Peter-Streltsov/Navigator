@@ -43,8 +43,8 @@ class Page
             $this->pagedata['login'] = "
             <div class=\"dropdown\">
             <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\"
-            style=\"color: #fff; background-color: #8fabd1; margin-right: 0.5pc; margin-top: 0.5pc;\">
-              administrator
+            style=\"max-width: 20pc; font-size: 10pt; color: #fff; background-color: #8fabd1; margin-right: 0.5pc; margin-top: 0.5pc;\">
+            administrator@administrator.ru
               <span class=\"caret\"></span>
             </button>
             <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">

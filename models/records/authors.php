@@ -22,7 +22,7 @@ class Authors extends Records\BaseModel
     // getting full list of registered authors (not users!)
     public function list()
     {
-        $this->data = $this->pdo->prepare('select authors.id, authors.name, authors.secondname, authors.lastname, positions.position, grades.grade from authors left join positions on authors.position_key=positions.id left join grades on authors.grade_key=grades.id');
+        $this->data = $this->pdo->prepare('select authors.id, authors.name, authors.secondname, authors.lastname, authors.age, positions.position, grades.grade from authors left join positions on authors.position_key=positions.id left join grades on authors.grade_key=grades.id');
         $this->data = $this->getArray($this->data);
         return $this;
     } // end function
@@ -62,7 +62,7 @@ class Authors extends Records\BaseModel
         } catch (\PDOException $e) {
             echo "PDO Error". $e;
         }
-        echo $query.PHP_EOL;
+        //echo $query.PHP_EOL;
     } // end function
 
 

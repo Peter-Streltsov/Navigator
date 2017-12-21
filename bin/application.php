@@ -42,30 +42,38 @@ $application->get('/test', function($request, $response) {
     $response->getBody()->write($_SESSION['status']);
 });
 
-// total userlist/таблица с данными всех пользователей
-$application->get('/users', function($request, $response, $id) {
+/**
+ * /public/
+ */
+
+/**
+ * /public/users/
+ */
+
+// таблица с данными всех пользователей
+$application->get('/public/users', function($request, $response, $id) {
     $data['page'] = (new Models\Page())->common()->getData();
     $users = new Records\Authors($this->pdo);
     $data['users'] = $users->list()->getData();
     $this->views->render($response, 'userlist.twig.html', $data);
 });
 
-// exact user data/информация о конкретном пользователе
-$application->get('/users/get/{id}', function($request, $response, $id) {
+// exact user data
+$application->get('/public/users/get/{id}', function($request, $response, $id) {
     $users = new Records\Authors($this->pdo, $this->fluent);
     $data['user'] = $users->getUser($id['id']);
     $this->views->render($response, 'userdata.twig.html', $data);
 });
 
 // edit user by id
-$application->get('/users/edit/{id}', function($request, $response, $id) {
+$application->get('/public/users/edit/{id}', function($request, $response, $id) {
     $data['page'] = (new Models\Page())->common()->getData();
     $data['user'] = (new Records\Authors($this->pdo, $this->fluent))->getUser($id['id']);
     return $this->views->render($response, 'useredit.twig.html', $data);
 });
 
 // input page for adding new user
-$application->get('/users/add', function($request, $response) {
+$application->get('/public/users/add', function($request, $response) {
     $data['page'] = (new Models\Page())->common()->getData();
     $data['positions'] = (new Records\Positions($this->pdo, $this->fluent))->getPositions();
     $data['grades'] = (new Records\Grades($this->pdo, $this->fluent))->getGrades();
@@ -73,19 +81,39 @@ $application->get('/users/add', function($request, $response) {
 });
 
 // personal user page
-$application->get('/users/personal/{id}', function($request, $response, $id) {
+$application->get('/public/users/personal/{id}', function($request, $response, $id) {
     $data['page'] = (new Models\Page())->common()->getData();
     $this->views->render($response, 'personal.twig.html', $data);
 });
 
 // issue message
-$application->get('/users/personal/message/{id}', function($request, $response, $id) {
+$application->get('/public/users/personal/message/{id}', function($request, $response, $id) {
     return $this->views->render($response, 'message.twig.html');
 });
 
 // logging out
 $application->get('/users/logout', function($request, $response) {
 });
+
+/**
+ * /public/stat/
+ */
+
+// general statistics
+$application->get('/public/stat', function($request, $response) {
+    $data['page'] = (new Models\Page())->getData();
+    $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
+    $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
+    $data['countusers'] = count($data['users']);
+    $data['count'] = count($data['articles']);
+    //var_dump($data['count']);
+    $this->views->render($response, 'stat.twig.html', $data);
+});
+
+
+/**
+ * /public/articles/
+ */
 
 // articles list
 $application->get('/articles', function($request, $response){
@@ -130,27 +158,28 @@ $application->get('/createdatabaselayout', function($request, $response) {
     $database->createLayout();
 });
 
-// general statistics
-$application->get('/stat', function($request, $response) {
-    $data['page'] = (new Models\Page())->getData();
-    $this->views->render($response, 'stat.twig.html', $data);
-});
-
 // control panel - admin only access
 $application->get('/control', function($request, $response) {
     $data['page'] = (new Models\Page())->getData();
     $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
     $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
-    //var_dump($data['users']);
-    foreach ($data['users'] as $user) {
-        $index = (new Records\Articles($this->pdo, $this->fluent))->getById($user['id']);
-    }
+    //var_dump($data['articles']);
     if (isset($_SESSION['messages'])) {
         $data['page']['messages'] = $_SESSION['messages'];
     }
     $this->views->render($response, 'controlpanel.twig.html', $data);
 });
 
+$application->get('/control/indexes', function($request, $response) {
+    $data['page'] = (new Models\Page())->getData();
+    $data['indexes'] = (new Records\Indexes($this->pdo, $this->fluent))->getIndexes()->getData();
+    return $this->views->render($response, 'indexes.twig.html', $data);
+});
+
+//
+$application->get('/control/make/{id}', function($request, $response, $id) {
+
+});
 
 
 /**
@@ -189,6 +218,14 @@ $application->post('/articles/add', function($request, $response){
     $user = new Records\Authors($this->pdo); //???
     $article = new Records\Articles($this->fluent);
     $response->getBody()->write('adding another article');
+});
+
+// updatong indexes
+$application->post('/control/indexes/update', function($request, $response) {
+    $values = [$_POST['1'], $_POST['2'], $_POST['3'], $_POST['4'], $_POST['5'], $_POST['6'], $_POST['7']];
+    $indexes = new Records\Indexes($this->pdo, $this->fluent);
+    $indexes->setIndexes($values);
+    return $response->withRedirect('/control');
 });
 
 // authorization

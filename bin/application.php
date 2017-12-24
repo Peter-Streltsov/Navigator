@@ -73,7 +73,7 @@ $application->get('/public/users/edit/{id}', function($request, $response, $id) 
 });
 
 // input page for adding new user
-$application->get('/public/users/add', function($request, $response) {
+$application->get('/control/users/add', function($request, $response) {
     $data['page'] = (new Models\Page())->common()->getData();
     $data['positions'] = (new Records\Positions($this->pdo, $this->fluent))->getPositions();
     $data['grades'] = (new Records\Grades($this->pdo, $this->fluent))->getGrades();

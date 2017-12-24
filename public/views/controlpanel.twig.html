@@ -62,9 +62,9 @@
                                                             <div class="panel-heading"><h3>{{ user.name }} {{ user.secondname }} {{ user.lastname }}</h3></div>
                                                             <div class="panel-body">
                                                                 <table class="table table-striped">
-                                                                    <tr><td>Должность: {{ user.position }}</td><td></td><td>Стаж: {{user.age }} </td><td></td></tr>
+                                                                    <tr><td>Должность: {{ user.position }}</td><td></td><td>Возраст: {{user.age }} </td><td></td></tr>
                                                                     <tr><td>Публикаций:</td><td></td><td>Научная степень: {{ user.grade }}</td><td></td></tr>
-                                                                    <tr><td>Индекс:</td><td></td></tr>
+                                                                    <tr><td>Индекс:</td><td></td>Стаж: {{ user.expirience }}</tr>
                                                                   </table>
                                                             </div>
                                                           </div>
@@ -190,52 +190,93 @@
                         </table>
                     </div>
 
-                    <!-- controls -->
+                <!-- CONTROL -->
                 <div id="menu2" class="tab-pane fade">
                   <div class="well">Управление приложением</div>
-                  
-                    <table class="table">
+                  <center>
+                  <div style="margin-right: 2pc; margin-left: 2pc;" class="row">
+                    <div class="col-xs-5">
+                      <div class="well">
+                        <a href="#1">Управление пользователями</a>
+                        <br>
+                        <a href="#2">Вспомогательные данные</a>
+                        <br>
+                        <a href="#3">Menu group 2</a>
+                      </div>
+                    </div>
+                    <div class="col-xs-7">
+                        <section id="1">
+                            <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
+                                <div class="panel-heading">Пользователи</div>
+                                <div class="panel-body">
+                                  <div class="btn-group-vertical">
+                                    <a href="/control/users/add" type="button" class="btn btn-default">Создать пользователя</a>
+                                    <a href="/control/users/delete" type="button" class="btn btn-default">Удалить пользователя</a>
+                                    <!--<a href="/suspend" type="button" class="btn btn-default">Редактировать права администраторов</a>-->
+                                  </div>
+                                </div>
+                              </div>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                        </section>
+                        <section id="2">
+                            <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
+                                <div class="panel-heading">Вспомогательные данные</div>
+                                <div class="panel-body">
+                                  <div class="btn-group-vertical">
+                                    <a href="/control/indexes" type="button" class="btn btn-default"><span class="glyphicon">  Редактировать коэффициенты</span></a>
+                                    <a href="/control/positions" type="button" class="btn btn-default"><span class="glyphicon">  Редактировать список должностей</span></a>
+                                    <a href="/control/grades" type="button" class="btn btn-default"><span class="glyphicon">  Редактировать список учёных степеней</span></a>
+                                  </div>
+                                </div>
+                              </div>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                        </section>
+                        <section id="3">
+                            <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
+                                <div class="panel-heading">Параметры приложения</div>
+                                <div class="panel-body">
+                                  <div class="btn-group-vertical">
+                                    <a href="/" type="button" class="btn btn-default">Параметры бота</a>
+                                    <a href="/" type="button" class="btn btn-default"><span style="color: red;" class="glyphicon">  Сбросить лог</span></a>
+                                    <a href="/suspend" type="button" class="btn btn-default"><span style="color: red;" class="glyphicon">  Приостановить работу приложения</span></a>
+                                  </div>
+                                </div>
+                              </div>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                          <br>
+                        </section>
+                    </div>
+                  </div>
+                  </center>
+                    <!--<table class="table">
                       <tr>
                         <td>
-                          <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
-                            <div class="panel-heading">Пользователи</div>
-                            <div class="panel-body">
-                              <div class="btn-group-vertical">
-                                <a href="/users/add" type="button" class="btn btn-default">Создать пользователя</a>
-                                <a href="/control/users/delete" type="button" class="btn btn-default">Удалить пользователя</a>
-                                <!--<a href="/suspend" type="button" class="btn btn-default">Редактировать права администраторов</a>-->
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
-                            <div class="panel-heading">Вспомогательные данные</div>
-                            <div class="panel-body">
-                              <div class="btn-group-vertical">
-                                <a href="/control/indexes" type="button" class="btn btn-default">Редактировать коэффициенты</a>
-                                <a href="/control/positions" type="button" class="btn btn-default">Редактировать список должностей</a>
-                                <a href="/control/grades" type="button" class="btn btn-default">Редактировать список учёных степеней</a>
-                              </div>
-                            </div>
-                          </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <div style="min-width: 27pc; min-height: 10pc;" class="panel panel-default">
-                            <div class="panel-heading">Параметры работы</div>
-                            <div class="panel-body">
-                              <div class="btn-group-vertical">
-                                <a href="/" type="button" class="btn btn-default">Параметры бота</a>
-                                <a href="/" style="background-color: rgb(247, 200, 112);"  type="button" class="btn btn-warning">Сбросить логи</a>
-                                <a href="/suspend" style="background-color: rgb(224, 147, 111);"  type="button" class="btn btn-danger">Приостановить работу приложения</a>
-                              </div>
-                            </div>
-                          </div>
                         </td>
                       </tr>
-                    </table>
+                    </table>-->
                   </div>
                 </div>
             </div>

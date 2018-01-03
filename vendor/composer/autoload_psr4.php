@@ -18,6 +18,7 @@ return array(
     'Scientometrics\\Models\\Records\\' => array($baseDir . '/models/records'),
     'Scientometrics\\Models\\Entities\\' => array($baseDir . '/models/entities'),
     'Scientometrics\\Models\\' => array($baseDir . '/models'),
+    'Scientometrics\\Interfaces\\' => array($baseDir . '/interfaces'),
     'Scientometrics\\Exceptions\\' => array($baseDir . '/exceptions'),
     'Scientometrics\\Config\\' => array($baseDir . '/config'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),

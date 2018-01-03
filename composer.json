@@ -8,6 +8,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Scientometrics\\Interfaces\\": "interfaces",
             "Scientometrics\\Models\\": "models",
             "Scientometrics\\Models\\Records\\": "models/records",
             "Scientometrics\\Models\\Service\\": "models/service",

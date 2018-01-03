@@ -14,6 +14,7 @@ class Page
 
     /**
      * contains complete pagedata
+     * 
      * @var string
      */
     private $pagedata = array();
@@ -27,6 +28,8 @@ class Page
     }
 
     /**
+     * getting current authorization status
+     * 
      * @return string
      */
     private function getAuthStatus()
@@ -35,6 +38,8 @@ class Page
     }
 
     /**
+     * forming usermenu
+     * 
      * @return string
      */
     private function userMenu()
@@ -62,6 +67,11 @@ class Page
         }
     }
 
+    /**
+     * 
+     * 
+     * @return this
+     */
     public function common()
     {
         $this->getAuthStatus();

@@ -9,5 +9,13 @@ use Scientometrics\Models\Records as Records;
  */
 class Users extends Records\BaseModel
 {
+    public function list()
+    {
 
+    }
+
+    public function save()
+    {
+        
+    }
 }

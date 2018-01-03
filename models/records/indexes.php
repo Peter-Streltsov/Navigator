@@ -15,6 +15,11 @@ class Indexes extends Records\BaseModel
 
     private $data;
 
+    public function list()
+    {
+
+    }
+    
     public function getIndexes()
     {
         $this->fluent->from('indexes_publications')->select(null)->select('indexes.id', 'indexes.name', 'indexes.value');

@@ -4,7 +4,7 @@ namespace Scientometrics\Models;
 
 use Scientometrics\Models\Records;
 
-class Charts extends Records\BaseModel implements RecordInterface
+class Charts extends Records\BaseModel
 {
     /**
      * annual plans for scientific work
@@ -23,6 +23,11 @@ class Charts extends Records\BaseModel implements RecordInterface
 
     private $data;
 
+    public function list()
+    {
+
+    }
+
     /**
      * Setter - monographies
      * 
@@ -36,7 +41,6 @@ class Charts extends Records\BaseModel implements RecordInterface
 
     } // end function
 
-    
     /**
      * Setter - collective
      * 

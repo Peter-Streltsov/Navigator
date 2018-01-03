@@ -6,7 +6,7 @@ use Scientometrics\Models\Records as Records;
 
 class Conferencies extends Records\BaseModel
 {
-    public function conferenciesList()
+    public function list()
     {
 
     }
@@ -17,6 +17,11 @@ class Conferencies extends Records\BaseModel
     }
 
     public function addConf()
+    {
+        
+    }
+
+    public function save()
     {
         
     }

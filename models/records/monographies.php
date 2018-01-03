@@ -12,6 +12,11 @@ class Monographies extends Records\BaseModel
     private $year;
     private $author;
 
+    public function list()
+    {
+
+    }
+
     public function monographiesList()
     {
         $result = $this->fluent->from('monographies');
@@ -59,6 +64,11 @@ class Monographies extends Records\BaseModel
         $this->author = $author;
         return $this;
     } // end function
+
+    public function save()
+    {
+        
+    }
 
     /**
      * getters

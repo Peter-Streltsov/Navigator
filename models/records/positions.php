@@ -13,11 +13,16 @@ class Positions extends Records\BaseModel
     private $id;
     private $position;
 
+    public function list()
+    {
+
+    }
+
     /**
      * setter for 'position'
      * @param position string
      * @return void
-     */
+     */    
     public function setPosition($position)
     {
         $this->position = $position;
@@ -36,5 +41,10 @@ class Positions extends Records\BaseModel
         }
         return $data;
     } // end function
+
+    public function save()
+    {
+        
+    }
 
 } // end class

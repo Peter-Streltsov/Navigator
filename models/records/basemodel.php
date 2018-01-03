@@ -2,7 +2,7 @@
 
 namespace Scientometrics\Models\Records;
 
-abstract class BaseModel
+abstract class BaseModel implements \Scientometrics\Interfaces\RecordInterface
 {
     protected $pdo;
     protected $fluent;

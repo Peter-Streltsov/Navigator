@@ -95,6 +95,11 @@ class Articles extends Records\BaseModel
         return $this;
     } // end function
 
+    public function save()
+    {
+
+    } // end function
+    
     /**
      * 
      */

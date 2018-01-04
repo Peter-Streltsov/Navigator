@@ -22,7 +22,7 @@ class Users extends Records\BaseModel
     public function list()
     {
         return $this;
-    }
+    } // end function
 
 
     /**
@@ -33,7 +33,7 @@ class Users extends Records\BaseModel
     public function save()
     {
         $this->fluent->insertInto('users')->values($this->name, $this->password, $this->author_alias);
-    }
+    } // end function
 
     /** SETTERS */
 
@@ -73,7 +73,7 @@ class Users extends Records\BaseModel
     {
         $this->author_alias = $alias;
         return $this;
-    }
+    } // end function
 
     
     /**
@@ -85,7 +85,7 @@ class Users extends Records\BaseModel
     {
         $this->added = date('Y-m-d');
         return $this;
-    }
+    } // end function
 
     /** GETTERS */
 
@@ -97,5 +97,6 @@ class Users extends Records\BaseModel
     public function getData()
     {
         return $this->data;
-    }
-}
+    } // end function
+
+} // end class

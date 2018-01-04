@@ -2,9 +2,7 @@
 
 namespace Scientometrics\Models\Records;
 
-use Scientometrics\Models\Records as Records;
-
-class Grades extends Records\BaseModel
+class Grades extends Record
 {
     public function list()
     {

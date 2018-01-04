@@ -2,7 +2,7 @@
 
 namespace Scientometrics\Models\Records;
 
-class Authors extends BaseModel
+class Authors extends Record
 {
     private $id;
     private $name;

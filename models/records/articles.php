@@ -2,7 +2,7 @@
 
 namespace Scientometrics\Models\Records;
 
-class Articles extends BaseModel
+class Articles extends Record
 {
     private $title;
     private $subtitle;

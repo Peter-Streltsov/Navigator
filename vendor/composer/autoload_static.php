@@ -37,6 +37,7 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
             'Symfony\\Component\\Translation\\' => 30,
             'Slim\\Views\\' => 11,
             'Slim\\' => 5,
+            'Scientometrics\\Models\\Subrecords\\' => 33,
             'Scientometrics\\Models\\Service\\' => 30,
             'Scientometrics\\Models\\Records\\' => 30,
             'Scientometrics\\Models\\Entities\\' => 31,
@@ -113,6 +114,10 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Slim\\' => 
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
+        ),
+        'Scientometrics\\Models\\Subrecords\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/models/subrecords',
         ),
         'Scientometrics\\Models\\Service\\' => 
         array (
@@ -1053,6 +1058,7 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Exceptions\\GeneralApplication' => __DIR__ . '/../..' . '/exceptions/generalapplication.php',
         'Scientometrics\\Exceptions\\LowModel' => __DIR__ . '/../..' . '/exceptions/lowmodel.php',
         'Scientometrics\\Interfaces\\RecordInterface' => __DIR__ . '/../..' . '/interfaces/recordinterface.php',
+        'Scientometrics\\Interfaces\\SubrecordInterface' => __DIR__ . '/../..' . '/interfaces/subrecordinterface.php',
         'Scientometrics\\Models\\Charts' => __DIR__ . '/../..' . '/models/records/charts.php',
         'Scientometrics\\Models\\Entities\\Articles' => __DIR__ . '/../..' . '/models/entities/articles.php',
         'Scientometrics\\Models\\Entities\\Models' => __DIR__ . '/../..' . '/models/entities/model.php',
@@ -1060,16 +1066,17 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Models\\Page' => __DIR__ . '/../..' . '/models/page.php',
         'Scientometrics\\Models\\Records\\Articles' => __DIR__ . '/../..' . '/models/records/articles.php',
         'Scientometrics\\Models\\Records\\Authors' => __DIR__ . '/../..' . '/models/records/authors.php',
-        'Scientometrics\\Models\\Records\\BaseModel' => __DIR__ . '/../..' . '/models/records/basemodel.php',
         'Scientometrics\\Models\\Records\\Conferencies' => __DIR__ . '/../..' . '/models/records/conferencies.php',
         'Scientometrics\\Models\\Records\\Grades' => __DIR__ . '/../..' . '/models/records/grades.php',
-        'Scientometrics\\Models\\Records\\Indexes' => __DIR__ . '/../..' . '/models/records/indexes.php',
         'Scientometrics\\Models\\Records\\Monographies' => __DIR__ . '/../..' . '/models/records/monographies.php',
         'Scientometrics\\Models\\Records\\Positions' => __DIR__ . '/../..' . '/models/records/positions.php',
+        'Scientometrics\\Models\\Records\\Record' => __DIR__ . '/../..' . '/models/records/record.php',
         'Scientometrics\\Models\\Records\\Reports' => __DIR__ . '/../..' . '/models/records/reports.php',
         'Scientometrics\\Models\\Records\\Users' => __DIR__ . '/../..' . '/models/records/users.php',
         'Scientometrics\\Models\\Service\\Layout' => __DIR__ . '/../..' . '/models/service/layout.php',
         'Scientometrics\\Models\\Service\\Messages' => __DIR__ . '/../..' . '/models/service/messages.php',
+        'Scientometrics\\Models\\Subrecords\\Indexes' => __DIR__ . '/../..' . '/models/subrecords/indexes.php',
+        'Scientometrics\\Models\\Subrecords\\Subrecords' => __DIR__ . '/../..' . '/models/subrecords/subrecord.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',

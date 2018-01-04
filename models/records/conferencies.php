@@ -4,7 +4,7 @@ namespace Scientometrics\Models\Records;
 
 use Scientometrics\Models\Records as Records;
 
-class Conferencies extends Records\BaseModel
+class Conferencies extends Record
 {
     public function list()
     {

@@ -1,18 +1,27 @@
 <?php
 
-namespace Scientometrics\Models\Records;
+namespace Scientometrics\Models\Subrecords;
 
 use Scientometrics\Models\Records as Records;
 
-/**
- * works with custom indexes for publications
- */
-class Indexes extends Records\BaseModel
+class Indexes extends Subrecord
 {
+    /**
+     * table parameters
+     * 
+     * @var [integer] $id
+     * @var [string] $name
+     * @var [float] $index
+     */
     private $id;
     private $name;
     private $index;
 
+    /**
+     * class data
+     *
+     * @var [array] $data
+     */
     private $data;
 
     public function list()
@@ -44,10 +53,26 @@ class Indexes extends Records\BaseModel
         $this->fluent->update('indexes');
     }
 
-    // adding new category
+    
+    /**
+     * saving data
+     *
+     * @return void
+     */
     public function save()
     {
         $this->fluent->insertInto('indexes')->values($this->name, $this->index);
     } // end function
+
+
+    /**
+     * get record data
+     *
+     * @return array
+     */
+    public function getData()
+    {
+
+    }
 
 } // end class

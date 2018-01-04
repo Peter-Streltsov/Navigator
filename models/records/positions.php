@@ -8,7 +8,7 @@ use Scientometrics\Models\Records as Records;
  * 
  */
 
-class Positions extends Records\BaseModel
+class Positions extends Record
 {
     private $id;
     private $position;

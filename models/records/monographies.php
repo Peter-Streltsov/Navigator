@@ -12,12 +12,13 @@ class Monographies extends Records\BaseModel
     private $year;
     private $author;
 
+
+    /**
+     * list of monographies and complete data
+     *
+     * @return array
+     */
     public function list()
-    {
-
-    }
-
-    public function monographiesList()
     {
         $result = $this->fluent->from('monographies');
         foreach ($result as $book)
@@ -27,26 +28,54 @@ class Monographies extends Records\BaseModel
         return $data;
     }
 
-    public function monographyById()
-    {
-        $this->fluent->from('monographies');
-    }
-    /**
-     * setters
-     */
 
+    /**
+     * getter - monography by id
+     *
+     * @param [integer] $id
+     * @return array
+     */
+    public function getById($id)
+    {
+        return $this->fluent->from('monographies')->where('id', $id);
+    }
+
+
+
+    /** SETTERS */
+
+    /**
+     * setter - monography title
+     *
+     * @param [string] $title
+     * @return object
+     */
     public function setTitle($title)
     {
         $this->title = $title;
         return $this;
     } // end function
 
+
+    /**
+     * setter - monography subtitle
+     *
+     * @param [string] $subtitle
+     * @return object
+     */
     public function setSubtitle($subtitle)
     {
         $this->subtitle = $subtitle;
         return $this;
     } // end function
 
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $year
+     * @return object
+     */
     public function setYear($year)
     {
         $this->year = $year;

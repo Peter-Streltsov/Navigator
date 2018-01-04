@@ -2,9 +2,10 @@
 
 namespace Scientometrics\Models\Records;
 
-use Scientometrics\Records as Records;
+use Scientometrics\Models\Records as Records;
+use Scientometrics\Models\Subrecords as Subrecords;
 
-abstract class BaseModel implements \Scientometrics\Interfaces\RecordInterface
+abstract class Record implements \Scientometrics\Interfaces\RecordInterface
 {
     protected $pdo;
     protected $fluent;

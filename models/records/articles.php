@@ -2,19 +2,22 @@
 
 namespace Scientometrics\Models\Records;
 
-use Scientometrics\Models\Records as Records;
-
-class Articles extends Records\BaseModel
+class Articles extends BaseModel
 {
     private $title;
     private $subtitle;
     private $year;
     private $publisher;
+    private $doi;
     private $author; // can be array
 
     private $data;
 
-    // list of all articles
+    /**
+     * articles list
+     *
+     * @return this
+     */
     public function list()
     {
         $result = $this->fluent->from('articles')
@@ -44,13 +47,27 @@ class Articles extends Records\BaseModel
         return $this;
     } // end function
 
+
+    /**
+     * Undocumented function
+     *
+     * @param [integer] $userid
+     * @return void
+     */
     public function getArticlesByUser($userid)
     {
+
     } // end function
 
+
+    /**
+     * get article information by id
+     * TODO: complete method - add fields in fluent selection
+     * @param [int] $id
+     * @return array
+     */
     public function getById($id)
     {
-        //$data = array();
         $result = $this->fluent->from('articles')
                                     ->select(null)
                                     ->select(array('articles.title', 'articles.magazine', 'articles.year'))
@@ -61,52 +78,94 @@ class Articles extends Records\BaseModel
         return $this->data;
     } // end function
 
-    public function addArticle()
+
+    /**
+     * inserting article data in database
+     * TODO: complete method; rename (save)
+     * @return void
+     */
+    public function save()
     {
         $this->fluent->insertInto('articles')->values($this->title, $this->publisher, $this->year, $this->author);
     } // end function
 
+
+    /** SETTERS */
+    /** */
+
     /**
-     * setters
+     * setter - article title
+     *
+     * @return this
      */
-
-    public function setTitle()
+    public function setTitle($title)
     {
-
-    } // end function
-
-    public function setSubtitle()
-    {
-
-    } // end function
-
-    public function setYear()
-    {
+        $this->title = $title;
         return $this;
     } // end function
 
-    public function setPublisher()
+
+    /**
+     * setter - article subtitle
+     *
+     * @return this
+     */
+    public function setSubtitle($subtitle)
     {
+        $this->subtitle = $subtitle;
         return $this;
     } // end function
 
-    public function setAuthor()
+
+    /**
+     * setter - article year
+     *
+     * @param [string] $year
+     * @return this
+     */
+    public function setYear($year)
     {
+        $this->year = $year;
         return $this;
     } // end function
 
-    public function save()
-    {
 
+    /**
+     * setter - article author
+     *
+     * @param [string] $publisher
+     * @return this
+     */
+    public function setPublisher($publisher)
+    {
+        $this->publisher = $publisher;
+        return $this;
     } // end function
+
+
+    /**
+     * setter - article author
+     *
+     * @param [string] $author
+     * @return this
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+        return $this;
+    } // end function
+
     
-    /**
-     * 
-     */
+    /** GETTERS */
 
+    /**
+     * getter - complete data
+     *
+     * @return array
+     */
     public function getData()
     {
         return $this->data;
-    }
+    } // end function
 
 } // end class

@@ -2,6 +2,8 @@
 
 namespace Scientometrics\Models\Records;
 
+use Scientometrics\Records as Records;
+
 abstract class BaseModel implements \Scientometrics\Interfaces\RecordInterface
 {
     protected $pdo;

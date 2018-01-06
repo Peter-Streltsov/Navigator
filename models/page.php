@@ -3,14 +3,14 @@
 namespace Scientometrics\Models;
 
 /**
- * class for collecting page data (menu options, authorization status, etc..)
- * @since 0.3
+ * class, generating and collecting page data (menu options, authorization status, etc..)
+ * @since 0.3.xx
  */
 
 class Page
 {
-    private $auth;
-    private $data = array();
+    private $auth; // user authorization status
+    private $data = array(); // page data
 
     /**
      * contains complete pagedata
@@ -68,9 +68,9 @@ class Page
     }
 
     /**
+     * common page data
      * 
-     * 
-     * @return this
+     * @return object
      */
     public function common()
     {
@@ -79,6 +79,12 @@ class Page
         return $this;
     }
 
+
+    /**
+     * Undocumented function
+     *
+     * @return object
+     */
     public function extended()
     {
         $this->getAuthStatus();

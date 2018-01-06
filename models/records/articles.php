@@ -86,7 +86,9 @@ class Articles extends Record
      */
     public function save()
     {
+        $articles_authors = new Subrecords\Articles_Authors();
         $this->fluent->insertInto('articles')->values($this->title, $this->publisher, $this->year, $this->author);
+        $id = $this->fluent->from('articles')->select(null)->select('id')->where('title', $this->title);
     } // end function
 
 

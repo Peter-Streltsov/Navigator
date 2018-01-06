@@ -4,6 +4,11 @@ namespace Scientometrics\Models\Service;
 
 class Messages
 {
+
+    /**
+     * @since 0.3.xx
+     */
+
     public static $messages = array();
 
     private static $instance;

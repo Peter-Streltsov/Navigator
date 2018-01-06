@@ -10,6 +10,13 @@ class Layout
 
 {
     /**
+     * class creating database layout and basic data
+     * @since 0.3.xx
+     */
+
+    /**
+     * main method
+     * 
      * @return void
      */
     public function createLayout()

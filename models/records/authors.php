@@ -233,7 +233,7 @@ class Authors extends Record
      * @param [integer] $id
      * @return array
      */
-    public function getUser($id)
+    public function getById($id)
     {
         $result = $this->fluent->from('authors')
                                     ->select(null)

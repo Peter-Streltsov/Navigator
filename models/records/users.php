@@ -4,7 +4,7 @@ namespace Scientometrics\Models\Records;
 
 use Scientometrics\Models\Records as Records;
 
-class Users extends Records\BaseModel
+class Users extends Records\Record
 {
     private $email;
     private $password;
@@ -97,6 +97,11 @@ class Users extends Records\BaseModel
     public function getData()
     {
         return $this->data;
+    } // end function
+
+    public function getById($id)
+    {
+
     } // end function
 
 } // end class

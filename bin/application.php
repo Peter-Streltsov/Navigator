@@ -153,9 +153,9 @@ $application->get('/bot', function($request, $response) {
 });
 
 // creating tables
-$application->get('/createdatabaselayout', function($request, $response) {
-    $database = new Models\Layout($this->pdo);
-    $database->createLayout();
+$application->get('/scheme', function($request, $response) {
+    $database = new Models\Service\Scheme($this->pdo);
+    $database->createScheme();
 });
 
 // control panel - admin only access

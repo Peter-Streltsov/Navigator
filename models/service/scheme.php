@@ -4,22 +4,32 @@ namespace Scientometrics\Models\Service;
 
 /**
  * class contains several private methods creating database layout
+ * 
+ * @since 0.3.xx
  */
 
-class Layout
+class Scheme
 
 {
+
+    private $pdo;
+
     /**
-     * class creating database layout and basic data
-     * @since 0.3.xx
+     * constructor
+     *
+     * @param [\PDO] $pdo
      */
+    public function __construct($pdo)
+    {
+        $this->pdo = $pdo;
+    }
 
     /**
      * main method
      * 
      * @return void
      */
-    public function createLayout(): void
+    public function createScheme(): void
     {
         $this->createPositions();
         $this->createAuthors();
@@ -45,7 +55,7 @@ class Layout
             name varchar(50) NOT NULL,
             secondname varchar(100),
             lastname varchar(100) NOT NULL,
-            position_key int(11) DEFAULT NULL,
+            position_key int(11) DEFAULT NULL,git 
             PRIMARY KEY (id),
             CONSTRAINT FK_authors2_position_key FOREIGN KEY (position_key)
             REFERENCES scientometrics.positions (id) ON DELETE NO ACTION ON UPDATE RESTRICT)

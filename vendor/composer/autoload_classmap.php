@@ -857,7 +857,7 @@ return array(
     'Scientometrics\\Models\\Records\\Reports' => $baseDir . '/models/records/reports.php',
     'Scientometrics\\Models\\Records\\Users' => $baseDir . '/models/records/users.php',
     'Scientometrics\\Models\\Service\\Messages' => $baseDir . '/models/service/messages.php',
-    'Scientometrics\\Models\\Service\\Scheme' => $baseDir . '/models/service/scheme.php',
+    'Scientometrics\\Models\\Service\\Schema' => $baseDir . '/models/service/schema.php',
     'Scientometrics\\Models\\Subrecords\\ArticlesAuthors' => $baseDir . '/models/subrecords/articlesauthors.php',
     'Scientometrics\\Models\\Subrecords\\Indexes' => $baseDir . '/models/subrecords/indexes.php',
     'Scientometrics\\Models\\Subrecords\\Subrecords' => $baseDir . '/models/subrecords/subrecord.php',

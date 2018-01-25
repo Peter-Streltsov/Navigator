@@ -8,20 +8,22 @@ namespace Scientometrics\Models\Service;
  * @since 0.3.xx
  */
 
-class Scheme
+class Schema
 
 {
 
     private $pdo;
+    private $response;
 
     /**
      * constructor
      *
      * @param [\PDO] $pdo
      */
-    public function __construct($pdo)
+    public function __construct($pdo, $response)
     {
         $this->pdo = $pdo;
+        $this->response = $response;
     }
 
     /**
@@ -40,6 +42,8 @@ class Scheme
         $this->createConferencies();
         echo "структура базы данных создана;<br>";
         echo "перенаправление в течение 3 секунд;<br>";
+        sleep(3);
+        $this->response->withRedirect('/');
     }
     
 
@@ -129,10 +133,16 @@ class Scheme
         if ($this->pdo->query("CREATE TABLE IF NOT EXISTS `articles2` 
                             (`id` int(11) NOT NULL AUTO_INCREMENT,
                             `title` varchar(30) NOT NULL,
-                            `subtitle` varchar(30),
+                            `subtitle` varchar(30) DEFAULT NULL,
+                            'magazine' varchar(250),
                             `author` int(11) NOT NULL,
                             `year` int(11),
-                            PRIMARY KEY (`id`)) Engine=InnoDB DEFAULT CHARSET=utf8;")) 
+                            'first_page' text,
+                            'last_page' text,
+                            'DOI' varchar(250),
+                            'country' varchar(250),
+                            'annotation' text,
+                            PRIMARY KEY (`id`)) Engine=InnoDB DEFAULT CHARSET=utf8;"))
         {
             echo "таблица 'articles' создана;<br>";
         } else {

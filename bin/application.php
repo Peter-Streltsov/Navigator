@@ -153,8 +153,8 @@ $application->get('/bot', function($request, $response) {
 });
 
 // creating tables
-$application->get('/scheme', function($request, $response) {
-    $database = new Models\Service\Scheme($this->pdo);
+$application->get('/schema', function($request, $response) {
+    $database = new Models\Service\Schema($this->pdo, $response);
     $database->createScheme();
 });
 

@@ -19,6 +19,16 @@ class Grades extends Record
         return $data;
     }
 
+    public function getData()
+    {
+
+    }
+
+    public function getById($id)
+    {
+
+    }
+
     public function save()
     {
         

@@ -13,11 +13,6 @@ class Positions extends Record
     private $id;
     private $position;
 
-    public function list()
-    {
-
-    }
-
     /**
      * setter for 'position'
      * @param position string
@@ -26,6 +21,7 @@ class Positions extends Record
     public function setPosition($position)
     {
         $this->position = $position;
+        return $this;
     }
     /**
      * recieves all values from positions ('id' & 'position')
@@ -41,6 +37,16 @@ class Positions extends Record
         }
         return $data;
     } // end function
+
+    public function getById($id)
+    {
+
+    }
+
+    public function getData()
+    {
+        
+    }
 
     public function save()
     {

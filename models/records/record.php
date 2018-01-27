@@ -21,4 +21,19 @@ abstract class Record implements \Scientometrics\Interfaces\RecordInterface
         $result->execute();
         return $result->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    /*public function getById()
+    {
+        
+    }
+
+    public function getData()
+    {
+
+    }
+
+    public function save()
+    {
+
+    }*/
 }

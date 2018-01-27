@@ -20,11 +20,66 @@ $application = new \Slim\App($configuration);
 
 require_once CONTAINERS;
 
-require_once CUSTOM_MIDDLEWARE; 
+require_once CUSTOM_MIDDLEWARE;
 
 /**
  * Routes
  */
+
+
+/**
+ * public routes
+ * user data - user access or public access
+ */
+$application->group('/public', function() {
+
+    $this->get('/authors', function($request, $response) {
+        $this->response->getBody()->write('authors list');
+    });
+    
+    // personal user data
+    $this->group('/user', function() {
+
+        /**
+         * GET-routes
+         */
+        
+        // author personal page
+        $this->get('/{id}', function($request, $response, $parameters) {
+            $this->response->getBody()->write('author personal page - '.$parameters['id']);
+        });
+    });
+});
+
+
+/**
+ * private routes
+ * control panel routes - admin authentication only
+ */
+$application->group('/controls', function() {
+
+    // controlpanel - user control group
+    $this->group('/user', function(){
+        $this->get('', function($request, $response) {
+            $this->response->getBody()->write('users list');
+        });
+        $this->get('/{id}', function($request, $response, $parameters) {
+            $this->response->getBody()->write('current user is - '.$parameters['id']);
+        });
+
+        /**
+         * POST-routes
+         * 
+         */
+        $this->post('', function() {
+
+        });
+    });
+    // controlpanel - data control group
+    $this->group('/data', function() {
+
+    });
+});
 
  /**
   * GET contollers

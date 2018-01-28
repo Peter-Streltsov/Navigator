@@ -22,27 +22,68 @@ require_once CONTAINERS;
 
 require_once CUSTOM_MIDDLEWARE;
 
+
+
 /**
  * Routes
  */
 
 
+
+// index page
+$application->get('/', function($request, $response) {
+    //var_dump($this->databaseconnection);
+    $data['page'] = (new Models\Page())->common()->getData();
+    $this->views->render($response, 'index.twig.html', $data);
+});
+
+
+// authorization
+$application->get('/authorize', function($request, $response) {
+    return $this->views->render($response, 'gate.twig.html');
+});
+
+// testing url
+$application->get('/test', function($request, $response) {
+    $response->getBody()->write($_SESSION['status']);
+});
+
+
+
 /**
  * public routes
- * user data - user access or public access
+ * user data - public access
  */
 $application->group('/public', function() {
 
-    $this->get('/authors', function($request, $response) {
-        $this->response->getBody()->write('authors list');
+    // general statistics
+    $this->get('/state', function($request, $response) {
+        $data['page'] = (new Models\Page())->getData();
+        $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
+        $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
+        $data['countusers'] = count($data['users']);
+        $data['count'] = count($data['articles']);
+        $this->views->render($response, 'stat.twig.html', $data);
+    });
+
+    $this->get('/contributions', function($request, $response) {
+        $this->response->getBody()->write('public scientific results');
     });
     
-    // personal user data
-    $this->group('/user', function() {
+    // personal public user data
+    $this->group('/users', function() {
 
         /**
          * GET-routes
          */
+
+        // public list of authors and basic author's data
+        $this->get('', function($request, $response) {
+            $data['page'] = (new Models\Page())->common()->getData();
+            $users = new Records\Authors($this->pdo);
+            $data['users'] = $users->list()->getData();
+            $this->views->render($response, 'userlist.twig.html', $data);
+        });
         
         // author personal page
         $this->get('/{id}', function($request, $response, $parameters) {
@@ -52,80 +93,136 @@ $application->group('/public', function() {
 });
 
 
+
+
 /**
  * private routes
  * control panel routes - admin authentication only
  */
-$application->group('/controls', function() {
+$application->group('/control', function() {
+    
+    $this->get('/schema', function($request, $response) {
+        $database = new Models\Service\Schema($this->pdo, $response);
+        $database->createScheme();
+    });
 
-    // controlpanel - user control group
-    $this->group('/user', function(){
+    // control panel menu
+    $this->get('', function($request, $response) {
+        $data['page'] = (new Models\Page())->getData();
+        $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
+        $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
+        if (isset($_SESSION['messages'])) {
+            $data['page']['messages'] = $_SESSION['messages'];
+        }
+        $this->views->render($response, 'controlpanel.twig.html', $data);
+    });
+
+
+
+    /**
+     * User control group
+     */
+    $this->group('/users', function(){
+
+        /**
+         * GET-routes
+         */
+
         $this->get('', function($request, $response) {
-            $this->response->getBody()->write('users list');
-        });
-        $this->get('/{id}', function($request, $response, $parameters) {
-            $this->response->getBody()->write('current user is - '.$parameters['id']);
+            return $response->getBody()->write('users list');
         });
 
+        // exact user data
+        $this->get('/get/{id}', function($request, $response, $id) {
+            $users = new Records\Authors($this->pdo, $this->fluent);
+            $data['user'] = $users->getById($id['id']);
+            $this->views->render($response, 'userdata.twig.html', $data);
+        });
+
+        
+        $this->get('/edit/{id}', function($request, $response, $id) {
+            $data['page'] = (new Models\Page())->common()->getData();
+            $data['user'] = (new Records\Authors($this->pdo, $this->fluent))->getById($id['id']);
+            return $this->views->render($response, 'useredit.twig.html', $data);
+        });
+
+        // changing user status
+        $this->get('/make/{status}/{id}', function($request, $response, $link) {
+            $response->getBody()->write('setting status '.$link['status'].' for user '.$link['id']);
+            switch ($link['status']) {
+                case 'author':
+                break;
+                case 'admin':
+                break;
+            }
+        });
+        
         /**
          * POST-routes
          * 
          */
-        $this->post('', function() {
+        $this->post('/add', function($request, $response) use($application) {
+            header("Content-Type: text/html; charset=utf-8");
+            $user = new Records\Authors($this->pdo, $this->fluent);
+            $_POST['added'] = date('Y-m-d');
+            $user->setName($_POST['name'])
+            ->setSecondname($_POST['secondname'])
+            ->setLastname($_POST['lastname'])
+            ->setPosition($_POST['position'])
+            ->setEdu($_POST['edu'])
+            ->setExpirience($_POST['expirience'])
+            ->setGrade($_POST['grade'])
+            ->setAge($_POST['age'])
+            ->setAdded()
+            ->save();
+            $messages = new Service\Messages();
+            $messages->setSuccess("Пользователь ".$_POST['name']." ".$_POST['lastname']." успешно создан");
+            $data['messages'] = $messages->getData();
+            $_SESSION['messages'] = $data['messages'];
+            return $response->withRedirect('/control');
+        });
 
+        /**
+         * AUTHORS subgroup
+         * users with 'author' status
+         */
+
+        $this->group('/authors', function() {
+
+            // AUTHORS list
+            $this->get('', function($request, $response) {
+                $response->getBody()->write('authors list');
+            });
+
+            $this->get('/{id}', function($request, $response, $link) {
+                $response->getBody()->write('information on author id '.$link['id']);
+            });
         });
     });
-    // controlpanel - data control group
-    $this->group('/data', function() {
+});
 
+
+/**
+ * 
+ */
+$application->group('/personal', function() {
+
+    $this->get('/{id}', function($request, $response, $link) {
+        $response->getBody()->write('personal page for user id '. $link['id']);
     });
+
+    $this->get('/{id}/message', function($request, $response, $id) {
+        return $this->views->render($response, 'message.twig.html');
+    });
+
 });
 
- /**
-  * GET contollers
-  */
 
-// index page
-$application->get('/', function($request, $response) {
-    //var_dump($this->databaseconnection);
-    $data['page'] = (new Models\Page())->common()->getData();
-    $this->views->render($response, 'index.twig.html', $data);
-});
 
-// testing url
-$application->get('/test', function($request, $response) {
-    $response->getBody()->write($_SESSION['status']);
-});
 
-/**
- * /public/
- */
 
-/**
- * /public/users/
- */
 
-// таблица с данными всех пользователей
-$application->get('/public/users', function($request, $response, $id) {
-    $data['page'] = (new Models\Page())->common()->getData();
-    $users = new Records\Authors($this->pdo);
-    $data['users'] = $users->list()->getData();
-    $this->views->render($response, 'userlist.twig.html', $data);
-});
 
-// exact user data
-$application->get('/public/users/get/{id}', function($request, $response, $id) {
-    $users = new Records\Authors($this->pdo, $this->fluent);
-    $data['user'] = $users->getUser($id['id']);
-    $this->views->render($response, 'userdata.twig.html', $data);
-});
-
-// edit user by id
-$application->get('/public/users/edit/{id}', function($request, $response, $id) {
-    $data['page'] = (new Models\Page())->common()->getData();
-    $data['user'] = (new Records\Authors($this->pdo, $this->fluent))->getUser($id['id']);
-    return $this->views->render($response, 'useredit.twig.html', $data);
-});
 
 // input page for adding new user
 $application->get('/control/users/add', function($request, $response) {
@@ -141,30 +238,10 @@ $application->get('/public/users/personal/{id}', function($request, $response, $
     $this->views->render($response, 'personal.twig.html', $data);
 });
 
-// issue message
-$application->get('/public/users/personal/message/{id}', function($request, $response, $id) {
-    return $this->views->render($response, 'message.twig.html');
-});
 
 // logging out
 $application->get('/users/logout', function($request, $response) {
 });
-
-/**
- * /public/stat/
- */
-
-// general statistics
-$application->get('/public/stat', function($request, $response) {
-    $data['page'] = (new Models\Page())->getData();
-    $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
-    $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
-    $data['countusers'] = count($data['users']);
-    $data['count'] = count($data['articles']);
-    //var_dump($data['count']);
-    $this->views->render($response, 'stat.twig.html', $data);
-});
-
 
 /**
  * /public/articles/
@@ -207,24 +284,6 @@ $application->get('/bot', function($request, $response) {
     $response->getBody()->write('telegram bot mockup');
 });
 
-// creating tables
-$application->get('/schema', function($request, $response) {
-    $database = new Models\Service\Schema($this->pdo, $response);
-    $database->createScheme();
-});
-
-// control panel - admin only access
-$application->get('/control', function($request, $response) {
-    $data['page'] = (new Models\Page())->getData();
-    $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
-    $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
-    //var_dump($data['articles']);
-    if (isset($_SESSION['messages'])) {
-        $data['page']['messages'] = $_SESSION['messages'];
-    }
-    $this->views->render($response, 'controlpanel.twig.html', $data);
-});
-
 $application->get('/control/indexes', function($request, $response) {
     $data['page'] = (new Models\Page())->getData();
     $data['indexes'] = (new Records\Indexes($this->pdo, $this->fluent))->getIndexes()->getData();
@@ -232,41 +291,11 @@ $application->get('/control/indexes', function($request, $response) {
 });
 
 //
-$application->get('/control/make/{id}', function($request, $response, $id) {
-
-});
 
 
 /**
  * POST contollers
  */
-
-// adding user
-$application->post('/users/add', function($request, $response) use($application) {
-    header("Content-Type: text/html; charset=utf-8");
-    $user = new Records\Authors($this->pdo, $this->fluent);
-    $_POST['added'] = date('Y-m-d');
-    $user->setName($_POST['name'])
-        ->setSecondname($_POST['secondname'])
-        ->setLastname($_POST['lastname'])
-        ->setPosition($_POST['position'])
-        ->setEdu($_POST['edu'])
-        ->setExpirience($_POST['expirience'])
-        ->setGrade($_POST['grade'])
-        ->setAge($_POST['age'])
-        ->setAdded()
-        ->save();
-
-    $messages = new Service\Messages();
-    $messages->setSuccess("Пользователь ".$_POST['name']." ".$_POST['lastname']." успешно создан");
-
-    $data['messages'] = $messages->getData();
-
-    $_SESSION['messages'] = $data['messages'];
-
-    return $response->withRedirect('/control');
-    //return $this->views->render($response, 'controlpanel.twig.html', $data);
-});
 
 // adding article
 $application->post('/articles/add', function($request, $response){
@@ -281,11 +310,6 @@ $application->post('/control/indexes/update', function($request, $response) {
     $indexes = new Records\Indexes($this->pdo, $this->fluent);
     $indexes->setIndexes($values);
     return $response->withRedirect('/control');
-});
-
-// authorization
-$application->post('/authorize', function($request, $response) {
-    $response->getBody()->write('authorization mockup');
 });
 
 

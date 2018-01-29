@@ -44,6 +44,7 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
             'Scientometrics\\Models\\' => 22,
             'Scientometrics\\Interfaces\\' => 26,
             'Scientometrics\\Exceptions\\' => 26,
+            'Scientometrics\\Controls\\' => 24,
             'Scientometrics\\Config\\' => 22,
         ),
         'P' => 
@@ -142,6 +143,10 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Exceptions\\' => 
         array (
             0 => __DIR__ . '/../..' . '/exceptions',
+        ),
+        'Scientometrics\\Controls\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/controls',
         ),
         'Scientometrics\\Config\\' => 
         array (
@@ -1058,6 +1063,9 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Psr\\SimpleCache\\CacheInterface' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheInterface.php',
         'Psr\\SimpleCache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/simple-cache/src/InvalidArgumentException.php',
         'Scientometrics\\Config\\Connections' => __DIR__ . '/../..' . '/config/connections.php',
+        'Scientometrics\\Controls\\Control' => __DIR__ . '/../..' . '/controls/personal.php',
+        'Scientometrics\\Controls\\Controller' => __DIR__ . '/../..' . '/controls/controller.php',
+        'Scientometrics\\Controls\\Statistics' => __DIR__ . '/../..' . '/controls/statistics.php',
         'Scientometrics\\Exceptions\\GeneralApplication' => __DIR__ . '/../..' . '/exceptions/generalapplication.php',
         'Scientometrics\\Exceptions\\LowModel' => __DIR__ . '/../..' . '/exceptions/lowmodel.php',
         'Scientometrics\\Interfaces\\ControlInterface' => __DIR__ . '/../..' . '/interfaces/controlinterface.php',
@@ -1081,6 +1089,7 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Models\\Service\\Schema' => __DIR__ . '/../..' . '/models/service/schema.php',
         'Scientometrics\\Models\\Subrecords\\ArticlesAuthors' => __DIR__ . '/../..' . '/models/subrecords/articlesauthors.php',
         'Scientometrics\\Models\\Subrecords\\Indexes' => __DIR__ . '/../..' . '/models/subrecords/indexes.php',
+        'Scientometrics\\Models\\Subrecords\\IndexesArticles' => __DIR__ . '/../..' . '/models/subrecords/indexesarticles.php',
         'Scientometrics\\Models\\Subrecords\\Subrecords' => __DIR__ . '/../..' . '/models/subrecords/subrecord.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',

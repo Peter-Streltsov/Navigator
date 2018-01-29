@@ -21,6 +21,7 @@ return array(
     'Scientometrics\\Models\\' => array($baseDir . '/models'),
     'Scientometrics\\Interfaces\\' => array($baseDir . '/interfaces'),
     'Scientometrics\\Exceptions\\' => array($baseDir . '/exceptions'),
+    'Scientometrics\\Controls\\' => array($baseDir . '/controls'),
     'Scientometrics\\Config\\' => array($baseDir . '/config'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),

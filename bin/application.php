@@ -7,6 +7,7 @@ use Telegram\Bot\Api;
 use Scientometrics\Models as Models;
 use Scientometrics\Models\Records as Records;
 use Scientometrics\Models\Service as Service;
+use Scientometrics\Controls as Controls;
 use Scientometrics\Config as Config;
 use Scientometrics\Bot as Bot;
 
@@ -57,14 +58,16 @@ $application->get('/test', function($request, $response) {
 $application->group('/public', function() {
 
     // general statistics
-    $this->get('/state', function($request, $response) {
+    /*$this->get('/state', function($request, $response) {
         $data['page'] = (new Models\Page())->getData();
         $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
         $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
         $data['countusers'] = count($data['users']);
         $data['count'] = count($data['articles']);
         $this->views->render($response, 'stat.twig.html', $data);
-    });
+    }); */
+
+    $this->get('/state', Controls\Statistics::class . ':plotPublic');
 
     $this->get('/contributions', function($request, $response) {
         $this->response->getBody()->write('public scientific results');

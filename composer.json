@@ -24,6 +24,7 @@
             "Scientometrics\\Models\\Service\\": "models/service",
             "Scientometrics\\Models\\Entities\\": "models/entities",
             "Scientometrics\\Config\\": "config",
+            "Scientometrics\\Controls\\": "controls",
             "Scientometrics\\Exceptions\\": "exceptions"
         }
     }

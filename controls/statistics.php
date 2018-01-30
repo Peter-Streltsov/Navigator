@@ -9,7 +9,7 @@ use Scientometrics\Models as Models;
 class Statistics extends Controls\Controller
 {
     /**
-     * Undocumented function
+     * renders public statistic and common data
      *
      * @return void
      */

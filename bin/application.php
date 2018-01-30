@@ -11,6 +11,8 @@ use Scientometrics\Controls as Controls;
 use Scientometrics\Config as Config;
 use Scientometrics\Bot as Bot;
 
+session_start();
+
 $configuration = [
     'settings' => [
         'displayErrorDetails' => true,
@@ -67,7 +69,7 @@ $application->group('/public', function() {
         $this->views->render($response, 'stat.twig.html', $data);
     }); */
 
-    $this->get('/state', Controls\Statistics::class . ':plotPublic');
+    $this->get('/state', Controls\Statistics::class . ':renderPublic');
 
     $this->get('/contributions', function($request, $response) {
         $this->response->getBody()->write('public scientific results');

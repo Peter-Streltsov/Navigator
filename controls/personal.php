@@ -2,10 +2,10 @@
 
 namespace Scientometrics\Controls;
 
-class Control extends Controller
+class Personal extends Controller
 {
     public function personal()
     {
-
+        $this->views->render();
     }
 }

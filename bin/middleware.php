@@ -11,7 +11,6 @@ use Telegram\Bot\Commands\Command;
 
 //
 $application->add(function($request, $response, $next) {
-    session_start();
     $_SESSION['status'] = 'session started';
     return $response = $next($request, $response);
 });

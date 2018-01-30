@@ -12,15 +12,19 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
      */
 
     protected $view;
+    protected $pdo;
+    protected $fluent;
 
     /**
      * Undocumented function
      *
-     * @param \Slim\Views\Twig $view
+     * @param \Slim\Container $container
      */
     final public function __construct(\Slim\Container $container)
     {
         $this->view = $container->views;
+        $this->pdo = $container->pdo;
+        $this->fluent = $container->fluent;
     } // end function
 
 } // end class

@@ -16,7 +16,7 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
     /**
      * Undocumented function
      *
-     * @param \Slim\Views\Twig $view
+     * @param \Slim\Container $container
      */
     final public function __construct(\Slim\Container $container)
     {

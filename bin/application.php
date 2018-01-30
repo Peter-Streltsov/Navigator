@@ -11,6 +11,8 @@ use Scientometrics\Controls as Controls;
 use Scientometrics\Config as Config;
 use Scientometrics\Bot as Bot;
 
+session_start();
+
 $configuration = [
     'settings' => [
         'displayErrorDetails' => true,

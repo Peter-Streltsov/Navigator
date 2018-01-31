@@ -59,33 +59,21 @@ $application->get('/test', function($request, $response) {
  */
 $application->group('/public', function() {
 
+    // public list of authors and basic author's data
+    $this->get('/', function($request, $response) {
+        var_dump($this);
+        //$data['page'] = $this->pagedata->getData();
+        //(new Models\Page())->common()->getData();
+        $users = new Records\Authors($this->pdo);
+        $data['users'] = $users->list()->getData();
+        $this->views->render($response, 'userlist.twig.html', $data);
+    });
+
     // general statistics
     $this->get('/state', Controls\Statistics::class . ':renderPublic');
 
     // scientific results - publications, reports, conferencies etc.
     $this->get('/contributions', Controls\Contributions::class . 'renderContributions');
-    
-    
-    // personal public user data
-    $this->group('/users', function() {
-
-        /**
-         * GET-routes
-         */
-
-        // public list of authors and basic author's data
-        $this->get('', function($request, $response) {
-            $data['page'] = (new Models\Page())->common()->getData();
-            $users = new Records\Authors($this->pdo);
-            $data['users'] = $users->list()->getData();
-            $this->views->render($response, 'userlist.twig.html', $data);
-        });
-        
-        // author personal page
-        $this->get('/{id}', function($request, $response, $parameters) {
-            $this->response->getBody()->write('author personal page - '.$parameters['id']);
-        });
-    });
 });
 
 
@@ -205,13 +193,9 @@ $application->group('/control', function() {
  */
 $application->group('/personal', function() {
 
-    $this->get('/{id}', function($request, $response, $link) {
-        $response->getBody()->write('personal page for user id '. $link['id']);
-    });
+    $this->get('/{id}', Controls\Personal::class . ':personal');
 
-    $this->get('/{id}/message', function($request, $response, $id) {
-        return $this->views->render($response, 'message.twig.html');
-    });
+    $this->get('/{id}/message', Controls\Personal::class . ':issueMessage');
 
 });
 

@@ -18,7 +18,7 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
     protected $view;
     protected $pdo;
     protected $fluent;
-
+    protected $pagedata;
 
     /**
      * basic final constructor
@@ -30,6 +30,7 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
         $this->view = $container->views;
         $this->pdo = $container->pdo;
         $this->fluent = $container->fluent;
+        $this->pagedata = $container->pagedata;
     } // end function
 
 } // end class

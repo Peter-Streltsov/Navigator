@@ -2,6 +2,8 @@
 
 namespace Scientometrics\Bin;
 
+use Scientometrics\Models as Models;
+
 $container = $application->getContainer();
 
 // Twig container

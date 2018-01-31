@@ -4,11 +4,24 @@ namespace Scientometrics\Controls;
 
 class Personal extends Controller
 {
-    public function personal($request, $response, $parameters)
+
+    /**
+     * 
+     * @since 0.3.xx
+     * 
+     */
+
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $request
+     * @param [type] $response
+     * @param [type] $parameters
+     * @return void
+     */
+    public function personal($request, $response, $parameters): void
     {
-<<<<<<< HEAD
-        $this->views->render();
-=======
         $this->views->render($response, 'cabinet.twig.html', $data);
     }
 
@@ -27,7 +40,7 @@ class Personal extends Controller
     }
 
     /**
-     * 
+     * sending issue message
      *
      * @param [type] $request
      * @param [type] $response
@@ -37,6 +50,5 @@ class Personal extends Controller
     public function sendMessage($request, $response): void
     {
         $data['page'] = (new Models\Page())->getData();
->>>>>>> develop
     }
 }

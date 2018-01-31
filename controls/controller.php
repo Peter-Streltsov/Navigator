@@ -2,11 +2,15 @@
 
 namespace Scientometrics\Controls;
 
+use Scientometrics\Controls as Controls;
 use Scientometrics\Models as Models;
-use Scientometrics\Models\Records as Subrecords;
+use Scientometrics\Models\Service as Service;
+use Scientometrics\Models\Records as Records;
+use Scientometrics\Models\Subrecords as Subrecords;
 
 abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
 {
+
     /**
      * basic controller class
      */
@@ -15,8 +19,9 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
     protected $pdo;
     protected $fluent;
 
+
     /**
-     * Undocumented function
+     * basic final constructor
      *
      * @param \Slim\Container $container
      */

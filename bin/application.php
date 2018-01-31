@@ -60,20 +60,11 @@ $application->get('/test', function($request, $response) {
 $application->group('/public', function() {
 
     // general statistics
-    /*$this->get('/state', function($request, $response) {
-        $data['page'] = (new Models\Page())->getData();
-        $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
-        $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
-        $data['countusers'] = count($data['users']);
-        $data['count'] = count($data['articles']);
-        $this->views->render($response, 'stat.twig.html', $data);
-    }); */
-
     $this->get('/state', Controls\Statistics::class . ':renderPublic');
 
-    $this->get('/contributions', function($request, $response) {
-        $this->response->getBody()->write('public scientific results');
-    });
+    // scientific results - publications, reports, conferencies etc.
+    $this->get('/contributions', Controls\Contributions::class . 'renderContributions');
+    
     
     // personal public user data
     $this->group('/users', function() {
@@ -106,6 +97,8 @@ $application->group('/public', function() {
  */
 $application->group('/control', function() {
     
+
+    // creating schema
     $this->get('/schema', function($request, $response) {
         $database = new Models\Service\Schema($this->pdo, $response);
         $database->createScheme();

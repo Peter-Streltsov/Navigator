@@ -27,6 +27,6 @@ $container['pdo'] = function() {
 };
 
 // model for page data
-$conatainer['pagedata'] = function() {
+$container['pagedata'] = function() {
     return new Models\Page();
 };

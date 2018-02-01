@@ -61,6 +61,7 @@ $application->group('/public', function() {
 
     // public list of authors and basic author's data
     $this->get('/', function($request, $response) {
+        //var_dump($this);
         $data['page'] = $this->pagedata->getData();
         $users = new Records\Authors($this->pdo);
         $data['users'] = $users->list()->getData();

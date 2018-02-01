@@ -26,7 +26,15 @@ $container['pdo'] = function() {
     return new \PDO($dsn, 'root', 'root', array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
 };
 
+$container['fluent'] = function() use($container) {
+    return new \FluentPDO($container['pdo']);
+};
+
 // model for page data
 $container['pagedata'] = function() {
     return new Models\Page();
+};
+
+$container['boothandler'] = function() use($container) {
+    return new Service\Boothandler($container);
 };

@@ -15,13 +15,7 @@ $application->add(function($request, $response, $next) {
     return $response = $next($request, $response);
 });
 
-// fluentpdo container
-$application->add(function($request, $response, $next) use($application, $container) {
-    $container['fluent'] = new \FluentPDO($container['pdo']);
-    return $response = $next($request, $response);
-});
-
-// adding telegram bot
+// adding telegram bot ??? (delete or relocate)
 $application->add(function($request, $response, $next) use($application, $container) {
     $container['bot'] = new Api('token', true);
     $response = $next($request, $response);

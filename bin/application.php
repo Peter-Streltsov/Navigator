@@ -42,9 +42,9 @@ $application->get('/', function($request, $response) {
 
 
 // authorization
-$application->get('/authorize', function($request, $response) {
-    return $this->views->render($response, 'gate.twig.html');
-});
+$application->get('/login', function($request, $response) {
+    $this->views->render($response, 'gate.twig.html');
+})->setName('login');
 
 // testing url
 $application->get('/test', function($request, $response) {

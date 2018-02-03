@@ -7,7 +7,7 @@ use Telegram\Bot\Commands\Command;
 use \Scinetometrics\Models as Models;
 
 /**
- * custom slim-php middleware
+ * custom slim 3 middleware
  */
 
 //
@@ -25,7 +25,7 @@ $application->add(function($request, $response, $next) {
      * mockup
      */
     $_SESSION['userstatus'] = 'administrator'; // get from schema.users
-    $_SESSION['login'] = '%username%@somemail.ru'; // get drom schema.users
+    //$_SESSION['login'] = '%username%@somemail.ru'; // get drom schema.users
 
     /**
      * 
@@ -38,6 +38,8 @@ $application->add(function($request, $response, $next) {
         \Scientometrics\Models\Page::$data['userstatus'] = $_SESSION['userstatus'] : \Scientometrics\Models\Page::$data['userstatus'] = 'guest';
     
 
+    echo $_SESSION['login'];
+    
     return $next($request, $response);
 });
 
@@ -45,12 +47,25 @@ $application->add(function($request, $response, $next) {
 $application->add(function($request, $response, $next) use($container) {
     //unset($_SESSION['status']);
     //$_SESSION['status'] = 'started';
+    if (isset($_POST['login'])) {
+        $_SESSION['login'] = $_POST['login'];
+    }
+    if ($_SESSION['status'] == 'check') {
+        if ($_SESSION['login'] == 'user@somemail.ru') {
+            $_SESSION['status'] == 'started';
+            print_r($_SESSION);
+            echo 'started';
+            return $next($request, $response);
+        }
+    }
     if ($_SESSION['status'] == 'started') {
-        $_SESSION['check'] = 'ok';
+
         return $next($request, $response);
+
     } else {
-        $_SESSION['status'] = 'started';
+        $_SESSION['status'] = 'check';
+
         return $container->views->render($response, 'gate.twig.html');
-        //return $response->withRedirect($this->router->pathFor('login'));
+
     }
 });

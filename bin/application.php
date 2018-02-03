@@ -34,7 +34,7 @@ require_once CUSTOM_MIDDLEWARE;
 
 
 // index page
-$application->get('/', function($request, $response) {
+$application->any('/', function($request, $response) {
     //var_dump($this->databaseconnection);
     $data['page'] = (new Models\Page())->common()->getData();
     $this->views->render($response, 'index.twig.html', $data);
@@ -52,7 +52,8 @@ $application->get('/test', function($request, $response) {
 });
 
 $application->post('/auth', function($request, $response) {
-    return $response->withRedirect('/');
+    $_SESSION['login'] = $_POST['login'];
+    return $response->withRedirect('');
 });
 
 

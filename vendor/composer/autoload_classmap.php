@@ -836,6 +836,7 @@ return array(
     'Psr\\SimpleCache\\CacheException' => $vendorDir . '/psr/simple-cache/src/CacheException.php',
     'Psr\\SimpleCache\\CacheInterface' => $vendorDir . '/psr/simple-cache/src/CacheInterface.php',
     'Psr\\SimpleCache\\InvalidArgumentException' => $vendorDir . '/psr/simple-cache/src/InvalidArgumentException.php',
+    'Scientometrics\\Bin\\Middleware\\Authentication' => $baseDir . '/bin/middleware/autentication.php',
     'Scientometrics\\Config\\Connections' => $baseDir . '/config/connections.php',
     'Scientometrics\\Controls\\Control' => $baseDir . '/controls/control.php',
     'Scientometrics\\Controls\\Controller' => $baseDir . '/controls/controller.php',

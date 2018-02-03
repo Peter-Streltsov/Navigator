@@ -46,6 +46,7 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
             'Scientometrics\\Exceptions\\' => 26,
             'Scientometrics\\Controls\\' => 24,
             'Scientometrics\\Config\\' => 22,
+            'Scientometrics\\Bin\\Middleware\\' => 30,
         ),
         'P' => 
         array (
@@ -151,6 +152,10 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Config\\' => 
         array (
             0 => __DIR__ . '/../..' . '/config',
+        ),
+        'Scientometrics\\Bin\\Middleware\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/bin/middleware',
         ),
         'Psr\\SimpleCache\\' => 
         array (
@@ -1062,6 +1067,7 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Psr\\SimpleCache\\CacheException' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheException.php',
         'Psr\\SimpleCache\\CacheInterface' => __DIR__ . '/..' . '/psr/simple-cache/src/CacheInterface.php',
         'Psr\\SimpleCache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/simple-cache/src/InvalidArgumentException.php',
+        'Scientometrics\\Bin\\Middleware\\Authentication' => __DIR__ . '/../..' . '/bin/middleware/autentication.php',
         'Scientometrics\\Config\\Connections' => __DIR__ . '/../..' . '/config/connections.php',
         'Scientometrics\\Controls\\Control' => __DIR__ . '/../..' . '/controls/control.php',
         'Scientometrics\\Controls\\Controller' => __DIR__ . '/../..' . '/controls/controller.php',

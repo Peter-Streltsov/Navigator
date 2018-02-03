@@ -17,6 +17,7 @@
     },
     "autoload": {
         "psr-4": {
+            "Scientometrics\\Bin\\Middleware\\": "bin/middleware",
             "Scientometrics\\Interfaces\\": "interfaces",
             "Scientometrics\\Models\\": "models",
             "Scientometrics\\Models\\Records\\": "models/records",

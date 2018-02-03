@@ -5,6 +5,7 @@ namespace Scientometrics\Bin;
 use Telegram\Bot\Api;
 use Telegram\Bot\Commands\Command;
 use \Scinetometrics\Models as Models;
+use Scientometrics\Bin\Middleware as Middleware;
 
 /**
  * custom slim 3 middleware
@@ -47,6 +48,8 @@ $application->add(function($request, $response, $next) {
 $application->add(function($request, $response, $next) use($container) {
     //unset($_SESSION['status']);
     //$_SESSION['status'] = 'started';
+    $auth = new Middleware\Boot($container, $request, $response, $next);
+    //$auth->sessionCheck();
     if (isset($_POST['login'])) {
         $_SESSION['login'] = $_POST['login'];
     }
@@ -60,12 +63,14 @@ $application->add(function($request, $response, $next) use($container) {
     }
     if ($_SESSION['status'] == 'started') {
 
-        return $next($request, $response);
+        //return $next($request, $response);
+        return $auth->allowed();
 
     } else {
         $_SESSION['status'] = 'check';
 
-        return $container->views->render($response, 'gate.twig.html');
+        return $auth->notAllowed();
+        //return $container->views->render($response, 'gate.twig.html');
 
     }
 });

@@ -23,6 +23,7 @@ return array(
     'Scientometrics\\Exceptions\\' => array($baseDir . '/exceptions'),
     'Scientometrics\\Controls\\' => array($baseDir . '/controls'),
     'Scientometrics\\Config\\' => array($baseDir . '/config'),
+    'Scientometrics\\Bin\\Middleware\\' => array($baseDir . '/bin/middleware'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),

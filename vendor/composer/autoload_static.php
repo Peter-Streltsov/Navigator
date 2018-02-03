@@ -1084,6 +1084,7 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Models\\Records\\Record' => __DIR__ . '/../..' . '/models/records/record.php',
         'Scientometrics\\Models\\Records\\Reports' => __DIR__ . '/../..' . '/models/records/reports.php',
         'Scientometrics\\Models\\Records\\Users' => __DIR__ . '/../..' . '/models/records/users.php',
+        'Scientometrics\\Models\\Service\\Boothandler' => __DIR__ . '/../..' . '/models/service/boothandler.php',
         'Scientometrics\\Models\\Service\\Messages' => __DIR__ . '/../..' . '/models/service/messages.php',
         'Scientometrics\\Models\\Service\\Schema' => __DIR__ . '/../..' . '/models/service/schema.php',
         'Scientometrics\\Models\\Subrecords\\ArticlesAuthors' => __DIR__ . '/../..' . '/models/subrecords/articlesauthors.php',

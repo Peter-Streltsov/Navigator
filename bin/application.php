@@ -51,6 +51,10 @@ $application->get('/test', function($request, $response) {
     $response->getBody()->write($_SESSION['status']);
 });
 
+$application->post('/auth', function($request, $response) {
+    return $response->withRedirect('/');
+});
+
 
 
 /**
@@ -146,7 +150,7 @@ $application->group('/control', function() {
          * POST-routes
          * 
          */
-        $this->post('/add', function($request, $response) use($application) {
+        $this->post('/add', function($request, $response) {
             header("Content-Type: text/html; charset=utf-8");
             $user = new Records\Authors($this->pdo, $this->fluent);
             $_POST['added'] = date('Y-m-d');

@@ -10,7 +10,7 @@ namespace Scientometrics\Models;
 class Page
 {
     private $auth; // user authorization status
-    private $data = array(); // page data
+    public static $data = array(); // page data
 
     /**
      * contains complete pagedata
@@ -21,7 +21,8 @@ class Page
 
     public function __construct()
     {;
-        $this->pagedata['user'] = 'administrator';
+        //$this->pagedata['user'] = 'administrator';
+        isset($_SESSION['status']['login']) ? $this->pagedata['user'] = $_SESSION['status']['login'] : $this->pagedata['user'] = 'guest';
         $this->getAuthStatus();
         $this->userMenu();
         return $this;
@@ -34,7 +35,8 @@ class Page
      */
     private function getAuthStatus()
     {
-        $this->pagedata['auth'] = 'administrator';
+        //$this->pagedata['auth'] = 'administrator';
+        isset($_SESSION['status']['userstatus']) ? $this->pagedata['auth'] = $_SESSION['status']['userstatus'] : $this->pagedata['auth'] = 'not logged in';
     }
 
     /**
@@ -48,9 +50,9 @@ class Page
             $this->pagedata['login'] = "
             <div class=\"dropdown\">
             <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\"
-            style=\"max-width: 20pc; font-size: 10pt; color: #fff; background-color: #8fabd1; margin-right: 0.5pc; margin-top: 0.5pc;\">
-            administrator@administrator.ru
-              <span class=\"caret\"></span>
+            style=\"max-width: 20pc; font-size: 10pt; color: #fff; background-color: #8fabd1; margin-right: 0.5pc; margin-top: 0.5pc;\">".
+            $this->pagedata['user']
+              ."<span class=\"caret\"></span>
             </button>
             <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">
               <li><a href=\"/users/personal/1\"><span class=\"glyphicon glyphicon-user\"> Личный кабинет</span></a></li>

@@ -5,9 +5,10 @@ namespace Scientometrics\Bin\Middleware;
 use Scientometrics\Models as Models;
 use Scientometrics\Models\Records as Records;
 
-class Authentication
+class Boot
 {
     /**
+     * "boot" class
      * authorization prototype
      * @since 0.3.42
      */
@@ -27,8 +28,36 @@ class Authentication
         $this->container = $container;
         $this->request = $request;
         $this->response = $response;
-    }
+    } // end constructor
 
+
+    /**
+     * 'main' method
+     *
+     * @return Scientometrics\Bin\Middleware\Boot
+     */
+    private function boot()
+    {
+        $this->sessionCheck();
+
+        $this->verifyAuthorization();
+
+        if (isset($_POST['save']) && $_POST['save'] == true && isset($_POST['login'])) {
+            $_COOKIE['login'] = $_POST['login'];
+            $_COOKIE['password'] = $_POST['password'];
+        }
+
+        return $this;
+
+    } // end function
+
+
+    /**
+     * "fabric" for user class
+     *
+     * @param [string] $class
+     * @return void
+     */
     private function createUser($class)
     {
         switch ($class) {
@@ -45,6 +74,16 @@ class Authentication
             return new Users\Guest();
             break;
         }
+    } // end function
+
+    /**
+     * writing session parameters to cookie
+     *
+     * @return void
+     */
+    private function setCookies(): void
+    {
+        $_COOKIE['login'] = $_SESSION['login'];
     } // end function
 
     /**
@@ -69,7 +108,6 @@ class Authentication
 
     public function verifyAuthorization()
     {
-        $this->sessionCheck();
 
         isset($_POST['password']) ? $this->password = $_POST['password'] : $this->password = null;
 

@@ -49,7 +49,6 @@ $application->add(function($request, $response, $next) use($container) {
     //unset($_SESSION['status']);
     //$_SESSION['status'] = 'started';
     $auth = new Middleware\Boot($container, $request, $response, $next);
-    //$auth->sessionCheck();
     if (isset($_POST['login'])) {
         $_SESSION['login'] = $_POST['login'];
     }

@@ -7,7 +7,7 @@ define('BIN', ROOT.'bin'.DS);
 define('APPLICATION', BIN.'application.php');
 define('MODELS', ROOT.'models'.DS);
 define('CUSTOM_MIDDLEWARE', BIN.'middleware.php');
-define('CONTAINERS', BIN.'fabric.php');
+define('CONTAINERS', BIN.'factory.php');
 define('VENDOR_AUTOLOAD', VENDOR.'autoload.php');
 define('CONFIG', ROOT.'config'.DS);
 define('PUBLIC', ROOT.'public'.DS);

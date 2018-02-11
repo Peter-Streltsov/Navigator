@@ -44,11 +44,12 @@ $application->any('/', function($request, $response) {
 // authorization
 $application->get('/login', function($request, $response) {
     $this->views->render($response, 'gate.twig.html');
-})->setName('login');
+})->setName('userlogin');
 
 // testing url
 $application->get('/test', function($request, $response) {
-    $response->getBody()->write($_SESSION['status']);
+    //$response->getBody()->write($_SESSION['status']);
+    return $response->withRedirect('/login');
 });
 
 $application->post('/auth', function($request, $response) {

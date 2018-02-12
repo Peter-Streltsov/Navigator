@@ -19,6 +19,7 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
     protected $pdo;
     protected $fluent;
     protected $pagedata;
+    protected $access = array();
 
     /**
      * basic final constructor
@@ -31,6 +32,16 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
         $this->pdo = $container->pdo;
         $this->fluent = $container->fluent;
         $this->pagedata = $container->pagedata;
+
+    } // end function
+
+
+    final public function checkAccess($access)
+    {
+        if ($access != $_SESSION['access']) {
+            header('Location: /login');
+            exit();
+        }
     } // end function
 
 } // end class

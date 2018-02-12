@@ -37,6 +37,7 @@ require_once CUSTOM_MIDDLEWARE;
 $application->any('/', function($request, $response) {
     //var_dump($this->databaseconnection);
     $data['page'] = (new Models\Page())->common()->getData();
+    print_r($response);
     $this->views->render($response, 'index.twig.html', $data);
 });
 
@@ -46,10 +47,8 @@ $application->get('/login', function($request, $response) {
     $this->views->render($response, 'gate.twig.html');
 })->setName('userlogin');
 
-// testing url
-$application->get('/test', function($request, $response) {
-    //$response->getBody()->write($_SESSION['status']);
-    return $response->withRedirect('/login');
+$application->group('/test', function() use ($application) {
+    $this->get('', '\Scientometrics\Controls\IndexController:index');
 });
 
 $application->post('/auth', function($request, $response) {

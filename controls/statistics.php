@@ -10,20 +10,28 @@ use Scientometrics\Models\Subrecords as Subrecords;
 
 class Statistics extends Controls\Controller
 {
+
+    public function setAccessParameters()
+    {
+        $this->access = ['user', 'administrator', 'supervisor'];
+    }
+
+
     /**
      * renders public statistic and common data
      *
      * @return void
      */
-    public function renderPublic($request, $response): void
+    public function renderPublic($request, $response)
     {
+        $this->checkAccess('user');
         $data['page'] = (new Models\Page())->getData();
-        $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
         $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
-        $data['countusers'] = count($data['users']);
+        $data['countusers'] = count((new Records\Authors($this->pdo, $this->fluent))->list()->getData());
         $data['count'] = count($data['articles']);
         $this->view->render($response, 'stat.twig.html', $data);
-    }
+
+    } // end function
 
     /**
      * Undocumented function

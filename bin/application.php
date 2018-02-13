@@ -37,7 +37,6 @@ require_once CUSTOM_MIDDLEWARE;
 $application->any('/', function($request, $response) {
     //var_dump($this->databaseconnection);
     $data['page'] = (new Models\Page())->common()->getData();
-    print_r($response);
     $this->views->render($response, 'index.twig.html', $data);
 });
 

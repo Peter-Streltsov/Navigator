@@ -24,14 +24,12 @@ class Auth
      * $_SESSION['login'] - user login
      * $_SESSION['password'] - user password
      * $_SESSION['access'] - user access status
-     * $_SESSION['status'] - auth status ('started' or 'check')
+     * $_SESSION['auth'] - auth status
      * 
      */
 
     /**
      *
-     * @var request [type]
-     * @var response [type]
      * @var next [type]
      * @var container [type]
      * @var save [boolean]
@@ -39,8 +37,6 @@ class Auth
      * @var auth [string]
      * 
      */
-    private $request;
-    private $response;
     private $container;
     private $login;
     private $save;
@@ -48,12 +44,10 @@ class Auth
     private $auth;
 
 
-    public function __construct($container, $request, $response)
+    public function __construct($container)
     {
 
         $this->container = $container;
-        $this->request = $request;
-        $this->response = $response;
 
     } // end constructor
 
@@ -76,7 +70,29 @@ class Auth
         if (isset($_POST['save'])) {
             $this->save = true;
         }
+
+        unset($_POST['login']);
+        unset($_POST['password']);
         
+        return $this;
+
+    } // end function
+
+
+    /**
+     * checking cookies and - if success - retrieving session parameters from cookies
+     *
+     * @return void
+     */
+    public function checkCookies()
+    {
+        //print_r($_COOKIE);
+
+        if (isset($_COOKIE['login']) && isset($_COOKIE['password'])) {
+            $_SESSION['login'] = $_COOKIE['login'];
+            $_SESSION['password'] = $_COOKIE['password'];
+        }
+
         return $this;
 
     } // end function
@@ -90,15 +106,12 @@ class Auth
      */
     public function checkSession()
     {
-        if ($_SESSION['status'] != 'started') {
-            $_SESSION['status'] = 'check';
-        }
+        if ($_SESSION['access'] == null) $_SESSION['access'] = 'guest';
 
         if (isset($_SESSION['login']) && $_SESSION['password'] != null) {
             $this->user['login'] = $_SESSION['login'];  
         } else {
             $this->user['login'] = 'guest';
-            $this->user['password'] = null;
         }
 
         return $this;
@@ -108,41 +121,41 @@ class Auth
 
 
     /**
-     * getting user data from database
+     * getting user data from database and checking
      *
      * @return Scientometrics\Middleware\Auth
      */
-    public function getUser() {
-        $userdata = $this->container->fluent
-            ->from('users')
-            ->select(null)
-            ->select('password', 'access')
-            ->where('login', $this->user['login']);
-        //print_r($userdata);
-
-        return $this;
-
-    } // end function
-    
-    
-
     public function checkUser() {
 
-        if ($this->user['login'] == '') {
+        // getting data for requested login
+        $query = "SELECT users.password, users.access FROM users WHERE users.login='".$this->user['login']."'";
+        //echo $query;
+        $user = $this->container->pdo->prepare($query);
+        $user->execute();
+        $user = $user->fetchAll(\PDO::FETCH_ASSOC);
 
+        //print_r($user);
+        //print_r($_SESSION);
+
+        // if user found and password correct
+        if ($user[0]['password'] != null) {
+            if ($user[0]['password'] == $_SESSION['password']) {
+                // if password correct - setting session data
+                echo 'password correct'.PHP_EOL;
+                $_SESSION['auth'] = 'auth';
+                $_SESSION['login'] = $this->user['login'];
+                $_SESSION['password'] = $user[0]['password'];
+                $_SESSION['access'] = $user[0]['access'];
+
+            } else {
+                // password incorrect
+                $_SESSION['auth'] = 'not';
+                $_SESSION['login'] = 'guest';
+                $_SESSION['access'] = 'guest';
+            }
         }
 
-        return $this;
-
-    } // end function
-
-
-    public function verify()
-    {
-        if ($this->login != $_SESSION['login']) {
-
-        }
-        $this->auth = 'notlogged';
+        print_r($_SESSION);
 
     } // end function
 

@@ -21,11 +21,10 @@ $application->add(function($request, $response, $next) use($container) {
     $auth = new Middleware\Auth($container, $request, $response);
     $auth->checkPost() // checking POST parameters
         ->checkSession() // checking SESSION parameters
-        ->getUser() // getting user data from database
-        ->checkUser() // checking user
-        ->verify();
+        //->checkCookies()
+        ->checkUser(); // getting user data from database
 
-    print_r($_SESSION);
+    //print_r($_SESSION);
     return $next($request, $response);
 
 });

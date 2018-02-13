@@ -22,7 +22,7 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
     protected $access = array();
 
     /**
-     * basic final constructor
+     * constructor
      *
      * @param \Slim\Container $container
      */
@@ -36,7 +36,13 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
     } // end function
 
 
-    final public function checkAccess($access)
+    /**
+     * checking access to current controller method
+     *
+     * @param string $access
+     * @return void
+     */
+    final public function checkAccess(string $access): void
     {
         if ($access != $_SESSION['access']) {
             header('Location: /login');

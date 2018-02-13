@@ -39,15 +39,24 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
     /**
      * checking access to current controller method
      *
-     * @param string $access
+     * @param array $access
      * @return void
      */
-    final public function checkAccess(string $access): void
+    final public function checkAccess(array $access): void
     {
-        if ($access != $_SESSION['access']) {
+        /*if ($access != $_SESSION['access']) {
             header('Location: /login');
             exit();
+        }*/
+
+        foreach ($access as $type) {
+            if ($_SESSION['access'] == $type) {
+                return;
+            }
         }
+
+        header('Location: /login');
+        exit();
     } // end function
 
 } // end class

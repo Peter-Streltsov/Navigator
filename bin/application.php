@@ -46,8 +46,14 @@ $application->get('/login', function($request, $response) {
     $this->views->render($response, 'gate.twig.html');
 })->setName('userlogin');
 
+$application->get('/logout', function($request, $response) {
+    unset($_SESSION);
+    session_destroy();
+    return $response->withRedirect('/');
+});
+
 $application->group('/test', function() use ($application) {
-    $this->get('', '\Scientometrics\Controls\IndexController:index');
+
 });
 
 $application->post('/auth', function($request, $response) {
@@ -221,11 +227,6 @@ $application->get('/control/users/add', function($request, $response) {
 $application->get('/public/users/personal/{id}', function($request, $response, $id) {
     $data['page'] = (new Models\Page())->common()->getData();
     $this->views->render($response, 'personal.twig.html', $data);
-});
-
-
-// logging out
-$application->get('/users/logout', function($request, $response) {
 });
 
 /**

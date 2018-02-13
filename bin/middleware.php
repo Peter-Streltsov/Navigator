@@ -2,8 +2,6 @@
 
 namespace Scientometrics\Bin;
 
-use Telegram\Bot\Api;
-use Telegram\Bot\Commands\Command;
 use \Scinetometrics\Models as Models;
 use Scientometrics\Bin\Middleware as Middleware;
 
@@ -11,9 +9,12 @@ use Scientometrics\Bin\Middleware as Middleware;
  * custom slim 3 middleware
  */
 
-//
+// generating page data
+$application->add(function($request, $response, $next) {
+    return $next($request, $response);
+});
 
-
+// authentication
 $application->add(function($request, $response, $next) use($container) {
 
     //unset($_SESSION['status']);
@@ -21,10 +22,8 @@ $application->add(function($request, $response, $next) use($container) {
     $auth = new Middleware\Auth($container, $request, $response);
     $auth->checkPost() // checking POST parameters
         ->checkSession() // checking SESSION parameters
-        //->checkCookies()
-        ->checkUser(); // getting user data from database
+        ->resolve(); // getting user data from database
 
-    //print_r($_SESSION);
     return $next($request, $response);
 
 });

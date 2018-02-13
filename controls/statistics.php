@@ -24,7 +24,7 @@ class Statistics extends Controls\Controller
      */
     public function renderPublic($request, $response)
     {
-        $this->checkAccess('user');
+        $this->checkAccess(['supervisor']);
         $data['page'] = (new Models\Page())->getData();
         $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
         $data['countusers'] = count((new Records\Authors($this->pdo, $this->fluent))->list()->getData());

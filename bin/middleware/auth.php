@@ -59,20 +59,14 @@ class Auth
      */
     public function checkPost()
     {
-        if (isset($_POST['login'])) {
-            $_SESSION['login'] = $_POST['login'];
-        }
 
-        if (isset($_POST['password'])) {
-            $_SESSION['password'] = $_POST['password'];
-        }
+        if (isset($_POST['login'])) $_SESSION['login'] = $_POST['login'];
 
-        if (isset($_POST['save'])) {
-            $this->save = true;
-        }
+        if (isset($_POST['password'])) $_SESSION['password'] = $_POST['password'];
 
-        unset($_POST['login']);
-        unset($_POST['password']);
+        if (isset($_POST['save'])) $this->save = true;
+
+        //print_r($_SESSION);
         
         return $this;
 
@@ -108,11 +102,16 @@ class Auth
     {
         if ($_SESSION['access'] == null) $_SESSION['access'] = 'guest';
 
-        if (isset($_SESSION['login']) && $_SESSION['password'] != null) {
+        if (isset($_SESSION['login'])) {
             $this->user['login'] = $_SESSION['login'];  
         } else {
             $this->user['login'] = 'guest';
         }
+        if (isset($_SESSION['password'])) {
+            $this->user['password'] = $_SESSION['password'];
+        }
+
+        //print_r($_SESSION);
 
         return $this;
 
@@ -125,11 +124,15 @@ class Auth
      *
      * @return Scientometrics\Middleware\Auth
      */
-    public function checkUser() {
+    public function resolve() {
+
+        if ($_SESSION['auth'] == 'auth' && isset($_SESSION['access'])) {
+            //echo 'return'.PHP_EOL;
+            return;
+        }
 
         // getting data for requested login
         $query = "SELECT users.password, users.access FROM users WHERE users.login='".$this->user['login']."'";
-        //echo $query;
         $user = $this->container->pdo->prepare($query);
         $user->execute();
         $user = $user->fetchAll(\PDO::FETCH_ASSOC);
@@ -139,15 +142,16 @@ class Auth
 
         // if user found and password correct
         if ($user[0]['password'] != null) {
-            if ($user[0]['password'] == $_SESSION['password']) {
+            if ($user[0]['password'] == $this->user['password']) {
+
                 // if password correct - setting session data
-                echo 'password correct'.PHP_EOL;
                 $_SESSION['auth'] = 'auth';
                 $_SESSION['login'] = $this->user['login'];
                 $_SESSION['password'] = $user[0]['password'];
                 $_SESSION['access'] = $user[0]['access'];
 
             } else {
+
                 // password incorrect
                 $_SESSION['auth'] = 'not';
                 $_SESSION['login'] = 'guest';
@@ -155,7 +159,7 @@ class Auth
             }
         }
 
-        print_r($_SESSION);
+        //print_r($_SESSION);
 
     } // end function
 

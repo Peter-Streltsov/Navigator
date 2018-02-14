@@ -2,7 +2,8 @@
 
 namespace Scientometrics\Bin;
 
-use \Scinetometrics\Models as Models;
+use Scientometrics\Models as Models;
+use Scientometrics\Models\Service as Service;
 use Scientometrics\Bin\Middleware as Middleware;
 
 /**
@@ -11,6 +12,8 @@ use Scientometrics\Bin\Middleware as Middleware;
 
 // generating page data
 $application->add(function($request, $response, $next) {
+    $page = new Service\Page();
+    $page->setUserMenu();
     return $next($request, $response);
 });
 

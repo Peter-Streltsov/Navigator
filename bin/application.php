@@ -36,7 +36,7 @@ require_once CUSTOM_MIDDLEWARE;
 // index page
 $application->any('/', function($request, $response) {
     //var_dump($this->databaseconnection);
-    $data['page'] = (new Models\Page())->common()->getData();
+    $data['page'] = (new Service\Page())->common()->getData();
     $this->views->render($response, 'index.twig.html', $data);
 });
 
@@ -103,7 +103,7 @@ $application->group('/control', function() {
 
     // control panel menu
     $this->get('', function($request, $response) {
-        $data['page'] = (new Models\Page())->getData();
+        $data['page'] = (new Service\Page())->getData();
         $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
         $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
         if (isset($_SESSION['messages'])) {

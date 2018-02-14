@@ -4,6 +4,7 @@ namespace Scientometrics\Bin\Middleware;
 
 use Scientometrics\Models as Models;
 use Scientometrics\Models\Records as Records;
+use Scientometrics\Models\Service as Service;
 
 class Auth
 {
@@ -153,6 +154,7 @@ class Auth
             } else {
 
                 // password incorrect
+                Service\Messages::setAlert('Неправильный логин или пароль');
                 $_SESSION['auth'] = 'not';
                 $_SESSION['login'] = 'guest';
                 $_SESSION['access'] = 'guest';

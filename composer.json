@@ -25,7 +25,7 @@
             "Scientometrics\\Models\\Records\\": "models/records",
             "Scientometrics\\Models\\Subrecords\\" : "models/subrecords",
             "Scientometrics\\Models\\Service\\": "models/service",
-            "Scientometrics\\Models\\Entities\\": "models/entities",
+            "Scientometrics\\Models\\Units\\": "models/units",
             "Scientometrics\\Config\\": "config",
             "Scientometrics\\Controls\\": "controls",
             "Scientometrics\\Exceptions\\": "exceptions"

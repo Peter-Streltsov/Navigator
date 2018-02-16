@@ -79,10 +79,15 @@ $application->group('/public', function() {
         $this->views->render($response, 'userlist.twig.html', $data);
     });
 
-    // general statistics
+    // public authors information
+    $this->get('/users', function($request, $response) {
+
+    });
+
+    // public general statistics
     $this->get('/state', Controls\Statistics::class . ':renderPublic');
 
-    // scientific results - publications, reports, conferencies etc.
+    // public scientific results - publications, reports, conferencies etc.
     $this->get('/contributions', Controls\Contributions::class . 'renderContributions');
 });
 

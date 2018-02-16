@@ -22,6 +22,14 @@ $container['views'] = function ($c) {
     return $view;
 };
 
+$container['uploadarticles'] = function ($c) {
+    return new \Upload\Storage\FileSystem('/public/storage/articles');
+};
+
+$container['uploadreports'] = function ($c) {
+    return new \Upload\Storage\Filesystem('/public/storage/articles');
+};
+
 // pdo object container
 $container['pdo'] = function() {
     $dsn = 'mysql:host=localhost;dbname=scientometrics';

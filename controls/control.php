@@ -23,7 +23,8 @@ class Control extends Controls\Controller
 
     protected function init()
     {
-
+        $this->access = ['administrator', 'supervisor'];
+        $this->checkAccess($this->access);
     }
 
 }

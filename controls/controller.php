@@ -8,17 +8,32 @@ use Scientometrics\Models\Service as Service;
 use Scientometrics\Models\Records as Records;
 use Scientometrics\Models\Subrecords as Subrecords;
 
+/**
+ * Class Controller
+ * @package Scientometrics\Controls
+ */
 abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
 {
 
     /**
-     * basic controller class
+     * @var mixed
      */
-
     protected $view;
+    /**
+     * @var mixed
+     */
     protected $pdo;
+    /**
+     * @var mixed
+     */
     protected $fluent;
+    /**
+     * @var mixed
+     */
     protected $pagedata;
+    /**
+     * @var array
+     */
     protected $access = array();
 
     /**
@@ -33,7 +48,14 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
         $this->fluent = $container->fluent;
         $this->pagedata = $container->pagedata;
 
+        $this->init();
+
     } // end function
+
+    protected function init()
+    {
+
+    }
 
 
     /**
@@ -44,11 +66,6 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
      */
     final public function checkAccess(array $access): void
     {
-        /*if ($access != $_SESSION['access']) {
-            header('Location: /login');
-            exit();
-        }*/
-
         foreach ($access as $type) {
             if ($_SESSION['access'] == $type) {
                 return;

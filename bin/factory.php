@@ -3,6 +3,7 @@
 namespace Scientometrics\Bin;
 
 use Scientometrics\Models as Models;
+use Scientometrics\Models\Service as Service;
 
 /**
  * loading dependencies
@@ -42,9 +43,5 @@ $container['fluent'] = function() use($container) {
 
 // model for page data
 $container['pagedata'] = function() {
-    return new Models\Page();
-};
-
-$container['boothandler'] = function() use($container) {
-    return new Service\Boothandler($container);
+    return new Service\Page();
 };

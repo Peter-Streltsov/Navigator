@@ -23,9 +23,10 @@
             "Scientometrics\\Interfaces\\": "interfaces",
             "Scientometrics\\Models\\": "models",
             "Scientometrics\\Models\\Records\\": "models/records",
-            "Scientometrics\\Models\\Subrecords\\" : "models/subrecords",
+            "Scientometrics\\Models\\Data\\": "models/data",
             "Scientometrics\\Models\\Service\\": "models/service",
             "Scientometrics\\Models\\Units\\": "models/units",
+            "Scientometrics\\Widgets\\": "widgets",
             "Scientometrics\\Config\\": "config",
             "Scientometrics\\Controls\\": "controls",
             "Scientometrics\\Exceptions\\": "exceptions"

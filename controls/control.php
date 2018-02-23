@@ -21,4 +21,9 @@ class Control extends Controls\Controller
         }
     }
 
+    protected function init()
+    {
+
+    }
+
 }

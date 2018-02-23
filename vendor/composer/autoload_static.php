@@ -37,10 +37,11 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
             'Symfony\\Component\\Translation\\' => 30,
             'Slim\\Views\\' => 11,
             'Slim\\' => 5,
+            'Scientometrics\\Widgets\\' => 23,
             'Scientometrics\\Models\\Units\\' => 28,
-            'Scientometrics\\Models\\Subrecords\\' => 33,
             'Scientometrics\\Models\\Service\\' => 30,
             'Scientometrics\\Models\\Records\\' => 30,
+            'Scientometrics\\Models\\Data\\' => 27,
             'Scientometrics\\Models\\' => 22,
             'Scientometrics\\Interfaces\\' => 26,
             'Scientometrics\\Exceptions\\' => 26,
@@ -118,13 +119,13 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         array (
             0 => __DIR__ . '/..' . '/slim/slim/Slim',
         ),
+        'Scientometrics\\Widgets\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/widgets',
+        ),
         'Scientometrics\\Models\\Units\\' => 
         array (
             0 => __DIR__ . '/../..' . '/models/units',
-        ),
-        'Scientometrics\\Models\\Subrecords\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/models/subrecords',
         ),
         'Scientometrics\\Models\\Service\\' => 
         array (
@@ -133,6 +134,10 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Models\\Records\\' => 
         array (
             0 => __DIR__ . '/../..' . '/models/records',
+        ),
+        'Scientometrics\\Models\\Data\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/models/data',
         ),
         'Scientometrics\\Models\\' => 
         array (
@@ -1284,19 +1289,18 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Config\\Connections' => __DIR__ . '/../..' . '/config/connections.php',
         'Scientometrics\\Controls\\Control' => __DIR__ . '/../..' . '/controls/control.php',
         'Scientometrics\\Controls\\Controller' => __DIR__ . '/../..' . '/controls/controller.php',
-        'Scientometrics\\Controls\\Statistics' => __DIR__ . '/../..' . '/controls/statistics.php',
+        'Scientometrics\\Controls\\PublicController' => __DIR__ . '/../..' . '/controls/publiccontroller.php',
         'Scientometrics\\Interfaces\\ControlInterface' => __DIR__ . '/../..' . '/interfaces/controlinterface.php',
         'Scientometrics\\Interfaces\\RecordInterface' => __DIR__ . '/../..' . '/interfaces/recordinterface.php',
         'Scientometrics\\Interfaces\\SubrecordInterface' => __DIR__ . '/../..' . '/interfaces/subrecordinterface.php',
         'Scientometrics\\Models\\Charts' => __DIR__ . '/../..' . '/models/records/charts.php',
-        'Scientometrics\\Models\\Entities\\Articles' => __DIR__ . '/../..' . '/models/entities/articles.php',
-        'Scientometrics\\Models\\Entities\\Models' => __DIR__ . '/../..' . '/models/entities/model.php',
-        'Scientometrics\\Models\\Entities\\Users' => __DIR__ . '/../..' . '/models/entities/users.php',
+        'Scientometrics\\Models\\Data\\Statistics' => __DIR__ . '/../..' . '/models/data/statistics.php',
         'Scientometrics\\Models\\Records\\Articles' => __DIR__ . '/../..' . '/models/records/articles.php',
         'Scientometrics\\Models\\Records\\Authors' => __DIR__ . '/../..' . '/models/records/authors.php',
         'Scientometrics\\Models\\Records\\Conferencies' => __DIR__ . '/../..' . '/models/records/conferencies.php',
         'Scientometrics\\Models\\Records\\Grades' => __DIR__ . '/../..' . '/models/records/grades.php',
         'Scientometrics\\Models\\Records\\Monographies' => __DIR__ . '/../..' . '/models/records/monographies.php',
+        'Scientometrics\\Models\\Records\\Page' => __DIR__ . '/../..' . '/models/records/page.php',
         'Scientometrics\\Models\\Records\\Positions' => __DIR__ . '/../..' . '/models/records/positions.php',
         'Scientometrics\\Models\\Records\\Record' => __DIR__ . '/../..' . '/models/records/record.php',
         'Scientometrics\\Models\\Records\\Reports' => __DIR__ . '/../..' . '/models/records/reports.php',

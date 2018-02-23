@@ -3,13 +3,11 @@
 namespace Scientometrics\Bin;
 
 use Slim\App;
-use Telegram\Bot\Api;
 use Scientometrics\Models as Models;
 use Scientometrics\Models\Records as Records;
 use Scientometrics\Models\Service as Service;
 use Scientometrics\Controls as Controls;
 use Scientometrics\Config as Config;
-use Scientometrics\Bot as Bot;
 
 session_start();
 
@@ -30,7 +28,6 @@ require_once CUSTOM_MIDDLEWARE;
 /**
  * Routes
  */
-
 
 
 // index page
@@ -77,19 +74,15 @@ $application->group('/public', function() {
         $users = new Records\Authors($this->pdo);
         $data['users'] = $users->list()->getData();
         $this->views->render($response, 'userlist.twig.html', $data);
-    });
-
-    // public authors information
-    $this->get('/users', function($request, $response) {
-
-    });
+    }); // end route
 
     // public general statistics
-    $this->get('/state', Controls\Statistics::class . ':renderPublic');
+    $this->get('/state', Controls\PublicController::class . ':publicStatistics');
 
-    // public scientific results - publications, reports, conferencies etc.
-    $this->get('/contributions', Controls\Contributions::class . 'renderContributions');
-});
+    // public scientific results - publications, reports etc.
+    $this->get('/contributions', Controls\PublicController::class . 'renderContributions');
+
+}); // end group
 
 
 
@@ -99,13 +92,12 @@ $application->group('/public', function() {
  * control panel routes - admin authentication only
  */
 $application->group('/control', function() {
-    
 
     // creating schema
     $this->get('/schema', function($request, $response) {
         $database = new Models\Service\Schema($this->pdo, $response);
         $database->createScheme();
-    });
+    }); // end route
 
     // control panel menu
     $this->get('', function($request, $response) {
@@ -116,7 +108,7 @@ $application->group('/control', function() {
             $data['page']['messages'] = $_SESSION['messages'];
         }
         $this->views->render($response, 'controlpanel.twig.html', $data);
-    });
+    }); // end route
 
 
 
@@ -131,21 +123,24 @@ $application->group('/control', function() {
 
         $this->get('', function($request, $response) {
             return $response->getBody()->write('users list');
-        });
+        }); // end route
 
         // exact user data
         $this->get('/get/{id}', function($request, $response, $id) {
             $users = new Records\Authors($this->pdo, $this->fluent);
             $data['user'] = $users->getById($id['id']);
             $this->views->render($response, 'userdata.twig.html', $data);
-        });
+        }); // end route
 
-        
+        /**
+         * TODO: change authors to users; create users
+         * editing user (author) information
+         */
         $this->get('/edit/{id}', function($request, $response, $id) {
             $data['page'] = (new Models\Page())->common()->getData();
             $data['user'] = (new Records\Authors($this->pdo, $this->fluent))->getById($id['id']);
             return $this->views->render($response, 'useredit.twig.html', $data);
-        });
+        }); // end route
 
         // changing user status
         $this->get('/make/{status}/{id}', function($request, $response, $link) {
@@ -156,7 +151,7 @@ $application->group('/control', function() {
                 case 'admin':
                 break;
             }
-        });
+        }); // end route
         
         /**
          * POST-routes
@@ -181,7 +176,7 @@ $application->group('/control', function() {
             $data['messages'] = $messages->getData();
             $_SESSION['messages'] = $data['messages'];
             return $response->withRedirect('/control');
-        });
+        }); // end route
 
         /**
          * AUTHORS subgroup

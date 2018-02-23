@@ -3,6 +3,7 @@
 namespace Scientometrics\Bin;
 
 use Slim\App;
+use Scientometrics\Widgets as Widgets;
 use Scientometrics\Models as Models;
 use Scientometrics\Models\Records as Records;
 use Scientometrics\Models\Service as Service;
@@ -68,13 +69,7 @@ $application->post('/auth', function($request, $response) {
 $application->group('/public', function() {
 
     // public list of authors and basic author's data
-    $this->get('/', function($request, $response) {
-        //var_dump($this);
-        $data['page'] = $this->pagedata->getData();
-        $users = new Records\Authors($this->pdo);
-        $data['users'] = $users->list()->getData();
-        $this->views->render($response, 'userlist.twig.html', $data);
-    }); // end route
+    $this->get('/', Controls\PublicController::class . ':users');
 
     // public general statistics
     $this->get('/state', Controls\PublicController::class . ':publicStatistics');

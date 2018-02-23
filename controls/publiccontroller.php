@@ -2,6 +2,7 @@
 
 namespace Scientometrics\Controls;
 
+use Scientometrics\Widgets as Widgets;
 use Scientometrics\Controls as Controls;
 use Scientometrics\Models\Service as Service;
 use Scientometrics\Models\Records as Records;
@@ -32,12 +33,17 @@ class PublicController extends Controls\Controller
 
     /**
      *
-     * @return void
+     *
+     * @param $request
+     * @param $response
      */
-    /*public function setAccessParameters()
+    public function users($request, $response)
     {
-        $this->access = ['user', 'administrator', 'supervisor'];
-    } */
+        $data['page'] = $this->pagedata->getData();
+        $users = new Records\Authors($this->pdo);
+        $data['users'] = $users->list()->getData();
+        $this->view->render($response, 'userlist.twig.html', $data);
+    } // end function
 
 
     /**

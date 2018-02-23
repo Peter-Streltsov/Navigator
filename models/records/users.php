@@ -6,12 +6,12 @@ use Scientometrics\Models\Records as Records;
 
 class Users extends Records\Record
 {
-    private $email;
+    private $login;
     private $password;
-    private $status;
+    private $access;
     private $author_alias;
     private $added;
-    private $data;
+    private $data = array();
 
 
     /**
@@ -21,7 +21,7 @@ class Users extends Records\Record
      */
     public function list()
     {
-        return $this;
+        //return $this;
     } // end function
 
 
@@ -43,9 +43,9 @@ class Users extends Records\Record
      * @param [string] $email
      * @return object
      */
-    public function setEmail($email)
+    public function setLogin($login)
     {
-        $this->email = $email;
+        $this->login = $login;
         return $this;
     } // end function
 
@@ -75,6 +75,15 @@ class Users extends Records\Record
         return $this;
     } // end function
 
+    /**
+     * @param [string] $access
+     * @return $this
+     */
+    public function setAccess($access)
+    {
+        $this->access = $access;
+        return $this;
+    }
     
     /**
      * setter - date user added
@@ -90,7 +99,7 @@ class Users extends Records\Record
     /** GETTERS */
 
     /**
-     * getter - userdata
+     * getting user data
      *
      * @return array
      */

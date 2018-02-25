@@ -1,5 +1,28 @@
 {% extends 'base.twig.html' %}
 
 {% block template %}
-
+<form>
+    <center>
+        <div class="input-group mb-3">
+            <div style="width:50pc;" class="input-group">
+                <span style="width:17pc;" class="input-group-addon" id="basic-addon1">Категория сообщения</span>
+                <input type="text" class="form-control" placeholder="Дополнительный комментарий" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div style="width:50pc;" class="input-group">
+                <span style="width:17pc;" class="input-group-addon" id="basic-addon1">Дополнительный комментарий</span>
+                <input type="text" class="form-control" placeholder="введите текст" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="input-group">
+            <div style="width:50pc;" class="input-group">
+                <span style="width:17pc;" class="input-group-addon" id="basic-addon1">Текст сообщения</span>
+                <textarea rows="10" class="form-control" placeholder="введите текст" aria-describedby="basic-addon1"></textarea>
+            </div>
+        </div>
+    </center>
+    <br>
+    <br>
+</form>
 {% endblock %}

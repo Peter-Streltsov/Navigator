@@ -95,16 +95,7 @@ $application->group('/control', function() {
     }); // end route
 
     // control panel menu
-    $this->get('', function($request, $response) {
-        $data['page'] = (new Service\Page())->getData();
-        $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
-        $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
-        if (isset($_SESSION['messages'])) {
-            $data['page']['messages'] = $_SESSION['messages'];
-        }
-        $this->views->render($response, 'controlpanel.twig.html', $data);
-    }); // end route
-
+    $this->get('', Controls\Control::class . ':control'); // end route
 
 
     /**

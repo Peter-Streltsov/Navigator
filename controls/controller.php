@@ -50,6 +50,8 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
 
         $this->init();
 
+        $this->checkAccess($this->access);
+
     } // end function
 
     protected function init()

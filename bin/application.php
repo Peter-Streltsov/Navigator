@@ -189,13 +189,11 @@ $application->group('/control', function() {
  */
 $application->group('/personal', function() {
 
-    $this->get('/{id}', Controls\Personal::class . ':personal');
+    $this->get('/{id}', Controls\personal::class . ':personalPage');
 
-    $this->get('/{id}/message', Controls\Personal::class . ':issueMessage');
+    $this->get('/{id}/message', Controls\personal::class . ':issueMessage');
 
-});
-
-
+}); // end group
 
 
 

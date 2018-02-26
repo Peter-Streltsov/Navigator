@@ -17,10 +17,16 @@ class Users extends Records\Record
     /**
      * Undocumented function
      *
-     * @return void
+     * @return array
      */
-    public function list()
+    public function findAll()
     {
+
+        $query = $this->slimpdo->select()->from('users');
+        $result = $query->execute();
+        $data = $result->fetchAll();
+        return $data;
+
         //return $this;
     } // end function
 
@@ -33,6 +39,7 @@ class Users extends Records\Record
     public function save()
     {
         $this->fluent->insertInto('users')->values($this->name, $this->password, $this->author_alias);
+
     } // end function
 
     /** SETTERS */

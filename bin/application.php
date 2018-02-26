@@ -35,6 +35,7 @@ require_once CUSTOM_MIDDLEWARE;
 $application->any('/', function($request, $response) {
     //var_dump($this->databaseconnection);
     //$data['page'] = (new Service\Page())->common()->getData();
+    var_dump($this->slimpdo);
     $data['page']['login'] = Service\Page::$data['login'];
     $this->views->render($response, 'index.twig.html', $data);
 });

@@ -36,6 +36,8 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
      */
     protected $access = array();
 
+    protected $slimpdo;
+
     /**
      * constructor
      *
@@ -47,6 +49,7 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
         $this->pdo = $container->pdo;
         $this->fluent = $container->fluent;
         $this->pagedata = $container->pagedata;
+        $this->slimpdo = $container->slimpdo;
 
         $this->init();
 

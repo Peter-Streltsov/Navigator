@@ -31,6 +31,14 @@ $container['uploadreports'] = function ($c) {
     return new \Upload\Storage\Filesystem('/public/storage/articles');
 };
 
+// Slim-PDO container
+$container['slimpdo'] = function() {
+    $dsn = 'mysql:host=localhost;dbname=scientometrics;charset=utf8';
+    $user = 'root';
+    $password = 'root';
+    return new \Slim\PDO\Database($dsn, $user, $password);
+};
+
 // pdo object container
 $container['pdo'] = function() {
     $dsn = 'mysql:host=localhost;dbname=scientometrics';

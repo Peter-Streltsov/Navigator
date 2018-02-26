@@ -18,11 +18,48 @@
 
                   <!-- ************************************************************************************************************** -->
                   <!-- ************************************************************************************************************** -->
-                  
+
                   <!-- USERS -->
                   <div id="home" class="tab-pane fade in active">
 
+                      <div class="well">Добавление новых пользователей, редактирование и удаление существующих данных
+                          <br>
+                          <br>
+                          <input class="form-control" id="myInput" type="text" placeholder="Поиск">
+                          <br>
+                          <div class="btn-group">
+                              <a class="btn btn-default" href="#"><i class="icon-user icon-white"></i><span class="glyphicon glyphicon-export">  Экспорт</span></a>
+                              <a style="background-color: lightgray;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                  <li><a onclick ="$('#userlist').tableExport({type:'png'});"><span class="glyphicon glyphicon-pencil" style="color: blue;">  PNG</span></a></li>
+                                  <li><a onclick ="$('#userlist').tableExport({type:'pdf',pdfFontSize:5,ignoreColumn:[1],htmlContent:'false',escape:'false'});"><span class="glyphicon glyphicon-pencil" style="color: red;">  PDF</span></a></li>
+                                  <li><a onclick ="$('#customers').tableExport({type:'excel',htmlContent:'false',escape:'false'});"><span class="glyphicon glyphicon-list-alt" style="color: green;">  XLS</span></a></li>
+                              </ul>
+                          </div>
+                          <br>
+                      </div>
+
+                      <table data-tableexport-display="none" style="margin-top: -1.3pc;" class="table table-hover">
+                          <thead style="background-color: lightgray;" class="thead-default">
+                          <tr>
+                              <th>Электронная почта (логин)</th>
+                              <th>Статус</th>
+                              <th>Действия</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {% for user in users %}
+                          <tr style="font-size: 10pt;">
+                              <td style="text-align: center;">{{ user.login }}</td>
+                              <td>{{ user.access }}</td>
+                              <td style="text-align: center;"></td>
+                          </tr>
+                          {% endfor %}
+                          </tbody>
+                      </table>
+
                   </div>
+
 
                   <!-- ************************************************************************************************************** -->
                   <!-- ************************************************************************************************************** -->

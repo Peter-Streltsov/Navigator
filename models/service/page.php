@@ -12,21 +12,25 @@ use Scientometrics\Widgets\Bootstrapmenu;
 
 class Page
 {
-    public static $data = array(); // page data
 
     /**
-     * contains complete pagedata
+     * static array
+     * contains generated page blocks
      * 
-     * @var string
-     * @deprecated version 0.3.63
+     * defined keys:
+     * ['user']
+     * ['access']
+     * ['messages']
+     * 
+     * @static
+     * @var array
      */
-    private $pagedata = array();
+    public static $data = array(); // page data
 
     public function __construct()
     {
         static::$data['user'] = $_SESSION['login'];
         static::$data['access'] = $_SESSION['access'];
-        //$this->setUserMenu();
         static::userMenu();
         
     }
@@ -65,32 +69,39 @@ class Page
     }
 
     /**
-     * common page data
-     * 
-     * @return object
+     * setting Bootstrap message
+     *
+     * @param string $type
+     * @param string $message
+     * @return void
      */
-    public function common()
+    public static function message($type = 'info', $message = null): void
     {
-        $this->getAuthStatus();
-        $this->setUserMenu();
-        return $this;
+        switch ($type) {
+            case 'alert':
+                static::$data['messages'][] = Bootstrapmessages::alert($message);
+            break;
+            case 'info':
+                static::$data['messages'][] = Bootstrapmessages::info($message);
+            break;
+            default:
+                static::$data['messages'][] = Bootstrapmessages::warning($message);
+            break;
+        }
     }
+
 
 
     /**
      * Undocumented function
      *
-     * @return object
+     * @return array
      */
-    public function extended()
+    public function getData(): array
     {
-        $this->getAuthStatus();
-        $this->userMenu();
-        return $this;
-    }
 
-    public function getData()
-    {
         return static::$data;
-    }
+
+    } // end function
+
 }

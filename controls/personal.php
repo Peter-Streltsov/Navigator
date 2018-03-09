@@ -4,6 +4,7 @@ namespace Scientometrics\Controls;
 
 use Scientometrics\Controls as Controls;
 use Scientometrics\Models\Service as Service;
+use Scientometrics\Service\Page;
 
 class personal extends Controls\Controller
 {
@@ -27,6 +28,7 @@ class personal extends Controls\Controller
     {
         //$data['page'] = (new Service\Page())->getData();
         $this->data['userid'] = $parameters['id'];
+        
 
         return $this->view->render($response, 'personal.twig.html', $this->data);
 

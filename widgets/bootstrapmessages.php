@@ -2,60 +2,53 @@
 
 namespace Scientometrics\Widgets;
 
-class BootstrapMessages
+/**
+ * static class - page messages
+ * @since 0.3.xx
+ */
+class Bootstrapmessages
 {
 
-    /**
-     * static class - page messages
-     * 
-     * @since 0.3.xx
-     */
-
-    public static $messages = array();
-
 
     /**
-     * @return array
+     * @param string $message
+     * @return string
      */
-    public static function getMessages()
+    public static function info($message): string
     {
-        return static::$messages;
-    }
 
-
-    /**
-     * @param $message
-     */
-    public static function success($message)
-    {
-        static::$messages[] = "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">
+        return "<div class=\"alert alert-success alert-dismissible fade in\" role=\"alert\">
         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
           <span aria-hidden=\"true\">&times;</span></button>".$message."</div>";
-        //return $this;
+
     } // end function
 
 
     /**
-     * @param $message
+     * @param string $message
+     * @return string
      */
-    public static function warning($message)
+    public static function warning($message): string
     {
-        static::$messages[] = "<div class=\"alert alert-warning alert-dismissible fade in\" role=\"alert\">
+
+        return "<div class=\"alert alert-warning alert-dismissible fade in\" role=\"alert\">
         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
           <span aria-hidden=\"true\">&times;</span></button>".$message."</div>";
-        //return $this;
+
     } // end function
 
 
     /**
-     * @param $message
+     * @param string $message
+     * @return string
      */
-    public static function alert($message)
+    public static function alert($message): string
     {
-        static::$messages[] = "<div class=\"alert alert-alert alert-dismissible fade in\" role=\"alert\">
+
+        return "<div class=\"alert alert-alert alert-dismissible fade in\" role=\"alert\">
         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
           <span aria-hidden=\"true\">&times;</span></button>".$message."</div>";
-        //return $this;
+
     } // end function
 
 } // end class

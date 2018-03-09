@@ -7,6 +7,7 @@ use Scientometrics\Controls as Controls;
 use Scientometrics\Models\Service as Service;
 use Scientometrics\Models\Records as Records;
 use Scientometrics\Models\Data as Data;
+use Scientometrics\Service\Page;
 use Amenadiel\JpGraph\Graph;
 use Amenadiel\JpGraph\Plot;
 
@@ -20,6 +21,7 @@ use Amenadiel\JpGraph\Plot;
  */
 class PublicController extends Controls\Controller
 {
+
     /**
      * Called in parent constructor
      * Setting class parameters for all class actions
@@ -31,7 +33,9 @@ class PublicController extends Controls\Controller
     {
         $this->access = ['user', 'administrator', 'supervisor'];
         $this->checkAccess($this->access);
-    }
+    } // end function
+
+
 
     /**
      *
@@ -41,11 +45,15 @@ class PublicController extends Controls\Controller
      */
     public function users($request, $response)
     {
-        $data['page'] = $this->pagedata->getData();
+
+        Service\Page::message('info', 'Список пользователей');
         $users = new Records\Authors($this->pdo);
-        $data['users'] = $users->list()->getData();
-        $this->view->render($response, 'userlist.twig.html', $data);
+        $this->data['users'] = $users->list()->getData();
+        $this->data['page'] = (new Service\Page())->getData();
+        $this->view->render($response, 'userlist.twig.html', $this->data);
+
     } // end function
+
 
 
     /**

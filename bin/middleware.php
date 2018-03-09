@@ -10,13 +10,41 @@ use Scientometrics\Bin\Middleware as Middleware;
  * custom slim 3 middleware
  */
 
-// generating page data
+
+
+/**
+ * generating basic page blocks
+ *
+ * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
+ * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 response
+ * @param  callable                                 $next     Next middleware
+ *
+ * @return \Psr\Http\Message\ResponseInterface
+ */
 $application->add(function($request, $response, $next) {
-    $page = new Service\Page();
+    new Service\Page(); // initialising menu after authentication
+    switch ($_SESSION['access']) {
+        case 'guest':
+        Service\Page::message('warning', 'Пользователь не авторизован');
+        break;
+        default:
+        Service\Page::message('warning', 'Вы авторизованы в системе, текущий статус - <b>'.$_SESSION['access'].'</b>');
+        break;
+    }
     return $next($request, $response);
 });
 
-// authentication
+
+
+/**
+ * session data and authentication
+ *
+ * @param  \Psr\Http\Message\ServerRequestInterface $request  PSR7 request
+ * @param  \Psr\Http\Message\ResponseInterface      $response PSR7 response
+ * @param  callable                                 $next     Next middleware
+ *
+ * @return \Psr\Http\Message\ResponseInterface
+ */
 $application->add(function($request, $response, $next) use($container) {
 
     //unset($_SESSION['status']);

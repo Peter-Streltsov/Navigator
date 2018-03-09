@@ -25,10 +25,10 @@ class personal extends Controls\Controller
      */
     public function personalPage($request, $response, $parameters)
     {
-        $data['page'] = (new Service\Page())->getData();
-        $data['userid'] = $parameters['id'];
+        //$data['page'] = (new Service\Page())->getData();
+        $this->data['userid'] = $parameters['id'];
 
-        return $this->view->render($response, 'personal.twig.html', $data);
+        return $this->view->render($response, 'personal.twig.html', $this->data);
 
     } // end action
 

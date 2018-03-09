@@ -7,6 +7,8 @@ use Scientometrics\Controls as Controls;
 use Scientometrics\Models\Service as Service;
 use Scientometrics\Models\Records as Records;
 use Scientometrics\Models\Data as Data;
+use Amenadiel\JpGraph\Graph;
+use Amenadiel\JpGraph\Plot;
 
 
 /**

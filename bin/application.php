@@ -33,15 +33,14 @@ require_once CUSTOM_MIDDLEWARE;
 
 // index page
 $application->any('/', function($request, $response) {
-    //var_dump($this->databaseconnection);
-    //$data['page'] = (new Service\Page())->common()->getData();
-    var_dump($this->slimpdo);
-    $data['page']['login'] = Service\Page::$data['login'];
+    $data['page'] = (new Service\Page())->getData();
     $this->views->render($response, 'index.twig.html', $data);
 });
 
 
-// authorization
+/**
+ * authorization routes
+ */
 $application->get('/login', function($request, $response) {
     $this->views->render($response, 'gate.twig.html');
 })->setName('userlogin');
@@ -52,10 +51,15 @@ $application->get('/logout', function($request, $response) {
     return $response->withRedirect('/');
 });
 
+
+/**
+ * feature testing routes
+ */
 $application->group('/test', function() use ($application) {
 
 });
 
+// ???
 $application->post('/auth', function($request, $response) {
     $_SESSION['login'] = $_POST['login'];
     return $response->withRedirect('');
@@ -121,6 +125,7 @@ $application->group('/control', function() {
 
         /**
          * TODO: change authors to users; create users
+         * TODO: move to Controls\Control controller action
          * editing user (author) information
          */
         $this->get('/edit/{id}', function($request, $response, $id) {

@@ -13,7 +13,6 @@ use Scientometrics\Bin\Middleware as Middleware;
 // generating page data
 $application->add(function($request, $response, $next) {
     $page = new Service\Page();
-    $page::setUserMenu();
     return $next($request, $response);
 });
 

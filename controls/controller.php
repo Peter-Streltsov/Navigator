@@ -19,24 +19,30 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
      * @var mixed
      */
     protected $view;
+
+
     /**
      * @var mixed
+     * @var fluent
+     * @var slimpdo \Slim\SlimPDO
      */
     protected $pdo;
-    /**
-     * @var mixed
-     */
     protected $fluent;
+    protected $slimpdo;
+
+
     /**
      * @var mixed
      */
     protected $pagedata;
+
+
     /**
      * @var array
      */
     protected $access = array();
 
-    protected $slimpdo;
+    protected $data;
 
     /**
      * constructor
@@ -51,12 +57,32 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
         $this->pagedata = $container->pagedata;
         $this->slimpdo = $container->slimpdo;
 
+        $this->pageData();
+
         $this->init();
 
         $this->checkAccess($this->access);
 
     } // end function
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    final private function pageData()
+    {
+
+        $this->data['page'] = (new Service\Page())->getData();
+
+    } // end function
+
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     protected function init()
     {
 

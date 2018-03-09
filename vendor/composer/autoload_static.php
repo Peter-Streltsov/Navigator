@@ -1494,6 +1494,7 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Models\\Subrecords\\Indexes' => __DIR__ . '/../..' . '/models/subrecords/indexes.php',
         'Scientometrics\\Models\\Subrecords\\Subrecords' => __DIR__ . '/../..' . '/models/subrecords/subrecord.php',
         'Scientometrics\\Widgets\\BootstrapMessages' => __DIR__ . '/../..' . '/widgets/bootstrapmessages.php',
+        'Scientometrics\\Widgets\\Bootstrapmenu' => __DIR__ . '/../..' . '/widgets/bootstrapmenu.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',

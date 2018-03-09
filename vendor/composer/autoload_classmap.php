@@ -1203,6 +1203,7 @@ return array(
     'Scientometrics\\Models\\Subrecords\\Indexes' => $baseDir . '/models/subrecords/indexes.php',
     'Scientometrics\\Models\\Subrecords\\Subrecords' => $baseDir . '/models/subrecords/subrecord.php',
     'Scientometrics\\Widgets\\BootstrapMessages' => $baseDir . '/widgets/bootstrapmessages.php',
+    'Scientometrics\\Widgets\\Bootstrapmenu' => $baseDir . '/widgets/bootstrapmenu.php',
     'SebastianBergmann\\CodeCoverage\\CodeCoverage' => $vendorDir . '/phpunit/php-code-coverage/src/CodeCoverage.php',
     'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => $vendorDir . '/phpunit/php-code-coverage/src/Driver/Driver.php',

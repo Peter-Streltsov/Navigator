@@ -2,7 +2,7 @@
 
 namespace Scientometrics\Widgets;
 
-class Messages
+class BootstrapMessages
 {
 
     /**

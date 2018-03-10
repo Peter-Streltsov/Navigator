@@ -1191,6 +1191,7 @@ return array(
     'Scientometrics\\Models\\Records\\Authors' => $baseDir . '/models/records/authors.php',
     'Scientometrics\\Models\\Records\\Conferencies' => $baseDir . '/models/records/conferencies.php',
     'Scientometrics\\Models\\Records\\Grades' => $baseDir . '/models/records/grades.php',
+    'Scientometrics\\Models\\Records\\Messages' => $baseDir . '/models/records/messages.php',
     'Scientometrics\\Models\\Records\\Monographies' => $baseDir . '/models/records/monographies.php',
     'Scientometrics\\Models\\Records\\Positions' => $baseDir . '/models/records/positions.php',
     'Scientometrics\\Models\\Records\\Record' => $baseDir . '/models/records/record.php',

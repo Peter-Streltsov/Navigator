@@ -39,7 +39,6 @@ class PublicController extends Controls\Controller
 
     /**
      *
-     *
      * @param $request
      * @param $response
      */

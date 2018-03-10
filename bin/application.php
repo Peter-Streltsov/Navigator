@@ -100,7 +100,7 @@ $application->group('/control', function() {
     }); // end route
 
     // control panel menu
-    $this->get('', Controls\Control::class . ':control'); // end route
+    $this->get('', Controls\Control::class . ':actionControl'); // end route
 
 
     /**

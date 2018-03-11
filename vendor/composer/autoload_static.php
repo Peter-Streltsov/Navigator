@@ -1482,7 +1482,6 @@ class ComposerStaticInit4e39d14d034212c1366f5f1e23f50a84
         'Scientometrics\\Models\\Records\\Authors' => __DIR__ . '/../..' . '/models/records/authors.php',
         'Scientometrics\\Models\\Records\\Conferencies' => __DIR__ . '/../..' . '/models/records/conferencies.php',
         'Scientometrics\\Models\\Records\\Grades' => __DIR__ . '/../..' . '/models/records/grades.php',
-        'Scientometrics\\Models\\Records\\Messages' => __DIR__ . '/../..' . '/models/records/messages.php',
         'Scientometrics\\Models\\Records\\Monographies' => __DIR__ . '/../..' . '/models/records/monographies.php',
         'Scientometrics\\Models\\Records\\Positions' => __DIR__ . '/../..' . '/models/records/positions.php',
         'Scientometrics\\Models\\Records\\Record' => __DIR__ . '/../..' . '/models/records/record.php',

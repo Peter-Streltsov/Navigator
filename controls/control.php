@@ -14,10 +14,9 @@ class Control extends Controls\Controller
     {
 
         $data['page'] = (new Service\Page())->getData();
-        $data['users'] = (new Records\Users($this->pdo, null, $this->slimpdo))->findAll();
-        $data['authors'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
+        //$data['users'] = (new Records\Users($this->pdo, null, $this->slimpdo))->findAll();
+        $data['users'] = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
         $data['articles'] = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
-        $data['messages'] = (new Records\Messages($this->pdo, $this->slimpdo))->list();
         $this->view->render($response, 'controlpanel.twig.html', $data);
 
     } // end action

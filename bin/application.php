@@ -57,6 +57,8 @@ $application->get('/logout', function($request, $response) {
  */
 $application->group('/test', function() use ($application) {
 
+    $this->get('/ajax', Controls\Control::class . ':actionAjax');
+
 });
 
 // ???

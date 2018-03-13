@@ -4,53 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba1d613c8b22927fb72f40c8cde43a0f",
+    "content-hash": "d07715b05c56304e88c9715b1b7bd52e",
     "packages": [
-        {
-            "name": "amenadiel/jpgraph",
-            "version": "3.6.14",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/HuasoFoundries/jpgraph.git",
-                "reference": "5a9e0297d26c2c698ac8f4d0367119276f2de9f7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/HuasoFoundries/jpgraph/zipball/5a9e0297d26c2c698ac8f4d0367119276f2de9f7",
-                "reference": "5a9e0297d26c2c698ac8f4d0367119276f2de9f7",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Amenadiel\\JpGraph\\": "src/",
-                    "Amenadiel\\JpGraph\\Graph\\": "src/graph",
-                    "Amenadiel\\JpGraph\\Image\\": "src/image",
-                    "Amenadiel\\JpGraph\\Plot\\": "src/plot",
-                    "Amenadiel\\JpGraph\\Text\\": "src/text",
-                    "Amenadiel\\JpGraph\\Themes\\": "src/themes",
-                    "Amenadiel\\JpGraph\\Util\\": "src/util"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "QPL-1.0"
-            ],
-            "description": "jpGraph, library to make graphs and charts",
-            "homepage": "http://jpgraph.net/",
-            "keywords": [
-                "chart",
-                "data",
-                "graph",
-                "jpgraph",
-                "pie"
-            ],
-            "time": "2018-02-13T19:34:27+00:00"
-        },
         {
             "name": "codeguy/upload",
             "version": "1.3.2",
@@ -588,16 +543,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.24.1",
+            "version": "1.24.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "ef12cbd8ba5ce624f0a6a95e0850c4cc13e71e41"
+                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/ef12cbd8ba5ce624f0a6a95e0850c4cc13e71e41",
-                "reference": "ef12cbd8ba5ce624f0a6a95e0850c4cc13e71e41",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bba6c6e410c6b4317e37a9474aeaa753808c3875",
+                "reference": "bba6c6e410c6b4317e37a9474aeaa753808c3875",
                 "shasum": ""
             },
             "require": {
@@ -637,7 +592,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-03-09T15:49:34+00:00"
+            "time": "2018-03-10T10:10:14+00:00"
         },
         {
             "name": "nikic/fast-route",

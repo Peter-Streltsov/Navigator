@@ -19,6 +19,9 @@ class personal extends Controls\Controller
 
     /**
      * personal 'cabinet' action
+     * 
+     * @method GET
+     * 
      * @since 0.3.59
      * @param $request
      * @param $response
@@ -26,11 +29,11 @@ class personal extends Controls\Controller
      */
     public function personalPage($request, $response, $parameters)
     {
-        //$data['page'] = (new Service\Page())->getData();
-        $this->data['userid'] = $parameters['id'];
-        
 
-        return $this->view->render($response, 'personal.twig.html', $this->data);
+        return $this->view->render($response, 'personal.twig.html', [
+            ['page'] => Page::getPage(),
+            ['id'] => $parameters['id']
+        ]);
 
     } // end action
 
@@ -49,10 +52,10 @@ class personal extends Controls\Controller
     public function issueMessage($request, $response, $parameters)
     {
 
-        $data['page'] = (new Service\Page())->getData();
-        $data['userid'] = $parameters['id'];
-
-        return $this->view->render($response, 'message.twig.html', $data);
+        return $this->view->render($response, 'message.twig.html', [
+            'page' => Page::getData(),
+            'userid' => $parameters['id']
+        ]);
 
     } // end action
 

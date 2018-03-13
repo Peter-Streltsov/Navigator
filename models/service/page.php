@@ -97,7 +97,7 @@ class Page
      *
      * @return array
      */
-    public function getData(): array
+    public static function getPage(): array
     {
 
         return static::$data;

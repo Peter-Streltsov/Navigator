@@ -57,8 +57,6 @@ abstract class Controller implements \Scientometrics\Interfaces\ControlInterface
         $this->pagedata = $container->pagedata;
         $this->slimpdo = $container->slimpdo;
 
-        $this->pageData();
-
         $this->init();
 
         $this->checkAccess($this->access);

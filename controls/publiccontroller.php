@@ -2,14 +2,12 @@
 
 namespace Scientometrics\Controls;
 
-use Scientometrics\Widgets as Widgets;
 use Scientometrics\Controls as Controls;
 use Scientometrics\Models\Service as Service;
 use Scientometrics\Models\Records as Records;
+use Scientometrics\Models\Records\Authors;
 use Scientometrics\Models\Data as Data;
-use Scientometrics\Service\Page;
-use Amenadiel\JpGraph\Graph;
-use Amenadiel\JpGraph\Plot;
+use Scientometrics\Models\Service\Page;
 
 
 /**
@@ -31,13 +29,16 @@ class PublicController extends Controls\Controller
      */
     protected function init()
     {
+
         $this->access = ['user', 'administrator', 'supervisor'];
         $this->checkAccess($this->access);
+
     } // end function
 
 
 
     /**
+     * ACTION
      *
      * @param $request
      * @param $response
@@ -45,17 +46,19 @@ class PublicController extends Controls\Controller
     public function users($request, $response)
     {
 
-        Service\Page::message('info', 'Список пользователей');
-        $users = new Records\Authors($this->pdo);
-        $this->data['users'] = $users->list()->getData();
-        $this->data['page'] = (new Service\Page())->getData();
-        $this->view->render($response, 'userlist.twig.html', $this->data);
+        Page::message('info', 'Список пользователей');
 
-    } // end function
+        $this->view->render($response, 'userlist.twig.html', [
+            'users' => (new Authors($this->pdo, $this->fluent))->list()->getData(),
+            'page' => (new Page())->getData()
+        ]);
+
+    } // end action
 
 
 
     /**
+     * ACTION
      * renders public statistic and common data
      *
      * @return void
@@ -63,9 +66,15 @@ class PublicController extends Controls\Controller
     public function publicStatistics($request, $response)
     {
 
-        $data = (new Data\Statistics($this->pdo, $this->fluent))->getPublicStatistics();
-        $this->view->render($response, 'stat.twig.html', $data);
+        $articles = (new Records\Articles($this->pdo, $this->fluent))->list()->getData();
+        $users = (new Records\Authors($this->pdo, $this->fluent))->list()->getData();
+        
+        $this->view->render($response, 'stat.twig.html', [
+            'page' => Page::getPage(),
+            'count' => count($articles),
+            'countusers' => count($users)
+        ]);
 
-    } // end function
+    } // end action
 
 } // end class

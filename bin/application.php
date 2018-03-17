@@ -6,7 +6,7 @@ use Slim\App;
 use Scientometrics\Widgets as Widgets;
 use Scientometrics\Models as Models;
 use Scientometrics\Models\Records as Records;
-use Scientometrics\Models\Service as Service;
+use Scientometrics\Models\Service\Page;
 use Scientometrics\Controls as Controls;
 use Scientometrics\Config as Config;
 
@@ -33,8 +33,9 @@ require_once CUSTOM_MIDDLEWARE;
 
 // index page
 $application->any('/', function($request, $response) {
-    $data['page'] = (new Service\Page())->getData();
-    $this->views->render($response, 'index.twig.html', $data);
+    $this->views->render($response, 'index.twig.html', [
+        'page' => Page::getPage()
+    ]);
 });
 
 

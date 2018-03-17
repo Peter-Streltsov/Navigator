@@ -7,12 +7,15 @@ use Scientometrics\Controls as Controls;
 use Scientometrics\Models\Records as Records;
 use Scientometrics\Models\Service as Service;
 use Scientometrics\Models\Service\Page;
+use Scientometrics\Models\Records\Messages;
 
 class Control extends Controls\Controller
 {
 
     public function actionControl($request, $response, $parameters)
     {
+
+        $columns = (new Messages($this->pdo, $this->fluent))->getFields();
 
         $this->view->render($response, 'controlpanel.twig.html', [
             'page' => Page::getPage(),

@@ -43,6 +43,13 @@ abstract class Record implements \Scientometrics\Interfaces\RecordInterface
 
     } // end function
 
+
+    public function getFields()
+    {
+        $sql = 'SHOW COLUMNS FROM '.$this->tablename;
+        return $result = $this->pdo->query($sql);
+    }
+
     
 
     /**

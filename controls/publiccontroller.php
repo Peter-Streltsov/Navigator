@@ -3,10 +3,8 @@
 namespace Scientometrics\Controls;
 
 use Scientometrics\Controls as Controls;
-use Scientometrics\Models\Service as Service;
 use Scientometrics\Models\Records as Records;
 use Scientometrics\Models\Records\Authors;
-use Scientometrics\Models\Data as Data;
 use Scientometrics\Models\Service\Page;
 
 
@@ -50,7 +48,7 @@ class PublicController extends Controls\Controller
 
         $this->view->render($response, 'userlist.twig.html', [
             'users' => (new Authors($this->pdo, $this->fluent))->list()->getData(),
-            'page' => (new Page())->getData()
+            'page' => Page::getPage()
         ]);
 
     } // end action

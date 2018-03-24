@@ -19,6 +19,9 @@ class m180319_140128_personnel extends Migration
             'secondname' => $this->string(255),
             'lastname' => $this->string(255)->notNull(),
             'position' => $this->integer()->notNull(),
+            'employment' => $this->integer()->notNull(),
+            'expirience' => $this->string(),
+            'age' => $this->integer()->notNull()
 
         ]);
 
@@ -32,7 +35,9 @@ class m180319_140128_personnel extends Migration
     public function safeDown()
     {
 
-        return false;
+        $this->dropTable('personnel');
+
+        return true;
 
     } // end function
 

@@ -72,9 +72,16 @@ class ArticlesController extends Controller
      */
     public function actionView($id)
     {
+
+        $model = Articles::find()
+            ->where(['article_id' => $id])
+            ->joinWith('authors', true, 'JOIN')
+            ->one();
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model
         ]);
+
     }
 
     /**

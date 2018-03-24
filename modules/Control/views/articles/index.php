@@ -68,12 +68,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 $links = function($auth) {
 
+                                    $top = "<label class=\"dropdown\">";
+                                    $ul = "<ul class=\"dropdown-menu\">";
+                                    $bottom = "</ul></label>";
+
                                     foreach ($auth as $author) {
-                                        $fio[$author['id']] = "<span style=\"color: #32a873; font-size: 16px;\">".$author['name'].' '.$author['secondname'].' '.$author['lastname'].'</span>';
-                                        $tag[] = Html::a($fio[$author['id']], ['control/authors/view', 'id' => $author['id']]);
+                                        $fio[$author['id']] = "<span style=\"font-size: 14px;\">"
+                                            .$author['lastname']
+                                            .' '
+                                            .mb_substr($author['name'],0,1,"UTF-8")
+                                            ."."
+                                            .mb_substr($author['secondname'],0,1,"UTF-8")
+                                            ."."
+                                            //.$author['name'].' '.$author['secondname']
+                                            //.' '
+                                            //.$author['lastname']
+                                            .'</span>';
+                                        $label = "<button type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" class=\"btn btn-default\">".$fio[$author['id']]." <span class='caret'></span>"."</button>".$ul;
+                                        $tag['br'] = "<br>";
+                                        $tag['articles'] = "<li>"
+                                            .Html::a("Данные автора", ['authors/view', 'id' => $author['id']])
+                                            .Html::a('Все публикации', ['articles/view', 'id' => $author['id']])
+                                            ."</li>";
+                                        //$tag[] = "<li>".Html::a()."</li>";
+                                        $user[] = $top.$label.implode($tag).$bottom;
                                     }
 
-                                    return implode("<br>", $tag);
+                                    return implode("<br>", $user);
                                 };
 
                                 isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;

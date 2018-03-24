@@ -49,6 +49,7 @@ AppAsset::register($this);
             ],
             'encodeLabels' => false,
             'items' => [
+                ['label' => "<input style='height: 1.5pc; color: #fff; background-color: #2c3337;' placeholder='Поиск' class=\"form-control\" type=\"text\"></input>"],
                 ['label' => 'Develop' ,
                     'visible' => !Yii::$app->user->isGuest,
                     'items' => [
@@ -56,6 +57,11 @@ AppAsset::register($this);
                         ['label' => 'Users', 'url' => ['/control/users']],
                         ['label' => 'Test', 'url' => ['/test']],
                         ['label' => 'Articles', 'url' => ['/control/articles']]
+                    ]
+                ],
+                ['label' => 'Публичные данные',
+                    'items' => [
+                            ['label' => 'Публикации', 'url' => ['/public/items']]
                     ]
                 ],
                 ['label' => 'Обратная связь', 'url' => ['/site/contact']],
@@ -111,7 +117,7 @@ AppAsset::register($this);
         </div>
     </div>
 
-    <footer style="color: #2a323b; height: 2.5pc; background-color: #7b8c85;" class="navbar-fixed-bottom ">
+    <footer style="color: #2a323b; height: 2.5pc; background-color: #d2d4d9;" class="navbar-fixed-bottom ">
         <div class="container">
             <p style="margin-top: 0.5pc;">
             <b class="pull-left">&copy;  <?= date('Y') ?></b>

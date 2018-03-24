@@ -40,7 +40,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'year',
             'doi',
             'file',
+            [
+                    'attribute' => 'authors',
+                    'value' => function($model) {
+                                if (isset($model['authors'] [0])) {
+                                    foreach ($model['authors'] as $author) {
+                                        $authors[] = $author['lastname'] . ' ' . mb_substr($author['name'],0,1,"UTF-8"). '.' . mb_substr($author['secondname'],0,1,"UTF-8").'.';
+                                    }
+                                }
+
+                                return implode(' ', $authors);
+                    }
+            ]
         ],
-    ]) ?>
+    ]);
+
+    //\yii\helpers\VarDumper::dump($model['authors']);
+
+    ?>
 
 </div>

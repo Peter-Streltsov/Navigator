@@ -50,10 +50,25 @@ class ArticlesAuthors extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getArticle()
+    /*public function getArticle()
     {
+
         return $this->hasOne(Articles::className(), ['id' => 'article_id']);
-    }
+
+    } // end function*/
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getAuthors()
+    {
+
+        return $this->hasMany(Authors::className(), ['id', 'author_id']);
+
+    } // end function*/
+
+
 
     /**
      * @inheritdoc

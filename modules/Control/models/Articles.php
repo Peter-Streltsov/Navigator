@@ -3,6 +3,8 @@
 namespace app\modules\Control\models;
 
 use Yii;
+use app\modules\Control\models\ArticlesAuthors;
+use app\modules\Control\models\Authors;
 
 /**
  * This is the model class for table "articles".
@@ -53,16 +55,36 @@ class Articles extends \yii\db\ActiveRecord
             'year' => 'Год издания',
             'doi' => 'ЦИО',
             'file' => 'File',
+            'authors' => 'Авторы'
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getArticlesAuthors()
+
+
+    public function getArticles()
     {
-        return $this->hasMany(ArticlesAuthors::className(), ['article_id' => 'id']);
+
+        return $this->hasOne(\app\modules\Control\models\ArticlesAuthors::className(), ['article_id' => 'id']);
+
     }
+
+
+
+    public function getAuthors()
+    {
+
+        return $this->hasMany(Authors::className(), ['id' => 'author_id'])->via('articles');
+
+    }
+
+    /*public function getData()
+    {
+
+        return $this->hasMany(Authors::className(), ['id' => 'author_id'])->viaTable('articles_authors', ['article_id' => 'id']);
+
+    }*/
+
+
 
     /**
      * @inheritdoc

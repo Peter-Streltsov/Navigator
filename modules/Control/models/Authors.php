@@ -40,9 +40,9 @@ class Authors extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'secondname' => 'Secondname',
-            'lastname' => 'Lastname',
+            'name' => 'Имя',
+            'secondname' => 'Отчество',
+            'lastname' => 'Фамилия',
         ];
     }
 

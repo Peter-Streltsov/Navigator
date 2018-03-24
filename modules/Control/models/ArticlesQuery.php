@@ -14,14 +14,20 @@ class ArticlesQuery extends \yii\db\ActiveQuery
         return $this->andWhere('[[status]]=1');
     }*/
 
+
+
     /**
      * @inheritdoc
      * @return Articles[]|array
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -29,6 +35,9 @@ class ArticlesQuery extends \yii\db\ActiveQuery
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

@@ -28,6 +28,9 @@ AppAsset::register($this);
 
     <body>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
     <?php $this->beginBody() ?>
 
     <div class="wrap">
@@ -120,6 +123,12 @@ AppAsset::register($this);
     </footer>
 
     <?php yii\helpers\Url::remember(); ?>
+
+    <script>
+        $(document).ready(function() {
+            $("body").niceScroll().resize(25);
+        });
+    </script>
 
     <?php $this->endBody() ?>
 

@@ -2,12 +2,15 @@
 
 namespace app\modules\Control\controllers;
 
+use app\modules\Control\models\ArticlesAuthors;
 use Yii;
 use app\modules\Control\models\Articles;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\widgets\DetailView;
 
 /**
  * ArticlesController implements the CRUD actions for Articles model.
@@ -36,13 +39,30 @@ class ArticlesController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Articles::find(),
+            'query' => Articles::find()->joinWith('authors'),
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
+
+    public function actionTest()
+    {
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Articles::find()->joinWith('authors')
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+
+    } // end action
+
+
 
     /**
      * Displays a single Articles model.

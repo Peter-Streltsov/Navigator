@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'tableOptions' => [
-                'class' => 'table table-hover'
+                'class' => 'table table-hover',
                 ],
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
@@ -58,10 +58,37 @@ $this->params['breadcrumbs'][] = $this->title;
             'year',
             'doi',
             //'file',
+            //'authors',
+            [
+                    //'label' => 'authors',
+                    'attribute' => 'authors',
+                    'encodeLabel' => false,
+                    'format' => 'raw',
+                    'value' => function($data) {
+
+                                $links = function($auth) {
+
+                                    foreach ($auth as $author) {
+                                        $fio[$author['id']] = "<span style=\"color: #32a873; font-size: 16px;\">".$author['name'].' '.$author['secondname'].' '.$author['lastname'].'</span>';
+                                        $tag[] = Html::a($fio[$author['id']], ['control/authors/view', 'id' => $author['id']]);
+                                    }
+
+                                    return implode("<br>", $tag);
+                                };
+
+                                isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
+
+                                return $authors;
+                        }
+                ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+
+    //\yii\helpers\VarDumper::dump($dataProvider);
+
+    ?>
     <?php Pjax::end(); ?>
 
     <br>

@@ -6,6 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Articles */
 
+
+$model = $model[0];
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -42,20 +44,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'file',
             [
                     'attribute' => 'authors',
+                    //'encodeLabels' => false,
                     'value' => function($model) {
-                                if (isset($model['authors'] [0])) {
-                                    foreach ($model['authors'] as $author) {
-                                        $authors[] = $author['lastname'] . ' ' . mb_substr($author['name'],0,1,"UTF-8"). '.' . mb_substr($author['secondname'],0,1,"UTF-8").'.';
+                                if (isset($model['data'] [0])) {
+                                    foreach ($model['data'] as $author) {
+                                        $authors[] = $author['lastname']
+                                            . ' ' . mb_substr($author['name'],0,1,"UTF-8")
+                                            . '.' . mb_substr($author['secondname'],0,1,"UTF-8")
+                                            .'.';
                                     }
                                 }
 
-                                return implode(' ', $authors);
+                                return implode("\n", $authors);
                     }
             ]
         ],
     ]);
-
-    //\yii\helpers\VarDumper::dump($model['authors']);
 
     ?>
 

@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+//use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Articles */
@@ -24,12 +25,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'doi')->textInput(['maxlength' => true]) ?>
 
-    <!--<?= $form->field($model, 'file')->textInput() ?>-->
+    <?= $form->field($model, 'file')->textInput() ?>
+
+
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'button big primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+
 
 </div>

@@ -61,7 +61,9 @@ AppAsset::register($this);
                 ],
                 ['label' => 'Публичные данные',
                     'items' => [
-                            ['label' => 'Публикации', 'url' => ['/public/items']]
+                            ['label' => 'Публикации', 'url' => ['/public/items'], 'options' => [
+                                'style' => 'width: 20pc;'
+                            ]]
                     ]
                 ],
                 ['label' => 'Обратная связь', 'url' => ['/site/contact']],

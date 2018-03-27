@@ -59,6 +59,9 @@ $config = [
     'modules' => [
         'control' => [
             'class' => 'app\modules\Control\ControlModule'
+        ],
+        'public' => [
+            'class' => 'app\modules\PublicAccess\PublicModule'
         ]
     ],
 

@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <label class="dropdown">
 
             <button type="button" id="dropdownMenuButton" data-toggle="dropdown" class="button big">
-                <b>Экспорт </b>
+                <b>Экспорт</b> <span class="glyphicon glyphicon-hdd"></span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -60,7 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'file',
             //'authors',
             [
-                    //'label' => 'authors',
                     'attribute' => 'authors',
                     'encodeLabel' => false,
                     'format' => 'raw',
@@ -87,8 +86,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         $label = "<button type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" class=\"btn btn-default\">".$fio[$author['id']]." <span class='caret'></span>"."</button>".$ul;
                                         $tag['br'] = "<br>";
                                         $tag['articles'] = "<li>"
-                                            .Html::a("Данные автора", ['authors/view', 'id' => $author['id']])
-                                            .Html::a('Все публикации', ['articles/view', 'id' => $author['id']])
+                                            .Html::a("<span style='font-size: 12px;'>Данные автора</span>", ['authors/view', 'id' => $author['id']])
+                                            .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-align-justify'> Все публикации автора</span>", ['articles/view', 'id' => $author['id']])
                                             ."</li>";
                                         //$tag[] = "<li>".Html::a()."</li>";
                                         $user[] = $top.$label.implode($tag).$bottom;
@@ -117,4 +116,4 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
 
 
-</div>
+</>

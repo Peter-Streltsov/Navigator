@@ -77,12 +77,12 @@ class Articles extends \yii\db\ActiveRecord
 
     }
 
-    /*public function getData()
+    public function getData()
     {
 
         return $this->hasMany(Authors::className(), ['id' => 'author_id'])->viaTable('articles_authors', ['article_id' => 'id']);
 
-    }*/
+    }
 
 
 

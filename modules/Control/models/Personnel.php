@@ -33,8 +33,8 @@ class Personnel extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'lastname', 'position', 'employment', 'age'], 'required'],
-            [['position', 'employment', 'age'], 'integer'],
-            [['name', 'secondname', 'lastname', 'expirience'], 'string', 'max' => 255],
+            [['employment', 'age'], 'integer'],
+            [['name', 'secondname', 'lastname', 'position', 'expirience'], 'string', 'max' => 255],
         ];
     }
 
@@ -45,13 +45,13 @@ class Personnel extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'secondname' => 'Secondname',
-            'lastname' => 'Lastname',
-            'position' => 'Position',
-            'employment' => 'Employment',
-            'expirience' => 'Expirience',
-            'age' => 'Age',
+            'name' => 'Имя',
+            'secondname' => 'Отчество',
+            'lastname' => 'Фамилия',
+            'position' => 'Должность',
+            'employment' => 'Стаж',
+            'expirience' => 'Предыдущий стаж',
+            'age' => '',
         ];
     }
 

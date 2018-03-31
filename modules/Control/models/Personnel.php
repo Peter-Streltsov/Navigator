@@ -51,7 +51,8 @@ class Personnel extends \yii\db\ActiveRecord
             'position' => 'Должность',
             'employment' => 'Стаж',
             'expirience' => 'Предыдущий стаж',
-            'age' => '',
+            'age' => 'Возраст',
+            'year_graduated' => 'Год окончания ВУЗа'
         ];
     }
 

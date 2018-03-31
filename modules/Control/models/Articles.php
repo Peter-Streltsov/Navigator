@@ -39,6 +39,7 @@ class Articles extends \yii\db\ActiveRecord
             [['year'], 'integer'],
             [['file'], 'string'],
             [['title', 'subtitle', 'publisher', 'doi'], 'string', 'max' => 255],
+            [['class'], 'exist', 'skipOnError' => true, 'targetClass' => IndexesArticles::className(), 'targetAttribute' => ['class' => 'id']],
         ];
     }
 
@@ -54,35 +55,56 @@ class Articles extends \yii\db\ActiveRecord
             'publisher' => 'Издатель',
             'year' => 'Год издания',
             'doi' => 'ЦИО',
-            'file' => 'File',
-            'authors' => 'Авторы'
+            'file' => 'Просмотр',
+            'authors' => 'Авторы',
+            'class' => 'Категория',
         ];
-    }
+    } // end function
 
 
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClass0()
+    {
+
+        return $this->hasOne(IndexesArticles::className(), ['id' => 'class']);
+
+    } // end function
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getArticles()
     {
 
         return $this->hasOne(\app\modules\Control\models\ArticlesAuthors::className(), ['article_id' => 'id']);
 
-    }
+    } // end function
 
 
-
+    /**
+     * @return $this
+     */
     public function getAuthors()
     {
 
         return $this->hasMany(Authors::className(), ['id' => 'author_id'])->via('articles');
 
-    }
+    } // end function
 
+
+    /**
+     * @return $this
+     */
     public function getData()
     {
 
         return $this->hasMany(Authors::className(), ['id' => 'author_id'])->viaTable('articles_authors', ['article_id' => 'id']);
 
-    }
+    } // end function
 
 
 
@@ -92,6 +114,9 @@ class Articles extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new ArticlesQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

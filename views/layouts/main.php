@@ -56,7 +56,8 @@ AppAsset::register($this);
                         ['label' => 'control', 'url' => ['/control']],
                         ['label' => 'Users', 'url' => ['/control/users']],
                         ['label' => 'Test', 'url' => ['/test']],
-                        ['label' => 'Articles', 'url' => ['/control/articles']]
+                        ['label' => 'Articles', 'url' => ['/control/articles']],
+                        ['label' => 'Articles indexes', 'url' => ['/control/indexes']]
                     ]
                 ],
                 ['label' => 'Публичные данные',

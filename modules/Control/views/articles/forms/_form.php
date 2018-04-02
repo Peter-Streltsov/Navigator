@@ -15,8 +15,6 @@ use yii\bootstrap\ActiveForm;
 
     <br>
 
-    <!--<?= \yii\helpers\VarDumper::dump($classes); ?>-->
-
     <?php $classes_items = \yii\helpers\ArrayHelper::map($classes, 'id', 'description'); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>

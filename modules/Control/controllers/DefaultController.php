@@ -2,6 +2,9 @@
 
 namespace app\modules\Control\controllers;
 
+use app\modules\Control\models\Articles;
+use app\modules\Control\models\Authors;
+use app\modules\Control\models\Users;
 use yii\web\Controller;
 
 /**
@@ -15,6 +18,13 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $data['users'] = Users::find()->count();
+        $data['authors.php'] = Authors::find()->count();
+        $data['articles'] = Articles::find()->count();
+
+        return $this->render('index', [
+            'data' => $data
+        ]);
     }
 }

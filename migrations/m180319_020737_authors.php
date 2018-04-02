@@ -13,7 +13,7 @@ class m180319_020737_authors extends Migration
     public function safeUp()
     {
 
-        $this->createTable('authors', [
+        $this->createTable('authors.php', [
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
             'secondname' => $this->string(255),
@@ -29,7 +29,7 @@ class m180319_020737_authors extends Migration
     public function safeDown()
     {
 
-        $this->dropTable('authors');
+        $this->dropTable('authors.php');
 
         return true;
         

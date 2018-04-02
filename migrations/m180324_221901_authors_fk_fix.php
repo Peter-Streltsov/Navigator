@@ -13,7 +13,7 @@ class m180324_221901_authors_fk_fix extends Migration
     public function safeUp()
     {
 
-        Yii::$app->db->createCommand()->addForeignKey('fk_authors_articles', 'articles_authors', 'author_id', 'authors', 'id')->execute();
+        Yii::$app->db->createCommand()->addForeignKey('fk_authors_articles', 'articles_authors', 'author_id', 'authors.php', 'id')->execute();
 
     } // end function
 

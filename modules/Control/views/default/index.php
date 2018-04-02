@@ -6,7 +6,20 @@
         in the "<?= $this->context->module->id ?>" module.
     </p>
     <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
+
+        <?php
+            \yii\helpers\VarDumper::dump($data);
+        ?>
+
+        <?php
+
+        $graphdata = [$data, []];
+
+        echo \sibilino\y2dygraphs\DygraphsWidget::widget([
+                'data' => [
+                        [$data['users'], $data['authors.php']]
+                ]
+        ]);
+        ?>
     </p>
 </div>

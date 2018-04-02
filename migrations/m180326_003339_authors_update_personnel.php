@@ -13,7 +13,7 @@ class m180326_003339_authors_update_personnel extends Migration
     public function safeUp()
     {
 
-        $this->addColumn('authors', 'personnel_id', 'string');
+        $this->addColumn('authors.php', 'personnel_id', 'string');
 
     } // end function
 
@@ -25,7 +25,7 @@ class m180326_003339_authors_update_personnel extends Migration
     public function safeDown()
     {
 
-        $this->dropColumn('authors', 'personnel_id');
+        $this->dropColumn('authors.php', 'personnel_id');
 
         return true;
 

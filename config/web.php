@@ -12,6 +12,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@sibilino/y2dygraphs' => '@vendor/sibilino/yii2-dygraphswidget/widget'
     ],
     'components' => [
         'request' => [

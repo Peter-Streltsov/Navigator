@@ -32,6 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
 
+    <?= \yii\helpers\VarDumper::dump($_POST) ?>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -46,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'authors',
                     //'encodeLabels' => false,
                     'value' => function($model) {
-                                if (isset($model['data'] [0])) {
+                                if (isset($model['data'][0])) {
                                     foreach ($model['data'] as $author) {
                                         $authors[] = $author['lastname']
                                             . ' ' . mb_substr($author['name'],0,1,"UTF-8")

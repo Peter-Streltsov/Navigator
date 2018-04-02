@@ -5,7 +5,7 @@ namespace app\modules\Control\models;
 use Yii;
 
 /**
- * This is the model class for table "authors".
+ * This is the model class for table "authors.php".
  *
  * @property int $id
  * @property string $name

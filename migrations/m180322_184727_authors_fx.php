@@ -13,7 +13,7 @@ class m180322_184727_authors_fx extends Migration
     public function safeUp()
     {
 
-        Yii::$app->db->createCommand()->addForeignKey('fx_authors_articles', 'articles_authors', 'author_id', 'authors.php', 'id');
+        Yii::$app->db->createCommand()->addForeignKey('fx_authors_articles', 'articles_authors', 'author_id', 'authors', 'id');
 
     } // end function
 
@@ -25,7 +25,7 @@ class m180322_184727_authors_fx extends Migration
     public function safeDown()
     {
 
-        Yii::$app->db->createCommand()->dropForeignKey('fx_authors_articles', 'authors.php');
+        Yii::$app->db->createCommand()->dropForeignKey('fx_authors_articles', 'authors');
 
         return true;
 

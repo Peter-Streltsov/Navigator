@@ -16,7 +16,7 @@ use yii\bootstrap\ActiveForm;
 
         <?php
 
-        \yii\helpers\VarDumper::dump($_POST);
+        //\yii\helpers\VarDumper::dump($_POST);
 
         foreach ($model['data'] as $author) {
             echo Html::beginForm(['articles/authors', 'id' => $model->id, 'authid' => $author->id], 'post');

@@ -15,7 +15,6 @@ class m180329_012608_pnrd_indexes_articles extends Migration
 
         $this->createTable('indexes_articles', [
             'id' => $this->primaryKey(),
-            //'class' => $this->integer()->notNull(),
             'description' => $this->text()->notNull(),
             'value' => $this->float()->notNull()
         ]);

@@ -19,6 +19,8 @@ class ControlModule extends \yii\base\Module
     {
         parent::init();
 
+        $this->layout = 'control';
+
         // custom initialization code goes here
     }
 }

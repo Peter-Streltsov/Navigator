@@ -5,6 +5,7 @@ namespace app\modules\Control\controllers;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\IndexesArticles;
+use app\widgets\Alert;
 use Yii;
 use app\modules\Control\models\Articles;
 use yii\data\ActiveDataProvider;
@@ -173,9 +174,8 @@ class ArticlesController extends Controller
                     'author_id' => $_POST['author'],
                     'article_id' => $id
                 ])->one();
-                //return VarDumper::dump($author_delete);
                 $author_delete->delete();
-                //return;
+                Yii::$app->session->setFlash('danger', "Автор удален");
             }
 
             if (isset($_POST['Articles'])) {
@@ -183,6 +183,13 @@ class ArticlesController extends Controller
                 $newauthor->article_id = $id;
                 $newauthor->author_id = $_POST['Articles']['authors'];
                 $newauthor->save();
+                Yii::$app->session->setFlash('success', "Автор добавлен");
+                /*Alert::widget([
+                    'options' => [
+                        'class' => 'alert-success'
+                    ],
+                    'body' => '<b>Вы победили!</b> Поздравляем с вашим новым достижением.'
+                ]);*/
             }
 
         }

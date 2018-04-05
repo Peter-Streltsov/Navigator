@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
 
-    <?= \yii\helpers\VarDumper::dump($_POST) ?>
+    <!--<?= \yii\helpers\VarDumper::dump($_POST) ?>-->
 
     <?= DetailView::widget([
         'model' => $model,
@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'publisher',
             'year',
             'doi',
+            'class',
             'file',
             [
                     'attribute' => 'authors',

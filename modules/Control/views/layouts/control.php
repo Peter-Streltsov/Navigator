@@ -106,41 +106,40 @@ AppAsset::register($this);
         <div style="background-color: white;" class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-3">
-                                <br>
-                                <div id="main-menu" class="list-group">
-                                    <br>
-                                    <br>
-                                    <a href="/control" class="list-group-item">Панель управления</a>
-                                    <a href="#sub-menu" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Авторы и сотрудники<span class="caret"></span></a>
-                                    <div class="collapse list-group-level1" id="sub-menu">
-                                        <a href="/control/users" class="list-group-item" data-parent="#sub-menu">Зарегистрированные пользователи</a>
-                                        <a href="/control/authors" class="list-group-item" data-parent="#sub-menu">Авторы</a>
-                                        <a href="/control/personnel" class="list-group-item" data-parent="#sub-menu">Сотрудники</a>
-                                        <a href="#sub-sub-menu" class="list-group-item" data-toggle="collapse" data-parent="#sub-menu">Sub Item 3 <span class="caret"></span></a>
-                                        <div class="collapse list-group-level2" id="sub-sub-menu">
-                                            <a href="#" class="list-group-item" data-parent="#sub-sub-menu">Sub Sub Item 1</a>
-                                            <a href="#" class="list-group-item" data-parent="#sub-sub-menu">Sub Sub Item 2</a>
-                                            <a href="#" class="list-group-item" data-parent="#sub-sub-menu">Sub Sub Item 3</a>
-                                        </div>
-                                    </div>
-                                    <a href="#sub-menu2" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Публикации <span class="caret"></span></a>
-                                    <div class="collapse list-group-level1" id="sub-menu2">
-                                        <a href="/control/articles" class="list-group-item" data-parent="#sub-menu2">Опубликованные статьи</a>
-                                        <a href="/control/monographies" class="list-group-item" data-parent="#sub-menu2">Монографии</a>
-                                        <!--<a href="/control/personnel" class="list-group-item" data-parent="#sub-menu">Сотрудники</a>-->
-                                    </div>
-                                    <a href="/control/events" class="list-group-item">Научные мероприятия <span class="caret"></span></a>
-                                    <a href="/control/messages" class="list-group-item">Сообщения
-                                        <?php
-
-                                        $count = \app\modules\Control\models\Messages::find()->count();
-                                        if ($count > 0) {
-                                            echo "<span class=\"badge badge-light\">".$count."</span>";
-                                        }
-
-                                        ?>
-                                    </a>
-                                </div>
+                    <br>
+                    <div id="main-menu" class="list-group">
+                        <br>
+                        <br>
+                        <!--<a href="/control" class="list-group-item">Панель управления</a>-->
+                        <?= Html::a('Панель управления', '/control', ['class' => 'list-group-item']); ?>
+                        <a href="#sub-menu" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Авторы и сотрудники<span class="caret"></span></a>
+                        <div class="collapse list-group-level1" id="sub-menu">
+                            <a href="/control/users" class="list-group-item" data-parent="#sub-menu">Зарегистрированные пользователи</a>
+                            <a href="/control/authors" class="list-group-item" data-parent="#sub-menu">Авторы</a>
+                            <a href="/control/personnel" class="list-group-item" data-parent="#sub-menu">Сотрудники</a>
+                            <a href="#sub-sub-menu" class="list-group-item" data-toggle="collapse" data-parent="#sub-menu">Sub Item 3 <span class="caret"></span></a>
+                            <div class="collapse list-group-level2" id="sub-sub-menu">
+                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu">Sub Sub Item 1</a>
+                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu">Sub Sub Item 2</a>
+                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu">Sub Sub Item 3</a>
+                            </div>
+                        </div>
+                        <a href="#sub-menu2" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Публикации <span class="caret"></span></a>
+                        <div class="collapse list-group-level1" id="sub-menu2">
+                            <a href="/control/articles" class="list-group-item" data-parent="#sub-menu2">Опубликованные статьи</a>
+                            <a href="/control/monographies" class="list-group-item" data-parent="#sub-menu2">Монографии</a>
+                            <!--<a href="/control/personnel" class="list-group-item" data-parent="#sub-menu">Сотрудники</a>-->
+                        </div>
+                        <a href="/control/events" class="list-group-item">Научные мероприятия <span class="caret"></span></a>
+                        <a href="/control/messages" class="list-group-item">Сообщения
+                            <?php
+                            $count = \app\modules\Control\models\Messages::find()->count();
+                            if ($count > 0) {
+                                echo "<span class=\"badge badge-light\">".$count."</span>";
+                            }
+                            ?>
+                        </a>
+                    </div>
                 </div>
                 <div class="col-xs-12 col-md-9">
                     <br>

@@ -4,6 +4,8 @@ namespace app\modules\Control\controllers;
 
 use app\modules\Control\models\Articles;
 use app\modules\Control\models\Authors;
+use app\modules\Control\models\Monographies;
+use app\modules\Control\models\Personnel;
 use app\modules\Control\models\Users;
 use yii\web\Controller;
 
@@ -19,12 +21,21 @@ class DefaultController extends Controller
     public function actionIndex()
     {
 
-        $data['users'] = Users::find()->count();
-        $data['authors.php'] = Authors::find()->count();
+        //$data['users'] = Users::find()->count();
+        $data['authors'] = Authors::find()->count();
         $data['articles'] = Articles::find()->count();
+        $data['monographies'] = Monographies::find()->count();
+        $table = [
+            'users' => Users::find()->count(),
+            'personnel' => Personnel::find()->count(),
+            'authors' => Authors::find()->count(),
+            'publications' => $data['articles'] + $data['monographies']
+        ];
+
 
         return $this->render('index', [
-            'data' => $data
+            'data' => $data,
+            'table' => $table
         ]);
     }
 }

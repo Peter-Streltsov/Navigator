@@ -20,6 +20,7 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "3ch3r46/bootui-datetimepicker": "^1.0",
         "sibilino/yii2-dygraphswidget": "*",
+        "miloschuman/yii2-highcharts-widget": "*",
         "kartik-v/yii2-export": "^1.2",
         "kartik-v/yii2-context-menu": "*"
 

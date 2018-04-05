@@ -15,7 +15,11 @@ use yii\bootstrap\ActiveForm;
 
     <br>
 
-    <?php $classes_items = \yii\helpers\ArrayHelper::map($classes, 'id', 'description'); ?>
+    <?php
+
+    $classes_items = \yii\helpers\ArrayHelper::map($classes, 'id', 'description');
+
+    ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -29,9 +33,12 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'file')->textInput() ?>
 
-    <!--<?= $form->field($model, 'class')->dropDownList($classes_items) ?>-->
+    <?= $form->field($model, 'class')->dropDownList($classes_items, [
+            'prompt' => 'Выберите категорию',
+            //'style' => 'width: 10px;',
+    ]) ?>
 
-    <?= $form->field($model, 'class')->listBox($classes_items); ?>
+    <!--<?= $form->field($model, 'class')->listBox($classes_items); ?>-->
 
     <div class="form-group">
 

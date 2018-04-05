@@ -184,12 +184,6 @@ class ArticlesController extends Controller
                 $newauthor->author_id = $_POST['Articles']['authors'];
                 $newauthor->save();
                 Yii::$app->session->setFlash('success', "Автор добавлен");
-                /*Alert::widget([
-                    'options' => [
-                        'class' => 'alert-success'
-                    ],
-                    'body' => '<b>Вы победили!</b> Поздравляем с вашим новым достижением.'
-                ]);*/
             }
 
         }

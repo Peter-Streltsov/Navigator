@@ -45,6 +45,9 @@ $config = [
                 ],
             ],
         ],
+        'access' => [
+            'class' => 'app\components\access'
+        ],
         'db' => $db,
 
         'urlManager' => [

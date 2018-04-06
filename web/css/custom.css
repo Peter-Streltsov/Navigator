@@ -67,6 +67,7 @@ td a {
 }
 
 #main-menu {
+    width: max-content;
     min-height: 70pc;
     /*background-color: #2E3039;*/
     border-radius: 5px;

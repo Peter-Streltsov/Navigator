@@ -141,14 +141,12 @@ AppAsset::register($this);
                         </a>
                         <a href="#sub-menu3" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Параметры приложения<span class="caret"></span></a>
                         <div class="collapse list-group-level1" id="sub-menu3">
-                            <a href="/control/users" class="list-group-item" data-parent="#sub-menu3">Зарегистрированные пользователи</a>
-                            <a href="/control/authors" class="list-group-item" data-parent="#sub-menu3">Авторы</a>
-                            <a href="/control/personnel" class="list-group-item" data-parent="#sub-menu3">Сотрудники</a>
-                            <a href="#sub-sub-menu" class="list-group-item" data-toggle="collapse" data-parent="#sub-menu3">Sub Item 3 <span class="caret"></span></a>
-                            <div class="collapse list-group-level2" id="sub-sub-menu">
-                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu3">Sub Sub Item 1</a>
-                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu3">Sub Sub Item 2</a>
-                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu3">Sub Sub Item 3</a>
+                            <a href="/control/users" class="list-group-item" data-parent="#sub-menu3">Данные организации</a>
+                            <a href="/control/positions" class="list-group-item" data-parent="#sub-menu3">Перечень должностей</a>
+                            <a href="#sub-sub-menu2" class="list-group-item" data-toggle="collapse" data-parent="#sub-menu3">Индексы<span class="caret"></span></a>
+                            <div class="collapse list-group-level2" id="sub-sub-menu2">
+                                <a href="/control/indexes" class="list-group-item" data-parent="#sub-sub-menu2">Индексы ПНРД - статьи</a>
+                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu2">Индексы ПНРД - монографии</a>
                             </div>
                         </div>
                     </div>

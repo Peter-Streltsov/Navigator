@@ -77,7 +77,7 @@ AppAsset::register($this);
                         ['label' => 'Панель управления', 'url' => ['/control'], 'options' => [
                             'style' => 'width: 20pc;'
                         ]],
-                        ['label' => 'Личный кабинет', 'url' => ['/control/user/', 'id' => Yii::$app->user->id]],
+                        ['label' => 'Личный кабинет', 'url' => ['/control/personal/', 'id' => Yii::$app->user->id]],
                         //'<br>',
                         '<li class="divider"></li>',
                         ['label' => 'Вы вошли как:'],
@@ -139,6 +139,18 @@ AppAsset::register($this);
                             }
                             ?>
                         </a>
+                        <a href="#sub-menu3" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Параметры приложения<span class="caret"></span></a>
+                        <div class="collapse list-group-level1" id="sub-menu3">
+                            <a href="/control/users" class="list-group-item" data-parent="#sub-menu3">Зарегистрированные пользователи</a>
+                            <a href="/control/authors" class="list-group-item" data-parent="#sub-menu3">Авторы</a>
+                            <a href="/control/personnel" class="list-group-item" data-parent="#sub-menu3">Сотрудники</a>
+                            <a href="#sub-sub-menu" class="list-group-item" data-toggle="collapse" data-parent="#sub-menu3">Sub Item 3 <span class="caret"></span></a>
+                            <div class="collapse list-group-level2" id="sub-sub-menu">
+                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu3">Sub Sub Item 1</a>
+                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu3">Sub Sub Item 2</a>
+                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu3">Sub Sub Item 3</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-md-9">

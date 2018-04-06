@@ -70,11 +70,13 @@ td a {
     min-height: 70pc;
     /*background-color: #2E3039;*/
     border-radius: 5px;
-    background-color: lightgray;
+    /*background-color: lightgray;*/
+    background-color: #f0f0f0;
 }
 
 .list-group-item {
-    background-color: lightgray;
+    /*background-color: lightgray;*/
+    background-color: #f0f0f0;
     border-radius: 5px;
     /*background-color: #2E3039;*/
     border: none;

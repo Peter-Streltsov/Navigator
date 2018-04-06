@@ -2,9 +2,11 @@
 
 namespace app\modules\Control\controllers;
 
+use app\modules\Control\models\Accesstokens;
 use Yii;
 use app\modules\Control\models\Users;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -87,12 +89,17 @@ class UsersController extends Controller
     {
         $model = $this->findModel($id);
 
+        //VarDumper::dump($model);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $tokens = Accesstokens::find()->select('token')->asArray()->all();
+
         return $this->render('update', [
             'model' => $model,
+            'tokens' => $tokens
         ]);
     }
 

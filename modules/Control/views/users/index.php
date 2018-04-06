@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-index">
 
-    <h3>Список зарегистрированных пользователей</h3>
+    <h3>Зарегистрированные пользователи</h3>
 
     <br>
 
@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'lastname',
             'created_at:date',
             //'auth_key',
-            //'token',
+            'access_token',
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',

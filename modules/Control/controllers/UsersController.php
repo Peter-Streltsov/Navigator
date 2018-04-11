@@ -3,6 +3,8 @@
 namespace app\modules\Control\controllers;
 
 use app\modules\Control\models\Accesstokens;
+use app\modules\Control\models\Authors;
+use app\modules\Control\models\Personnel;
 use Yii;
 use app\modules\Control\models\Users;
 use yii\data\ActiveDataProvider;
@@ -10,6 +12,7 @@ use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\User;
 
 /**
  * UsersController implements the CRUD actions for Users model.
@@ -32,12 +35,15 @@ class UsersController extends Controller
         ];
     }
 
+
+
     /**
      * Lists all Users models.
      * @return mixed
      */
     public function actionIndex()
     {
+
         $dataProvider = new ActiveDataProvider([
             'query' => Users::find(),
         ]);
@@ -45,7 +51,10 @@ class UsersController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Displays a single Users model.
@@ -55,10 +64,14 @@ class UsersController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Creates a new Users model.
@@ -67,6 +80,7 @@ class UsersController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Users();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -76,7 +90,10 @@ class UsersController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Updates an existing Users model.
@@ -87,6 +104,7 @@ class UsersController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
         //VarDumper::dump($model);
@@ -101,7 +119,10 @@ class UsersController extends Controller
             'model' => $model,
             'tokens' => $tokens
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Deletes an existing Users model.
@@ -115,7 +136,82 @@ class UsersController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+
+    } // end action
+
+
+
+
+
+    /**
+     * making new author from existing user
+     *
+     * @param $id integer
+     * @return \yii\web\Response
+     */
+    public function actionMakeauthor($id)
+    {
+
+        $user = Users::find()->where(['id' => $id])->asArray()->one();
+
+        if (Authors::find()->where(['user_id' => $id])->exists()) {
+
+            Yii::$app->session->setFlash('danger', "Автор с таким идентификатором пользоватея уже существует");
+            return $this->redirect('/control/users');
+
+        }
+
+        $newauthor = new Authors();
+        $newauthor->name = $user['name'];
+        $newauthor->lastname = $user['lastname'];
+        $newauthor->user_id = $user['id'];
+        $newauthor->save();
+
+        $createdauthor = Authors::find()->where(['user_id' => $id])->one();
+
+        return $this->redirect('/control/authors/update?id='.$createdauthor->id);
+
+    } // end function
+
+
+
+
+
+    /**
+     * making new staff member from existing user
+     *
+     * @param $id ineger
+     * @return \yii\web\Response
+     */
+    public function actionMakestaff($id)
+    {
+
+        $user = Users::find()->where(['id' => $id])->asArray()->one(); // getting user to make personnel
+
+        if (Personnel::find()->where(['user_id' => $id])->exists()) {
+
+            Yii::$app->session->setFlash('danger', "Сотрудник с таким идентификатором пользоватея уже существует");
+            return $this->redirect('/control/users');
+
+        }
+
+        //VarDumper::dump($user);
+
+        $newstaff = new Personnel(); // creating new staff
+        $newstaff->name = $user['name'];
+        $newstaff->lastname = $user['lastname'];
+        $newstaff->user_id = $user['id'];
+        $newstaff->save(); // saving new staff data
+        //print_r($newstaff->getErrors());
+
+        $createdstaff = Personnel::find()->where(['user_id' => $id])->one(); // getting just created staff
+        //VarDumper::dump($createdstaff);
+
+        return $this->redirect('/control/personnel/update?id='.$createdstaff->id); // redirect to edit further data
+
+    } // end action
+
+
 
     /**
      * Finds the Users model based on its primary key value.
@@ -131,5 +227,6 @@ class UsersController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-}
+    } // end function
+
+} // end class

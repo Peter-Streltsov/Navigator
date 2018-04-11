@@ -32,8 +32,8 @@ class Personnel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'lastname', 'position', 'employment', 'age'], 'required'],
-            [['employment', 'age'], 'integer'],
+            [['name', 'lastname'], 'required'],
+            [['employment', 'age', 'user_id'], 'integer'],
             [['name', 'secondname', 'lastname', 'position', 'expirience'], 'string', 'max' => 255],
         ];
     }
@@ -52,6 +52,7 @@ class Personnel extends \yii\db\ActiveRecord
             'employment' => 'Стаж',
             'expirience' => 'Предыдущий стаж',
             'age' => 'Возраст',
+            'user_id' => 'user id',
             'year_graduated' => 'Год окончания ВУЗа'
         ];
     }

@@ -104,8 +104,8 @@ AppAsset::register($this);
         <br>
 
         <div style="background-color: white;" class="container">
-            <div class="row">
-                <div class="col-xs-12 col-md-3">
+            <div style="height: inherit" class="row">
+                <div style="background-color: #f0f0f0; display: table-cell; height: inherit;" class="col-xs-12 col-md-3">
                     <br>
                     <div id="main-menu" class="list-group">
                         <br>

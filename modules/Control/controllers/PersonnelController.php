@@ -2,6 +2,7 @@
 
 namespace app\modules\Control\controllers;
 
+use app\modules\Control\models\Authors;
 use Yii;
 use app\modules\Control\models\Personnel;
 use yii\data\ActiveDataProvider;
@@ -93,6 +94,22 @@ class PersonnelController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+
+
+    public function actionMakeauthor($id)
+    {
+
+        $personnel = Personnel::find($id)->one();
+
+        $newauthor = new Authors();
+        $newauthor->name = $personnel->name;
+        $newauthor->lastname = $personnel->lastname;
+        $newauthor->staff_id = $personnel->id;
+        $newauthor->save();
+
+        return $this->redirect('personnel/view?id='.$id);
     }
 
     /**

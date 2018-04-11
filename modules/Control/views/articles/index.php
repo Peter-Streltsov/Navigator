@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'subtitle',
             'publisher',
             'year',
-            'doi',
+            //'doi',
             //'file',
             //'authors',
             [
@@ -83,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             //.' '
                                             //.$author['lastname']
                                             .'</span>';
-                                        $label = "<button type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" class=\"btn btn-default\">".$fio[$author['id']]." <span class='caret'></span>"."</button>".$ul;
+                                        $label = "<button type=\"button\" id=\"dropdownMenuButton\" style='width: 12pc;' data-toggle=\"dropdown\" class=\"btn btn-default\">".$fio[$author['id']]." <span class='caret'></span>"."</button>".$ul;
                                         $tag['br'] = "<br>";
                                         $tag['articles'] = "<li>"
                                             .Html::a("<span style='font-size: 12px;'>Данные автора</span>", ['authors/view', 'id' => $author['id']])

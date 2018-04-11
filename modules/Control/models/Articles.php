@@ -21,6 +21,9 @@ use app\modules\Control\models\Authors;
  */
 class Articles extends \yii\db\ActiveRecord
 {
+
+    public static $authorid = null;
+
     /**
      * @inheritdoc
      */
@@ -106,6 +109,16 @@ class Articles extends \yii\db\ActiveRecord
 
     } // end function
 
+
+    /**
+     * @return $this
+     */
+    public function getAuthorsarticles()
+    {
+
+        return $this->hasMany(Articles::className(), ['id' => 'article_id'])->viaTable('articles_authors', ['author_id' => static::$authorid]);
+
+    } // end function
 
 
     /**

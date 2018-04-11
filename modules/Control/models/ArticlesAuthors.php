@@ -15,37 +15,59 @@ use Yii;
  */
 class ArticlesAuthors extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
+
         return 'articles_authors';
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function rules()
     {
+
         return [
             [['article_id', 'author_id'], 'required'],
             [['article_id', 'author_id'], 'integer'],
             [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articles::className(), 'targetAttribute' => ['article_id' => 'id']],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
             'article_id' => 'Article ID',
             'author_id' => 'Author ID',
         ];
+
+    } // end function
+
+
+
+    public function getArticlesbyauthor()
+    {
+
+        return $this->hasMany(Articles::className(), ['id' => 'article_id']);
+
     }
+
+
 
     /**
      * @return \yii\db\ActiveQuery

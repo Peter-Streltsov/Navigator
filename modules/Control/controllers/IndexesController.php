@@ -19,6 +19,7 @@ class IndexesController extends Controller
      */
     public function behaviors()
     {
+
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -27,22 +28,39 @@ class IndexesController extends Controller
                 ],
             ],
         ];
-    }
+
+    } // end function
+
+
 
     /**
-     * Lists all IndexesArticles models.
+     * Lists all Indexes models
+     *
+     * @param $class string
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($class)
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => IndexesArticles::find(),
-        ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+        switch ($class) {
+
+            case 'articles':
+                $dataProvider = new ActiveDataProvider([
+                    'query' => IndexesArticles::find(),
+                ]);
+
+                return $this->render('index', [
+                    'dataProvider' => $dataProvider,
+                ]);
+                break;
+            case 'monographies':
+                break;
+
+        }
+
+    } // end action
+
+
 
     /**
      * Displays a single IndexesArticles model.
@@ -52,10 +70,14 @@ class IndexesController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Creates a new IndexesArticles model.
@@ -64,6 +86,7 @@ class IndexesController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new IndexesArticles();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,7 +96,10 @@ class IndexesController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Updates an existing IndexesArticles model.
@@ -93,7 +119,10 @@ class IndexesController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Deletes an existing IndexesArticles model.
@@ -104,10 +133,14 @@ class IndexesController extends Controller
      */
     public function actionDelete($id)
     {
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+
+    } // end action
+
+
 
     /**
      * Finds the IndexesArticles model based on its primary key value.
@@ -118,10 +151,13 @@ class IndexesController extends Controller
      */
     protected function findModel($id)
     {
+
         if (($model = IndexesArticles::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-}
+
+    } // end function
+
+} // end class

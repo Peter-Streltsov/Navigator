@@ -49,7 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'table table-hover',
                 ],
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'title',
@@ -57,8 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'publisher',
             'year',
             //'doi',
-            //'file',
-            //'authors',
             [
                     'attribute' => 'authors',
                     'encodeLabel' => false,
@@ -102,7 +99,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                 ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                        'view' => function($url, $model) {
+                                    $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/articles/view','id'=>$model['id']]);;
+                                    return Html::a('<span class="glyphicon glyphicon-file"></span>', $buttonurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
+                                    }
+                    ],
+                'template' => '{view}'
+            ],
         ],
     ]);
 

@@ -11,23 +11,23 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="messages-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
 
     <br>
-
-    <p>
-        <?= Html::a('Новое сообщение', ['create'], ['class' => 'button primary big']) ?>
-    </p>
-
     <br>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+    <?php $messages = GridView::widget([
+        'dataProvider' => $dataProvider,
+        'tableOptions' => [
+                'class' => 'table'
+        ],
+        'options' => [
+                'class' => 'table'
+        ],
+        'columns' => [
+
+            //'id',
             'user_id',
             'username',
             'created_at',
@@ -37,6 +37,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);
+
+    echo \yii\bootstrap\Tabs::widget([
+        'items' => [
+            [
+                'label' => 'Сообщения',
+                'content' => "<br><br>".$messages
+            ],
+            [
+                'label' => 'Запросы'
+            ]
+        ]
+    ]) ?>
+
     <?php Pjax::end(); ?>
 </div>

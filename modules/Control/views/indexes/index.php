@@ -16,13 +16,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
 
     <p>
-        <?= Html::a('Создать новый индекс', ['create'], ['class' => 'button primary big']) ?>
+        <?= Html::a('Создать новый индекс', ['create', 'class' => 'articles'], ['class' => 'button primary big']) ?>
     </p>
 
     <br>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'tableOptions' => [
+                'class' => 'table table-hover'
+        ],
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
@@ -30,7 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'value',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                    'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update}'
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

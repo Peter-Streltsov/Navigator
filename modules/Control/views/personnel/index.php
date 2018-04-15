@@ -44,8 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'tableOptions' => [
+                'class' => 'table table-hover'
+        ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',
@@ -56,7 +58,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'expirience',
             'age:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                    'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update}'
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

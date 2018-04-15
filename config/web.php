@@ -48,6 +48,9 @@ $config = [
         'access' => [
             'class' => 'app\components\access'
         ],
+        'data' => [
+            'class' => 'app\components\Data'
+        ],
         'db' => $db,
 
         'urlManager' => [
@@ -57,7 +60,6 @@ $config = [
                 '<action:(test|index|login|about|contact)>' => 'site/<action>'
             ],
         ],
-
     ],
 
     'modules' => [

@@ -5,17 +5,21 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Personnel */
 
-$this->title = 'Update Personnel: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Personnels', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Редактировать данные - ' . $model->name.' '.$model->lastname;
+$this->params['breadcrumbs'][] = ['label' => 'Сотрудники', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->name . ' ' . $model->lastname, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Редактировать данные';
 ?>
 <div class="personnel-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
-    <?= $this->render('_form', [
+    <br>
+    <br>
+
+    <?= $this->render('forms/update', [
         'model' => $model,
+        'classes' => $classes
     ]) ?>
 
 </div>

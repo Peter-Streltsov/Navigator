@@ -67,7 +67,10 @@ class ArticlesController extends Controller
     {
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Articles::find()->joinWith('authors')
+            'query' => Articles::find()->joinWith('authors'),
+            'pagination' => [
+                'pageSize' => 10
+            ]
         ]);
 
         return $this->render('index', [
@@ -92,9 +95,12 @@ class ArticlesController extends Controller
             ->joinWith('data')
             ->all();
 
+        $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
+
 
         return $this->render('view', [
-        'model' => $model
+        'model' => $model,
+            'authors' => $authors
         ]);
 
     }
@@ -112,6 +118,8 @@ class ArticlesController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
+
+        //$classes =
 
         return $this->render('create', [
             'model' => $model,

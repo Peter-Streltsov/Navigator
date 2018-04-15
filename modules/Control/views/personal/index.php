@@ -10,12 +10,15 @@
 <br>
 <br>
 
-<?= \yii\helpers\Html::a('Сообщение', 'control/personal/message', ['class' => 'button primary big']); ?>
+<?= \yii\helpers\Html::a('Сообщение', '/control/message', ['class' => 'button primary big']); ?>
+<?= \yii\helpers\Html::a('Загрузить данные', ['/control/upload/create'], ['class' => 'button primary big']) ?>
 
 <br>
 <br>
 <br>
 
+<center>
+<div style="width: 50pc;">
 <?php
 
 echo \miloschuman\highcharts\Highcharts::widget([
@@ -60,32 +63,42 @@ echo \miloschuman\highcharts\Highcharts::widget([
 ]);
 
 ?>
+</div>
+</center>
 
 <br>
 <br>
 <br>
 
-<h4>Персональные данные</h4>
-<br>
-<br>
-
-<?= \yii\widgets\DetailView::widget([
-        'model' => $personal
+<?php $personaldata =  \yii\widgets\DetailView::widget([
+        'model' => $personal,
+    'options' => [
+            'class' => 'table'
+    ]
 ]);
-?>
 
-<br>
-<br>
+$articlesview = \yii\grid\GridView::widget([
+    'dataProvider' => $dataprovider,
+    'columns' => [
+        'title',
+        'subtitle',
+        'year'
+    ]
+]);
 
-<h4>Опубликованные статьи</h4>
 
-<?php echo \yii\grid\GridView::widget([
-        'dataProvider' => $dataprovider,
-        'columns' => [
-                'title',
-                'subtitle',
-            'year'
-        ]
-        ]);
+echo \yii\bootstrap\Tabs::widget([
+        'items' => [
+                [
+                    'label' => 'Персональные данные',
+                    'content' => $personaldata
+                ],
+                [
+                        'label' => 'Опубликованные статьи',
+                    'content' => $articlesview
+                ]
+            ]
+]);
+
 
 ?>

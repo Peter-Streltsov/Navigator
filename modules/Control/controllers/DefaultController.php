@@ -9,11 +9,13 @@ use app\modules\Control\models\Personnel;
 use app\modules\Control\models\Users;
 use yii\web\Controller;
 
+
 /**
  * Default controller for the `Control` module
  */
 class DefaultController extends Controller
 {
+
     /**
      * Renders the index view for the module
      * @return string
@@ -37,5 +39,7 @@ class DefaultController extends Controller
             'data' => $data,
             'table' => $table
         ]);
-    }
-}
+
+    } // end action
+
+} // end class

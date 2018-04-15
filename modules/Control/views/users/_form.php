@@ -25,6 +25,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'access_token')->dropDownList($tokens) ?>
 
+    <br>
+    <br>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'button big primary']) ?>
     </div>

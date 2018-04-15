@@ -45,15 +45,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'tableOptions' => [
+                'class' => 'table table-hover'
+        ],
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',
             'secondname',
             'lastname',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'view' => function($url, $model) {
+                        $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/authors/view','id'=>$model['id']]);;
+                        return Html::a('<span class="glyphicon glyphicon-file"></span>', $buttonurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
+                    }
+                ],
+                'template' => '{view}'
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

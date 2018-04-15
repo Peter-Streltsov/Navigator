@@ -25,17 +25,11 @@ nav div div a {
 }
 
 td a {
-    /*color: gray;*/
     color: #2a323b;
 }
 
 .wrap {
-    width: 88pc;
     position: center;
-}
-
-.container {
-    width: 88pc;
 }
 
 
@@ -93,7 +87,9 @@ a.list-group-item:hover,
 a.list-group-item:focus {
     /*background-color: #43D5B1;*/
     border-radius: 5px;
-    background-color: #32a873;
+    /*background-color: #32a873;*/
+    /*background-color: #90ee90;*/
+    background-color: #84e084;
 }
 
 a.list-group-item.active,

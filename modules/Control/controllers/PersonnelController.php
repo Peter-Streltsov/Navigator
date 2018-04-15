@@ -3,6 +3,7 @@
 namespace app\modules\Control\controllers;
 
 use app\modules\Control\models\Authors;
+use app\modules\Control\models\Positions;
 use Yii;
 use app\modules\Control\models\Personnel;
 use yii\data\ActiveDataProvider;
@@ -86,6 +87,7 @@ class PersonnelController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $classes = Positions::find()->asArray()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -93,6 +95,7 @@ class PersonnelController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'classes' => $classes
         ]);
     }
 

@@ -1,12 +1,22 @@
-<div class="PublicAccess-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
-</div>
+
+<h3>Перечень публикаций</h3>
+
+<br><br>
+
+<?php
+
+$publications =  \yii\grid\GridView::widget([
+        'dataProvider' => $dataprovider
+]);
+
+
+echo \yii\bootstrap\Tabs::widget([
+        'items' => [
+                [
+                        'label' => 'Публикации',
+                    'content' => $publications
+                ]
+        ]
+]);
+
+?>

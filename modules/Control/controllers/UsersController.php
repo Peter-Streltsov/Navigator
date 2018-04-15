@@ -82,6 +82,7 @@ class UsersController extends Controller
     {
 
         $model = new Users();
+        $tokens = Accesstokens::find()->asArray()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -89,6 +90,7 @@ class UsersController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'tokens' => $tokens
         ]);
 
     } // end action

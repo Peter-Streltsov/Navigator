@@ -49,8 +49,8 @@ AppAsset::register($this);
             ],
             'encodeLabels' => false,
             'items' => [
-                ['label' => "<input style='height: 1.5pc; color: #fff; background-color: #2c3337;' placeholder='Поиск' class=\"form-control\" type=\"text\"></input>"],
-                ['label' => 'Develop' ,
+                //['label' => "<input style='height: 1.5pc; color: #fff; background-color: #2c3337;' placeholder='Поиск' class=\"form-control\" type=\"text\"></input>"],
+                /*['label' => 'Develop' ,
                     'visible' => !Yii::$app->user->isGuest,
                     'items' => [
                         ['label' => 'control', 'url' => ['/control']],
@@ -59,10 +59,10 @@ AppAsset::register($this);
                         ['label' => 'Articles', 'url' => ['/control/articles']],
                         ['label' => 'Articles indexes', 'url' => ['/control/indexes']]
                     ]
-                ],
+                ],*/
                 ['label' => 'Публичные данные',
                     'items' => [
-                            ['label' => 'Публикации', 'url' => ['/public/items'], 'options' => [
+                            ['label' => 'Публикации', 'url' => ['/public'], 'options' => [
                                 'style' => 'width: 20pc;'
                             ]]
                     ]

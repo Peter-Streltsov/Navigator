@@ -17,7 +17,7 @@ class m180411_233148_upload extends Migration
             'id' => $this->primaryKey(),
             'author_id' => $this->integer(),
             'description' => $this->text()->null(),
-            'uploadedfile' => $this->binary()->notNull(),
+            'uploadedfile' => $this->string()->notNull(),
             'accepted' => $this->boolean()->defaultValue(false)
         ]);
 

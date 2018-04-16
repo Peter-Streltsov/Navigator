@@ -49,7 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'table table-hover'
                 ],
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'username',

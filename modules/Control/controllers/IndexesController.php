@@ -49,8 +49,14 @@ class IndexesController extends Controller
                     'query' => IndexesArticles::find(),
                 ]);
 
+                $model = IndexesArticles::find()->all();
+
+                $columns = IndexesArticles::find()->asArray()->all();
+
                 return $this->render('index', [
                     'dataProvider' => $dataProvider,
+                    'columns' => $columns,
+                    'model' => $model
                 ]);
                 break;
             case 'monographies':

@@ -2,9 +2,11 @@
 
 namespace app\modules\Control\controllers;
 
+use app\modules\Control\models\MessagesClasses;
 use Yii;
 use app\modules\Control\models\Messages;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -19,6 +21,7 @@ class MessagesController extends Controller
      */
     public function behaviors()
     {
+
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -27,14 +30,25 @@ class MessagesController extends Controller
                 ],
             ],
         ];
-    }
+
+    } // end action
+
+
 
     /**
      * Lists all Messages models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($set = null, $id = null)
     {
+
+        if (isset($set) && isset($id)) {
+            $newmodel = Messages::find()->where(['id' => $id])->one();
+            $newmodel->read = true;
+            $newmodel->save();
+            return $this->redirect('/control/messages');
+        }
+
         $dataProvider = new ActiveDataProvider([
             'query' => Messages::find(),
         ]);
@@ -42,7 +56,10 @@ class MessagesController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Displays a single Messages model.
@@ -52,10 +69,14 @@ class MessagesController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Creates a new Messages model.
@@ -64,7 +85,13 @@ class MessagesController extends Controller
      */
     public function actionCreate()
     {
+
+        $user = Yii::$app->user->getIdentity();
+
         $model = new Messages();
+        $model->username = $user->username;
+
+        $classes = MessagesClasses::find()->asArray()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,8 +99,12 @@ class MessagesController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'classes' => $classes
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Updates an existing Messages model.
@@ -84,6 +115,7 @@ class MessagesController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -93,7 +125,10 @@ class MessagesController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Deletes an existing Messages model.
@@ -104,10 +139,14 @@ class MessagesController extends Controller
      */
     public function actionDelete($id)
     {
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+
+    } // end action
+
+
 
     /**
      * Finds the Messages model based on its primary key value.
@@ -118,10 +157,13 @@ class MessagesController extends Controller
      */
     protected function findModel($id)
     {
+
         if (($model = Messages::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-}
+
+    } // end function
+
+} // end class

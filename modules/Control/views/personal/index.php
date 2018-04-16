@@ -10,7 +10,7 @@
 <br>
 <br>
 
-<?= \yii\helpers\Html::a('Сообщение', '/control/message', ['class' => 'button primary big']); ?>
+<?= \yii\helpers\Html::a('Сообщение', ['/control/messages/create'], ['class' => 'button primary big']); ?>
 <?= \yii\helpers\Html::a('Загрузить данные', ['/control/upload/create'], ['class' => 'button primary big']) ?>
 
 <br>

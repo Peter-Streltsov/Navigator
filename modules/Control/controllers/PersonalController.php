@@ -7,6 +7,7 @@ use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Personnel;
 use app\modules\Control\models\Users;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\helpers\VarDumper;
@@ -22,6 +23,14 @@ class PersonalController extends \yii\web\Controller
     {
 
         $model = Users::find()->where(['id' => $id])->one();
+
+        if (!Authors::find()->where(['user_id' => $model->id])->exists()) {
+
+            \Yii::$app->session->setFlash('danger' ,'Автора с таким идентификатором не существует');
+
+            return $this->redirect('/');
+        }
+
         $author = Authors::find()->where(['user_id' => $model->id])->one();
         $staff = Personnel::find()->where(['user_id' => $id])->one();
         Articles::$authorid = $model->id;

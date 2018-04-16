@@ -27,15 +27,45 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
 
-            //'id',
-            'user_id',
             'username',
-            'created_at',
+            'created_at:datetime',
             'category',
             'custom_theme',
             //'text:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                        'view' => function($url, $model) {
+                            /*return Html::a(
+                                    '<span class="glyphicon glyphicon-file"></span>',
+                                    [
+                                        '/control/messages/view',
+                                        'id' => $model->id
+                                    ],
+                                    [
+                                        'class' => 'button primary big'
+                                    ]);*/
+                        },
+                    'read' => function($url, $model) {
+                            if ($model->read != '1') {
+                                return Html::a(
+                                        '<span class="glyphicon glyphicon-check"></span>',
+                                        [
+                                            '/control/messages',
+                                            'set' => 1,
+                                            'id' => $model->id
+                                        ],
+                                        [
+                                            'class' => 'button primary big'
+                                        ]);
+                            } else {
+                                return '';
+                            }
+                    }
+                        ],
+                'template' => '{view} {read}'
+            ],
         ],
     ]);
 

@@ -3,6 +3,7 @@
 namespace app\modules\Control\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "monographies".
@@ -16,6 +17,22 @@ use Yii;
  */
 class Monographies extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+
+        return [
+            'class' => TimestampBehavior::className(),
+            'updatedAtAttribute' => false
+        ];
+
+    } // end function
+
+
+
     /**
      * @inheritdoc
      */

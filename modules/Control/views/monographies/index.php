@@ -37,7 +37,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'doi',
             //'file',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                    'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+                'buttons' => [
+                        'view' => function($url, $model) {
+                                    return Html::a('<span class="glyphicon glyphicon-file"></span>', ['/control/monographies/view', 'id' => $model->id], ['class' => 'button primary big']);
+                        }
+                ]
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

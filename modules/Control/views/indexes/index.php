@@ -20,6 +20,47 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <br>
+    <br>
+    <br>
+
+    <?php
+
+    echo \miloschuman\highcharts\Highcharts::widget([
+        'scripts' => [
+            'themes/grid-light',
+        ],
+        'options' => [
+            'title' => [
+                'text' => 'Текущее соотношение индексов'
+            ],
+            'xAxis' => [
+                    'categories' => array_values(array_map(function($item) { return $item['description']; }, $columns))
+            ],
+            'yAxis' => [
+                    'title' => ''
+                    ],
+            'series' => [
+                    [
+                        'type' => 'column',
+                        'name' => 'Индексы',
+                        'data' => array_values(array_map(function($item) { return (float)$item['value']; }, $columns))
+                    ]
+
+            ],
+            'labels' => [
+                'items' => [
+                    'html' =>'test chart'
+                ]
+            ],
+            'size' => 50,
+            'credits' => ['enabled' => false],
+            //'showInLegend' => false,
+        ],
+    ]); ?>
+
+    <br>
+    <br>
+    <br>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

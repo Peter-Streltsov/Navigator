@@ -7,17 +7,20 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\Control\models\Monographies */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Monographies', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Монографии', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="monographies-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
+
+    <br>
+    <br>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+        <?= Html::a('Редактировать данные', ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+            'class' => 'button danger big',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
@@ -25,8 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <br>
+    <br>
+
     <?= DetailView::widget([
         'model' => $model,
+        'options' => [
+                'class' => 'table'
+                ],
         'attributes' => [
             'id',
             'title',

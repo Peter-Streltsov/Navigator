@@ -39,8 +39,8 @@ class Organisation extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'organisation' => 'Organisation',
-            'weblink' => 'Weblink',
+            'organisation' => 'Название организации',
+            'weblink' => 'Ссылка',
         ];
     }
 

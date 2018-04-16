@@ -7,35 +7,39 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\Control\models\Messages */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Messages', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Сообщения', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="messages-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <br>
+    <h4><?= $model->category ?></h4>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Panel Heading</div>
+        <div class="panel-body">Panel Content</div>
+    </div>
+
+    <br>
+    <br>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'user_id',
+            //'id',
+            //'user_id',
             'username',
             'created_at',
             'category',
-            'custom_theme',
-            'text:ntext',
+            //'custom_theme',
+            //'text:ntext',
         ],
     ]) ?>
+
+    <?php
+
+    ?>
 
 </div>

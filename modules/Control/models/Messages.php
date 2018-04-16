@@ -3,6 +3,7 @@
 namespace app\modules\Control\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "messages".
@@ -25,6 +26,17 @@ class Messages extends \yii\db\ActiveRecord
         return 'messages';
     }
 
+
+    public function behaviors()
+    {
+
+        return [
+            'class' => TimestampBehavior::className(),
+            //'updatedAtAttribute' => false
+        ];
+
+    } // end function
+
     /**
      * @inheritdoc
      */
@@ -46,7 +58,7 @@ class Messages extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'ID пользователя',
-            'username' => 'ФИО пользователя',
+            'username' => 'Пользователь',
             'created_at' => 'Создано',
             'category' => 'Категория',
             'custom_theme' => 'Тема сообщения',

@@ -62,7 +62,7 @@ AppAsset::register($this);
                 ['label' => 'Войти', 'url' => ['/site/login']]
                 ) : (
                 [
-                    'label' => "<span class=\"glyphicon glyphicon-list\"></span>",
+                    'label' => "<span class=\"glyphicon glyphicon-align-justify\"></span>",
                     'items' => [
                         ['label' => 'Панель управления', 'url' => ['/control'], 'options' => [
                             'style' => 'width: 20pc;'

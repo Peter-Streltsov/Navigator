@@ -26,6 +26,7 @@
                     'title' => [
                             'text' => 'Распределение научных результатов'
                     ],
+                'style' => 'width: 20pc;',
                 'labels' => [
                         'items' => [
                                 'html' =>'test chart'
@@ -60,7 +61,9 @@
 
         echo \yii\widgets\DetailView::widget([
                 'model' => $table,
-            'class' => 'table',
+            'options' => [
+                    'class' => 'table'
+            ],
             'attributes' => [
                     'personnel' =>
                         [

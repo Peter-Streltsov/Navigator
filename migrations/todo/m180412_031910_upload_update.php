@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m180412_031910_upload_update
  */
-class m180412_031910_upload_update extends Migration
+class m180412_031910_messages_update extends Migration
 {
     /**
      * {@inheritdoc}

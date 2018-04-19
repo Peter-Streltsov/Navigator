@@ -58,7 +58,7 @@ class Articles extends \yii\db\ActiveRecord
             'publisher' => 'Издатель',
             'year' => 'Год издания',
             'doi' => 'ЦИО',
-            'file' => 'Просмотр',
+            'file' => 'Файл',
             'authors' => 'Авторы',
             'class' => 'Категория',
         ];
@@ -119,6 +119,89 @@ class Articles extends \yii\db\ActiveRecord
         return $this->hasMany(Articles::className(), ['id' => 'article_id'])->viaTable('articles_authors', ['author_id' => static::$authorid]);
 
     } // end function
+
+
+    /**
+     *
+     * getting indexes for current author
+     *
+     * @param $id integer
+     * @return array
+     */
+    public static function getArticlesForAuthor($id)
+    {
+
+        $authorarticles = ArticlesAuthors::find()
+            ->where(['author_id' => $id])
+            ->joinWith('articlesbyauthor')
+            ->asArray()
+            ->all();
+
+        // by default - empty array
+        $articles = [];
+
+        // formatting array
+        foreach ($authorarticles as $article) {
+            $articles[] = $article['articlesbyauthor'][0];
+        }
+
+        return $articles;
+
+    } // end function
+
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public static function getCurrentArticles($id)
+    {
+
+        $year = date('Y');
+
+        $articles = static::getArticlesForAuthor($id);
+
+        $sortedarticles = [];
+
+        foreach ($articles as $article) {
+            if ($article['year'] == $year) {
+                $sortedarticles[] = $article;
+            }
+        }
+
+        return $sortedarticles;
+
+    } // end function
+
+
+
+    /**
+     * collecting indexes for current year articles
+     *
+     * @param $id integer
+     * @return float
+     */
+    public static function getIndexes($id)
+    {
+
+        $indexes = [];
+
+        $articles = static::getCurrentArticles($id);
+
+        foreach ($articles as $article) {
+            $query = IndexesArticles::find()
+                ->select('value')
+                ->where(['id' => (int)$article['class']])
+                ->asArray()
+                ->one();
+
+            $indexes[] = (float)$query['value'];
+        }
+
+        return array_sum($indexes);
+
+    } // end function
+
 
 
     /**

@@ -68,15 +68,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'table table-hover'
         ],
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'description:ntext',
             'value',
 
             [
-                    'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}'
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}'
             ],
         ],
     ]); ?>

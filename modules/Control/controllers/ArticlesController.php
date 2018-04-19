@@ -92,15 +92,21 @@ class ArticlesController extends Controller
 
         $model = Articles::find($id)
             ->where(['articles.id' => $id])
+            //->join('LEFT JOIN', 'indexes_articles', ['class' => 'indexes_articles.id'])
             ->joinWith('data')
             ->all();
 
+        $class = IndexesArticles::find()->where(['id' => $model[0]['class']])->asArray()->one();
+        $model[0]['class'] = $class['description'];
+
         $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
 
+        if ($authors == null) { $authors = 'не задано';}
 
         return $this->render('view', [
-        'model' => $model,
-            'authors' => $authors
+            'model' => $model,
+            'authors' => $authors,
+            'class' => $class
         ]);
 
     }
@@ -119,10 +125,11 @@ class ArticlesController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        //$classes =
+        $classes = IndexesArticles::find()->asArray()->all();
 
         return $this->render('create', [
             'model' => $model,
+            'classes' => $classes
         ]);
 
     } // end action

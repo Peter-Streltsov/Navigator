@@ -20,16 +20,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'options' => [
+                'encodeLabel' => false,
+],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'author_id',
             'description:ntext',
-            'uploadedfile',
+            //'uploadedfile',
+            /*[
+                'attribute' => 'uploadedfile',
+                'encodeLabel' => true,
+                'value' => function($model) {
+                    //return 'link';
+                    return Html::a('Прикрепленный файл', 'upload/' . $model->uploadedfile, ['class' => 'button primary big']);
+                }
+                ],*/
             'accepted',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+                'buttons' => [
+                        'view' => function($url, $model) {
+                            return Html::a('Прикрепленный файл', '/upload/' . $model->uploadedfile, ['class' => 'button primary big']);
+                        }
+                ],
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

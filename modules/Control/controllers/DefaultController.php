@@ -3,6 +3,7 @@
 namespace app\modules\Control\controllers;
 
 use app\modules\Control\models\Articles;
+use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Monographies;
 use app\modules\Control\models\Personnel;
@@ -23,7 +24,9 @@ class DefaultController extends Controller
     public function actionIndex()
     {
 
-        //$data['users'] = Users::find()->count();
+        $user = \Yii::$app->user->getIdentity();
+        $author = Authors::find()->where(['user_id' => $user->id])->one();
+
         $data['authors'] = Authors::find()->count();
         $data['articles'] = Articles::find()->count();
         $data['monographies'] = Monographies::find()->count();
@@ -37,7 +40,7 @@ class DefaultController extends Controller
 
         return $this->render('index', [
             'data' => $data,
-            'table' => $table
+            'table' => $table,
         ]);
 
     } // end action

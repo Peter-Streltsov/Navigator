@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 
 /* @var $this yii\web\View */
@@ -14,14 +15,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="articles-create">
 
     <br>
-    <?= Html::a('<span class="glyphicon glyphicon-chevron-left"></span>', yii\helpers\Url::previous(), ['class' => 'button pill']); ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <br>
 
-    <?= $this->render('forms/_form', [
+    <?= $this->render('forms/create', [
         'model' => $model,
+        'classes' => $classes
     ]) ?>
 
 </div>

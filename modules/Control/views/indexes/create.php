@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\Control\models\IndexesArticles */
 
 $this->title = 'Создать новый индекс';
-$this->params['breadcrumbs'][] = ['label' => 'Indexes Articles', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Индексы ПНРД - статьи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="indexes-articles-create">

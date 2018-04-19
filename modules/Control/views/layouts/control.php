@@ -123,10 +123,13 @@ AppAsset::register($this);
                         <a href="/control/events" class="list-group-item">Научные мероприятия <span class="caret"></span></a>
                         <a href="/control/messages" class="list-group-item">Сообщения
                             <?php
-                            $count = \app\modules\Control\models\Messages::find()->count();
-                            if ($count > 0) {
-                                echo "<span class=\"badge badge-light\">".$count."</span>";
+
+                            $count = \app\modules\Control\models\Messages::find()->where(['read' => null])->count();
+
+                            if (count($count) > 0) {
+                                echo "<span style='color: lightcoral' class=\"badge badge-light\">".$count."</span>";
                             }
+
                             ?>
                         </a>
                         <a href="#sub-menu3" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Параметры приложения<span class="caret"></span></a>

@@ -16,6 +16,15 @@ a {
     color: #32a873;
 }
 
+ul.pagination li a {
+    color: #32a873;
+    background-color: #fff;
+}
+
+ul.pagination li.active a {
+    background-color: #32a873;
+}
+
 nav div div a {
     color: #32a873;
 }
@@ -26,6 +35,10 @@ nav div div a {
 
 td a {
     color: #2a323b;
+}
+
+select option {
+    width: 30pc;
 }
 
 .wrap {

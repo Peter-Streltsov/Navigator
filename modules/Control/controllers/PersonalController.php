@@ -16,56 +16,56 @@ class PersonalController extends \yii\web\Controller
 {
 
     /**
+     * Personal page action
+     * Displayed publications, personal data, indexes etc.
+     *
      * @param $id
      * @return string
      */
     public function actionIndex($id)
     {
 
+        // current user
+        // TODO: replace with user identity (?)
         $model = Users::find()->where(['id' => $id])->one();
 
+        // checking if exist author for current user; if no - redirect to '/control'
         if (!Authors::find()->where(['user_id' => $model->id])->exists()) {
 
             \Yii::$app->session->setFlash('danger' ,'Автора с таким идентификатором не существует');
 
-            return $this->redirect('/');
+            return $this->redirect('/control');
         }
 
+        // author connected with current user
         $author = Authors::find()->where(['user_id' => $model->id])->one();
+
+        // staff record connected with current user
         $staff = Personnel::find()->where(['user_id' => $id])->one();
-        Articles::$authorid = $model->id;
 
-        $authorarticles = ArticlesAuthors::find()->where(['author_id' => $author->id])->joinWith('articlesbyauthor')->asArray()->all();
+        // all articles for author connected with current user
+        $articles = Articles::getArticlesForAuthor($author->id);
 
-        foreach ($authorarticles as $article) {
-            $articles[] = $article['articlesbyauthor'][0];
-        }
+        // articles published in current year
+        $currentarticles = Articles::getCurrentArticles($author->id);
 
+        // indexes for all articles in current year
+        $indexes['articles'] = Articles::getIndexes($author->id);
+
+        // datapdovider for author's articles
         $dataProvider = new ArrayDataProvider([
             'allModels' => $articles
         ]);
 
-        $personalprovider = new ActiveDataProvider([
-            'query' => Personnel::find()->where(['id' => $id])->one()
-        ]);
 
         return $this->render('index', [
             'model' => $model,
             'articles' => $articles,
+            'currentarticles' => $currentarticles,
             'dataprovider' => $dataProvider,
-            'staffdata' => $personalprovider,
-            'personal' => $staff
+            'personal' => $staff,
+            'indexes' => $indexes
         ]);
-
-    } // end action
-
-
-
-    /**
-     *
-     */
-    public function actionMessage()
-    {
 
     } // end action
 

@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'button primary danger big',
-            //'style' => 'color: red;',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
@@ -47,8 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'file',
             [
                     'attribute' => 'authors',
-                    //'encodeLabels' => false,
                     'value' => function($model) {
+                                $authors = [];
                                 if (isset($model['data'][0])) {
                                     foreach ($model['data'] as $author) {
                                         $authors[] = $author['lastname']

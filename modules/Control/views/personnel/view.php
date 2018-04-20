@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'secondname',
             'lastname',
             'position',
+            'habilitation',
             'employment',
             'expirience',
             'age',

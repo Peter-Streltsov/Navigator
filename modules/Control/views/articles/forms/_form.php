@@ -27,7 +27,11 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'publisher')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'year')->textInput() ?>
+    <?= $form->field($model, 'year')->widget(etsoft\widgets\YearSelectbox::classname(), [
+        'yearStart' => -10,
+        'yearEnd' => 10,
+    ]);
+    ?>
 
     <?= $form->field($model, 'doi')->textInput(['maxlength' => true]) ?>
 

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Articles */
 
-$this->title = 'Редактировать статью: '.$model->title;
+$this->title = 'Редактировать данные статьи - '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
@@ -16,11 +16,12 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <br>
 
-    <?= Html::a('Редактировать авторов', \yii\helpers\Url::to(['articles/authors', 'id' => $model->id])) ?>
-
-    <?= $this->render('forms/_form', [
+    <?= $this->render('forms/update', [
         'model' => $model,
-        'classes' => $classes
+        'classes' => $classes,
+        'authors' => $authors,
+        'model_authors' => $model_authors,
+        'author_items' => $author_items
     ]) ?>
 
 </div>

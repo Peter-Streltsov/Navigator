@@ -19,7 +19,8 @@ $this->params['breadcrumbs'][] = 'Редактировать данные';
 
     <?= $this->render('forms/update', [
         'model' => $model,
-        'classes' => $classes
+        'classes' => $classes,
+        'habilitations' => $habilitations
     ]) ?>
 
 </div>

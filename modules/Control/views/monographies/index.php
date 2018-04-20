@@ -35,10 +35,52 @@ $this->params['breadcrumbs'][] = $this->title;
             'subtitle',
             'year',
             'doi',
-            //'file',
+            [
+                'attribute' => 'authors',
+                'encodeLabel' => false,
+                'format' => 'raw',
+                'value' => function($data) {
+                            $links = function($auth) {
+
+                                $top = "<label class=\"dropdown\">";
+                                $ul = "<ul class=\"dropdown-menu\">";
+                                $bottom = "</ul></label>";
+
+                                foreach ($auth as $author) {
+                                    $fio[$author['id']] = "<span style=\"font-size: 14px;\">"
+                                        .$author['lastname']
+                                        .' '
+                                        .mb_substr($author['name'],0,1,"UTF-8")
+                                        ."."
+                                        .mb_substr($author['secondname'],0,1,"UTF-8")
+                                        ."."
+                                        //.$author['name'].' '.$author['secondname']
+                                        //.' '
+                                        //.$author['lastname']
+                                        .'</span>';
+                                    $label = "<button type=\"button\" id=\"dropdownMenuButton\" style='width: 12pc;' data-toggle=\"dropdown\" class=\"btn btn-default\">".$fio[$author['id']]." <span class='caret'></span>"."</button>".$ul;
+                                    $tag['br'] = "<br>";
+                                    $tag['articles'] = "<li>"
+                                        .Html::a("<span style='font-size: 12px;'>Данные автора</span>", ['authors/view', 'id' => $author['id']])
+                                        .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-align-justify'> Все публикации автора</span>", ['articles/view', 'id' => $author['id']])
+                                        ."</li>";
+                                    //$tag[] = "<li>".Html::a()."</li>";
+                                    $user[] = $top.$label.implode($tag).$bottom;
+                                }
+
+                                return implode("<br>", $user);
+
+                            };
+
+                    isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
+
+                    return $authors;
+
+                }
+            ],
 
             [
-                    'class' => 'yii\grid\ActionColumn',
+                'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}',
                 'buttons' => [
                         'view' => function($url, $model) {
@@ -49,4 +91,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <?php Pjax::end(); ?>
+
 </div>

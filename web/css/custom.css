@@ -1,7 +1,5 @@
 
 body {
-    /*background-color: #e8e8e8;*/
-    /*background-color: #dcdcdc;*/
     background-color: #f5f5f5;
 
 }
@@ -14,6 +12,14 @@ a {
     font-weight: bold;
     font-size: 18px;
     color: #32a873;
+}
+
+ul.nav-pills:nth-child(1) li.active a.kv-toggle {
+    background-color: #32a873;
+}
+
+li.active:nth-child(7) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1) {
+    color: #fff;
 }
 
 ul.pagination li a {

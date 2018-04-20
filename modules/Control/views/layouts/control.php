@@ -9,6 +9,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use \kartik\sidenav\SideNav;
+use \app\modules\Control\models\Messages;
 
 AppAsset::register($this);
 
@@ -96,59 +98,127 @@ AppAsset::register($this);
         <div style="background-color: white;" class="container">
             <div class="row">
                 <div style="background-color: #f0f0f0;" class="col-xs-12 col-md-3">
+
+                    <br>
+                    <br>
+
+                    <?php
+
+                    echo SideNav::widget([
+                        'type' => SideNav::TYPE_DEFAULT,
+                        'encodeLabels' => false,
+                        'heading' => 'Панель управления',
+                        'activateParents' => false,
+                        'activateItems' => true,
+                        'hideEmptyItems' => false,
+                        'containerOptions' => [
+                        ],
+                        'items' => [
+                            [
+                                'label' => 'Общие сведения',
+                                'icon' => 'home',
+                                'url' => '/control'
+                            ],
+                            [
+                                'label' => 'Статистика',
+                                'icon' => 'stats',
+                            ],
+                            [
+                                'label' => 'Авторы и сотрудники',
+                                'icon' => 'user',
+                                'items' => [
+                                    [
+                                        'label' => 'Зарегистрированные пользователи',
+                                        'url' => '/control/users'
+                                    ],
+                                    [
+                                        'label' => 'Сотрудники',
+                                        'url' => '/control/personnel'
+                                    ],
+                                    [
+                                        'label' => 'Авторы',
+                                        'url' => '/control/authors'
+                                    ]
+                                ]
+                            ],
+                            [
+                                'label' => 'Публикации',
+                                'icon' => 'book',
+                                'items' => [
+                                    [
+                                        'label' => 'Статьи',
+                                        'url' => '/control/articles'
+                                    ],
+                                    [
+                                        'label' => 'Монографии',
+                                        'url' => '/control/monographies'
+                                    ]
+                                ]
+                            ],
+                            [
+                                'label' => 'Научные мероприятия',
+                                'icon' => 'list',
+                                'items' => [
+                                        [
+                                                'label' => 'Доклады'
+                                        ],
+                                    [
+                                            'label' => 'Участие в конференциях'
+                                    ]
+                                ]
+                            ],
+                            [
+                                'label' => 'Сообщения ' .
+                                    '<span style="background-color: red;" class="badge badge-light">' .
+                                    count(Messages::find()->where(['read' => null])->count()) .
+                                    '</span>',
+                                'icon' => 'comment',
+                                'url' => '/control/messages'
+                            ],
+                            [
+                                'label' => 'Параметры приложения',
+                                'icon' => 'certificate',
+                                'items' => [
+                                    [
+                                        'label' => 'Данные организации',
+                                        'url' => '/control/orgdata'
+                                    ],
+                                    [
+                                            'label' => 'Перечень должностей',
+                                        'url' => '/control/positions'
+                                    ],
+                                    [
+                                        'label' => 'Индексы',
+                                        'items' => [
+                                                [
+                                                    'label' => 'Индексы ПНРД - статьи',
+                                                    'url' => '/control/indexes?class=articles'
+                                                ],
+                                            ]
+                                    ],
+                                ]
+                            ],
+                            [
+                                    'label' => 'WebAPI',
+                                'icon' => 'cloud',
+                                'items' => [
+                                        [
+                                                'label' => 'Scopus'
+                                        ]
+                                ]
+                            ],
+                        ]
+                    ]);
+
+                    ?>
+
                     <br>
                     <div id="main-menu" class="list-group">
-                        <br>
-                        <br>
-                        <!--<a href="/control" class="list-group-item">Панель управления</a>-->
-                        <?= Html::a('Панель управления', '/control', ['class' => 'list-group-item']); ?>
-                        <a href="#sub-menu" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Авторы и сотрудники<span class="caret"></span></a>
-                        <div class="collapse list-group-level1" id="sub-menu">
-                            <a href="/control/users" class="list-group-item" data-parent="#sub-menu">Зарегистрированные пользователи</a>
-                            <a href="/control/authors" class="list-group-item" data-parent="#sub-menu">Авторы</a>
-                            <a href="/control/personnel" class="list-group-item" data-parent="#sub-menu">Сотрудники</a>
-                            <!--<a href="#sub-sub-menu" class="list-group-item" data-toggle="collapse" data-parent="#sub-menu">Sub Item 3 <span class="caret"></span></a>
-                            <div class="collapse list-group-level2" id="sub-sub-menu">
-                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu">Sub Sub Item 1</a>
-                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu">Sub Sub Item 2</a>
-                                <a href="#" class="list-group-item" data-parent="#sub-sub-menu">Sub Sub Item 3</a>
-                            </div>-->
-                        </div>
-                        <a href="#sub-menu2" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Публикации <span class="caret"></span></a>
-                        <div class="collapse list-group-level1" id="sub-menu2">
-                            <a href="/control/articles" class="list-group-item" data-parent="#sub-menu2">Опубликованные статьи</a>
-                            <a href="/control/monographies" class="list-group-item" data-parent="#sub-menu2">Монографии</a>
-                            <!--<a href="/control/personnel" class="list-group-item" data-parent="#sub-menu">Сотрудники</a>-->
-                        </div>
-                        <a href="/control/events" class="list-group-item">Научные мероприятия <span class="caret"></span></a>
-                        <a href="/control/messages" class="list-group-item">Сообщения
-                            <?php
-
-                            $count = \app\modules\Control\models\Messages::find()->where(['read' => null])->count();
-
-                            if (count($count) > 0) {
-                                echo "<span style='color: lightcoral' class=\"badge badge-light\">".$count."</span>";
-                            }
-
-                            ?>
-                        </a>
-                        <a href="#sub-menu3" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Параметры приложения<span class="caret"></span></a>
-                        <div class="collapse list-group-level1" id="sub-menu3">
-                            <a href="/control/orgdata" class="list-group-item" data-parent="#sub-menu3">Данные организации</a>
-                            <a href="/control/positions" class="list-group-item" data-parent="#sub-menu3">Перечень должностей</a>
-                            <a href="#sub-sub-menu2" class="list-group-item" data-toggle="collapse" data-parent="#sub-menu3">Индексы<span class="caret"></span></a>
-                            <div class="collapse list-group-level2" id="sub-sub-menu2">
-                                <a href="/control/indexes?class=articles" class="list-group-item" data-parent="#sub-sub-menu2">Индексы ПНРД - статьи</a>
-                                <a href="/control/indexes?class=monographies" class="list-group-item" data-parent="#sub-sub-menu2">Индексы ПНРД - монографии</a>
-                            </div>
-                        </div>
                     </div>
+
                 </div>
                 <div class="col-xs-12 col-md-9">
                     <br>
-                    <?php
-                    //\yii\helpers\VarDumper::dump($this->params);
-                    ?>
 
                     <?= Breadcrumbs::widget([
                             'homeLink' => ['label' => 'Панель управления', 'url' => '/control'],

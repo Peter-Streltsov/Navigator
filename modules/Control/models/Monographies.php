@@ -26,7 +26,7 @@ class Monographies extends \yii\db\ActiveRecord
 
         return [
             'class' => TimestampBehavior::className(),
-            'updatedAtAttribute' => false
+            //'updatedAtAttribute' => false
         ];
 
     } // end function
@@ -46,19 +46,24 @@ class Monographies extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+
         return [
             [['title', 'year'], 'required'],
             [['year'], 'integer'],
             [['file'], 'string'],
             [['title', 'subtitle', 'doi'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
@@ -66,8 +71,55 @@ class Monographies extends \yii\db\ActiveRecord
             'year' => 'Год издания',
             'doi' => 'ЦИО',
             'file' => 'File',
+            'authors' => 'Авторы'
         ];
-    }
+
+    } // end function
+
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMonographies()
+    {
+
+        return $this->hasOne(MonographiesAuthors::className(), ['monography_id' => 'id']);
+
+    } // end function
+
+
+
+    /**
+     * @return $this
+     */
+    public function getAuthors()
+    {
+
+        return $this->hasMany(Authors::className(), ['id' => 'author_id'])->via('monographies');
+
+    } // end function
+
+
+
+    /**
+     * @return $this
+     */
+    public function getData()
+    {
+
+        return $this->hasMany(Authors::className(), ['id' => 'author_id'])->viaTable('monographies_authors', ['monography_id' => 'id']);
+
+    } // end function
+
+
+
+    public function getMonographiesByAuthor($id)
+    {
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -75,6 +127,9 @@ class Monographies extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new MonographiesQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Monographies */
@@ -17,8 +18,12 @@ $this->params['breadcrumbs'][] = 'Редактировать данные';
     <br>
     <br>
 
-    <?= $this->render('_form', [
+    <?= $this->render('forms/update', [
         'model' => $model,
+        'model_authors' => $model_authors,
+        'author_items' => $author_items,
+        'authors' => $authors,
+
     ]) ?>
 
 </div>

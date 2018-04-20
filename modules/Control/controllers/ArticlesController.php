@@ -146,6 +146,40 @@ class ArticlesController extends Controller
     public function actionUpdate($id)
     {
 
+        if (Yii::$app->request->post()) {
+
+            if (isset($_POST['delete']) && $_POST['delete'] == 1) {
+                $author_delete = ArticlesAuthors::find()->where([
+                    'author_id' => $_POST['author'],
+                    'article_id' => $id
+                ])->one();
+                $author_delete->delete();
+                Yii::$app->session->setFlash('danger', "Автор удален");
+            }
+
+            if (isset($_POST['Articles'])) {
+                $newauthor = new ArticlesAuthors();
+                $newauthor->article_id = $id;
+                $newauthor->author_id = $_POST['Articles']['authors'];
+                $newauthor->save();
+                Yii::$app->session->setFlash('success', "Автор добавлен");
+            }
+
+        }
+
+        $model_authors = Articles::find($id)
+            ->where(['articles.id' => $id])
+            ->joinWith('data')
+            ->all();
+
+        $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
+
+        $items = \yii\helpers\ArrayHelper::map($authors, 'id', function($items) {
+            return $items['name']. ' ' . $items['lastname'];
+        });
+
+        // old action
+
         $model = Articles::find($id)
             ->where(['articles.id' => $id])
             ->joinWith('data')
@@ -154,20 +188,17 @@ class ArticlesController extends Controller
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
 
         if (Yii::$app->request->post()) {
-
-            //return VarDumper::dump($model);
-
             if ($model[0]->load(Yii::$app->request->post()) && $model[0]->save()) {
-                return $this->redirect(['view', 'id' => $id]);
+                return $this->redirect(['update', 'id' => $id]);
             }
         }
-
-        $authors = Authors::find()->select(['id', 'lastname', 'name'])->asArray()->all();
 
         return $this->render('update', [
             'model' => $model[0],
             'classes' => $classes,
-            //'authors' => $authors
+            'model_authors' => $model_authors[0],
+            'authors' => $authors,
+            'author_items' => $items
         ]);
 
     } // end action

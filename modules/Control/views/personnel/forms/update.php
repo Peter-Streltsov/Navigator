@@ -20,9 +20,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'position')->textInput() ?>
 
-    <?= $form->field($model, 'employment')->textInput() ?>
+    <?= $form->field($model, 'habilitation')->dropDownList($habilitations) ?>
 
-    <?= $form->field($model, 'expirience')->textInput(['maxlength' => true]) ?>
+    <!--<?= $form->field($model, 'employment')->textInput() ?>-->
+
+    <!--<?= $form->field($model, 'expirience')->textInput(['maxlength' => true]) ?>-->
 
     <?= $form->field($model, 'age')->textInput() ?>
 

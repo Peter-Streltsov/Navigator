@@ -2,6 +2,8 @@
 
 namespace app\modules\Control\controllers;
 
+use app\modules\Control\models\Authors;
+use app\modules\Control\models\MonographiesAuthors;
 use Yii;
 use app\modules\Control\models\Monographies;
 use yii\data\ActiveDataProvider;
@@ -35,14 +37,21 @@ class MonographiesController extends Controller
      */
     public function actionIndex()
     {
+
+        $model = Monographies::find()->joinWith('authors')->all();
+
         $dataProvider = new ActiveDataProvider([
-            'query' => Monographies::find(),
+            'query' => Monographies::find()->joinWith('authors')
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'model' => $model
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Displays a single Monographies model.
@@ -52,10 +61,14 @@ class MonographiesController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Creates a new Monographies model.
@@ -64,6 +77,7 @@ class MonographiesController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Monographies();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,7 +87,11 @@ class MonographiesController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+
+    } // end action
+
+
+
 
     /**
      * Updates an existing Monographies model.
@@ -84,16 +102,55 @@ class MonographiesController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->post()) {
+
+            if (isset($_POST['delete']) && $_POST['delete'] == 1) {
+                $author_delete = MonographiesAuthors::find()->where([
+                    'author_id' => $_POST['author'],
+                    'monography_id' => $id
+                ])->one();
+                $author_delete->delete();
+                Yii::$app->session->setFlash('danger', "Автор удален");
+            }
+
+            if (isset($_POST['Monographies'])) {
+                $newauthor = new MonographiesAuthors();
+                $newauthor->monography_id = $id;
+                $newauthor->author_id = $_POST['Monographies']['authors'];
+                $newauthor->save();
+                Yii::$app->session->setFlash('success', "Автор добавлен");
+            }
+
         }
 
+        $model_authors = Monographies::find($id)
+            ->where(['monographies.id' => $id])
+            ->joinWith('data')
+            ->all();
+
+
+        // all authors
+        $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
+        $items = \yii\helpers\ArrayHelper::map($authors, 'id', function($items) {
+            return $items['name']. ' ' . $items['lastname'];
+        });
+
+        $model = Monographies::find($id)
+            ->where(['monographies.id' => $id])
+            ->joinWith('data')
+            ->all();
+
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model[0],
+            'model_authors' => $model_authors[0],
+            'authors' => $authors,
+            'author_items' => $items
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Deletes an existing Monographies model.

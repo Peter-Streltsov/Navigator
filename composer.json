@@ -12,18 +12,22 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": "~2.0.14",
+        "yiisoft/yii2": "<2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "3ch3r46/bootui-datetimepicker": "^1.0",
         "kartik-v/yii2-widget-datepicker": "@dev",
         "sibilino/yii2-dygraphswidget": "*",
         "miloschuman/yii2-highcharts-widget": "*",
+        "kartik-v/yii2-widget-sidenav": "@dev",
         "kartik-v/yii2-export": "^1.2",
-        "kartik-v/yii2-context-menu": "*"
+        "kartik-v/yii2-context-menu": "*",
+        "et-soft/yii2-widget-select-year": "*",
+        "guzzlehttp/guzzle": "6.2.1",
+        "kasparsj/scopus-search-api": "dev-master"
 
     },
     "require-dev": {

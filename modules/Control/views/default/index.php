@@ -57,7 +57,19 @@
             ],
         ]);
 
-        echo "<br><br><br>";
+        ?>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-body">
+
+        <?php
+
+        //echo "<br><br><br>";
 
         echo \yii\widgets\DetailView::widget([
                 'model' => $table,
@@ -84,5 +96,8 @@
         ]);
 
         ?>
+            </div>
+        </div>
+    </div>
     </p>
 </div>

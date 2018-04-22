@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Positions */
 
-$this->title = 'Update Positions: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Positions', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Изменить название должности';
+$this->params['breadcrumbs'][] = ['label' => 'Список должностей', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->position, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="positions-update">
 

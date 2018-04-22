@@ -20,40 +20,95 @@
 
 <div class="row">
     <div class="col-xs-12 col-md-6">
+        <?= \yii\widgets\DetailView::widget([
+        'model' => $personal,
+    'options' => [
+            'class' => 'table'
+    ],
+    'attributes' => [
+        'lastname',
+        'name',
+        'secondname',
+        'age',
+        'position',
+        'habilitation'
+    ]
+]);
+        ?>
+    </div>
+    <div class="col-xs-12 col-md-5">
+        <img style="max-height: 20pc;" src="/images/1.jpg" class="img-rounded">
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-xs-12 col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
+                <b>
+                    Научные показатели за <?= date('Y') ?> год:
+                </b>
+            </div>
+            <div class="panel-body">
+                <br>
+                <b style="color: red;">
+                    Индекс ПНРД за <?= date('Y') ?> год: <?= $indexes['articles'] ?>
+                </b>
+                (Средний индекс ПНРД - <b><?= $meanindex ?></b>)
+                <br>
+                <br>
                 <b>
                     Публикаций в текущем году: <?= count($currentarticles) ?>
                 </b>
-            </div>
-            <div class="panel-body">
                 <br>
-                Статей: <?= count($currentarticles) ?>
                 <br>
-                Монографий: 0
-                <br>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-12 col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <b>
-                    Индекс ПНРД за <?= date('Y') ?> год: <?= $indexes['articles'] ?>
-                </b>
-            </div>
-            <div class="panel-body">
-                <br>
-                Статей: <?= count($currentarticles) ?>
-                <br>
-                Монографий: 0
-                <br>
+
+                <table class="table">
+                    <thead>
+                    <th>Категория</th>
+                    <th>Опубликовано</th>
+                    <th>Индекс</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            Статьи
+                        </td>
+                        <td>
+                            <?= count($currentarticles) ?>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Монографии
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Участие в научных конференциях
+                        </td>
+                        <td>
+                            0
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
 
-<br>
 <br>
 <br>
 
@@ -129,19 +184,7 @@
 <br>
 
 <div class="panel panel-default">
-<?php $personaldata =  \yii\widgets\DetailView::widget([
-        'model' => $personal,
-    'options' => [
-            'class' => 'table'
-    ],
-    'attributes' => [
-        'lastname',
-        'name',
-        'secondname',
-        'age',
-        'position',
-    ]
-]);
+<?php
 
 $articlesview = \yii\grid\GridView::widget([
     'dataProvider' => $dataprovider,
@@ -156,12 +199,11 @@ $articlesview = \yii\grid\GridView::widget([
 echo \yii\bootstrap\Tabs::widget([
         'items' => [
                 [
-                    'label' => 'Персональные данные',
-                    'content' => $personaldata
+                    'label' => 'Статьи (за все время)',
+                    'content' => $articlesview
                 ],
                 [
-                        'label' => 'Статьи (за все время)',
-                    'content' => $articlesview
+                        'label' => 'Монографии (за все время)'
                 ]
             ]
 ]);

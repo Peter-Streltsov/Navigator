@@ -122,6 +122,7 @@ AppAsset::register($this);
                             [
                                 'label' => 'Статистика',
                                 'icon' => 'stats',
+                                'url' => '/control/statistics'
                             ],
                             [
                                 'label' => 'Авторы и сотрудники',
@@ -170,7 +171,7 @@ AppAsset::register($this);
                             [
                                 'label' => 'Сообщения ' .
                                     '<span style="background-color: red;" class="badge badge-light">' .
-                                    count(Messages::find()->where(['read' => null])->count()) .
+                                    Messages::find()->where(['read' => null])->count() .
                                     '</span>',
                                 'icon' => 'comment',
                                 'url' => '/control/messages'

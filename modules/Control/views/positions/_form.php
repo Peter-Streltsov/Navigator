@@ -12,10 +12,15 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <br>
+    <br>
+
     <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
 
+    <br>
+
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'button primary big']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

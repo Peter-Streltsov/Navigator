@@ -6,6 +6,7 @@ use app\modules\Control\models\Articles;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Personnel;
+use app\modules\Control\models\PNRD;
 use app\modules\Control\models\Users;
 use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use yii\data\ActiveDataProvider;
@@ -49,8 +50,10 @@ class PersonalController extends \yii\web\Controller
         // articles published in current year
         $currentarticles = Articles::getCurrentArticles($author->id);
 
+        $meanindex = PNRD::meanIndex();
+
         // indexes for all articles in current year
-        $indexes['articles'] = Articles::getIndexes($author->id);
+        $indexes['articles'] = PNRD::personalArticlesIndex($author->id);
 
         // datapdovider for author's articles
         $dataProvider = new ArrayDataProvider([
@@ -64,7 +67,8 @@ class PersonalController extends \yii\web\Controller
             'currentarticles' => $currentarticles,
             'dataprovider' => $dataProvider,
             'personal' => $staff,
-            'indexes' => $indexes
+            'indexes' => $indexes,
+            'meanindex' => $meanindex,
         ]);
 
     } // end action

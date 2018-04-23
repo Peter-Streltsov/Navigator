@@ -175,6 +175,24 @@ class Articles extends \yii\db\ActiveRecord
 
 
 
+    public static function getArticlesByYear(int $year)
+    {
+
+        $articles = Articles::find()->asArray()->all();
+        $sortedarticles = [];
+
+        foreach ($articles as $article) {
+            if ($article['year'] == $year) {
+                $sortedarticles[] = $article;
+            }
+        }
+
+        return $sortedarticles;
+
+    } // end function
+
+
+
     /**
      * collecting indexes for current year articles
      *
@@ -187,6 +205,31 @@ class Articles extends \yii\db\ActiveRecord
         $indexes = [];
 
         $articles = static::getCurrentArticles($id);
+
+        foreach ($articles as $article) {
+            $query = IndexesArticles::find()
+                ->select('value')
+                ->where(['id' => (int)$article['class']])
+                ->asArray()
+                ->one();
+
+            $indexes[] = (float)$query['value'];
+        }
+
+        return array_sum($indexes);
+
+    } // end function
+
+
+
+    public static function getIndexesByYear($year)
+    {
+
+        $indexes = [];
+
+        //$articles = static::getCurrentArticles($id);
+
+        $articles = static::getArticlesByYear($year);
 
         foreach ($articles as $article) {
             $query = IndexesArticles::find()

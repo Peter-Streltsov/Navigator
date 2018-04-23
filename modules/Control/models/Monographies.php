@@ -113,9 +113,28 @@ class Monographies extends \yii\db\ActiveRecord
     } // end function
 
 
-
+    /**
+     * @param $id
+     * @return array
+     */
     public function getMonographiesByAuthor($id)
     {
+
+        $authormonographies = MonographiesAuthors::find()
+            ->where(['author_id' => $id])
+            ->joinWith('monographiesbyauthor')
+            ->asArray()
+            ->all();
+
+        // by default - empty array
+        $monographies = [];
+
+        // formatting array
+        foreach ($authormonographies as $monography) {
+            $monographies[] = $monography['monographiesbyauthor'][0];
+        }
+
+        return $monographies;
 
     } // end function
 

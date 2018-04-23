@@ -163,10 +163,13 @@ class UsersController extends Controller
 
         }
 
+        $staff = Personnel::find()->where(['user_id' => $user['id']])->one();
+
         $newauthor = new Authors();
         $newauthor->name = $user['name'];
         $newauthor->lastname = $user['lastname'];
         $newauthor->user_id = $user['id'];
+        if (isset($staff[0]['id'])) { $newauthor->staff_id = $staff[0]['id']; }
         $newauthor->save();
 
         $createdauthor = Authors::find()->where(['user_id' => $id])->one();

@@ -14,7 +14,7 @@ class Statistics extends Model
     public static function getBasic()
     {
 
-        $authors = (float)(Authors::find()->count());
+        $authors = (Authors::find()->count());
 
         $basic = [];
         $basic['meanindex'] = PNRD::meanIndex();
@@ -33,10 +33,32 @@ class Statistics extends Model
     {
 
         $advanced = [];
+        $phd = [];
+        $dsc = [];
 
-        $advanced['meanindexphd'] = '';
+        $personnel = Personnel::find()->asArray()->all();
 
-        return $advanced;
+        foreach ($personnel as $staff) {
+            if ($staff['habilitation'] == 'кандидат наук') {
+                $phd[] = $staff;
+            } elseif ($staff['habilitation'] == 'доктор наук') {
+                $dsc[] = $staff;
+            }
+        }
+
+        foreach ($phd as $author) {
+
+        }
+
+        foreach ($phd as $author) {
+
+        }
+
+        //return $personnel;
+        return $phd;
+        //return $dsc;
+        //return $authors;
+        //return $advanced;
 
     } // end function
 
@@ -49,6 +71,16 @@ class Statistics extends Model
     {
 
         $timeline = [];
+
+        $years[] = date('Y');
+
+        for ($i = 1; $i < 10; $i++) {
+            $years[$i] = $years[$i - 1] - 1;
+        }
+
+        foreach ($years as $year) {
+            $timeline[$year] = Articles::getIndexesByYear($year);
+        }
 
         return $timeline;
 

@@ -157,7 +157,7 @@ class ArticlesController extends Controller
                 Yii::$app->session->setFlash('danger', "Автор удален");
             }
 
-            if (isset($_POST['Articles'])) {
+            if (isset($_POST['Articles']['authors'])) {
                 $newauthor = new ArticlesAuthors();
                 $newauthor->article_id = $id;
                 $newauthor->author_id = $_POST['Articles']['authors'];

@@ -15,9 +15,12 @@ class StatisticsController extends Controller
 
         $advanceddata = Statistics::getAdvanced();
 
+        $timeline = Statistics::indexTimeline();
+
         return $this->render('index', [
             'basic' => $basicdata,
-            'advanced' => $advanceddata
+            'advanced' => $advanceddata,
+            'timeline' => $timeline
         ]);
 
     } // end action

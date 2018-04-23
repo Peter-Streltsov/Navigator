@@ -153,7 +153,11 @@ AppAsset::register($this);
                                     [
                                         'label' => 'Монографии',
                                         'url' => '/control/monographies'
-                                    ]
+                                    ],
+                                    [
+                                        'label' => 'Диссертации',
+                                        'url' => '/control/dissertations'
+                                    ],
                                 ]
                             ],
                             [
@@ -161,7 +165,7 @@ AppAsset::register($this);
                                 'icon' => 'list',
                                 'items' => [
                                         [
-                                                'label' => 'Доклады'
+                                            'label' => 'Доклады'
                                         ],
                                     [
                                             'label' => 'Участие в конференциях'
@@ -175,6 +179,10 @@ AppAsset::register($this);
                                     '</span>',
                                 'icon' => 'comment',
                                 'url' => '/control/messages'
+                            ],
+                            [
+                                'label' =>'Отчеты',
+                                'icon' => 'list-alt'
                             ],
                             [
                                 'label' => 'Параметры приложения',
@@ -204,7 +212,8 @@ AppAsset::register($this);
                                 'icon' => 'cloud',
                                 'items' => [
                                         [
-                                                'label' => 'Scopus'
+                                            'label' => 'Scopus',
+                                            'url' => '/control/webapi/scopusapi'
                                         ]
                                 ]
                             ],

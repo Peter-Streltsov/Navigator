@@ -11,11 +11,11 @@ use yii\widgets\ActiveForm;
 <div class="users-form">
 
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+            'validateOnType' => true
+    ]); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-
-    <!--<?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>-->
+    <?= $form->field($model, 'username')->input('email') ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

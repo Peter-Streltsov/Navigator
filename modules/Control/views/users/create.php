@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <br>
 
-    <?= $this->render('_form', [
+    <?= $this->render('forms/create', [
         'model' => $model,
         'tokens' => $tokens
     ]) ?>

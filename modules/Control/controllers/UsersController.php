@@ -84,8 +84,28 @@ class UsersController extends Controller
         $model = new Users();
         $tokens = Accesstokens::find()->asArray()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $password = '';
+            $chars = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e',
+                'f','g','h','i','j','k','l','m','n','o','p',
+                'q','r','s','t','u','v','w','x','y','z','A',
+                'B','C','D','E','F','G','H','I','J','K','L',
+                'M','N','O','P','Q','R','S','T','U','V','W',
+                'X','Y','Z'];
+
+            $i = 7;
+
+            while ($i >= 0) {
+                $password .= $chars[mt_rand(0, (count($chars) - 1))];
+                $i--;
+            }
+
+            $model->password = $password;
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [

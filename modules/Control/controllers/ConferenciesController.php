@@ -2,26 +2,23 @@
 
 namespace app\modules\Control\controllers;
 
-use app\modules\Control\models\Authors;
 use Yii;
-use app\modules\Control\models\Dissertations;
+use app\modules\Control\models\Conferencies;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DissertationsController implements the CRUD actions for Dissertations model.
+ * ConferenciesController implements the CRUD actions for Conferencies model.
  */
-class DissertationsController extends Controller
+class ConferenciesController extends Controller
 {
-
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -30,57 +27,44 @@ class DissertationsController extends Controller
                 ],
             ],
         ];
-
-    } // end function
-
-
+    }
 
     /**
-     * Lists all Dissertations models.
+     * Lists all Conferencies models.
      * @return mixed
      */
     public function actionIndex()
     {
-
         $dataProvider = new ActiveDataProvider([
-            'query' => Dissertations::find(),
+            'query' => Conferencies::find(),
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-
-    } // end action
-
-
+    }
 
     /**
-     * Displays a single Dissertations model.
+     * Displays a single Conferencies model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-
-    } // end action
-
-
+    }
 
     /**
-     * Creates a new Dissertations model.
+     * Creates a new Conferencies model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-
-        $model = new Dissertations();
-        $authors = Authors::find()->asArray()->all();
+        $model = new Conferencies();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -88,15 +72,11 @@ class DissertationsController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'authors' => $authors
         ]);
-
-    } // end action
-
-
+    }
 
     /**
-     * Updates an existing Dissertations model.
+     * Updates an existing Conferencies model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -104,7 +84,6 @@ class DissertationsController extends Controller
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -114,13 +93,10 @@ class DissertationsController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-
-    } // end action
-
-
+    }
 
     /**
-     * Deletes an existing Dissertations model.
+     * Deletes an existing Conferencies model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -128,31 +104,24 @@ class DissertationsController extends Controller
      */
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-
-    } // end action
-
-
+    }
 
     /**
-     * Finds the Dissertations model based on its primary key value.
+     * Finds the Conferencies model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Dissertations the loaded model
+     * @return Conferencies the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-
-        if (($model = Dissertations::findOne($id)) !== null) {
+        if (($model = Conferencies::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-
-    } // end function
-
-} // end class
+    }
+}

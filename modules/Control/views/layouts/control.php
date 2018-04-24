@@ -53,11 +53,12 @@ AppAsset::register($this);
             'items' => [
                 //['label' => "<input style='height: 1.5pc; color: #fff; background-color: #2c3337;' placeholder='Поиск' class=\"form-control\" type=\"text\"></input>"],
                 ['label' => 'Публичные данные',
-                    'items' => [
+                    'url' => '/public'
+                    /*'items' => [
                         ['label' => 'Публикации', 'url' => ['/public'], 'options' => [
                             'style' => 'width: 20pc;'
                         ]]
-                    ]
+                    ]*/
                 ],
                 ['label' => 'Обратная связь', 'url' => ['/site/contact']],
                 Yii::$app->user->isGuest ? (
@@ -158,19 +159,28 @@ AppAsset::register($this);
                                         'label' => 'Диссертации',
                                         'url' => '/control/dissertations'
                                     ],
+                                    [
+                                        'label' => 'Редактирование',
+                                        'url' => '/control/editions'
+                                    ],
                                 ]
                             ],
                             [
                                 'label' => 'Научные мероприятия',
                                 'icon' => 'list',
                                 'items' => [
-                                        [
-                                            'label' => 'Доклады'
-                                        ],
                                     [
-                                            'label' => 'Участие в конференциях'
+                                        'label' => 'Доклады'
+                                    ],
+                                    [
+                                        'label' => 'Участие в конференциях',
+                                        'url' => '/control/conferencies'
                                     ]
                                 ]
+                            ],
+                            [
+                                    'label' => 'Научно-популяризаторская работа',
+                                'icon' => 'blackboard'
                             ],
                             [
                                 'label' => 'Сообщения ' .

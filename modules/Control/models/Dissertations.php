@@ -49,16 +49,16 @@ class Dissertations extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'author' => 'Author',
+            'title' => 'Название',
+            'author' => 'Автор',
             'author_id' => 'Author ID',
-            'date' => 'Date',
-            'code' => 'Code',
-            'organisation' => 'Organisation',
-            'speciality' => 'Speciality',
-            'type' => 'Type',
-            'opponents' => 'Opponents',
-            'annotation' => 'Annotation',
+            'date' => 'Дата защиты',
+            'code' => 'Шифр диссертационного совета',
+            'organisation' => 'Организация',
+            'speciality' => 'Специальность',
+            'type' => 'Тип диссертации',
+            'opponents' => 'Оппоненты',
+            'annotation' => 'Аннотация',
         ];
     }
 

@@ -6,20 +6,38 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Conferencies';
+$this->title = 'Конференции';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="conferencies-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <br>
+
+    <h2><?= Html::encode($this->title) ?></h2>
     <?php Pjax::begin(); ?>
 
+    <br>
+    <br>
+
     <p>
-        <?= Html::a('Create Conferencies', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить', ['create'], ['class' => 'button primary big']) ?>
     </p>
+
+    <br>
+
+    <div class="well">
+        <div class="form-group">
+            <label for="usr">Поиск:</label>
+            <input type="text" class="form-control" id="searchinput">
+        </div>
+    </div>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'tableOptions' => [
+            'class' => 'table table-hover',
+            'id' => 'syntable'
+        ],
         'columns' => [
 
             'report_title',
@@ -31,8 +49,22 @@ $this->params['breadcrumbs'][] = $this->title;
             //'link',
             //'thesis_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view}'
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
+
+    <script>
+        $(document).ready(function(){
+            $("#searchinput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#syntable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 </div>

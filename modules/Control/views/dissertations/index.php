@@ -11,7 +11,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="dissertations-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <br>
+
+    <h2><?= Html::encode($this->title) ?></h2>
 
     <br>
     <br>
@@ -24,8 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
 
+    <div class="well">
+        <div class="form-group">
+            <label for="usr">Поиск:</label>
+            <input type="text" class="form-control" id="searchinput">
+        </div>
+    </div>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'tableOptions' => [
+            'class' => 'table table-hover',
+            'id' => 'syntable'
+        ],
         'columns' => [
 
             'title',
@@ -51,4 +64,16 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <?php Pjax::end(); ?>
+
+    <script>
+        $(document).ready(function(){
+            $("#searchinput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#syntable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
 </div>

@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Editions';
+$this->title = 'Редактирование';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="editions-index">
@@ -23,8 +23,21 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Создать', ['create'], ['class' => 'button primary big']) ?>
     </p>
 
+    <br>
+
+    <div class="well">
+        <div class="form-group">
+            <label for="usr">Поиск:</label>
+            <input type="text" class="form-control" id="searchinput">
+        </div>
+    </div>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'tableOptions' => [
+            'class' => 'table table-hover',
+            'id' => 'syntable'
+        ],
         'columns' => [
 
             'chiefeditor',
@@ -38,4 +51,16 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <?php Pjax::end(); ?>
+
+    <script>
+        $(document).ready(function(){
+            $("#searchinput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#syntable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
 </div>

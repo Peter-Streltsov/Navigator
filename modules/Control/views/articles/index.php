@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use kartik\export\ExportMenu;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -11,43 +12,89 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-index">
 
-    <h3>Опубликованные статьи</h3>
+    <br>
 
+    <h2>Опубликованные статьи</h2>
+
+    <br>
     <br>
 
     <?php Pjax::begin(); ?>
 
     <p>
-
-        <div>
-
-        <?= Html::a('Назад', yii\helpers\Url::previous(), ['class' => 'button big primary']) ?>
         <?= Html::a('Добавить статью', ['create'], ['class' => 'button big primary']) ?>
-
-        <label class="dropdown">
-
-            <button type="button" id="dropdownMenuButton" data-toggle="dropdown" class="button big">
-                <b>Экспорт</b> <span class="glyphicon glyphicon-hdd"></span>
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#"><span style="color: red; font-size: 12px;" class="glyphicon glyphicon"> PDF</span></a></li>
-                <li><a href="#"><span style="color: blue; font-size: 12px;" class="glyphicon glyphicon"> JPEG</span></a></li>
-                <!--<li class="divider"></li>-->
-                <li><a href="#"><span style="color: green; font-size: 12px;" class="glyphicon glyphicon"> XLS</span></a></li>
-            </ul>
-        </label>
-    </div>
-
     </p>
 
+    <br>
+
+    <div class="well">
+        <div class="form-group">
+            <label for="usr">Поиск:</label>
+            <input type="text" class="form-control" id="searchinput">
+        </div>
+    </div>
+
+
+    <?php
+    $gridColumns = [
+
+        'id',
+        'title',
+        'subtitle',
+        'publisher',
+        'year',
+        //'doi',
+        [
+            'attribute' => 'authors',
+            'encodeLabel' => false,
+            'format' => 'raw',
+            'value' => function($data) {
+
+                $links = function($auth) {
+
+                    $fio = [];
+
+                    foreach ($auth as $author) {
+                        $fio[$author['id']] = $author['lastname'].' '.mb_substr($author['name'],0,1,"UTF-8")."."
+                            .mb_substr($author['secondname'],0,1,"UTF-8").".";
+                    }
+
+                    return implode(' ', $fio);
+                };
+
+                isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
+
+                return $authors;
+            }
+        ],
+
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'buttons' => [
+                'view' => function($url, $model) {
+                    $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/articles/view','id'=>$model['id']]);;
+                    return Html::a('<span class="glyphicon glyphicon-file"></span>', $buttonurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
+                }
+            ],
+            'template' => '{view}'
+        ],
+    ];
+
+    echo ExportMenu::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => $gridColumns
+    ]);
+    ?>
+
+    <br>
     <br>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'tableOptions' => [
-                'class' => 'table table-hover',
-                ],
+            'class' => 'table table-hover',
+            'id' => 'syntable'
+        ],
         'columns' => [
 
             'id',
@@ -120,6 +167,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <br>
     <br>
+
+    <script>
+        $(document).ready(function(){
+            $("#searchinput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#syntable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 
 
 </div>

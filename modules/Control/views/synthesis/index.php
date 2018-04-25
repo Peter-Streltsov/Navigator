@@ -6,17 +6,14 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Сотрудники';
+$this->title = 'Отчеты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="personnel-index">
+<div class="articles-index">
+
+    <h3>Отчеты</h3>
 
     <br>
-
-    <h3><?= Html::encode($this->title) ?></h3>
-
-    <br>
-
 
     <?php Pjax::begin(); ?>
 
@@ -24,12 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div>
 
-        <?= Html::a('Добавить сотрудника', ['create'], ['class' => 'button big primary']) ?>
-
         <label class="dropdown">
 
             <button type="button" id="dropdownMenuButton" data-toggle="dropdown" class="button big">
-                <b>Экспорт </b> <span class="glyphicon glyphicon-hdd"></span>
+                <b>Экспорт</b> <span class="glyphicon glyphicon-hdd"></span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -43,6 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     </p>
 
+    <br>
+
     <div class="well">
         <div class="form-group">
             <label for="usr">Поиск:</label>
@@ -51,29 +48,39 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $model,
         'tableOptions' => [
+            'id' => 'syntable',
             'class' => 'table table-hover',
-            'id' => 'syntable'
         ],
         'columns' => [
 
-            'id',
             'name',
-            'secondname',
             'lastname',
-            'position',
-            'employment:datetime',
-            'expirience',
-            'age:datetime',
-
+            'habilitation',
             [
-                    'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}'
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'view' => function($url, $model) {
+                        $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/synthesis/persona','id'=>$model['id']]);;
+                        return Html::a('<span class="glyphicon glyphicon-file"></span>',
+                            $buttonurl, [
+                                'class' => 'button primary big',
+                                'title' => Yii::t('yii',
+                                'view')]);
+                    }
+                ],
+                'template' => '{view}'
             ],
         ],
-    ]); ?>
+    ]);
+
+    ?>
     <?php Pjax::end(); ?>
+
+    <br>
+    <br>
+    <br>
 
     <script>
         $(document).ready(function(){
@@ -85,5 +92,6 @@ $this->params['breadcrumbs'][] = $this->title;
             });
         });
     </script>
+
 
 </div>

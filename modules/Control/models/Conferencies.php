@@ -46,13 +46,13 @@ class Conferencies extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'report_title' => 'Report Title',
-            'author' => 'Author',
-            'conferencion_name' => 'Conferencion Name',
-            'date' => 'Date',
-            'report_date' => 'Report Date',
-            'report_type' => 'Report Type',
-            'link' => 'Link',
+            'report_title' => 'Название доклада',
+            'author' => 'Автор',
+            'conferencion_name' => 'Название конференции',
+            'date' => 'Дата проведения конференции',
+            'report_date' => 'Дата доклада',
+            'report_type' => 'Тип доклада',
+            'link' => 'Ссылка на материалы конференции',
             'thesis_id' => 'Thesis ID',
         ];
     }

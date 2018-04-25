@@ -179,8 +179,12 @@ AppAsset::register($this);
                                 ]
                             ],
                             [
-                                    'label' => 'Научно-популяризаторская работа',
-                                'icon' => 'blackboard'
+                                'label' => 'Научно-популяризаторская работа',
+                                'icon' => 'blackboard',
+                                'items' => [
+                                        [
+                                                'label' => 'Лекции'
+                                ]]
                             ],
                             [
                                 'label' => 'Сообщения ' .
@@ -192,7 +196,8 @@ AppAsset::register($this);
                             ],
                             [
                                 'label' =>'Отчеты',
-                                'icon' => 'list-alt'
+                                'icon' => 'list-alt',
+                                'url' => '/control/synthesis'
                             ],
                             [
                                 'label' => 'Параметры приложения',

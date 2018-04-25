@@ -68,6 +68,9 @@ $config = [
         ],
         'public' => [
             'class' => 'app\modules\PublicAccess\PublicModule'
+        ],
+        'gridview' => [
+            'class' => 'kartik\grid\Module'
         ]
     ],
 

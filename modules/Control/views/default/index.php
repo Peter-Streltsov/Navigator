@@ -1,3 +1,9 @@
+<?php
+
+$this->title = 'Общие сведения';
+
+?>
+
 <div class="Control-default-index">
 
     <h3>Общие сведения</h3>
@@ -72,7 +78,7 @@
         //echo "<br><br><br>";
 
         echo \yii\widgets\DetailView::widget([
-                'model' => $table,
+            'model' => $table,
             'options' => [
                     'class' => 'table'
             ],
@@ -100,4 +106,6 @@
         </div>
     </div>
     </p>
+
+    <?=\yii\helpers\VarDumper::dump(Yii::$app->access->isAdmin()) ?>
 </div>

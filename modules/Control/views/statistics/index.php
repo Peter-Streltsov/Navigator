@@ -4,6 +4,12 @@ $this->title = 'Статистика';
 
 ?>
 
+<?php
+$this->params['breadcrumbs'][] = $this->title;
+?>
+
+<?=\yii\widgets\Breadcrumbs::widget(); ?>
+
 <br>
 <h3><?= $this->title ?></h3>
 <br>
@@ -14,7 +20,13 @@ $this->title = 'Статистика';
 <br>
 <div>
 <?= \yii\widgets\DetailView::widget([
-    'model' => $basic
+    'options' => [
+            'class' => 'table'
+        ],
+    'model' => $basic,
+    /*'attributes' => [
+            'Meanindex' => 'Средний индекс'
+    ]*/
 ]); ?>
 
 
@@ -52,5 +64,13 @@ $this->title = 'Статистика';
             'credits' => ['enabled' => false]
         ],
     ]) ?>
+
+    <?php
+    echo \yii\widgets\DetailView::widget([
+            'model' => $advanced
+    ]);
+    ?>
+
+
 
 </div>

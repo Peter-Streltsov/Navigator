@@ -24,6 +24,10 @@ class DefaultController extends Controller
     public function actionIndex()
     {
 
+        if (isset($_GET['denyrequest'])) {
+            \Yii::$app->session->setFlash('danger', 'Доступ к запрашиваемому ресурсу невозможен');
+        }
+
         $user = \Yii::$app->user->getIdentity();
         $author = Authors::find()->where(['user_id' => $user->id])->one();
 

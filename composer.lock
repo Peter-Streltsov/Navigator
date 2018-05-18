@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fab99d0ce4d4e7fe0a1b3445590bd75d",
+    "content-hash": "25f011bfc2a47292ae6fd9e623bb5ab1",
     "packages": [
         {
             "name": "3ch3r46/bootui-datetimepicker",
@@ -1189,6 +1189,71 @@
             ],
             "description": "Scopus API for PHP (Unofficial)",
             "time": "2017-03-29T12:54:46+00:00"
+        },
+        {
+            "name": "markrogoyski/math-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/markrogoyski/math-php.git",
+                "reference": "af6690909a433b0b3ce9ae840af9594ee31f1019"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/markrogoyski/math-php/zipball/af6690909a433b0b3ce9ae840af9594ee31f1019",
+                "reference": "af6690909a433b0b3ce9ae840af9594ee31f1019",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "6.*",
+                "satooshi/php-coveralls": "^2.0",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MathPHP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Rogoyski",
+                    "email": "mark@rogoyski.com",
+                    "homepage": "https://github.com/markrogoyski",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Kevin Nowaczyk",
+                    "role": "Contributor"
+                },
+                {
+                    "name": "Jakob Sandberg",
+                    "role": "Contributor"
+                }
+            ],
+            "description": "Math Library for PHP. Features descriptive statistics and regressions; Continuous and discrete probability distributions; Linear algebra with matrices and vectors, Numerical analysis; special mathematical functions; Algebra",
+            "homepage": "https://github.com/markrogoyski/math-php/",
+            "keywords": [
+                "algebra",
+                "combinatorics",
+                "distributions",
+                "linear algebra",
+                "math",
+                "mathematics",
+                "matrix",
+                "numerical analysis",
+                "probability",
+                "regressions",
+                "statistics"
+            ],
+            "time": "2018-05-10T03:40:42+00:00"
         },
         {
             "name": "miloschuman/yii2-highcharts-widget",
@@ -5820,6 +5885,7 @@
         "kartik-v/yii2-widget-datepicker": 20,
         "kartik-v/yii2-widget-sidenav": 20,
         "kasparsj/scopus-search-api": 20,
+        "markrogoyski/math-php": 20,
         "schmunk42/yii2-giiant": 0
     },
     "prefer-stable": false,

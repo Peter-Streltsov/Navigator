@@ -35,7 +35,13 @@ class Access extends Component
     public function isAdmin()
     {
 
-        return static::$user == 'administrator';
+        if (static::$user == 'supervisor' || static::$user == 'administrator') {
+            $access = true;
+        } else {
+            $access = false;
+        }
+
+        return static::$user == 'supervisor';
 
     } // end function
 

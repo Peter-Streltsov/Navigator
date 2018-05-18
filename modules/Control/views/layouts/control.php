@@ -54,11 +54,6 @@ AppAsset::register($this);
                 //['label' => "<input style='height: 1.5pc; color: #fff; background-color: #2c3337;' placeholder='Поиск' class=\"form-control\" type=\"text\"></input>"],
                 ['label' => 'Публичные данные',
                     'url' => '/public'
-                    /*'items' => [
-                        ['label' => 'Публикации', 'url' => ['/public'], 'options' => [
-                            'style' => 'width: 20pc;'
-                        ]]
-                    ]*/
                 ],
                 ['label' => 'Обратная связь', 'url' => ['/site/contact']],
                 Yii::$app->user->isGuest ? (
@@ -105,6 +100,126 @@ AppAsset::register($this);
 
                     <?php
 
+                    $items = [
+                        [
+                            'label' => 'Общие сведения',
+                            'icon' => 'home',
+                            'url' => '/control'
+                        ],
+                        [
+                            'label' => 'Статистика',
+                            'icon' => 'stats',
+                            'url' => '/control/statistics'
+                        ],
+                        [
+                            'label' => 'Авторы и сотрудники',
+                            'icon' => 'user',
+                            'items' => [
+                                [
+                                    'label' => 'Зарегистрированные пользователи',
+                                    'url' => '/control/users'
+                                ],
+                                [
+                                    'label' => 'Сотрудники',
+                                    'url' => '/control/personnel'
+                                ],
+                                [
+                                    'label' => 'Авторы',
+                                    'url' => '/control/authors'
+                                ]
+                            ]
+                        ],
+                        [
+                            'label' => 'Публикации',
+                            'icon' => 'book',
+                            'items' => [
+                                [
+                                    'label' => 'Статьи',
+                                    'url' => '/control/articles'
+                                ],
+                                [
+                                    'label' => 'Монографии',
+                                    'url' => '/control/monographies'
+                                ],
+                                [
+                                    'label' => 'Диссертации',
+                                    'url' => '/control/dissertations'
+                                ],
+                                [
+                                    'label' => 'Редактирование',
+                                    'url' => '/control/editions'
+                                ],
+                            ]
+                        ],
+                        [
+                            'label' => 'Научные мероприятия',
+                            'icon' => 'list',
+                            'items' => [
+                                [
+                                    'label' => 'Доклады'
+                                ],
+                                [
+                                    'label' => 'Участие в конференциях',
+                                    'url' => '/control/conferencies'
+                                ]
+                            ]
+                        ],
+                        [
+                            'label' => 'Научно-популяризаторская работа',
+                            'icon' => 'blackboard',
+                            'items' => [
+                                [
+                                    'label' => 'Лекции'
+                                ]]
+                        ],
+                        [
+                            'label' => 'Сообщения ' .
+                                '<span style="background-color: red;" class="badge badge-light">' .
+                                Messages::find()->where(['read' => null])->count() .
+                                '</span>',
+                            'icon' => 'comment',
+                            'url' => '/control/messages'
+                        ],
+                        [
+                            'label' =>'Отчеты',
+                            'icon' => 'list-alt',
+                            'url' => '/control/admin/synthesis'
+                        ],
+                        [
+                            'label' => 'Параметры',
+                            'icon' => 'certificate',
+                            'items' => [
+                                [
+                                    'label' => 'Данные организации',
+                                    'url' => '/control/orgdata'
+                                ],
+                                [
+                                    'label' => 'Перечень должностей',
+                                    'url' => '/control/positions'
+                                ],
+                                [
+                                    'label' => 'Индексы',
+                                    'items' => [
+                                        [
+                                            'label' => 'Индексы ПНРД - статьи',
+                                            'url' => '/control/indexes?class=articles'
+                                        ],
+                                    ]
+                                ],
+                            ]
+                        ],
+                        [
+                            'label' => 'WebAPI',
+                            'icon' => 'cloud',
+                            'items' => [
+                                [
+                                    'label' => 'Scopus',
+                                    'url' => '/control/webapi/scopusapi'
+                                ]
+                            ]
+                        ],
+                    ];
+
                     echo SideNav::widget([
                         'type' => SideNav::TYPE_DEFAULT,
                         'encodeLabels' => false,
@@ -114,125 +229,7 @@ AppAsset::register($this);
                         'hideEmptyItems' => false,
                         'containerOptions' => [
                         ],
-                        'items' => [
-                            [
-                                'label' => 'Общие сведения',
-                                'icon' => 'home',
-                                'url' => '/control'
-                            ],
-                            [
-                                'label' => 'Статистика',
-                                'icon' => 'stats',
-                                'url' => '/control/statistics'
-                            ],
-                            [
-                                'label' => 'Авторы и сотрудники',
-                                'icon' => 'user',
-                                'items' => [
-                                    [
-                                        'label' => 'Зарегистрированные пользователи',
-                                        'url' => '/control/users'
-                                    ],
-                                    [
-                                        'label' => 'Сотрудники',
-                                        'url' => '/control/personnel'
-                                    ],
-                                    [
-                                        'label' => 'Авторы',
-                                        'url' => '/control/authors'
-                                    ]
-                                ]
-                            ],
-                            [
-                                'label' => 'Публикации',
-                                'icon' => 'book',
-                                'items' => [
-                                    [
-                                        'label' => 'Статьи',
-                                        'url' => '/control/articles'
-                                    ],
-                                    [
-                                        'label' => 'Монографии',
-                                        'url' => '/control/monographies'
-                                    ],
-                                    [
-                                        'label' => 'Диссертации',
-                                        'url' => '/control/dissertations'
-                                    ],
-                                    [
-                                        'label' => 'Редактирование',
-                                        'url' => '/control/editions'
-                                    ],
-                                ]
-                            ],
-                            [
-                                'label' => 'Научные мероприятия',
-                                'icon' => 'list',
-                                'items' => [
-                                    [
-                                        'label' => 'Доклады'
-                                    ],
-                                    [
-                                        'label' => 'Участие в конференциях',
-                                        'url' => '/control/conferencies'
-                                    ]
-                                ]
-                            ],
-                            [
-                                'label' => 'Научно-популяризаторская работа',
-                                'icon' => 'blackboard',
-                                'items' => [
-                                        [
-                                                'label' => 'Лекции'
-                                ]]
-                            ],
-                            [
-                                'label' => 'Сообщения ' .
-                                    '<span style="background-color: red;" class="badge badge-light">' .
-                                    Messages::find()->where(['read' => null])->count() .
-                                    '</span>',
-                                'icon' => 'comment',
-                                'url' => '/control/messages'
-                            ],
-                            [
-                                'label' =>'Отчеты',
-                                'icon' => 'list-alt',
-                                'url' => '/control/synthesis'
-                            ],
-                            [
-                                'label' => 'Параметры приложения',
-                                'icon' => 'certificate',
-                                'items' => [
-                                    [
-                                        'label' => 'Данные организации',
-                                        'url' => '/control/orgdata'
-                                    ],
-                                    [
-                                            'label' => 'Перечень должностей',
-                                        'url' => '/control/positions'
-                                    ],
-                                    [
-                                        'label' => 'Индексы',
-                                        'items' => [
-                                                [
-                                                    'label' => 'Индексы ПНРД - статьи',
-                                                    'url' => '/control/indexes?class=articles'
-                                                ],
-                                            ]
-                                    ],
-                                ]
-                            ],
-                            [
-                                    'label' => 'WebAPI',
-                                'icon' => 'cloud',
-                                'items' => [
-                                        [
-                                            'label' => 'Scopus',
-                                            'url' => '/control/webapi/scopusapi'
-                                        ]
-                                ]
-                            ],
-                        ]
+                        'items' => $items
                     ]);
 
                     ?>

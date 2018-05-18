@@ -27,7 +27,8 @@
         "kartik-v/yii2-context-menu": "*",
         "et-soft/yii2-widget-select-year": "*",
         "guzzlehttp/guzzle": "6.2.1",
-        "kasparsj/scopus-search-api": "dev-master"
+        "kasparsj/scopus-search-api": "dev-master",
+        "markrogoyski/math-php": "dev-master"
 
     },
     "require-dev": {

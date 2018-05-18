@@ -11,15 +11,15 @@ class StatisticsController extends Controller
     public function actionIndex()
     {
 
-        $basicdata = Statistics::getBasic();
+        $basic = Statistics::getBasic();
 
-        $advanceddata = Statistics::getAdvanced();
+        $advanced = Statistics::getAdvanced();
 
         $timeline = Statistics::indexTimeline();
 
         return $this->render('index', [
-            'basic' => $basicdata,
-            'advanced' => $advanceddata,
+            'basic' => $basic,
+            'advanced' => $advanced,
             'timeline' => $timeline
         ]);
 

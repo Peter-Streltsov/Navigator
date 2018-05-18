@@ -37,7 +37,7 @@
         ?>
     </div>
     <div class="col-xs-12 col-md-5">
-        <img style="max-height: 20pc;" src="/images/1.jpg" class="img-rounded">
+        <img style="width: 15pc; height: 20pc;" src="/images/1.jpg" class="img-rounded">
     </div>
 </div>
 

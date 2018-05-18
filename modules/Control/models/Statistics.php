@@ -4,6 +4,7 @@ namespace app\modules\Control\models;
 
 use yii\base\Model;
 use app\modules\Control\models\PNRD;
+use MathPHP\Statistics\Average;
 
 class Statistics extends Model
 {
@@ -17,8 +18,15 @@ class Statistics extends Model
         $authors = (Authors::find()->count());
 
         $basic = [];
+
+        // средний индекс
         $basic['meanindex'] = PNRD::meanIndex();
+
+        // статей на одного автора
         $basic['meanarticles'] = (float)(Articles::find()->count() / $authors);
+
+        $basic['meanarticles2'] = Average::mean([]);
+
         $basic['meanmonographies'] = round((float)(Monographies::find()->count() / $authors), 2);
 
         return $basic;
@@ -26,15 +34,26 @@ class Statistics extends Model
     } // end function
 
 
+
     /**
+     * provides advanced statistics data
+     *
      * @return array
      */
     public static function getAdvanced()
     {
 
         $advanced = [];
+
+        // philosophy doctors
         $phd = [];
+
+        // doctors of sciences
         $dsc = [];
+
+        $mns = [];
+        $ns = [];
+        $sns = [];
 
         $personnel = Personnel::find()->asArray()->all();
 
@@ -46,6 +65,18 @@ class Statistics extends Model
             }
         }
 
+        foreach ($personnel as $staff) {
+            if ($staff['position'] == 'младший научный сотрудник') {
+
+            } elseif ($staff['position'] == 'научный сотрудник') {
+
+            } elseif ($staff['position'] == 'ведущий научный сотрудник') {
+
+            }
+        }
+
+
+
         foreach ($phd as $author) {
 
         }
@@ -55,10 +86,7 @@ class Statistics extends Model
         }
 
         //return $personnel;
-        return $phd;
-        //return $dsc;
-        //return $authors;
-        //return $advanced;
+        return $advanced;
 
     } // end function
 
@@ -67,7 +95,7 @@ class Statistics extends Model
     /**
      * @return array
      */
-    public function indexTimeline()
+    public static function indexTimeline()
     {
 
         $timeline = [];

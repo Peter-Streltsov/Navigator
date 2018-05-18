@@ -64,7 +64,12 @@ $config = [
 
     'modules' => [
         'control' => [
-            'class' => 'app\modules\Control\ControlModule'
+            'class' => 'app\modules\Control\ControlModule',
+            'modules' => [
+                'admin' => [
+                    'class' => 'app\modules\Control\modules\Admin\Admin'
+                ],
+            ],
         ],
         'public' => [
             'class' => 'app\modules\PublicAccess\PublicModule'

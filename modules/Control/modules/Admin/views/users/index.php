@@ -11,6 +11,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-index">
 
+    <br>
+
     <h3>Зарегистрированные пользователи</h3>
 
     <br>
@@ -20,8 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
 
     <div>
-
-        <?= Html::a('Назад', yii\helpers\Url::previous(), ['class' => 'button big primary']) ?>
         <?= Html::a('Создать пользователя', ['create'], ['class' => 'button big primary']) ?>
 
         <label class="dropdown">
@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view}',
                 'buttons' => [
                         'view' => function($url, $model) {
-                            $viewurl = Yii::$app->getUrlManager()->createUrl(['/control/users/view','id'=>$model['id']]);
+                            $viewurl = Yii::$app->getUrlManager()->createUrl(['/control/admin/users/view','id'=>$model['id']]);
                             return Html::a('<span class="glyphicon glyphicon-file"></span>', $viewurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
                         }
                 ]

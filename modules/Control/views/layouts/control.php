@@ -117,7 +117,7 @@ AppAsset::register($this);
                             'items' => [
                                 [
                                     'label' => 'Зарегистрированные пользователи',
-                                    'url' => '/control/users'
+                                    'url' => '/control/admin/users'
                                 ],
                                 [
                                     'label' => 'Сотрудники',
@@ -178,7 +178,7 @@ AppAsset::register($this);
                                 Messages::find()->where(['read' => null])->count() .
                                 '</span>',
                             'icon' => 'comment',
-                            'url' => '/control/messages'
+                            'url' => '/control/admin/messages'
                         ],
                         [
                             'label' =>'Отчеты',
@@ -191,11 +191,11 @@ AppAsset::register($this);
                             'items' => [
                                 [
                                     'label' => 'Данные организации',
-                                    'url' => '/control/orgdata'
+                                    'url' => '/control/admin/orgdata'
                                 ],
                                 [
                                     'label' => 'Перечень должностей',
-                                    'url' => '/control/positions'
+                                    'url' => '/control/admin/positions'
                                 ],
                                 [
                                     'label' => 'Индексы',

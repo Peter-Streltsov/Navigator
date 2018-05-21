@@ -14,6 +14,11 @@ a {
     color: #32a873;
 }
 
+
+
+/**
+* menu items
+ */
 ul.nav-pills:nth-child(1) li.active a.kv-toggle {
     background-color: #32a873;
 }
@@ -21,6 +26,8 @@ ul.nav-pills:nth-child(1) li.active a.kv-toggle {
 li.active:nth-child(7) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1) {
     color: #fff;
 }
+
+
 
 ul.pagination li a {
     color: #32a873;
@@ -31,6 +38,20 @@ ul.pagination li.active a {
     background-color: #32a873;
 }
 
+/*
+* modal window - read articles
+ */
+div.in:nth-child(5) > div:nth-child(1) > div:nth-child(1) {
+    margin-left: -20pc;
+    margin-top: 4pc;
+    margin-bottom: -5pc;
+    width: 80pc;
+}
+
+
+/*
+* table links
+ */
 nav div div a {
     color: #32a873;
 }
@@ -44,7 +65,7 @@ td a {
 }
 
 select option {
-    width: 30pc;
+    /*width: 30pc;*/
 }
 
 .wrap {

@@ -58,22 +58,29 @@ class AuthorsController extends Controller
     }
 
     /**
-     * Creates a new Authors model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Creates a new Authors model
+     * If creation is successful, the browser will be redirected to the 'view' page
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Authors();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->access->isAdmin()) {
+            $model = new Authors();
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            return $this->redirect('/control?denyrequest=1');
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
+    } // end action
+
+
 
     /**
      * Updates an existing Authors model.

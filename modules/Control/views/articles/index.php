@@ -43,6 +43,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'subtitle',
         'publisher',
         'year',
+        //'file',
+        /*[
+            'attribute' => 'file',
+            'value' => function($data) {
+        \yii\helpers\VarDumper::dump($data);
+            }
+        ],*/
         //'doi',
         [
             'attribute' => 'authors',
@@ -68,16 +75,6 @@ $this->params['breadcrumbs'][] = $this->title;
             }
         ],
 
-        [
-            'class' => 'yii\grid\ActionColumn',
-            'buttons' => [
-                'view' => function($url, $model) {
-                    $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/articles/view','id'=>$model['id']]);;
-                    return Html::a('<span class="glyphicon glyphicon-file"></span>', $buttonurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
-                }
-            ],
-            'template' => '{view}'
-        ],
     ];
 
     echo ExportMenu::widget([
@@ -109,6 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw',
                     'value' => function($data) {
 
+                                // generates 'view' buttons for article authors
                                 $links = function($auth) {
 
                                     $top = "<label class=\"dropdown\">";
@@ -123,9 +121,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ."."
                                             .mb_substr($author['secondname'],0,1,"UTF-8")
                                             ."."
-                                            //.$author['name'].' '.$author['secondname']
-                                            //.' '
-                                            //.$author['lastname']
                                             .'</span>';
                                         $label = "<button type=\"button\" id=\"dropdownMenuButton\" style='width: 12pc;' data-toggle=\"dropdown\" class=\"btn btn-default\">".$fio[$author['id']]." <span class='caret'></span>"."</button>".$ul;
                                         $tag['br'] = "<br>";
@@ -151,10 +146,31 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                         'view' => function($url, $model) {
                                     $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/articles/view','id'=>$model['id']]);;
-                                    return Html::a('<span class="glyphicon glyphicon-file"></span>', $buttonurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
-                                    }
+                                    return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $buttonurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
+                                    },
+                        'file' => function($url, $model) {
+                            ob_start();
+                            \yii\bootstrap\Modal::begin([
+                                'header' => "<h2>$model->title</h2><br><h4>$model->subtitle</h4>",
+                                'size' => 'large',
+                                'toggleButton' => [
+                                    'label' => "<span class='glyphicon glyphicon-file'></span>",
+                                    'class' => 'button primary big'
+                                ],
+                                'footer' => 'Close'
+                            ]);
+
+                            echo \yii2assets\pdfjs\PdfJs::widget([
+                                'url' => \yii\helpers\Url::base().'/upload/lab1.pdf'
+                            ]);
+
+                            \yii\bootstrap\Modal::end();
+                            //$modal = ob_get_contents();
+                            $modal = ob_get_clean();
+                            return $modal;
+                        }
                     ],
-                'template' => '{view}'
+                'template' => "{view}<br><br>{file}"
             ],
         ],
     ]);

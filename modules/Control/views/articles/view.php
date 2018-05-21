@@ -14,13 +14,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-view">
 
+    <br>
+
     <h3><?= Html::encode($this->title) ?></h3>
 
     <br>
+    <br>
 
     <p>
-        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+        <?= Html::a("Редактировать <span class='glyphicon glyphicon-edit'></span>", ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
+        <?= Html::a("Удалить <span class='glyphicon glyphicon-remove-circle'></span>", ['delete', 'id' => $model->id], [
             'class' => 'button primary danger big',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',

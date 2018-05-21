@@ -11,6 +11,8 @@ use yii\bootstrap\ActiveForm;
 
 <div class="articles-form">
 
+    <?=\yii\helpers\VarDumper::dump($_POST); ?>
+
     <?php $form = ActiveForm::begin(); ?>
 
     <br>
@@ -22,6 +24,9 @@ use yii\bootstrap\ActiveForm;
     ?>
 
     <div class="row">
+
+        <div class="col-lg-1"></div>
+
         <div class="col-lg-10">
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
         </div>
@@ -30,12 +35,18 @@ use yii\bootstrap\ActiveForm;
 
     <!-- Subtite input - text area (max 255 chars) -->
     <div class="row">
+
+        <div class="col-lg-1"></div>
+
         <div class="col-lg-10">
             <?= $form->field($model, 'subtitle')->textArea(['rows' => 2, 'maxlength' => true]) ?>
         </div>
     </div>
 
     <div class="row">
+
+        <div class="col-lg-1"></div>
+
         <div class="col-lg-10">
             <?= $form->field($model, 'publisher')->textInput(['maxlength' => true]) ?>
         </div>
@@ -44,6 +55,9 @@ use yii\bootstrap\ActiveForm;
 
     <!-- year publishing and DOI index input - in one row -->
     <div class="row">
+
+        <div class="col-lg-1"></div>
+
         <div class="col-lg-3">
             <?= $form->field($model, 'year')->widget(etsoft\widgets\YearSelectbox::classname(), [
                 'yearStart' => -10,
@@ -61,6 +75,8 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
 
+        <div class="col-lg-1"></div>
+
         <div class="col-lg-7">
 
     <?= $form->field($model, 'class')->dropDownList($classes_items, [
@@ -74,9 +90,16 @@ use yii\bootstrap\ActiveForm;
 
     <div class="form-group">
 
-        <br>
-        <?= Html::submitButton('Сохранить', ['class' => 'button big primary']) ?>
-        <br>
+        <div class="row">
+
+            <div class="col-lg-1"></div>
+
+            <div class="col-lg-5">
+
+            <br>
+            <?= Html::submitButton('Сохранить', ['class' => 'button big primary']) ?>
+            <br>
+            </div>
 
     </div>
 
@@ -87,39 +110,79 @@ use yii\bootstrap\ActiveForm;
 
 </div>
 
+<br>
+<br>
+
 <div class="articles-form">
 
-    <br>
+    <div class="row">
 
-    <div class="form-inline">
+        <div class="col-lg-1"></div>
 
-        <?php
+        <div class="col-lg-6">
 
-        foreach ($model_authors['data'] as $author) {
-            echo Html::beginForm(['articles/update', 'id' => $model_authors->id, 'authid' => $author->id], 'post');
-            echo Html::input('text', 'username', $author->name.' '.$author->lastname, ['class' => 'form-control']);
-            echo Html::input('hidden', 'delete', '1');
-            echo Html::input('hidden', 'author', $author->id);
-            echo Html::submitButton('Удалить', ['class' => 'button primary big']);
-            echo Html::endForm();
-            echo "<br>";
-        }
-        ?>
+            <h4>Авторы:</h4>
+            <br>
 
-    </div>
+            <div class="form-inline">
 
-    <div style="width:30pc;" class="form-group">
+                <?php
 
+                foreach ($model_authors['data'] as $author) {
+                    echo Html::beginForm(['articles/update', 'id' => $model_authors->id, 'authid' => $author->id], 'post');
+                    echo Html::input('text', 'username', $author->name.' '.$author->lastname, ['class' => 'form-control']);
+                    echo Html::input('hidden', 'delete', '1');
+                    echo Html::input('hidden', 'author', $author->id);
+                    echo Html::submitButton('Удалить', ['class' => 'button primary big']);
+                    echo Html::endForm();
+                    echo "<br>";
+                }
+                ?>
 
-        <br>
-        <br>
-        <h4>Добавить автора</h4>
-        <br>
+            </div>
 
-        <?php $form = ActiveForm::begin(); ?>
-        <?php echo $form->field($model, 'authors')->dropDownList($author_items); ?>
-        <?= Html::submitButton('Добавить', ['class' => 'button primary big']); ?>
-        <?php ActiveForm::end(); ?>
+            <div class="form-group">
+
+                <br>
+                <h4>Добавить автора</h4>
+                <br>
+
+                <?php $form = ActiveForm::begin(); ?>
+                <?= $form->field($model, 'authors')->dropDownList($author_items); ?>
+                <?= Html::submitButton('Добавить', ['class' => 'button primary big']); ?>
+                <?php ActiveForm::end(); ?>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <?php
+
+            if (isset($model->file)) {
+                if ($model->file == '') {
+                    $modal = "<h5 style='color: red;'>Имя файла не задано!</h5>";
+                } else {
+                    $modal = "<h5 style='color: green;'>Прикрепленный файл</h5>";
+                }
+            } else {
+                $modal = "<h5 style='color: red;'>Файл не загружен</h5>";
+            }
+
+            \yii\bootstrap\Modal::begin([
+                'header' => 'Файл статьи',
+                'toggleButton' => ['label' => $modal]
+            ]);
+
+            $uploadform = ActiveForm::begin();
+            Html::hiddenInput('upload_flag', '1');
+            echo $uploadform->field($model, 'file')->fileInput();
+            echo Html::submitButton('Сохранить', ['class' => 'button']);
+            $uploadform::end();
+
+            \yii\bootstrap\Modal::end();
+
+            ?>
+        </div>
 
     </div>
 

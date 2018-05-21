@@ -15,6 +15,10 @@ $config = [
         '@sibilino/y2dygraphs' => '@vendor/sibilino/yii2-dygraphswidget/widget'
     ],
     'components' => [
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            'defaultRoles' => ['user', 'administrator', 'supervisor']
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'Y8rKQYVMCvgPK-0Kf3ls6GJw30gSJFEa',
@@ -76,7 +80,10 @@ $config = [
         ],
         'gridview' => [
             'class' => 'kartik\grid\Module'
-        ]
+        ],
+        'pdfjs' => [
+            'class' => '\yii2assets\pdfjs\Module'
+        ],
     ],
 
     'params' => $params,

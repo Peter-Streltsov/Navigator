@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\controllers;
+namespace app\modules\Control\modules\Admin\controllers;
 
 use app\modules\Control\models\Articles;
 use app\modules\Control\models\Authors;

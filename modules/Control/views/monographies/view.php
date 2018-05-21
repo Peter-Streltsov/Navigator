@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'subtitle',
             'year',
-            'doi',
+            'isbn',
             'file',
         ],
     ]) ?>

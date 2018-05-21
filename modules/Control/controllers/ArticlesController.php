@@ -4,7 +4,9 @@ namespace app\modules\Control\controllers;
 
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
+use app\modules\Control\models\Fileupload;
 use app\modules\Control\models\IndexesArticles;
+use app\modules\Control\models\Upload;
 use app\widgets\Alert;
 use Yii;
 use app\modules\Control\models\Articles;
@@ -146,6 +148,12 @@ class ArticlesController extends Controller
     public function actionUpdate($id)
     {
 
+        if (Yii::$app->request->post() && isset($_POST['upload'])) {
+            $upload = new Upload();
+            $article = Articles::find()->where(['id' => $id])->one();
+            $file = new Fileupload();
+        }
+
         if (Yii::$app->request->post()) {
 
             if (isset($_POST['delete']) && $_POST['delete'] == 1) {
@@ -202,57 +210,6 @@ class ArticlesController extends Controller
         ]);
 
     } // end action
-
-
-    /**
-     * adding author
-     *
-     * @param $id
-     * @return string
-     */
-    public function actionAuthors($id)
-    {
-
-        if (Yii::$app->request->post()) {
-
-            if (isset($_POST['delete']) && $_POST['delete'] == 1) {
-                $author_delete = ArticlesAuthors::find()->where([
-                    'author_id' => $_POST['author'],
-                    'article_id' => $id
-                ])->one();
-                $author_delete->delete();
-                Yii::$app->session->setFlash('danger', "Автор удален");
-            }
-
-            if (isset($_POST['Articles'])) {
-                $newauthor = new ArticlesAuthors();
-                $newauthor->article_id = $id;
-                $newauthor->author_id = $_POST['Articles']['authors'];
-                $newauthor->save();
-                Yii::$app->session->setFlash('success', "Автор добавлен");
-            }
-
-        }
-
-        $model = Articles::find($id)
-            ->where(['articles.id' => $id])
-            ->joinWith('data')
-            ->all();
-
-        $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
-
-        $items = \yii\helpers\ArrayHelper::map($authors, 'id', function($items) {
-            return $items['name']. ' ' . $items['lastname'];
-        });
-
-
-        return $this->render('authors', [
-            'model' => $model[0],
-            'authors' => $authors,
-            'author_items' => $items
-        ]);
-
-    } // end function
 
 
 

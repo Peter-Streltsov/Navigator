@@ -57,7 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                             'id' => $model->id
                                         ],
                                         [
-                                            'class' => 'button primary big'
+                                            'class' => 'button primary big',
+                                            'style' => 'border-radius: 3pc;'
                                         ]);
                             } else {
                                 return '';

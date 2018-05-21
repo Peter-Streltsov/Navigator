@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $model->name.' '.$model->lastname;
         'attributes' => [
             'id',
             'username',
-            'password',
+            //'password',
             'name',
             'lastname',
             'access_token',

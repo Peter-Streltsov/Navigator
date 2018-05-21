@@ -19,7 +19,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'year')->textInput() ?>
 
-    <?= $form->field($model, 'doi')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'isbn')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'file')->textInput() ?>
 

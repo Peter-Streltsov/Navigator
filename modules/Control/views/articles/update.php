@@ -12,6 +12,8 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="articles-update">
 
+    <br>
+
     <h3><?= Html::encode($this->title) ?></h3>
 
     <br>

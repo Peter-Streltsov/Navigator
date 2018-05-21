@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\controllers;
+namespace app\modules\Control\modules\Admin\controllers;
 
 use app\modules\Control\models\Accesstokens;
 use app\modules\Control\models\Authors;
@@ -179,7 +179,7 @@ class UsersController extends Controller
         if (Authors::find()->where(['user_id' => $id])->exists()) {
 
             Yii::$app->session->setFlash('danger', "Автор с таким идентификатором пользоватея уже существует");
-            return $this->redirect('/control/users');
+            return $this->redirect('/control/admin/users');
 
         }
 
@@ -216,7 +216,7 @@ class UsersController extends Controller
         if (Personnel::find()->where(['user_id' => $id])->exists()) {
 
             Yii::$app->session->setFlash('danger', "Сотрудник с таким идентификатором пользоватея уже существует");
-            return $this->redirect('/control/users');
+            return $this->redirect('/control/admin/users');
 
         }
 

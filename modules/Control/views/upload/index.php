@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'encodeLabel' => false,
 ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'author_id',
@@ -45,7 +45,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view}',
                 'buttons' => [
                         'view' => function($url, $model) {
-                            return Html::a('Прикрепленный файл', '/upload/' . $model->uploadedfile, ['class' => 'button primary big']);
+                            ob_start();
+                            \yii\bootstrap\Modal::begin(
+                                    [
+                                            'toggleButton' => [
+                                                    'label' => 'file'
+                                            ]
+                                    ]
+                            );
+                            echo Html::a('Прикрепленный файл', '/upload/' . $model->uploadedfile, ['class' => 'button primary big']);
+                            \yii\bootstrap\Modal::end();
+                            $modal = ob_get_contents();
+                            ob_get_clean();
+                            return $modal;
                         }
                 ],
             ],

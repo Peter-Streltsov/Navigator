@@ -84,22 +84,31 @@ class UploadController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Upload();
+
+        if (isset($_POST['upload_flag'])) {
+
+            $file = new Fileupload();
+            $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
+            $file->upload();
+            $model->uploadedfile = (string)$file->name;
+            $model->load(Yii::$app->request->post());
+            $model->save();
+            return $this->redirect('view?id=' . $model->id);
+
+            /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }*/
+
+        }
 
         $user = Yii::$app->user->getIdentity();
         $author = Authors::find()->where(['user_id' => $user->id])->one();
         $classes = UploadCategories::find()->asArray()->all();
         $classes = ArrayHelper::map($classes, 'id', 'class');
-
         $file = new Fileupload();
-        $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
-        $file->upload();
-        $model->uploadedfile = (string)$file->name;
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
 
         return $this->render('create', [
             'model' => $model,

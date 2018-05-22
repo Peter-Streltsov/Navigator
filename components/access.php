@@ -16,8 +16,11 @@ class Access extends Component
 
     public function __construct()
     {
-
-        static::$user = (\Yii::$app->user->getIdentity())->access_token;;
+        if (\Yii::$app->user->getIdentity()) {
+            static::$user = (\Yii::$app->user->getIdentity())->access_token;
+        } else {
+            static::$user = 'guest';
+        }
 
     } // end construct
 
@@ -41,7 +44,8 @@ class Access extends Component
             $access = false;
         }
 
-        return static::$user == 'supervisor';
+        return $access;
+        //return static::$user == 'supervisor';
 
     } // end function
 

@@ -2,6 +2,8 @@
 
 namespace app\modules\Control;
 
+use yii\helpers\Url;
+
 /**
  * Control module definition class
  */
@@ -21,6 +23,20 @@ class ControlModule extends \yii\base\Module
 
         $this->layout = 'control';
 
-        // custom initialization code goes here
-    }
-}
+    } // end function
+
+
+
+    public function beforeAction($action)
+    {
+
+        if(!\Yii::$app->access->isAdmin()) {
+            \Yii::$app->getResponse()->redirect(Url::to('/site/index?denyrequest=1'));
+            return false;
+        }
+
+        return true;
+
+    } // end function
+
+} // end module

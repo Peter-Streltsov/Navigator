@@ -35,9 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <br>
+    <br>
+    <br>
 
     <?= DetailView::widget([
         'model' => $model,
+        'options' => [
+                'class' => 'table'
+        ],
         'attributes' => [
             'id',
             'title',
@@ -64,6 +69,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ],
     ]);
+
+    ?>
+
+    <br>
+    <br>
+    <br>
+
+    <?php
+
+    if (isset($model->file)) {
+        echo \yii2assets\pdfjs\PdfJs::widget([
+                'url' => '/upload/articles/' . $model->file,
+                'height' => '50pc'
+            ]
+        );
+    }
 
     ?>
 

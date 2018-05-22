@@ -1,5 +1,9 @@
 <?php
 
+/* @var $data  */
+/* @var $this \yii\web\View */
+/* @var $table array */
+
 $this->title = 'Общие сведения';
 
 ?>
@@ -17,11 +21,6 @@ $this->title = 'Общие сведения';
         <?php
 
         $user =  Yii::$app->user->getIdentity();
-        
-        //\yii\helpers\VarDumper::dump($user);
-
-        //\yii\helpers\VarDumper::dump(Yii::$app->access->isAdmin());
-
 
         echo \miloschuman\highcharts\Highcharts::widget([
             'scripts' => [

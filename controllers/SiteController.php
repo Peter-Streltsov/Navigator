@@ -56,14 +56,22 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Displays homepage
      *
      * @return string
      */
     public function actionIndex()
     {
+
+        if (isset($_GET['denyrequest'])) {
+            \Yii::$app->session->setFlash('danger', 'Доступ к запрашиваемому ресурсу невозможен');
+        }
+
         return $this->render('index');
-    }
+
+    } // end action
+
+
 
     /**
      * Login action.

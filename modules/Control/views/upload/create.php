@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /* @var $classes array */
 /* @var $user null|\yii\web\IdentityInterface */
 
-$this->title = 'Загрузить данные';
+$this->title = 'Загрузка данных';
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => ['/control/personal?id='.Yii::$app->user->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br><br>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <?= $this->render('forms/create', [
         'model' => $model,

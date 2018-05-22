@@ -20,9 +20,12 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $model = (new PublicModel())->getPublications();
 
-        //var_dump($model);
+        if (isset($_GET['denyrequest'])) {
+            \Yii::$app->session->setFlash('danger', 'Доступ к запрашиваемому ресурсу невозможен');
+        }
+
+        $model = (new PublicModel())->getPublications();
 
         $dataProvider = new ArrayDataProvider([
             'allModels' => $model

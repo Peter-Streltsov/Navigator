@@ -17,29 +17,73 @@ use yii\widgets\ActiveForm;
 
     <br>
     <br>
+    <br>
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <div><?= $form->field($model, 'author_id')->textInput(['value' => $author->id, 'readonly' => true]) ?></div>
+    <?= Html::hiddenInput('upload_flag', '1') ?>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $form->field($model, 'author_id')->textInput(['value' => $author->id, 'readonly' => true]) ?>
+        </div>
+        <div class="col-lg-2">
+            <?= $form->field($model, 'year')->widget(etsoft\widgets\YearSelectbox::classname(), [
+                'yearStart' => -25,
+                'yearEnd' => 10,
+            ]); ?>
+        </div>
+        <div class="col-lg-5">
+            <?= $form->field($model, 'class')->dropDownList($classes); ?>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-lg-10">
+            <?= $form->field($model, 'title')->textInput() ?>
+        </div>
+    </div>
 
     <br>
 
-    <h5>Запрос на добавление:</h5>
-    <?= $form->field($model, 'class')->dropDownList($classes); ?>
+    <div class="row">
+        <div class="col-lg-10">
+            <?= $form->field($model, 'subtitle')->textArea(['rows' => 2]) ?>
+        </div>
+    </div>
 
-    <br><br>
+    <br>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <div class="row">
+        <div class="col-lg-10">
+            <?= $form->field($model, 'publisher')->textInput() ?>
+        </div>
+    </div>
 
-    <?= $form->field($file, 'uploadedfile')->fileInput([
-        'class' => 'btn btn-default',
-        'multiple' => true
-        //'label' => 'title'
-    ]) ?>
+    <br>
 
-    <!--<?= $form->field($model, 'accepted')->textInput() ?>-->
+    <div class="row">
+        <div class="col-lg-10">
+            <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+        </div>
+    </div>
 
-    <br><br>
+    <br>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <?= $form->field($file, 'uploadedfile')->fileInput([
+                'class' => 'btn btn-default',
+                'multiple' => true
+            ]) ?>
+        </div>
+    </div>
+
+    <br>
+    <br>
 
     <div class="form-group">
         <?= Html::submitButton('Отправить', ['class' => 'button primary big']) ?>

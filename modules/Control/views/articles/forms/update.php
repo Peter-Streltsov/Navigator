@@ -7,6 +7,11 @@ use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Articles */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $author_items  */
+/* @var $file mixed|string */
+/* @var $classes  */
+/* @var $model_authors  */
+/* @var $authors  */
 ?>
 
 <div class="articles-form">

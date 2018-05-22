@@ -23,19 +23,19 @@ class Fileupload extends Model
     } // end function
 
 
+
     /**
-     *
      * uploads file and sets uploaded file name to Upload model
-     *
-     * @param Upload $model
+
      * @return bool
      */
-    public function upload()
+    public function upload($folder = '')
     {
 
         if ($this->validate()) {
-            $this->uploadedfile->saveAs('upload/' . $this->uploadedfile->baseName . '.' . $this->uploadedfile->extension);
+            $this->uploadedfile->saveAs('upload/' . $folder . $this->uploadedfile->baseName . '.' . $this->uploadedfile->extension);
             $this->name = (string)$this->uploadedfile->baseName . '.' . $this->uploadedfile->extension;
+            \Yii::$app->session->setFlash('success', 'Файл загружен');
             return true;
         } else {
 

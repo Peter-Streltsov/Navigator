@@ -76,7 +76,6 @@ AppAsset::register($this);
                         ['label' => 'Выход', 'url' => ['/site/logout'], 'linkOptions' => [
                             'data-method' => 'post'
                         ]]
-                        /*Html::a('Exit', ['/site/logout'])]*/
                     ]
                 ]
                 ),

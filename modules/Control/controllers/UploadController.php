@@ -91,9 +91,6 @@ class UploadController extends Controller
         $classes = UploadCategories::find()->asArray()->all();
         $classes = ArrayHelper::map($classes, 'id', 'class');
 
-        //$model->file = UploadedFile::getInstance($model, 'file');
-        //$model->upload();
-
         $file = new Fileupload();
         $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
         $file->upload();

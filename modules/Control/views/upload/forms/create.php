@@ -6,6 +6,10 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Upload */
 /* @var $form yii\widgets\ActiveForm */
+/* @var $file mixed|string */
+/* @var $author  */
+/* @var $classes  */
+/* @var $user null|\yii\web\IdentityInterface */
 ?>
 
 

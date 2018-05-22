@@ -11,8 +11,6 @@ use yii\bootstrap\ActiveForm;
 
 <div class="articles-form">
 
-    <?=\yii\helpers\VarDumper::dump($_POST); ?>
-
     <?php $form = ActiveForm::begin(); ?>
 
     <br>
@@ -162,7 +160,7 @@ use yii\bootstrap\ActiveForm;
                 if ($model->file == '') {
                     $modal = "<h5 style='color: red;'>Имя файла не задано!</h5>";
                 } else {
-                    $modal = "<h5 style='color: green;'>Прикрепленный файл</h5>";
+                    $modal = "<h5 style='color: green;'>Прикрепленный файл </h5>" . $model->file;
                 }
             } else {
                 $modal = "<h5 style='color: red;'>Файл не загружен</h5>";
@@ -174,8 +172,8 @@ use yii\bootstrap\ActiveForm;
             ]);
 
             $uploadform = ActiveForm::begin();
-            Html::hiddenInput('upload_flag', '1');
-            echo $uploadform->field($model, 'file')->fileInput();
+            echo Html::hiddenInput('upload_flag', true);
+            echo $uploadform->field($file, 'uploadedfile')->fileInput();
             echo Html::submitButton('Сохранить', ['class' => 'button']);
             $uploadform::end();
 

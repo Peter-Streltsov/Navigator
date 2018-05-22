@@ -5,6 +5,8 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Articles */
+/* @var $class \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles|array|null */
+/* @var $authors \app\modules\Control\models\Authors[]|array|string */
 
 
 $model = $model[0];
@@ -26,15 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a("Удалить <span class='glyphicon glyphicon-remove-circle'></span>", ['delete', 'id' => $model->id], [
             'class' => 'button primary danger big',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Подтверждение - удалить статью?',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
 
     <br>
-
-    <!--<?= \yii\helpers\VarDumper::dump($_POST) ?>-->
 
     <?= DetailView::widget([
         'model' => $model,
@@ -48,20 +48,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'class',
             'file',
             [
-                    'attribute' => 'authors',
-                    'value' => function($model) {
-                                $authors = [];
-                                if (isset($model['data'][0])) {
-                                    foreach ($model['data'] as $author) {
-                                        $authors[] = $author['lastname']
-                                            . ' ' . mb_substr($author['name'],0,1,"UTF-8")
-                                            . '.' . mb_substr($author['secondname'],0,1,"UTF-8")
-                                            .'.';
-                                    }
-                                }
-
-                                return implode("\n", $authors);
+                'attribute' => 'authors',
+                'value' => function($model) {
+                    $authors = [];
+                    if (isset($model['data'][0])) {
+                        foreach ($model['data'] as $author) {
+                            $authors[] = $author['lastname']
+                                . ' ' . mb_substr($author['name'],0,1,"UTF-8")
+                                . '.' . mb_substr($author['secondname'],0,1,"UTF-8")
+                                .'.';
+                        }
                     }
+                    return implode("\n", $authors);
+                }
             ]
         ],
     ]);

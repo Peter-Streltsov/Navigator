@@ -16,6 +16,7 @@ use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 use yii\widgets\DetailView;
 
 /**
@@ -148,10 +149,14 @@ class ArticlesController extends Controller
     public function actionUpdate($id)
     {
 
-        if (Yii::$app->request->post() && isset($_POST['upload'])) {
-            $upload = new Upload();
-            $article = Articles::find()->where(['id' => $id])->one();
+        if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
             $file = new Fileupload();
+            $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
+            $file->upload('articles/');
+            $articlemodel = Articles::find()->where(['id' => $id])->one();
+            $articlemodel->file = $file->name;
+            $articlemodel->save();
+            Yii::$app->session->setFlash('info', 'Статье ' . $articlemodel->title . 'сопоставлен файл ' . $file->name);
         }
 
         if (Yii::$app->request->post()) {
@@ -186,6 +191,8 @@ class ArticlesController extends Controller
             return $items['name']. ' ' . $items['lastname'];
         });
 
+        $file = new Fileupload();
+
         // old action
 
         $model = Articles::find($id)
@@ -203,6 +210,7 @@ class ArticlesController extends Controller
 
         return $this->render('update', [
             'model' => $model[0],
+            'file' => $file,
             'classes' => $classes,
             'model_authors' => $model_authors[0],
             'authors' => $authors,

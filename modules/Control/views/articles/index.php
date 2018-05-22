@@ -150,22 +150,23 @@ $this->params['breadcrumbs'][] = $this->title;
                                     },
                         'file' => function($url, $model) {
                             ob_start();
-                            \yii\bootstrap\Modal::begin([
-                                'header' => "<h2>$model->title</h2><br><h4>$model->subtitle</h4>",
-                                'size' => 'large',
-                                'toggleButton' => [
-                                    'label' => "<span class='glyphicon glyphicon-file'></span>",
-                                    'class' => 'button primary big'
-                                ],
-                                'footer' => 'Close'
-                            ]);
 
-                            echo \yii2assets\pdfjs\PdfJs::widget([
-                                'url' => \yii\helpers\Url::base().'/upload/lab1.pdf'
-                            ]);
+                            if (isset($model->file)) {
+                                \yii\bootstrap\Modal::begin([
+                                    'header' => "<h2>$model->title</h2><br><h4>$model->subtitle</h4>",
+                                    'size' => 'large',
+                                    'toggleButton' => [
+                                        'label' => "<span class='glyphicon glyphicon-file'></span>",
+                                        'class' => 'button primary big'
+                                    ],
+                                    'footer' => 'Close'
+                                ]);
+                                echo \yii2assets\pdfjs\PdfJs::widget([
+                                    'url' => \yii\helpers\Url::base().'/upload/articles/' . $model->file
+                                ]);
 
-                            \yii\bootstrap\Modal::end();
-                            //$modal = ob_get_contents();
+                                \yii\bootstrap\Modal::end();
+                            }
                             $modal = ob_get_clean();
                             return $modal;
                         }

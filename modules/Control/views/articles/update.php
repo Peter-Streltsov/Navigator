@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <?= $this->render('forms/update', [
         'model' => $model,
         'classes' => $classes,
+        'file' => $file,
         'authors' => $authors,
         'model_authors' => $model_authors,
         'author_items' => $author_items

@@ -36,7 +36,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
         NavBar::begin([
-            'brandLabel' => '<b class="navbrand">'.'Наукометрия'.'</b>',
+            'brandLabel' => '<b class="navbrand">' . Yii::$app->data->data->organisation . ' - Наукометрия' . '</b>',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
@@ -49,36 +49,18 @@ AppAsset::register($this);
             ],
             'encodeLabels' => false,
             'items' => [
-                //['label' => "<input style='height: 1.5pc; color: #fff; background-color: #2c3337;' placeholder='Поиск' class=\"form-control\" type=\"text\"></input>"],
-                /*['label' => 'Develop' ,
-                    'visible' => !Yii::$app->user->isGuest,
-                    'items' => [
-                        ['label' => 'control', 'url' => ['/control']],
-                        ['label' => 'Users', 'url' => ['/control/users']],
-                        ['label' => 'Test', 'url' => ['/test']],
-                        ['label' => 'Articles', 'url' => ['/control/articles']],
-                        ['label' => 'Articles indexes', 'url' => ['/control/indexes']]
-                    ]
-                ],*/
-                ['label' => 'Публичные данные',
-                    'items' => [
-                            ['label' => 'Публикации', 'url' => ['/public'], 'options' => [
-                                'style' => 'width: 20pc;'
-                            ]]
-                    ]
-                ],
+                ['label' => 'Публичные данные', 'url' => ['/public']],
                 ['label' => 'Обратная связь', 'url' => ['/site/contact']],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/site/login']]
                 ) : (
                         [
-                            'label' => "<span class=\"glyphicon glyphicon-list\"></span>",
+                            'label' => "<span class=\"glyphicon glyphicon-align-justify\"></span>",
                             'items' => [
                                 ['label' => 'Панель управления', 'url' => ['/control'], 'options' => [
                                         'style' => 'width: 20pc;'
                                 ]],
                                 ['label' => 'Личный кабинет', 'url' => ['/control/user/', 'id' => Yii::$app->user->id]],
-                                //'<br>',
                                 '<li class="divider"></li>',
                                 ['label' => 'Вы вошли как:'],
                                 ['label' => "<b style=\"color: #32a873\">".' '.Yii::$app->user->identity->name.' '.Yii::$app->user->identity->lastname.'</b>'],
@@ -88,7 +70,6 @@ AppAsset::register($this);
                                 ['label' => 'Выход', 'url' => ['/site/logout'], 'linkOptions' => [
                                         'data-method' => 'post'
                                 ]]
-                                    /*Html::a('Exit', ['/site/logout'])]*/
                         ]
                     ]
                 ),

@@ -146,7 +146,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                         'view' => function($url, $model) {
                                     $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/articles/view','id'=>$model['id']]);;
-                                    return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $buttonurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
+                                    return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $buttonurl, ['class' => 'button primary big', 'style' => 'border-radius: 2pc;', 'title' => Yii::t('yii', 'Подробно')]);
                                     },
                         'file' => function($url, $model) {
                             ob_start();
@@ -157,6 +157,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'size' => 'large',
                                     'toggleButton' => [
                                         'label' => "<span class='glyphicon glyphicon-file'></span>",
+                                        'style' => 'border-radius: 2pc;',
                                         'class' => 'button primary big'
                                     ],
                                     'footer' => 'Close'

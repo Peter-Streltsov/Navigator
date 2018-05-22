@@ -25,7 +25,7 @@ class Monographies extends \yii\db\ActiveRecord
     {
 
         return [
-            'class' => TimestampBehavior::className(),
+            //'class' => TimestampBehavior::className(),
             //'updatedAtAttribute' => false
         ];
 
@@ -51,7 +51,7 @@ class Monographies extends \yii\db\ActiveRecord
             [['title', 'year'], 'required'],
             [['year'], 'integer'],
             [['file'], 'string'],
-            [['title', 'subtitle', 'doi'], 'string', 'max' => 255],
+            [['title', 'subtitle', 'isbn'], 'string', 'max' => 255],
         ];
 
     } // end function

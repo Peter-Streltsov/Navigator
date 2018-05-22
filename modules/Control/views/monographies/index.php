@@ -6,6 +6,7 @@ use yii\widgets\Pjax;
 use kartik\export\ExportMenu;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $model \app\modules\Control\models\Monographies[]|array */
 
 $this->title = 'Опубликованные монографии';
 $this->params['breadcrumbs'][] = $this->title;
@@ -67,16 +68,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             }
         ],
-
-        [
-            'class' => 'yii\grid\ActionColumn',
-            'template' => '{view}',
-            'buttons' => [
-                'view' => function($url, $model) {
-                    return Html::a('<span class="glyphicon glyphicon-file"></span>', ['/control/monographies/view', 'id' => $model->id], ['class' => 'button primary big']);
-                }
-            ]
-        ],
         ];
 
     ?>
@@ -100,6 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'id' => 'syntable'
     ],
         'columns' => [
+                'id',
             'title',
             'subtitle',
             'year',
@@ -150,12 +142,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{view}',
+                'template' => "{view}<br><br>{file}",
                 'buttons' => [
                     'view' => function($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-file"></span>', ['/control/monographies/view', 'id' => $model->id], ['class' => 'button primary big']);
+                        return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', ['/control/monographies/view', 'id' => $model->id], ['class' => 'button primary big', 'style' => 'border-radius: 2pc;']);
+                    },
+                    'file' => function($url, $model) {
+                        ob_start();
+
+                        if (isset($model->file)) {
+                            \yii\bootstrap\Modal::begin([
+                                'header' => "<h2>$model->title</h2><br><h4>$model->subtitle</h4>",
+                                'size' => 'large',
+                                'toggleButton' => [
+                                    'label' => "<span class='glyphicon glyphicon-file'></span>",
+                                    'style' => 'border-radius: 2pc;',
+                                    'class' => 'button primary big'
+                                ],
+                                'footer' => 'Close'
+                            ]);
+                            echo \yii2assets\pdfjs\PdfJs::widget([
+                                'url' => \yii\helpers\Url::base().'/upload/monographies/' . $model->file
+                            ]);
+
+                            \yii\bootstrap\Modal::end();
+                        }
+                        $modal = ob_get_clean();
+                        return $modal;
                     }
-                ]
+                ],
             ],
         ]
     ]);

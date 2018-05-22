@@ -13,6 +13,8 @@ $this->params['breadcrumbs'][] = 'Редактировать данные';
 ?>
 <div class="monographies-update">
 
+    <br>
+
     <h3><?= Html::encode($this->title) ?></h3>
 
     <br>
@@ -21,6 +23,7 @@ $this->params['breadcrumbs'][] = 'Редактировать данные';
     <?= $this->render('forms/update', [
         'model' => $model,
         'model_authors' => $model_authors,
+        'file' => $file,
         'author_items' => $author_items,
         'authors' => $authors,
 

@@ -3,6 +3,7 @@
 namespace app\modules\Control\controllers;
 
 use app\modules\Control\models\Authors;
+use app\modules\Control\models\Fileupload;
 use app\modules\Control\models\MonographiesAuthors;
 use Yii;
 use app\modules\Control\models\Monographies;
@@ -10,6 +11,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * MonographiesController implements the CRUD actions for Monographies model.
@@ -103,6 +105,18 @@ class MonographiesController extends Controller
     public function actionUpdate($id)
     {
 
+        // saving uploaded file
+        if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
+            $file = new Fileupload();
+            $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
+            $file->upload('monographies/');
+            $monographymodel = Monographies::find()->where(['id' => $id])->one();
+            $monographymodel->file = $file->name;
+            $monographymodel->save();
+            Yii::$app->session->setFlash('info', 'Монографии ' . $monographymodel->title . ' сопоставлен файл ' . $file->name);
+        }
+
+        // adding or deleting author
         if (Yii::$app->request->post()) {
 
             if (isset($_POST['delete']) && $_POST['delete'] == 1) {
@@ -136,6 +150,8 @@ class MonographiesController extends Controller
             return $items['name']. ' ' . $items['lastname'];
         });
 
+        $file = new Fileupload();
+
         $model = Monographies::find($id)
             ->where(['monographies.id' => $id])
             ->joinWith('data')
@@ -144,6 +160,7 @@ class MonographiesController extends Controller
         return $this->render('update', [
             'model' => $model[0],
             'model_authors' => $model_authors[0],
+            'file' => $file,
             'authors' => $authors,
             'author_items' => $items
         ]);

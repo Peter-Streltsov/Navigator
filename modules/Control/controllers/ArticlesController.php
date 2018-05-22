@@ -156,7 +156,7 @@ class ArticlesController extends Controller
             $articlemodel = Articles::find()->where(['id' => $id])->one();
             $articlemodel->file = $file->name;
             $articlemodel->save();
-            Yii::$app->session->setFlash('info', 'Статье ' . $articlemodel->title . 'сопоставлен файл ' . $file->name);
+            Yii::$app->session->setFlash('info', 'Статье ' . $articlemodel->title . ' сопоставлен файл ' . $file->name);
         }
 
         if (Yii::$app->request->post()) {

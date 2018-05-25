@@ -66,6 +66,46 @@ $this->title = 'Общие сведения';
 
     <br>
     <br>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-body">
+
+                <?php
+
+                //echo "<br><br><br>";
+
+                echo \yii\widgets\DetailView::widget([
+                    'model' => $table,
+                    'options' => [
+                        'class' => 'table'
+                    ],
+                    'attributes' => [
+                        'publications' =>
+                            [
+                                'label' => 'Всего публикаций (всех типов)',
+                                'value' => $table['publications']
+                            ],
+                        'articles' => [
+                                'label' => 'Статей',
+                                'value' => $table['articles']
+                            ],
+                        'monographies' => [
+                                'label' => 'Монографий',
+                                'value' => $table['monographies']
+                            ],
+                        'disserttions' => [
+                                'label' => 'Диссертаций',
+                                'value' => $table['dissertations']
+                            ]
+                    ]
+                ]);
+
+                ?>
+            </div>
+        </div>
+    </div>
+
     <br>
 
     <div class="panel panel-default">
@@ -84,19 +124,19 @@ $this->title = 'Общие сведения';
             'attributes' => [
                     'personnel' =>
                         [
-                            'label' => 'Сотрудников',
+                            'label' => 'Всего сотрудников',
                             'value' => $table['personnel']
                             ],
-                    'publications' =>
-                    [
-                            'label' => 'Всего публикаций (всех типов)',
-                           'value' => $table['publications']
-                    ],
+                    'phd' =>
+                        [
+                            'label' => 'Кандидатов наук',
+                            'value' => $table['phd']
+                        ],
                     'users' =>
-                    [
+                        [
                             'label' => 'Зарегистрировано пользователей',
-                        'value' => $table['users']
-                    ]
+                            'value' => $table['users']
+                        ],
             ]
         ]);
 
@@ -105,6 +145,4 @@ $this->title = 'Общие сведения';
         </div>
     </div>
     </p>
-
-    <?=\yii\helpers\VarDumper::dump(Yii::$app->access->isAdmin()) ?>
 </div>

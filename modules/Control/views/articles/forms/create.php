@@ -1,5 +1,9 @@
 <?php
 
+/* @var $classes  */
+/* @var $this \yii\web\View */
+/* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
+
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;

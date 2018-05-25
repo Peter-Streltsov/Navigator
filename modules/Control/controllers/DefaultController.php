@@ -5,6 +5,7 @@ namespace app\modules\Control\controllers;
 use app\modules\Control\models\Articles;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
+use app\modules\Control\models\Dissertations;
 use app\modules\Control\models\Monographies;
 use app\modules\Control\models\Personnel;
 use app\modules\Control\models\Users;
@@ -33,8 +34,12 @@ class DefaultController extends Controller
         $table = [
             'users' => Users::find()->count(),
             'personnel' => Personnel::find()->count(),
+            'phd' => Personnel::find()->where(['habilitation' => 'кандидат наук'])->count(),
             'authors' => Authors::find()->count(),
-            'publications' => $data['articles'] + $data['monographies']
+            'publications' => $data['articles'] + $data['monographies'],
+            'monographies' => $data['monographies'],
+            'articles' => $data['articles'],
+            'dissertations' => Dissertations::find()->count()
         ];
 
 

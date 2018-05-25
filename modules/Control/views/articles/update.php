@@ -1,9 +1,16 @@
 <?php
 
 use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Articles */
+/* @var $author_items array */
+/* @var $file \app\modules\Control\models\Fileupload */
+/* @var $classes \app\modules\Control\models\Articles[]|\app\modules\Control\models\IndexesArticles[]|array */
+/* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
+/* @var $authors \app\modules\Control\models\Authors[]|array */
 
 $this->title = 'Редактировать данные статьи - '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
@@ -12,19 +19,38 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 <div class="articles-update">
 
-    <br>
-
-    <h3><?= Html::encode($this->title) ?></h3>
-
-    <br>
-
-    <?= $this->render('forms/update', [
+    <!--<?php /*echo $this->render('forms/update', [
         'model' => $model,
         'classes' => $classes,
         'file' => $file,
         'authors' => $authors,
         'model_authors' => $model_authors,
         'author_items' => $author_items
-    ]) ?>
+    ])*/ ?>-->
+
+    <div class="articles-form">
+        <?= $this->render('forms/update/articleform', [
+            'title' => $this->title,
+            'classes' => $classes,
+            'model' => $model
+        ]) ?>
+    </div>
+
+    <div class="article-form">
+
+    </div>
+
+    <div>
+        <?= $this->render('forms/update/modalsform', [
+            'author_items' => $author_items,
+            'file' => $file,
+            'model_authors' => $model_authors,
+            'model' => $model
+        ]); ?>
+    </div>
+
+    <div>
+        <?= $this->render('forms/update/citationsform') ?>
+    </div>
 
 </div>

@@ -40,8 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        'view' => [
+                ''
+        ],
         'options' => [
-                'class' => 'table'
+                'class' => 'table',
+            'encodeLabesl' => true
         ],
         'attributes' => [
             'id',
@@ -51,7 +55,43 @@ $this->params['breadcrumbs'][] = $this->title;
             'year',
             'doi',
             'class',
-            'file',
+            [
+                'attribute' => 'file',
+                'label' => 'Прикрепленный файл и текст',
+                'format' => 'raw',
+                'value' => function($model) {
+                    if (isset($model->file)) {
+                        ob_start();
+                        if (isset($model->file)) {
+                            \yii\bootstrap\Modal::begin([
+                                'header' => "<h2>$model->title</h2><br><h4><h4>",
+                                'size' => 'modal-lg',
+                                'bodyOptions' => [
+                                        'width' => '200pc;'
+                                ],
+                                'options' => [
+                                        'width' => '200'
+                                ],
+                                'toggleButton' => [
+                                    'label' => "<span class='glyphicon glyphicon-file'></span>",
+                                    'style' => 'border-radius: 2pc;',
+                                    'class' => 'button primary big'
+                                ],
+                                'footer' => 'Close'
+                            ]);
+                            echo \yii2assets\pdfjs\PdfJs::widget([
+                                'url' => \yii\helpers\Url::base().'/upload/articles/' . $model->file
+                            ]);
+
+                            \yii\bootstrap\Modal::end();
+                        }
+                        $modal = ob_get_clean();
+                        return $modal;
+                    } else {
+
+                    }
+                }
+            ],
             [
                 'attribute' => 'authors',
                 'value' => function($model) {
@@ -75,17 +115,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <br>
     <br>
-
-    <?php
-
-    if (isset($model->file)) {
-        echo \yii2assets\pdfjs\PdfJs::widget([
-                'url' => '/upload/articles/' . $model->file,
-                'height' => '50pc'
-            ]
-        );
-    }
-
-    ?>
 
 </div>

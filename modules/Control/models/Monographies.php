@@ -139,6 +139,22 @@ class Monographies extends \yii\db\ActiveRecord
     } // end function
 
 
+    /**
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            Yii::$app->session->setFlash('success', 'Монография добавлена');
+        } else {
+            Yii::$app->session->setFlash('success', 'Данные монографии обновлены');
+        }
+
+    } // end function
+
 
     /**
      * @inheritdoc

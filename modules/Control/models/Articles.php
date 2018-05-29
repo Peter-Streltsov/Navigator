@@ -32,6 +32,8 @@ class Articles extends \yii\db\ActiveRecord
         return 'articles';
     }
 
+
+
     /**
      * @inheritdoc
      */
@@ -44,7 +46,10 @@ class Articles extends \yii\db\ActiveRecord
             [['title', 'subtitle', 'publisher', 'doi'], 'string', 'max' => 255],
             [['class'], 'exist', 'skipOnError' => true, 'targetClass' => IndexesArticles::className(), 'targetAttribute' => ['class' => 'id']],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -77,6 +82,7 @@ class Articles extends \yii\db\ActiveRecord
     } // end function
 
 
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -86,6 +92,7 @@ class Articles extends \yii\db\ActiveRecord
         return $this->hasOne(\app\modules\Control\models\ArticlesAuthors::className(), ['article_id' => 'id']);
 
     } // end function
+
 
 
     /**
@@ -99,6 +106,7 @@ class Articles extends \yii\db\ActiveRecord
     } // end function
 
 
+
     /**
      * @return $this
      */
@@ -110,6 +118,7 @@ class Articles extends \yii\db\ActiveRecord
     } // end function
 
 
+
     /**
      * @return $this
      */
@@ -119,6 +128,7 @@ class Articles extends \yii\db\ActiveRecord
         return $this->hasMany(Articles::className(), ['id' => 'article_id'])->viaTable('articles_authors', ['author_id' => static::$authorid]);
 
     } // end function
+
 
 
     /**
@@ -150,6 +160,7 @@ class Articles extends \yii\db\ActiveRecord
     } // end function
 
 
+
     /**
      * @param $id
      * @return array
@@ -175,6 +186,10 @@ class Articles extends \yii\db\ActiveRecord
 
 
 
+    /**
+     * @param int $year
+     * @return array
+     */
     public static function getArticlesByYear(int $year)
     {
 
@@ -222,6 +237,10 @@ class Articles extends \yii\db\ActiveRecord
 
 
 
+    /**
+     * @param $year
+     * @return float|int
+     */
     public static function getIndexesByYear($year)
     {
 
@@ -244,6 +263,21 @@ class Articles extends \yii\db\ActiveRecord
         return array_sum($indexes);
 
     } // end function
+
+
+
+    public function afterSave($insert, $changedAttributes)
+    {
+
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            Yii::$app->session->setFlash('success', 'Статья добавлена');
+        } else {
+            Yii::$app->session->setFlash('success', 'Данные статьи обновлены');
+        }
+
+    } // end function
+
 
 
 

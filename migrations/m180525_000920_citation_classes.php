@@ -24,8 +24,10 @@ class m180525_000920_citation_classes extends Migration
             'value'
         ],
             [
-                ['testclass', 1],
-                ['testclass2', 2]
+                ['РИНЦ', 1],
+                ['Scopus', 2],
+                ['Web of Science', 3],
+                ['Google Scholar', 4]
             ]
         );
 

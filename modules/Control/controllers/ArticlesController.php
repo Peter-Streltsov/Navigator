@@ -167,7 +167,6 @@ class ArticlesController extends Controller
                     'article_id' => $id
                 ])->one();
                 $author_delete->delete();
-                Yii::$app->session->setFlash('danger', "Автор удален");
             }
 
             if (isset($_POST['Articles']['authors'])) {
@@ -175,7 +174,6 @@ class ArticlesController extends Controller
                 $newauthor->article_id = $id;
                 $newauthor->author_id = $_POST['Articles']['authors'];
                 $newauthor->save();
-                Yii::$app->session->setFlash('success', "Автор добавлен");
             }
 
         }

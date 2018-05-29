@@ -18,13 +18,16 @@ use yii\behaviors\TimestampBehavior;
  */
 class Messages extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
+
         return 'messages';
-    }
+
+    } // end function
 
 
     public function behaviors()
@@ -37,24 +40,31 @@ class Messages extends \yii\db\ActiveRecord
 
     } // end function
 
+
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
+
         return [
             [['user_id', 'created_at'], 'integer'],
             [['username', 'category', 'text'], 'required'],
             [['text'], 'string'],
             [['username', 'category', 'custom_theme'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
             'user_id' => 'ID пользователя',
@@ -64,7 +74,26 @@ class Messages extends \yii\db\ActiveRecord
             'custom_theme' => 'Тема сообщения',
             'text' => 'Текст сообщения',
         ];
-    }
+
+    } // end function
+
+
+
+    /**
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            Yii::$app->session->setFlash('success', 'Сообщение отправлено');
+        }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -72,6 +101,9 @@ class Messages extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new MessagesQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

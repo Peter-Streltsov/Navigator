@@ -16,6 +16,7 @@ $this->title = 'Редактировать данные статьи - '.$model-
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
+$this->registerJsFile('/js/years.selector.js');
 ?>
 <div class="articles-update">
 
@@ -39,6 +40,9 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <div class="article-form">
 
     </div>
+
+    <br>
+    <br>
 
     <div>
         <?= $this->render('forms/update/modalsform', [

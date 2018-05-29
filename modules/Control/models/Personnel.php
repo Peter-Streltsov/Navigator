@@ -18,31 +18,41 @@ use Yii;
  */
 class Personnel extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
+
         return 'personnel';
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function rules()
     {
+
         return [
             [['name', 'lastname'], 'required'],
             [['employment', 'age', 'user_id'], 'integer'],
             [['name', 'secondname', 'lastname', 'position', 'habilitation', 'expirience'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
             'name' => 'Имя',
@@ -56,7 +66,24 @@ class Personnel extends \yii\db\ActiveRecord
             'habilitation' => 'Ученая степень',
             'year_graduated' => 'Год окончания ВУЗа'
         ];
-    }
+
+    } // end function
+
+
+
+    public function afterSave($insert, $changedAttributes)
+    {
+
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            Yii::$app->session->setFlash('success', 'Сотрудник добавлен');
+        } else {
+            Yii::$app->session->setFlash('success' , 'Данные сотрудника обновлены');
+        }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -64,6 +91,9 @@ class Personnel extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new PersonnelQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

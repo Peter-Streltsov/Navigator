@@ -93,6 +93,46 @@ class ArticlesAuthors extends \yii\db\ActiveRecord
 
 
     /**
+     * @param bool $insert
+     * @return bool
+     */
+    public function beforeSave($insert)
+    {
+
+        if (ArticlesAuthors::find()->where(['author_id' => $this->author_id, 'article_id' => $this->article_id])->exists()) {
+            Yii::$app->session->setFlash('warning', 'Автор с таким id уже сопоставлен статье');
+            return false;
+        } else {
+            return true;
+        }
+
+    } // end function
+
+
+
+    /**
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+
+        Yii::$app->session->setFlash('info', 'Автор добавлен');
+
+    } // end function
+
+
+
+    public function afterDelete()
+    {
+
+        Yii::$app->session->setFlash('danger', 'Автор удален');
+
+    } // end function
+
+
+
+    /**
      * @inheritdoc
      * @return ArticlesAuthorsQuery the active query used by this AR class.
      */

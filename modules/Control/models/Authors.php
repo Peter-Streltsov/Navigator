@@ -19,32 +19,61 @@ class Authors extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
+
         return 'authors';
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function rules()
     {
+
         return [
             [['name', 'lastname'], 'required'],
             [['name', 'secondname', 'lastname'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
             'name' => 'Имя',
             'secondname' => 'Отчество',
             'lastname' => 'Фамилия',
         ];
-    }
+
+    } // end function
+
+
+    /**
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            Yii::$app->session->setFlash('success', 'Автор добавлен');
+        } else {
+            Yii::$app->session->setFlash('danger', 'Данные автора обновлены');
+        }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -52,6 +81,9 @@ class Authors extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new AuthorsQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

@@ -3,7 +3,9 @@
 namespace app\modules\Control\controllers;
 
 use app\modules\Control\models\ArticlesAuthors;
+use app\modules\Control\models\ArticlesCitations;
 use app\modules\Control\models\Authors;
+use app\modules\Control\models\CitationClasses;
 use app\modules\Control\models\Fileupload;
 use app\modules\Control\models\IndexesArticles;
 use app\modules\Control\models\Upload;
@@ -12,6 +14,7 @@ use Yii;
 use app\modules\Control\models\Articles;
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -45,7 +48,7 @@ class ArticlesController extends Controller
 
 
     /**
-     * Lists all Articles models.
+     * Lists all Articles models
      * @return mixed
      */
     public function actionIndex()
@@ -53,27 +56,6 @@ class ArticlesController extends Controller
 
         $dataProvider = new ActiveDataProvider([
             'query' => Articles::find()->joinWith('authors'),
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
-
-    } // end action
-
-
-
-    /**
-     * @return string
-     */
-    public function actionTest()
-    {
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => Articles::find()->joinWith('authors'),
-            'pagination' => [
-                'pageSize' => 10
-            ]
         ]);
 
         return $this->render('index', [
@@ -140,8 +122,10 @@ class ArticlesController extends Controller
 
 
     /**
-     * Updates an existing Articles model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Updates an existing Articles model;
+     * Adds citations, authors etc.
+     * If update is successful, the browser will be again redirected to 'update' page
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -149,6 +133,16 @@ class ArticlesController extends Controller
     public function actionUpdate($id)
     {
 
+        // adding citation
+        if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
+            Yii::$app->session->setFlash('warning', 'Trying to add citation');
+            $citation = new ArticlesCitations();
+            if ($citation->load(Yii::$app->request->post()) && $citation->save()) {
+                return $this->redirect(['update', 'id' => $id]);
+            }
+        }
+
+        // uploading article file
         if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
             $file = new Fileupload();
             $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
@@ -159,8 +153,8 @@ class ArticlesController extends Controller
             Yii::$app->session->setFlash('info', 'Статье ' . $articlemodel->title . ' сопоставлен файл ' . $file->name);
         }
 
+        // updating article authors
         if (Yii::$app->request->post()) {
-
             if (isset($_POST['delete']) && $_POST['delete'] == 1) {
                 $author_delete = ArticlesAuthors::find()->where([
                     'author_id' => $_POST['author'],
@@ -168,15 +162,15 @@ class ArticlesController extends Controller
                 ])->one();
                 $author_delete->delete();
             }
-
             if (isset($_POST['Articles']['authors'])) {
                 $newauthor = new ArticlesAuthors();
                 $newauthor->article_id = $id;
                 $newauthor->author_id = $_POST['Articles']['authors'];
                 $newauthor->save();
             }
-
         }
+
+        // view parameters
 
         $model_authors = Articles::find($id)
             ->where(['articles.id' => $id])
@@ -191,8 +185,6 @@ class ArticlesController extends Controller
 
         $file = new Fileupload();
 
-        // old action
-
         $model = Articles::find($id)
             ->where(['articles.id' => $id])
             ->joinWith('data')
@@ -206,11 +198,25 @@ class ArticlesController extends Controller
             }
         }
 
+        //$citations = ArticlesCitations::find()->all();
+        $citations = new ActiveDataProvider([
+            'query' => ArticlesCitations::find()->where(['article_id' => $id])
+        ]);
+        $citation_classes = CitationClasses::find()->asArray()->all();
+        $citation_classes = ArrayHelper::map($citation_classes, 'class', 'class');
+
+        $newcitation = new ArticlesCitations();
+
+        // view
+
         return $this->render('update', [
             'model' => $model[0],
             'file' => $file,
             'classes' => $classes,
             'model_authors' => $model_authors[0],
+            'newcitation' => $newcitation,
+            'citations' => $citations,
+            'citation_classes' => $citation_classes,
             'authors' => $authors,
             'author_items' => $items
         ]);

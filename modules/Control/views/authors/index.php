@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div>
 
-        <?= Html::a('Назад', yii\helpers\Url::previous(), ['class' => 'button big primary']) ?>
         <?= Html::a('Добавить автора', ['create'], ['class' => 'button primary big']) ?>
 
         <label class="dropdown">
@@ -33,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <ul class="dropdown-menu">
                 <li><a href="#"><span style="color: red; font-size: 12px;" class="glyphicon glyphicon"> PDF</span></a></li>
                 <li><a href="#"><span style="color: blue; font-size: 12px;" class="glyphicon glyphicon"> JPEG</span></a></li>
-                <!--<li class="divider"></li>-->
                 <li><a href="#"><span style="color: green; font-size: 12px;" class="glyphicon glyphicon"> XLS</span></a></li>
             </ul>
         </label>
@@ -60,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'view' => function($url, $model) {
                         $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/authors/view','id'=>$model['id']]);;
-                        return Html::a('<span class="glyphicon glyphicon-file"></span>', $buttonurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
+                        return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $buttonurl, ['style' => 'border-radius: 2pc;', 'class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
                     }
                 ],
                 'template' => '{view}'

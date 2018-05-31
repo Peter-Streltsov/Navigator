@@ -28,7 +28,7 @@ AppAsset::register($this);
         <?php $this->head() ?>
     </head>
 
-    <body>
+    <body style="overflow: hidden;">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
@@ -91,8 +91,8 @@ AppAsset::register($this);
         <br>
 
         <div style="background-color: white;" class="container">
-            <div class="row">
-                <div style="background-color: #f0f0f0;" class="col-xs-12 col-md-3">
+            <div style="background-color: #f0f0f0;" class="row">
+                <div id="control-panel" class="col-xs-12 col-md-3">
 
                     <br>
                     <br>
@@ -227,6 +227,10 @@ AppAsset::register($this);
                         'activateItems' => true,
                         'hideEmptyItems' => false,
                         'containerOptions' => [
+                                'style' => [
+                                        'width' => '17pc'
+                                ],
+                                'data-spy' => 'affix'
                         ],
                         'items' => $items
                     ]);
@@ -238,7 +242,7 @@ AppAsset::register($this);
                     </div>
 
                 </div>
-                <div class="col-xs-12 col-md-9">
+                <div id="content-holder" class="col-xs-12 col-md-9">
                     <br>
 
                     <?= Breadcrumbs::widget([

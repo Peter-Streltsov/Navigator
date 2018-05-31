@@ -11,15 +11,19 @@ use yii\bootstrap\ActiveForm;
 <!--<div class="articles-form">-->
 
 <div class="row">
-    <!--<div class="col-lg-1">
-    </div>-->
+
     <div class="col-lg-9">
         <br>
         <h3><?=$title?></h3>
         <br>
         <br>
     </div>
+
 </div>
+
+<div class="panel panel-default">
+    <div class="panel panel-body">
+
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -33,8 +37,6 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
 
-        <!--<div class="col-lg-1"></div>-->
-
         <div class="col-lg-10">
             <?= $form->field($model, 'title')->textInput([
                 'maxlength' => true,
@@ -47,8 +49,6 @@ use yii\bootstrap\ActiveForm;
     <!-- Subtite input - text area (max 255 chars) -->
     <div class="row">
 
-        <!--<div class="col-lg-1"></div>-->
-
         <div class="col-lg-10">
             <?= $form->field($model, 'subtitle')->textArea([
                 'rows' => 2,
@@ -59,8 +59,6 @@ use yii\bootstrap\ActiveForm;
     </div>
 
     <div class="row">
-
-        <!--<div class="col-lg-1"></div>-->
 
         <div class="col-lg-10">
             <?= $form->field($model, 'publisher')->textInput([
@@ -74,13 +72,10 @@ use yii\bootstrap\ActiveForm;
     <!-- year publishing and DOI index input - in one row -->
     <div class="row">
 
-        <!--<div class="col-lg-1"></div>-->
-
         <div class="col-lg-3">
             <?= $form->field($model, 'year')->widget(etsoft\widgets\YearSelectbox::classname(), [
                 'yearStart' => -10,
                 'yearEnd' => 10,
-                //'style' => 'background-color: #ffffe0;'
             ]);
             ?>
         </div>
@@ -94,13 +89,10 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
 
-        <!--<div class="col-lg-1"></div>-->
-
         <div class="col-lg-7">
 
             <?= $form->field($model, 'class')->dropDownList($classes_items, [
                 'prompt' => 'Выберите категорию',
-                'style' => 'background-color: #ffffe0;',
             ]) ?>
         </div>
 
@@ -110,13 +102,12 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
 
-        <!--<div class="col-lg-1"></div>-->
-
         <div class="col-lg-5">
 
             <br>
             <?= Html::submitButton('Сохранить', ['class' => 'button big primary']) ?>
             <br>
+
         </div>
 
     </div>
@@ -126,4 +117,7 @@ use yii\bootstrap\ActiveForm;
     <br>
 
 
+</div>
+
+    </div>
 </div>

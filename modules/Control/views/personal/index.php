@@ -1,5 +1,12 @@
 <?php
 /* @var $this yii\web\View */
+/* @var $indexes  */
+/* @var $model \app\modules\Control\models\Users|array|null */
+/* @var $personal \app\modules\Control\models\Personnel|array|null */
+/* @var $meanindex float */
+/* @var $articles array */
+/* @var $currentarticles array */
+/* @var $dataprovider \yii\data\ArrayDataProvider */
 ?>
 
 <?php $this->title = 'Личный кабинет - ' . $model->name.  ' ' . $model->lastname ?>

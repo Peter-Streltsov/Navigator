@@ -11,6 +11,8 @@ use yii\bootstrap\Modal;
 /* @var $classes \app\modules\Control\models\Articles[]|\app\modules\Control\models\IndexesArticles[]|array */
 /* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
 /* @var $authors \app\modules\Control\models\Authors[]|array */
+/* @var $citations \app\modules\Control\models\ArticlesCitations[]|array */
+/* @var $newcitation \app\modules\Control\models\ArticlesCitations */
 
 $this->title = 'Редактировать данные статьи - '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
@@ -53,8 +55,15 @@ $this->registerJsFile('/js/years.selector.js');
         ]); ?>
     </div>
 
+    <br>
+
     <div>
-        <?= $this->render('forms/update/citationsform') ?>
+        <?= $this->render('forms/update/citationsform', [
+                'model' => $model,
+                'citations' => $citations,
+                'citation_classes' => $citation_classes,
+                'newcitation' => $newcitation
+        ]) ?>
     </div>
 
 </div>

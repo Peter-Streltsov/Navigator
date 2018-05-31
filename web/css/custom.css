@@ -1,7 +1,9 @@
 
 body {
     background-color: #f5f5f5;
-
+    /*position: fixed;
+    width: 120pc;
+    overflow-y: hidden;*/
 }
 
 .navbrand {
@@ -14,7 +16,18 @@ a {
     color: #32a873;
 }
 
+.container {
+    /*height: 100vh;*/
+}
 
+#control-panel {
+    background-color: #f0f0f0;
+}
+
+#content-holder {
+    height: 130%;
+    background-color: white;
+}
 
 /**
 * menu items
@@ -64,21 +77,8 @@ td a {
     color: #2a323b;
 }
 
-select option {
-    /*width: 30pc;*/
-}
-
-.wrap {
-    position: center;
-}
-
-
 .container a {
     font-size: 16px;
-}
-
-.container table {
-    width: 75pc;
 }
 
 .navbar-brand {

@@ -27,25 +27,48 @@ class ArticlesCitations extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+
         return [
             [['article_id'], 'required'],
+            [['title'], 'required'],
             [['article_id'], 'integer'],
             [['title', 'class'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
             'article_id' => 'Article ID',
-            'title' => 'Title',
-            'class' => 'Class',
+            'title' => 'Описание',
+            'class' => 'Категория',
         ];
-    }
+
+    } // end function
+
+
+
+    public function afterSave($insert, $changedAttributes)
+    {
+
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+
+        } else {
+
+        }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -53,6 +76,9 @@ class ArticlesCitations extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new CitQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

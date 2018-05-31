@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'tableOptions' => [
             'class' => 'table table-hover',
-            'id' => 'syntable'
+            //'id' => 'syntable'
         ],
         'columns' => [
 

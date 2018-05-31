@@ -14,8 +14,6 @@ use yii\bootstrap\Modal;
 
 <div class="row">
 
-    <div class="col-lg-1"></div>
-
     <div class="col-lg-6">
 
         <h4>Авторы:</h4>

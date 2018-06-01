@@ -1,4 +1,7 @@
 <?php
+
+use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 /* @var $indexes  */
 /* @var $model \app\modules\Control\models\Users|array|null */
@@ -17,104 +20,36 @@
 <br>
 <br>
 
-<?= \yii\helpers\Html::a('Сообщение <span class="glyphicon glyphicon-send"></span>', ['/control/messages/create'], ['class' => 'button primary big']); ?>
-<?= \yii\helpers\Html::a('Загрузить данные <span class="glyphicon glyphicon-upload"></span>', ['/control/upload/create'], ['class' => 'button primary big']) ?>
-
-<br>
-<br>
-<br>
-<br>
-
+<!-- upper buttons -->
 <div class="row">
-    <div class="col-xs-12 col-md-6">
-        <?= \yii\widgets\DetailView::widget([
-        'model' => $personal,
-    'options' => [
-            'class' => 'table'
-    ],
-    'attributes' => [
-        'lastname',
-        'name',
-        'secondname',
-        'age',
-        'position',
-        'habilitation'
-    ]
-]);
-        ?>
-    </div>
-    <div class="col-xs-12 col-md-5">
-        <img style="width: 15pc; height: 20pc;" src="/images/1.jpg" class="img-rounded">
+    <div class="col-lg-10">
+        <?= Html::a('Сообщение <span class="glyphicon glyphicon-send"></span>', ['/control/messages/create'], ['class' => 'button primary big']); ?>
+        <?= Html::a('Загрузить данные <span class="glyphicon glyphicon-upload"></span>', ['/control/upload/create'], ['class' => 'button primary big']) ?>
     </div>
 </div>
+<!-- end block -->
+
+<br>
+<br>
+<br>
+<br>
+
+
+<!-- basic user information -->
+<?= $this->render('forms/commondata', [
+        'personal' => $personal
+]) ?>
+<!-- end block -->
 
 <br>
 
-<div class="row">
-    <div class="col-xs-12 col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <b>
-                    Научные показатели за <?= date('Y') ?> год:
-                </b>
-            </div>
-            <div class="panel-body">
-                <br>
-                <b style="color: red;">
-                    Индекс ПНРД за <?= date('Y') ?> год: <?= $indexes['articles'] ?>
-                </b>
-                (Средний индекс ПНРД - <b><?= $meanindex ?></b>)
-                <br>
-                <br>
-                <b>
-                    Публикаций в текущем году: <?= count($currentarticles) ?>
-                </b>
-                <br>
-                <br>
-
-                <table class="table">
-                    <thead>
-                    <th>Категория</th>
-                    <th>Опубликовано</th>
-                    <th>Индекс</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            Статьи
-                        </td>
-                        <td>
-                            <?= count($currentarticles) ?>
-                        </td>
-                        <td>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Монографии
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Участие в научных конференциях
-                        </td>
-                        <td>
-                            0
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+<!---->
+<?= $this->render('forms/panels', [
+    'indexes' => $indexes,
+    'currentarticles' => $currentarticles,
+    'meanindex' => $meanindex
+]); ?>
+<!-- end block -->
 
 <br>
 <br>

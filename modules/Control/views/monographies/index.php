@@ -23,9 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
 
     <p>
-        <div>
         <?= Html::a('Добавить монографию', ['create'], ['class' => 'button primary big']) ?>
-    </div>
     </p>
 
     <br>

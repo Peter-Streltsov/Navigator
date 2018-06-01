@@ -1,8 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Articles */
@@ -13,8 +11,9 @@ use yii\bootstrap\Modal;
 /* @var $authors \app\modules\Control\models\Authors[]|array */
 /* @var $citations \app\modules\Control\models\ArticlesCitations[]|array */
 /* @var $newcitation \app\modules\Control\models\ArticlesCitations */
+/* @var $citation_classes array */
 
-$this->title = 'Редактировать данные статьи - '.$model->title;
+$this->title = 'Редактировать данные - '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
@@ -22,14 +21,16 @@ $this->registerJsFile('/js/years.selector.js');
 ?>
 <div class="articles-update">
 
-    <!--<?php /*echo $this->render('forms/update', [
-        'model' => $model,
-        'classes' => $classes,
-        'file' => $file,
-        'authors' => $authors,
-        'model_authors' => $model_authors,
-        'author_items' => $author_items
-    ])*/ ?>-->
+    <div class="row">
+
+        <div class="col-lg-10">
+            <br>
+            <h3><?= Html::encode($this->title) ?></h3>
+            <br>
+            <br>
+        </div>
+
+    </div>
 
     <div class="articles-form">
         <?= $this->render('forms/update/articleform', [
@@ -37,10 +38,6 @@ $this->registerJsFile('/js/years.selector.js');
             'classes' => $classes,
             'model' => $model
         ]) ?>
-    </div>
-
-    <div class="article-form">
-
     </div>
 
     <br>

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
 
-    <h2>Опубликованные статьи</h2>
+    <h2><?= Html::encode($this->title) ?></h2>
 
     <br>
     <br>

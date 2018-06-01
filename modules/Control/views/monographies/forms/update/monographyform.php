@@ -1,11 +1,12 @@
 <?php
 
-/* @var $classes \app\modules\Control\models\Articles[]|\app\modules\Control\models\IndexesArticles[]|array */
-/* @var $this \yii\web\View */
-/* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
-/* @var $title string */
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+
+/* @var $this \yii\web\View */
+/* @var $model \app\modules\Control\models\Articles|\app\modules\Control\models\Monographies|mixed|\yii\db\ActiveRecord */
+/* @var $classes \app\modules\Control\models\Articles[]|array */
 ?>
 
 <div class="panel panel-default">
@@ -17,16 +18,15 @@ use yii\bootstrap\ActiveForm;
 
     <?php
 
-    $classes_items = \yii\helpers\ArrayHelper::map($classes, 'id', 'description');
+    $classes_items = ArrayHelper::map($classes, 'id', 'description');
 
     ?>
 
     <div class="row">
-
         <div class="col-lg-10">
             <?= $form->field($model, 'title')->textInput([
                 'maxlength' => true,
-                'style' => 'background-color: #ffffe0;',
+                'style' => 'background-color: #ffffe0;'
             ]) ?>
         </div>
     </div>
@@ -34,7 +34,6 @@ use yii\bootstrap\ActiveForm;
 
     <!-- Subtite input - text area (max 255 chars) -->
     <div class="row">
-
         <div class="col-lg-10">
             <?= $form->field($model, 'subtitle')->textArea([
                 'rows' => 2,
@@ -45,7 +44,6 @@ use yii\bootstrap\ActiveForm;
     </div>
 
     <div class="row">
-
         <div class="col-lg-10">
             <?= $form->field($model, 'publisher')->textInput([
                 'maxlength' => true,
@@ -57,7 +55,6 @@ use yii\bootstrap\ActiveForm;
 
     <!-- year publishing and DOI index input - in one row -->
     <div class="row">
-
         <div class="col-lg-3">
             <?= $form->field($model, 'year')->widget(etsoft\widgets\YearSelectbox::classname(), [
                 'yearStart' => -10,
@@ -65,45 +62,33 @@ use yii\bootstrap\ActiveForm;
             ]);
             ?>
         </div>
-
         <div class="col-lg-7">
-            <?= $form->field($model, 'doi')->textInput(['maxlength' => true, 'style' => 'background-color: #ffffe0;']) ?>
+            <?= $form->field($model, 'isbn')->textInput([
+                'maxlength' => true,
+                'style' => 'background-color: #ffffe0;'
+            ]) ?>
         </div>
     </div>
 
-    <!--<?= $form->field($model, 'file')->textInput() ?>-->
-
     <div class="row">
-
         <div class="col-lg-7">
 
             <?= $form->field($model, 'class')->dropDownList($classes_items, [
                 'prompt' => 'Выберите категорию',
             ]) ?>
         </div>
-
     </div>
 
-<div class="form-group">
+        <div class="row">
+            <div class="col-lg-5">
 
-    <div class="row">
-
-        <div class="col-lg-5">
-
-            <br>
-            <?= Html::submitButton('Сохранить', ['class' => 'button big primary']) ?>
-            <br>
-
+                <br>
+                <?= Html::submitButton('Сохранить', ['class' => 'button big primary']) ?>
+                <br>
+            </div>
         </div>
-
+        <?php ActiveForm::end(); ?>
+        <br>
     </div>
 
-    <?php ActiveForm::end(); ?>
-
-    <br>
-
-
-</div>
-
     </div>
-</div>

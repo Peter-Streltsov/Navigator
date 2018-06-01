@@ -4,6 +4,7 @@ namespace app\modules\Control\controllers;
 
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Fileupload;
+use app\modules\Control\models\IndexesArticles;
 use app\modules\Control\models\MonographiesAuthors;
 use Yii;
 use app\modules\Control\models\Monographies;
@@ -105,7 +106,12 @@ class MonographiesController extends Controller
     public function actionUpdate($id)
     {
 
-        // saving uploaded file
+        // adding citation
+         if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
+
+         }
+
+        // uploading monography file
         if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
             $file = new Fileupload();
             $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
@@ -116,7 +122,7 @@ class MonographiesController extends Controller
             Yii::$app->session->setFlash('info', 'Монографии ' . $monographymodel->title . ' сопоставлен файл ' . $file->name);
         }
 
-        // adding or deleting author
+        // deleting author
         if (Yii::$app->request->post()) {
 
             if (isset($_POST['delete']) && $_POST['delete'] == 1) {
@@ -128,7 +134,7 @@ class MonographiesController extends Controller
                 Yii::$app->session->setFlash('danger', "Автор удален");
             }
 
-            if (isset($_POST['Monographies'])) {
+            if (isset($_POST['add_author_flag'])) {
                 $newauthor = new MonographiesAuthors();
                 $newauthor->monography_id = $id;
                 $newauthor->author_id = $_POST['Monographies']['authors'];
@@ -138,29 +144,43 @@ class MonographiesController extends Controller
 
         }
 
+        // view parameters
+
         $model_authors = Monographies::find($id)
             ->where(['monographies.id' => $id])
             ->joinWith('data')
             ->all();
 
-
-        // all authors
+        // authors list
         $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
+
         $items = \yii\helpers\ArrayHelper::map($authors, 'id', function($items) {
             return $items['name']. ' ' . $items['lastname'];
         });
 
+        // uploading file
         $file = new Fileupload();
+
+        $classes = IndexesArticles::find()->asArray()->all();
 
         $model = Monographies::find($id)
             ->where(['monographies.id' => $id])
             ->joinWith('data')
             ->all();
 
+        // saving model data
+        if (Yii::$app->request->post()) {
+            if ($model[0]->load(Yii::$app->request->post()) && $model[0]->save()) {
+                return $this->redirect(['update', 'id' => $id]);
+            }
+        }
+
+
         return $this->render('update', [
             'model' => $model[0],
             'model_authors' => $model_authors[0],
             'file' => $file,
+            'classes' => $classes,
             'authors' => $authors,
             'author_items' => $items
         ]);

@@ -76,7 +76,12 @@ $config = [
             ],
         ],
         'public' => [
-            'class' => 'app\modules\PublicAccess\PublicModule'
+            'class' => 'app\modules\PublicAccess\PublicModule',
+            'modules' => [
+                'API' => [
+                    'class' => 'app\modules\PublicAccess\modules\API'
+                ]
+            ]
         ],
         'gridview' => [
             'class' => 'kartik\grid\Module'

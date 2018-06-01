@@ -26,9 +26,12 @@ use yii\widgets\ActiveForm;
     <div class="col-lg-10">
         <?= \yii\grid\GridView::widget([
             'dataProvider' => $citations,
+            'tableOptions' => [
+                    'class' => 'table'
+            ],
             'columns' => [
                 'title',
-                'class'
+                'class',
             ]
         ]) ?>
     </div>

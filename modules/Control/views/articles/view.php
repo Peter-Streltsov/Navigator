@@ -8,7 +8,6 @@ use yii\widgets\DetailView;
 /* @var $class \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles|array|null */
 /* @var $authors \app\modules\Control\models\Authors[]|array|string */
 
-
 $model = $model[0];
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];

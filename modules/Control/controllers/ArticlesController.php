@@ -135,7 +135,6 @@ class ArticlesController extends Controller
 
         // adding citation
         if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
-            Yii::$app->session->setFlash('warning', 'Trying to add citation');
             $citation = new ArticlesCitations();
             if ($citation->load(Yii::$app->request->post()) && $citation->save()) {
                 return $this->redirect(['update', 'id' => $id]);
@@ -209,7 +208,6 @@ class ArticlesController extends Controller
         $newcitation = new ArticlesCitations();
 
         // view
-
         return $this->render('update', [
             'model' => $model[0],
             'file' => $file,

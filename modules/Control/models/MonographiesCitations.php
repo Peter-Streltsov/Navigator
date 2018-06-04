@@ -3,6 +3,7 @@
 namespace app\modules\Control\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "monographies_citations".
@@ -12,7 +13,7 @@ use Yii;
  * @property string $title
  * @property string $class
  */
-class MonographiesCitations extends \yii\db\ActiveRecord
+class MonographiesCitations extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -27,24 +28,33 @@ class MonographiesCitations extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+
         return [
-            [['publisher', 'title', 'class'], 'required'],
+            [['publisher', 'monography_id', 'title', 'class'], 'required'],
+            [['monography_id'], 'integer'],
             [['publisher', 'title', 'class'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
-            'publisher' => 'Publisher',
-            'title' => 'Title',
-            'class' => 'Class',
+            'publisher' => 'Издатель',
+            'title' => 'Описание',
+            'class' => 'Категория',
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -52,6 +62,9 @@ class MonographiesCitations extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new MonographiesCitationsQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

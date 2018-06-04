@@ -15,6 +15,7 @@ class m180531_023516_monographies_citations extends Migration
 
         $this->createTable('monographies_citations', [
             'id' => $this->primaryKey(),
+            'monography_id' => $this->integer()->notNull(),
             'publisher' => $this->string()->notNull(),
             'title' => $this->string()->notNull(),
             'class' => $this->string()->notNull()

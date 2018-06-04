@@ -40,8 +40,23 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <div>
         <?= $this->render('forms/update/modalsform', [
-                'file' => $file
+            'file' => $file,
+            'author_items' => $author_items,
+            'model_authors' => $model_authors,
+            'model' => $model
         ]); ?>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <?= $this->render('forms/update/citationsform', [
+            'model' => $model,
+            'citations' => $citations,
+            'citation_classes' => $citation_classes,
+            'newcitation' => $newcitation
+        ]) ?>
     </div>
 
     <br>

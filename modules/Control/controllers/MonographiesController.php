@@ -5,9 +5,12 @@ namespace app\modules\Control\controllers;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Fileupload;
 use app\modules\Control\models\IndexesArticles;
-use app\modules\Control\models\MonographiesAuthors;
-use Yii;
 use app\modules\Control\models\Monographies;
+use app\modules\Control\models\MonographiesAuthors;
+use app\modules\Control\models\MonographiesCitations;
+use app\modules\Control\models\CitationClasses;
+use Yii;
+use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -107,9 +110,27 @@ class MonographiesController extends Controller
     {
 
         // adding citation
-         if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
-
-         }
+        if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
+            $citation = new MonographiesCitations();
+            if ($citation->load(Yii::$app->request->post())) {
+                if ($citation->save()) {
+                    return $this->redirect(['update', 'id' => $id]);
+                } else {
+                    ob_start();
+                    $errors = $citation->getErrors();
+                    foreach ($errors as $key => $error) {
+                        $text = '';
+                        foreach ($error as $message) {
+                            $text = $text . $message . ' ';
+                        }
+                        echo 'Поле "' . $key . '" => ' . $text;
+                    }
+                    $cit = ob_get_contents();
+                    ob_get_clean();
+                    Yii::$app->session->setFlash('danger', $cit);
+                }
+            }
+        }
 
         // uploading monography file
         if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
@@ -119,7 +140,11 @@ class MonographiesController extends Controller
             $monographymodel = Monographies::find()->where(['id' => $id])->one();
             $monographymodel->file = $file->name;
             $monographymodel->save();
-            Yii::$app->session->setFlash('info', 'Монографии ' . $monographymodel->title . ' сопоставлен файл ' . $file->name);
+            Yii::$app->session->setFlash('info',
+                'Монографии '
+                . $monographymodel->title
+                . ' сопоставлен файл '
+                . $file->name);
         }
 
         // deleting author
@@ -134,18 +159,19 @@ class MonographiesController extends Controller
                 Yii::$app->session->setFlash('danger', "Автор удален");
             }
 
-            if (isset($_POST['add_author_flag'])) {
+            if (isset($_POST['Monographies']['authors'])) {
                 $newauthor = new MonographiesAuthors();
                 $newauthor->monography_id = $id;
                 $newauthor->author_id = $_POST['Monographies']['authors'];
                 $newauthor->save();
-                Yii::$app->session->setFlash('success', "Автор добавлен");
+                Yii::$app->session->setFlash('info', "Автор добавлен");
             }
 
         }
 
         // view parameters
 
+        // monography authors
         $model_authors = Monographies::find($id)
             ->where(['monographies.id' => $id])
             ->joinWith('data')
@@ -168,6 +194,14 @@ class MonographiesController extends Controller
             ->joinWith('data')
             ->all();
 
+        $citations = new ActiveDataProvider([
+            'query' => MonographiesCitations::find()->where(['monography_id' => $id])
+        ]);
+        $citation_classes = CitationClasses::find()->asArray()->all();
+        $citation_classes = ArrayHelper::map($citation_classes, 'class', 'class');
+
+        $newcitation = new MonographiesCitations();
+
         // saving model data
         if (Yii::$app->request->post()) {
             if ($model[0]->load(Yii::$app->request->post()) && $model[0]->save()) {
@@ -181,6 +215,9 @@ class MonographiesController extends Controller
             'model_authors' => $model_authors[0],
             'file' => $file,
             'classes' => $classes,
+            'citations' => $citations,
+            'citation_classes' => $citation_classes,
+            'newcitation' => $newcitation,
             'authors' => $authors,
             'author_items' => $items
         ]);

@@ -34,7 +34,6 @@ $this->registerJsFile('/js/years.selector.js');
 
     <div class="articles-form">
         <?= $this->render('forms/update/articleform', [
-            'title' => $this->title,
             'classes' => $classes,
             'model' => $model
         ]) ?>

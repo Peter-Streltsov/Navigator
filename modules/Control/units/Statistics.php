@@ -1,9 +1,13 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\modules\Control\units;
 
 use yii\base\Model;
-use app\modules\Control\models\PNRD;
+use app\modules\Control\models\Authors;
+use app\modules\Control\models\Articles;
+use app\modules\Control\models\Monographies;
+use app\modules\Control\models\Personnel;
+use app\modules\Control\units\PNRD;
 use MathPHP\Statistics\Average;
 
 class Statistics extends Model
@@ -20,7 +24,7 @@ class Statistics extends Model
         $basic = [];
 
         // средний индекс
-        $basic['meanindex'] = PNRD::meanIndex();
+        $basic['meanindex'] = \app\modules\Control\units\PNRD::meanIndex();
 
         // статей на одного автора
         $basic['meanarticles'] = (float)(Articles::find()->count() / $authors);

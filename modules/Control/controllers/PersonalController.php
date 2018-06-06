@@ -2,16 +2,17 @@
 
 namespace app\modules\Control\controllers;
 
+use Yii;
 use app\modules\Control\models\Articles;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Personnel;
-use app\modules\Control\models\PNRD;
+use app\modules\Control\models\Messages;
+use app\modules\Control\models\MessagesClasses;
+use app\modules\Control\units\PNRD;
 use app\modules\Control\models\Users;
-use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
-use yii\helpers\VarDumper;
 
 class PersonalController extends \yii\web\Controller
 {
@@ -69,6 +70,35 @@ class PersonalController extends \yii\web\Controller
             'personal' => $staff,
             'indexes' => $indexes,
             'meanindex' => $meanindex,
+        ]);
+
+    } // end action
+
+
+    /**
+     * Creates a new user message
+     * If creation is successful, the will redirect to the 'view' page
+     *
+     * @return mixed
+     */
+    public function actionCreate($id)
+    {
+
+        $user = Yii::$app->user->getIdentity();
+
+        $model = new Messages();
+        $model->username = $user->username;
+
+        $classes = MessagesClasses::find()->asArray()->all();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $user = Yii::$app->user->getIdentity();
+            return $this->redirect(['/control/personal', 'id' => $user->id]);
+        }
+
+        return $this->render('createmessage', [
+            'model' => $model,
+            'classes' => $classes
         ]);
 
     } // end action

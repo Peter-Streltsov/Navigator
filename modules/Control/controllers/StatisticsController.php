@@ -3,8 +3,13 @@
 namespace app\modules\Control\controllers;
 
 use yii\web\Controller;
-use app\modules\Control\models\Statistics;
+use app\modules\Control\units\Statistics;
 
+/**
+ * Class StatisticsController
+ *
+ * @package app\modules\Control\controllers
+ */
 class StatisticsController extends Controller
 {
 

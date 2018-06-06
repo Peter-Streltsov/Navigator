@@ -3,6 +3,7 @@
 namespace app\modules\Control\modules\Admin\controllers;
 
 use app\modules\Control\models\MessagesClasses;
+use app\modules\Control\models\Upload;
 use Yii;
 use app\modules\Control\models\Messages;
 use yii\data\ActiveDataProvider;
@@ -36,25 +37,26 @@ class MessagesController extends Controller
 
 
     /**
-     * Lists all Messages models.
+     * Lists all user messages
+     *
      * @return mixed
      */
-    public function actionIndex($set = null, $id = null)
+    public function actionUsers($set = null, $id = null)
     {
 
         if (isset($set) && isset($id)) {
             $newmodel = Messages::find()->where(['id' => $id])->one();
             $newmodel->read = true;
             $newmodel->save();
-            return $this->redirect('/control/messages');
+            return $this->redirect('/control/admin/messages');
         }
 
-        $dataProvider = new ActiveDataProvider([
+        $messagesProvider = new ActiveDataProvider([
             'query' => Messages::find(),
         ]);
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'messagesProvider' => $messagesProvider,
         ]);
 
     } // end action
@@ -62,16 +64,37 @@ class MessagesController extends Controller
 
 
     /**
-     * Displays a single Messages model.
-     * @param integer $id
+     * Lists all uploaded data from users (articles candidates etc.)
+     *
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionUploads($id = null)
     {
 
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+        // accept uploaded data
+        if (Yii::$app->request->post() && $id != null) {
+            $model = Upload::find()->where(['id' => $id])->one();
+
+        }
+
+        // decline uploaded data
+        if (Yii::$app->request->post() && $_POST['decline_flag']) {
+            $model = new Upload();
+        }
+
+        // lists all not accepted uploaded data models
+        $uploadsProvider = new ActiveDataProvider([
+            'query' => Upload::find()->where(['accepted' => '0'])
+        ]);
+
+        $aceptedUploadsProvider = new ActiveDataProvider([
+            'query' => Upload::find()->where(['accepted' => '1'])
+        ]);
+
+        // view
+        return $this->render('uploads', [
+            'accepted' => $aceptedUploadsProvider,
+            'uploadsProvider' => $uploadsProvider
         ]);
 
     } // end action
@@ -79,8 +102,10 @@ class MessagesController extends Controller
 
 
     /**
-     * Creates a new Messages model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Creates a new user message
+     * If creation is successful, will redirect to the 'view' page
+     *
+     * @deprecated
      * @return mixed
      */
     public function actionCreate()
@@ -103,31 +128,6 @@ class MessagesController extends Controller
         ]);
 
     } // end action
-
-
-
-    /**
-     * Updates an existing Messages model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-
-    } // end action
-
 
 
     /**

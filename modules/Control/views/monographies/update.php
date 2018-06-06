@@ -9,6 +9,9 @@ use yii\helpers\Html;
 /* @var $model_authors \app\modules\Control\models\Monographies */
 /* @var $authors \app\modules\Control\models\Authors[]|array */
 /* @var $classes \app\modules\Control\models\Articles[]|array */
+/* @var $citations \yii\data\ActiveDataProvider */
+/* @var $citation_classes array */
+/* @var $newcitation \app\modules\Control\models\MonographiesCitations */
 
 $this->title = 'Редактировать данные - ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Монографии', 'url' => ['index']];

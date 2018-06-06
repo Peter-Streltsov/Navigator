@@ -1,9 +1,11 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\modules\Control\units;
 
 use yii\base\Model;
 use app\modules\Control\models\Articles;
+use app\modules\Control\models\Authors;
+use app\modules\Control\models\IndexesArticles;
 use app\modules\Control\models\Monographies;
 
 class PNRD extends Model

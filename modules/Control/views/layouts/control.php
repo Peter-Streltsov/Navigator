@@ -10,6 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use \kartik\sidenav\SideNav;
+use app\modules\Control\models\Upload;
 use \app\modules\Control\models\Messages;
 
 AppAsset::register($this);
@@ -17,8 +18,11 @@ AppAsset::register($this);
 ?>
 
 <?php $this->beginPage() ?>
+
     <!DOCTYPE html>
+
     <html lang="<?= Yii::$app->language ?>">
+
     <head>
         <meta charset="<?= Yii::$app->charset ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,7 +59,7 @@ AppAsset::register($this);
                 ['label' => 'Публичные данные',
                     'url' => '/public'
                 ],
-                ['label' => 'Обратная связь', 'url' => ['/site/contact']],
+                //['label' => 'Обратная связь', 'url' => ['/site/contact']],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/site/login']]
                 ) : (
@@ -98,6 +102,16 @@ AppAsset::register($this);
                     <br>
 
                     <?php
+
+                    // number of unread messages
+                    $messages_count = '<span style="background-color: red;" class="badge badge-light">' .
+                        Messages::find()->where(['read' => null])->count() .
+                        '</span>';
+
+                    // number of unread uploads
+                    $uploads_count = '<span style="background-color: darkslategray;" class="badge badge-light">' .
+                        Upload::find()->where(['accepted' => '0'])->count() .
+                        '</span>';
 
                     $items = [
                         [
@@ -172,12 +186,21 @@ AppAsset::register($this);
                                 ]]
                         ],
                         [
-                            'label' => 'Сообщения ' .
-                                '<span style="background-color: red;" class="badge badge-light">' .
-                                Messages::find()->where(['read' => null])->count() .
-                                '</span>',
+                            'label' => 'Сообщения '
+                                . $messages_count
+                                . ' '
+                                . $uploads_count,
                             'icon' => 'comment',
-                            'url' => '/control/admin/messages'
+                            'items' => [
+                                [
+                                    'label' => 'Пользовательские сообщения' . $messages_count,
+                                    'url' => '/control/admin/messages/users'
+                                ],
+                                [
+                                    'label' => 'Загруженные данные' . $uploads_count,
+                                    'url' => '/control/admin/messages/uploads'
+                                ]
+                            ]
                         ],
                         [
                             'label' =>'Отчеты',
@@ -246,7 +269,7 @@ AppAsset::register($this);
                     <br>
 
                     <?= Breadcrumbs::widget([
-                            'homeLink' => ['label' => 'Панель управления', 'url' => '/control'],
+                        'homeLink' => ['label' => 'Панель управления', 'url' => '/control'],
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                         ]) ?>
 

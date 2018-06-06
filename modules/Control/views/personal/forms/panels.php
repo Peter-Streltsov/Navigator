@@ -1,3 +1,10 @@
+<?php
+
+/* @var $indexes  */
+/* @var $this \yii\web\View */
+/* @var $meanindex float */
+/* @var $currentarticles array */
+?>
 <div class="row">
     <div class="col-xs-12 col-md-12">
         <div class="panel panel-default">

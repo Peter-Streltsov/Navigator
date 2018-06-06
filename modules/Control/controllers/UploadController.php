@@ -9,7 +9,6 @@ use Yii;
 use app\modules\Control\models\Upload;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -80,6 +79,9 @@ class UploadController extends Controller
      * Creates a new Fileuploaded model,
      * If creation is successful, the browser will be redirected to the 'view' page.
      *
+     * TODO: delete action; moved to PersonalController
+     *
+     * @deprecated
      * @return mixed
      */
     public function actionCreate()

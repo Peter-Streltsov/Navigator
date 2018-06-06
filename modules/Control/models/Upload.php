@@ -40,11 +40,10 @@ class Upload extends \yii\db\ActiveRecord
     {
 
         return [
-            [['title', 'year'], 'required'],
+            [['title', 'class', 'year'], 'required'],
             [['author_id'], 'integer'],
-            [['description', 'subtitle', 'publisher'], 'string'],
+            [['description', 'class', 'subtitle', 'publisher'], 'string'],
             [['uploadedfile'], 'string'],
-            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf', 'maxFiles' => 1],
             [['accepted'], 'string', 'max' => 1],
         ];
 

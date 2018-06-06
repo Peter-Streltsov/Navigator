@@ -32,6 +32,10 @@ class Fileupload extends Model
     public function upload($folder = '')
     {
 
+        if ($folder != '') {
+            $folder = '/' . $folder. '/';
+        }
+
         if ($this->validate()) {
             $this->uploadedfile->saveAs('upload/' . $folder . $this->uploadedfile->baseName . '.' . $this->uploadedfile->extension);
             $this->name = (string)$this->uploadedfile->baseName . '.' . $this->uploadedfile->extension;

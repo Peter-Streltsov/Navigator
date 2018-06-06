@@ -24,7 +24,7 @@ use yii\helpers\Html;
 <div class="row">
     <div class="col-lg-10">
         <?= Html::a('Сообщение <span class="glyphicon glyphicon-send"></span>', ['/control/personal/create', 'id' => $model->id], ['class' => 'button primary big']); ?>
-        <?= Html::a('Загрузить данные <span class="glyphicon glyphicon-upload"></span>', ['/control/upload/create'], ['class' => 'button primary big']) ?>
+        <?= Html::a('Загрузить данные <span class="glyphicon glyphicon-upload"></span>', ['/control/personal/upload'], ['class' => 'button primary big']) ?>
     </div>
 </div>
 <!-- end block -->

@@ -6,11 +6,16 @@ use Yii;
 use app\modules\Control\models\Articles;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
+use app\modules\Control\models\Upload;
+use app\modules\Control\models\UploadCategories;
 use app\modules\Control\models\Personnel;
 use app\modules\Control\models\Messages;
 use app\modules\Control\models\MessagesClasses;
 use app\modules\Control\units\PNRD;
 use app\modules\Control\models\Users;
+use yii\web\UploadedFile;
+use yii\helpers\ArrayHelper;
+use app\modules\Control\models\Fileupload;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 
@@ -73,6 +78,75 @@ class PersonalController extends \yii\web\Controller
         ]);
 
     } // end action
+
+
+
+    /**
+     * Creates new uploaded data (candidate for articles, monograph etc.)
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionUpload()
+    {
+
+        $model = new Upload();
+
+        if (isset($_POST['upload_flag'])) {
+            $file = new Fileupload();
+            $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
+            
+            $model->uploadedfile = (string)$file->name;
+            $model->load(Yii::$app->request->post());
+
+            $folder = '';
+
+            switch ($model->class) {
+                case 'Статья':
+                    $folder = 'articles';
+                    break;
+                case 'Монография':
+                    $folder = 'monograph';
+                    break;
+                case 'Диссертация':
+                    $folder = 'dissertations';
+                    break;
+            }
+
+            $file->upload($folder);
+
+            if ($model->save()) {
+                Yii::$app->session->setFlash('info', 'Данные загружены');
+            } else {
+                ob_start();
+                $error_message = '';
+                $errors = $model->getErrors();
+                var_dump($errors);
+                $error_message = ob_get_contents();
+                ob_get_clean();
+                /*foreach ($errors as $error) {
+                    $error_message = $error_message;
+                }*/
+                Yii::$app->session->setFlash('danger', $error_message);
+
+            }
+        }
+
+        $user = Yii::$app->user->getIdentity();
+        $author = Authors::find()->where(['user_id' => $user->id])->one();
+        $classes = UploadCategories::find()->asArray()->all();
+        $classes = ArrayHelper::map($classes, 'class', 'class');
+        $file = new Fileupload();
+
+        return $this->render('uploaddata', [
+            'model' => $model,
+            'classes' => $classes,
+            'user' => $user,
+            'author' => $author,
+            'file' => $file,
+        ]);
+
+    } // end action
+
 
 
     /**

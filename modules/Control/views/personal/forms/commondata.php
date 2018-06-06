@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 ?>
 <!-- -->
 <div class="row">
-    <div class="col-xs-12 col-md-6">
+    <div class="col-lg-8">
         <?= DetailView::widget([
             'model' => $personal,
             'options' => [
@@ -25,8 +25,8 @@ use yii\widgets\DetailView;
         ?>
     </div>
 
-    <div class="col-xs-12 col-md-5">
-        <img style="width: 15pc; height: 20pc;" src="/images/1.jpg" class="img-rounded">
+    <div class="col-lg-4">
+        <img style="border-radius: 3pc;max-width: 15pc; max-height: 20pc;" src="/images/1.jpg" class="img-rounded">
     </div>
 
 </div>

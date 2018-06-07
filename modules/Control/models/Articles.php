@@ -265,6 +265,28 @@ class Articles extends \yii\db\ActiveRecord
     } // end function
 
 
+    /**
+     * @param bool $insert
+     * @return bool
+     */
+    public function beforeSave($insert)
+    {
+
+        //return parent::beforeSave($insert);
+        if (Articles::find()->where([
+            'title' => $this->title,
+            'year' => $this->year,
+            'publisher' => $this->publisher
+        ])->exists()) {
+            Yii::$app->session->setFlash('danger', 'Статья с заданными параметрами уже есть в базе данных');
+            return false;
+        }
+
+        return true;
+
+    } // end function
+
+
 
     public function afterSave($insert, $changedAttributes)
     {

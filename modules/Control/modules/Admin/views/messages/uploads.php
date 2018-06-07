@@ -69,15 +69,60 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'yii\grid\ActionColumn',
                         'buttons' => [
                             'accept' => function($url, $model) {
-                                return Html::a(
-                                    '<span class="glyphicon glyphicon-user">' . '</span>',
-                                    ['messages/accept', 'id' => $model->id],
-                                    [
-                                        'class' => 'button',
-                                        'style' => 'border-radius: 2pc;'
-                                    ]
-                                );
-                            }
+                                    ob_start();
+
+                                    // represents uploaded data model and actions
+                                    Modal::begin([
+                                        'toggleButton' => [
+                                            'label' => '<span class="glyphicon glyphicon-info-sign"></span>',
+                                            'class' => 'button primary',
+                                            'style' => 'border-radius: 2vh;'
+                                            ],
+                                        'options' => [
+                                                'style' => 'padding-top: 7vh;'
+                                        ]
+                                    ]);
+
+                                    echo "<h3>";
+                                    echo Html::encode($model->title);
+                                    echo "</h3>";
+                                    echo "<br>";
+
+                                    // uploaded data model
+                                    echo \yii\widgets\DetailView::widget([
+                                            'model' => $model,
+                                        'attributes' => [
+                                                'title',
+                                                'subtitle',
+                                                'publisher',
+                                                'uploadedfile',
+                                                'description'
+                                        ]
+                                    ]);
+
+                                    echo "<br><br>";
+
+                                    echo Html::a('Принять', [
+                                        'acceptupload',
+                                        'id' => $model->id],
+                                        [
+                                            'class' => 'button primary'
+                                        ]);
+
+                                    echo Html::a('Отклонить', [
+                                        'declineupload',
+                                        'id' => $model->id],
+                                        [
+                                            'class' => 'button primary danger'
+                                        ]);
+
+                                    Modal::end();
+
+                                    $content = ob_get_contents();
+                                    ob_get_clean();
+
+                                    return $content;
+                                } // end function
                         ],
                         'template' => '{accept}'
                     ]

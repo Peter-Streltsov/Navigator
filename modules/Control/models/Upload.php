@@ -5,6 +5,7 @@ namespace app\modules\Control\models;
 use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
+use app\modules\Control\models\Articles;
 
 /**
  * This is the model class for table "upload".
@@ -40,7 +41,7 @@ class Upload extends \yii\db\ActiveRecord
     {
 
         return [
-            [['title', 'class', 'year'], 'required'],
+            [['title', 'publisher', 'class', 'year'], 'required'],
             [['author_id'], 'integer'],
             [['description', 'class', 'subtitle', 'publisher'], 'string'],
             [['uploadedfile'], 'string'],
@@ -87,6 +88,49 @@ class Upload extends \yii\db\ActiveRecord
 
             return false;
         }
+
+    } // end function
+
+
+
+    /**
+     * creates Article model from existing Upload model
+     *
+     * @return bool
+     */
+    public static function createArticle($id)
+    {
+
+        $upload = Upload::find()->where(['id' => $id])->one();
+
+        // creating new Articles model and getting parameters from Upload model
+        $article = new Articles();
+        $article->title = $upload->title;
+        $article->publisher = $upload->publisher;
+        $article->year = $upload->year;
+
+        if (isset($upload->subtitle)) {
+            $article->subtitle = $upload->subtitle;
+        }
+
+        if ($article->save()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    } // end function
+
+
+
+    /**
+     * creates Monographies model from existing Upload model
+     *
+     * @return bool
+     */
+    public static function createMonograph($id)
+    {
+
 
     } // end function
 

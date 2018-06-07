@@ -94,7 +94,6 @@ class Messages extends \yii\db\ActiveRecord
     } // end function
 
 
-
     /**
      * @inheritdoc
      * @return MessagesQuery the active query used by this AR class.

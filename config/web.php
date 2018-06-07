@@ -52,6 +52,9 @@ $config = [
         'access' => [
             'class' => 'app\components\access'
         ],
+        'counter' => [
+            'class' => 'app\components\Counter',
+        ],
         'data' => [
             'class' => 'app\components\Data'
         ],

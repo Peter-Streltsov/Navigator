@@ -2,6 +2,7 @@
 
 namespace app\modules\Control\controllers;
 
+use app\modules\Control\models\Notifications;
 use Yii;
 use app\modules\Control\models\Articles;
 use app\modules\Control\models\ArticlesAuthors;
@@ -19,6 +20,11 @@ use app\modules\Control\models\Fileupload;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 
+/**
+ * Class PersonalController
+ *
+ * @package app\modules\Control\controllers
+ */
 class PersonalController extends \yii\web\Controller
 {
 
@@ -94,7 +100,7 @@ class PersonalController extends \yii\web\Controller
         if (isset($_POST['upload_flag'])) {
             $file = new Fileupload();
             $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
-            
+
             $model->uploadedfile = (string)$file->name;
             $model->load(Yii::$app->request->post());
 
@@ -146,6 +152,27 @@ class PersonalController extends \yii\web\Controller
         ]);
 
     } // end action
+
+
+    /**
+     * renders all user notifications
+     *
+     * @return string
+     */
+    public function actionNotifications()
+    {
+
+        $user = Yii::$app->user->getIdentity();
+
+        $notifications = new ActiveDataProvider([
+            'query' => Notifications::find()->where(['user_id' => $user->id])
+        ]);
+
+        return $this->render('notifications', [
+            'notifications' => $notifications
+        ]);
+
+    }
 
 
 

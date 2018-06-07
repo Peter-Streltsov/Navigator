@@ -105,6 +105,8 @@ class MessagesController extends Controller
      * Creates a new user message
      * If creation is successful, will redirect to the 'view' page
      *
+     * TODO: delete, moved to PersonalController
+     *
      * @deprecated
      * @return mixed
      */
@@ -128,6 +130,39 @@ class MessagesController extends Controller
         ]);
 
     } // end action
+
+
+    /**
+     * converts Upload model into Articles, Monographies or Dissertations
+     * depending on Upload model class
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function actionAcceptupload($id)
+    {
+
+        $upload = Upload::find()->where(['id' => $id])->one();
+
+        switch ($upload->class) {
+            case 'Статья':
+                if (Upload::createArticle($upload->id)) {
+                    //return $this->redirect('/control/admin/messages/uploads?success=1');
+                    $upload->accepted = 1;
+                    $upload->save();
+                    return $this->redirect('/control/admin/messages/uploads');
+                } else {
+                    return $this->redirect('/control/admin/messages/uploads?denied=1');
+                }
+                break;
+            case 'Монография':
+                break;
+        }
+
+        return $this->redirect('/control/admin/messages/uploads');
+
+    } // end action
+
 
 
     /**

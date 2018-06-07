@@ -56,16 +56,38 @@ AppAsset::register($this);
             'encodeLabels' => false,
             'items' => [
                 //['label' => "<input style='height: 1.5pc; color: #fff; background-color: #2c3337;' placeholder='Поиск' class=\"form-control\" type=\"text\"></input>"],
-                ['label' => 'Публичные данные',
+                [
+                    'label' => 'Публичные данные',
                     'url' => '/public'
                 ],
-                //['label' => 'Обратная связь', 'url' => ['/site/contact']],
+                [
+                    'label' => '<span style="color: red;" class="glyphicon glyphicon-send"></span>',
+                    'items' => [
+                            [
+                                    'label' => '<br>'
+                            ],
+                            [
+                                'label' => 'Уведомления',
+                                'url' => '/control/personal/notifications',
+                                'options' => [
+                                        'style' => 'width: 10pc;'
+                                ]
+                            ],
+                        [
+                                'label' => 'Загрузить данные',
+                            'url' => '/control/personal/upload'
+                        ]
+                    ]
+                ],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/site/login']]
                 ) : (
                 [
                     'label' => "<span class=\"glyphicon glyphicon-align-justify\"></span>",
                     'items' => [
+                            [
+                                    'label' => '<br>'
+                            ],
                         ['label' => 'Панель управления', 'url' => ['/control'], 'options' => [
                             'style' => 'width: 20pc;'
                         ]],
@@ -102,11 +124,6 @@ AppAsset::register($this);
                     <br>
 
                     <?php
-
-                    // number of unread messages
-                    $messages_count = '<span style="background-color: red;" class="badge badge-light">' .
-                        Messages::find()->where(['read' => null])->count() .
-                        '</span>';
 
                     // number of unread uploads
                     $uploads_count = '<span style="background-color: darkslategray;" class="badge badge-light">' .
@@ -187,13 +204,13 @@ AppAsset::register($this);
                         ],
                         [
                             'label' => 'Сообщения '
-                                . $messages_count
+                                . Yii::$app->counter->messagesCount()
                                 . ' '
                                 . $uploads_count,
                             'icon' => 'comment',
                             'items' => [
                                 [
-                                    'label' => 'Пользовательские сообщения' . $messages_count,
+                                    'label' => 'Пользовательские сообщения' . Yii::$app->counter->messagesCount(),
                                     'url' => '/control/admin/messages/users'
                                 ],
                                 [
@@ -265,7 +282,7 @@ AppAsset::register($this);
                     </div>
 
                 </div>
-                <div id="content-holder" class="col-xs-12 col-md-9">
+                <div style="min-height: 50pc;" id="content-holder" class="col-xs-12 col-md-9">
                     <br>
 
                     <?= Breadcrumbs::widget([

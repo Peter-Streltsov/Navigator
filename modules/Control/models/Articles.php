@@ -207,6 +207,19 @@ class Articles extends \yii\db\ActiveRecord
     } // end function
 
 
+    /**
+     * gets article affilation
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAffilation()
+    {
+
+        return $this->hasOne(ArticlesAffilations::className(), ['article_id' => 'id']);
+
+    } // end function
+
+
 
     /**
      * collecting indexes for current year articles

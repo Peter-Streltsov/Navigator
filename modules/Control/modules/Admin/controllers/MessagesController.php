@@ -3,11 +3,11 @@
 namespace app\modules\Control\modules\Admin\controllers;
 
 use app\modules\Control\models\MessagesClasses;
+use app\modules\Control\models\Notifications;
 use app\modules\Control\models\Upload;
 use Yii;
 use app\modules\Control\models\Messages;
 use yii\data\ActiveDataProvider;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -132,9 +132,12 @@ class MessagesController extends Controller
     } // end action
 
 
+
     /**
-     * converts Upload model into Articles, Monographies or Dissertations
+     * converts Upload model into Articles, Monographies, Reports or Dissertations
      * depending on Upload model class
+     *
+     * redirects to uploads view page
      *
      * @param $id
      * @return mixed
@@ -142,14 +145,17 @@ class MessagesController extends Controller
     public function actionAcceptupload($id)
     {
 
+        $user = Yii::$app->user->getIdentity();
+
         $upload = Upload::find()->where(['id' => $id])->one();
 
         switch ($upload->class) {
             case 'Статья':
                 if (Upload::createArticle($upload->id)) {
-                    //return $this->redirect('/control/admin/messages/uploads?success=1');
                     $upload->accepted = 1;
                     $upload->save();
+                    $text = 'Ваша статья принята администратором ' . $user->name . ' ' . $user->lastname;
+                    Notifications::createNotification($upload->author_id, $text);
                     return $this->redirect('/control/admin/messages/uploads');
                 } else {
                     return $this->redirect('/control/admin/messages/uploads?denied=1');
@@ -167,7 +173,8 @@ class MessagesController extends Controller
 
     /**
      * Deletes an existing Messages model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected to the 'index' page
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found

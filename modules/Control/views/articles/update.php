@@ -12,6 +12,7 @@ use yii\helpers\Html;
 /* @var $citations \app\modules\Control\models\ArticlesCitations[]|array */
 /* @var $newcitation \app\modules\Control\models\ArticlesCitations */
 /* @var $citation_classes array */
+/* @var $affilation mixed */
 
 $this->title = 'Редактировать данные - '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
@@ -37,6 +38,15 @@ $this->registerJsFile('/js/years.selector.js');
             'classes' => $classes,
             'model' => $model
         ]) ?>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <?= $this->render('forms/update/affilation', [
+                'affilation' => $affilation
+                ]); ?>
     </div>
 
     <br>

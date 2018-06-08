@@ -42,10 +42,10 @@ class Upload extends \yii\db\ActiveRecord
 
         return [
             [['title', 'publisher', 'class', 'year'], 'required'],
-            [['author_id'], 'integer'],
+            [['accepted', 'author_id'], 'integer'],
             [['description', 'class', 'subtitle', 'publisher'], 'string'],
             [['uploadedfile'], 'string'],
-            [['accepted'], 'string', 'max' => 1],
+            //[['accepted'], 'integer', 'max' => 1],
         ];
 
     } // end function

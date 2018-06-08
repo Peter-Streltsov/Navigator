@@ -2,6 +2,7 @@
 
 namespace app\modules\Control\controllers;
 
+use app\modules\Control\models\ArticlesAffilations;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\ArticlesCitations;
 use app\modules\Control\models\Authors;
@@ -133,6 +134,20 @@ class ArticlesController extends Controller
     public function actionUpdate($id)
     {
 
+        // affilation
+        if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
+            $newaffilation = ArticlesAffilations::find()->where(['article_id' => $id])->one();
+            if ($newaffilation == null) {
+                $newaffilation = new ArticlesAffilations();
+            }
+            $newaffilation->article_id = $id;
+            if ($newaffilation->load(Yii::$app->request->post()) && $newaffilation->save()) {
+                Yii::$app->session->setFlash('success', 'Данные обновлены');
+            } else {
+                Yii::$app->session->setFlash('warning', 'Не удалось обновить данные');
+            }
+        }
+
         // adding citation
         if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
             $citation = new ArticlesCitations();
@@ -207,8 +222,11 @@ class ArticlesController extends Controller
 
         $newcitation = new ArticlesCitations();
 
+        $affilation = $model[0]->affilation;
+
         // view
         return $this->render('update', [
+            'affilation' => $affilation,
             'model' => $model[0],
             'file' => $file,
             'classes' => $classes,

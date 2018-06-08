@@ -63,20 +63,26 @@ AppAsset::register($this);
                 [
                     'label' => '<span style="color: red;" class="glyphicon glyphicon-send"></span>',
                     'items' => [
-                            [
-                                    'label' => '<br>'
+                        [
+                            'label' => '<br>'
                             ],
-                            [
-                                'label' => 'Уведомления',
-                                'url' => '/control/personal/notifications',
-                                'options' => [
-                                        'style' => 'width: 10pc;'
+                        [
+                            'label' => 'Уведомления',
+                            'url' => '/control/personal/notifications',
+                            'options' => [
+                                    'style' => 'width: 10pc;'
                                 ]
                             ],
                         [
-                                'label' => 'Загрузить данные',
+                                'label' => '<br>'
+                        ],
+                        [
+                            'label' => 'Загрузить данные',
                             'url' => '/control/personal/upload'
-                        ]
+                            ],
+                        [
+                            'label' => '<br>'
+                            ]
                     ]
                 ],
                 Yii::$app->user->isGuest ? (

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
+/* @var $tokens \app\modules\Control\models\Accesstokens[]|array */
 
 $this->title = 'Редактировать данные пользователя '.$model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];

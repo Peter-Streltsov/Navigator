@@ -83,12 +83,12 @@ class ArticlesAuthors extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    /*public function getAuthors()
+    public function getArticlesbyid()
     {
 
-        return $this->hasMany(Authors::className(), ['id', 'author_id']);
+        return $this->hasMany(Articles::className(), ['id', 'author_id']);
 
-    } // end function*/
+    } // end function
 
 
 

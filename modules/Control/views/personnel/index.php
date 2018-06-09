@@ -16,32 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3><?= Html::encode($this->title) ?></h3>
 
     <br>
+    <br>
 
+    <?= Html::a('Добавить сотрудника', ['create'], ['class' => 'button big primary']) ?>
 
-    <?php Pjax::begin(); ?>
-
-    <p>
-
-    <div>
-
-        <?= Html::a('Добавить сотрудника', ['create'], ['class' => 'button big primary']) ?>
-
-        <label class="dropdown">
-
-            <button type="button" id="dropdownMenuButton" data-toggle="dropdown" class="button big">
-                <b>Экспорт </b> <span class="glyphicon glyphicon-hdd"></span>
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#"><span style="color: red; font-size: 12px;" class="glyphicon glyphicon"> PDF</span></a></li>
-                <li><a href="#"><span style="color: blue; font-size: 12px;" class="glyphicon glyphicon"> JPEG</span></a></li>
-                <!--<li class="divider"></li>-->
-                <li><a href="#"><span style="color: green; font-size: 12px;" class="glyphicon glyphicon"> XLS</span></a></li>
-            </ul>
-        </label>
-    </div>
-
-    </p>
+    <br>
+    <br>
 
     <div class="well">
         <div class="form-group">
@@ -49,6 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <input type="text" class="form-control" id="searchinput">
         </div>
     </div>
+
+    <br>
+    <br>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -68,12 +51,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'age:datetime',
 
             [
-                    'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}'
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                        'view' => function($url, $model) {
+                            $button = Html::a(
+                                    '<span class="glyphicon glyphicon-info-sign"></span>',
+                                    ['/control/personnel/view', 'id' => $model->id],
+                                    [
+                                        'style' => 'border-radius: 2pc;',
+                                        'class' => 'button primary big'
+                                    ]
+                            );
+                            return $button;
+                        },
+                ],
+                'template' => '{view}'
             ],
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
 
     <script>
         $(document).ready(function(){

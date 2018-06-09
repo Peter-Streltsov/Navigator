@@ -11,41 +11,34 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="authors-index">
 
+    <br>
+
     <h3>Список авторов</h3>
 
     <br>
+    <br>
 
-    <?php Pjax::begin(); ?>
+    <?= Html::a('Добавить автора', ['create'], ['class' => 'button primary big']) ?>
 
-    <p>
+    <br>
+    <br>
 
-    <div>
-
-        <?= Html::a('Добавить автора', ['create'], ['class' => 'button primary big']) ?>
-
-        <label class="dropdown">
-
-            <button type="button" id="dropdownMenuButton" data-toggle="dropdown" class="button big">
-                <b>Экспорт </b>
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#"><span style="color: red; font-size: 12px;" class="glyphicon glyphicon"> PDF</span></a></li>
-                <li><a href="#"><span style="color: blue; font-size: 12px;" class="glyphicon glyphicon"> JPEG</span></a></li>
-                <li><a href="#"><span style="color: green; font-size: 12px;" class="glyphicon glyphicon"> XLS</span></a></li>
-            </ul>
-        </label>
+    <div class="well">
+        <div class="form-group">
+            <label for="usr">Поиск:</label>
+            <input type="text" class="form-control" id="searchinput">
+        </div>
     </div>
 
-    </p>
-
+    <br>
     <br>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'tableOptions' => [
-                'class' => 'table table-hover'
+            'class' => 'table table-hover'
         ],
+        'id' => 'syntable',
         'columns' => [
 
             'id',
@@ -65,5 +58,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
+
 </div>
+
+<script>
+    $(document).ready(function(){
+        $("#searchinput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#syntable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

@@ -26,12 +26,27 @@ $this->registerJsFile('/js/years.selector.js');
 
         <div class="col-lg-10">
             <br>
+            <br>
             <h3><?= Html::encode($this->title) ?></h3>
+            <br>
+            <br>
             <br>
             <br>
         </div>
 
     </div>
+
+    <div>
+
+        <?= $this->render('forms/update/buttons', [
+            'file' => $file,
+            'model' => $model
+        ]) ?>
+
+    </div>
+
+    <br>
+    <br>
 
     <div class="articles-form">
         <?= $this->render('forms/update/articleform', [
@@ -53,7 +68,7 @@ $this->registerJsFile('/js/years.selector.js');
     <br>
 
     <div>
-        <?= $this->render('forms/update/modalsform', [
+        <?= $this->render('forms/update/authorsform', [
             'author_items' => $author_items,
             'file' => $file,
             'model_authors' => $model_authors,

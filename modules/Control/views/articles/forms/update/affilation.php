@@ -12,7 +12,7 @@ use app\modules\Control\models\ArticlesAffilations;
 <div class="panel panel-default">
     <div class="panel panel-body">
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-12">
 
                 <h4>Affilation</h4>
 

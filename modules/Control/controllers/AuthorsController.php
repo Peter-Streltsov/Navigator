@@ -114,7 +114,16 @@ class AuthorsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+
+    } // end action
+
+
+
+    public function actionViewpublications($id)
+    {
+
     }
+
 
     /**
      * Finds the Authors model based on its primary key value.

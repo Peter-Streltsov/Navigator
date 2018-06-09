@@ -127,7 +127,7 @@ class ArticlesController extends Controller
      * Adds citations, authors etc.
      * If update is successful, the browser will be again redirected to 'update' page
      *
-     * @param integer $id
+     * @param integer $id - article id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */

@@ -16,38 +16,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <h3>Зарегистрированные пользователи</h3>
 
     <br>
+    <br>
 
-    <?php Pjax::begin(); ?>
+    <?= Html::a('Создать пользователя', ['create'], ['class' => 'button big primary']) ?>
 
-    <p>
+    <br>
+    <br>
 
-    <div>
-        <?= Html::a('Создать пользователя', ['create'], ['class' => 'button big primary']) ?>
-
-        <label class="dropdown">
-
-            <button type="button" id="dropdownMenuButton" data-toggle="dropdown" class="button big">
-                <b>Экспорт </b>
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#"><span style="color: red; font-size: 12px;" class="glyphicon glyphicon"> PDF</span></a></li>
-                <li><a href="#"><span style="color: blue; font-size: 12px;" class="glyphicon glyphicon"> JPEG</span></a></li>
-                <!--<li class="divider"></li>-->
-                <li><a href="#"><span style="color: green; font-size: 12px;" class="glyphicon glyphicon"> XLS</span></a></li>
-            </ul>
-        </label>
+    <div class="well">
+        <div class="form-group">
+            <label for="usr">Поиск:</label>
+            <input type="text" class="form-control" id="searchinput">
+        </div>
     </div>
 
-    </p>
-
+    <br>
     <br>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'tableOptions' => [
-                'class' => 'table table-hover'
-                ],
+            'class' => 'table table-hover'
+        ],
+        'id' => 'syntable',
         'columns' => [
 
             'id',
@@ -62,12 +53,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                         'view' => function($url, $model) {
                             $viewurl = Yii::$app->getUrlManager()->createUrl(['/control/admin/users/view','id'=>$model['id']]);
-                            return Html::a('<span class="glyphicon glyphicon-file"></span>', $viewurl, ['class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
+                            return Html::a('<span class="glyphicon glyphicon-info-sign"></span>',
+                                $viewurl,
+                                [
+                                    'style' => 'border-radius: 2pc;',
+                                    'class' => 'button primary big',
+                                    'title' => Yii::t('yii', 'view')]);
                         }
                 ]
                 ],
             ]
     ]); ?>
 
-    <?php Pjax::end(); ?>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $("#searchinput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#syntable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

@@ -23,7 +23,7 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
 
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <?= $form->field($model, 'title')->textInput([
                 'maxlength' => true,
                 'style' => 'background-color: #ffffe0;',
@@ -35,7 +35,7 @@ use yii\bootstrap\ActiveForm;
     <!-- Subtite input - text area (max 255 chars) -->
     <div class="row">
 
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <?= $form->field($model, 'subtitle')->textArea([
                 'rows' => 2,
                 'maxlength' => true,
@@ -46,7 +46,7 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
 
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <?= $form->field($model, 'publisher')->textInput([
                 'maxlength' => true,
                 'style' => 'background-color: #ffffe0;'
@@ -58,7 +58,7 @@ use yii\bootstrap\ActiveForm;
     <!-- year publishing and DOI index input - in one row -->
     <div class="row">
 
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <?= $form->field($model, 'year')->widget(etsoft\widgets\YearSelectbox::classname(), [
                 'yearStart' => -10,
                 'yearEnd' => 10,
@@ -66,7 +66,7 @@ use yii\bootstrap\ActiveForm;
             ?>
         </div>
 
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             <?= $form->field($model, 'doi')->textInput(['maxlength' => true, 'style' => 'background-color: #ffffe0;']) ?>
         </div>
     </div>
@@ -75,7 +75,7 @@ use yii\bootstrap\ActiveForm;
 
     <div class="row">
 
-        <div class="col-lg-7">
+        <div class="col-lg-12">
 
             <?= $form->field($model, 'class')->dropDownList($classes_items, [
                 'prompt' => 'Выберите категорию',

@@ -14,75 +14,51 @@ use yii\widgets\ActiveForm;
 <br>
 <br>
 
-<div class="row">
-
-    <div class="col-lg-10">
-        <h4>Цитирования:</h4>
-    </div>
-
-</div>
-
-<div class="row">
-    <div class="col-lg-10">
-        <?= \yii\grid\GridView::widget([
-            'dataProvider' => $citations,
-            'tableOptions' => [
-                    'class' => 'table'
-            ],
-            'columns' => [
-                'title',
-                'class',
-            ]
-        ]) ?>
-    </div>
-</div>
-
-
-<br>
-<br>
-
-
-<div class="row">
-
-    <div class="col-lg-10">
-
-        <div class="panel panel-default">
-
-            <div class="panel panel-heading">
-                Добавить цитирование
+<div class="panel panel-default">
+    <div class="panel panel-body">
+        <div class="row">
+            <div class="col-lg-8">
+                <?= \yii\grid\GridView::widget([
+                    'dataProvider' => $citations,
+                    'tableOptions' => [
+                        'class' => 'table'
+                    ],
+                    'columns' => [
+                        'title',
+                        'class',
+                    ]
+                ]) ?>
             </div>
+            <div class="col-lg-4">
 
-            <div class="panel panel-body">
+                <?php
+
+                Modal::begin([
+                    'toggleButton' => [
+                        'label' => 'Добавить цитирование',
+                        'class' => 'button primary big'
+                    ]
+
+                ]);
+
+                $citations = ActiveForm::begin();
+
+                echo Html::hiddenInput('citation_flag', '1');
+                echo $citations->field($newcitation, 'title')->textInput();
+                echo $citations->field($newcitation, 'class')->dropDownList($citation_classes);
+                echo $citations->field($newcitation, 'article_id')->textInput(['value' => $model->id, 'readonly' => true]);
 
 
-                <?php $citations = ActiveForm::begin(); ?>
-                <?= Html::hiddenInput('citation_flag', '1'); ?>
+                echo Html::submitButton('Сохранить', ['class' => 'button primary big']);
 
-                <div class="row">
-                    <div class="col-lg-10">
-                        <?= $citations->field($newcitation, 'title')->textInput(); ?>
-                    </div>
-                </div>
+                //$citations::end();
+                ActiveForm::end();
 
-                <div class="row">
-                    <div class="col-lg-5">
-                        <?= $citations->field($newcitation, 'class')->dropDownList($citation_classes); ?>
-                    </div>
-                    <div class="col-lg-5">
-                        <?= $citations->field($newcitation, 'article_id')->textInput(['value' => $model->id]); ?>
-                    </div>
-                </div>
+                Modal::end();
 
-                <br>
-
-                <?= Html::submitButton('Сохранить', ['class' => 'button primary big']); ?>
-
-                <?php $citations::end(); ?>
+                ?>
 
             </div>
-
         </div>
-
     </div>
-
 </div>

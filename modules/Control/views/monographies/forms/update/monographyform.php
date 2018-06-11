@@ -23,7 +23,7 @@ use yii\helpers\ArrayHelper;
     ?>
 
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <?= $form->field($model, 'title')->textInput([
                 'maxlength' => true,
                 'style' => 'background-color: #ffffe0;'
@@ -34,7 +34,7 @@ use yii\helpers\ArrayHelper;
 
     <!-- Subtite input - text area (max 255 chars) -->
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <?= $form->field($model, 'subtitle')->textArea([
                 'rows' => 2,
                 'maxlength' => true,
@@ -44,7 +44,7 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <?= $form->field($model, 'publisher')->textInput([
                 'maxlength' => true,
                 'style' => 'background-color: #ffffe0;'
@@ -55,14 +55,14 @@ use yii\helpers\ArrayHelper;
 
     <!-- year publishing and DOI index input - in one row -->
     <div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <?= $form->field($model, 'year')->widget(etsoft\widgets\YearSelectbox::classname(), [
                 'yearStart' => -10,
                 'yearEnd' => 10,
             ]);
             ?>
         </div>
-        <div class="col-lg-7">
+        <div class="col-lg-8">
             <?= $form->field($model, 'isbn')->textInput([
                 'maxlength' => true,
                 'style' => 'background-color: #ffffe0;'
@@ -71,7 +71,7 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-12">
 
             <?= $form->field($model, 'class')->dropDownList($classes_items, [
                 'prompt' => 'Выберите категорию',

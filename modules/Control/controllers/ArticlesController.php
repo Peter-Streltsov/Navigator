@@ -206,8 +206,8 @@ class ArticlesController extends Controller
 
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
 
-        // updating article data
-        if (Yii::$app->request->post()) {
+        // updating article data - articleform
+        if (Yii::$app->request->isPjax) {
             if ($model[0]->load(Yii::$app->request->post()) && $model[0]->save()) {
                 return $this->redirect(['update', 'id' => $id]);
             }

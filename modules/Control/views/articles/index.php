@@ -43,14 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'subtitle',
         'publisher',
         'year',
-        //'file',
-        /*[
-            'attribute' => 'file',
-            'value' => function($data) {
-        \yii\helpers\VarDumper::dump($data);
-            }
-        ],*/
-        //'doi',
         [
             'attribute' => 'authors',
             'encodeLabel' => false,

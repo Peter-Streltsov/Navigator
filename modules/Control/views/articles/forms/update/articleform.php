@@ -11,7 +11,15 @@ use yii\bootstrap\ActiveForm;
 <div class="panel panel-default">
     <div class="panel panel-body">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php
+    \yii\widgets\Pjax::begin();
+    ?>
+
+    <?php $form = ActiveForm::begin([
+            'options' => [
+                    'data-pjax' => true
+            ]
+    ]); ?>
 
     <br>
 
@@ -99,6 +107,8 @@ use yii\bootstrap\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
+
+    <?php \yii\widgets\Pjax::end(); ?>
 
     <br>
 

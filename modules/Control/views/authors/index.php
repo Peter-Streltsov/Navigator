@@ -1,8 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use kartik\export\ExportMenu;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -29,6 +30,24 @@ $this->params['breadcrumbs'][] = $this->title;
             <input type="text" class="form-control" id="searchinput">
         </div>
     </div>
+
+    <br>
+    <br>
+
+    <?php
+
+    $gridColumns = [
+        'id',
+        'name',
+        'secondname',
+        'lastname',
+    ];
+
+    echo ExportMenu::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => $gridColumns
+    ]);
+    ?>
 
     <br>
     <br>

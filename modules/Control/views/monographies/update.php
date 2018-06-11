@@ -12,6 +12,7 @@ use yii\helpers\Html;
 /* @var $citations \yii\data\ActiveDataProvider */
 /* @var $citation_classes array */
 /* @var $newcitation \app\modules\Control\models\MonographiesCitations */
+/* @var $affilation \app\modules\Control\models\MonographAffilations|array|null */
 
 $this->title = 'Редактировать данные - ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Монографии', 'url' => ['index']];
@@ -24,18 +25,42 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
         <div class="col-lg-10">
             <br>
+            <br>
             <h3><?= Html::encode($this->title) ?></h3>
+            <br>
+            <br>
             <br>
             <br>
         </div>
 
     </div>
 
+    <div>
+
+        <?= $this->render('forms/update/buttons', [
+            'file' => $file,
+            'model' => $model
+        ]) ?>
+
+    </div>
+
+    <br>
+    <br>
+
     <div class="monographies-form">
         <?= $this->render('forms/update/monographyform', [
                 'model' => $model,
                 'classes' => $classes
         ]) ?>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <?= $this->render('forms/update/affilationform', [
+            'affilation' => $affilation
+        ]); ?>
     </div>
 
     <br>

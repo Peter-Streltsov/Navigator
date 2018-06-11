@@ -69,8 +69,10 @@ class Monographies extends \yii\db\ActiveRecord
             'title' => 'Заголовок',
             'subtitle' => 'Подзаголовок',
             'year' => 'Год издания',
+            'publisher' => 'Издатель',
+            'class' => 'Категория',
             'isbn' => 'ISBN',
-            'file' => 'File',
+            'file' => 'Файл',
             'authors' => 'Авторы'
         ];
 

@@ -5,6 +5,7 @@ namespace app\modules\Control\controllers;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Fileupload;
 use app\modules\Control\models\IndexesArticles;
+use app\modules\Control\models\MonographAffilations;
 use app\modules\Control\models\Monographies;
 use app\modules\Control\models\MonographiesAuthors;
 use app\modules\Control\models\MonographiesCitations;
@@ -109,6 +110,20 @@ class MonographiesController extends Controller
     public function actionUpdate($id)
     {
 
+        // affilation
+        if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
+            $newaffilation = MonographAffilations::find()->where(['monograph_id' => $id])->one();
+            if ($newaffilation == null) {
+                $newaffilation = new MonographAffilations();
+            }
+            $newaffilation->monograph_id = $id;
+            if ($newaffilation->load(Yii::$app->request->post()) && $newaffilation->save()) {
+                Yii::$app->session->setFlash('success', 'Данные обновлены');
+            } else {
+                Yii::$app->session->setFlash('danger', 'Не удалось обновить данные');
+            }
+        }
+
         // adding citation
         if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
             $citation = new MonographiesCitations();
@@ -202,6 +217,8 @@ class MonographiesController extends Controller
 
         $newcitation = new MonographiesCitations();
 
+        $affilation = MonographAffilations::find()->where(['monograph_id' => $id])->one();
+
         // saving model data
         if (Yii::$app->request->post()) {
             if ($model[0]->load(Yii::$app->request->post()) && $model[0]->save()) {
@@ -213,6 +230,7 @@ class MonographiesController extends Controller
         return $this->render('update', [
             'model' => $model[0],
             'model_authors' => $model_authors[0],
+            'affilation' => $affilation,
             'file' => $file,
             'classes' => $classes,
             'citations' => $citations,

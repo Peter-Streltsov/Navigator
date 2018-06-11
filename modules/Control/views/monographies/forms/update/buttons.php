@@ -16,7 +16,7 @@ use yii\helpers\Html;
 
         if (!isset($model->text)) {
             $class = 'button danger';
-            $modaltextbutton = '<h5><span class="glyphicon glyphicon-book"></span>  Текст статьи не задан</h5>';
+            $modaltextbutton = '<br><h5>Текст статьи не задан</h5><br>';
             $modaltextheader = 'Загрузить текст';
             ob_start();
             /*\mihaildev\ckeditor\CKEditor::widget([
@@ -35,9 +35,9 @@ use yii\helpers\Html;
         }
 
         Modal::begin([
-                'header' => $modaltextheader,
+            'header' => $modaltextheader,
             'toggleButton' => [
-                    'label' => $modaltextbutton,
+                'label' => $modaltextbutton,
                 'class' => $class
             ]
         ]);
@@ -59,21 +59,19 @@ use yii\helpers\Html;
 
         if (isset($model->file)) {
             if ($model->file == '') {
-                $modal = "<h5><span class='glyphicon glyphicon-file'></span>  Файл не прикреплен</h5>";
-                $class = "button danger";
+                $modal = "<br><h5 style='color: red;'>Имя файла не задано!</h5><br><br>";
             } else {
-                $modal = "<h5><span class='glyphicon glyphicon-file'></span>  Файл прикреплен</h5>";
-                $class = 'button primary';
+                $modal = "<br><h5 style='color: green;'>Прикрепленный файл  - <br>" . $model->file . " </h5>";
             }
         } else {
-            $modal = "<h5><span class='glyphicon glyphicon-file'></span>  Файл не прикреплен</h5>";
-            $class = 'button danger';
+            $modal = "<h5 style='color: red;'>Файл не загружен</h5>";
         }
         \yii\bootstrap\Modal::begin([
             'header' => 'Файл статьи',
             'toggleButton' => [
                 'label' => $modal,
-                'class' => $class
+                'style' => 'max-width: 50vh;',
+                'class' => 'button'
             ]
         ]);
 

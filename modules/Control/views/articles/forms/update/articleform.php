@@ -5,6 +5,7 @@
 /* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
 /* @var $title string */
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 ?>
 
@@ -12,12 +13,12 @@ use yii\bootstrap\ActiveForm;
     <div class="panel panel-body">
 
     <?php
-    \yii\widgets\Pjax::begin();
+    //\yii\widgets\Pjax::begin();
     ?>
 
     <?php $form = ActiveForm::begin([
             'options' => [
-                    'data-pjax' => true
+                    'data-pjax' => false
             ]
     ]); ?>
 
@@ -25,7 +26,8 @@ use yii\bootstrap\ActiveForm;
 
     <?php
 
-    $classes_items = \yii\helpers\ArrayHelper::map($classes, 'id', 'description');
+    echo Html::input('hidden', 'update', true);
+    $classes_items = ArrayHelper::map($classes, 'id', 'description');
 
     ?>
 
@@ -99,7 +101,15 @@ use yii\bootstrap\ActiveForm;
         <div class="col-lg-5">
 
             <br>
-            <?= Html::submitButton('Сохранить', ['class' => 'button big primary']) ?>
+            <?php
+
+            echo Html::submitButton(
+                    '<span class="glyphicon glyphicon-ok"></span>  Сохранить',
+                    [
+                        'style' => 'color: green;',
+                        'class' => 'btn btn-default'
+                    ])
+            ?>
             <br>
 
         </div>
@@ -108,7 +118,7 @@ use yii\bootstrap\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
-    <?php \yii\widgets\Pjax::end(); ?>
+    <?php //\yii\widgets\Pjax::end(); ?>
 
     <br>
 

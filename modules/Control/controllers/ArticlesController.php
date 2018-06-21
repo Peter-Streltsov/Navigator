@@ -134,25 +134,40 @@ class ArticlesController extends Controller
     public function actionUpdate($id)
     {
 
+        $model = Articles::find()->where(['id' => $id])->one();
+
+        if (isset($_POST['delete_text'])) {
+            $model->text = null;
+            $model->save();
+        }
+
         // affilation
         if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
-            $newaffilation = ArticlesAffilations::find()->where(['article_id' => $id])->one();
-            if ($newaffilation == null) {
-                $newaffilation = new ArticlesAffilations();
-            }
+            $newaffilation = new ArticlesAffilations();
             $newaffilation->article_id = $id;
             if ($newaffilation->load(Yii::$app->request->post()) && $newaffilation->save()) {
                 Yii::$app->session->setFlash('success', 'Данные обновлены');
             } else {
                 Yii::$app->session->setFlash('warning', 'Не удалось обновить данные');
             }
+        } elseif (Yii::$app->request->post() && isset($_POST['affilation_delete'])) {
+            $affilation = ArticlesAffilations::find()->where([
+                'article_id' => $id,
+                'name' => $_POST['affilation_delete']
+            ])->one();
+            $affilation->delete();
         }
 
         // adding citation
         if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
             $citation = new ArticlesCitations();
-            if ($citation->load(Yii::$app->request->post()) && $citation->save()) {
-                return $this->redirect(['update', 'id' => $id]);
+            if ($_POST['citation_flag'] == 'delete') {
+                $citation = ArticlesCitations::find()->where(['id' => $_POST['citation_id']])->one();
+                $citation->delete() ?
+                    Yii::$app->session->setFlash('danger', 'Цитирование удалено')
+                    : Yii::$app->session->setFlash('warning', 'Данные не были обновлены');
+            } elseif ($citation->load(Yii::$app->request->post()) && $citation->save()) {
+                Yii::$app->session->setFlash('success', 'Цитирование добавлено');
             }
         }
 
@@ -171,8 +186,9 @@ class ArticlesController extends Controller
         if (Yii::$app->request->post()) {
             if (isset($_POST['delete']) && $_POST['delete'] == 1) {
                 $author_delete = ArticlesAuthors::find()->where([
-                    'author_id' => $_POST['author'],
-                    'article_id' => $id
+                    //'author_id' => $_POST['author'],
+                    //'article_id' => $id
+                    'id' => $_POST['article_authors_id']
                 ])->one();
                 $author_delete->delete();
             }
@@ -186,51 +202,46 @@ class ArticlesController extends Controller
 
         // view parameters
 
-        $model_authors = Articles::find($id)
-            ->where(['articles.id' => $id])
-            ->joinWith('data')
-            ->all();
+        $model_authors = ArticlesAuthors::find()->where(['article_id' => $id])->all();
 
         $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
 
-        $items = \yii\helpers\ArrayHelper::map($authors, 'id', function($items) {
+        $items = ArrayHelper::map($authors, 'id', function($items) {
             return $items['name']. ' ' . $items['lastname'];
         });
 
         $file = new Fileupload();
 
-        $model = Articles::find($id)
+        $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+
+        $model = Articles::find()
             ->where(['articles.id' => $id])
             ->joinWith('data')
             ->all();
 
-        $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
-
         // updating article data - articleform
-        if (Yii::$app->request->isPjax) {
+        if (Yii::$app->request->post()) {
             if ($model[0]->load(Yii::$app->request->post()) && $model[0]->save()) {
-                return $this->redirect(['update', 'id' => $id]);
+                //return $this->redirect(['update', 'id' => $id]);
             }
         }
 
-        //$citations = ArticlesCitations::find()->all();
-        $citations = new ActiveDataProvider([
-            'query' => ArticlesCitations::find()->where(['article_id' => $id])
-        ]);
+        $citations = ArticlesCitations::find()->where(['article_id' => $id])->all();
+
         $citation_classes = CitationClasses::find()->asArray()->all();
         $citation_classes = ArrayHelper::map($citation_classes, 'class', 'class');
 
         $newcitation = new ArticlesCitations();
 
-        $affilation = $model[0]->affilation;
+        $affilations = $model[0]->affilation;
 
         // view
         return $this->render('update', [
-            'affilation' => $affilation,
+            'affilations' => $affilations,
             'model' => $model[0],
             'file' => $file,
             'classes' => $classes,
-            'model_authors' => $model_authors[0],
+            'model_authors' => $model_authors,
             'newcitation' => $newcitation,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
@@ -244,7 +255,8 @@ class ArticlesController extends Controller
 
     /**
      * Deletes an existing Articles model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion successful, the browser will redirect to 'index' page
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found

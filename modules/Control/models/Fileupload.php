@@ -24,6 +24,16 @@ class Fileupload extends Model
 
 
 
+    public function attributeLabels()
+    {
+
+        return [
+            'uploadedfile' => 'Загруженный файл'
+        ];
+
+    }
+
+
     /**
      * uploads file and sets uploaded file name to Upload model
 

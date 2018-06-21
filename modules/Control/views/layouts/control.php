@@ -41,6 +41,7 @@ AppAsset::register($this);
 
     <div class="wrap">
         <?php
+
         NavBar::begin([
             'brandLabel' => '<b class="navbrand">'.Yii::$app->data->data->organisation.' - Наукометрия'.'</b>',
             'brandUrl' => Yii::$app->homeUrl,

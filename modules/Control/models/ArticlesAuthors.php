@@ -37,6 +37,7 @@ class ArticlesAuthors extends \yii\db\ActiveRecord
         return [
             [['article_id', 'author_id'], 'required'],
             [['article_id', 'author_id'], 'integer'],
+            [['part'], 'number'],
             [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articles::className(), 'targetAttribute' => ['article_id' => 'id']],
         ];
 
@@ -52,6 +53,7 @@ class ArticlesAuthors extends \yii\db\ActiveRecord
 
         return [
             'id' => 'ID',
+            'part' => 'part',
             'article_id' => 'Article ID',
             'author_id' => 'Author ID',
         ];
@@ -80,6 +82,26 @@ class ArticlesAuthors extends \yii\db\ActiveRecord
     } // end function*/
 
 
+
+    /**
+     * gets author affilated with current record
+     *
+     * @return Authors|string|null
+     */
+    public function getAuthor()
+    {
+
+        $author = Authors::find()->where(['id' => $this->author_id])->one();
+
+        if ($author != null) {
+            return $author->name . ' ' . $author->lastname;
+        } else {
+            return 'Not set';
+        }
+
+    } // end function
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -99,10 +121,14 @@ class ArticlesAuthors extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
 
-        if (ArticlesAuthors::find()->where(['author_id' => $this->author_id, 'article_id' => $this->article_id])->exists()) {
+        if (ArticlesAuthors::find()->where([
+            'author_id' => $this->author_id,
+            'article_id' => $this->article_id
+        ])->exists()) {
             Yii::$app->session->setFlash('warning', 'Автор с таким id уже сопоставлен статье');
             return false;
         } else {
+            Yii::$app->session->setFlash('info', 'Автор сопоставлен статье');
             return true;
         }
 

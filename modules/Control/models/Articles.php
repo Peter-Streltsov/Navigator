@@ -60,9 +60,10 @@ class Articles extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Заголовок',
             'subtitle' => 'Подзаголовок',
-            'publisher' => 'Издатель',
+            'publisher' => 'Издатель / Издание',
             'year' => 'Год издания',
             'doi' => 'ЦИО',
+            'text' => 'Текст',
             'file' => 'Файл',
             'authors' => 'Авторы',
             'class' => 'Категория',
@@ -215,7 +216,7 @@ class Articles extends \yii\db\ActiveRecord
     public function getAffilation()
     {
 
-        return $this->hasOne(ArticlesAffilations::className(), ['article_id' => 'id']);
+        return $this->hasMany(ArticlesAffilations::className(), ['article_id' => 'id']);
 
     } // end function
 
@@ -285,14 +286,24 @@ class Articles extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
 
-        //return parent::beforeSave($insert);
-        if (Articles::find()->where([
-            'title' => $this->title,
-            'year' => $this->year,
-            'publisher' => $this->publisher
-        ])->exists()) {
-            Yii::$app->session->setFlash('danger', 'Статья с заданными параметрами уже есть в базе данных');
-            return false;
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                if ($insert) {
+                    Yii::$app->session->setFlash('success', 'Статья сохранена');
+                    return true;
+                } else {
+                    Yii::$app->session->setFlash('danger', '');
+                    return false;
+                }
+            } else {
+                if ($insert) {
+                    Yii::$app->session->setFlash('warning', 'Обновление данных не удалось');
+                    return false;
+                } else {
+                    Yii::$app->session->setFlash('info', 'Данные обновлены');
+                    return true;
+                }
+            }
         }
 
         return true;
@@ -306,9 +317,9 @@ class Articles extends \yii\db\ActiveRecord
 
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
-            Yii::$app->session->setFlash('success', 'Статья добавлена');
+            //Yii::$app->session->setFlash('success', 'Статья добавлена');
         } else {
-            Yii::$app->session->setFlash('success', 'Данные статьи обновлены');
+            //Yii::$app->session->setFlash('success', 'Данные статьи обновлены');
         }
 
     } // end function

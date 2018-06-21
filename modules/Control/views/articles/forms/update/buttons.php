@@ -24,6 +24,10 @@ use yii\helpers\Html;
             'preset' => 'basic'
             ]
             ]);*/
+            $form = ActiveForm::begin();
+            echo $form->field($model, 'text')->textarea();
+            echo Html::submitButton();
+            ActiveForm::end();
             $modaltextcontent = ob_get_contents();
             ob_get_clean();
         } else {
@@ -31,13 +35,22 @@ use yii\helpers\Html;
             $modaltextbutton = '<h5 style="color: green;">Текст статьи</h5>';
             $modaltextheader = '';
             ob_start();
+            echo $model->text;
+
+            echo "<br><br>";
+
+            echo Html::beginForm('', 'post');
+            echo Html::input('hidden', 'delete_text', 1);
+            echo Html::submitButton();
+            echo Html::endForm();
             $modaltextcontent = ob_get_contents();
+            ob_get_clean();
         }
 
         Modal::begin([
                 'header' => $modaltextheader,
             'toggleButton' => [
-                    'label' => $modaltextbutton,
+                'label' => $modaltextbutton,
                 'class' => $class
             ]
         ]);
@@ -69,7 +82,7 @@ use yii\helpers\Html;
             $modal = "<h5><span class='glyphicon glyphicon-file'></span>  Файл не прикреплен</h5>";
             $class = 'button danger';
         }
-        \yii\bootstrap\Modal::begin([
+        Modal::begin([
             'header' => 'Файл статьи',
             'toggleButton' => [
                 'label' => $modal,
@@ -79,11 +92,29 @@ use yii\helpers\Html;
 
         $uploadform = ActiveForm::begin();
         echo Html::hiddenInput('upload_flag', true);
-        echo $uploadform->field($file, 'uploadedfile')->fileInput();
-        echo Html::submitButton('Сохранить', ['class' => 'button']);
+
+        if (isset($model->file)) {
+            echo "<h4>Текущий файл:</h4>";
+            echo Html::input('text', 'text', $model->file, ['class' => 'form-control']);
+        } else {
+            echo "<h5 style='color: red;'>Файл не загружен</h5style>";
+        }
+
+        echo"<br><br>";
+
+        echo "<h4>Загрузить новый файл:</h4>";
+
+        echo"<br>";
+
+        echo $uploadform->field($file, 'uploadedfile')->fileInput(['class' => 'btn btn-default']);
+
+        echo "<br><br>";
+
+        echo Html::submitButton('Сохранить', ['class' => 'button primary big']);
+
         $uploadform::end();
 
-        \yii\bootstrap\Modal::end();
+        Modal::end();
         ?>
     </div>
 </div>

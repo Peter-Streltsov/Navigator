@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-use app\modules\Control\models\Users;
+use app\models\identity\Users;
 use yii\base\Model;
 
 /**

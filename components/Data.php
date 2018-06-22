@@ -2,7 +2,7 @@
 
 namespace app\components;
 
-use app\modules\Control\models\Organisation;
+use app\models\basis\Organisation;
 use yii\base\Component;
 
 /**
@@ -12,12 +12,15 @@ use yii\base\Component;
 class Data extends Component
 {
 
-    public $data;
+    public $orgdata;
 
     public function __construct()
     {
 
-        $this->data = Organisation::find()->one();
+        $organisation = new Organisation();
+        $organisation::findOne(1);
+
+        $this->orgdata = $organisation;
 
     } // end construct
 

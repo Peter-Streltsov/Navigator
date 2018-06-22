@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\identity;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -26,8 +26,10 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
+
         return 'users';
-    }
+
+    } // end function
 
 
 
@@ -96,6 +98,7 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
     } // end function
 
 
+
     /**
      * finds an identity by given ID
      *
@@ -111,12 +114,18 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
 
 
 
+    /**
+     * @param mixed $token
+     * @param null $type
+     * @return Users|null|IdentityInterface
+     */
     public static function findIdentityByAccessToken($token, $type = null)
     {
 
         return static::findOne(['access_token' => $token]);
 
     } // end function
+
 
 
     /**
@@ -128,6 +137,7 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->auth_key;
 
     } // end function
+
 
 
     /**

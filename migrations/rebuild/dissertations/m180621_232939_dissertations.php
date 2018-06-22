@@ -6,7 +6,7 @@ use yii\db\Migration;
  * creates datastructure for dissertations
  * linked models:
  *      * DissertationTypes [type] // special
- *      * Grades [grade] // common
+ *      * Habilitations [habilitation] // common
  *      * Languages [language] // common
  *      * Authors [author] // common
  *      * Specialities [speciality] // common ??? (if necessary)
@@ -27,7 +27,7 @@ class m180621_232939_dissertations extends Migration
             'title' => $this->string()->notNull(),
             'year' => $this->integer()->notNull(),
             'city' => $this->string()->notNull(),
-            'grade' => $this->integer()->notNull(),
+            'habilitation' => $this->integer()->notNull(),
             'organisation' => $this->string(),
             'speciality' => $this->string()->notNull(),
             'pages_number' => $this->integer(),

@@ -6,13 +6,11 @@ use app\modules\Control\models\Accesstokens;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Personnel;
 use Yii;
-use app\modules\Control\models\Users;
+use app\models\identity\Users;
 use yii\data\ActiveDataProvider;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\User;
 
 /**
  * UsersController implements the CRUD actions for Users model.

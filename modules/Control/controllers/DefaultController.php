@@ -2,13 +2,14 @@
 
 namespace app\modules\Control\controllers;
 
-use app\modules\Control\models\Articles;
+//use app\modules\Control\models\Articles;
+use app\models\units\articles\Article;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Dissertations;
 use app\modules\Control\models\Monographies;
 use app\modules\Control\models\Personnel;
-use app\modules\Control\models\Users;
+use app\models\identity\Users;
 use yii\web\Controller;
 
 
@@ -29,17 +30,17 @@ class DefaultController extends Controller
         $author = Authors::find()->where(['user_id' => $user->id])->one();
 
         $data['authors'] = Authors::find()->count();
-        $data['articles'] = Articles::find()->count();
-        $data['monographies'] = Monographies::find()->count();
+        $data['articles'] = Article::find()->count();
+        $data['monographies'] = '';//Monographies::find()->count();
         $table = [
             'users' => Users::find()->count(),
-            'personnel' => Personnel::find()->count(),
-            'phd' => Personnel::find()->where(['habilitation' => 'кандидат наук'])->count(),
+            'personnel' => '',//Personnel::find()->count(),
+            'phd' => '',//Personnel::find()->where(['habilitation' => 'кандидат наук'])->count(),
             'authors' => Authors::find()->count(),
-            'publications' => $data['articles'] + $data['monographies'],
+            'publications' => '',//$data['articles'] + $data['monographies'],
             'monographies' => $data['monographies'],
             'articles' => $data['articles'],
-            'dissertations' => Dissertations::find()->count()
+            'dissertations' => '',//Dissertations::find()->count()
         ];
 
 

@@ -2,26 +2,22 @@
 
 namespace app\modules\Control\controllers;
 
+use app\models\units\articles\Article;
+use app\models\pnrd\IndexesArticles;
 use app\modules\Control\models\ArticlesAffilations;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\ArticlesCitations;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\CitationClasses;
 use app\modules\Control\models\Fileupload;
-use app\modules\Control\models\IndexesArticles;
 use app\modules\Control\models\Upload;
-use app\widgets\Alert;
 use Yii;
-use app\modules\Control\models\Articles;
 use yii\data\ActiveDataProvider;
-use yii\db\Query;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
-use yii\widgets\DetailView;
 
 /**
  * ArticlesController implements the CRUD actions for Articles model.
@@ -56,7 +52,7 @@ class ArticlesController extends Controller
     {
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Articles::find()->joinWith('authors'),
+            'query' => Article::find()//->joinWith('authors'),
         ]);
 
         return $this->render('index', [
@@ -78,7 +74,6 @@ class ArticlesController extends Controller
 
         $model = Articles::find($id)
             ->where(['articles.id' => $id])
-            //->join('LEFT JOIN', 'indexes_articles', ['class' => 'indexes_articles.id'])
             ->joinWith('data')
             ->all();
 
@@ -105,7 +100,7 @@ class ArticlesController extends Controller
     public function actionCreate()
     {
 
-        $model = new Articles();
+        $model = new Article();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

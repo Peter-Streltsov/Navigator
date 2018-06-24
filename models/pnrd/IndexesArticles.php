@@ -1,8 +1,9 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\pnrd;
 
-use Yii;
+use yii\db\ActiveRecord;
+use app\models\units\articles\ArticleQuery;
 
 /**
  * This is the model class for table "indexes_articles".
@@ -13,47 +14,64 @@ use Yii;
  *
  * @property Articles[] $articles
  */
-class IndexesArticles extends \yii\db\ActiveRecord
+class IndexesArticles extends ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
+
         return 'indexes_articles';
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function rules()
     {
+
         return [
             [['description', 'value'], 'required'],
             [['description'], 'string'],
             [['value'], 'number'],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
             'description' => 'Описание',
             'value' => 'Значение индекса',
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getArticles()
     {
-        return $this->hasMany(Articles::className(), ['class' => 'id']);
-    }
+
+        return $this->hasMany(Article::className(), ['class' => 'id']);
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -61,6 +79,9 @@ class IndexesArticles extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new ArticlesQuery(get_called_class());
-    }
-}
+
+        return new ArticleQuery(get_called_class());
+
+    } // end function
+
+} // end class

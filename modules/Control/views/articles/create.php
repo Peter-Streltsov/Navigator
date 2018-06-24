@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\Control\models\Articles */
+/* @var $classes  */
 
 $this->title = 'Добавить статью';
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];

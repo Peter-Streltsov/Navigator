@@ -42,10 +42,10 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
 
-        isset(Yii::$app->data->orgdata->organisation) != '' ? $brandLabel = Yii::$app->data->label . ' - ' : $brandLabel = '';
+        isset(Yii::$app->data->orgdata->organisation) != '' ? $brandLabel = Yii::$app->data->orgdata->organisation . ' - ' : $brandLabel = '';
 
         NavBar::begin([
-            'brandLabel' => '<b class="navbrand">'.Yii::$app->data->data->organisation.'Наукометрия'.'</b>',
+            'brandLabel' => '<b class="navbrand">'. $brandLabel . 'Наукометрия'.'</b>',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
@@ -135,9 +135,9 @@ AppAsset::register($this);
                     <?php
 
                     // number of unread uploads
-                    $uploads_count = '<span style="background-color: darkslategray;" class="badge badge-light">' .
-                        Upload::find()->where(['accepted' => '0'])->count() .
-                        '</span>';
+                    //$uploads_count = '<span style="background-color: darkslategray;" class="badge badge-light">' .
+                        //Upload::find()->where(['accepted' => '0'])->count() .
+                        //'</span>';
 
                     $items = [
                         [
@@ -213,17 +213,17 @@ AppAsset::register($this);
                         ],
                         [
                             'label' => 'Сообщения '
-                                . Yii::$app->counter->messagesCount()
-                                . ' '
-                                . $uploads_count,
+                                //. Yii::$app->counter->messagesCount()
+                                . ' ',
+                                //. $uploads_count,
                             'icon' => 'comment',
                             'items' => [
                                 [
-                                    'label' => 'Пользовательские сообщения' . Yii::$app->counter->messagesCount(),
+                                    'label' => 'Пользовательские сообщения' /*. Yii::$app->counter->messagesCount()*/,
                                     'url' => '/control/admin/messages/users'
                                 ],
                                 [
-                                    'label' => 'Загруженные данные' . $uploads_count,
+                                    'label' => 'Загруженные данные',// . $uploads_count,
                                     'url' => '/control/admin/messages/uploads'
                                 ]
                             ]
@@ -310,7 +310,7 @@ AppAsset::register($this);
     <footer style="color: #2a323b; height: 2.5pc; background-color: #d2d4d9;" class="navbar-fixed-bottom ">
         <div class="container">
             <p style="margin-top: 0.5pc;">
-                <b class="pull-left">&copy;  <?= date('Y') ?> <?= Html::a(Yii::$app->data->data->organisation, 'http://'.Yii::$app->data->data->weblink) ?></b>
+                <b class="pull-left">&copy;  <?= date('Y') ?> <?= Html::a(Yii::$app->data->orgdata->organisation, 'http://'.Yii::$app->data->orgdata->weblink) ?></b>
 
                 <!--<b class="pull-right"><?= Yii::powered() ?></b>-->
             </p>

@@ -24,6 +24,7 @@ class m180317_003955_users extends Migration
             'lastname' => $this->string(255),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
+            'auth_key' => $this->string(),
             'access_token' => $this->string(255)
         ]);
 

@@ -3,6 +3,7 @@
 /* @var $classes  */
 /* @var $this \yii\web\View */
 /* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
+/* @var $types array */
 
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
@@ -48,10 +49,20 @@ use yii\helpers\Html;
     </div>
 
     <div class="row">
-        <div class="col-lg-5">
-            <?= $form->field($model, 'type')->dropDownList($classes_items, [
-                'prompt' => 'Выберите категорию',
+        <div class="col-lg-4">
+            <?= $form->field($model, 'language')->textInput() ?>
+        </div>
+        <div class="col-lg-6">
+            <?= $form->field($model, 'type')->dropDownList($types, [
+                'prompt' => 'Вид',
                 'style' => 'width: 30pc;'
+            ]) ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <?= $form->field($model, 'class')->dropDownList($classes_items, [
+                    'prompt' => 'Выберите категорию'
             ]) ?>
         </div>
     </div>

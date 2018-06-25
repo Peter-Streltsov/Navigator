@@ -2,21 +2,25 @@
 
 namespace app\modules\Control\controllers;
 
-use app\models\units\articles\Article;
+// project models
+use app\models\common\Languages;
 use app\models\pnrd\IndexesArticles;
+use app\models\units\articles\Article;
+use app\models\units\articles\ArticleTypes;
+// deprecated models
 use app\modules\Control\models\ArticlesAffilations;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\ArticlesCitations;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\CitationClasses;
 use app\modules\Control\models\Fileupload;
-use app\modules\Control\models\Upload;
+// base models
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
@@ -72,13 +76,13 @@ class ArticlesController extends Controller
     public function actionView($id)
     {
 
-        $model = Articles::find($id)
+        $model = Article::find($id)
             ->where(['articles.id' => $id])
-            ->joinWith('data')
+            //->joinWith('data')
             ->all();
 
-        $class = IndexesArticles::find()->where(['id' => $model[0]['class']])->asArray()->one();
-        $model[0]['class'] = $class['description'];
+        //$class = IndexesArticles::find()->where(['id' => $model[0]['class']])->asArray()->one();
+        //$model[0]['class'] = $class['description'];
 
         $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
 
@@ -87,10 +91,12 @@ class ArticlesController extends Controller
         return $this->render('view', [
             'model' => $model,
             'authors' => $authors,
-            'class' => $class
+            //'class' => $class
         ]);
 
-    }
+    } // end action
+
+
 
     /**
      * Creates a new Articles model.
@@ -101,15 +107,20 @@ class ArticlesController extends Controller
     {
 
         $model = new Article();
+        $languages = new Languages();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         $classes = IndexesArticles::find()->asArray()->all();
+        $types = ArticleTypes::find()->asArray()->all();
+        $types = ArrayHelper::map($types, 'id', 'type');
 
         return $this->render('create', [
             'model' => $model,
+            'languages' => $languages,
+            'types' => $types,
             'classes' => $classes
         ]);
 
@@ -118,9 +129,9 @@ class ArticlesController extends Controller
 
 
     /**
-     * Updates an existing Articles model;
+     * Updates an existing Articles model
      * Adds citations, authors etc.
-     * If update is successful, the browser will be again redirected to 'update' page
+     * If update is successful, will be redirected to 'update' page
      *
      * @param integer $id - article id
      * @return mixed
@@ -129,7 +140,7 @@ class ArticlesController extends Controller
     public function actionUpdate($id)
     {
 
-        $model = Articles::find()->where(['id' => $id])->one();
+        $model = Article::find()->where(['id' => $id])->one();
 
         if (isset($_POST['delete_text'])) {
             $model->text = null;
@@ -171,7 +182,7 @@ class ArticlesController extends Controller
             $file = new Fileupload();
             $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
             $file->upload('articles/');
-            $articlemodel = Articles::find()->where(['id' => $id])->one();
+            $articlemodel = Article::find()->where(['id' => $id])->one();
             $articlemodel->file = $file->name;
             $articlemodel->save();
             Yii::$app->session->setFlash('info', 'Статье ' . $articlemodel->title . ' сопоставлен файл ' . $file->name);
@@ -209,7 +220,7 @@ class ArticlesController extends Controller
 
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
 
-        $model = Articles::find()
+        $model = Article::find()
             ->where(['articles.id' => $id])
             ->joinWith('data')
             ->all();

@@ -40,8 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         'id',
         'title',
-        'subtitle',
-        'publisher',
+        //'subtitle',
+        //'publisher',
         'year',
         [
             'attribute' => 'authors',
@@ -88,8 +88,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'subtitle',
-            'publisher',
+            //'subtitle',
+            //'publisher',
             'year',
             //'doi',
             [
@@ -145,7 +145,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             if (isset($model->file)) {
                                 \yii\bootstrap\Modal::begin([
-                                    'header' => "<h2>$model->title</h2><br><h4>$model->subtitle</h4>",
+                                    'header' => "<h2>$model->title</h2><br>",
                                     'size' => 'large',
                                     'toggleButton' => [
                                         'label' => "<span class='glyphicon glyphicon-file'></span>",

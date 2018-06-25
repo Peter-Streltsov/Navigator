@@ -25,6 +25,7 @@ class m180319_021020_articles extends Migration
         $this->createTable('articles', [
             'id' => $this->primaryKey(),
             'type' =>$this->integer()->notNull(),
+            'class' => $this->integer()->notNull(),
             'title' => $this->text()->notNull(),
             'magazine' => $this->string(255),
             'number' => $this->integer()->notNull(),

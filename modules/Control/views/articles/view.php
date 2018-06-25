@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\bootstrap\Modal;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -35,84 +36,91 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
     <br>
-    <br>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'view' => [
-                ''
-        ],
-        'options' => [
-                'class' => 'table',
-            'encodeLabesl' => true
-        ],
-        'attributes' => [
-            'id',
-            'title',
-            'subtitle',
-            'publisher',
-            'year',
-            'doi',
-            'class',
-            [
-                'attribute' => 'file',
-                'label' => 'Прикрепленный файл и текст',
-                'format' => 'raw',
-                'value' => function($model) {
-                    if (isset($model->file)) {
-                        ob_start();
-                        if (isset($model->file)) {
-                            \yii\bootstrap\Modal::begin([
-                                'header' => "<h2>$model->title</h2><br><h4><h4>",
-                                'size' => 'modal-lg',
-                                'bodyOptions' => [
+    <div class="panel panel-default">
+        <div class="panel panel-body">
+
+            <br>
+
+            <?= DetailView::widget([
+                'model' => $model,
+                'view' => [
+                        ''
+                ],
+                'options' => [
+                    'class' => 'table',
+                    'encodeLabesl' => true
+                ],
+                'attributes' => [
+                    'id',
+                    'title',
+                    'year',
+                    'doi',
+                [
+                    'attribute' => 'type',
+                    'label' => 'Тип публикации',
+                    'value' => function($model) {
+                            return $model->type;
+                        }
+                    ],
+                [
+                    'attribute' => 'file',
+                    'label' => 'Прикрепленный файл и текст',
+                    'format' => 'raw',
+                    'value' => function($model) {
+                            if (isset($model->file)) {
+                                ob_start();
+                                if (isset($model->file)) {
+                                    Modal::begin([
+                                        'header' => "<h2>$model->title</h2><br><h4><h4>",
+                                        'size' => 'modal-lg',
+                                        'bodyOptions' => [
                                         'width' => '200pc;'
-                                ],
-                                'options' => [
-                                        'width' => '200'
-                                ],
-                                'toggleButton' => [
-                                    'label' => "<span class='glyphicon glyphicon-file'></span>",
-                                    'style' => 'border-radius: 2pc;',
-                                    'class' => 'button primary big'
-                                ],
-                                'footer' => 'Close'
-                            ]);
-                            echo \yii2assets\pdfjs\PdfJs::widget([
-                                'url' => \yii\helpers\Url::base().'/upload/articles/' . $model->file
-                            ]);
+                                        ],
+                                        'options' => [
+                                                'width' => '200'
+                                        ],
+                                        'toggleButton' => [
+                                            'label' => "<span class='glyphicon glyphicon-file'></span>",
+                                            'style' => 'border-radius: 2pc;',
+                                            'class' => 'button primary big'
+                                        ],
+                                        'footer' => 'Close'
+                                    ]);
+                                    echo \yii2assets\pdfjs\PdfJs::widget([
+                                            'url' => \yii\helpers\Url::base().'/upload/articles/' . $model->file
+                                    ]);
+                                    Modal::end();
+                                }
+                                $modal = ob_get_clean();
+                                return $modal;
+                            } else {
 
-                            \yii\bootstrap\Modal::end();
+                            }
                         }
-                        $modal = ob_get_clean();
-                        return $modal;
-                    } else {
-
-                    }
-                }
-            ],
-            [
-                'attribute' => 'authors',
-                'value' => function($model) {
-                    $authors = [];
-                    if (isset($model['data'][0])) {
-                        foreach ($model['data'] as $author) {
-                            $authors[] = $author['lastname']
-                                . ' ' . mb_substr($author['name'],0,1,"UTF-8")
-                                . '.' . mb_substr($author['secondname'],0,1,"UTF-8")
-                                .'.';
+                    ],
+                    [
+                        'attribute' => 'authors',
+                        'value' => function($model) {
+                            $authors = [];
+                            if (isset($model['data'][0])) {
+                                foreach ($model['data'] as $author) {
+                                    $authors[] = $author['lastname']
+                                        . ' ' . mb_substr($author['name'],0,1,"UTF-8")
+                                        . '.' . mb_substr($author['secondname'],0,1,"UTF-8")
+                                        .'.';
+                                }
+                            }
+                            return implode("\n", $authors);
                         }
-                    }
-                    return implode("\n", $authors);
-                }
-            ]
-        ],
-    ]);
+                    ]
+                ],
+            ]);
+            ?>
 
-    ?>
-
-    <br>
-    <br>
-    <br>
-
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
 </div>

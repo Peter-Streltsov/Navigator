@@ -44,8 +44,8 @@ class Article extends \yii\db\ActiveRecord
     {
 
         return [
-            [['type', 'title', 'number', 'year', 'language'], 'required'],
-            [['type', 'number', 'direct_number', 'pages', 'year', 'created_at'], 'integer'],
+            [['type', 'title', 'number', 'class', 'year', 'language'], 'required'],
+            [['type', 'number', 'direct_number', 'class', 'pages', 'year', 'created_at'], 'integer'],
             [['title', 'annotaion', 'index', 'file'], 'string'],
             [['magazine', 'language', 'doi', 'link'], 'string', 'max' => 255],
         ];
@@ -63,6 +63,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'type' => 'Тип',
+            'class' => 'Индекс ПНРД',
             'title' => 'Заголовок',
             'magazine' => 'Журнал',
             'number' => 'Номер',
@@ -86,15 +87,18 @@ class Article extends \yii\db\ActiveRecord
 
 
     /**
-     * TODO: complete
+     * returns article type
+     *
+     * @return string
      */
     public function getType()
     {
 
-        //return $this->hasOne(ArticleTypes::className(), []);
+        return $type = $this->hasOne(ArticleTypes::className(), ['type' => 'type']);
+        return $type->type;
 
     } // end function
-    
+
 
 
     /**
@@ -129,6 +133,39 @@ class Article extends \yii\db\ActiveRecord
 
 
     // END GETTERS
+
+
+
+    /**
+     * @param bool $insert
+     * @return bool
+     */
+    public function beforeSave($insert)
+    {
+
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                if ($insert) {
+                    Yii::$app->session->setFlash('success', 'Статья сохранена');
+                    return true;
+                } else {
+                    Yii::$app->session->setFlash('danger', 'Сохранение не удалось');
+                    return false;
+                }
+            } else {
+                if ($insert) {
+                    Yii::$app->session->setFlash('warning', 'Обновление данных не удалось');
+                    return false;
+                } else {
+                    Yii::$app->session->setFlash('info', 'Данные обновлены');
+                    return true;
+                }
+            }
+        }
+
+        return true;
+
+    } // end function
 
 
 

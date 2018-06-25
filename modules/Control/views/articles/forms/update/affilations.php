@@ -24,7 +24,7 @@ use app\modules\Control\models\ArticlesAffilations;
 
                 $mod_affilation = new ArticlesAffilations();
 
-                if ($affilations != null) {
+                if (is_array($affilations) && $affilations != null) {
                     foreach ($affilations as $key => $affilation) {
                         echo '<div class="form-inline">';
                         echo Html::beginForm();
@@ -37,7 +37,7 @@ use app\modules\Control\models\ArticlesAffilations;
                 } else {
                     echo "<b style='color: red;'>Affilation is not set</b>".PHP_EOL;
                     echo Html::submitButton('Сохранить', ['class' => 'button primary big']);
-                    ActiveForm::end();
+                    //ActiveForm::end();
                 }
 
                 ?>

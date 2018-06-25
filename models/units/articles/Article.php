@@ -2,6 +2,8 @@
 
 namespace app\models\units\articles;
 
+use app\models\pnrd\indexes\IndexesArticles;
+use app\modules\Control\models\ArticlesAuthors;
 use Yii;
 
 /**
@@ -77,27 +79,36 @@ class Article extends \yii\db\ActiveRecord
             'index' => 'Полнотекстовый индекс',
             'link' => 'Ссылка',
             'file' => 'Файл',
+            'authors' => 'Авторы'
         ];
 
     } // end function
 
 
 
-    // GETTERS
+    // ACTIVERECORD GETTERS
 
 
     /**
      * returns article type
      *
+     * TODO: fix
+     *
      * @return string
      */
-    public function getType()
+    public function getPublicationtype()
     {
 
-        return $type = $this->hasOne(ArticleTypes::className(), ['type' => 'type']);
-        return $type->type;
+        return $this->hasOne(ArticleTypes::className(), ['id' => 'type']);
 
     } // end function
+
+
+
+    public function getPublicationclass()
+    {
+        return $this->hasOne(IndexesArticles::className(), ['id' => 'class']);
+    }
 
 
 
@@ -107,7 +118,21 @@ class Article extends \yii\db\ActiveRecord
     public function getPages()
     {
 
+        //return $this->hasOne();
+
     }
+
+
+
+    /**
+     * TODO: complete
+     */
+    public function getAffilations()
+    {
+
+        return 'affilations';
+
+    } // end function
 
 
     /**
@@ -126,7 +151,19 @@ class Article extends \yii\db\ActiveRecord
     public function getAuthors()
     {
 
-        //$this->hasMany();
+        /*$this->hasMany(ArticlesAuthors::className(), ['article_id' => 'id'])
+            ->viaTable('articles_authors');*/
+
+    } // end function
+
+
+
+    public function getAuthorsnames()
+    {
+
+        $authors = [];
+        return $authors;
+
 
     } // end function
 

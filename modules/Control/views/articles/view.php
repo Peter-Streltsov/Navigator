@@ -9,7 +9,6 @@ use yii\widgets\DetailView;
 /* @var $class \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles|array|null */
 /* @var $authors \app\modules\Control\models\Authors[]|array|string */
 
-$model = $model[0];
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -55,20 +54,28 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'title',
                     'year',
+                    'language',
                     'doi',
                 [
                     'attribute' => 'type',
                     'label' => 'Тип публикации',
                     'value' => function($model) {
-                            return $model->type;
+                            return $model->publicationtype->type;
                         }
                     ],
+                [
+                    'attribute' => 'class',
+                    'label' => 'Индекс ПНРД',
+                    'value' => function($model) {
+                            return $model->publicationclass->description;
+                    }
+                ],
                 [
                     'attribute' => 'file',
                     'label' => 'Прикрепленный файл и текст',
                     'format' => 'raw',
                     'value' => function($model) {
-                            if (isset($model->file)) {
+                            if ($model->file != '') {
                                 ob_start();
                                 if (isset($model->file)) {
                                     Modal::begin([
@@ -94,8 +101,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                                 $modal = ob_get_clean();
                                 return $modal;
-                            } else {
-
                             }
                         }
                     ],

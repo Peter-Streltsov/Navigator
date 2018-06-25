@@ -4,7 +4,7 @@ namespace app\modules\Control\controllers;
 
 // project models
 use app\models\common\Languages;
-use app\models\pnrd\IndexesArticles;
+use app\models\pnrd\indexes\IndexesArticles;
 use app\models\units\articles\Article;
 use app\models\units\articles\ArticleTypes;
 // deprecated models
@@ -79,9 +79,8 @@ class ArticlesController extends Controller
         $model = Article::find($id)
             ->where(['articles.id' => $id])
             //->joinWith('data')
-            ->all();
+            ->one();
 
-        //$class = IndexesArticles::find()->where(['id' => $model[0]['class']])->asArray()->one();
         //$model[0]['class'] = $class['description'];
 
         $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
@@ -91,7 +90,6 @@ class ArticlesController extends Controller
         return $this->render('view', [
             'model' => $model,
             'authors' => $authors,
-            //'class' => $class
         ]);
 
     } // end action
@@ -210,41 +208,50 @@ class ArticlesController extends Controller
 
         $model_authors = ArticlesAuthors::find()->where(['article_id' => $id])->all();
 
+        // authors for current article
         $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
-
         $items = ArrayHelper::map($authors, 'id', function($items) {
             return $items['name']. ' ' . $items['lastname'];
         });
 
+        // file to upload if necessary
         $file = new Fileupload();
 
+        // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
 
+        // article
         $model = Article::find()
             ->where(['articles.id' => $id])
-            ->joinWith('data')
-            ->all();
+            ->one();
+            //->joinWith('data')
+            //->all();
 
         // updating article data - articleform
         if (Yii::$app->request->post()) {
-            if ($model[0]->load(Yii::$app->request->post()) && $model[0]->save()) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 //return $this->redirect(['update', 'id' => $id]);
             }
         }
 
+        // added citations
         $citations = ArticlesCitations::find()->where(['article_id' => $id])->all();
 
-        $citation_classes = CitationClasses::find()->asArray()->all();
-        $citation_classes = ArrayHelper::map($citation_classes, 'class', 'class');
+        //$citation_classes = CitationClasses::find()->asArray()->all();
+        $citation_classes = ArrayHelper::map(
+            CitationClasses::find()->asArray()->all(),
+            'class',
+            'class'
+        );
 
         $newcitation = new ArticlesCitations();
 
-        $affilations = $model[0]->affilation;
+        $affilations = $model->affilations;
 
         // view
         return $this->render('update', [
             'affilations' => $affilations,
-            'model' => $model[0],
+            'model' => $model,
             'file' => $file,
             'classes' => $classes,
             'model_authors' => $model_authors,

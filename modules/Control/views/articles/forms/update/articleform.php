@@ -41,23 +41,10 @@ use yii\bootstrap\ActiveForm;
         </div>
     </div>
 
-
-    <!-- Subtite input - text area (max 255 chars) -->
     <div class="row">
 
         <div class="col-lg-12">
-            <?= $form->field($model, 'subtitle')->textArea([
-                'rows' => 2,
-                'maxlength' => true,
-                'style' => 'background-color: #ffffe0;'
-            ]) ?>
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class="col-lg-12">
-            <?= $form->field($model, 'publisher')->textInput([
+            <?= $form->field($model, 'magazine')->textInput([
                 'maxlength' => true,
                 'style' => 'background-color: #ffffe0;'
             ]) ?>

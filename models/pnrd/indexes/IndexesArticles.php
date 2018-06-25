@@ -1,8 +1,9 @@
 <?php
 
-namespace app\models\pnrd;
+namespace app\models\pnrd\indexes;
 
 use yii\db\ActiveRecord;
+use app\models\units\articles\Article;
 use app\models\units\articles\ArticleQuery;
 
 /**

@@ -25,7 +25,7 @@ use yii\helpers\Html;
             ]
             ]);*/
             $form = ActiveForm::begin();
-            echo $form->field($model, 'text')->textarea();
+            echo $form->field($model, 'index')->textarea();
             echo Html::submitButton();
             ActiveForm::end();
             $modaltextcontent = ob_get_contents();
@@ -48,7 +48,7 @@ use yii\helpers\Html;
         }
 
         Modal::begin([
-                'header' => $modaltextheader,
+            'header' => $modaltextheader,
             'toggleButton' => [
                 'label' => $modaltextbutton,
                 'class' => $class

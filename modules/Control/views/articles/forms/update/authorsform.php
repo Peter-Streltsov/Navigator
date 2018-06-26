@@ -1,14 +1,15 @@
 <?php
 
+
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use yii\bootstrap\Modal;
+
 /* @var $author_items array */
 /* @var $file \app\modules\Control\models\Fileupload|mixed|string */
 /* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
 /* @var $this \yii\web\View */
 /* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
-
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Modal;
 
 ?>
 
@@ -60,8 +61,8 @@ use yii\bootstrap\Modal;
                     ]);
 
                     $form = ActiveForm::begin();
-                    echo $form->field($model, 'author')->dropDownList($author_items, ['style' => 'width: 80vh;']);
-                    echo $form->field($model, 'part')->textInput();
+                    //echo $form->field($model, 'author')->dropDownList($author_items, ['style' => 'width: 80vh;']);
+                    //echo $form->field($model, 'part')->textInput();
                     echo Html::submitButton('Добавить', ['class' => 'button primary big']);
                     ActiveForm::end();
 

@@ -130,6 +130,7 @@ class Article extends \yii\db\ActiveRecord
     public function getAffilations()
     {
 
+        return $this->hasMany(ArticleAffilations::classname(), ['article_id' => 'id']);
         return 'affilations';
 
     } // end function

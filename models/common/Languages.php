@@ -49,7 +49,7 @@ class Languages extends \yii\db\ActiveRecord
 
         return [
             'id' => 'ID',
-            'language' => 'Language',
+            'language' => 'Язык',
             'created_at' => 'Created At',
         ];
 
@@ -66,9 +66,10 @@ class Languages extends \yii\db\ActiveRecord
 
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
-                return false;
-            } else {
+                Yii::$app->session->setFlash('warning', 'Список языков обновлен');
                 return true;
+            } else {
+                return false;
             }
         }
 

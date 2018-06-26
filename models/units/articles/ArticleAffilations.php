@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\articles;
 
 use Yii;
 
@@ -12,7 +12,7 @@ use Yii;
  * @property int $article_id
  * @property string $type
  */
-class ArticlesAffilations extends \yii\db\ActiveRecord
+class ArticleAffilations extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -53,6 +53,6 @@ class ArticlesAffilations extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new ArticlesAffilationsQuery(get_called_class());
+        return new ArticleAffilationsQuery(get_called_class());
     }
 }

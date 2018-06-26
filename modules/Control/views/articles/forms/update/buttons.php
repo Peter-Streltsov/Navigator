@@ -14,7 +14,7 @@ use yii\helpers\Html;
 
         <?php
 
-        if (!isset($model->text)) {
+        if (!isset($model->index)) {
             $class = 'button danger';
             $modaltextbutton = '<h5><span class="glyphicon glyphicon-book"></span>  Текст статьи не задан</h5>';
             $modaltextheader = 'Загрузить текст';
@@ -35,13 +35,15 @@ use yii\helpers\Html;
             $modaltextbutton = '<h5 style="color: green;">Текст статьи</h5>';
             $modaltextheader = '';
             ob_start();
-            echo $model->text;
+            echo $model->index;
 
             echo "<br><br>";
 
             echo Html::beginForm('', 'post');
             echo Html::input('hidden', 'delete_text', 1);
-            echo Html::submitButton();
+            echo Html::submitButton('Сбросить индекс', [
+                    'data' => ['confirm' => 'Действительно удалить текст статьи?']
+            ]);
             echo Html::endForm();
             $modaltextcontent = ob_get_contents();
             ob_get_clean();
@@ -51,6 +53,7 @@ use yii\helpers\Html;
             'header' => $modaltextheader,
             'toggleButton' => [
                 'label' => $modaltextbutton,
+                'style' => 'border-radius: 0.5pc;',
                 'class' => $class
             ]
         ]);
@@ -86,6 +89,7 @@ use yii\helpers\Html;
             'header' => 'Файл статьи',
             'toggleButton' => [
                 'label' => $modal,
+                'style' => 'border-radius: 0.5pc;',
                 'class' => $class
             ]
         ]);

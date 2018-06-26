@@ -1,13 +1,13 @@
 <?php
 
-/* @var $affilation mixed */
-/* @var $this \yii\web\View */
-/* @var $affilations  */
-
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
-use app\modules\Control\models\ArticlesAffilations;
+use app\models\units\articles\ArticleAffilations;
+
+/* @var $affilation mixed */
+/* @var $this \yii\web\View */
+/* @var $affilations  */
 
 ?>
 
@@ -22,7 +22,7 @@ use app\modules\Control\models\ArticlesAffilations;
 
                 <?php
 
-                $mod_affilation = new ArticlesAffilations();
+                $mod_affilation = new ArticleAffilations();
 
                 if (is_array($affilations) && $affilations != null) {
                     foreach ($affilations as $key => $affilation) {
@@ -66,7 +66,7 @@ use app\modules\Control\models\ArticlesAffilations;
 
                 echo "<br>";
 
-                echo Html::hiddenInput('affilation_delete', $affilation->id);
+                //echo Html::hiddenInput('affilation_delete', $affilation->id);
                 echo Html::submitButton('Сохранить', ['class' => 'button primary big']);
 
                 ActiveForm::end();

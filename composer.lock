@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb4dc932401ec2eb6609c283682838e5",
+    "content-hash": "859b0e398c513f63cd7b89289cdf91c5",
     "packages": [
         {
             "name": "3ch3r46/bootui-datetimepicker",
@@ -77,7 +77,7 @@
             "version": "v1.35.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nakupanda/bootstrap3-dialog.git",
+                "url": "git@github.com:nakupanda/bootstrap3-dialog.git",
                 "reference": "3dd11d586f78de75356af418907ec6e3b347377c"
             },
             "dist": {
@@ -160,7 +160,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bestiejs/punycode.js.git",
+                "url": "git@github.com:bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -5980,6 +5980,7 @@
         "kartik-v/yii2-widget-sidenav": 20,
         "kasparsj/scopus-search-api": 20,
         "markrogoyski/math-php": 20,
+        "kartik-v/yii2-widget-select2": 20,
         "schmunk42/yii2-giiant": 0
     },
     "prefer-stable": false,

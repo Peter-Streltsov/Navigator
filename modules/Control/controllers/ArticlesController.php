@@ -138,10 +138,13 @@ class ArticlesController extends Controller
     public function actionUpdate($id)
     {
 
+        $newlanguage = new Languages();
+
+        // main model - current article
         $model = Article::find()->where(['id' => $id])->one();
 
         if (isset($_POST['delete_text'])) {
-            $model->text = null;
+            $model->index = null;
             $model->save();
         }
 
@@ -204,8 +207,11 @@ class ArticlesController extends Controller
             }
         }
 
-        // view parameters
+        /**
+         * basic view parameters
+         */
 
+        // authors for current article
         $model_authors = ArticlesAuthors::find()->where(['article_id' => $id])->all();
 
         // authors for current article
@@ -216,6 +222,8 @@ class ArticlesController extends Controller
 
         // file to upload if necessary
         $file = new Fileupload();
+
+        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
 
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
@@ -230,7 +238,8 @@ class ArticlesController extends Controller
         // updating article data - articleform
         if (Yii::$app->request->post()) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                //return $this->redirect(['update', 'id' => $id]);
+                $newlanguage->language = $model->language;
+                $newlanguage->save();
             }
         }
 
@@ -252,7 +261,9 @@ class ArticlesController extends Controller
         return $this->render('update', [
             'affilations' => $affilations,
             'model' => $model,
+            'newlanguage' => $newlanguage,
             'file' => $file,
+            'languages' => $languages,
             'classes' => $classes,
             'model_authors' => $model_authors,
             'newcitation' => $newcitation,

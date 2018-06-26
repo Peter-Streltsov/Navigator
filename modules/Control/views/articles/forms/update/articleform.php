@@ -1,20 +1,21 @@
 <?php
 
+use kartik\select2\Select2;
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use yii\bootstrap\ActiveForm;
+
 /* @var $classes \app\modules\Control\models\Articles[]|\app\modules\Control\models\IndexesArticles[]|array */
 /* @var $this \yii\web\View */
 /* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
 /* @var $title string */
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
-use yii\bootstrap\ActiveForm;
+/* @var $languages array */
+/* @var $newlanguage \app\models\common\Languages */
+
 ?>
 
 <div class="panel panel-default">
     <div class="panel panel-body">
-
-    <?php
-    //\yii\widgets\Pjax::begin();
-    ?>
 
     <?php $form = ActiveForm::begin([
             'options' => [
@@ -31,22 +32,51 @@ use yii\bootstrap\ActiveForm;
 
     ?>
 
+    <!-- -->
     <div class="row">
 
         <div class="col-lg-12">
-            <?= $form->field($model, 'title')->textInput([
+            <?= $form->field($model, 'title')->textarea([
                 'maxlength' => true,
                 'style' => 'background-color: #ffffe0;',
             ]) ?>
         </div>
     </div>
 
+    <!-- -->
     <div class="row">
 
-        <div class="col-lg-12">
+        <div class="col-lg-7">
             <?= $form->field($model, 'magazine')->textInput([
                 'maxlength' => true,
                 'style' => 'background-color: #ffffe0;'
+            ]) ?>
+        </div>
+        <div class="col-lg-2">
+            <?= $form->field($model, 'number')->textInput(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $form->field($model, 'direct_number')->textInput(); ?>
+        </div>
+    </div>
+
+    <!-- -->
+    <div class="row">
+        <div class="col-lg-4">
+            <?= $form->field($model, 'language')->widget(Select2::classname(), [
+                'data' => $languages,
+                'options' => ['placeholder' => 'Select a state ...'],
+                //'tags' => true,
+                'pluginOptions' => [
+                    'tags' => true,
+                    'allowClear' => true
+                ],
+            ]); ?>
+        </div>
+        <div class="col-lg-8">
+
+            <?= $form->field($model, 'class')->dropDownList($classes_items, [
+                'prompt' => 'Выберите категорию',
             ]) ?>
         </div>
     </div>
@@ -55,31 +85,25 @@ use yii\bootstrap\ActiveForm;
     <!-- year publishing and DOI index input - in one row -->
     <div class="row">
 
-        <div class="col-lg-4">
+        <div class="col-lg-2">
             <?= $form->field($model, 'year')->widget(etsoft\widgets\YearSelectbox::classname(), [
                 'yearStart' => -10,
                 'yearEnd' => 10,
             ]);
             ?>
         </div>
-
-        <div class="col-lg-8">
+        <div class="col-lg-4">
             <?= $form->field($model, 'doi')->textInput(['maxlength' => true, 'style' => 'background-color: #ffffe0;']) ?>
         </div>
     </div>
 
-    <!--<?= $form->field($model, 'file')->textInput() ?>-->
-
+    <!-- -->
     <div class="row">
-
         <div class="col-lg-12">
-
-            <?= $form->field($model, 'class')->dropDownList($classes_items, [
-                'prompt' => 'Выберите категорию',
-            ]) ?>
+            <?=$form->field($model, 'annotaion')->textarea(['rows' => 5]); ?>
         </div>
-
     </div>
+
 
 <div class="form-group">
 
@@ -104,8 +128,6 @@ use yii\bootstrap\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
-    <?php //\yii\widgets\Pjax::end(); ?>
 
     <br>
 

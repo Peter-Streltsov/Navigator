@@ -14,12 +14,15 @@ use yii\helpers\Html;
 /* @var $citation_classes array */
 /* @var $affilation mixed */
 /* @var $affilations mixed */
+/* @var $newlanguage \app\models\common\Languages */
+/* @var $languages array */
 
 $this->title = 'Редактировать данные - '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
-$this->registerJsFile('/js/years.selector.js');
+$this->registerJsFile('js/years.selector.js');
+
 ?>
 <div class="articles-update">
 
@@ -52,6 +55,8 @@ $this->registerJsFile('/js/years.selector.js');
     <div class="articles-form">
         <?= $this->render('forms/update/articleform', [
             'classes' => $classes,
+            'newlanguage' => $newlanguage,
+            'languages' => $languages,
             'model' => $model
         ]) ?>
     </div>

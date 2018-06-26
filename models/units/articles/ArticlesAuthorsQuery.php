@@ -1,13 +1,15 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\articles;
+
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[ArticlesAuthors]].
  *
  * @see ArticlesAuthors
  */
-class ArticlesAuthorsQuery extends \yii\db\ActiveQuery
+class ArticlesAuthorsQuery extends ActiveQuery
 {
     /*public function active()
     {

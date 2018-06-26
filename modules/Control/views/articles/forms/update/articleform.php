@@ -11,6 +11,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $title string */
 /* @var $languages array */
 /* @var $newlanguage \app\models\common\Languages */
+/* @var $magazines array */
 
 ?>
 
@@ -47,16 +48,25 @@ use yii\bootstrap\ActiveForm;
     <div class="row">
 
         <div class="col-lg-7">
-            <?= $form->field($model, 'magazine')->textInput([
-                'maxlength' => true,
-                'style' => 'background-color: #ffffe0;'
-            ]) ?>
+            <?= $form->field($model, 'magazine')->widget(Select2::className(), [
+                'data' => $magazines,
+                'options' => ['placeholder'],
+                'pluginOptions' => [
+                    'tags' => true,
+                    'allowClear' => true,
+                ]
+            ]);
+            ?>
         </div>
         <div class="col-lg-2">
-            <?= $form->field($model, 'number')->textInput(); ?>
+            <?= $form->field($model, 'number')->textInput([
+                    'style' => 'background-color: #ffffe0;'
+            ]); ?>
         </div>
         <div class="col-lg-3">
-            <?= $form->field($model, 'direct_number')->textInput(); ?>
+            <?= $form->field($model, 'direct_number')->textInput([
+                    'style' => 'background-color: #ffffe0;'
+            ]); ?>
         </div>
     </div>
 
@@ -66,7 +76,6 @@ use yii\bootstrap\ActiveForm;
             <?= $form->field($model, 'language')->widget(Select2::classname(), [
                 'data' => $languages,
                 'options' => ['placeholder' => 'Select a state ...'],
-                //'tags' => true,
                 'pluginOptions' => [
                     'tags' => true,
                     'allowClear' => true
@@ -75,9 +84,14 @@ use yii\bootstrap\ActiveForm;
         </div>
         <div class="col-lg-8">
 
-            <?= $form->field($model, 'class')->dropDownList($classes_items, [
-                'prompt' => 'Выберите категорию',
-            ]) ?>
+            <?= $form->field($model, 'class')->widget(Select2::className(), [
+                'data' => $classes_items,
+                'options' => ['placeholder'],
+                'pluginOptions' => [
+                        'allowClear' => true
+                ]
+            ]);
+            ?>
         </div>
     </div>
 
@@ -85,14 +99,16 @@ use yii\bootstrap\ActiveForm;
     <!-- year publishing and DOI index input - in one row -->
     <div class="row">
 
-        <div class="col-lg-2">
-            <?= $form->field($model, 'year')->widget(etsoft\widgets\YearSelectbox::classname(), [
-                'yearStart' => -10,
-                'yearEnd' => 10,
+        <div class="col-lg-4">
+            <?= $form->field($model, 'year')->widget(Select2::className(), [
+                'data' => Yii::$app->yearselector->select,
+                'pluginOptions' => [
+                        'allowClear' => true
+                ]
             ]);
             ?>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-8">
             <?= $form->field($model, 'doi')->textInput(['maxlength' => true, 'style' => 'background-color: #ffffe0;']) ?>
         </div>
     </div>
@@ -100,7 +116,10 @@ use yii\bootstrap\ActiveForm;
     <!-- -->
     <div class="row">
         <div class="col-lg-12">
-            <?=$form->field($model, 'annotaion')->textarea(['rows' => 5]); ?>
+            <?=$form->field($model, 'annotaion')->textarea([
+                'maxlength' => true,
+                'style' => 'background-color: #ffffe0;',
+                'rows' => 5]); ?>
         </div>
     </div>
 

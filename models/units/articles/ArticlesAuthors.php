@@ -1,8 +1,9 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\articles;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "articles_authors".
@@ -13,7 +14,7 @@ use Yii;
  *
  * @property Articles $article
  */
-class ArticlesAuthors extends \yii\db\ActiveRecord
+class ArticlesAuthors extends ActiveRecord
 {
 
     /**

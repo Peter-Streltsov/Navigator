@@ -58,6 +58,9 @@ $config = [
         'data' => [
             'class' => 'app\components\Data'
         ],
+        'yearselector' => [
+            'class' => 'app\components\YearSelect'
+        ],
         'db' => $db,
 
         'urlManager' => [

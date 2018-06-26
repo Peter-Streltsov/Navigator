@@ -16,6 +16,7 @@ use yii\helpers\Html;
 /* @var $affilations mixed */
 /* @var $newlanguage \app\models\common\Languages */
 /* @var $languages array */
+/* @var $magazines array */
 
 $this->title = 'Редактировать данные - '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
@@ -55,8 +56,8 @@ $this->registerJsFile('js/years.selector.js');
     <div class="articles-form">
         <?= $this->render('forms/update/articleform', [
             'classes' => $classes,
-            'newlanguage' => $newlanguage,
             'languages' => $languages,
+            'magazines' => $magazines,
             'model' => $model
         ]) ?>
     </div>

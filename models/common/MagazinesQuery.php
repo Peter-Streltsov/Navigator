@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\common;
 
 /**
- * This is the ActiveQuery class for [[Editions]].
+ * This is the ActiveQuery class for [[Magazines]].
  *
- * @see Editions
+ * @see Magazines
  */
-class EditionsQuery extends \yii\db\ActiveQuery
+class MagazinesQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +16,7 @@ class EditionsQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Editions[]|array
+     * @return Magazines[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +25,7 @@ class EditionsQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Editions|array|null
+     * @return Magazines|array|null
      */
     public function one($db = null)
     {

@@ -4,12 +4,13 @@ namespace app\modules\Control\controllers;
 
 // project models
 use app\models\common\Languages;
+use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\models\units\articles\Article;
+use app\models\units\articles\ArticlesAuthors;
 use app\models\units\articles\ArticleTypes;
 // deprecated models
 use app\modules\Control\models\ArticlesAffilations;
-use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\ArticlesCitations;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\CitationClasses;
@@ -139,6 +140,7 @@ class ArticlesController extends Controller
     {
 
         $newlanguage = new Languages();
+        $newmagazine = new Magazines();
 
         // main model - current article
         $model = Article::find()->where(['id' => $id])->one();
@@ -223,7 +225,10 @@ class ArticlesController extends Controller
         // file to upload if necessary
         $file = new Fileupload();
 
+        // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+
+        $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
 
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
@@ -240,6 +245,8 @@ class ArticlesController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 $newlanguage->language = $model->language;
                 $newlanguage->save();
+                $newmagazine->magazine = $model->magazine;
+                $newmagazine->save();
             }
         }
 
@@ -264,6 +271,7 @@ class ArticlesController extends Controller
             'newlanguage' => $newlanguage,
             'file' => $file,
             'languages' => $languages,
+            'magazines' => $magazines,
             'classes' => $classes,
             'model_authors' => $model_authors,
             'newcitation' => $newcitation,

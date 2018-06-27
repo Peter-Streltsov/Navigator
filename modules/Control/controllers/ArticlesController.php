@@ -7,10 +7,10 @@ use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\models\units\articles\Article;
+use app\models\units\articles\ArticlesAffilations;
 use app\models\units\articles\ArticlesAuthors;
 use app\models\units\articles\ArticleTypes;
 // deprecated models
-use app\modules\Control\models\ArticlesAffilations;
 use app\modules\Control\models\ArticlesCitations;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\CitationClasses;
@@ -79,7 +79,7 @@ class ArticlesController extends Controller
 
         $model = Article::find($id)
             ->where(['articles.id' => $id])
-            //->joinWith('data')
+            ->joinWith('authors')
             ->one();
 
         //$model[0]['class'] = $class['description'];
@@ -106,19 +106,22 @@ class ArticlesController extends Controller
     {
 
         $model = new Article();
-        $languages = new Languages();
+        // added languages list
+        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+        $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
+        // article categories (pnrd)
+        $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+        // pnrd indexes
+        $types = ArrayHelper::map(ArticleTypes::find()->asArray()->all(), 'id', 'type');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $classes = IndexesArticles::find()->asArray()->all();
-        $types = ArticleTypes::find()->asArray()->all();
-        $types = ArrayHelper::map($types, 'id', 'type');
-
         return $this->render('create', [
             'model' => $model,
             'languages' => $languages,
+            'magazines' => $magazines,
             'types' => $types,
             'classes' => $classes
         ]);
@@ -141,6 +144,8 @@ class ArticlesController extends Controller
 
         $newlanguage = new Languages();
         $newmagazine = new Magazines();
+        $newcitation = new ArticlesCitations();
+        $newauthor = new ArticlesAuthors();
 
         // main model - current article
         $model = Article::find()->where(['id' => $id])->one();
@@ -195,16 +200,11 @@ class ArticlesController extends Controller
         if (Yii::$app->request->post()) {
             if (isset($_POST['delete']) && $_POST['delete'] == 1) {
                 $author_delete = ArticlesAuthors::find()->where([
-                    //'author_id' => $_POST['author'],
-                    //'article_id' => $id
                     'id' => $_POST['article_authors_id']
                 ])->one();
                 $author_delete->delete();
             }
-            if (isset($_POST['Articles']['authors'])) {
-                $newauthor = new ArticlesAuthors();
-                $newauthor->article_id = $id;
-                $newauthor->author_id = $_POST['Articles']['authors'];
+            if ($newauthor->load(Yii::$app->request->post())) {
                 $newauthor->save();
             }
         }
@@ -217,10 +217,11 @@ class ArticlesController extends Controller
         $model_authors = ArticlesAuthors::find()->where(['article_id' => $id])->all();
 
         // authors for current article
-        $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
-        $items = ArrayHelper::map($authors, 'id', function($items) {
-            return $items['name']. ' ' . $items['lastname'];
-        });
+        $authors = ArrayHelper::map(
+            Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
 
         // file to upload if necessary
         $file = new Fileupload();
@@ -236,9 +237,8 @@ class ArticlesController extends Controller
         // article
         $model = Article::find()
             ->where(['articles.id' => $id])
+            ->joinWith('authors')
             ->one();
-            //->joinWith('data')
-            //->all();
 
         // updating article data - articleform
         if (Yii::$app->request->post()) {
@@ -260,25 +260,22 @@ class ArticlesController extends Controller
             'class'
         );
 
-        $newcitation = new ArticlesCitations();
-
         $affilations = $model->affilations;
 
         // view
         return $this->render('update', [
             'affilations' => $affilations,
             'model' => $model,
-            'newlanguage' => $newlanguage,
             'file' => $file,
             'languages' => $languages,
             'magazines' => $magazines,
             'classes' => $classes,
             'model_authors' => $model_authors,
             'newcitation' => $newcitation,
+            'newauthor' => $newauthor,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
-            'authors' => $authors,
-            'author_items' => $items
+            'author_items' => $authors
         ]);
 
     } // end action

@@ -2,6 +2,7 @@
 
 namespace app\models\units\articles;
 
+use app\modules\Control\models\Authors;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -38,8 +39,8 @@ class ArticlesAuthors extends ActiveRecord
         return [
             [['article_id', 'author_id'], 'required'],
             [['article_id', 'author_id'], 'integer'],
-            [['part'], 'number'],
-            [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Articles::className(), 'targetAttribute' => ['article_id' => 'id']],
+            [['part'], 'integer'],
+            [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Article::className(), 'targetAttribute' => ['article_id' => 'id']],
         ];
 
     } // end function

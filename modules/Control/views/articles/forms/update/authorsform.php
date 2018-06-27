@@ -1,6 +1,7 @@
 <?php
 
 
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Modal;
@@ -10,6 +11,7 @@ use yii\bootstrap\Modal;
 /* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
 /* @var $this \yii\web\View */
 /* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
+/* @var $newauthor \app\models\units\articles\ArticlesAuthors */
 
 ?>
 
@@ -22,8 +24,6 @@ use yii\bootstrap\Modal;
                 <br>
 
                     <?php
-
-                    //foreach ($model_authors['data'] as $author) {
                     foreach ($model_authors as $model) {
                         echo '<div class="form-inline">';
                         echo Html::beginForm(['articles/update', 'id' => $model->id, 'authid' => $model->id], 'post');
@@ -52,17 +52,25 @@ use yii\bootstrap\Modal;
                             'label' => '<span style="color: green;" class="glyphicon glyphicon-plus"></span>',
                             'class' => 'btn btn-default',
                             ],
-                        'options' => [
+                        /*'options' => [
                             'width' => '200'
                         ],
                         'bodyOptions' => [
                                 'width' => '150'
-                        ]
+                        ]*/
                     ]);
 
                     $form = ActiveForm::begin();
-                    //echo $form->field($model, 'author')->dropDownList($author_items, ['style' => 'width: 80vh;']);
-                    //echo $form->field($model, 'part')->textInput();
+                    echo Html::hiddenInput('add_author', 1);
+                    echo $form->field($newauthor, 'author_id')->widget(Select2::className(), [
+                        'data' => $author_items,
+                        'pluginOptions' => [],
+                        'options' => [
+                                'tags' => true
+                        ]
+                    ]);
+                    echo $form->field($newauthor, 'article_id')->hiddenInput(['value' => $model->id]);
+                    echo $form->field($newauthor, 'part')->textInput();
                     echo Html::submitButton('Добавить', ['class' => 'button primary big']);
                     ActiveForm::end();
 

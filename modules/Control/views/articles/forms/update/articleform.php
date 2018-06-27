@@ -102,6 +102,9 @@ use yii\bootstrap\ActiveForm;
         <div class="col-lg-4">
             <?= $form->field($model, 'year')->widget(Select2::className(), [
                 'data' => Yii::$app->yearselector->select,
+                'options' => [
+                        //'placeholder' => $model->year
+                ],
                 'pluginOptions' => [
                         'allowClear' => true
                 ]
@@ -131,6 +134,8 @@ use yii\bootstrap\ActiveForm;
         <div class="col-lg-5">
 
             <br>
+            <br>
+
             <?php
 
             echo Html::submitButton(

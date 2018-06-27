@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
  *
  * @see ArticlesAffilations
  */
-class ArticleAffilationsQuery extends ActiveQuery
+class ArticlesAffilationsQuery extends ActiveQuery
 {
 
     /**

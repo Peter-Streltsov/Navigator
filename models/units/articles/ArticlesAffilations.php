@@ -2,17 +2,17 @@
 
 namespace app\models\units\articles;
 
-use Yii;
+use app\models\units\articles\ArticlesAffilationsQuery;
 
 /**
- * This is the model class for table "articles_affilations".
+ * This is the model class for table "affilations".
  *
  * @property int $id
  * @property string $name
  * @property int $article_id
  * @property string $type
  */
-class ArticleAffilations extends \yii\db\ActiveRecord
+class ArticlesAffilations extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
@@ -53,6 +53,6 @@ class ArticleAffilations extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new ArticleAffilationsQuery(get_called_class());
+        return new ArticlesAffilationsQuery(get_called_class());
     }
 }

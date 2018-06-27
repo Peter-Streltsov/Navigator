@@ -1,13 +1,13 @@
 <?php
 
-use yii\widgets\ActiveForm;
-use yii\bootstrap\Modal;
-use yii\helpers\Html;
-use app\models\units\articles\ArticleAffilations;
-
 /* @var $affilation mixed */
 /* @var $this \yii\web\View */
 /* @var $affilations  */
+
+use yii\widgets\ActiveForm;
+use yii\bootstrap\Modal;
+use yii\helpers\Html;
+use app\models\units\articles\ArticlesAffilations;
 
 ?>
 
@@ -22,7 +22,7 @@ use app\models\units\articles\ArticleAffilations;
 
                 <?php
 
-                $mod_affilation = new ArticleAffilations();
+                $mod_affilation = new ArticlesAffilations();
 
                 if (is_array($affilations) && $affilations != null) {
                     foreach ($affilations as $key => $affilation) {
@@ -36,7 +36,7 @@ use app\models\units\articles\ArticleAffilations;
                     }
                 } else {
                     echo "<b style='color: red;'>Affilation is not set</b>".PHP_EOL;
-                    echo Html::submitButton('Сохранить', ['class' => 'button primary big']);
+                    //echo Html::submitButton('Сохранить', ['class' => 'button primary big']);
                     //ActiveForm::end();
                 }
 

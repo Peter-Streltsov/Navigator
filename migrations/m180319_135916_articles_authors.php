@@ -16,7 +16,8 @@ class m180319_135916_articles_authors extends Migration
         $this->createTable('articles_authors', [
             'id' => $this->primaryKey(),
             'article_id' => $this->integer()->notNull(),
-            'author_id' => $this->integer()->notNull()
+            'author_id' => $this->integer()->notNull(),
+            'part' => $this->integer()->defaultValue(10)
         ]);
 
     } // end function

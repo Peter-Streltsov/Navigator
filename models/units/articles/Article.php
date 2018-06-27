@@ -2,9 +2,10 @@
 
 namespace app\models\units\articles;
 
+use app\modules\Control\models\Authors;
+use Yii;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\modules\Control\models\ArticlesAuthors;
-use Yii;
 
 /**
  * ActiveRecord class for table "articles".
@@ -130,7 +131,7 @@ class Article extends \yii\db\ActiveRecord
     public function getAffilations()
     {
 
-        return $this->hasMany(ArticleAffilations::classname(), ['article_id' => 'id']);
+        return $this->hasMany(ArticlesAffilations::classname(), ['article_id' => 'id']);
         return 'affilations';
 
     } // end function
@@ -152,8 +153,7 @@ class Article extends \yii\db\ActiveRecord
     public function getAuthors()
     {
 
-        /*$this->hasMany(ArticlesAuthors::className(), ['article_id' => 'id'])
-            ->viaTable('articles_authors');*/
+        return $this->hasMany(Authors::className(), ['id' => 'author_id'])->viaTable('articles_authors', ['article_id' => 'id']);
 
     } // end function
 

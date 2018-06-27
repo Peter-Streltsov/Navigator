@@ -17,6 +17,7 @@ use yii\helpers\Html;
 /* @var $newlanguage \app\models\common\Languages */
 /* @var $languages array */
 /* @var $magazines array */
+/* @var $newauthor \app\models\units\articles\ArticlesAuthors */
 
 $this->title = 'Редактировать данные - '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
@@ -77,7 +78,7 @@ $this->registerJsFile('js/years.selector.js');
     <div>
         <?= $this->render('forms/update/authorsform', [
             'author_items' => $author_items,
-            'file' => $file,
+            'newauthor' => $newauthor,
             'model_authors' => $model_authors,
             'model' => $model
         ]); ?>

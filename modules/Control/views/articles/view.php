@@ -108,8 +108,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'authors',
                         'value' => function($model) {
                             $authors = [];
-                            if (isset($model['data'][0])) {
-                                foreach ($model['data'] as $author) {
+                            if (isset($model->authors)) {
+                                foreach ($model->authors as $author) {
                                     $authors[] = $author['lastname']
                                         . ' ' . mb_substr($author['name'],0,1,"UTF-8")
                                         . '.' . mb_substr($author['secondname'],0,1,"UTF-8")
@@ -118,7 +118,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             }
                             return implode("\n", $authors);
                         }
-                    ]
+                    ],
+                    'annotaion'
                 ],
             ]);
             ?>

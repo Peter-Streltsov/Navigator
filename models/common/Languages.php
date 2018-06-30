@@ -3,6 +3,8 @@
 namespace app\models\common;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "languages".
@@ -40,6 +42,23 @@ class Languages extends \yii\db\ActiveRecord
     } // end function
 
 
+    /**
+     *
+     * @return array
+     */
+    public function behaviors()
+    {
+
+        return [
+            //TimestampBehavior::className(),
+            //'attributes' => [
+//                ActiveRecord::EVENT_BEFORE_INSERT => ['created_at']
+  //          ]
+            //'updatedAtAttribute' => 'false'
+        ];
+
+    } // end function
+
 
     /**
      * @inheritdoc
@@ -56,7 +75,9 @@ class Languages extends \yii\db\ActiveRecord
     } // end function
 
 
+
     /**
+     * if language exists - will not be saved, else - adds new record
      *
      * @param bool $insert
      * @return bool

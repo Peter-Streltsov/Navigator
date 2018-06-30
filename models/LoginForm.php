@@ -7,13 +7,14 @@ use app\models\identity\Users;
 use yii\base\Model;
 
 /**
- * LoginForm is the model behind the login form.
+ * LoginForm is the model behind the login form
  *
- * @property UserBase|null $user This property is read-only.
+ * @property UserBase|null $user This property is read-only
  *
  */
 class LoginForm extends Model
 {
+
     public $username;
     public $password;
     public $rememberMe = true;
@@ -26,6 +27,7 @@ class LoginForm extends Model
      */
     public function rules()
     {
+
         return [
             // username and password are both required
             [['username', 'password'], 'required'],
@@ -34,7 +36,8 @@ class LoginForm extends Model
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
-    }
+
+    } // end function
 
     /**
      * Validates the password.
@@ -65,11 +68,13 @@ class LoginForm extends Model
      */
     public function login()
     {
+
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
         }
         return false;
-    }
+
+    } // end function
 
     /**
      * Finds user by [[username]]

@@ -2,9 +2,9 @@
 
 namespace app\modules\Control\controllers;
 
+use app\models\units\dissertations\Dissertations;
 use app\modules\Control\models\Authors;
 use Yii;
-use app\modules\Control\models\Dissertations;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -72,14 +72,21 @@ class DissertationsController extends Controller
 
 
     /**
-     * Creates a new Dissertations model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * Creates a new Dissertation record
+     * If creation is successful - will redirect to 'view' page
+     *
+     * @return string|\yii\web\Response
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionCreate()
     {
 
+        // new dissertation record
         $model = new Dissertations();
+
+        // lists all available authors
         $authors = Authors::find()->asArray()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

@@ -10,12 +10,12 @@ use app\models\units\articles\Article;
 use app\models\units\articles\ArticlesAffilations;
 use app\models\units\articles\ArticlesAuthors;
 use app\models\units\articles\ArticleTypes;
-// deprecated models
+// deprecated namespaces/models
 use app\modules\Control\models\ArticlesCitations;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\CitationClasses;
 use app\modules\Control\models\Fileupload;
-// base models
+// framework classes
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;

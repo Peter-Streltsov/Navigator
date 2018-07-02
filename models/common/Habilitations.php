@@ -25,22 +25,30 @@ class Habilitations extends \yii\db\ActiveRecord
      */
     public function rules()
     {
+
         return [
             [['habilitation'], 'required'],
             [['habilitation'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
-            'habilitation' => 'Habilitation',
+            'habilitation' => 'Научная степень',
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -48,6 +56,9 @@ class Habilitations extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new HabilitationsQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

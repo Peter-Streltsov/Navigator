@@ -2,7 +2,8 @@
 
 namespace app\models\units\dissertations;
 
-use Yii;
+use app\interfaces\UnitInterface;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "dissertations".
@@ -24,53 +25,90 @@ use Yii;
  * @property string $index
  * @property string $file
  */
-class Dissertations extends \yii\db\ActiveRecord
+class Dissertations extends ActiveRecord implements UnitInterface
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
+
         return 'dissertations';
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function rules()
     {
+
         return [
             [['type', 'title', 'year', 'city', 'habilitation', 'speciality', 'author'], 'required'],
             [['type', 'year', 'habilitation', 'pages_number', 'author'], 'integer'],
             [['annotation', 'index'], 'string'],
             [['title', 'city', 'organisation', 'speciality', 'language', 'state_registration', 'link', 'file'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
-            'type' => 'Type',
-            'title' => 'Title',
-            'year' => 'Year',
-            'city' => 'City',
-            'habilitation' => 'Habilitation',
-            'organisation' => 'Organisation',
-            'speciality' => 'Speciality',
-            'pages_number' => 'Pages Number',
-            'language' => 'Language',
-            'state_registration' => 'State Registration',
-            'author' => 'Author',
-            'annotation' => 'Annotation',
-            'link' => 'Link',
-            'index' => 'Index',
-            'file' => 'File',
+            'type' => 'Тип',
+            'title' => 'Заголовок',
+            'year' => 'Год защиты',
+            'city' => 'Город',
+            'habilitation' => 'Ученая степень',
+            'organisation' => 'Организация',
+            'speciality' => 'Специальность',
+            'pages_number' => 'Количество страниц',
+            'language' => 'Язык',
+            'state_registration' => 'Номер государственной регистрации',
+            'author' => 'Автор',
+            'annotation' => 'Аннотация',
+            'link' => 'Ссылка на сетевой ресурс',
+            'index' => 'Полнотекстовый индекс',
+            'file' => 'Файл',
         ];
+
+    } // end function
+
+
+    /**
+     * GETTERS
+     */
+
+    /**
+     *
+     */
+    public function getDissertationtype()
+    {
+
     }
+
+
+
+    public function getIndex()
+    {
+
+    }
+
+
+    /**
+     * ENDGETTERS
+     */
+
+
 
     /**
      * @inheritdoc
@@ -78,6 +116,9 @@ class Dissertations extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new DissertationTypesQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

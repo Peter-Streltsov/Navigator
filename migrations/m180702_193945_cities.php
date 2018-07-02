@@ -3,12 +3,9 @@
 use yii\db\Migration;
 
 /**
- * create model for Languages
- * app\models\common\Languages
- *
- * Class m180622_005319_languages
+ * Class m180702_193945_cities
  */
-class m180622_005319_languages extends Migration
+class m180702_193945_cities extends Migration
 {
     /**
      * @inheritdoc
@@ -16,9 +13,9 @@ class m180622_005319_languages extends Migration
     public function safeUp()
     {
 
-        $this->createTable('languages', [
+        $this->createTable('cities', [
             'id' => $this->primaryKey(),
-            'language' => $this->string()->notNull()
+            'city' => $this->string()->notNull()
         ]);
 
     } // end function
@@ -31,7 +28,7 @@ class m180622_005319_languages extends Migration
     public function safeDown()
     {
 
-        $this->dropTable('languages');
+        $this->dropTable('cities');
 
         return true;
 

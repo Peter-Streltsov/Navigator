@@ -2,10 +2,14 @@
 
 namespace app\modules\Control\controllers;
 
+use app\models\common\Cities;
 use app\models\units\dissertations\Dissertations;
+use app\models\units\dissertations\DissertationTypes;
 use app\modules\Control\models\Authors;
+use app\modules\Control\models\Habilitations;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -86,15 +90,30 @@ class DissertationsController extends Controller
         // new dissertation record
         $model = new Dissertations();
 
+        $types = ArrayHelper::map(DissertationTypes::find()->asArray()->all(), 'id', 'type');
+
         // lists all available authors
-        $authors = Authors::find()->asArray()->all();
+        $authors = ArrayHelper::map(Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id', function($item) {
+            return $item['name']. ' ' . $item['lastname'];
+        });
+
+        $habilitations = ArrayHelper::map(Habilitations::find()->asArray()->all(), 'id', 'habilitation');
+
+        // lists all added cities
+        $cities = Cities::find()->asArray()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $city = new Cities();
+            $city->city = $model->city;
+            $city->save(); // saving new city (if new record)
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'types' => $types,
+            'habilitations' => $habilitations,
+            'cities' => $cities,
             'authors' => $authors
         ]);
 
@@ -103,11 +122,15 @@ class DissertationsController extends Controller
 
 
     /**
-     * Updates an existing Dissertations model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Updates an existing Dissertation (units/Dissertations)
+     * If successful, will redirect to 'view' page
+     *
      * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {

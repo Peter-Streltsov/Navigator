@@ -98,9 +98,13 @@ class ArticlesController extends Controller
 
 
     /**
-     * Creates a new Articles model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * Creates a new Articles
+     * If successful, will redirect to 'view' page
+     *
+     * @return string|\yii\web\Response
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionCreate()
     {
@@ -226,9 +230,6 @@ class ArticlesController extends Controller
         // file to upload if necessary
         $file = new Fileupload();
 
-        // added languages list
-        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
-
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
 
         // article categories (pnrd)
@@ -243,12 +244,15 @@ class ArticlesController extends Controller
         // updating article data - articleform
         if (Yii::$app->request->post()) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $newlanguage->language = $model->language;
+                $newlanguage->language = strtolower($model->language);
                 $newlanguage->save();
                 $newmagazine->magazine = $model->magazine;
                 $newmagazine->save();
             }
         }
+
+        // added languages list
+        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
 
         // added citations
         $citations = ArticlesCitations::find()->where(['article_id' => $id])->all();

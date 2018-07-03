@@ -75,7 +75,6 @@ use yii\bootstrap\ActiveForm;
         <div class="col-lg-4">
             <?= $form->field($model, 'language')->widget(Select2::classname(), [
                 'data' => $languages,
-                'options' => ['placeholder' => 'Select a state ...'],
                 'pluginOptions' => [
                     'tags' => true,
                     'allowClear' => true
@@ -103,7 +102,7 @@ use yii\bootstrap\ActiveForm;
             <?= $form->field($model, 'year')->widget(Select2::className(), [
                 'data' => Yii::$app->yearselector->select,
                 'options' => [
-                        //'placeholder' => $model->year
+                        'placeholder' => $model->year
                 ],
                 'pluginOptions' => [
                         'allowClear' => true

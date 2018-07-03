@@ -23,9 +23,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
     echo $this->render('forms/create/createform', [
         'model' => $model,
+        'types' => $types,
+        'habilitations' => $habilitations,
+        'cities' => $cities,
         'authors' => $authors
     ]);
 
     ?>
 
-    </div>
+</div>
+
+<?php
+var_dump($model->errors);
+?>

@@ -7,10 +7,12 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\Control\models\Dissertations */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Dissertations', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Диссертации', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="dissertations-view">
+
+    <br>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -18,11 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Редактировать данные', ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'button danger big',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Удалить диссертацию?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -38,15 +40,31 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'author',
-            'author_id',
-            'date',
-            'code',
+            [
+                'attribute' => 'author',
+                'value' => function($model) {
+                    $author = $model->dissertationauthor;
+                    return $author->name . ' ' . $author->lastname;
+                }
+            ],
+            'year',
+            'city',
             'organisation',
             'speciality',
-            'type',
-            'opponents:ntext',
-            'annotation:ntext',
+            [
+                'attribute' => 'habilitation',
+                'value' => function($model) {
+                    $habilitation = $model->dissertationhabilitation;
+                    return $habilitation->habilitation;
+                }
+            ],
+            [
+                'attribute' => 'type',
+                'value' => function($model) {
+                    $type = $model->dissertationtype;
+                    return $type->type;
+                }
+            ]
         ],
     ]) ?>
 

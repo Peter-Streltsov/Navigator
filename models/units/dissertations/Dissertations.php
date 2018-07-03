@@ -3,6 +3,8 @@
 namespace app\models\units\dissertations;
 
 use app\interfaces\UnitInterface;
+use app\models\common\Habilitations;
+use app\modules\Control\models\Authors;
 use yii\db\ActiveRecord;
 
 /**
@@ -89,12 +91,39 @@ class Dissertations extends ActiveRecord implements UnitInterface
      */
 
     /**
+     * gets current dissertation type
      *
+     * @return \DissertationTypes
      */
     public function getDissertationtype()
     {
 
-    }
+        return $this->hasOne(DissertationTypes::className(), ['id' => 'type']);
+
+    } // end function
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDissertationhabilitation()
+    {
+
+        return $this->hasOne(Habilitations::className(), ['id' => 'habilitation']);
+
+    } // end function
+
+    
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDissertationauthor()
+    {
+
+        return $this->hasOne(Authors::className(), ['id' => 'author']);
+
+    } // end function
 
 
 

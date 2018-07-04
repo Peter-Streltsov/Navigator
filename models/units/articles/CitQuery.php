@@ -1,18 +1,16 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\articles;
+
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[ArticlesCitations]].
  *
  * @see ArticlesCitations
  */
-class CitQuery extends \yii\db\ActiveQuery
+class CitQuery extends ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * @inheritdoc

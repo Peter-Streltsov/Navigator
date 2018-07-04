@@ -1,8 +1,7 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\monograph;
 
-use Yii;
 use yii\db\ActiveRecord;
 
 /**

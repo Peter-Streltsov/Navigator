@@ -1,13 +1,15 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\monograph;
+
+use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[Accesstokens]].
+ * This is the ActiveQuery class for [[MonographAffilations]].
  *
- * @see Accesstokens
+ * @see MonographAffilations
  */
-class AccesstokensQuery extends \yii\db\ActiveQuery
+class MonographAffilationsQuery extends ActiveQuery
 {
     /*public function active()
     {
@@ -16,7 +18,7 @@ class AccesstokensQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Accesstokens[]|array
+     * @return MonographAffilations[]|array
      */
     public function all($db = null)
     {
@@ -25,7 +27,7 @@ class AccesstokensQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Accesstokens|array|null
+     * @return MonographAffilations|array|null
      */
     public function one($db = null)
     {

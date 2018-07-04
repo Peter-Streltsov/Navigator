@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\monograph;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "monograph_affilations".
@@ -12,7 +12,7 @@ use Yii;
  * @property int $monograph_id
  * @property string $type
  */
-class MonographAffilations extends \yii\db\ActiveRecord
+class MonographAffilations extends ActiveRecord
 {
     /**
      * @inheritdoc

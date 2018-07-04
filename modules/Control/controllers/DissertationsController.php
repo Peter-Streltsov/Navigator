@@ -6,7 +6,7 @@ use app\models\common\Cities;
 use app\models\units\dissertations\Dissertations;
 use app\models\units\dissertations\DissertationTypes;
 use app\modules\Control\models\Authors;
-use app\modules\Control\models\Habilitations;
+use app\models\common\Habilitations;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -100,7 +100,7 @@ class DissertationsController extends Controller
         $habilitations = ArrayHelper::map(Habilitations::find()->asArray()->all(), 'id', 'habilitation');
 
         // lists all added cities
-        $cities = Cities::find()->asArray()->all();
+        $cities = ArrayHelper::map(Cities::find()->asArray()->all(), 'city', 'city');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $city = new Cities();
@@ -136,12 +136,16 @@ class DissertationsController extends Controller
     {
 
         $model = $this->findModel($id);
+        $types = ArrayHelper::map(DissertationTypes::find()->asArray()->all(), 'id', 'type');
+        $cities = ArrayHelper::map(Cities::find()->asArray()->all(), 'id', 'city');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
+            'cities' => $cities,
+            'types' => $types,
             'model' => $model,
         ]);
 
@@ -150,11 +154,14 @@ class DissertationsController extends Controller
 
 
     /**
-     * Deletes an existing Dissertations model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * Deletes an existing Dissertation
+     * If deletion successful, will redirect to 'index' page
+     *
      * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -168,11 +175,13 @@ class DissertationsController extends Controller
 
 
     /**
-     * Finds the Dissertations model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Dissertations the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * Finds the Dissertations model based on its primary key value
+     * If the model is not found, a 404 HTTP exception will be thrown
+     *
+     * @param $id
+     * @return Dissertations|null
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {

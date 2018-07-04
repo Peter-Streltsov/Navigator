@@ -1,13 +1,15 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\monograph;
+
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[MonographiesCitations]].
  *
  * @see MonographiesCitations
  */
-class MonographiesCitationsQuery extends \yii\db\ActiveQuery
+class MonographiesCitationsQuery extends ActiveQuery
 {
     /*public function active()
     {

@@ -113,7 +113,7 @@ class Dissertations extends ActiveRecord implements UnitInterface
 
     } // end function
 
-    
+
 
     /**
      * @return \yii\db\ActiveQuery

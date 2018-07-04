@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\monograph;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "monographies_authors".
@@ -14,8 +14,9 @@ use Yii;
  * @property Authors $author
  * @property Monographies $monography
  */
-class MonographiesAuthors extends \yii\db\ActiveRecord
+class MonographiesAuthors extends ActiveRecord
 {
+
     /**
      * @inheritdoc
      */

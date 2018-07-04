@@ -8,10 +8,10 @@ use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\models\units\articles\Article;
 use app\models\units\articles\ArticlesAffilations;
+use app\models\units\articles\ArticlesCitations;
 use app\models\units\articles\ArticlesAuthors;
 use app\models\units\articles\ArticleTypes;
 // deprecated namespaces/models
-use app\modules\Control\models\ArticlesCitations;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\CitationClasses;
 use app\modules\Control\models\Fileupload;

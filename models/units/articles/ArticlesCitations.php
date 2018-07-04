@@ -1,8 +1,9 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\articles;
 
-use Yii;
+use app\models\units\articles\CitQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "articles_citations".
@@ -12,7 +13,7 @@ use Yii;
  * @property string $title
  * @property string $class
  */
-class ArticlesCitations extends \yii\db\ActiveRecord
+class ArticlesCitations extends ActiveRecord
 {
     /**
      * @inheritdoc

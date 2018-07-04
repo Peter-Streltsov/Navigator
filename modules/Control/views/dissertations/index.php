@@ -18,8 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <br>
 
-    <?php Pjax::begin(); ?>
-
     <p>
         <?= Html::a('Добавить диссертацию', ['create'], ['class' => 'button primary big']) ?>
     </p>
@@ -42,13 +40,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'title',
-            'author',
+            [
+                'attribute' => 'author',
+                'value' => function($model) {
+                    $author = $model->dissertationauthor;
+                    return $author-> name .  ' ' . $author->lastname;
+                }
+            ],
             'year',
             'organisation',
             'speciality',
-            //'type',
-            'annotation:ntext',
-
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
@@ -60,7 +61,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
 
     <script>
         $(document).ready(function(){

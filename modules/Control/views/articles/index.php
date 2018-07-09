@@ -88,8 +88,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            //'subtitle',
-            //'publisher',
             'year',
             //'doi',
             [
@@ -172,7 +170,6 @@ $this->params['breadcrumbs'][] = $this->title;
     //\yii\helpers\VarDumper::dump($dataProvider);
 
     ?>
-    <?php Pjax::end(); ?>
 
     <br>
     <br>
@@ -191,3 +188,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
+
+<?php Pjax::end(); ?>

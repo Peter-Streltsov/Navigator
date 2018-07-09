@@ -14,6 +14,7 @@ use Yii;
  */
 class Authors extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -52,9 +53,32 @@ class Authors extends \yii\db\ActiveRecord
             'name' => 'Имя',
             'secondname' => 'Отчество',
             'lastname' => 'Фамилия',
+            'habilitation' => 'Ученая степень'
         ];
 
     } // end function
+
+
+
+    /**
+     * GETTERS
+     */
+
+    public function getAuthorhabilitation()
+    {
+
+    }
+
+
+    public function getPublications()
+    {
+
+    }
+
+    /**
+     * ENDGETTERS
+     */
+
 
 
     /**
@@ -73,14 +97,6 @@ class Authors extends \yii\db\ActiveRecord
 
     } // end function
 
-
-
-    public function getPublications()
-    {
-
-
-
-    }
 
 
 

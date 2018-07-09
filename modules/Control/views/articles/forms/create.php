@@ -41,7 +41,7 @@ use yii\helpers\Html;
         <div class="col-lg-6">
             <?= $form->field($model, 'magazine')->widget(Select2::className(), [
                 'data' => $magazines,
-                'options' => [
+                'pluginOptions' => [
                         'tags' => true
                 ]
             ]); ?>
@@ -57,9 +57,8 @@ use yii\helpers\Html;
     <div class="row">
         <div class="col-lg-2">
             <?= $form->field($model, 'year')->widget(\kartik\select2\Select2::className(), [
-                    'data' => Yii::$app->yearselector->select,
-                'pluginOptions' => [],
-                'options' => [
+                'data' => Yii::$app->yearselector->select,
+                'pluginOptions' => [
                         'tags' => true
                 ]
             ]) ?>
@@ -69,7 +68,10 @@ use yii\helpers\Html;
         </div>
         <div class="col-lg-5">
             <?= $form->field($model, 'language')->widget(Select2::className(), [
-                'data' => $languages
+                'data' => $languages,
+                'pluginOptions' => [
+                        'tags' => true
+                ]
             ]) ?>
         </div>
     </div>

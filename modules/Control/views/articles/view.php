@@ -130,3 +130,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+<?php
+\yii\helpers\VarDumper::dump($_POST);
+
+?>

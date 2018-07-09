@@ -40,7 +40,7 @@ class ArticlesAuthors extends ActiveRecord
             [['article_id', 'author_id'], 'required'],
             [['article_id', 'author_id'], 'integer'],
             [['part'], 'integer'],
-            [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => Article::className(), 'targetAttribute' => ['article_id' => 'id']],
+            [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleJournal::className(), 'targetAttribute' => ['article_id' => 'id']],
         ];
 
     } // end function

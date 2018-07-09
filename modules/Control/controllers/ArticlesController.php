@@ -6,7 +6,7 @@ namespace app\modules\Control\controllers;
 use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
-use app\models\units\articles\Article;
+use app\models\units\articles\ArticleJournal;
 use app\models\units\articles\ArticlesAffilations;
 use app\models\units\articles\ArticlesCitations;
 use app\models\units\articles\ArticlesAuthors;
@@ -57,7 +57,7 @@ class ArticlesController extends Controller
     {
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find()//->joinWith('authors'),
+            'query' => ArticleJournal::find()//->joinWith('authors'),
         ]);
 
         return $this->render('index', [
@@ -72,17 +72,13 @@ class ArticlesController extends Controller
      * Displays a single Articles model.
      * @param integer $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
 
-        $model = Article::find($id)
-            ->where(['articles.id' => $id])
-            ->joinWith('authors')
+        $model = ArticleJournal::find($id)
+            ->where(['id' => $id])
             ->one();
-
-        //$model[0]['class'] = $class['description'];
 
         $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
 
@@ -109,7 +105,7 @@ class ArticlesController extends Controller
     public function actionCreate()
     {
 
-        $model = new Article();
+        $model = new ArticleJournal();
         // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
@@ -137,23 +133,26 @@ class ArticlesController extends Controller
     /**
      * Updates an existing Articles model
      * Adds citations, authors etc.
-     * If update is successful, will be redirected to 'update' page
+     * If update successful, will be redirect to 'update' page
      *
-     * @param integer $id - article id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return string
+     * @throws \Throwable
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {
 
-        $newlanguage = new Languages();
         $newmagazine = new Magazines();
         $newcitation = new ArticlesCitations();
         $newauthor = new ArticlesAuthors();
 
         // main model - current article
-        $model = Article::find()->where(['id' => $id])->one();
+        $model = ArticleJournal::find()->where(['id' => $id])->one();
 
+        // deleting text index
         if (isset($_POST['delete_text'])) {
             $model->index = null;
             $model->save();
@@ -194,7 +193,7 @@ class ArticlesController extends Controller
             $file = new Fileupload();
             $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
             $file->upload('articles/');
-            $articlemodel = Article::find()->where(['id' => $id])->one();
+            $articlemodel = ArticleJournal::find()->where(['id' => $id])->one();
             $articlemodel->file = $file->name;
             $articlemodel->save();
             Yii::$app->session->setFlash('info', 'Статье ' . $articlemodel->title . ' сопоставлен файл ' . $file->name);
@@ -236,16 +235,14 @@ class ArticlesController extends Controller
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
 
         // article
-        $model = Article::find()
-            ->where(['articles.id' => $id])
-            ->joinWith('authors')
+        $model = ArticleJournal::find()
+            ->where(['id' => $id])
+            //->joinWith('authors')
             ->one();
 
         // updating article data - articleform
         if (Yii::$app->request->post()) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $newlanguage->language = strtolower($model->language);
-                $newlanguage->save();
                 $newmagazine->magazine = $model->magazine;
                 $newmagazine->save();
             }
@@ -306,16 +303,18 @@ class ArticlesController extends Controller
 
 
     /**
-     * Finds the Articles model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * Finds the Articles model based on its primary key value
+     * If the model is not found, a 404 HTTP exception will be thrown
+     *
      * @param integer $id
-     * @return Articles the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return ArticleJournal|null
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {
 
-        if (($model = Articles::findOne($id)) !== null) {
+        if (($model = ArticleJournal::findOne($id)) !== null) {
             return $model;
         }
 

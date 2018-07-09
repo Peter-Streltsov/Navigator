@@ -2,10 +2,14 @@
 
 namespace app\models\units\articles;
 
-use app\modules\Control\models\Authors;
-use Yii;
+// project models
 use app\models\pnrd\indexes\IndexesArticles;
 use app\modules\Control\models\ArticlesAuthors;
+use app\models\common\Languages;
+use app\modules\Control\models\Authors;
+// yii
+use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * ActiveRecord class for table "articles".
@@ -26,7 +30,7 @@ use app\modules\Control\models\ArticlesAuthors;
  * @property string $link
  * @property resource $file
  */
-class Article extends \yii\db\ActiveRecord
+class ArticleJournal extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -34,7 +38,7 @@ class Article extends \yii\db\ActiveRecord
     public static function tableName()
     {
 
-        return 'articles';
+        return 'articles_journal';
 
     } // end function
 
@@ -49,7 +53,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['type', 'title', 'number', 'class', 'year', 'language'], 'required'],
             [['type', 'number', 'direct_number', 'class', 'pages', 'year', 'created_at'], 'integer'],
-            [['title', 'annotaion', 'index', 'file'], 'string'],
+            [['title', 'annotation', 'index', 'file'], 'string'],
             [['magazine', 'language', 'doi', 'link'], 'string', 'max' => 255],
         ];
 
@@ -76,7 +80,7 @@ class Article extends \yii\db\ActiveRecord
             'language' => 'Язык',
             'doi' => 'ЦИО',
             'created_at' => 'Created At',
-            'annotaion' => 'Аннотация',
+            'annotation' => 'Аннотация',
             'index' => 'Полнотекстовый индекс',
             'link' => 'Ссылка',
             'file' => 'Файл',
@@ -87,7 +91,7 @@ class Article extends \yii\db\ActiveRecord
 
 
 
-    // ACTIVERECORD GETTERS
+    // GETTERS
 
 
     /**
@@ -173,15 +177,19 @@ class Article extends \yii\db\ActiveRecord
     // END GETTERS
 
 
-
     /**
+     *
+     *
      * @param bool $insert
      * @return bool
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function beforeSave($insert)
     {
 
         if (parent::beforeSave($insert)) {
+
             if ($this->isNewRecord) {
                 if ($insert) {
                     Yii::$app->session->setFlash('success', 'Статья сохранена');
@@ -192,16 +200,30 @@ class Article extends \yii\db\ActiveRecord
                 }
             } else {
                 if ($insert) {
-                    Yii::$app->session->setFlash('warning', 'Обновление данных не удалось');
+                    Yii::$app->session->setFlash('danger', 'Обновление данных не удалось');
                     return false;
                 } else {
-                    Yii::$app->session->setFlash('info', 'Данные обновлены');
+                    Yii::$app->session->setFlash('success', 'Данные обновлены');
                     return true;
                 }
             }
         }
 
         return true;
+
+    } // end function
+
+
+
+    public function afterSave($insert, $changedAttributes)
+    {
+
+        parent::afterSave($insert, $changedAttributes);
+
+        // saving language
+        $newlanguage = new Languages();
+        $newlanguage->language = strtolower($this->language);
+        $newlanguage->save();
 
     } // end function
 

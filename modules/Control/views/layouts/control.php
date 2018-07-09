@@ -174,11 +174,28 @@ AppAsset::register($this);
                             'items' => [
                                 [
                                     'label' => 'Статьи',
-                                    'url' => '/control/articles'
+                                    'items' => [
+                                        [
+                                            'label' => 'Статьи в журналах',
+                                            'url' => '/control/articles'
+                                        ],
+                                        [
+                                            'label' => 'Статьи в сборниках и главы в книгах',
+                                            'url' => '/control/articlescollected'
+                                        ],
+                                        [
+                                            'label' => 'Статьи в сборниках трудов конференций',
+                                            'url' => '/control/articlesconf'
+                                        ]
+                                    ]
                                 ],
                                 [
-                                    'label' => 'Монографии',
-                                    'url' => '/control/monographies'
+                                    'label' => 'Монографии и Сборники',
+                                    'url' => '/control/monograph'
+                                ],
+                                [
+                                    'label' => 'Конференции',
+                                    'url' => '/control/conference'
                                 ],
                                 [
                                     'label' => 'Диссертации',
@@ -190,7 +207,7 @@ AppAsset::register($this);
                                 ],
                             ]
                         ],
-                        [
+                        /*[
                             'label' => 'Научные мероприятия',
                             'icon' => 'list',
                             'items' => [
@@ -202,7 +219,7 @@ AppAsset::register($this);
                                     'url' => '/control/conferencies'
                                 ]
                             ]
-                        ],
+                        ],*/
                         [
                             'label' => 'Научно-популяризаторская работа',
                             'icon' => 'blackboard',

@@ -17,10 +17,10 @@ class m180319_020737_authors extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
             'secondname' => $this->string(255),
+            'lastname' => $this->string(255)->notNull(),
             'habilitation' => $this->integer(),
             'user_id' => $this->integer(),
             'personnel_id' => $this->integer(),
-            'lastname' => $this->string(255)->notNull()
         ]);
 
     } // end function

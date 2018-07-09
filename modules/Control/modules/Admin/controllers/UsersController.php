@@ -2,11 +2,14 @@
 
 namespace app\modules\Control\modules\Admin\controllers;
 
-use app\modules\Control\models\Accesstokens;
+// project models
+use app\models\identity\Users;
+use app\models\identity\Accesstokens;
+// deprecated models/namespaces
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Personnel;
+// framework models
 use Yii;
-use app\models\identity\Users;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -55,7 +58,8 @@ class UsersController extends Controller
 
 
     /**
-     * Displays a single Users model.
+     * Displays a single User
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -72,9 +76,14 @@ class UsersController extends Controller
 
 
     /**
-     * Creates a new Users model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * Creates a new User
+     * generates random password for user
+     * If creation successful, will redirect to the 'view' page
+     *
+     * @return string|\yii\web\Response
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionCreate()
     {
@@ -116,11 +125,15 @@ class UsersController extends Controller
 
 
     /**
-     * Updates an existing Users model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Updates an existing User model
+     * If update successful, will redirect to 'view' page
+     *
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {

@@ -79,6 +79,9 @@ $config = [
                 'admin' => [
                     'class' => 'app\modules\Control\modules\Admin\Admin'
                 ],
+                'articles' => [
+                    'class' => 'app\modules\Control\modules\articles\Articles'
+                ]
             ],
         ],
         'public' => [

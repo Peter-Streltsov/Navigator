@@ -2,14 +2,15 @@
 
 namespace app\modules\Control\controllers;
 
-//use app\modules\Control\models\Articles;
-use app\models\units\articles\Article;
+// project classes
+use app\models\units\articles\ArticleJournal;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Dissertations;
-use app\modules\Control\models\Monographies;
-use app\modules\Control\models\Personnel;
+//use app\modules\Control\models\Monographies;
+//use app\modules\Control\models\Personnel;
 use app\models\identity\Users;
+// yii2 classes
 use yii\web\Controller;
 
 
@@ -30,7 +31,7 @@ class DefaultController extends Controller
         $author = Authors::find()->where(['user_id' => $user->id])->one();
 
         $data['authors'] = Authors::find()->count();
-        $data['articles'] = Article::find()->count();
+        $data['articles'] = ArticleJournal::find()->count();
         $data['monographies'] = '';//Monographies::find()->count();
         $table = [
             'users' => Users::find()->count(),

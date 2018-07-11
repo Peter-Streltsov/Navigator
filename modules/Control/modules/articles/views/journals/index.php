@@ -135,7 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'yii\grid\ActionColumn',
                     'buttons' => [
                         'view' => function($url, $model) {
-                            $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/articles/view','id'=>$model['id']]);;
+                            $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/articles/journals/view','id'=>$model['id']]);;
                             return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $buttonurl, ['class' => 'button primary big', 'style' => 'border-radius: 2pc;', 'title' => Yii::t('yii', 'Подробно')]);
                         },
                         'file' => function($url, $model) {

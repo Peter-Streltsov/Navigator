@@ -177,15 +177,15 @@ AppAsset::register($this);
                                     'items' => [
                                         [
                                             'label' => 'Статьи в журналах',
-                                            'url' => '/control/articles'
+                                            'url' => '/control/articles/journals'
                                         ],
                                         [
                                             'label' => 'Статьи в сборниках и главы в книгах',
-                                            'url' => '/control/articlescollected'
+                                            'url' => '/control/articles/collections'
                                         ],
                                         [
                                             'label' => 'Статьи в сборниках трудов конференций',
-                                            'url' => '/control/articlesconf'
+                                            'url' => '/control/articles/conferencies'
                                         ]
                                     ]
                                 ],

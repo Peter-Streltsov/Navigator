@@ -81,6 +81,9 @@ $config = [
                 ],
                 'articles' => [
                     'class' => 'app\modules\Control\modules\articles\Articles'
+                ],
+                'personal' => [
+                    'class' => 'app\modules\Control\modules\personal\PersonalModule'
                 ]
             ],
         ],

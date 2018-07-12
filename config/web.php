@@ -83,7 +83,12 @@ $config = [
                     'class' => 'app\modules\Control\modules\articles\Articles'
                 ],
                 'personal' => [
-                    'class' => 'app\modules\Control\modules\personal\PersonalModule'
+                    'class' => 'app\modules\Control\modules\personal\PersonalModule',
+                    'modules' => [
+                        'uploads' => [
+                            'class' => 'app\modules\Control\modules\personal\uploads\UploadModule'
+                        ]
+                    ]
                 ]
             ],
         ],

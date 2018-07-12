@@ -1,0 +1,75 @@
+<?php
+
+namespace app\modules\Control\modules\personal\controllers;
+
+// project classes
+use app\models\units\articles\ArticleJournal;
+use app\models\identity\Users;
+use app\modules\Control\models\Authors;
+use app\modules\Control\models\Personnel;
+// yii2 classes
+use yii\web\Controller;
+
+
+/**
+ * Default controller for the `personal` module
+ */
+class DefaultController extends Controller
+{
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws \yii\db\Exception
+     */
+    public function actionIndex($id)
+    {
+
+        // current user
+        // TODO: replace with user identity (?)
+        $model = Users::find()->where(['id' => $id])->one();
+
+        // checking if exist author for current user; if no - redirect to '/control'
+        if (!Authors::find()->where(['user_id' => $model->id])->exists()) {
+
+            \Yii::$app->session->setFlash('danger' ,'Сотрудника с таким идентификатором не существует');
+
+            return $this->redirect('/control');
+        }
+
+        // author connected with current user
+        $author = Authors::find()->where(['user_id' => $model->id])->one();
+
+        // staff record connected with current user
+        $staff = Personnel::find()->where(['user_id' => $id])->one();
+
+        // all articles for author connected with current user
+        $articles = ArticleJournal::getArticlesForAuthor($author->id);
+
+        // articles published in current year
+        $currentarticles = ArticleJournal::getCurrentArticles($author->id);
+
+        $meanindex = PNRD::meanIndex();
+
+        // indexes for all articles in current year
+        $indexes['articles'] = PNRD::personalArticlesIndex($author->id);
+
+        // datapdovider for author's articles
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $articles
+        ]);
+
+
+        return $this->render('index', [
+            'model' => $model,
+            'articles' => $articles,
+            'currentarticles' => $currentarticles,
+            'dataprovider' => $dataProvider,
+            'personal' => $staff,
+            'indexes' => $indexes,
+            'meanindex' => $meanindex,
+        ]);
+
+    } // end action
+
+} // end class

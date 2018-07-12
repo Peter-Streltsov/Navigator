@@ -2,9 +2,9 @@
 
 namespace app\models\pnrd\indexes;
 
+use app\models\units\articles\ArticleJournal;
+use app\models\units\articles\IndexesArticlesQuery;
 use yii\db\ActiveRecord;
-use app\models\units\articles\Article;
-use app\models\units\articles\ArticleQuery;
 
 /**
  * This is the model class for table "indexes_articles".
@@ -13,7 +13,7 @@ use app\models\units\articles\ArticleQuery;
  * @property string $description
  * @property double $value
  *
- * @property Articles[] $articles
+ * @property ArticleJournal[] $articles
  */
 class IndexesArticles extends ActiveRecord
 {
@@ -68,7 +68,7 @@ class IndexesArticles extends ActiveRecord
     public function getArticles()
     {
 
-        return $this->hasMany(Article::className(), ['class' => 'id']);
+        return $this->hasMany(ArticleJournal::className(), ['class' => 'id']);
 
     } // end function
 
@@ -76,12 +76,12 @@ class IndexesArticles extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return ArticlesQuery the active query used by this AR class.
+     * @return IndexesArticlesQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticleQuery(get_called_class());
+        return new IndexesArticlesQuery(get_called_class());
 
     } // end function
 

@@ -11,6 +11,6 @@ interface UnitInterface
 
     //public function getAuthors();
 
-    public function getIndex();
+    public function getPnrdindex();
 
 } // end interface

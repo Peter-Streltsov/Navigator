@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use kartik\export\ExportMenu;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -13,9 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="articles-index">
 
         <br>
+        <br>
 
         <h2><?= Html::encode($this->title) ?></h2>
 
+        <br>
         <br>
         <br>
 
@@ -33,6 +36,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <input type="text" class="form-control" id="searchinput">
             </div>
         </div>
+
+        <br>
+        <br>
 
 
         <?php

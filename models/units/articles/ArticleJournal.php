@@ -3,6 +3,7 @@
 namespace app\models\units\articles;
 
 // project models
+use app\interfaces\UnitInterface;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\modules\Control\models\ArticlesAuthors;
 use app\models\common\Languages;
@@ -30,7 +31,7 @@ use yii\db\ActiveRecord;
  * @property string $link
  * @property resource $file
  */
-class ArticleJournal extends ActiveRecord
+class ArticleJournal extends ActiveRecord implements UnitInterface
 {
     /**
      * @inheritdoc
@@ -173,6 +174,25 @@ class ArticleJournal extends ActiveRecord
     } // end function
 
 
+    /**
+     * returns pnrd index for current article
+     */
+    public function getPnrdindex()
+    {
+
+        $current_year = date('Y');
+
+        if (($current_year - $this->year) < 5) {
+            return 0;
+        }
+
+        $base_index = IndexesArticles::find();
+
+        //$index = $this->get
+
+    } // end function
+
+
 
     // END GETTERS
 
@@ -182,8 +202,6 @@ class ArticleJournal extends ActiveRecord
      *
      * @param bool $insert
      * @return bool
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function beforeSave($insert)
     {
@@ -231,12 +249,12 @@ class ArticleJournal extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return ArticleQuery the active query used by this AR class.
+     * @return ArticleJournalQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticleQuery(get_called_class());
+        return new ArticleJournalQuery(get_called_class());
 
     } // end function
 

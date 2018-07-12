@@ -71,7 +71,8 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
         return [
             'id' => 'ID',
             'type' => 'Тип',
-            'class' => 'Индекс ПНРД',
+            'class' => 'Категория ПНРД',
+            'pnrdindex' => 'Индекс ПНРД',
             'title' => 'Заголовок',
             'magazine' => 'Журнал',
             'number' => 'Номер',
@@ -176,6 +177,8 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
 
     /**
      * returns pnrd index for current article
+     *
+     * @return float
      */
     public function getPnrdindex()
     {
@@ -186,9 +189,9 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
             return 0;
         }
 
-        $base_index = IndexesArticles::find();
+        $base_index = IndexesArticles::find()->where(['id' => $this->class])->one();
 
-        //$index = $this->get
+        return $base_index->value;
 
     } // end function
 

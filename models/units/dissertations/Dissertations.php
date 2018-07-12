@@ -126,8 +126,12 @@ class Dissertations extends ActiveRecord implements UnitInterface
     } // end function
 
 
-
-    public function getIndex()
+    /**
+     *
+     * TODO: complete method (needs model for dissertation indexes)
+     *
+     */
+    public function getPnrdindex()
     {
 
     }

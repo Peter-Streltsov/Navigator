@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\pnrd\indexes;
 
 use app\models\pnrd\indexes\IndexesArticles;
 use yii\db\ActiveQuery;

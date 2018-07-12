@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Опубликованные статьи';
+$this->title = 'Статьи - публикации в журналах';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
     <div class="articles-index">
@@ -95,6 +95,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id',
                 'title',
                 'year',
+                [
+                    'attribute' => 'pnrdindex',
+                    'value' => function($model) {
+                        return $model->pnrdindex;
+                    }
+                ],
                 //'doi',
                 [
                     'attribute' => 'authors',

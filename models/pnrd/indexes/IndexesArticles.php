@@ -3,7 +3,7 @@
 namespace app\models\pnrd\indexes;
 
 use app\models\units\articles\ArticleJournal;
-use app\models\units\articles\IndexesArticlesQuery;
+use app\models\pnrd\indexes\IndexesArticlesQuery;
 use yii\db\ActiveRecord;
 
 /**

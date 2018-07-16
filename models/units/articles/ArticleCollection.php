@@ -64,10 +64,10 @@ class ArticleCollection extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return ArtcleCollectionQuery the active query used by this AR class.
+     * @return ArticleCollectionQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new ArtcleCollectionQuery(get_called_class());
+        return new ArticleCollectionQuery(get_called_class());
     }
 }

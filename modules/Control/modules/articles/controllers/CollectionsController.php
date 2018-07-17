@@ -2,8 +2,13 @@
 
 namespace app\modules\Control\modules\articles\controllers;
 
-use Yii;
+// project classes
 use app\models\units\articles\ArticleCollection;
+use app\models\common\Languages;
+use app\models\common\Magazines;
+//yii2 classes
+use Yii;
+use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -75,7 +80,7 @@ class CollectionsController extends Controller
 
     /**
      * Creates a new ArticleCollection model
-     * If creation successful, will be redirect to 'view' page
+     * If creation successful, will redirect to 'view' page
      *
      * @return string|\yii\web\Response
      * @throws \yii\base\InvalidConfigException
@@ -86,6 +91,9 @@ class CollectionsController extends Controller
     {
 
         $model = new ArticleCollection();
+        // added languages list
+        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+        $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -93,6 +101,8 @@ class CollectionsController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'magazines' => $magazines,
+            'languages' => $languages
         ]);
 
     } // end action

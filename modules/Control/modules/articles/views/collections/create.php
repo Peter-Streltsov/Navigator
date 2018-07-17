@@ -5,17 +5,24 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\units\articles\ArticleCollection */
 
-$this->title = 'Update Article Collection: {nameAttribute}';
+$this->title = 'Добавить статью';
 $this->params['breadcrumbs'][] = ['label' => 'Article Collections', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Добавить статью';
 ?>
+
 <div class="article-collection-update">
+
+    <br>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
+    <br>
+
+    <?= $this->render('forms/create', [
         'model' => $model,
-    ]) ?>
+        'languages' => $languages
+    ]);
+    ?>
+
 
 </div>

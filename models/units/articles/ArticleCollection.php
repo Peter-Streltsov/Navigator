@@ -37,7 +37,7 @@ class ArticleCollection extends \yii\db\ActiveRecord
         return [
             [['title', 'type', 'collection'], 'required'],
             [['title', 'collection', 'section', 'text_index', 'annotation'], 'string'],
-            [['type', 'section_number', 'language'], 'integer'],
+            [['type', 'year', 'section_number', 'language'], 'integer'],
             [['link', 'file'], 'string', 'max' => 255],
         ];
     }
@@ -51,6 +51,7 @@ class ArticleCollection extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'type' => 'Type',
+            'year' => 'Year',
             'collection' => 'Collection',
             'section' => 'Section',
             'section_number' => 'Section Number',

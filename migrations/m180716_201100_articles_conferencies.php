@@ -17,6 +17,8 @@ class m180716_201100_articles_conferencies extends Migration
             'id' => $this->primaryKey(),
             'title' => $this->text()->notNull(),
             'conferency_collection' => $this->text()->notNull(),
+            'section' => $this->string(),
+            'year' => $this->integer()->notNull(),
             'number' => $this->string(),
             'language' => $this->integer(),
             'annotation' => $this->text(),

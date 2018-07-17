@@ -54,13 +54,16 @@ class ArticleConferencies extends \yii\db\ActiveRecord
 
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'title' => 'Заголовок',
             'conferency_collection' => 'Conferency Collection',
-            'number' => 'Number',
-            'language' => 'Language',
-            'annotation' => 'Annotation',
-            'text_index' => 'Text Index',
-            'file' => 'File',
+            'section' => 'Раздел сборника',
+            'year' => 'Год издания',
+            'pages' => 'Страницы',
+            'number' => 'Номер сборника',
+            'language' => 'Язык',
+            'annotation' => 'Аннотация',
+            'text_index' => 'Текстовый индекс',
+            'file' => 'Файл',
         ];
 
     } // end function

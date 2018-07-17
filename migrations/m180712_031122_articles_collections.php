@@ -18,6 +18,7 @@ class m180712_031122_articles_collections extends Migration
             'id' => $this->primaryKey(),
             'title' => $this->text()->notNull(), // заголовок
             'type' => $this->integer()->notNull(), // вид
+            'year' => $this->integer()->notNull(), // год издания
             'collection' => $this->text()->notNull(), // название сборника
             'section' => $this->text(), // раздел сборника
             'section_number' => $this->integer(),

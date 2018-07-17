@@ -2,7 +2,11 @@
 
 namespace app\models\units\articles;
 
+// project classes
+use app\interfaces\UnitInterface;
+// yii2 classes
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "articles_collections".
@@ -19,49 +23,99 @@ use Yii;
  * @property string $link
  * @property string $file
  */
-class ArticleCollection extends \yii\db\ActiveRecord
+class ArticleCollection extends ActiveRecord implements UnitInterface
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
+
         return 'articles_collections';
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function rules()
     {
+
         return [
             [['title', 'type', 'collection'], 'required'],
             [['title', 'collection', 'section', 'text_index', 'annotation'], 'string'],
             [['type', 'year', 'section_number', 'language'], 'integer'],
             [['link', 'file'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'type' => 'Type',
-            'year' => 'Year',
-            'collection' => 'Collection',
-            'section' => 'Section',
-            'section_number' => 'Section Number',
-            'language' => 'Language',
-            'text_index' => 'Text Index',
-            'annotation' => 'Annotation',
-            'link' => 'Link',
-            'file' => 'File',
+            'title' => 'Заголовок',
+            'type' => 'Вид',
+            'year' => 'Год издания',
+            'collection' => 'Сборник',
+            'section' => 'Раздел сборника',
+            'section_number' => 'Номер раздела',
+            'language' => 'Язык',
+            'text_index' => 'Текстовый индекс',
+            'annotation' => 'Аннотация',
+            'link' => 'Ссылка',
+            'file' => 'Файл',
         ];
+
+    } // end function
+
+
+    /**
+     * GETTERS
+     */
+
+
+    /**
+     *
+     */
+    public function getUnitauthors()
+    {
+        // TODO: Implement getUnitauthors() method.
     }
+
+
+    /**
+     *
+     */
+    public function getUnitlanguage()
+    {
+        // TODO: Implement getUnitlanguage() method
+    }
+
+
+
+    /**
+     *
+     */
+    public function getPnrdindex()
+    {
+        // TODO: Implement getPnrdindex() method
+    }
+
+    /**
+     * END GETTERS
+     */
+
+
 
     /**
      * @inheritdoc
@@ -69,6 +123,9 @@ class ArticleCollection extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new ArticleCollectionQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

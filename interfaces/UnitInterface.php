@@ -9,7 +9,9 @@ namespace app\interfaces;
 interface UnitInterface
 {
 
-    //public function getAuthors();
+    public function getUnitauthors();
+
+    public function getUnitlanguage();
 
     public function getPnrdindex();
 

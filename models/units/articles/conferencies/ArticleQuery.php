@@ -1,14 +1,17 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\conferencies;
+
+use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[ArticlesConferenciesTypes]].
+ * ActiveQuery class for [[Article]]
  *
- * @see ArticlesConferenciesTypes
+ * @see ArticlesConferencies
  */
-class ArticlesConferenciesTypesQuery extends \yii\db\ActiveQuery
+class ArticleQuery extends ActiveQuery
 {
+
     /*public function active()
     {
         return $this->andWhere('[[status]]=1');
@@ -16,19 +19,26 @@ class ArticlesConferenciesTypesQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return ArticlesConferenciesTypes[]|array
+     * @return Article[]|array
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
-     * @return ArticlesConferenciesTypes|array|null
+     * @return Article|array|null
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

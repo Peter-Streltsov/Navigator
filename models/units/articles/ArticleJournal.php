@@ -93,7 +93,62 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
 
 
 
-    // GETTERS
+    /**
+     * GETTERS
+     */
+
+
+    /**
+     * TODO: Complete method getUnitauthors()
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUnitauthors()
+    {
+
+        return $this->hasMany(Authors::className(), ['id' => 'author_id'])
+            ->viaTable('articles_authors', ['article_id' => 'id']);
+
+    } // end function
+
+
+
+    /**
+     * TODO: Complete method getUnitlanguage()
+     *
+     * @return string
+     */
+    public function getUnitlanguage()
+    {
+
+        $language = $this->hasOne(Languages::className(), ['id' => 'language']);
+
+        return $language->language;
+
+    } // end function
+
+
+
+    /**
+     * returns pnrd index for current article
+     *
+     * @return float
+     */
+    public function getPnrdindex()
+    {
+
+        $current_year = date('Y');
+
+        if (($current_year - $this->year) < 5) {
+            return 0;
+        }
+
+        $base_index = IndexesArticles::find()->where(['id' => $this->class])->one();
+
+        return $base_index->value;
+
+    } // end function
+
 
 
     /**
@@ -153,18 +208,6 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
 
 
 
-    /**
-     * TODO: complete
-     */
-    public function getAuthors()
-    {
-
-        return $this->hasMany(Authors::className(), ['id' => 'author_id'])->viaTable('articles_authors', ['article_id' => 'id']);
-
-    } // end function
-
-
-
     public function getAuthorsnames()
     {
 
@@ -175,29 +218,10 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
     } // end function
 
 
+
     /**
-     * returns pnrd index for current article
-     *
-     * @return float
+     * END GETTERS
      */
-    public function getPnrdindex()
-    {
-
-        $current_year = date('Y');
-
-        if (($current_year - $this->year) < 5) {
-            return 0;
-        }
-
-        $base_index = IndexesArticles::find()->where(['id' => $this->class])->one();
-
-        return $base_index->value;
-
-    } // end function
-
-
-
-    // END GETTERS
 
 
     /**

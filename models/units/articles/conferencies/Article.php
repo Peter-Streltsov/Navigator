@@ -1,8 +1,10 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\conferencies;
 
+use app\interfaces\UnitInterface;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "articles_conferencies".
@@ -16,7 +18,7 @@ use Yii;
  * @property string $text_index
  * @property string $file
  */
-class ArticleConferencies extends \yii\db\ActiveRecord
+class Article extends ActiveRecord implements UnitInterface
 {
 
     /**
@@ -39,7 +41,7 @@ class ArticleConferencies extends \yii\db\ActiveRecord
 
         return [
             [['title', 'conferency_collection'], 'required'],
-            [['title', 'conferency_collection', 'annotation', 'text_index'], 'string'],
+            [['title', 'section', 'conferency_collection', 'annotation', 'text_index'], 'string'],
             [['language'], 'integer'],
             [['number', 'file'], 'string', 'max' => 255],
         ];
@@ -71,13 +73,51 @@ class ArticleConferencies extends \yii\db\ActiveRecord
 
 
     /**
+     * GETTERS
+     */
+
+
+
+    /**
+     * return string value of current article language
+     *
+     * @return string
+     */
+    public function getUnitlanguage()
+    {
+
+    }
+
+
+
+    public function getUnitauthors()
+    {
+        // TODO: Implement getUnitauthors() method.
+    }
+
+
+
+    public function getPnrdindex()
+    {
+        // TODO: Implement getPnrdindex() method.
+    }
+
+
+
+    /**
+     * END GETTERS
+     */
+
+
+
+    /**
      * @inheritdoc
-     * @return ArticlesConferenciesQuery the active query used by this AR class.
+     * @return ArticleQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticleConferenciesQuery(get_called_class());
+        return new ArticleQuery(get_called_class());
 
     } // end function
 

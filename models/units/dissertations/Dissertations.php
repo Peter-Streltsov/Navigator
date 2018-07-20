@@ -90,6 +90,31 @@ class Dissertations extends ActiveRecord implements UnitInterface
      * GETTERS
      */
 
+
+
+    public function getUnitauthors()
+    {
+        // TODO: Implement getUnitauthors() method.
+    }
+
+
+
+    public function getUnitlanguage()
+    {
+        // TODO: Implement getUnitlanguage() method.
+    }
+
+
+    /**
+     *
+     * TODO: complete method (needs model for dissertation indexes)
+     *
+     */
+    public function getPnrdindex()
+    {
+
+    }
+
     /**
      * gets current dissertation type
      *
@@ -125,16 +150,6 @@ class Dissertations extends ActiveRecord implements UnitInterface
 
     } // end function
 
-
-    /**
-     *
-     * TODO: complete method (needs model for dissertation indexes)
-     *
-     */
-    public function getPnrdindex()
-    {
-
-    }
 
 
     /**

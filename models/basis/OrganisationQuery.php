@@ -2,17 +2,22 @@
 
 namespace app\models\basis;
 
+use yii\db\ActiveQuery;
+
 /**
  * This is the ActiveQuery class for [[Organisation]].
  *
  * @see Organisation
  */
-class OrganisationQuery extends \yii\db\ActiveQuery
+class OrganisationQuery extends ActiveQuery
 {
+
     /*public function active()
     {
         return $this->andWhere('[[status]]=1');
     }*/
+
+
 
     /**
      * @inheritdoc
@@ -20,8 +25,12 @@ class OrganisationQuery extends \yii\db\ActiveQuery
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -29,6 +38,9 @@ class OrganisationQuery extends \yii\db\ActiveQuery
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

@@ -2,14 +2,10 @@
 
 namespace app\modules\Control\modules\Admin\controllers;
 
-use app\modules\Control\models\Articles;
-use app\modules\Control\models\Authors;
-use app\modules\Control\models\Monographies;
-use app\modules\Control\models\Organisation;
-use app\modules\Control\models\Personnel;
-use app\modules\Control\models\Users;
-use yii\data\ActiveDataProvider;
-use yii\debug\models\timeline\DataProvider;
+// project classes
+use app\models\basis\Organisation;
+// yii2 classes
+use Yii;
 use yii\web\Controller;
 
 
@@ -28,8 +24,37 @@ class OrgdataController extends Controller
 
         $model = Organisation::find()->one();
 
-        //echo "orgdata";
+        if ($model == null) {
+            $model = new Organisation();
+            $model->organisation = '<b style="color: red;">название организации не задано</b>';
+            $model->weblink = null;
+        }
+
         return $this->render('index', [
+            'model' => $model
+        ]);
+
+    } // end action
+
+
+
+    public function actionUpdate()
+    {
+
+        if (Yii::$app->request->post()) {
+            $newdata = new Organisation();
+            if ($newdata->load(Yii::$app->request->post())) {
+                $newdata->save();
+            }
+        }
+
+        $model = Organisation::find()->one();
+
+        if ($model == null) {
+            $model = new Organisation();
+        }
+
+        return $this->render('update', [
             'model' => $model
         ]);
 

@@ -42,7 +42,7 @@ AppAsset::register($this);
     <div class="wrap">
         <?php
 
-        isset(Yii::$app->data->orgdata->organisation) != '' ? $brandLabel = Yii::$app->data->orgdata->organisation . ' - ' : $brandLabel = '';
+        Yii::$app->data->orgdata->organisation != null ? $brandLabel = Yii::$app->data->label . ' - ' : $brandLabel = '';
 
         NavBar::begin([
             'brandLabel' => '<b class="navbrand">'. $brandLabel . 'Наукометрия'.'</b>',
@@ -327,7 +327,7 @@ AppAsset::register($this);
     <footer style="color: #2a323b; height: 2.5pc; background-color: #d2d4d9;" class="navbar-fixed-bottom ">
         <div class="container">
             <p style="margin-top: 0.5pc;">
-                <b class="pull-left">&copy;  <?= date('Y') ?> <?= Html::a(Yii::$app->data->orgdata->organisation, 'http://'.Yii::$app->data->orgdata->weblink) ?></b>
+                <b class="pull-left">&copy;  <?= date('Y') ?> <?= Html::a(Yii::$app->data->label, 'http://'.Yii::$app->data->orgdata->weblink) ?></b>
 
                 <!--<b class="pull-right"><?= Yii::powered() ?></b>-->
             </p>

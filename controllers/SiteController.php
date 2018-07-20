@@ -74,7 +74,7 @@ class SiteController extends Controller
 
 
     /**
-     * Login action.
+     * Login action
      *
      * @return Response|string
      */
@@ -96,7 +96,10 @@ class SiteController extends Controller
         return $this->render('login', [
             'model' => $model,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Logout action.
@@ -105,10 +108,14 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
+
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
+
+    } // end action
+
+
 
     /**
      * Displays contact page.
@@ -126,13 +133,6 @@ class SiteController extends Controller
         return $this->render('contact', [
             'model' => $model,
         ]);
-    } // end action
-
-    public function actionTest()
-    {
-
-        return $this->render('index');
-
     } // end action
 
 } // end class

@@ -17,11 +17,21 @@ class Data extends Component
     public function __construct()
     {
 
-        $organisation = new Organisation();
-        $organisation::findOne(1);
+        $organisation = Organisation::findOne(1);
+
+        $this->label = $organisation->organisation;
 
         $this->orgdata = $organisation;
 
     } // end construct
+
+
+
+    public function __set($name, $value)
+    {
+
+        $this->$name = $value;
+
+    } // end function
 
 } // end function

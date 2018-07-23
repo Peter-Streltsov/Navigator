@@ -1,8 +1,9 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\messages;
 
 use Yii;
+use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -16,7 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $custom_theme
  * @property string $text
  */
-class Messages extends \yii\db\ActiveRecord
+class Message extends ActiveRecord
 {
 
     /**
@@ -96,12 +97,12 @@ class Messages extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return MessagesQuery the active query used by this AR class.
+     * @return MessageQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new MessagesQuery(get_called_class());
+        return new MessageQuery(get_called_class());
 
     } // end function
 

@@ -1,8 +1,9 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\messages;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "notifications".
@@ -13,7 +14,7 @@ use Yii;
  * @property string $from
  * @property int $read
  */
-class Notifications extends \yii\db\ActiveRecord
+class Notification extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -106,10 +107,13 @@ class Notifications extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return NotificationsQuery the active query used by this AR class.
+     * @return NotificationQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new NotificationsQuery(get_called_class());
-    }
-}
+
+        return new NotificationQuery(get_called_class());
+
+    } // end function
+
+} // end class

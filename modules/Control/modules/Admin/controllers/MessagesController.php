@@ -2,11 +2,13 @@
 
 namespace app\modules\Control\modules\Admin\controllers;
 
-use app\modules\Control\models\MessagesClasses;
-use app\modules\Control\models\Notifications;
-use app\modules\Control\models\Upload;
+// project classes
+use app\models\messages\MessageClasses;
+use app\models\messages\Notification;
+//use app\models\Upload; TODO: change namespace;
+use app\models\messages\Message;
+// yii2 classes
 use Yii;
-use app\modules\Control\models\Messages;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -17,6 +19,7 @@ use yii\filters\VerbFilter;
  */
 class MessagesController extends Controller
 {
+
     /**
      * @inheritdoc
      */
@@ -32,27 +35,31 @@ class MessagesController extends Controller
             ],
         ];
 
-    } // end action
+    } // end function
 
 
 
     /**
-     * Lists all user messages
+     * lists messages from users
      *
-     * @return mixed
+     * @param null $set
+     * @param null $id
+     * @return string|\yii\web\Response
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionUsers($set = null, $id = null)
     {
 
         if (isset($set) && isset($id)) {
-            $newmodel = Messages::find()->where(['id' => $id])->one();
+            $newmodel = Message::find()->where(['id' => $id])->one();
             $newmodel->read = true;
             $newmodel->save();
             return $this->redirect('/control/admin/messages');
         }
 
         $messagesProvider = new ActiveDataProvider([
-            'query' => Messages::find(),
+            'query' => Message::find(),
         ]);
 
         return $this->render('index', [
@@ -64,9 +71,12 @@ class MessagesController extends Controller
 
 
     /**
-     * Lists all uploaded data from users (articles candidates etc.)
+     * lists uploaded data from users
      *
-     * @return mixed
+     * @deprecated 0.4.55
+     * @param null $id
+     * @return string
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionUploads($id = null)
     {
@@ -115,10 +125,10 @@ class MessagesController extends Controller
 
         $user = Yii::$app->user->getIdentity();
 
-        $model = new Messages();
+        $model = new Message();
         $model->username = $user->username;
 
-        $classes = MessagesClasses::find()->asArray()->all();
+        $classes = MessageClasses::find()->asArray()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

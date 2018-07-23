@@ -1,14 +1,17 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\messages;
+
+use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[MessagesClasses]].
+ * This is the ActiveQuery class for [[Notification]].
  *
- * @see MessagesClasses
+ * @see Notifications
  */
-class MessagesClassesQuery extends \yii\db\ActiveQuery
+class NotificationQuery extends ActiveQuery
 {
+
     /*public function active()
     {
         return $this->andWhere('[[status]]=1');
@@ -16,19 +19,26 @@ class MessagesClassesQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return MessagesClasses[]|array
+     * @return Notifications[]|array
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
-     * @return MessagesClasses|array|null
+     * @return Notifications|array|null
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

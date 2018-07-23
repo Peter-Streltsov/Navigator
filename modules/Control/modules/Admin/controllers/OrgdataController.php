@@ -41,14 +41,14 @@ class OrgdataController extends Controller
     public function actionUpdate()
     {
 
-        if (Yii::$app->request->post()) {
-            $newdata = new Organisation();
-            if ($newdata->load(Yii::$app->request->post())) {
-                $newdata->save();
+        $model = Organisation::find()->one();
+
+        if (Yii::$app->request->post() && $model->load(Yii::$app->request->post())) {
+            $model->id = 1;
+            if ($model->save()) {
+                return $this->redirect('/control/admin/orgdata');
             }
         }
-
-        $model = Organisation::find()->one();
 
         if ($model == null) {
             $model = new Organisation();

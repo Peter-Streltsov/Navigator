@@ -7,6 +7,7 @@ use yii\db\Migration;
  */
 class m180403_002752_messages extends Migration
 {
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +19,9 @@ class m180403_002752_messages extends Migration
             'user_id' => $this->integer(),
             'username' => $this->string()->notNull(),
             'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
             'category' => $this->string()->notNull(),
+            'read' => $this->boolean()->defaultValue(false),
             'custom_theme' => $this->string(255),
             'text' => $this->text()->notNull()
         ]);

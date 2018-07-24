@@ -57,7 +57,7 @@ class Article extends ActiveRecord implements UnitInterface
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
-            'conferency_collection' => 'Conferency Collection',
+            'conferency_collection' => 'Сборник материалов конференции',
             'section' => 'Раздел сборника',
             'year' => 'Год издания',
             'pages' => 'Страницы',

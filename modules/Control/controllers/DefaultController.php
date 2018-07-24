@@ -3,7 +3,7 @@
 namespace app\modules\Control\controllers;
 
 // project classes
-use app\models\pnrd\CommonData;
+use app\models\pnrd\facades\CommonData;
 use app\models\units\articles\ArticleJournal;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Authors;

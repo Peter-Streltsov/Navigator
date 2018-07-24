@@ -24,48 +24,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
 
     <div class="row">
-        <div class="col-lg-1">
-
-            <br>
-            <br>
-            <br>
+        <div class="col-lg-12">
 
             <?php
 
-            Modal::begin([
-                'toggleButton' => [
-                    'label' => '<span class="glyphicon glyphicon-info-sign" "></span>',
-                    'style' => 'border-radius: 1pc;',
-                    'class' => 'button primary big'
-                ]
-            ]);
-
-            Modal::end();
-
-
-            ?>
-
-            <br>
-            <br>
-
-            <?php
-
-            Modal::begin([
-                'toggleButton' => [
-                    'label' => '<span class="glyphicon glyphicon-info-sign" "></span>',
-                    'style' => 'border-radius: 1pc;',
-                    'class' => 'button primary big'
-                ]
-            ]);
-
-            echo Highcharts::widget([
+            $content1 = Highcharts::widget([
                 'scripts' => [
                     //'modules/exporting',
                     'themes/grid-light',
                 ],
                 'options' => [
                     'title' => [
-                        'text' => 'Распределение научных результатов'
+                        //'text' => 'Распределение научных результатов'
                     ],
                     'style' => 'width: 20pc;',
                     'labels' => [
@@ -96,65 +66,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'credits' => ['enabled' => false]
                 ],
-            ]);
+            ]);;
+            $content2 = '';
 
-            Modal::end();
-
+            echo \yii\bootstrap\Tabs::widget([
+                'items' => [
+                    [
+                        'label' => 'Распределение научных результатов',
+                        'content' => $content1,
+                        'active' => true
+                    ]
+                ]
+            ])
             ?>
-        </div>
-        <div class="col-lg-10">
-        <div class="panel panel-default">
-            <div class="panel panel-body">
-                    <?php
-
-                    $user =  Yii::$app->user->getIdentity();
-
-                    echo Highcharts::widget([
-                        'scripts' => [
-                            //'modules/exporting',
-                            'themes/grid-light',
-                        ],
-                        'options' => [
-                            'title' => [
-                                'text' => 'Распределение научных результатов'
-                            ],
-                            'style' => 'width: 20pc;',
-                            'labels' => [
-                                'items' => [
-                                    'html' =>'test chart'
-                                ]
-                            ],
-                            'series' => [
-                                [
-                                    'type' => 'pie',
-                                    'name' => 'Распределение научных результатов',
-                                    'data' => [
-                                        [
-                                            'name' => 'Статьи',
-                                            'y' => (int)$data['articles'],
-                                        ],
-                                        [
-                                            'name' => 'Монографии',
-                                            'y' => (int)$data['monographies'],
-                                            'color' => new \yii\web\JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "gray"')
-                                        ],
-                                        [
-                                            'name' => 'Научные мероприятия (конференции, доклады)',
-                                            'y' => 1
-                                        ]
-                                    ],
-                                ],
-                            ],
-                            'credits' => ['enabled' => false]
-                        ],
-                    ]);
-
-                    ?>
-                </div>
-            </div>
         </div>
     </div>
 
+    <br>
+    <br>
+    <br>
     <br>
     <br>
 

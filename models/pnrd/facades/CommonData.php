@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\pnrd;
+namespace app\models\pnrd\facades;
 
 // project classes
 use app\models\identity\Users;

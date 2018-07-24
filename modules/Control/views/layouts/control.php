@@ -230,7 +230,7 @@ AppAsset::register($this);
                         ],
                         [
                             'label' => 'Сообщения '
-                                //. Yii::$app->counter->messagesCount()
+                                . Yii::$app->counter->messagesCount()
                                 . ' ',
                                 //. $uploads_count,
                             'icon' => 'comment',

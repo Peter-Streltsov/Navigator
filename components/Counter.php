@@ -2,9 +2,11 @@
 
 namespace app\components;
 
+// project classes
+use app\models\messages\Message;
+// yii2 classes
 use Yii;
 use yii\base\Component;
-use app\modules\Control\models\Messages;
 
 /**
  * Class Messages
@@ -26,7 +28,7 @@ class Counter extends Component
     {
 
         // counting messages with status null (not read)
-        $count = Messages::find()->where(['read' => null])->count();
+        $count = Message::find()->where(['read' => null])->count();
 
         // if $count query returns null - set $count to 0
         if ($count < 1) {

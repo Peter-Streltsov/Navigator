@@ -3,11 +3,12 @@
 namespace app\modules\Control\modules\personal\controllers;
 
 // project classes
-use app\models\units\articles\ArticleJournal;
+use app\models\units\ArticleJournal;
 use app\models\identity\Users;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Personnel;
 // yii2 classes
+use Yii;
 use yii\web\Controller;
 
 
@@ -29,10 +30,10 @@ class DefaultController extends Controller
         // TODO: replace with user identity (?)
         $model = Users::find()->where(['id' => $id])->one();
 
-        // checking if exist author for current user; if no - redirect to '/control'
-        if (!Authors::find()->where(['user_id' => $model->id])->exists()) {
+        // checking if exist employee for current user; if no - redirect to '/control'
+        if (!Personnel::find()->where(['user_id' => $model->id])->exists()) {
 
-            \Yii::$app->session->setFlash('danger' ,'Сотрудника с таким идентификатором не существует');
+            Yii::$app->session->setFlash('danger' ,'Сотрудника с таким идентификатором не существует');
 
             return $this->redirect('/control');
         }
@@ -44,30 +45,30 @@ class DefaultController extends Controller
         $staff = Personnel::find()->where(['user_id' => $id])->one();
 
         // all articles for author connected with current user
-        $articles = ArticleJournal::getArticlesForAuthor($author->id);
+        //$articles = ArticleJournal::getArticlesForAuthor($author->id);
 
         // articles published in current year
-        $currentarticles = ArticleJournal::getCurrentArticles($author->id);
+        //$currentarticles = ArticleJournal::getCurrentArticles($author->id);
 
-        $meanindex = PNRD::meanIndex();
+        //$meanindex = PNRD::meanIndex();
 
         // indexes for all articles in current year
-        $indexes['articles'] = PNRD::personalArticlesIndex($author->id);
+        //$indexes['articles'] = PNRD::personalArticlesIndex($author->id);
 
         // datapdovider for author's articles
-        $dataProvider = new ArrayDataProvider([
+        /*$dataProvider = new ArrayDataProvider([
             'allModels' => $articles
-        ]);
+        ]);*/
 
 
         return $this->render('index', [
             'model' => $model,
-            'articles' => $articles,
-            'currentarticles' => $currentarticles,
-            'dataprovider' => $dataProvider,
+            //'articles' => $articles,
+            //'currentarticles' => $currentarticles,
+            //'dataprovider' => $dataProvider,
             'personal' => $staff,
-            'indexes' => $indexes,
-            'meanindex' => $meanindex,
+            //'indexes' => $indexes,
+            //'meanindex' => $meanindex,
         ]);
 
     } // end action

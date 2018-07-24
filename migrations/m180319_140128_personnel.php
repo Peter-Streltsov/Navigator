@@ -19,9 +19,12 @@ class m180319_140128_personnel extends Migration
             'secondname' => $this->string(255)->defaultValue(null),
             'lastname' => $this->string(255)->notNull(),
             'position' => $this->integer()->defaultValue(null),
+            'year_graduated' => $this->string(),
             'employment' => $this->integer()->defaultValue(null),
             'expirience' => $this->string()->defaultValue(null),
-            'age' => $this->integer()->defaultValue(null)
+            'habilitation' => $this->integer(),
+            'age' => $this->integer()->defaultValue(null),
+            'user_id' => $this->integer()
 
         ]);
 

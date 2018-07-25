@@ -28,30 +28,26 @@ class DefaultController extends Controller
     public function actionIndex()
     {
 
-        $user = \Yii::$app->user->getIdentity();
-        $author = Authors::find()->where(['user_id' => $user->id])->one();
-
         $commondata = new CommonData();
 
-        $data['authors'] = Authors::find()->count();
-        $data['articles'] = ArticleJournal::find()->count();
-        $data['monographies'] = '';
-
-        $table = [
-            'users' => $commondata->users->count(),
-            'personnel' => $commondata->employees->count(),
-            'phd' => '',
-            'authors' => $commondata,
+        $sciencedata = [
             'publications' => '',
-            'monographies' => $data['monographies'],
+            'monographies' => '',
             'articles' => $commondata->countArticlesJournal(),
             'dissertations' => $commondata->countDissertations()
         ];
 
+        $employeedata = [
+            'users' => $commondata->users->count(),
+            'personnel' => $commondata->employees->count(),
+            'phd' => '',
+            'authors' => $commondata
+        ];
+
 
         return $this->render('index', [
-            'data' => $data,
-            'table' => $table,
+            'science' => $sciencedata,
+            'employee' => $employeedata,
         ]);
 
     } // end action

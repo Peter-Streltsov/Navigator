@@ -19,11 +19,11 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
- * MonographiesController implements the CRUD actions for Monographies model.
+ * MonographController implements the CRUD actions for Monographies model.
  */
-class MonographiesController extends Controller
+class MonographController extends Controller
 {
-    /**
+    /** 
      * @inheritdoc
      */
     public function behaviors()

@@ -12,48 +12,56 @@ use yii\widgets\DetailView;
 <div class="row">
     <div class="col-lg-12">
 
-        <?php
+        <div class="panel panel-default">
+            <div class="panel-heading">
 
-        Yii::$app->request;
+            </div>
+            <div class="panel body">
+                <?php
 
-        echo Highcharts::widget([
-            'scripts' => [
-                //'modules/exporting',
-                'themes/grid-light',
-            ],
-            'options' => [
-                'style' => 'width: 20pc;',
-                'labels' => [
-                    'items' => [
-                        'html' =>'test chart'
-                    ]
-                ],
-                'series' => [
-                    [
-                        //'type' => '',
-                        'name' => 'Авторы и сотрудники',
-                        'data' => [
-                            /*[
-                                'name' => 'Статьи',
-                                'y' => (int)$employee['articles'],
-                            ],
-                            [
-                                'name' => 'Монографии',
-                                'y' => (int)$data['monographies'],
-                                'color' => new \yii\web\JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "gray"')
-                            ],
-                            [
-                                'name' => 'Научные мероприятия (конференции, доклады)',
-                                'y' => 1
-                            ]*/
-                        ],
+                Yii::$app->request;
+
+                echo Highcharts::widget([
+                    'scripts' => [
+                        //'modules/exporting',
+                        'themes/grid-light',
                     ],
-                ],
-                'credits' => ['enabled' => false]
-            ],
-        ]);
+                    'options' => [
+                        'style' => 'width: 20pc;',
+                        'labels' => [
+                            'items' => [
+                                'html' =>'test chart'
+                            ]
+                        ],
+                        'series' => [
+                            [
+                                //'type' => '',
+                                'name' => 'Авторы и сотрудники',
+                                'data' => [
+                                    /*[
+                                        'name' => 'Статьи',
+                                        'y' => (int)$employee['articles'],
+                                    ],
+                                    [
+                                        'name' => 'Монографии',
+                                        'y' => (int)$data['monographies'],
+                                        'color' => new \yii\web\JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "gray"')
+                                    ],
+                                    [
+                                        'name' => 'Научные мероприятия (конференции, доклады)',
+                                        'y' => 1
+                                    ]*/
+                                ],
+                            ],
+                        ],
+                        'credits' => ['enabled' => false]
+                    ],
+                ]);
 
-        ?>
+                ?>
+            </div>
+        </div>
+
 
     </div>
 </div>

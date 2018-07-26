@@ -45,6 +45,16 @@ class DefaultController extends Controller
         // staff record connected with current user
         $staff = Personnel::find()->where(['user_id' => $id])->one();
 
+        /**
+         *
+         */
+
+        $personal = new \app\models\pnrd\facades\PersonalData();
+
+        /**
+         *
+         */
+
         // all articles for author connected with current user
         //$articles = ArticleJournal::getArticlesForAuthor($author->id);
 
@@ -64,6 +74,7 @@ class DefaultController extends Controller
 
         return $this->render('index', [
             'model' => $model,
+            'personaldata' => $personal,
             //'articles' => $articles,
             //'currentarticles' => $currentarticles,
             //'dataprovider' => $dataProvider,

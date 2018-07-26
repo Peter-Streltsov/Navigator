@@ -13,51 +13,58 @@ use yii\widgets\DetailView;
 <div class="row">
     <div class="col-lg-12">
 
-        <?php
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Распределение по типам публикаций
+            </div>
+            <div class="panel-body">
+                <?php
 
-        Yii::$app->request;
+                Yii::$app->request;
 
-        echo Highcharts::widget([
-        'scripts' => [
-        //'modules/exporting',
-        'themes/grid-light',
-        ],
-        'options' => [
-        'title' => [
-        //'text' => 'Распределение научных результатов'
-        ],
-        'style' => 'width: 20pc;',
-        'labels' => [
-        'items' => [
-        'html' =>'test chart'
-        ]
-        ],
-        'series' => [
-        [
-        'type' => 'pie',
-        'name' => 'Распределение научных результатов',
-        'data' => [
-        [
-        'name' => 'Статьи',
-        'y' => (int)$science['articles'],
-        ],
-        [
-        'name' => 'Монографии',
-        'y' => (int)$science['monographies'],
-        'color' => new JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "gray"')
-        ],
-        [
-        'name' => 'Научные мероприятия (конференции, доклады)',
-        'y' => 1
-        ]
-        ],
-        ],
-        ],
-        'credits' => ['enabled' => false]
-        ],
-        ]);
+                echo Highcharts::widget([
+                    'scripts' => [
+                        //'modules/exporting',
+                        'themes/grid-light',
+                    ],
+                    'options' => [
+                        'title' => [
+                            //'text' => 'Распределение научных результатов'
+                        ],
+                        'style' => 'width: 20pc;',
+                        'labels' => [
+                            'items' => [
+                                'html' =>'test chart'
+                            ]
+                        ],
+                        'series' => [
+                            [
+                                'type' => 'pie',
+                                'name' => 'Распределение научных результатов',
+                                'data' => [
+                                    [
+                                        'name' => 'Статьи',
+                                        'y' => (int)$science['articles'],
+                                    ],
+                                    [
+                                        'name' => 'Монографии',
+                                        'y' => (int)$science['monographies'],
+                                        'color' => new JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "gray"')
+                                    ],
+                                    [
+                                        'name' => 'Научные мероприятия (конференции, доклады)',
+                                        'y' => 1
+                                    ]
+                                ],
+                            ],
+                        ],
+                        'credits' => ['enabled' => false]
+                    ],
+                ]);
 
-        ?>
+                ?>
+            </div>
+        </div>
 
     </div>
 </div>

@@ -2,9 +2,15 @@
 
 namespace app\models\identity;
 
-use Yii;
-use yii\behaviors\TimestampBehavior;
+// interfaces
+use app\modules\Control\models\Authors;
+use app\modules\Control\models\Personnel;
 use yii\web\IdentityInterface;
+use app\interfaces\UserInterface;
+// yii2 classes
+use Yii;
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "users".
@@ -18,7 +24,7 @@ use yii\web\IdentityInterface;
  * @property string $access_token
  * @property string $auth_key
  */
-class Users extends \yii\db\ActiveRecord implements IdentityInterface
+class Users extends ActiveRecord implements IdentityInterface, UserInterface
 {
 
     /**
@@ -222,5 +228,36 @@ class Users extends \yii\db\ActiveRecord implements IdentityInterface
 
     } // end function
 
+
+
+    /**
+     * UserInterface implementation
+     */
+
+    /**
+     * @return Personnel|null
+     */
+    public function getStaff()
+    {
+
+        return Personnel::find()->where(['user_id' => $this->id])->one();
+
+    } // end function
+
+
+
+    /**
+     * @return Authors|null
+     */
+    public function getAuthor()
+    {
+
+        return Authors::find()->where(['user_id' => $this->id])->one();
+
+    } // end function
+
+    /**
+     * END USERINTERFACE
+     */
 
 } // end class

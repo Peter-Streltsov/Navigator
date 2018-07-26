@@ -132,6 +132,8 @@ use yii\helpers\Html;
 <div class="panel panel-default">
     <?php
 
+    //var_dump($personaldata->author);
+
     /*$articlesview = \yii\grid\GridView::widget([
         'dataProvider' => $dataprovider,
         'columns' => [

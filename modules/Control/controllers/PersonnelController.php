@@ -2,23 +2,25 @@
 
 namespace app\modules\Control\controllers;
 
+// project classes
+use app\models\common\Habilitations;
 use app\modules\Control\models\Authors;
-use app\modules\Control\models\Habilitations;
-use app\modules\Control\models\Positions;
-use Yii;
 use app\modules\Control\models\Personnel;
+use app\modules\Control\models\Positions;
+// yii classes
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * PersonnelController implements the CRUD actions for Personnel model.
  */
 class PersonnelController extends Controller
 {
+
     /**
      * @inheritdoc
      */
@@ -39,7 +41,8 @@ class PersonnelController extends Controller
 
 
     /**
-     * Lists all Personnel models.
+     * Lists all Personnel models
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -58,10 +61,12 @@ class PersonnelController extends Controller
 
 
     /**
-     * Displays a single Personnel model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Displays a single Personnel model
+     *
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionView($id)
     {
@@ -75,33 +80,15 @@ class PersonnelController extends Controller
 
 
     /**
-     * Creates a new Personnel model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-
-        $model = new Personnel();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-
-    } // end action
-
-
-
-    /**
-     * Updates an existing Personnel model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Updates an existing Personnel model
+     * If successful, will redirect to 'view' page
+     *
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {
@@ -125,7 +112,14 @@ class PersonnelController extends Controller
     } // end action
 
 
-
+    /**
+     * Creates author from existing Personnel model
+     *
+     * @param $id
+     * @return \yii\web\Response
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
+     */
     public function actionMakeauthor($id)
     {
 
@@ -144,11 +138,15 @@ class PersonnelController extends Controller
 
 
     /**
-     * Deletes an existing Personnel model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Deletes an existing staff member (Personnel model)
+     * If deletion successful, will redirect to 'index' page
+     *
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -162,11 +160,13 @@ class PersonnelController extends Controller
 
 
     /**
-     * Finds the Personnel model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Personnel the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * Finds the Personnel model based on its primary key ($id)
+     * If model is not found - 404 HTTP exception will be thrown
+     *
+     * @param $id
+     * @return Personnel|null
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {

@@ -12,7 +12,12 @@ $this->params['breadcrumbs'][] = 'Добавить автора';
 ?>
 <div class="authors-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <br>
+
+    <h3><?= Html::encode($this->title) ?></h3>
+
+    <br>
+    <br>
 
     <?= $this->render('_form', [
         'model' => $model,

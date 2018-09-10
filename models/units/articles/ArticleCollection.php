@@ -87,7 +87,7 @@ class ArticleCollection extends ActiveRecord implements UnitInterface
     /**
      *
      */
-    public function getUnitauthors()
+    public function getAuthors()
     {
         // TODO: Implement getUnitauthors() method.
     }
@@ -96,7 +96,7 @@ class ArticleCollection extends ActiveRecord implements UnitInterface
     /**
      *
      */
-    public function getUnitlanguage()
+    public function getLanguage()
     {
         // TODO: Implement getUnitlanguage() method
     }
@@ -106,9 +106,15 @@ class ArticleCollection extends ActiveRecord implements UnitInterface
     /**
      *
      */
-    public function getPnrdindex()
+    public function getIndex()
     {
         // TODO: Implement getPnrdindex() method
+    }
+
+
+    public function getPersonalIndex()
+    {
+        // TODO: Implement getPersonalIndex() method.
     }
 
     /**

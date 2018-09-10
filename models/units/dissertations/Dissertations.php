@@ -92,27 +92,39 @@ class Dissertations extends ActiveRecord implements UnitInterface
 
 
 
-    public function getUnitauthors()
+    public function getAuthors()
     {
-        // TODO: Implement getUnitauthors() method.
+        // TODO: Implement getUnitauthors() method;
     }
 
 
 
-    public function getUnitlanguage()
+    public function getLanguage()
     {
-        // TODO: Implement getUnitlanguage() method.
+        // TODO: Implement getUnitlanguage() method;
     }
 
 
     /**
-     *
      * TODO: complete method (needs model for dissertation indexes)
      *
+     * @return integer
      */
-    public function getPnrdindex()
+    public function getIndex()
     {
+        //TODO: Implement getIndex() method;
+        return 1;
+    }
 
+
+
+    /**
+     * @return float|int
+     */
+    public function getPersonalIndex()
+    {
+        // TODO: Implement getPersonalIndex() method;
+        return $this->getIndex() * 0.3;
     }
 
     /**

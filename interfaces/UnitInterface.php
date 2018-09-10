@@ -9,10 +9,32 @@ namespace app\interfaces;
 interface UnitInterface
 {
 
-    public function getUnitauthors();
+    /**
+     * lists current unit authors
+     *
+     * @return array
+     */
+    public function getAuthors();
 
-    public function getUnitlanguage();
+    /**
+     * returns current unit language
+     *
+     * @return string
+     */
+    public function getLanguage();
 
-    public function getPnrdindex();
+    /**
+     * calculates and returns total PNRD index for current unit
+     *
+     * @return integer
+     */
+    public function getIndex();
+
+    /**
+     * calculates and returns index for current unit for requested author
+     *
+     * @return integer
+     */
+    public function getPersonalIndex();
 
 } // end interface

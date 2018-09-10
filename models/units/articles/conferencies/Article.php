@@ -83,23 +83,29 @@ class Article extends ActiveRecord implements UnitInterface
      *
      * @return string
      */
-    public function getUnitlanguage()
+    public function getLanguage()
     {
 
     }
 
 
 
-    public function getUnitauthors()
+    public function getAuthors()
     {
         // TODO: Implement getUnitauthors() method.
     }
 
 
 
-    public function getPnrdindex()
+    public function getIndex()
     {
         // TODO: Implement getPnrdindex() method.
+    }
+
+
+    public function getPersonalIndex()
+    {
+        // TODO: Implement getPersonalIndex() method.
     }
 
 

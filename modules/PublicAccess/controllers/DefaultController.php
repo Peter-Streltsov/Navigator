@@ -2,7 +2,7 @@
 
 namespace app\modules\PublicAccess\controllers;
 
-use app\modules\Control\models\Articles;
+use app\models\units\articles\ArticleJournal;
 use app\modules\Control\models\Monographies;
 use app\modules\PublicAccess\models\PublicModel;
 use yii\data\ArrayDataProvider;

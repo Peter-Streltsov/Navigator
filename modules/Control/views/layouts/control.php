@@ -45,7 +45,7 @@ AppAsset::register($this);
         Yii::$app->data->orgdata->organisation != null ? $brandLabel = Yii::$app->data->label . ' - ' : $brandLabel = '';
 
         NavBar::begin([
-            'brandLabel' => '<b class="navbrand">'. $brandLabel . 'Наукометрия'.'</b>',
+            'brandLabel' => '<b class="navbrand">'. $brandLabel . 'Наукометрия'.'</b>' . '<b style="font-size: 1vh; color: red;"> alpha</b>',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',

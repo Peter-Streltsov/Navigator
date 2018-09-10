@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'pnrdindex',
                     'value' => function($model) {
-                        return $model->pnrdindex;
+                        return $model->index;
                     }
                 ],
                 //'doi',

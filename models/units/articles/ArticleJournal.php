@@ -103,7 +103,7 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getUnitauthors()
+    public function getAuthors()
     {
 
         return $this->hasMany(Authors::className(), ['id' => 'author_id'])
@@ -118,7 +118,7 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
      *
      * @return string
      */
-    public function getUnitlanguage()
+    public function getLanguage()
     {
 
         $language = $this->hasOne(Languages::className(), ['id' => 'language']);
@@ -130,11 +130,20 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
 
 
     /**
+     * @return int|void
+     */
+    public function getPersonalIndex()
+    {
+        // TODO: Implement getPersonalIndex() method.
+    }
+
+
+    /**
      * returns pnrd index for current article
      *
      * @return float
      */
-    public function getPnrdindex()
+    public function getIndex()
     {
 
         $current_year = date('Y');

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\collections;
 
 // project classes
 use app\interfaces\UnitInterface;

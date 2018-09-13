@@ -3,7 +3,7 @@
 namespace app\modules\Control\modules\articles\controllers;
 
 // project classes
-use app\models\units\articles\conferencies\Article;
+use app\models\units\articles\conferencies\ArticleConferency;
 // yii2 classes
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -44,7 +44,7 @@ class ConferenciesController extends Controller
     {
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find(),
+            'query' => ArticleConferency::find(),
         ]);
 
         return $this->render('index', [
@@ -86,7 +86,7 @@ class ConferenciesController extends Controller
     public function actionCreate()
     {
 
-        $model = new Article();
+        $model = new ArticleConferency();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -154,14 +154,14 @@ class ConferenciesController extends Controller
      * If the model is not found, a 404 HTTP exception will be thrown
      *
      * @param $id
-     * @return ArticleConferencies|null
+     * @return ArticleConferency|null
      * @throws NotFoundHttpException
      * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {
 
-        if (($model = Article::findOne($id)) !== null) {
+        if (($model = ArticleConferency::findOne($id)) !== null) {
             return $model;
         }
 

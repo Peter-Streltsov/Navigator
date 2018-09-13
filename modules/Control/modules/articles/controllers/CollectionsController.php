@@ -3,7 +3,7 @@
 namespace app\modules\Control\modules\articles\controllers;
 
 // project classes
-use app\models\units\articles\ArticleCollection;
+use app\models\units\articles\collections\ArticleCollection;
 use app\models\common\Languages;
 use app\models\common\Magazines;
 //yii2 classes

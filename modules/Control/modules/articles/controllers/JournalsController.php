@@ -6,7 +6,7 @@ namespace app\modules\Control\modules\articles\controllers;
 use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
-use app\models\units\articles\ArticleJournal;
+use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\ArticlesAffilations;
 use app\models\units\articles\ArticlesCitations;
 use app\models\units\articles\ArticlesAuthors;

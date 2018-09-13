@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
  *
  * @see ArticlesConferencies
  */
-class ArticleQuery extends ActiveQuery
+class ArticleConferencyQuery extends ActiveQuery
 {
 
     /*public function active()

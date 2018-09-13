@@ -4,9 +4,9 @@ namespace app\models\pnrd\facades;
 
 // project classes
 use app\models\identity\Users;
-use app\models\units\articles\ArticleJournal;
-use app\models\units\articles\ArticleCollection;
-use app\models\units\articles\conferencies\Article as ArticleConferency;
+use app\models\units\articles\journals\ArticleJournal;
+use app\models\units\articles\collections\ArticleCollection;
+use app\models\units\articles\conferencies\ArticleConferency;
 use app\models\units\dissertations\Dissertations;
 use app\modules\Control\models\Personnel;
 

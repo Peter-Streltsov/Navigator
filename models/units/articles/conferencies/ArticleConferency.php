@@ -3,11 +3,10 @@
 namespace app\models\units\articles\conferencies;
 
 use app\interfaces\UnitInterface;
-use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "articles_conferencies".
+ * ActiveRecord model class for table "articles_conferencies";
  *
  * @property int $id
  * @property string $title
@@ -18,7 +17,7 @@ use yii\db\ActiveRecord;
  * @property string $text_index
  * @property string $file
  */
-class Article extends ActiveRecord implements UnitInterface
+class ArticleConferency extends ActiveRecord implements UnitInterface
 {
 
     /**
@@ -90,6 +89,9 @@ class Article extends ActiveRecord implements UnitInterface
 
 
 
+    /**
+     * @return array|void
+     */
     public function getAuthors()
     {
         // TODO: Implement getUnitauthors() method.
@@ -97,12 +99,19 @@ class Article extends ActiveRecord implements UnitInterface
 
 
 
+    /**
+     * @return int|void
+     */
     public function getIndex()
     {
         // TODO: Implement getPnrdindex() method.
     }
 
 
+
+    /**
+     * @return int|void
+     */
     public function getPersonalIndex()
     {
         // TODO: Implement getPersonalIndex() method.
@@ -118,12 +127,13 @@ class Article extends ActiveRecord implements UnitInterface
 
     /**
      * @inheritdoc
-     * @return ArticleQuery the active query used by this AR class.
+     *
+     * @return ArticleConferencyQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticleQuery(get_called_class());
+        return new ArticleConferencyQuery(get_called_class());
 
     } // end function
 

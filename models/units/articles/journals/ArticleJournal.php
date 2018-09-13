@@ -1,8 +1,8 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\journals;
 
-// project models
+// project classes
 use app\interfaces\UnitInterface;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\modules\Control\models\ArticlesAuthors;

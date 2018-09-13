@@ -280,6 +280,10 @@ AppAsset::register($this);
                                 [
                                     'label' => 'Scopus',
                                     'url' => '/control/webapi/scopusapi'
+                                ],
+                                [
+                                    'label' => 'CrossRef',
+                                    'url' => '/control/webapi/crossref'
                                 ]
                             ]
                         ],

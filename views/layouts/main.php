@@ -39,7 +39,7 @@ AppAsset::register($this);
         isset(Yii::$app->data->orgdata->organisation) != '' ? $brandLabel = Yii::$app->data->label . ' - ' : $brandLabel = '';
 
         NavBar::begin([
-            'brandLabel' => '<b class="navbrand">' . $brandLabel . 'Наукометрия' . '</b>',
+            'brandLabel' => '<b class="navbrand">' . $brandLabel . 'Наукометрия' . '</b>' . '<b style="font-size: 1vh; color: red;"> alpha</b>',
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
@@ -63,7 +63,7 @@ AppAsset::register($this);
                                 ['label' => 'Панель управления', 'url' => ['/control'], 'options' => [
                                         'style' => 'width: 20pc;'
                                 ]],
-                                ['label' => 'Личный кабинет', 'url' => ['/control/user/', 'id' => Yii::$app->user->id]],
+                                ['label' => 'Личный кабинет', 'url' => ['/control/personal/', 'id' => Yii::$app->user->id]],
                                 '<li class="divider"></li>',
                                 ['label' => 'Вы вошли как:'],
                                 ['label' => "<b style=\"color: #32a873\">".' '.Yii::$app->user->identity->name.' '.Yii::$app->user->identity->lastname.'</b>'],

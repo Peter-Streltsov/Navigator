@@ -1,3 +1,9 @@
+<?php
+
+use yii\grid\GridView;
+use yii\bootstrap\Tabs;
+
+?>
 
 <h3>Перечень публикаций</h3>
 
@@ -5,17 +11,23 @@
 
 <?php
 
-$publications =  \yii\grid\GridView::widget([
+$publications =  GridView::widget([
         'dataProvider' => $dataprovider
 ]);
 
+$listed = \yii\widgets\ListView::widget([
+    'dataProvider' => $dataprovider,
+    'itemView' => 'items/unitdescript'
+]);
 
-echo \yii\bootstrap\Tabs::widget([
+echo "<br><br>";
+
+echo Tabs::widget([
         'items' => [
-                [
-                        'label' => 'Публикации',
-                    'content' => $publications
-                ]
+            [
+                'label' => 'Публикации',
+                'content' => $listed
+            ]
         ]
 ]);
 

@@ -2,9 +2,9 @@
 
 namespace app\modules\PublicAccess\controllers;
 
-use app\models\units\articles\ArticleJournal;
-use app\modules\Control\models\Monographies;
-use app\modules\PublicAccess\models\PublicModel;
+// project classes
+use app\models\opendata\Data;
+// yii classes
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 
@@ -16,23 +16,30 @@ class DefaultController extends Controller
 
     /**
      * Renders the index view for the module
+     * Displays public accessible data on institution publications
+     *
      * @return string
      */
     public function actionIndex()
     {
 
+        //displaying flash message if redirected from restricted resource
         if (isset($_GET['denyrequest'])) {
             \Yii::$app->session->setFlash('danger', 'Доступ к запрашиваемому ресурсу невозможен');
         }
 
-        $model = (new PublicModel())->getPublications();
+        // collecting articles
+        $articles = Data::getArticles();
+        $monograph = [];
+        $dissertations = [];
+
+        // gathering publications
+        $publications = array_merge($articles, $monograph, $dissertations);
 
         $dataProvider = new ArrayDataProvider([
-            'allModels' => $model
+            'allModels' => $publications
         ]);
 
-
-        //return $this->redirect('/');
         return $this->render('index', [
             'dataprovider' => $dataProvider
         ]);
@@ -41,17 +48,9 @@ class DefaultController extends Controller
 
 
 
-    public function actionPublications()
-    {
-
-        $model = (new PublicModel())->getPublications();
-
-        return $this->redirect('/');
-
-    } // end action
-
-
-
+    /**
+     *
+     */
     public function actionInfo()
     {
 
@@ -59,6 +58,9 @@ class DefaultController extends Controller
 
 
 
+    /**
+     *
+     */
     public function actionStatistics()
     {
 

@@ -59,11 +59,11 @@ class WebapiController extends Controller
             if ($article['status'] == 'ok') {
 
             }
-            return $this->render('crossref', [
+            return $this->render('crossref/crossref', [
                 'article' => $article
             ]);
         } else {
-            return $this->render('crossref', [
+            return $this->render('crossref/crossref', [
                 'article' => $article
             ]);
         }
@@ -78,6 +78,22 @@ class WebapiController extends Controller
     public function actionCrossrefajax()
     {
 
-    }
+        if (\Yii::$app->request->post() && $_POST['DOI'] != null) {
+            $client = new CrossRefClient();
+            $article = $client->request('works/' . $_POST['DOI']);
+            if ($article['status'] == 'ok') {
+                $message = $article['message'];
+                return $this->renderAjax('crossref/ajax/article', [
+                    'article' => $article,
+                    'message' => $message
+                ]);
+            }
+        } else {
+            return $this->renderAjax('crossref/ajax/error');
+        }
+
+        return false;
+
+    } // end action
 
 } // end class

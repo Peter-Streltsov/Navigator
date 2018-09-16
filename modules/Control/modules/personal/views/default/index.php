@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $indexes  */
@@ -10,9 +11,14 @@ use yii\helpers\Html;
 /* @var $articles array */
 /* @var $currentarticles array */
 /* @var $dataprovider \yii\data\ArrayDataProvider */
+
+$this->title = 'Личный кабинет - ' . $model->name.  ' ' . $model->lastname;
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
-<?php $this->title = 'Личный кабинет - ' . $model->name.  ' ' . $model->lastname ?>
+<br>
+<br>
 
 <h3><?= \yii\bootstrap\Html::encode($this->title); ?></h3>
 
@@ -23,8 +29,20 @@ use yii\helpers\Html;
 <!-- upper buttons -->
 <div class="row">
     <div class="col-lg-10">
-        <?= Html::a('Сообщение <span class="glyphicon glyphicon-send"></span>', ['/control/personal/create', 'id' => $model->id], ['class' => 'button primary big']); ?>
-        <?= Html::a('Загрузить данные <span class="glyphicon glyphicon-upload"></span>', ['/control/personal/upload'], ['class' => 'button primary big']) ?>
+        <?= Html::a('Сообщение <span class="glyphicon glyphicon-send"></span>', ['/control/personal/action/create', 'id' => $model->id], ['class' => 'button primary big']); ?>
+        <!--<?= Html::a('Загрузить данные <span class="glyphicon glyphicon-upload"></span>', ['/control/personal/upload'], ['class' => 'button primary big']) ?>-->
+        <?php
+
+        Modal::begin([
+                'toggleButton' => [
+                    'label' => 'Загрузить данные <span class="glyphicon glyphicon-upload"></span>',
+                    'class' => 'button primary big'
+                ]
+        ]);
+        echo "Функция отключена в текущей версии";
+        Modal::end();
+
+        ?>
     </div>
 </div>
 <!-- end block -->
@@ -33,6 +51,43 @@ use yii\helpers\Html;
 <br>
 <br>
 <br>
+
+<div class="row">
+    <div class="col-lg-6">
+        <?php
+        echo \yii\widgets\DetailView::widget([
+                'model' => $personaldata->author,
+            'attributes' => [
+                'name',
+                'secondname',
+                'lastname',
+                'habilitation',
+                'user_id'
+            ]
+        ]);
+        ?>
+    </div>
+    <div class="col-lg-1">
+
+    </div>
+    <div id="photo-holder" class="col-lg-5">
+        <?php
+         if ($model->userpic == null) {
+             $model->userpic = '<b style="color: red;">Изображение не загружено</b>';
+         }
+        ?>
+        <?= $model->userpic ?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-7">
+
+    </div>
+    <div class="col-lg-5">
+        <?= Html::button('Загрузить фотографию') ?>
+    </div>
+</div>
 
 
 <!-- basic user information -->
@@ -62,10 +117,10 @@ use yii\helpers\Html;
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a data-toggle="collapse" href="#collapse1">Распределение научных результатов   <span class="glyphicon glyphicon-arrow-down"></span></a>
+                <a data-toggle="collapse" href="#collapse1">Распределение научных результатов</a>
             </h4>
         </div>
-        <div id="collapse1" class="panel-collapse collapse">
+        <!--<div id="collapse1" class="panel-collapse collapse">-->
             <div class="panel-body">
 
                 <?php
@@ -122,7 +177,7 @@ use yii\helpers\Html;
             <div class="panel-footer"></div>
         </div>
     </div>
-</div>
+<!--</div>-->
 
 
 <br>

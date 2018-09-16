@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\messages;
 
 use yii\db\ActiveQuery;
 
@@ -19,7 +19,7 @@ class MessageClassesQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return MessagesClasses[]|array
+     * @return MessageClasses[]|array
      */
     public function all($db = null)
     {

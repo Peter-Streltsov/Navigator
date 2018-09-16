@@ -3,6 +3,9 @@
 namespace app\models\pnrd\facades;
 
 // project classes
+use app\models\units\articles\collections\ArticleCollection;
+use app\models\units\articles\conferencies\ArticleConferency;
+use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\dissertations\Dissertations;
 // yii2 classes
 use Yii;
@@ -37,14 +40,19 @@ class PersonalData
      */
 
     /**
-     *
+     * collects articles of all types where user_id = $this->>user->id and returns them as array of ActiveRecords
      */
     public function getArticles()
     {
 
         // TODO: implement method;
+        $articles_journals = ArticleJournal::find()->all();
+        $articles_collections = ArticleCollection::find()->all();
+        $articles_conferencies = ArticleConferency::find()->all();
 
-    }
+        return array_merge($articles_journals, $articles_collections, $articles_conferencies);
+
+    } // end function
 
 
 

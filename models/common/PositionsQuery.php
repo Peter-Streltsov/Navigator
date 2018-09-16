@@ -1,14 +1,15 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\common;
 
 /**
- * This is the ActiveQuery class for [[Positions]].
+ * ActiveQuery class for [[Positions]].
  *
  * @see Positions
  */
 class PositionsQuery extends \yii\db\ActiveQuery
 {
+
     /*public function active()
     {
         return $this->andWhere('[[status]]=1');
@@ -20,8 +21,12 @@ class PositionsQuery extends \yii\db\ActiveQuery
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -29,6 +34,9 @@ class PositionsQuery extends \yii\db\ActiveQuery
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

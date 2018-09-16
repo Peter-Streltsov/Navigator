@@ -236,7 +236,7 @@ AppAsset::register($this);
                             'icon' => 'comment',
                             'items' => [
                                 [
-                                    'label' => 'Пользовательские сообщения' /*. Yii::$app->counter->messagesCount()*/,
+                                    'label' => 'Пользовательские сообщения' . Yii::$app->counter->messagesCount(),
                                     'url' => '/control/admin/messages/users'
                                 ],
                                 [

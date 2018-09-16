@@ -18,7 +18,7 @@ class MessageClasses extends ActiveRecord
     public static function tableName()
     {
 
-        return 'messages_classes';
+        return 'message_classes';
 
     } // end function
 

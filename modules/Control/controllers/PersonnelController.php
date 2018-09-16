@@ -6,7 +6,7 @@ namespace app\modules\Control\controllers;
 use app\models\common\Habilitations;
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Personnel;
-use app\modules\Control\models\Positions;
+use app\models\common\Positions;
 // yii classes
 use Yii;
 use yii\data\ActiveDataProvider;

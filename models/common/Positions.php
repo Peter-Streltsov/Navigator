@@ -1,46 +1,57 @@
 <?php
 
-namespace app\modules\Control\models;
-
-use Yii;
+namespace app\models\common;
 
 /**
- * This is the model class for table "positions".
+ * Model class for table "positions".
  *
  * @property int $id
  * @property string $position
  */
 class Positions extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
+
         return 'positions';
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function rules()
     {
+
         return [
             [['position'], 'required'],
             [['position'], 'string', 'max' => 255],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
+
         return [
             'id' => 'ID',
             'position' => 'Должность',
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -48,6 +59,9 @@ class Positions extends \yii\db\ActiveRecord
      */
     public static function find()
     {
+
         return new PositionsQuery(get_called_class());
-    }
-}
+
+    } // end function
+
+} // end class

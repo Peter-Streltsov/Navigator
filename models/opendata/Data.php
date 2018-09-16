@@ -15,6 +15,11 @@ use app\models\units\articles\journals\ArticleJournal;
 class Data
 {
 
+    /**
+     *
+     *
+     * @return array
+     */
     public static function getArticles()
     {
 

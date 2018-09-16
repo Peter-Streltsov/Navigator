@@ -4,6 +4,7 @@ namespace app\models\pnrd\facades;
 
 // project classes
 use app\models\identity\Users;
+use app\models\opendata\Data;
 use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\collections\ArticleCollection;
 use app\models\units\articles\conferencies\ArticleConferency;
@@ -11,8 +12,8 @@ use app\models\units\dissertations\Dissertations;
 use app\modules\Control\models\Personnel;
 
 /**
- * Class Data
- * Facade for 'units' data
+ * Class CommonData
+ * Provides methods for collecting data on published articles, dissertations etc.
  *
  * @since 0.4.60
  * @package app\models\pnrd
@@ -47,12 +48,14 @@ class CommonData
 
 
     /**
-     * @return mixed
+     * Counts all published articles
+     *
+     * @return integer
      */
-    public function countArticlesJournal()
+    public function countArticles()
     {
 
-        return $this->articles->journals->count();
+        return count(Data::getArticles());
 
     } // end function
 
@@ -72,7 +75,9 @@ class CommonData
 
 
     /**
-     * @return int|string
+     * Counts all added dissertations
+     *
+     * @return integer
      */
     public function countDissertations()
     {

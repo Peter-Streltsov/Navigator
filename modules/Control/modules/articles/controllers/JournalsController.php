@@ -10,7 +10,7 @@ use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\ArticlesAffilations;
 use app\models\units\articles\ArticlesCitations;
 use app\models\units\articles\ArticlesAuthors;
-use app\models\units\articles\ArticleTypes;
+use app\models\units\articles\journals\Types;
 // deprecated namespaces/models
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\CitationClasses;
@@ -113,7 +113,7 @@ class JournalsController extends Controller
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
         // pnrd indexes
-        $types = ArrayHelper::map(ArticleTypes::find()->asArray()->all(), 'id', 'type');
+        $types = ArrayHelper::map(Types::find()->asArray()->all(), 'id', 'type');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

@@ -6,11 +6,7 @@ namespace app\modules\Control\controllers;
 use app\models\pnrd\facades\CommonData;
 use app\models\units\articles\ArticleJournal;
 use app\modules\Control\models\ArticlesAuthors;
-use app\modules\Control\models\Authors;
 use app\modules\Control\models\Dissertations;
-//use app\modules\Control\models\Monographies;
-//use app\modules\Control\models\Personnel;
-use app\models\identity\Users;
 // yii2 classes
 use yii\web\Controller;
 
@@ -23,6 +19,7 @@ class DefaultController extends Controller
 
     /**
      * Renders the index view for the module
+     *
      * @return string
      */
     public function actionIndex()
@@ -33,7 +30,7 @@ class DefaultController extends Controller
         $sciencedata = [
             'publications' => '',
             'monographies' => '',
-            'articles' => $commondata->countArticlesJournal(),
+            'articles' => $commondata->countArticles(),
             'dissertations' => $commondata->countDissertations()
         ];
 

@@ -1,6 +1,8 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\journals;
+
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "article_types".
@@ -8,7 +10,7 @@ namespace app\models\units\articles;
  * @property int $id
  * @property string $type
  */
-class ArticleTypes extends \yii\db\ActiveRecord
+class Types extends ActiveRecord
 {
 
     /**
@@ -60,12 +62,12 @@ class ArticleTypes extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      *
-     * @return ArticleTypesQuery the active query used by this AR class.
+     * @return TypesQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticleTypesQuery(get_called_class());
+        return new TypesQuery(get_called_class());
 
     } // end function
 

@@ -19,9 +19,13 @@ class Data extends Component
 
         $organisation = Organisation::findOne(1);
 
-        $this->label = $organisation->organisation;
-
-        $this->orgdata = $organisation;
+        if ($organisation != null) {
+            $this->label = $organisation->organisation;
+            $this->orgdata = $organisation;
+        } else {
+            $this->label = '';
+            $this->orgdata = '';
+        }
 
     } // end construct
 

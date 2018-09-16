@@ -17,6 +17,8 @@ class ArticleConferencyQuery extends ActiveQuery
         return $this->andWhere('[[status]]=1');
     }*/
 
+
+
     /**
      * @inheritdoc
      * @return Article[]|array

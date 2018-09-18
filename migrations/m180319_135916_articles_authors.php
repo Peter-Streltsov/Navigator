@@ -13,7 +13,21 @@ class m180319_135916_articles_authors extends Migration
     public function safeUp()
     {
 
-        $this->createTable('articles_authors', [
+        $this->createTable('articles_journals_authors', [
+            'id' => $this->primaryKey(),
+            'article_id' => $this->integer()->notNull(),
+            'author_id' => $this->integer()->notNull(),
+            'part' => $this->integer()->defaultValue(10)
+        ]);
+
+        $this->createTable('articles_conferencies_authors', [
+            'id' => $this->primaryKey(),
+            'article_id' => $this->integer()->notNull(),
+            'author_id' => $this->integer()->notNull(),
+            'part' => $this->integer()->defaultValue(10)
+        ]);
+
+        $this->createTable('articles_collections_authors', [
             'id' => $this->primaryKey(),
             'article_id' => $this->integer()->notNull(),
             'author_id' => $this->integer()->notNull(),
@@ -30,7 +44,9 @@ class m180319_135916_articles_authors extends Migration
     public function safeDown()
     {
 
-        $this->dropTable('articles_authors');
+        $this->dropTable('articles_journals_authors');
+        $this->dropTable('articles_conferencies_authors');
+        $this->dropTable('articles_collections_authors');
 
         return true;
 

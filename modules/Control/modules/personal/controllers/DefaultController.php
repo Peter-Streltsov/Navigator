@@ -32,6 +32,7 @@ class DefaultController extends Controller
         // current user
         // TODO: replace with user identity (?)
         $model = Users::find()->where(['id' => $id])->one();
+        //$model = Yii::$app->user->identity;
 
         // checking if exist employee for current user; if no - redirect to '/control'
         if (!Personnel::find()->where(['user_id' => $model->id])->exists()) {

@@ -1,25 +1,20 @@
 <?php
 
-namespace app\models\units\articles\journals;
+namespace app\models\units\articles;
 
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[ArticleTypes]].
+ * This is the ActiveQuery class for [[ArticlesAffilations]].
  *
- * @see Types
+ * @see ArticlesAffilations
  */
-class TypesQuery extends ActiveQuery
+class ArticlesAffilationsQuery extends ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
 
     /**
      * @inheritdoc
-     * @return Types[]|array
+     * @return ArticlesAffilations[]|array
      */
     public function all($db = null)
     {
@@ -32,7 +27,7 @@ class TypesQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Types|array|null
+     * @return ArticlesAffilations|array|null
      */
     public function one($db = null)
     {

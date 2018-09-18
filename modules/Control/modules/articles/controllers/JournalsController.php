@@ -10,7 +10,7 @@ use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\ArticlesAffilations;
 use app\models\units\articles\ArticlesCitations;
 use app\models\units\articles\ArticlesAuthors;
-use app\models\units\articles\journals\Types;
+use app\models\units\articles\Types;
 // deprecated namespaces/models
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\CitationClasses;
@@ -87,7 +87,7 @@ class JournalsController extends Controller
 
         return $this->render('view', [
             'model' => $model,
-            'authors' => $authors,
+            //'authors' => $authors,
         ]);
 
     } // end action

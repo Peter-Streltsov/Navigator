@@ -91,7 +91,7 @@ use yii\helpers\Html;
 
     <div class="row">
         <div class="col-lg-12">
-            <?= $form->field($model, 'annotaion')->textarea(); ?>
+            <?= $form->field($model, 'annotation')->textarea(); ?>
         </div>
     </div>
 

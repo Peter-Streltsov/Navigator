@@ -3,12 +3,15 @@
 namespace app\models\units\articles\journals;
 
 // project classes
+use app\interfaces\ArticleInterface;
 use app\interfaces\UnitInterface;
 use app\models\pnrd\indexes\IndexesArticles;
-use app\modules\Control\models\ArticlesAuthors;
+use app\models\units\articles\ArticlesAuthors;
 use app\models\common\Languages;
+use app\models\units\articles\traits\ArticleQueryTrait;
+use app\models\units\articles\traits\ArticleTrait;
 use app\modules\Control\models\Authors;
-// yii
+// yii classes
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -26,13 +29,17 @@ use yii\db\ActiveRecord;
  * @property string $language
  * @property string $doi
  * @property int $created_at
- * @property string $annotaion
+ * @property string $annotation
  * @property string $index
  * @property string $link
  * @property resource $file
  */
-class ArticleJournal extends ActiveRecord implements UnitInterface
+class ArticleJournal extends ActiveRecord implements UnitInterface, ArticleInterface
 {
+
+    use ArticleTrait;
+    use ArticleQueryTrait;
+
     /**
      * @inheritdoc
      */

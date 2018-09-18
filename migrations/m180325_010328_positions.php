@@ -36,8 +36,8 @@ class m180325_010328_positions extends Migration
     public function safeDown()
     {
 
-        //$this->dropTable('positions');
-        Yii::$app->db->createCommand()->dropTable('positions');
+        $this->dropTable('positions');
+        //Yii::$app->db->createCommand()->dropTable('positions');
 
         return true;
 

@@ -60,7 +60,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'type',
                     'label' => 'Тип публикации',
                     'value' => function($model) {
-                            return $model->publicationtype->type;
+                            //return $model->publicationtype->type;
+                        return $model->getType();
                         }
                     ],
                 [
@@ -119,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return implode("\n", $authors);
                         }
                     ],
-                    'annotaion'
+                    'annotation'
                 ],
             ]);
             ?>
@@ -132,6 +133,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php
-\yii\helpers\VarDumper::dump($_POST);
+\yii\helpers\VarDumper::dump($model->getType());
 
 ?>

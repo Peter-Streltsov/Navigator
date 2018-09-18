@@ -8,9 +8,10 @@ use app\models\identity\Accesstokens;
 // deprecated models/namespaces
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Personnel;
-// framework models
+// yii classes
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -243,7 +244,7 @@ class UsersController extends Controller
         $createdstaff = Personnel::find()->where(['user_id' => $id])->one(); // getting just created staff
         //VarDumper::dump($createdstaff);
 
-        return $this->redirect('/control/personnel/update?id='.$createdstaff->id); // redirect to edit further data
+        return $this->redirect('/control/admin/users/view?id='.$createdstaff->id); // redirect to edit further data
 
     } // end action
 

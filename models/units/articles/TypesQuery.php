@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\units\articles\conferencies;
+namespace app\models\units\articles;
 
 use yii\db\ActiveQuery;
 
@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
  *
  * @see ArticleTypes
  */
-class ArticleTypesQuery extends ActiveQuery
+class TypesQuery extends ActiveQuery
 {
 
     /*public function active()
@@ -19,7 +19,7 @@ class ArticleTypesQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return ArticlesConferenciesTypes[]|array
+     * @return Types[]|array
      */
     public function all($db = null)
     {
@@ -32,7 +32,7 @@ class ArticleTypesQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return ArticlesConferenciesTypes|array|null
+     * @return Types|array|null
      */
     public function one($db = null)
     {

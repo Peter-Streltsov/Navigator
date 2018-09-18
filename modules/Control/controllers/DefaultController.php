@@ -25,6 +25,8 @@ class DefaultController extends Controller
     public function actionIndex()
     {
 
+        $year = \app\models\units\articles\journals\ArticleJournal::find()->currentYear()->all();
+
         $commondata = new CommonData();
 
         $sciencedata = [

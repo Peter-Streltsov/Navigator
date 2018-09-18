@@ -21,7 +21,7 @@ class ArticleJournalQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Article[]|array
+     * @return ArticleJournal[]|array
      */
     public function all($db = null)
     {
@@ -34,12 +34,30 @@ class ArticleJournalQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Article|array|null
+     * @return ArticleJournal|array|null
      */
     public function one($db = null)
     {
 
         return parent::one($db);
+
+    } // end function
+
+
+
+    public function byYear($year)
+    {
+
+        return $this->where(['year' => $year]);
+
+    } // end function
+
+
+
+    public function currentYear()
+    {
+
+        return $this->where(['year' => date('Y')]);
 
     } // end function
 

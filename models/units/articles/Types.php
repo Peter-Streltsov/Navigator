@@ -1,8 +1,7 @@
 <?php
 
-namespace app\models\units\articles\conferencies;
+namespace app\models\units\articles;
 
-use Yii;
 use yii\db\ActiveRecord;
 
 /**
@@ -11,7 +10,7 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property string $type
  */
-class ArticleTypes extends ActiveRecord
+class Types extends ActiveRecord
 {
 
     /**
@@ -20,7 +19,7 @@ class ArticleTypes extends ActiveRecord
     public static function tableName()
     {
 
-        return 'articles_conferencies_types';
+        return 'article_types';
 
     } // end function
 
@@ -58,12 +57,12 @@ class ArticleTypes extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return ArticlesConferenciesTypesQuery the active query used by this AR class.
+     * @return TypesQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticlesConferenciesTypesQuery(get_called_class());
+        return new TypesQuery(get_called_class());
 
     } // end function
 

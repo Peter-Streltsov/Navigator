@@ -13,6 +13,7 @@ class Data extends Component
 {
 
     public $orgdata;
+    public $label;
 
     public function __construct()
     {
@@ -23,8 +24,10 @@ class Data extends Component
             $this->label = $organisation->organisation;
             $this->orgdata = $organisation;
         } else {
+            $this->orgdata = new \stdClass();
+            $this->orgdata->organisation = '';
+            $this->orgdata->weblink = '';
             $this->label = '';
-            $this->orgdata = '';
         }
 
     } // end construct

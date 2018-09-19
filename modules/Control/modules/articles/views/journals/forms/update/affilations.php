@@ -7,7 +7,7 @@
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Modal;
 use yii\helpers\Html;
-use app\models\units\articles\ArticlesAffilations;
+use app\models\units\articles\journals\Affilations;
 
 ?>
 
@@ -22,7 +22,7 @@ use app\models\units\articles\ArticlesAffilations;
 
                 <?php
 
-                $mod_affilation = new ArticlesAffilations();
+                $mod_affilation = new Affilations();
 
                 if (is_array($affilations) && $affilations != null) {
                     foreach ($affilations as $key => $affilation) {

@@ -7,15 +7,14 @@ use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\models\units\articles\journals\ArticleJournal;
-use app\models\units\articles\ArticlesAffilations;
-use app\models\units\articles\ArticlesCitations;
-use app\models\units\articles\ArticlesAuthors;
-use app\models\units\articles\Types;
+use app\models\units\articles\journals\Affilations;
+use app\models\units\articles\journals\Authors;
+use app\models\units\articles\journals\Citations;
 // deprecated namespaces/models
-use app\modules\Control\models\Authors;
 use app\modules\Control\models\CitationClasses;
 use app\modules\Control\models\Fileupload;
-// framework classes
+use app\modules\Control\models\Authors as AuthorsCommon;
+// yii classes
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -52,6 +51,7 @@ class JournalsController extends Controller
 
     /**
      * Lists all Articles models
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -70,7 +70,8 @@ class JournalsController extends Controller
 
 
     /**
-     * Displays a single Articles model.
+     * Displays a single ArticleJournals model
+     *
      * @param integer $id
      * @return mixed
      */
@@ -81,7 +82,7 @@ class JournalsController extends Controller
             ->where(['id' => $id])
             ->one();
 
-        $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
+        $authors = AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all();
 
         if ($authors == null) { $authors = 'не задано';}
 
@@ -113,7 +114,7 @@ class JournalsController extends Controller
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
         // pnrd indexes
-        $types = ArrayHelper::map(Types::find()->asArray()->all(), 'id', 'type');
+        $types = $model->types();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -133,8 +134,8 @@ class JournalsController extends Controller
 
     /**
      * Updates an existing Articles model
-     * Adds citations, authors etc.
-     * If update successful, will be redirect to 'update' page
+     * Adds citations, authors etc;
+     * If update successful, will redirect to 'update' page
      *
      * @param $id
      * @return string
@@ -147,8 +148,8 @@ class JournalsController extends Controller
     {
 
         $newmagazine = new Magazines();
-        $newcitation = new ArticlesCitations();
-        $newauthor = new ArticlesAuthors();
+        $newcitation = new Citations();
+        $newauthor = new Authors();
 
         // main model - current article
         $model = ArticleJournal::find()->where(['id' => $id])->one();
@@ -161,7 +162,7 @@ class JournalsController extends Controller
 
         // affilation
         if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
-            $newaffilation = new ArticlesAffilations();
+            $newaffilation = new Affilations();
             $newaffilation->article_id = $id;
             if ($newaffilation->load(Yii::$app->request->post()) && $newaffilation->save()) {
                 Yii::$app->session->setFlash('success', 'Данные обновлены');
@@ -178,9 +179,9 @@ class JournalsController extends Controller
 
         // adding citation
         if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
-            $citation = new ArticlesCitations();
+            $citation = new Citations();
             if ($_POST['citation_flag'] == 'delete') {
-                $citation = ArticlesCitations::find()->where(['id' => $_POST['citation_id']])->one();
+                $citation = Citations::find()->where(['id' => $_POST['citation_id']])->one();
                 $citation->delete() ?
                     Yii::$app->session->setFlash('danger', 'Цитирование удалено')
                     : Yii::$app->session->setFlash('warning', 'Данные не были обновлены');
@@ -218,27 +219,22 @@ class JournalsController extends Controller
          */
 
         // authors for current article
-        $model_authors = ArticlesAuthors::find()->where(['article_id' => $id])->all();
-
+        //$model_authors = Authors::find()->where(['article_id' => $id])->all();
+        $model_authors = $model->authors();
         // authors for current article
         $authors = ArrayHelper::map(
-            Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
             function ($item) {
                 return $item['name'] . ' ' . $item['lastname'];
             });
-
         // file to upload if necessary
         $file = new Fileupload();
-
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
-
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
-
         // article
         $model = ArticleJournal::find()
             ->where(['id' => $id])
-            //->joinWith('authors')
             ->one();
 
         // updating article data - articleform
@@ -253,7 +249,7 @@ class JournalsController extends Controller
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
 
         // added citations
-        $citations = ArticlesCitations::find()->where(['article_id' => $id])->all();
+        $citations = Citations::find()->where(['article_id' => $id])->all();
 
         //$citation_classes = CitationClasses::find()->asArray()->all();
         $citation_classes = ArrayHelper::map(
@@ -285,7 +281,7 @@ class JournalsController extends Controller
 
 
     /**
-     * Deletes an existing Articles model.
+     * Deletes an existing Articles model;
      * If deletion successful, the browser will redirect to 'index' page
      *
      * @param integer $id

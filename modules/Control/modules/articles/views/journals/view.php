@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Тип публикации',
                     'value' => function($model) {
                             //return $model->publicationtype->type;
-                        return $model->getType();
+                        return $model->type();
                         }
                     ],
                 [
@@ -133,6 +133,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php
-\yii\helpers\VarDumper::dump($model->getType());
+//\yii\helpers\VarDumper::dump($model->getType());
 
 ?>

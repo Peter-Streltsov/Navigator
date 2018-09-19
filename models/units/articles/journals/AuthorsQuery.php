@@ -1,20 +1,20 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\journals;
 
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[ArticleTypes]].
+ * ActiveQuery class for [[app\models\units\articles\journals\Authors]]
  *
- * @see ArticleTypes
+ * @see ArticlesAuthors
  */
-class TypesQuery extends ActiveQuery
+class AuthorsQuery extends ActiveQuery
 {
 
     /**
      * @inheritdoc
-     * @return Types[]|array
+     * @return Authors[]|array
      */
     public function all($db = null)
     {
@@ -27,7 +27,7 @@ class TypesQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Types|array|null
+     * @return Authors|array|null
      */
     public function one($db = null)
     {

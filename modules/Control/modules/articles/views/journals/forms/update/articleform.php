@@ -118,7 +118,7 @@ use yii\bootstrap\ActiveForm;
     <!-- -->
     <div class="row">
         <div class="col-lg-12">
-            <?=$form->field($model, 'annotaion')->textarea([
+            <?=$form->field($model, 'annotation')->textarea([
                 'maxlength' => true,
                 'style' => 'background-color: #ffffe0;',
                 'rows' => 5]); ?>

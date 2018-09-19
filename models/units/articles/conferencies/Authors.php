@@ -1,18 +1,18 @@
 <?php
 
-namespace app\models\units\articles\journals;
+namespace app\models\units\articles\conferencies;
 
 use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "articles_journals_authors".
+ * This is the model class for table "articles_conferencies_authors".
  *
  * @property int $id
  * @property int $article_id
  * @property int $author_id
  *
- * @property ArticleJournal $article
+ * @property ArticleConferency $article
  */
 class Authors extends ActiveRecord
 {
@@ -23,7 +23,7 @@ class Authors extends ActiveRecord
     public static function tableName()
     {
 
-        return 'articles_journals_authors';
+        return 'articles_conferencies_authors';
 
     } // end function
 

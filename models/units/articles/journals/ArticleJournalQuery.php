@@ -2,6 +2,7 @@
 
 namespace app\models\units\articles\journals;
 
+use app\models\units\articles\traits\ArticleQueryTrait;
 use yii\db\ActiveQuery;
 
 /**
@@ -12,12 +13,7 @@ use yii\db\ActiveQuery;
 class ArticleJournalQuery extends ActiveQuery
 {
 
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
-
+    use ArticleQueryTrait;
 
     /**
      * @inheritdoc

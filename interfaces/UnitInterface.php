@@ -14,27 +14,27 @@ interface UnitInterface
      *
      * @return array
      */
-    public function getAuthors();
+    public function authors();
 
     /**
      * returns current unit language
      *
      * @return string
      */
-    public function getLanguage();
+    public function languageValue();
 
     /**
-     * calculates and returns total PNRD index for current unit
+     * calculates and returns total PNRD index for current unit model
      *
      * @return integer
      */
-    public function getIndex();
+    public function index();
 
     /**
      * calculates and returns index for current unit for requested author
      *
      * @return integer
      */
-    public function getPersonalIndex();
+    public function personalIndex();
 
 } // end interface

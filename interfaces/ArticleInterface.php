@@ -16,7 +16,7 @@ interface ArticleInterface
      * @param int $year
      * @return int
      */
-    public function byYear($year);
+    public function byYear(int $year);
 
     /**
      * @return int

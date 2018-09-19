@@ -10,6 +10,8 @@ use app\models\units\articles\ArticlesAuthors;
 use app\models\common\Languages;
 use app\models\units\articles\traits\ArticleQueryTrait;
 use app\models\units\articles\traits\ArticleTrait;
+use app\models\units\articles\traits\SchemeTrait;
+use app\models\units\articles\traits\UnitTrait;
 use app\modules\Control\models\Authors;
 // yii classes
 use Yii;
@@ -34,11 +36,11 @@ use yii\db\ActiveRecord;
  * @property string $link
  * @property resource $file
  */
-class ArticleJournal extends ActiveRecord implements UnitInterface, ArticleInterface
+class ArticleJournal extends ActiveRecord implements UnitInterface
 {
 
-    use ArticleTrait;
-    use ArticleQueryTrait;
+    use SchemeTrait;
+    use UnitTrait;
 
     /**
      * @inheritdoc
@@ -121,7 +123,7 @@ class ArticleJournal extends ActiveRecord implements UnitInterface, ArticleInter
 
 
     /**
-     * TODO: Complete method getUnitlanguage()
+     * returns language value for current model
      *
      * @return string
      */
@@ -134,15 +136,6 @@ class ArticleJournal extends ActiveRecord implements UnitInterface, ArticleInter
 
     } // end function
 
-
-
-    /**
-     * @return int|void
-     */
-    public function getPersonalIndex()
-    {
-        // TODO: Implement getPersonalIndex() method.
-    }
 
 
     /**
@@ -167,22 +160,6 @@ class ArticleJournal extends ActiveRecord implements UnitInterface, ArticleInter
 
 
 
-    /**
-     * returns article type
-     *
-     * TODO: fix
-     *
-     * @return string
-     */
-    public function getPublicationtype()
-    {
-
-        return $this->hasOne(ArticleTypes::className(), ['id' => 'type']);
-
-    } // end function
-
-
-
     public function getPublicationclass()
     {
         return $this->hasOne(IndexesArticles::className(), ['id' => 'class']);
@@ -193,43 +170,11 @@ class ArticleJournal extends ActiveRecord implements UnitInterface, ArticleInter
     /**
      * TODO: complete
      */
-    public function getPages()
-    {
-
-        //return $this->hasOne();
-
-    }
-
-
-
-    /**
-     * TODO: complete
-     */
     public function getAffilations()
     {
 
-        return $this->hasMany(ArticlesAffilations::classname(), ['article_id' => 'id']);
+        return $this->hasMany(Affilations::classname(), ['article_id' => 'id']);
         return 'affilations';
-
-    } // end function
-
-
-    /**
-     * TODO: complete
-     */
-    public function getPagesNumber()
-    {
-
-    }
-
-
-
-    public function getAuthorsnames()
-    {
-
-        $authors = [];
-        return $authors;
-
 
     } // end function
 
@@ -241,7 +186,7 @@ class ArticleJournal extends ActiveRecord implements UnitInterface, ArticleInter
 
 
     /**
-     *
+     * sets flash messages using Alert widget (yii2)
      *
      * @param bool $insert
      * @return bool
@@ -285,6 +230,21 @@ class ArticleJournal extends ActiveRecord implements UnitInterface, ArticleInter
         $newlanguage = new Languages();
         $newlanguage->language = strtolower($this->language);
         $newlanguage->save();
+
+    } // end function
+
+
+
+    /**
+     * uses SchemeTrait deleteLinkedData() method
+     *
+     * @inheritdoc
+     */
+    public function afterDelete()
+    {
+
+        parent::afterDelete();
+        $this->deleteLinkedData();
 
     } // end function
 

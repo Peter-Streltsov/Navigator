@@ -15,10 +15,10 @@ trait ArticleQueryTrait
     /**
      *
      */
-    public function byYear($year)
+    public function byYear(int $year)
     {
 
-        return $this->where(['year' => $year]);
+        return $this->andWhere(['year' => $year]);
 
     } // end function
 
@@ -29,6 +29,8 @@ trait ArticleQueryTrait
      */
     public function currentYear()
     {
+
+        return $this->andWhere(['year' => date('Y')]);
 
     } // end function
 

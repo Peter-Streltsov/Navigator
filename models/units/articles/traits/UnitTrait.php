@@ -61,7 +61,8 @@ trait UnitTrait
     public function index()
     {
 
-        $index = IndexesArticles::find()->select('value')->where(['id' => $this->type])->one();
+        $index = IndexesArticles::find()->select('value')->where(['id' => $this->type])->asArray()->one();
+        return (int)$index['value'];
 
     } // end function
 

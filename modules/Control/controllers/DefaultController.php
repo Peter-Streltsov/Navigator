@@ -3,7 +3,8 @@
 namespace app\modules\Control\controllers;
 
 // project classes
-use app\models\pnrd\facades\CommonData;
+use app\models\pnrd\CommonData;
+use app\models\pnrd\facades\PersonalData;
 use app\models\units\articles\ArticleJournal;
 use app\modules\Control\models\ArticlesAuthors;
 use app\modules\Control\models\Dissertations;
@@ -29,6 +30,10 @@ class DefaultController extends Controller
 
         $commondata = new CommonData();
 
+        $testdata = [
+            'total' => $commondata::total()
+        ];
+
         $sciencedata = [
             'publications' => '',
             'monographies' => '',
@@ -45,6 +50,7 @@ class DefaultController extends Controller
 
 
         return $this->render('index', [
+            'test' => $testdata,
             'science' => $sciencedata,
             'employee' => $employeedata,
         ]);

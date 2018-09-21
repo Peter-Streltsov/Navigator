@@ -3,6 +3,9 @@
 namespace app\models\units\articles\conferencies;
 
 use app\interfaces\UnitInterface;
+use app\models\units\articles\traits\ArticleQueryTrait;
+use app\models\units\articles\traits\SchemeTrait;
+use app\models\units\articles\traits\UnitTrait;
 use yii\db\ActiveRecord;
 
 /**
@@ -19,6 +22,10 @@ use yii\db\ActiveRecord;
  */
 class ArticleConferency extends ActiveRecord implements UnitInterface
 {
+
+    use SchemeTrait;
+    use UnitTrait;
+    use ArticleQueryTrait;
 
     /**
      * @inheritdoc

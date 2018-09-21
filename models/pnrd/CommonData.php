@@ -1,10 +1,11 @@
 <?php
 
-namespace app\models\pnrd\facades;
+namespace app\models\pnrd;
 
 // project classes
 use app\models\identity\Users;
 use app\models\opendata\Data;
+use app\models\pnrd\facades\Indexes;
 use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\collections\ArticleCollection;
 use app\models\units\articles\conferencies\ArticleConferency;
@@ -40,6 +41,18 @@ class CommonData
         $this->dissertations = Dissertations::find();
 
     } // end construct
+
+
+    /**
+     *
+     */
+    public static function total()
+    {
+
+        $index = new Indexes(new ArticleJournal(), new ArticleConferency(), new ArticleCollection(), new Dissertations());
+        return $index->total();
+
+    } // end function
 
 
     /**
@@ -86,10 +99,9 @@ class CommonData
 
     } // end function
 
-
-
     /**
      * ENDCOUNTERS
      */
+
 
 } // end class

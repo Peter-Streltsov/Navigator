@@ -24,6 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
 
     <div class="row">
+        <div class="col-lg-5">
+            <?= \yii\helpers\Html::tag('b', $test['total']) ?>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-lg-12">
 
             <?php

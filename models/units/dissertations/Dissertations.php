@@ -92,14 +92,14 @@ class Dissertations extends ActiveRecord implements UnitInterface
 
 
 
-    public function getAuthors()
+    public function authors()
     {
         // TODO: Implement getUnitauthors() method;
     }
 
 
 
-    public function getLanguage()
+    public function languageValue()
     {
         // TODO: Implement getUnitlanguage() method;
     }
@@ -110,7 +110,7 @@ class Dissertations extends ActiveRecord implements UnitInterface
      *
      * @return integer
      */
-    public function getIndex()
+    public function index()
     {
         //TODO: Implement getIndex() method;
         return 1;
@@ -121,7 +121,7 @@ class Dissertations extends ActiveRecord implements UnitInterface
     /**
      * @return float|int
      */
-    public function getPersonalIndex()
+    public function personalIndex()
     {
         // TODO: Implement getPersonalIndex() method;
         return $this->getIndex() * 0.3;

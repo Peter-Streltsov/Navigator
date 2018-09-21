@@ -19,14 +19,14 @@ trait SchemeTrait
      *
      * @return string
      */
-    private function currentNamespace()
+    /*private function currentNamespace()
     {
 
         $current_class = explode('\\', __CLASS__);
         array_pop($current_class);
         return implode('\\', $current_class) . '\\';
 
-    } // end function
+    } // end function*/
 
 
 
@@ -64,6 +64,9 @@ trait SchemeTrait
      */
     public function citations()
     {
+
+        $citations = $this->currentNamespace() . 'Citations';
+        return $citations::find()->where(['article_id' => $this->id])->all();
 
     } // end function
 

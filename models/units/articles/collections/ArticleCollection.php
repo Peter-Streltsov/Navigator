@@ -5,6 +5,9 @@ namespace app\models\units\articles\collections;
 // project classes
 use app\interfaces\UnitInterface;
 // yii2 classes
+use app\models\units\articles\traits\ArticleQueryTrait;
+use app\models\units\articles\traits\SchemeTrait;
+use app\models\units\articles\traits\UnitTrait;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -25,6 +28,10 @@ use yii\db\ActiveRecord;
  */
 class ArticleCollection extends ActiveRecord implements UnitInterface
 {
+
+    use SchemeTrait;
+    use UnitTrait;
+    use ArticleQueryTrait;
 
     /**
      * @inheritdoc

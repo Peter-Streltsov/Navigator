@@ -249,7 +249,8 @@ class JournalsController extends Controller
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
 
         // added citations
-        $citations = Citations::find()->where(['article_id' => $id])->all();
+        //$citations = Citations::find()->where(['article_id' => $id])->all();
+        $citations = $model->citations();
 
         //$citation_classes = CitationClasses::find()->asArray()->all();
         $citation_classes = ArrayHelper::map(

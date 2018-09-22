@@ -5,7 +5,7 @@ namespace app\modules\Control\controllers;
 // project classes
 use app\models\common\Habilitations;
 use app\modules\Control\models\Authors;
-use app\modules\Control\models\Personnel;
+use app\models\identity\Personnel;
 use app\models\common\Positions;
 // yii classes
 use Yii;
@@ -16,7 +16,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * PersonnelController implements the CRUD actions for Personnel model.
+ * PersonnelController implements the CRUD actions for Personnel model;
  */
 class PersonnelController extends Controller
 {

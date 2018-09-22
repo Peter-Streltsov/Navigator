@@ -3,11 +3,10 @@
 namespace app\modules\Control\modules\personal\controllers;
 
 // project classes
-use app\models\units\ArticleJournal;
-use app\models\pnrd\facades\PersonalData;
+use app\models\pnrd\PersonalData;
 use app\models\identity\Users;
 use app\modules\Control\models\Authors;
-use app\modules\Control\models\Personnel;
+use app\models\identity\Personnel;
 // yii2 classes
 use Yii;
 use yii\web\Controller;

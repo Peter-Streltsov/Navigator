@@ -2,10 +2,9 @@
 
 namespace app\models\pnrd\facades;
 
-use app\models\units\articles\collections\ArticleCollection;
-use app\models\units\articles\conferencies\ArticleConferency;
-use app\models\units\articles\journals\ArticleJournal;
-use app\models\units\dissertations\Dissertations;
+// project classes
+use app\models\pnrd\Units;
+// yii classes
 use yii\web\IdentityInterface;
 
 /**
@@ -13,26 +12,41 @@ use yii\web\IdentityInterface;
  *
  * @package app\models\pnrd\facades
  */
-class  Indexes
+class Indexes
 {
 
+    /**
+     * @var \app\models\units\articles\journals\ArticleJournalQuery
+     */
     private $journals;
-    private $conferency;
+    /**
+     * @var \app\models\units\articles\conferencies\ArticleConferencyQuery
+     */
+    private $conference;
+    /**
+     * @var \app\models\units\articles\collections\ArticleCollectionQuery
+     */
     private $collections;
+    /**
+     * @var \app\models\units\dissertations\DissertationTypesQuery
+     */
     private $dissertations;
 
-    public function __construct(ArticleJournal $journal, ArticleConferency $conferency, ArticleCollection $collection, Dissertations $dissertations)
+    public function __construct(Units $units)
     {
 
-        $this->journals = $journal::find()->all();
-        $this->conferency = $conferency::find()->all();
-        $this->collections = $collection::find()->all();
-        $this->dissertations = $dissertations::find()->all();
+        $this->journals = $units->articlesJournals();
+        $this->conference = $units->articlesConferences();
+        $this->collections = $units->articlesCollections();
+        $this->dissertations = $units->dissertations();
 
     } // end constructor
 
 
 
+    /**
+     * @param IdentityInterface $user
+     */
     public function personal(IdentityInterface $user)
     {
 
@@ -43,35 +57,35 @@ class  Indexes
     /**
      * calculates total PNRD index for all registered publications
      *
-     * @return int
+     * @return float
      */
     public function total()
     {
 
         $index = [];
 
-        /*$journals = ArticleJournal::find()->all();
-        $conferencies = ArticleConferency::find()->all();
-        $collections = ArticleCollection::find()->all();
-        $dissertations = Dissertations::find()->all();*/
+        $journals = $this->journals->all();
+        $conferencies = $this->conference->all();
+        $collections = $this->collections->all();
+        $dissertations = $this->dissertations->all();
 
-        foreach ($this->journals as $journal) {
+        foreach ($journals as $journal) {
             $index[] = $journal->index();
         }
 
-        foreach ($this->conferency as $conferency) {
-            $index[] = $conferency->index();
+        foreach ($conferencies as $conference) {
+            $index[] = $conference->index();
         }
 
-        foreach ($this->collections as $collection) {
+        foreach ($collections as $collection) {
             $index[] = $collection->index();
         }
 
-        foreach ($this->dissertations as $dissertation) {
+        foreach ($dissertations as $dissertation) {
             $index[] = $dissertation->index();
         }
 
-        return (integer)array_sum($index);
+        return (float)array_sum($index);
 
     } // end function
 

@@ -1,18 +1,14 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\identity;
 
 /**
- * This is the ActiveQuery class for [[Personnel]].
+ * ActiveQuery class for [[Personnel]]
  *
  * @see Personnel
  */
 class PersonnelQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * @inheritdoc
@@ -20,8 +16,12 @@ class PersonnelQuery extends \yii\db\ActiveQuery
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -29,6 +29,9 @@ class PersonnelQuery extends \yii\db\ActiveQuery
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

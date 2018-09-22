@@ -10,7 +10,7 @@ use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\collections\ArticleCollection;
 use app\models\units\articles\conferencies\ArticleConferency;
 use app\models\units\dissertations\Dissertations;
-use app\modules\Control\models\Personnel;
+use app\models\identity\Personnel;
 
 /**
  * Class CommonData
@@ -43,14 +43,17 @@ class CommonData
     } // end construct
 
 
+
     /**
+     * calculates total index for publications associated with organisation
      *
+     * @return int
      */
     public static function total()
     {
 
-        $index = new Indexes(new ArticleJournal(), new ArticleConferency(), new ArticleCollection(), new Dissertations());
-        return $index->total();
+        $index = new Indexes(new Units());
+        return (int)$index->total();
 
     } // end function
 

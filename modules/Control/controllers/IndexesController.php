@@ -2,8 +2,10 @@
 
 namespace app\modules\Control\controllers;
 
+// project classes
+use app\models\pnrd\indexes\IndexesArticles;
+// yii classes
 use Yii;
-use app\modules\Control\models\IndexesArticles;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -69,7 +71,8 @@ class IndexesController extends Controller
 
 
     /**
-     * Displays a single IndexesArticles model.
+     * Displays a single IndexesArticles model;
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -86,8 +89,9 @@ class IndexesController extends Controller
 
 
     /**
-     * Creates a new IndexesArticles model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Creates a new IndexesArticles model;
+     * If creation is successful, the browser will be redirected to the 'view' page;
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -108,8 +112,9 @@ class IndexesController extends Controller
 
 
     /**
-     * Updates an existing IndexesArticles model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Updates an existing IndexesArticles model;
+     * If update is successful, the browser will be redirected to the 'view' page;
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -131,8 +136,9 @@ class IndexesController extends Controller
 
 
     /**
-     * Deletes an existing IndexesArticles model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * Deletes an existing IndexesArticles model;
+     * If deletion is successful, the browser will be redirected to the 'index' page;
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -149,8 +155,9 @@ class IndexesController extends Controller
 
 
     /**
-     * Finds the IndexesArticles model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * Finds the IndexesArticles model using primary key value ($id);
+     * If the model is not found, a 404 HTTP exception will be thrown;
+     *
      * @param integer $id
      * @return IndexesArticles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
@@ -162,7 +169,7 @@ class IndexesController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Запрошенный ресурс не существует');
 
     } // end function
 

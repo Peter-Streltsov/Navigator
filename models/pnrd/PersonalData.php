@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\pnrd\facades;
+namespace app\models\pnrd;
 
 // project classes
 use app\models\units\articles\collections\ArticleCollection;

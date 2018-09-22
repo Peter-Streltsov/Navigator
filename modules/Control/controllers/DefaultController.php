@@ -4,10 +4,6 @@ namespace app\modules\Control\controllers;
 
 // project classes
 use app\models\pnrd\CommonData;
-use app\models\pnrd\facades\PersonalData;
-use app\models\units\articles\ArticleJournal;
-use app\modules\Control\models\ArticlesAuthors;
-use app\modules\Control\models\Dissertations;
 // yii2 classes
 use yii\web\Controller;
 
@@ -25,8 +21,6 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-
-        $year = \app\models\units\articles\journals\ArticleJournal::find()->currentYear()->all();
 
         $commondata = new CommonData();
 

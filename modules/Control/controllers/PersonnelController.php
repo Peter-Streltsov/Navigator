@@ -123,7 +123,8 @@ class PersonnelController extends Controller
     public function actionMakeauthor($id)
     {
 
-        $personnel = Personnel::find($id)->one();
+        $personnel = Personnel::find()->where(['id' => $id])->one();
+        //$personnel = Personnel::findOne(['id' => $id]);
 
         $newauthor = new Authors();
         $newauthor->name = $personnel->name;

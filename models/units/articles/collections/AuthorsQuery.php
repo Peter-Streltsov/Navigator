@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\collections;
 
 use yii\db\ActiveQuery;
 
@@ -9,12 +9,8 @@ use yii\db\ActiveQuery;
  *
  * @see ArticlesAuthors
  */
-class ArticlesAuthorsQuery extends ActiveQuery
+class AuthorsQuery extends ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * @inheritdoc
@@ -22,8 +18,12 @@ class ArticlesAuthorsQuery extends ActiveQuery
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -31,6 +31,9 @@ class ArticlesAuthorsQuery extends ActiveQuery
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

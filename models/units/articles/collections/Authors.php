@@ -1,19 +1,19 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\collections;
 
 use app\modules\Control\models\Authors;
 use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "articles_authors".
+ * This is the model class for table "articles_collections_authors".
  *
  * @property int $id
  * @property int $article_id
  * @property int $author_id
  *
- * @property Articles $article
+ * @property ArticleCollection $article
  */
 class ArticlesAuthors extends ActiveRecord
 {
@@ -24,7 +24,7 @@ class ArticlesAuthors extends ActiveRecord
     public static function tableName()
     {
 
-        return 'articles_authors';
+        return 'articles_collections_authors';
 
     } // end function
 
@@ -64,29 +64,20 @@ class ArticlesAuthors extends ActiveRecord
 
 
 
-    public function getArticlesbyauthor()
-    {
-
-        return $this->hasMany(Articles::className(), ['id' => 'article_id']);
-
-    }
-
-
-
     /**
      * @return \yii\db\ActiveQuery
      */
-    /*public function getArticle()
+    public function getArticlesbyauthor()
     {
 
-        return $this->hasOne(Articles::className(), ['id' => 'article_id']);
+        return $this->hasMany(ArticleCollection::className(), ['id' => 'article_id']);
 
-    } // end function*/
+    } // end function
 
 
 
     /**
-     * gets author affilated with current record
+     * gets author associated with current record
      *
      * @return Authors|string|null
      */
@@ -102,6 +93,7 @@ class ArticlesAuthors extends ActiveRecord
         }
 
     } // end function
+
 
 
     /**
@@ -151,6 +143,9 @@ class ArticlesAuthors extends ActiveRecord
 
 
 
+    /**
+     * @inheritdoc
+     */
     public function afterDelete()
     {
 
@@ -162,10 +157,13 @@ class ArticlesAuthors extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return ArticlesAuthorsQuery the active query used by this AR class.
+     * @return AuthorsQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new ArticlesAuthorsQuery(get_called_class());
-    }
-}
+
+        return new AuthorsQuery(get_called_class());
+
+    } // end function
+
+} // end class

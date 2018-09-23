@@ -1,8 +1,8 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\collections;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "article_pages".
@@ -12,8 +12,9 @@ use Yii;
  * @property int $begin_page
  * @property int $end_page
  */
-class Pages extends \yii\db\ActiveRecord
+class Pages extends ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -60,12 +61,12 @@ class Pages extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return ArticlePagesQuery the active query used by this AR class.
+     * @return PagesQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticlePagesQuery(get_called_class());
+        return new PagesQuery(get_called_class());
 
     } // end function
 

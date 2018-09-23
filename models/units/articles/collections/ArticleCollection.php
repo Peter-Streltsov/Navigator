@@ -87,50 +87,6 @@ class ArticleCollection extends ActiveRecord implements UnitInterface
 
 
     /**
-     * GETTERS
-     */
-
-
-    /**
-     *
-     */
-    public function getAuthors()
-    {
-        // TODO: Implement getUnitauthors() method.
-    }
-
-
-    /**
-     *
-     */
-    public function getLanguage()
-    {
-        // TODO: Implement getUnitlanguage() method
-    }
-
-
-
-    /**
-     *
-     */
-    public function getIndex()
-    {
-        // TODO: Implement getPnrdindex() method
-    }
-
-
-    public function getPersonalIndex()
-    {
-        // TODO: Implement getPersonalIndex() method.
-    }
-
-    /**
-     * END GETTERS
-     */
-
-
-
-    /**
      * @inheritdoc
      * @return ArticleCollectionQuery the active query used by this AR class.
      */

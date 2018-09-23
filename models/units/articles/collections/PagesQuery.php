@@ -1,34 +1,39 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\collections;
+
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[ArticlePages]].
  *
- * @see ArticlePages
+ * @see Pages
  */
-class ArticlePagesQuery extends \yii\db\ActiveQuery
+class PagesQuery extends ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * @inheritdoc
-     * @return ArticlePages[]|array
+     * @return Pages[]|array
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
-     * @return ArticlePages|array|null
+     * @return Pages|array|null
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

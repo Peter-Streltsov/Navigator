@@ -2,33 +2,38 @@
 
 namespace app\models\units\articles\collections;
 
+use yii\db\ActiveQuery;
+
 /**
- * This is the ActiveQuery class for [[ArtcleCollection]].
+ * ActiveQuery class for [[ArticleCollection]].
  *
  * @see ArticleCollection
  */
-class ArticleCollectionQuery extends \yii\db\ActiveQuery
+class ArticleCollectionQuery extends ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * @inheritdoc
-     * @return ArtcleCollection[]|array
+     * @return ArticleCollection[]|array
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
-     * @return ArtcleCollection|array|null
+     * @return ArticleCollection|array|null
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

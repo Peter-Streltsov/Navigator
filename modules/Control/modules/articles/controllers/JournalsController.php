@@ -10,10 +10,9 @@ use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\journals\Affilations;
 use app\models\units\articles\journals\Authors;
 use app\models\units\articles\journals\Citations;
-// deprecated namespaces/models
-use app\modules\Control\models\CitationClasses;
-use app\modules\Control\models\Fileupload;
-use app\modules\Control\models\Authors as AuthorsCommon;
+use app\models\units\CitationClasses;
+use app\models\identity\Authors as AuthorsCommon;
+use app\models\filesystem\Fileupload;
 // yii classes
 use Yii;
 use yii\data\ActiveDataProvider;

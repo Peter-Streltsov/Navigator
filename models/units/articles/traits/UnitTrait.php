@@ -22,14 +22,14 @@ trait UnitTrait
      *
      * @return string
      */
-    private function currentNamespace()
+    /*private static function currentNamespace()
     {
 
-        $current_class = explode('\\', __CLASS__);
+        $current_class = explode('\\', get_called_class());
         array_pop($current_class);
         return implode('\\', $current_class) . '\\';
 
-    } // end function
+    } // end function*/
 
 
 
@@ -40,7 +40,7 @@ trait UnitTrait
     public function authors()
     {
 
-        $authorsname = $this->currentNamespace() . 'Authors';
+        $authorsname = self::currentNamespace() . 'Authors';
         return (new $authorsname())::find()->where(['article_id' => $this->id])->all();
 
     } // end function
@@ -59,6 +59,18 @@ trait UnitTrait
         return $language->language;
 
     } // end function
+
+
+
+    /**
+     * returns string value for current article publications class
+     *
+     * @return string
+     */
+    public function publicationClass()
+    {
+
+    } // emd function
 
 
 

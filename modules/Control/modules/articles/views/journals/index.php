@@ -1,9 +1,13 @@
 <?php
 
+// extensions
+use kartik\export\ExportMenu;
+// yii classes
 use yii\helpers\Html;
 use yii\grid\GridView;
-use kartik\export\ExportMenu;
 use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -101,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $model->index;
                     }
                 ],
-                //'doi',
+                'doi',
                 [
                     'attribute' => 'authors',
                     'encodeLabel' => false,
@@ -137,8 +141,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             return implode("<br>", $user);
                         };
 
-                        isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
-
+                        //isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
+                        $authors = $data->authors();
+                        isset ($authors[0]) ? $authors = $links($authors) : $authors = null;
                         return $authors;
                     }
                 ],
@@ -154,7 +159,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ob_start();
 
                             if (isset($model->file)) {
-                                \yii\bootstrap\Modal::begin([
+                                Modal::begin([
                                     'header' => "<h2>$model->title</h2><br>",
                                     'size' => 'large',
                                     'toggleButton' => [
@@ -165,10 +170,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'footer' => 'Close'
                                 ]);
                                 echo \yii2assets\pdfjs\PdfJs::widget([
-                                    'url' => \yii\helpers\Url::base().'/upload/articles/' . $model->file
+                                    'url' => Url::base().'/upload/articles/' . $model->file
                                 ]);
 
-                                \yii\bootstrap\Modal::end();
+                                Modal::end();
                             }
                             $modal = ob_get_clean();
                             return $modal;

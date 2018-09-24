@@ -19,14 +19,14 @@ trait SchemeTrait
      *
      * @return string
      */
-    /*private function currentNamespace()
+    private function currentNamespace()
     {
 
-        $current_class = explode('\\', __CLASS__);
+        $current_class = explode('\\', get_called_class());
         array_pop($current_class);
         return implode('\\', $current_class) . '\\';
 
-    } // end function*/
+    } // end function
 
 
 

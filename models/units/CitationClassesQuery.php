@@ -1,18 +1,16 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units;
+
+use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[CitationClasses]].
+ * This is the ActiveQuery class for [[CitationClasses]]
  *
  * @see CitationClasses
  */
-class CitationClassesQuery extends \yii\db\ActiveQuery
+class CitationClassesQuery extends ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * @inheritdoc
@@ -20,8 +18,12 @@ class CitationClassesQuery extends \yii\db\ActiveQuery
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -29,6 +31,9 @@ class CitationClassesQuery extends \yii\db\ActiveQuery
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

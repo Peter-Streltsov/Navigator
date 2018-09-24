@@ -20,7 +20,7 @@ class m180523_000437_articles_citations extends Migration
             'class' => $this->string()
         ]);
 
-        $this->createTable('articles_conferencies_citations', [
+        $this->createTable('articles_conferences_citations', [
             'id' => $this->primaryKey(),
             'article_id' => $this->integer()->notNull(),
             'title' => $this->string(),
@@ -45,7 +45,7 @@ class m180523_000437_articles_citations extends Migration
     {
 
         $this->dropTable('articles_journals_citations');
-        $this->dropTable('articles_conferencies_citations');
+        $this->dropTable('articles_conferences_citations');
         $this->dropTable('articles_collections_citations');
 
         return true;

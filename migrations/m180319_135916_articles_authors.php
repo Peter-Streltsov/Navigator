@@ -20,7 +20,7 @@ class m180319_135916_articles_authors extends Migration
             'part' => $this->integer()->defaultValue(10)
         ]);
 
-        $this->createTable('articles_conferencies_authors', [
+        $this->createTable('articles_conferences_authors', [
             'id' => $this->primaryKey(),
             'article_id' => $this->integer()->notNull(),
             'author_id' => $this->integer()->notNull(),
@@ -45,7 +45,7 @@ class m180319_135916_articles_authors extends Migration
     {
 
         $this->dropTable('articles_journals_authors');
-        $this->dropTable('articles_conferencies_authors');
+        $this->dropTable('articles_conferences_authors');
         $this->dropTable('articles_collections_authors');
 
         return true;

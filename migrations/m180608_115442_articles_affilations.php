@@ -23,7 +23,7 @@ class m180608_115442_articles_affilations extends Migration
             'type' => $this->string()->notNull()->defaultValue('other')
         ]);
 
-        $this->createTable('articles_conferencies_affilations', [
+        $this->createTable('articles_conferences_affilations', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'article_id' => $this->integer()->notNull(),
@@ -48,7 +48,7 @@ class m180608_115442_articles_affilations extends Migration
     {
 
         $this->dropTable('articles_journals_affilations');
-        $this->dropTable('articles_conferencies_affilations');
+        $this->dropTable('articles_conferences_affilations');
         $this->dropTable('articles_collections_affilations');
 
         return true;

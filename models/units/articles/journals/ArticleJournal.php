@@ -3,19 +3,13 @@
 namespace app\models\units\articles\journals;
 
 // project classes
-use app\interfaces\ArticleInterface;
+//use app\interfaces\ArticleInterface;
 use app\interfaces\UnitInterface;
 use app\models\pnrd\indexes\IndexesArticles;
-use app\models\units\articles\ArticlesAuthors;
 use app\models\common\Languages;
-use app\models\units\articles\traits\ArticleQueryTrait;
-use app\models\units\articles\traits\ArticleTrait;
-use app\models\units\articles\traits\SchemeTrait;
-use app\models\units\articles\traits\UnitTrait;
-use app\modules\Control\models\Authors;
+use app\models\units\articles\Article;
 // yii classes
 use Yii;
-use yii\db\ActiveRecord;
 
 /**
  * ActiveRecord class for table "articles".
@@ -36,13 +30,12 @@ use yii\db\ActiveRecord;
  * @property string $link
  * @property resource $file
  */
-class ArticleJournal extends ActiveRecord implements UnitInterface
+class ArticleJournal extends Article implements UnitInterface
 {
 
-    use SchemeTrait;
-    use UnitTrait;
-
     /**
+     * redefined from parent class Article
+     *
      * @inheritdoc
      */
     public static function tableName()
@@ -55,6 +48,8 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
 
 
     /**
+     * not defined in parent class Article
+     *
      * @inheritdoc
      */
     public function rules()
@@ -72,6 +67,8 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
 
 
     /**
+     * not defined in parent class Article
+     *
      * @inheritdoc
      */
     public function attributeLabels()
@@ -112,13 +109,13 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthors()
+    /*public function getAuthors()
     {
 
         return $this->hasMany(Authors::className(), ['id' => 'author_id'])
             ->viaTable('articles_authors', ['article_id' => 'id']);
 
-    } // end function
+    } // end function*/
 
 
 
@@ -127,14 +124,14 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
      *
      * @return string
      */
-    public function getLanguage()
+    /*public function getLanguage()
     {
 
         $language = $this->hasOne(Languages::className(), ['id' => 'language']);
 
         return $language->language;
 
-    } // end function
+    } // end function*/
 
 
 
@@ -143,7 +140,7 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
      *
      * @return float
      */
-    public function getIndex()
+    /*public function getIndex()
     {
 
         $current_year = date('Y');
@@ -156,14 +153,19 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
 
         return $base_index->value;
 
-    } // end function
+    } // end function*/
 
 
-
-    public function getPublicationclass()
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getPublicationclass()
     {
+
         return $this->hasOne(IndexesArticles::className(), ['id' => 'class']);
-    }
+
+    } // end function*/
+
 
 
 
@@ -174,7 +176,6 @@ class ArticleJournal extends ActiveRecord implements UnitInterface
     {
 
         return $this->hasMany(Affilations::classname(), ['article_id' => 'id']);
-        return 'affilations';
 
     } // end function
 

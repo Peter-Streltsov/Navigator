@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\identity;
 
 /**
  * This is the ActiveQuery class for [[Authors]].

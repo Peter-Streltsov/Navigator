@@ -2,7 +2,6 @@
 
 namespace app\models\units\articles\collections;
 
-use app\models\units\articles\collections\AffilationsQuery;
 use yii\db\ActiveRecord;
 
 /**

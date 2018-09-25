@@ -5,13 +5,11 @@ namespace app\modules\Control\modules\Admin\controllers;
 // project models
 use app\models\identity\Users;
 use app\models\identity\Accesstokens;
-// deprecated models/namespaces
-use app\modules\Control\models\Authors;
-use app\modules\Control\models\Personnel;
+use app\models\identity\Authors;
+use app\models\identity\Personnel;
 // yii classes
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -189,10 +187,8 @@ class UsersController extends Controller
         $user = Users::find()->where(['id' => $id])->asArray()->one();
 
         if (Authors::find()->where(['user_id' => $id])->exists()) {
-
             Yii::$app->session->setFlash('danger', "Автор с таким идентификатором пользоватея уже существует");
             return $this->redirect('/control/admin/users');
-
         }
 
         $staff = Personnel::find()->where(['user_id' => $user['id']])->one();
@@ -226,25 +222,23 @@ class UsersController extends Controller
         $user = Users::find()->where(['id' => $id])->asArray()->one(); // getting user to make personnel
 
         if (Personnel::find()->where(['user_id' => $id])->exists()) {
-
             Yii::$app->session->setFlash('danger', "Сотрудник с таким идентификатором пользоватея уже существует");
             return $this->redirect('/control/admin/users');
-
         }
-
-        //VarDumper::dump($user);
 
         $newstaff = new Personnel(); // creating new staff
         $newstaff->name = $user['name'];
         $newstaff->lastname = $user['lastname'];
         $newstaff->user_id = $user['id'];
-        $newstaff->save(); // saving new staff data
-        //print_r($newstaff->getErrors());
 
-        $createdstaff = Personnel::find()->where(['user_id' => $id])->one(); // getting just created staff
-        //VarDumper::dump($createdstaff);
+        if ($newstaff->save()) {
+            $createdstaff = Personnel::find()->where(['user_id' => $id])->one(); // getting just created staff
+            return $this->redirect('/control/personnel/view?id='.$createdstaff->id); // redirect to edit further data
+        } else {
+            Yii::$app->session->setFlash('danger', 'Не удалось добавить сотрудника');
+            return $this->redirect('/control/admin/users/view?id=' . $id);
+        }
 
-        return $this->redirect('/control/admin/users/view?id='.$createdstaff->id); // redirect to edit further data
 
     } // end action
 

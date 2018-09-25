@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\units\articles\conferencies;
+namespace app\models\units\articles\conferences;
 
 use yii\db\ActiveQuery;
 
@@ -11,13 +11,6 @@ use yii\db\ActiveQuery;
  */
 class ArticleConferencyQuery extends ActiveQuery
 {
-
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
-
-
 
     /**
      * @inheritdoc

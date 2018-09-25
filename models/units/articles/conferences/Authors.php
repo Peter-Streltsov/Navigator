@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\units\articles\conferencies;
+namespace app\models\units\articles\conferences;
 
 use Yii;
 use yii\db\ActiveRecord;
@@ -69,18 +69,6 @@ class Authors extends ActiveRecord
         return $this->hasMany(Articles::className(), ['id' => 'article_id']);
 
     }
-
-
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    /*public function getArticle()
-    {
-
-        return $this->hasOne(Articles::className(), ['id' => 'article_id']);
-
-    } // end function*/
 
 
 

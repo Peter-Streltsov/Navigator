@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\conferences;
 
 use yii\db\ActiveRecord;
 
@@ -62,12 +62,12 @@ class Pages extends ActiveRecord
     /**
      * @inheritdoc
      *
-     * @return ArticlePagesQuery the active query used by this AR class.
+     * @return PagesQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticlePagesQuery(get_called_class());
+        return new PagesQuery(get_called_class());
 
     } // end function
 

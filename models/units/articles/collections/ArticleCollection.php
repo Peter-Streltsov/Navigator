@@ -4,12 +4,10 @@ namespace app\models\units\articles\collections;
 
 // project classes
 use app\interfaces\UnitInterface;
-// yii2 classes
+use app\models\units\articles\Article;
 use app\models\units\articles\traits\ArticleQueryTrait;
 use app\models\units\articles\traits\SchemeTrait;
 use app\models\units\articles\traits\UnitTrait;
-use Yii;
-use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "articles_collections".
@@ -26,7 +24,7 @@ use yii\db\ActiveRecord;
  * @property string $link
  * @property string $file
  */
-class ArticleCollection extends ActiveRecord implements UnitInterface
+class ArticleCollection extends Article implements UnitInterface
 {
 
     use SchemeTrait;

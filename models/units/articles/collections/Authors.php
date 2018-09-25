@@ -2,7 +2,9 @@
 
 namespace app\models\units\articles\collections;
 
-use app\modules\Control\models\Authors;
+// project classes
+use app\models\identity\Authors;
+// yii classes
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -102,7 +104,7 @@ class ArticlesAuthors extends ActiveRecord
     public function getArticlesbyid()
     {
 
-        return $this->hasMany(Articles::className(), ['id', 'author_id']);
+        return $this->hasMany(ArticleCollection::className(), ['id', 'author_id']);
 
     } // end function
 

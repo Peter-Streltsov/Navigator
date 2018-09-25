@@ -57,7 +57,7 @@ class ArticleJournal extends Article implements UnitInterface
 
         return [
             [['type', 'title', 'number', 'class', 'year', 'language'], 'required'],
-            [['type', 'number', 'direct_number', 'class', 'pages', 'year', 'created_at'], 'integer'],
+            [['type', 'number', 'direct_number', 'class', 'year', 'created_at'], 'integer'],
             [['title', 'annotation', 'index', 'file'], 'string'],
             [['magazine', 'language', 'doi', 'link'], 'string', 'max' => 255],
         ];

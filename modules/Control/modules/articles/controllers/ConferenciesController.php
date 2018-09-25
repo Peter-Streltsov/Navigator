@@ -3,7 +3,7 @@
 namespace app\modules\Control\modules\articles\controllers;
 
 // project classes
-use app\models\units\articles\conferencies\ArticleConferency;
+use app\models\units\articles\conferences\ArticleConferency;
 // yii2 classes
 use Yii;
 use yii\data\ActiveDataProvider;

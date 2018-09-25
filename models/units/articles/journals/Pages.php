@@ -21,7 +21,7 @@ class Pages extends ActiveRecord
     public static function tableName()
     {
 
-        return 'article_journals_pages';
+        return 'articles_journals_pages';
 
     } // end function
 
@@ -34,7 +34,7 @@ class Pages extends ActiveRecord
     {
 
         return [
-            [['article_id', 'begin_page'], 'required'],
+            [['article_id', 'begin_page', 'end_page'], 'required'],
             [['article_id', 'begin_page', 'end_page'], 'integer'],
         ];
 
@@ -50,9 +50,9 @@ class Pages extends ActiveRecord
 
         return [
             'id' => 'ID',
-            'article_id' => 'Article ID',
-            'begin_page' => 'Begin Page',
-            'end_page' => 'End Page',
+            'article_id' => 'Идентификатор статьи',
+            'begin_page' => 'Начальная страница',
+            'end_page' => 'Последняя страница',
         ];
 
     } // end function
@@ -61,12 +61,12 @@ class Pages extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return ArticlePagesQuery the active query used by this AR class.
+     * @return PagesQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticlePagesQuery(get_called_class());
+        return new PagesQuery(get_called_class());
 
     } //  end function
 

@@ -10,6 +10,7 @@ use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\journals\Affilations;
 use app\models\units\articles\journals\Authors;
 use app\models\units\articles\journals\Citations;
+use app\models\units\articles\journals\Pages;
 use app\models\units\CitationClasses;
 use app\models\identity\Authors as AuthorsCommon;
 use app\models\filesystem\Fileupload;
@@ -81,9 +82,9 @@ class JournalsController extends Controller
             ->where(['id' => $id])
             ->one();
 
-        $authors = AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all();
+        //$authors = AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all();
 
-        if ($authors == null) { $authors = 'не задано';}
+        //if ($authors == null) { $authors = 'не задано';}
 
         return $this->render('view', [
             'model' => $model,
@@ -106,19 +107,35 @@ class JournalsController extends Controller
     public function actionCreate()
     {
 
+        /**
+         * view parameters
+         */
+
+        // article model
         $model = new ArticleJournal();
         // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+        // magazines list
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
         // pnrd indexes
         $types = $model->types();
 
+        /**
+         * saving base model or collecting errors (converting to string) if not succeeded
+         */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
+        } elseif (Yii::$app->request->post() && !$model->save()) {
+            foreach ($model->getErrors() as $error) {
+                $message[] = implode(' ', $error);
+            }
+            $errors = implode('<br>', $message);
+            Yii::$app->session->setFlash('danger', 'Сохранение не удалось' . '<br><br>' . $errors);
         }
 
+        // rendering view
         return $this->render('create', [
             'model' => $model,
             'languages' => $languages,

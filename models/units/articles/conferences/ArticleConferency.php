@@ -1,12 +1,10 @@
 <?php
 
-namespace app\models\units\articles\conferencies;
+namespace app\models\units\articles\conferences;
 
+// project classes
 use app\interfaces\UnitInterface;
-use app\models\units\articles\traits\ArticleQueryTrait;
-use app\models\units\articles\traits\SchemeTrait;
-use app\models\units\articles\traits\UnitTrait;
-use yii\db\ActiveRecord;
+use app\models\units\articles\Article;
 
 /**
  * ActiveRecord model class for table "articles_conferencies";
@@ -20,12 +18,8 @@ use yii\db\ActiveRecord;
  * @property string $text_index
  * @property string $file
  */
-class ArticleConferency extends ActiveRecord implements UnitInterface
+class ArticleConferency extends Article implements UnitInterface
 {
-
-    use SchemeTrait;
-    use UnitTrait;
-    use ArticleQueryTrait;
 
     /**
      * @inheritdoc
@@ -76,59 +70,6 @@ class ArticleConferency extends ActiveRecord implements UnitInterface
 
     } // end function
 
-
-
-    /**
-     * GETTERS
-     */
-
-
-
-    /**
-     * return string value of current article language
-     *
-     * @return string
-     */
-    public function getLanguage()
-    {
-
-    }
-
-
-
-    /**
-     * @return array|void
-     */
-    public function getAuthors()
-    {
-        // TODO: Implement getUnitauthors() method.
-    }
-
-
-
-    /**
-     * @return int|void
-     */
-    public function getIndex()
-    {
-        // TODO: Implement getPnrdindex() method.
-    }
-
-
-
-    /**
-     * @return int|void
-     */
-    public function getPersonalIndex()
-    {
-        // TODO: Implement getPersonalIndex() method.
-    }
-
-
-
-    /**
-     * END GETTERS
-     */
 
 
 

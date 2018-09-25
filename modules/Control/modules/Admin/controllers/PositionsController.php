@@ -2,8 +2,10 @@
 
 namespace app\modules\Control\modules\Admin\controllers;
 
+// project classes
+use app\models\common\Positions;
+// yii classes
 use Yii;
-use app\modules\Control\models\Positions;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -14,11 +16,13 @@ use yii\filters\VerbFilter;
  */
 class PositionsController extends Controller
 {
+
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
+
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -27,7 +31,10 @@ class PositionsController extends Controller
                 ],
             ],
         ];
-    }
+
+    } // end function
+
+
 
     /**
      * Lists all Positions models.
@@ -35,6 +42,7 @@ class PositionsController extends Controller
      */
     public function actionIndex()
     {
+
         $dataProvider = new ActiveDataProvider([
             'query' => Positions::find(),
         ]);
@@ -42,7 +50,10 @@ class PositionsController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Displays a single Positions model.
@@ -52,10 +63,14 @@ class PositionsController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Creates a new Positions model.
@@ -64,6 +79,7 @@ class PositionsController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Positions();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,7 +89,10 @@ class PositionsController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Updates an existing Positions model.
@@ -84,6 +103,7 @@ class PositionsController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -93,7 +113,10 @@ class PositionsController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
+
+    } // end action
+
+
 
     /**
      * Deletes an existing Positions model.
@@ -104,10 +127,14 @@ class PositionsController extends Controller
      */
     public function actionDelete($id)
     {
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
+
+    } // end action
+
+
 
     /**
      * Finds the Positions model based on its primary key value.
@@ -118,10 +145,13 @@ class PositionsController extends Controller
      */
     protected function findModel($id)
     {
+
         if (($model = Positions::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-}
+
+    } // end function
+
+} // end class

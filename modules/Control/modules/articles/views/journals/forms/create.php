@@ -17,7 +17,9 @@ use yii\helpers\Html;
 
 <div class="articles-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php
+    $form = ActiveForm::begin();
+    ?>
 
     <br>
 
@@ -31,11 +33,17 @@ use yii\helpers\Html;
         <b style="color: red;">Авторов необходимо сопоставить статье после создания базовой записи</b>
     </div>
 
+    <br>
+    <br>
+
     <div class="row">
         <div class="col-lg-12">
             <?= $form->field($model, 'title')->textarea(['maxlength' => true]) ?>
         </div>
     </div>
+
+    <br>
+    <br>
 
     <div class="row">
         <div class="col-lg-6">
@@ -53,6 +61,9 @@ use yii\helpers\Html;
             <?= $form->field($model, 'direct_number')->textInput(['maxlength' => true]) ?>
         </div>
     </div>
+
+    <br>
+    <br>
 
     <div class="row">
         <div class="col-lg-2">
@@ -89,17 +100,26 @@ use yii\helpers\Html;
         </div>
     </div>
 
+    <br>
+    <br>
+
     <div class="row">
         <div class="col-lg-12">
             <?= $form->field($model, 'annotation')->textarea(); ?>
         </div>
     </div>
 
+    <br>
+    <br>
+
     <div class="row">
         <div class="col-lg-12">
             <?= $form->field($model, 'index')->textarea(['rows' => 5]); ?>
         </div>
     </div>
+
+    <br>
+    <br>
 
     <div class="row">
         <div class="col-lg-5">

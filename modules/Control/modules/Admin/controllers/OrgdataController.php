@@ -43,10 +43,14 @@ class OrgdataController extends Controller
 
         $model = Organisation::find()->one();
 
-        if (Yii::$app->request->post() && $model->load(Yii::$app->request->post())) {
+        if (Yii::$app->request->post()) {
+            $model = new Organisation();
+            $model->load(Yii::$app->request->post());
             $model->id = 1;
             if ($model->save()) {
-                return $this->redirect('/control/admin/orgdata');
+                Yii::$app->session->setFlash('success', 'Данные обновлены');
+            } else {
+                Yii::$app->session->setFlash('danger', 'Не удалось обновить данные');
             }
         }
 

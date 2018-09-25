@@ -4,6 +4,7 @@ namespace app\models\units\articles;
 
 // project classes
 use app\interfaces\UnitInterface;
+use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\models\units\articles\traits\ArticleQueryTrait;
 use app\models\units\articles\traits\SchemeTrait;
@@ -43,6 +44,9 @@ class Article extends ActiveRecord implements UnitInterface
         parent::afterSave($insert, $changedAttributes);
 
         // saving language
+        $newmagazine = new Magazines();
+        $newmagazine->magazine = $this->magazine;
+        $newmagazine->save();
         $newlanguage = new Languages();
         $newlanguage->language = strtolower($this->language);
         $newlanguage->save();

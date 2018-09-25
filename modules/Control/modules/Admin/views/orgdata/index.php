@@ -27,18 +27,25 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 
 <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-5">
         Название
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-7">
         <div class="form-control">
             <?= $model->organisation; ?>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-7">
+<br>
 
+<div class="row">
+    <div class="col-lg-5">
+        Ссылка на сетевой ресурс организации
+    </div>
+    <div class="col-lg-7">
+        <div class="form-control">
+            <?= $model->weblink; ?>
+        </div>
     </div>
 </div>

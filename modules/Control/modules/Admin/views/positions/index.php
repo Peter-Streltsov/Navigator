@@ -11,15 +11,23 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="positions-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <br>
+    <br>
+    <br>
+
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <br>
+    <br>
+    <br>
+
     <?php Pjax::begin(); ?>
 
     <p>
-        <?= Html::a('Добавить', ['create'], ['class' => 'button primary big']) ?>
+        <?= Html::a('Создать должность', ['create'], ['class' => 'button primary big']) ?>
     </p>
 
+    <br>
     <br>
 
     <?= GridView::widget([
@@ -28,8 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'position',
 
             [
-                    'class' => 'yii\grid\ActionColumn',
-                'template' => '{update}'
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}'
             ],
         ],
     ]); ?>

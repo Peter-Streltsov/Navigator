@@ -66,6 +66,8 @@ class Languages extends ActiveRecord
     public function beforeSave($insert)
     {
 
+        $this->language = strtolower($this->language);
+
         if (parent::beforeSave($insert)) {
             if (!Languages::find()->where(['language' => $this->language])->exists()) {
                 Yii::$app->session->setFlash('warning', 'Список языков обновлен');

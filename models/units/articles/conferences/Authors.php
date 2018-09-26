@@ -23,7 +23,7 @@ class Authors extends ActiveRecord
     public static function tableName()
     {
 
-        return 'articles_conferencies_authors';
+        return 'articles_conferences_authors';
 
     } // end function
 

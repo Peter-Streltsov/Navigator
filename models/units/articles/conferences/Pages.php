@@ -21,7 +21,7 @@ class Pages extends ActiveRecord
     public static function tableName()
     {
 
-        return 'article_conferencies_pages';
+        return 'article_conferences_pages';
 
     } // end function
 

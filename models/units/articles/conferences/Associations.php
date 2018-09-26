@@ -5,14 +5,14 @@ namespace app\models\units\articles\conferences;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "affilations".
+ * This is the model class for table "articles_conferences_associations";
  *
  * @property int $id
  * @property string $name
  * @property int $article_id
  * @property string $type
  */
-class Affilations extends ActiveRecord
+class Associations extends ActiveRecord
 {
 
     /**
@@ -21,7 +21,7 @@ class Affilations extends ActiveRecord
     public static function tableName()
     {
 
-        return 'articles_affilations';
+        return 'articles_conferences_associations';
 
     } // end function
 

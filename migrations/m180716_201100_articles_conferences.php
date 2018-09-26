@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m180716_201100_articles_conferencies
  */
-class m180716_201100_articles_conferencies extends Migration
+class m180716_201100_articles_conferences extends Migration
 {
     /**
      * @inheritdoc
@@ -13,7 +13,7 @@ class m180716_201100_articles_conferencies extends Migration
     public function safeUp()
     {
 
-        $this->createTable('articles_conferencies', [
+        $this->createTable('articles_conferences', [
             'id' => $this->primaryKey(),
             'title' => $this->text()->notNull(),
             'conferency_collection' => $this->text()->notNull(),
@@ -36,7 +36,7 @@ class m180716_201100_articles_conferencies extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('articles_conferencies');
+        $this->dropTable('articles_conferences');
 
         return true;
 

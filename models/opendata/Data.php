@@ -3,7 +3,7 @@
 namespace app\models\opendata;
 
 use app\models\units\articles\collections\ArticleCollection;
-use app\models\units\articles\conferencies\ArticleConferency;
+use app\models\units\articles\conferences\ArticleConference;
 use app\models\units\articles\journals\ArticleJournal;
 
 /**
@@ -24,7 +24,7 @@ class Data
     {
 
         $articles_journals = ArticleJournal::find()->asArray()->all();
-        $articles_conferencies = ArticleConferency::find()->asArray()->all();
+        $articles_conferencies = ArticleConference::find()->asArray()->all();
         $articles_collections = ArticleCollection::find()->asArray()->all();
         return array_merge($articles_journals, $articles_conferencies, $articles_collections);
 

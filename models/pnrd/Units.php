@@ -3,7 +3,7 @@
 namespace app\models\pnrd;
 
 use app\models\units\articles\collections\ArticleCollection;
-use app\models\units\articles\conferencies\ArticleConferency;
+use app\models\units\articles\conferences\ArticleConference;
 use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\dissertations\Dissertations;
 
@@ -26,7 +26,7 @@ class Units
     {
 
         $this->articlesJournals = new ArticleJournal();
-        $this->articlesConferences = new ArticleConferency();
+        $this->articlesConferences = new ArticleConference();
         $this->articlesCollections = new ArticleCollection();
         $this->monographs = null;
         $this->dissertations = new Dissertations();

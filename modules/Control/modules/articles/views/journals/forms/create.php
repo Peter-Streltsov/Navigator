@@ -17,9 +17,7 @@ use yii\helpers\Html;
 
 <div class="articles-form">
 
-    <?php
-    $form = ActiveForm::begin();
-    ?>
+    <?php $form = ActiveForm::begin(); ?>
 
     <br>
 

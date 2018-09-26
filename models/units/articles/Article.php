@@ -22,9 +22,13 @@ class Article extends ActiveRecord implements UnitInterface
 {
 
     use SchemeTrait;
-    use ArticleQueryTrait;
     use UnitTrait;
 
+    /**
+     * @deprecated
+     *
+     * @return string
+     */
     public static function tableName()
     {
 
@@ -43,10 +47,13 @@ class Article extends ActiveRecord implements UnitInterface
 
         parent::afterSave($insert, $changedAttributes);
 
+        if (isset($this->magazine)) {
+            $newmagazine = new Magazines();
+            $newmagazine->magazine = $this->magazine;
+            $newmagazine->save();
+        }
+
         // saving language
-        $newmagazine = new Magazines();
-        $newmagazine->magazine = $this->magazine;
-        $newmagazine->save();
         $newlanguage = new Languages();
         $newlanguage->language = strtolower($this->language);
         $newlanguage->save();

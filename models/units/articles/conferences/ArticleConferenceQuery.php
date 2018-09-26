@@ -1,21 +1,20 @@
 <?php
 
-namespace app\models\units\articles\journals;
+namespace app\models\units\articles\conferences;
 
 use yii\db\ActiveQuery;
 
 /**
- * ActiveQuery class for [[Affilations]]
+ * ActiveQuery class for [[Article]]
  *
- * @see ArticlesAffilations
+ * @see ArticlesConferencies
  */
-class AffilationsQuery extends ActiveQuery
+class ArticleConferenceQuery extends ActiveQuery
 {
 
     /**
      * @inheritdoc
-     *
-     * @return Affilations[]|array
+     * @return ArticleConference[]|array
      */
     public function all($db = null)
     {
@@ -28,8 +27,7 @@ class AffilationsQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     *
-     * @return Affilations|array|null
+     * @return ArticleConference|array|null
      */
     public function one($db = null)
     {

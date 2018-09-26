@@ -4,22 +4,17 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\units\articles\journals\ArticleJournal */
-/* @var $classes  */
-/* @var $types array */
-/* @var $languages \app\models\common\Languages */
-/* @var $magazines array */
+/* @var $model app\models\units\articles\conferences\ArticleConference */
 
 $this->title = 'Добавить статью';
-$this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Статьи - материалы конференций', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<div class="articles-create">
+<div class="article-conferencies-create">
 
     <br>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <br>
     <br>

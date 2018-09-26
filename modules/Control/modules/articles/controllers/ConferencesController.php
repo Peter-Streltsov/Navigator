@@ -3,18 +3,22 @@
 namespace app\modules\Control\modules\articles\controllers;
 
 // project classes
-use app\models\units\articles\conferences\ArticleConferency;
+use app\models\units\articles\conferences\ArticleConference;
+use app\models\common\Languages;
+use app\models\common\Magazines;
+use app\models\pnrd\indexes\IndexesArticles;
 // yii2 classes
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
- * ConferenciesController implements the CRUD actions for ArticleConferencies model.
+ * ConferencesController implements the CRUD actions for ArticleConference model
  */
-class ConferenciesController extends Controller
+class ConferencesController extends Controller
 {
 
     /**
@@ -37,14 +41,14 @@ class ConferenciesController extends Controller
 
 
     /**
-     * Lists all ArticleConferencies models.
+     * Lists all ArticleConference models
      * @return mixed
      */
     public function actionIndex()
     {
 
         $dataProvider = new ActiveDataProvider([
-            'query' => ArticleConferency::find(),
+            'query' => ArticleConference::find(),
         ]);
 
         return $this->render('index', [
@@ -56,7 +60,7 @@ class ConferenciesController extends Controller
 
 
     /**
-     * Displays a single ArticleConferencies model
+     * Displays a single ArticleConference model
      *
      * @param $id
      * @return string
@@ -75,8 +79,8 @@ class ConferenciesController extends Controller
 
 
     /**
-     * Creates a new ArticleConferencies model.
-     * If creation successful, will be redirect to 'view' page
+     * Creates a new ArticleConference model
+     * If creation successful, will redirect to 'view' page
      *
      * @return string|\yii\web\Response
      * @throws \yii\base\InvalidConfigException
@@ -86,14 +90,39 @@ class ConferenciesController extends Controller
     public function actionCreate()
     {
 
-        $model = new ArticleConferency();
+        /**
+         * view parameters
+         */
 
+        $model = new ArticleConference();
+        // added languages list
+        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+        // magazines list
+        $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
+        // article categories (pnrd)
+        $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+        // pnrd indexes
+        $types = $model->types();
+
+        /**
+         * saving base model or collecting errors (converting to string) if not succeeded
+         */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
+        } elseif (Yii::$app->request->post() && !$model->save()) {
+            foreach ($model->getErrors() as $error) {
+                $message[] = implode(' ', $error);
+            }
+            $errors = implode('<br>', $message);
+            Yii::$app->session->setFlash('danger', 'Сохранение не удалось' . '<br><br>' . $errors);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'languages' => $languages,
+            'magazines' => $magazines,
+            'types' => $types,
+            'classes' => $classes
         ]);
 
     } // end action
@@ -101,7 +130,7 @@ class ConferenciesController extends Controller
 
 
     /**
-     * Updates an existing ArticleConferencies model.
+     * Updates an existing ArticleConference model
      * If update successful, will redirect to 'view' page
      *
      * @param $id
@@ -129,8 +158,8 @@ class ConferenciesController extends Controller
 
 
     /**
-     * Deletes an existing ArticleConferencies model.
-     * If deletion successful, will be redirect to 'index' page
+     * Deletes an existing ArticleConference model
+     * If deletion successful, will redirect to 'index' page
      *
      * @param $id
      * @return \yii\web\Response
@@ -150,18 +179,18 @@ class ConferenciesController extends Controller
 
 
     /**
-     * Finds the ArticleConferencies model based on its primary key value.
+     * Finds the ArticleConference model based on its primary key value
      * If the model is not found, a 404 HTTP exception will be thrown
      *
      * @param $id
-     * @return ArticleConferency|null
+     * @return ArticleConference|null
      * @throws NotFoundHttpException
      * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {
 
-        if (($model = ArticleConferency::findOne($id)) !== null) {
+        if (($model = ArticleConference::findOne($id)) !== null) {
             return $model;
         }
 

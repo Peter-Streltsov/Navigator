@@ -24,7 +24,7 @@ class m180319_021020_articles extends Migration
     public function safeUp()
     {
 
-        $this->createTable('articles_journal', [
+        $this->createTable('articles_journals', [
             'id' => $this->primaryKey(),
             'type' =>$this->integer()->notNull(),
             'class' => $this->integer()->notNull(),
@@ -53,7 +53,7 @@ class m180319_021020_articles extends Migration
     public function safeDown()
     {
 
-        $this->dropTable('articles_journal');
+        $this->dropTable('articles_journals');
 
         return true;
 

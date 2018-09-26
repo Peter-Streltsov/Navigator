@@ -11,7 +11,6 @@ namespace app\models\units\articles\traits;
 trait ArticleQueryTrait
 {
 
-
     /**
      *
      */
@@ -25,7 +24,7 @@ trait ArticleQueryTrait
 
 
     /**
-     *
+     * ads query parameter - 'year' == current year
      */
     public function currentYear()
     {

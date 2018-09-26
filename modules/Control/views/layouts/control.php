@@ -185,7 +185,7 @@ AppAsset::register($this);
                                         ],
                                         [
                                             'label' => 'Статьи в сборниках трудов конференций',
-                                            'url' => '/control/articles/conferencies'
+                                            'url' => '/control/articles/conferences'
                                         ]
                                     ]
                                 ],
@@ -216,7 +216,7 @@ AppAsset::register($this);
                                 ],
                                 [
                                     'label' => 'Участие в конференциях',
-                                    'url' => '/control/conferencies'
+                                    'url' => '/control/conferences'
                                 ]
                             ]
                         ],*/

@@ -5,16 +5,16 @@ namespace app\models\units\articles\conferences;
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[Affilations]].
+ * ActiveQuery class for [[Associations]]
  *
- * @see Affilations
+ * @see Associations
  */
-class AffilationsQuery extends ActiveQuery
+class AssociationsQuery extends ActiveQuery
 {
 
     /**
      * @inheritdoc
-     * @return Affilations[]|array
+     * @return Associations[]|array
      */
     public function all($db = null)
     {
@@ -27,7 +27,7 @@ class AffilationsQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Affilations|array|null
+     * @return Associations|array|null
      */
     public function one($db = null)
     {

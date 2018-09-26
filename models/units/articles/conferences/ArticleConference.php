@@ -7,18 +7,18 @@ use app\interfaces\UnitInterface;
 use app\models\units\articles\Article;
 
 /**
- * ActiveRecord model class for table "articles_conferencies";
+ * ActiveRecord model class for table "articles_conferences";
  *
  * @property int $id
  * @property string $title
- * @property string $conferency_collection
+ * @property string $conference_collection
  * @property string $number
  * @property int $language
  * @property string $annotation
  * @property string $text_index
  * @property string $file
  */
-class ArticleConferency extends Article implements UnitInterface
+class ArticleConference extends Article implements UnitInterface
 {
 
     /**
@@ -27,7 +27,7 @@ class ArticleConferency extends Article implements UnitInterface
     public static function tableName()
     {
 
-        return 'articles_conferencies';
+        return 'articles_conferences';
 
     } // end function
 
@@ -41,8 +41,8 @@ class ArticleConferency extends Article implements UnitInterface
 
         return [
             [['title', 'conferency_collection'], 'required'],
-            [['title', 'section', 'conferency_collection', 'annotation', 'text_index'], 'string'],
-            [['language'], 'integer'],
+            [['title', 'section', 'language', 'conferency_collection', 'annotation', 'text_index'], 'string'],
+            [['year'], 'integer'],
             [['number', 'file'], 'string', 'max' => 255],
         ];
 
@@ -76,12 +76,12 @@ class ArticleConferency extends Article implements UnitInterface
     /**
      * @inheritdoc
      *
-     * @return ArticleConferencyQuery the active query used by this AR class.
+     * @return ArticleConferenceQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new ArticleConferencyQuery(get_called_class());
+        return new ArticleConferenceQuery(get_called_class());
 
     } // end function
 

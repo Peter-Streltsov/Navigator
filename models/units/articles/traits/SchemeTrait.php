@@ -104,11 +104,11 @@ trait SchemeTrait
         }
 
         // deleting affilations
-        $affilations = $this->currentNamespace() . 'Affilations';
-        $affilations = new $affilations();
-        $affilations::find()->where(['article_id' => $this->id])->all();
-        foreach ($affilations as $affilation) {
-            $affilation->delete();
+        $associations = $this->currentNamespace() . 'Associations';
+        $associations = new $associations();
+        $associations::find()->where(['article_id' => $this->id])->all();
+        foreach ($associations as $association) {
+            $association->delete();
         }
 
     } // end function

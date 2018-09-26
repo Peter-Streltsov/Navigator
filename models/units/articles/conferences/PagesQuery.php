@@ -5,7 +5,7 @@ namespace app\models\units\articles\conferences;
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[ArticlePages]].
+ * This is the ActiveQuery class for [[ArticlePages]]
  *
  * @see ArticlePages
  */

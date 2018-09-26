@@ -8,7 +8,7 @@ use app\models\opendata\Data;
 use app\models\pnrd\facades\Indexes;
 use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\collections\ArticleCollection;
-use app\models\units\articles\conferencies\ArticleConferency;
+use app\models\units\articles\conferences\ArticleConference;
 use app\models\units\dissertations\Dissertations;
 use app\models\identity\Personnel;
 
@@ -37,7 +37,7 @@ class CommonData
         $this->articles = new \stdClass();
         $this->articles->journals = ArticleJournal::find();
         $this->articles->collections = ArticleCollection::find();
-        $this->articles->conferency = ArticleConferency::find();
+        $this->articles->conferency = ArticleConference::find();
         $this->dissertations = Dissertations::find();
 
     } // end construct

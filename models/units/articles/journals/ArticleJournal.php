@@ -41,7 +41,7 @@ class ArticleJournal extends Article implements UnitInterface
     public static function tableName()
     {
 
-        return 'articles_journal';
+        return 'articles_journals';
 
     } // end function
 

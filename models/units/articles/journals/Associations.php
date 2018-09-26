@@ -1,18 +1,18 @@
 <?php
 
-namespace app\models\units\articles\collections;
+namespace app\models\units\articles\journals;
 
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "affilations".
+ * Model class for table "article_journals_associations";
  *
  * @property int $id
  * @property string $name
  * @property int $article_id
  * @property string $type
  */
-class Affilations extends ActiveRecord
+class Associations extends ActiveRecord
 {
 
     /**
@@ -21,7 +21,7 @@ class Affilations extends ActiveRecord
     public static function tableName()
     {
 
-        return 'articles_collections_affilations';
+        return 'articles_journals_associations';
 
     } // end function
 
@@ -62,12 +62,12 @@ class Affilations extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return AffilationsQuery the active query used by this AR class.
+     * @return AssociationsQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new AffilationsQuery(get_called_class());
+        return new AssociationsQuery(get_called_class());
 
     } // end function
 

@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m180716_231410_articles_conferencies_types
+ * Class m180716_231410_articles_conferences_types
  */
-class m180716_231410_articles_conferencies_types extends Migration
+class m180716_231410_articles_conferences_types extends Migration
 {
 
     /**
@@ -14,12 +14,12 @@ class m180716_231410_articles_conferencies_types extends Migration
     public function safeUp()
     {
 
-        $this->createTable('articles_conferencies_types', [
+        $this->createTable('articles_conferences_types', [
             'id' => $this->primaryKey(),
             'type' => $this->string()->notNull()
         ]);
 
-        $this->batchInsert('articles_conferencies_types', ['type'], [
+        $this->batchInsert('articles_conferences_types', ['type'], [
             ['статья в сборнике трудов конференции'],
             ['тезисы доклада конференции']
         ]);
@@ -34,7 +34,7 @@ class m180716_231410_articles_conferencies_types extends Migration
     public function safeDown()
     {
 
-        $this->dropTable('articles_conferencies_types');
+        $this->dropTable('articles_conferences_types');
 
         return true;
 

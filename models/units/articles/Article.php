@@ -25,8 +25,9 @@ class Article extends ActiveRecord implements UnitInterface
     use UnitTrait;
 
     /**
-     * @deprecated
+     * should not be used and must be redefined in child classes
      *
+     * @deprecated
      * @return string
      */
     public static function tableName()
@@ -47,11 +48,7 @@ class Article extends ActiveRecord implements UnitInterface
 
         parent::afterSave($insert, $changedAttributes);
 
-        if (isset($this->magazine)) {
-            $newmagazine = new Magazines();
-            $newmagazine->magazine = $this->magazine;
-            $newmagazine->save();
-        }
+        $this->savePublisher();
 
         // saving language
         $newlanguage = new Languages();
@@ -72,6 +69,33 @@ class Article extends ActiveRecord implements UnitInterface
 
         parent::afterDelete();
         $this->deleteLinkedData();
+
+    } // end function
+
+
+
+    /**
+     * saving publisher for current article (on update and create actions)
+     */
+    public function savePublisher()
+    {
+
+        if (isset($this->magazine)) {
+            $newmagazine = new Magazines();
+            $newmagazine->magazine = $this->magazine;
+            $newmagazine->save();
+        }
+
+        /**
+         *
+         */
+
+        /*if (isset($this->conference_collection)) {
+            $conference = new Conference();
+            $conference->name = $this->conference_collection;
+            $conference->section = $this->section;
+            $conference->save();
+        }*/
 
     } // end function
 

@@ -1,8 +1,9 @@
 <?php
 
-use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\grid\GridView;
+use yii\grid\ActionColumn;
 
 /* @var $this \yii\web\View */
 /* @var $citations \app\modules\Control\models\ArticlesCitations[]|array|static */
@@ -15,62 +16,74 @@ use yii\widgets\ActiveForm;
 <br>
 
 <div class="panel panel-default">
-    <div class="panel panel-body">
-
+    <div class="panel panel-heading">
         <h4>Цитирования:</h4>
+    </div>
+    <div class="panel panel-body">
 
         <br>
 
 
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 <?php
 
-                $i = 1;
-                foreach ($citations as $key => $citation) {
-                    echo "<div class='form-inline'>";
-
-                    echo Html::beginForm('', 'post');
-                    echo Html::input('hidden', 'citation_flag', 'delete');
-                    echo Html::input('hidden', 'citation_id', $citation->id);
-                    echo Html::input('text', '', $i, ['style' => 'width: 5vh;', 'class' => 'form-control', 'readonly' => true]);
-                    echo Html::input('text', 'title', $citation->title, ['style' => 'width: 50vh;', 'class' => 'form-control', 'readonly' => true]);
-                    echo Html::input('text', 'class', $citation->class, ['style' => 'width: 15vh;', 'class' => 'form-control', 'readonly' => true]);
-                    echo Html::submitButton('<span style="color: red;" class="glyphicon glyphicon-remove"></span>', ['class' => 'btn btn-default']);
-                    echo Html::endForm();
-                    echo "</div>";
-                    echo "<br>";
-                    $i++;
-                }
+                echo GridView::widget([
+                    'dataProvider' => $citations,
+                    'tableOptions' => [
+                        'style' => 'border-radius: 3vh;',
+                        'class' => 'table table-hover'
+                    ],
+                    'layout' => "{items}",
+                    'columns' => [
+                        [
+                            'class' => 'yii\grid\SerialColumn',
+                        ],
+                        [
+                            'attribute' => 'title',
+                            'label' => '',
+                        ],
+                        [
+                            'attribute' => 'class',
+                            'label' => ''
+                        ],
+                        [
+                            'class' => ActionColumn::className(),
+                            'buttons' => [
+                                'delete' => function($url, $model) {
+                                    return Html::a('<span style="color: red;" class="glyphicon glyphicon-remove"></span>', 'deletecitation?id=' . $model->article_id . '&citation=' . $model->id);
+                                }
+                            ],
+                            'template' => '{delete}'
+                        ]
+                    ]
+                ]);
 
                 ?>
             </div>
-            <div class="col-lg-2">
+
+            <div class="col-lg-1">
+
+            </div>
+
+            <div class="col-lg-5">
 
                 <?php
 
-                Modal::begin([
-                    'toggleButton' => [
-                        'label' => '<span style="color: green;" class="glyphicon glyphicon-plus"></span>',
-                        'class' => 'btn btn-default'
-                    ]
-
+                $citations = ActiveForm::begin([
+                    'action' => 'citation?id=' . $id,
+                    'method' => 'post',
+                    'options' => [
+                        'data-pjax' => true,
+                        'enctype' => 'multipart/form-data'
+                    ],
                 ]);
-
-                $citations = ActiveForm::begin();
-
-                echo Html::hiddenInput('citation_flag', '1');
-                echo $citations->field($newcitation, 'title')->textInput();
+                echo $citations->field($newcitation, 'title')->textarea();
                 echo $citations->field($newcitation, 'class')->dropDownList($citation_classes);
-                echo $citations->field($newcitation, 'article_id')->textInput(['value' => $model->id, 'readonly' => true]);
+                echo $citations->field($newcitation, 'article_id')->hiddenInput(['value' => $model->id, 'readonly' => true])->label('');
+                echo Html::submitButton('<span style="color: green;" class="glyphicon glyphicon-plus"></span>', ['class' => 'btn btn-default']);
 
-
-                echo Html::submitButton('Сохранить', ['class' => 'button primary big']);
-
-                //$citations::end();
                 ActiveForm::end();
-
-                Modal::end();
 
                 ?>
 

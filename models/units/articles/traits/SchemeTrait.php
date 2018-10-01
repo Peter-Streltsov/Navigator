@@ -51,9 +51,12 @@ trait SchemeTrait
      */
     public function type()
     {
+        if (isset ($this->type)) {
+            $type = Types::find()->select(['type'])->where(['id' => $this->type])->asArray()->one();
+            return $type['type'];
+        }
 
-        $type = Types::find()->select(['type'])->where(['id' => $this->type])->asArray()->one();
-        return $type['type'];
+        return null;
 
     } // end function
 

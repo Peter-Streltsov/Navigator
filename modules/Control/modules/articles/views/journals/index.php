@@ -63,17 +63,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         $fio = [];
 
-                        foreach ($auth as $author) {
+                        /*foreach ($auth as $author) {
                             $fio[$author['id']] = $author['lastname'].' '.mb_substr($author['name'],0,1,"UTF-8")."."
                                 .mb_substr($author['secondname'],0,1,"UTF-8").".";
                         }
 
-                        return implode(' ', $fio);
+                        return implode(' ', $fio);*/
                     };
 
-                    isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
+                    //isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
 
-                    return $authors;
+                    //return $authors;
                 }
             ],
 
@@ -141,7 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return implode("<br>", $user);
                         };
 
-                        //isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
+                        isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
                         $authors = $data->authors();
                         isset ($authors[0]) ? $authors = $links($authors) : $authors = null;
                         return $authors;

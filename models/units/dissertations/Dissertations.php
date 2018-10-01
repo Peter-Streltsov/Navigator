@@ -4,7 +4,7 @@ namespace app\models\units\dissertations;
 
 use app\interfaces\UnitInterface;
 use app\models\common\Habilitations;
-use app\modules\Control\models\Authors;
+use app\models\identity\Authors;
 use yii\db\ActiveRecord;
 
 /**

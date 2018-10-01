@@ -5,7 +5,7 @@ namespace app\modules\Control\controllers;
 use app\models\common\Cities;
 use app\models\units\dissertations\Dissertations;
 use app\models\units\dissertations\DissertationTypes;
-use app\modules\Control\models\Authors;
+use app\models\identity\Authors;
 use app\models\common\Habilitations;
 use Yii;
 use yii\data\ActiveDataProvider;

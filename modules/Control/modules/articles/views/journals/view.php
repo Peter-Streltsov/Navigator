@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 /* @var $authors \app\modules\Control\models\Authors[]|array|string */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Статьи - публикации в журналах', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="articles-view">

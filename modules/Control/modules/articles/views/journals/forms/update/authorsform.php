@@ -4,7 +4,6 @@
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Modal;
 
 /* @var $author_items array */
 /* @var $file \app\modules\Control\models\Fileupload|mixed|string */
@@ -16,52 +15,81 @@ use yii\bootstrap\Modal;
 ?>
 
 <div class="panel panel-default">
+    <div class="panel panel-heading">
+        <h4>Авторы:</h4>
+    </div>
     <div class="panel panel-body">
         <div class="row">
-            <div class="col-lg-10">
 
-                <h4>Авторы:</h4>
+            <div class="col-lg-6">
+
+                <br>
+                <br>
                 <br>
 
-                    <?php
-                    foreach ($model_authors as $model) {
-                        echo '<div class="form-inline">';
-                        echo Html::beginForm(['articles/update', 'id' => $model->id, 'authid' => $model->id], 'post');
-                        echo Html::input('text', 'username', $model->author, ['style' => 'width: 55vh;', 'class' => 'form-control', 'readonly' => true]);
-                        echo Html::input('text', 'part', $model->part, ['style' => 'color: green; width: 15vh;', 'class' => 'form-control', 'readonly' => true]);
-                        echo Html::input('hidden', 'delete', '1');
-                        echo Html::input('hidden', 'article_authors_id', $model->id);
-                        echo Html::input('hidden', 'author', $model->author_id);
-                        echo Html::submitButton('<span style="color: red;" class="glyphicon glyphicon-remove"></span>', ['class' => 'btn btn-default']);
-                        echo Html::endForm();
-                        echo "</div>";
-                        echo "<br>";
-                    }
-                    ?>
+                <div class="panel panel-default">
+                    <div class="panel-panel-body">
+                        <?php
+
+                        echo \yii\grid\GridView::widget([
+                            'dataProvider' => $linked_authors,
+                            'layout' => "{items}",
+                            'tableOptions' => [
+                                'class' => 'table table-hover'
+                            ],
+                            'columns' => [
+                                [
+                                    'class' => 'yii\grid\SerialColumn',
+                                ],
+                                [
+                                    'attribute' => 'lastname',
+                                    'label' => '',
+                                    'value' => function($model) {
+                                        $author = $model->author();
+                                        return $author->name . ' ' . $author->secondname . ' ' . $author->lastname;
+                                    }
+                                ],
+                                [
+                                    'class' => \yii\grid\ActionColumn::className(),
+                                    'buttons' => [
+                                        'delete' => function($url, $model) {
+                                            return Html::a('<span style="color: red;" class="glyphicon glyphicon-remove"></span>', 'deleteauthor?author_id='. $model->id . '&id='. $model->article_id);
+                                        }
+                                    ],
+                                    'template' => '{delete}'
+                                ]
+                            ]
+                        ]);
+                        ?>
+
+                        <br>
+                        <br>
+                        <br>
+
+                    </div>
+                </div>
 
             </div>
-            <div class="col-lg-2">
-                    <br>
+
+            <div class="col-lg-1">
+
+            </div>
+
+            <div class="col-lg-5">
+
                     <br>
                     <br>
 
                     <?php
 
-                    Modal::begin([
-                        'toggleButton' => [
-                            'label' => '<span style="color: green;" class="glyphicon glyphicon-plus"></span>',
-                            'class' => 'btn btn-default',
-                            ],
-                        /*'options' => [
-                            'width' => '200'
+                    $form = ActiveForm::begin([
+                        'action' => ['author?id=' . $id],
+                        'method' => 'post',
+                        'options' => [
+                            'data-pjax' => true,
+                            'enctype' => 'multipart/form-data'
                         ],
-                        'bodyOptions' => [
-                                'width' => '150'
-                        ]*/
                     ]);
-
-                    $form = ActiveForm::begin();
-                    echo Html::hiddenInput('add_author', 1);
                     echo $form->field($newauthor, 'author_id')->widget(Select2::className(), [
                         'data' => $author_items,
                         'pluginOptions' => [],
@@ -69,15 +97,19 @@ use yii\bootstrap\Modal;
                                 'tags' => true
                         ]
                     ]);
-                    echo $form->field($newauthor, 'article_id')->hiddenInput(['value' => $model->id]);
+                    echo $form->field($newauthor, 'article_id')->hiddenInput(['value' => $id])->label('');
                     echo $form->field($newauthor, 'part')->textInput();
-                    echo Html::submitButton('Добавить', ['class' => 'button primary big']);
-                    ActiveForm::end();
+                    echo Html::submitButton('<span style="color: green;" class="glyphicon glyphicon-plus"></span>');
 
-                    Modal::end();
+                    ActiveForm::end();
 
                     ?>
             </div>
+
         </div>
     </div>
 </div>
+
+<?php
+
+//\yii\helpers\VarDumper::dump($linked_authors);

@@ -175,7 +175,7 @@ class ArticleJournal extends Article implements UnitInterface
     public function getAffilations()
     {
 
-        return $this->hasMany(Affilations::classname(), ['article_id' => 'id']);
+        return $this->hasMany(Associations::classname(), ['article_id' => 'id']);
 
     } // end function
 

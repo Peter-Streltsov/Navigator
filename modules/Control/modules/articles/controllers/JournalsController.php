@@ -8,6 +8,7 @@ use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\articles\journals\Affilations;
+use app\models\units\articles\journals\Associations;
 use app\models\units\articles\journals\Authors;
 use app\models\units\articles\journals\Citations;
 use app\models\units\articles\journals\Pages;
@@ -17,6 +18,7 @@ use app\models\filesystem\Fileupload;
 // yii classes
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -170,42 +172,6 @@ class JournalsController extends Controller
         // main model - current article
         $model = ArticleJournal::find()->where(['id' => $id])->one();
 
-        // deleting text index
-        if (isset($_POST['delete_text'])) {
-            $model->index = null;
-            $model->save();
-        }
-
-        // affilation
-        if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
-            $newaffilation = new Affilations();
-            $newaffilation->article_id = $id;
-            if ($newaffilation->load(Yii::$app->request->post()) && $newaffilation->save()) {
-                Yii::$app->session->setFlash('success', 'Данные обновлены');
-            } else {
-                Yii::$app->session->setFlash('warning', 'Не удалось обновить данные');
-            }
-        } elseif (Yii::$app->request->post() && isset($_POST['affilation_delete'])) {
-            $affilation = ArticlesAffilations::find()->where([
-                'article_id' => $id,
-                'name' => $_POST['affilation_delete']
-            ])->one();
-            $affilation->delete();
-        }
-
-        // adding citation
-        if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
-            $citation = new Citations();
-            if ($_POST['citation_flag'] == 'delete') {
-                $citation = Citations::find()->where(['id' => $_POST['citation_id']])->one();
-                $citation->delete() ?
-                    Yii::$app->session->setFlash('danger', 'Цитирование удалено')
-                    : Yii::$app->session->setFlash('warning', 'Данные не были обновлены');
-            } elseif ($citation->load(Yii::$app->request->post()) && $citation->save()) {
-                Yii::$app->session->setFlash('success', 'Цитирование добавлено');
-            }
-        }
-
         // uploading article file
         if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
             $file = new Fileupload();
@@ -217,32 +183,21 @@ class JournalsController extends Controller
             Yii::$app->session->setFlash('info', 'Статье ' . $articlemodel->title . ' сопоставлен файл ' . $file->name);
         }
 
-        // updating article authors
-        if (Yii::$app->request->post()) {
-            if (isset($_POST['delete']) && $_POST['delete'] == 1) {
-                $author_delete = ArticlesAuthors::find()->where([
-                    'id' => $_POST['article_authors_id']
-                ])->one();
-                $author_delete->delete();
-            }
-            if ($newauthor->load(Yii::$app->request->post())) {
-                $newauthor->save();
-            }
-        }
-
         /**
          * basic view parameters
          */
 
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
         // authors for current article
-        //$model_authors = Authors::find()->where(['article_id' => $id])->all();
-        $model_authors = $model->authors();
-        // authors for current article
-        $authors = ArrayHelper::map(
+        $author_items = ArrayHelper::map(
             AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
             function ($item) {
                 return $item['name'] . ' ' . $item['lastname'];
             });
+
         // file to upload if necessary
         $file = new Fileupload();
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
@@ -265,32 +220,35 @@ class JournalsController extends Controller
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
 
         // added citations
-        //$citations = Citations::find()->where(['article_id' => $id])->all();
-        $citations = $model->citations();
-
-        //$citation_classes = CitationClasses::find()->asArray()->all();
+        //$citations = $model->citations();
+        $citations = new ActiveDataProvider([
+            'query' => Citations::find()->where(['article_id' => $id])
+        ]);
         $citation_classes = ArrayHelper::map(
             CitationClasses::find()->asArray()->all(),
             'class',
             'class'
         );
 
-        $affilations = $model->affilations;
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()->where(['article_id' => $id])
+        ]);
 
         // view
         return $this->render('update', [
-            'affilations' => $affilations,
+            'linked_authors' => $linked_authors,
+            'associations' => $associations,
             'model' => $model,
             'file' => $file,
             'languages' => $languages,
             'magazines' => $magazines,
             'classes' => $classes,
-            'model_authors' => $model_authors,
             'newcitation' => $newcitation,
             'newauthor' => $newauthor,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
-            'author_items' => $authors
+            'author_items' => $author_items,
+            'id' => $id
         ]);
 
     } // end action
@@ -298,8 +256,234 @@ class JournalsController extends Controller
 
 
     /**
-     * Deletes an existing Articles model;
-     * If deletion successful, the browser will redirect to 'index' page
+     * AJAX actions
+     */
+
+
+    /**
+     *
+     */
+    public function actionAuthor($id)
+    {
+
+        $author = new Authors();
+
+        if (Yii::$app->request->post()) {
+            if ($author->load(Yii::$app->request->post())) {
+                $author->save();
+            }
+        }
+
+        $author_items = ArrayHelper::map(
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
+        $newauthor = new Authors();
+
+        return $this->renderAjax('forms/update/authorsform', [
+            'id' => $id,
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items,
+            'newauthor' => $newauthor,
+        ]);
+
+    } // end action
+
+
+
+    /**
+     * @param $author_id
+     * @param $id
+     * @return string
+     * @throws \Throwable
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteauthor($author_id, $id)
+    {
+
+        $deleting_author = Authors::findOne(['id' => $author_id]);
+        $deleting_author->delete();
+
+        $author_items = ArrayHelper::map(
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
+        $newauthor = new Authors();
+
+        return $this->renderAjax('forms/update/authorsform', [
+            'id' => $id,
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items,
+            'newauthor' => $newauthor,
+        ]);
+
+    } // end action
+
+
+
+    /**
+     * @param $id
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionAssociation($id)
+    {
+
+        $associations = new Associations();
+        if ($associations->load(Yii::$app->request->post())) {
+            if (!$associations->save()) {
+                Yii::$app->session->setFlash('danger', 'Добавление организации не удалось');
+            }
+        }
+
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()->where(['article_id' => $id])
+        ]);
+
+        return $this->renderAjax('forms/update/associations', [
+            'associations' => $associations,
+            'id' => $id
+        ]);
+
+    } // end action
+
+
+
+    /**
+     * @param $id
+     * @return false|int
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteassociation($id)
+    {
+
+        $model = Associations::find()->where(['id' => $id ])->one();
+        if ($model != null) {
+            $model->delete();
+        }
+
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()
+        ]);
+
+        return $this->renderAjax('forms/update/associations', [
+            'associations' => $associations,
+            'id' => $id
+        ]);
+
+    } // end action
+
+
+
+    /**
+     * @param $id
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionCitation($id)
+    {
+
+        // saving citation
+        $citation = new Citations();
+
+        if (Yii::$app->request->post() && $citation->load(Yii::$app->request->post())) {
+            $citation->save();
+        }
+
+        // citation class for active form
+        $newcitation = new Citations();
+
+        $citations = new ActiveDataProvider([
+            'query' => Citations::find()->where(['article_id' => $id])
+        ]);
+
+        // data for dropdown list
+        $citation_classes = ArrayHelper::map(
+            CitationClasses::find()->asArray()->all(),
+            'class',
+            'class'
+        );
+
+        // current article model
+        $model = ArticleJournal::find()
+            ->where(['id' => $id])
+            ->one();
+
+        return $this->renderAjax('forms/update/citationsform', [
+            'model' => $model,
+            'citations' => $citations,
+            'citation_classes' => $citation_classes,
+            'newcitation' => $newcitation,
+            'id' => $id
+        ]);
+
+    } // end action
+
+
+
+    public function actionDeletecitation($id, $citation)
+    {
+
+        $citation_to_delete = Citations::findOne(['id' => $citation]);
+        $citation_to_delete->delete();
+
+        // citation class for active form
+        $newcitation = new Citations();
+
+        $citations = new ActiveDataProvider([
+            'query' => Citations::find()->where(['article_id' => $id])
+        ]);
+
+        // data for dropdown list
+        $citation_classes = ArrayHelper::map(
+            CitationClasses::find()->asArray()->all(),
+            'class',
+            'class'
+        );
+
+        // current article model
+        $model = ArticleJournal::find()
+            ->where(['id' => $id])
+            ->one();
+
+        return $this->renderAjax('forms/update/citationsform', [
+            'model' => $model,
+            'citations' => $citations,
+            'citation_classes' => $citation_classes,
+            'newcitation' => $newcitation,
+            'id' => $id
+        ]);
+
+    } // end action
+
+
+    /**
+     * End AJAX
+     */
+
+
+
+    /**
+     * Deletes an existing Articles model
+     * If deletion successful, will redirect to 'index' page
      *
      * @param integer $id
      * @return mixed

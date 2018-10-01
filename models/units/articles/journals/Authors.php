@@ -2,6 +2,7 @@
 
 namespace app\models\units\articles\journals;
 
+use app\models\identity\Authors as AuthorsCommon;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -66,7 +67,7 @@ class Authors extends ActiveRecord
     public function getArticlesbyauthor()
     {
 
-        return $this->hasMany(Articles::className(), ['id' => 'article_id']);
+        return $this->hasMany(ArticleJournal::className(), ['id' => 'article_id']);
 
     }
 
@@ -109,7 +110,7 @@ class Authors extends ActiveRecord
     public function getArticlesbyid()
     {
 
-        return $this->hasMany(Articles::className(), ['id', 'author_id']);
+        return $this->hasMany(ArticleJournal::className(), ['id', 'author_id']);
 
     } // end function
 
@@ -122,7 +123,7 @@ class Authors extends ActiveRecord
     public function beforeSave($insert)
     {
 
-        if (ArticlesAuthors::find()->where([
+        if (Authors::find()->where([
             'author_id' => $this->author_id,
             'article_id' => $this->article_id
         ])->exists()) {
@@ -154,6 +155,16 @@ class Authors extends ActiveRecord
     {
 
         Yii::$app->session->setFlash('danger', 'Автор удален');
+
+    } // end function
+
+
+
+    public function author()
+    {
+
+        return \app\models\identity\Authors::find()->where(['id' => $this->author_id])->one();
+        //return $this->hasOne(AuthorsCommon::className(), ['id' => 'author_id']);
 
     } // end function
 

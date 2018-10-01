@@ -40,8 +40,8 @@ class ArticleConference extends Article implements UnitInterface
     {
 
         return [
-            [['title', 'conferency_collection'], 'required'],
-            [['title', 'section', 'language', 'conferency_collection', 'annotation', 'text_index'], 'string'],
+            [['title', 'conference_collection'], 'required'],
+            [['title', 'section', 'language', 'conference_collection', 'annotation', 'text_index'], 'string'],
             [['year'], 'integer'],
             [['number', 'file'], 'string', 'max' => 255],
         ];

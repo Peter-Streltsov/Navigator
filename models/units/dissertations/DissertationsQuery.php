@@ -3,16 +3,12 @@
 namespace app\models\units\dissertations;
 
 /**
- * This is the ActiveQuery class for [[Dissertations]].
+ * ActiveQuery class for [[Dissertations]]
  *
  * @see Dissertations
  */
 class DissertationsQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * @inheritdoc
@@ -20,8 +16,12 @@ class DissertationsQuery extends \yii\db\ActiveQuery
      */
     public function all($db = null)
     {
+
         return parent::all($db);
-    }
+
+    } // end function
+
+
 
     /**
      * @inheritdoc
@@ -29,6 +29,9 @@ class DissertationsQuery extends \yii\db\ActiveQuery
      */
     public function one($db = null)
     {
+
         return parent::one($db);
-    }
-}
+
+    } // end function
+
+} // end class

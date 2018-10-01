@@ -5,6 +5,8 @@ namespace app\models\units\articles\traits;
 // project classes
 use app\models\common\Languages;
 use app\models\pnrd\indexes\IndexesArticles;
+use app\models\units\articles\journals\Authors;
+use app\models\identity\Authors as AuthorsCommon;
 // yii classes
 use Yii;
 
@@ -40,8 +42,16 @@ trait UnitTrait
     public function authors()
     {
 
-        $authorsname = self::currentNamespace() . 'Authors';
-        return (new $authorsname())::find()->where(['article_id' => $this->id])->all();
+        $authors = Authors::find()->where(['article_id' => $this->id])->all();
+        if (count($authors) >= 1) {
+            foreach ($authors as $authorlink) {
+                $author = AuthorsCommon::find()->where(['id' => $authorlink->id])->asArray()->one();
+                $result[] = $author;
+            }
+        }
+
+        //var_dump($result);
+        return $result;
 
     } // end function
 
@@ -82,8 +92,10 @@ trait UnitTrait
     public function index()
     {
 
-        $index = IndexesArticles::find()->select('value')->where(['id' => $this->type])->asArray()->one();
-        return (float)$index['value'];
+        if (isset($this->type)) {
+            $index = IndexesArticles::find()->select('value')->where(['id' => $this->type])->asArray()->one();
+            return (float)$index['value'];
+        }
 
     } // end function
 

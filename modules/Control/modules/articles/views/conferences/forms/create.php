@@ -38,7 +38,7 @@ $classes_items = ArrayHelper::map($classes, 'id', 'description');
 
 <div class="row">
     <div class="col-lg-12">
-        <?= $form->field($model, 'conferency_collection')->textarea(['maxlength' => true]) ?>
+        <?= $form->field($model, 'conference_collection')->textarea(['maxlength' => true]) ?>
     </div>
 </div>
 
@@ -122,3 +122,6 @@ $classes_items = ArrayHelper::map($classes, 'id', 'description');
 <br>
 <br>
 <br>
+
+<?php
+//\yii\helpers\VarDumper::dump(Yii::$app->yearselector->select);

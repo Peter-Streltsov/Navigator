@@ -1,11 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\Control\models\Articles */
+/* @var $model app\models\units\articles\journals\ArticleJournal */
 /* @var $author_items array */
-/* @var $file \app\modules\Control\models\Fileupload */
+/* @var $file \app\models\filesystem\Fileupload */
 /* @var $classes \app\modules\Control\models\Articles[]|\app\modules\Control\models\IndexesArticles[]|array */
 /* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
 /* @var $authors \app\modules\Control\models\Authors[]|array */
@@ -20,10 +21,9 @@ use yii\helpers\Html;
 /* @var $newauthor \app\models\units\articles\ArticlesAuthors */
 
 $this->title = 'Редактировать данные - '.$model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Статьи - публикации в журналах', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
-$this->registerJsFile('js/years.selector.js');
 
 ?>
 <div class="articles-update">
@@ -42,6 +42,8 @@ $this->registerJsFile('js/years.selector.js');
 
     </div>
 
+    <?php Pjax::begin(); ?>
+
     <div>
 
         <?= $this->render('forms/update/buttons', [
@@ -51,8 +53,14 @@ $this->registerJsFile('js/years.selector.js');
 
     </div>
 
+    <?php Pjax::end(); ?>
+
     <br>
     <br>
+
+    <?php Pjax::begin([
+            'enablePushState' => false,
+    ]); ?>
 
     <div class="articles-form">
         <?= $this->render('forms/update/articleform', [
@@ -63,36 +71,62 @@ $this->registerJsFile('js/years.selector.js');
         ]) ?>
     </div>
 
-    <br>
-    <br>
-
-    <div>
-        <?= $this->render('forms/update/affilations', [
-                'affilations' => $affilations
-                ]); ?>
-    </div>
+    <?php Pjax::end(); ?>
 
     <br>
     <br>
 
-    <div>
-        <?= $this->render('forms/update/authorsform', [
-            'author_items' => $author_items,
-            'newauthor' => $newauthor,
-            'model_authors' => $model_authors,
-            'model' => $model
+    <?php Pjax::begin([
+            'enablePushState' => false,
+            'id' => 'associations',
+    ]); ?>
+
+    <div id="associations">
+        <?= $this->render('forms/update/associations', [
+            'associations' => $associations,
+            'id' => $id
         ]); ?>
     </div>
 
+    <?php Pjax::end(); ?>
+
+    <br>
     <br>
 
-    <div>
+    <?php Pjax::begin([
+        'enablePushState' => false,
+        'id' => 'authors'
+    ]); ?>
+
+    <div id="authors">
+        <?= $this->render('forms/update/authorsform', [
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items,
+            'newauthor' => $newauthor,
+            'id' => $id
+        ]); ?>
+    </div>
+
+    <?php Pjax::end(); ?>
+
+    <br>
+    <br>
+
+    <?php Pjax::begin([
+            'id' => 'citations',
+            'enablePushState' => false,
+    ]); ?>
+
+    <div id="citations">
         <?= $this->render('forms/update/citationsform', [
-                'model' => $model,
-                'citations' => $citations,
-                'citation_classes' => $citation_classes,
-                'newcitation' => $newcitation
+            'model' => $model,
+            'citations' => $citations,
+            'citation_classes' => $citation_classes,
+            'newcitation' => $newcitation,
+            'id' => $id
         ]) ?>
     </div>
+
+    <?php Pjax::end(); ?>
 
 </div>

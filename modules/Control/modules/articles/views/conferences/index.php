@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             'title:ntext',
-            'conferency_collection:ntext',
+            'conference_collection:ntext',
             'number',
             'language',
             //'annotation:ntext',

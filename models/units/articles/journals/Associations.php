@@ -51,9 +51,9 @@ class Associations extends ActiveRecord
 
         return [
             'id' => 'ID',
-            'name' => '',
-            'article_id' => 'Article ID',
-            'type' => 'Type',
+            'name' => 'Название организации',
+            'article_id' => 'Идентификатор статьи',
+            'type' => '',
         ];
 
     } // end function

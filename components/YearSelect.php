@@ -3,6 +3,7 @@
 namespace app\components;
 
 use yii\base\Component;
+use yii\helpers\ArrayHelper;
 
 class YearSelect extends Component
 {
@@ -16,6 +17,9 @@ class YearSelect extends Component
         $begindate = $currentdate - 30;
         $enddate = $currentdate + 1;
         $this->select = range($begindate, $enddate);
+        $this->select = ArrayHelper::index($this->select, function ($item) {
+            return $item;
+        });
 
     } // end construct
 

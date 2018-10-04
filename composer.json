@@ -28,6 +28,7 @@
         "mihaildev/yii2-ckeditor": "*",
         "kartik-v/yii2-widget-select2": "@dev",
         "yiisoft/yii2-imagine": "^2.0@dev",
+        "samdark/yii2-webshell": "dev-master",
         "renanbr/crossref-client": "^1.0@dev"
 
     },

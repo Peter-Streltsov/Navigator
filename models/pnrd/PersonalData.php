@@ -4,7 +4,7 @@ namespace app\models\pnrd;
 
 // project classes
 use app\models\units\articles\collections\ArticleCollection;
-use app\models\units\articles\conferencies\ArticleConferency;
+use app\models\units\articles\conferences\ArticleConference;
 use app\models\units\articles\journals\ArticleJournal;
 use app\models\units\dissertations\Dissertations;
 // yii2 classes
@@ -48,7 +48,7 @@ class PersonalData
         // TODO: implement method;
         $articles_journals = ArticleJournal::find()->all();
         $articles_collections = ArticleCollection::find()->all();
-        $articles_conferencies = ArticleConferency::find()->all();
+        $articles_conferencies = ArticleConference::find()->all();
 
         return array_merge($articles_journals, $articles_collections, $articles_conferencies);
 

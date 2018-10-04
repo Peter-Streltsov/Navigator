@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c65a6021cc799e6e9d9100240f71f50",
+    "content-hash": "633ef0aa63acf5d556ca5f64a744e9c2",
     "packages": [
         {
             "name": "3ch3r46/bootui-datetimepicker",
@@ -154,6 +154,22 @@
             "license": [
                 "MIT"
             ]
+        },
+        {
+            "name": "bower-asset/jquery.terminal",
+            "version": "0.8.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jcubic/jquery.terminal.git",
+                "reference": "8f5407975498807076a76b83424d295091cf9600"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jcubic/jquery.terminal/zipball/8f5407975498807076a76b83424d295091cf9600",
+                "reference": "8f5407975498807076a76b83424d295091cf9600",
+                "shasum": null
+            },
+            "type": "bower-asset"
         },
         {
             "name": "bower-asset/punycode",
@@ -2351,6 +2367,50 @@
                 "throttle"
             ],
             "time": "2017-04-03T22:36:02+00:00"
+        },
+        {
+            "name": "samdark/yii2-webshell",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/samdark/yii2-webshell.git",
+                "reference": "355474274a205ad69fe77bd6833ffe8bbb01e160"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/samdark/yii2-webshell/zipball/355474274a205ad69fe77bd6833ffe8bbb01e160",
+                "reference": "355474274a205ad69fe77bd6833ffe8bbb01e160",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery.terminal": "~0.8.8",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "samdark\\webshell\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru"
+                }
+            ],
+            "description": "A web shell that allows to run yii console commands and create your own commands.",
+            "keywords": [
+                "console",
+                "extension",
+                "shell",
+                "webshell",
+                "yii2"
+            ],
+            "time": "2017-06-13T14:42:44+00:00"
         },
         {
             "name": "setasign/fpdi",
@@ -6630,6 +6690,7 @@
         "markrogoyski/math-php": 20,
         "kartik-v/yii2-widget-select2": 20,
         "yiisoft/yii2-imagine": 20,
+        "samdark/yii2-webshell": 20,
         "renanbr/crossref-client": 20,
         "schmunk42/yii2-giiant": 0
     },

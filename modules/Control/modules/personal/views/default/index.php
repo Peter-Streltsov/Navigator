@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <br>
 <br>
 
-<h3><?= \yii\bootstrap\Html::encode($this->title); ?></h3>
+<h3><?= Html::encode($this->title); ?></h3>
 
 <br>
 <br>
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-lg-6">
         <?php
         echo \yii\widgets\DetailView::widget([
-                'model' => $personaldata->author,
+            'model' => $personaldata->author,
             'attributes' => [
                 'name',
                 'secondname',

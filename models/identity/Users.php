@@ -3,8 +3,6 @@
 namespace app\models\identity;
 
 // interfaces
-use app\modules\Control\models\Authors;
-use app\modules\Control\models\Personnel;
 use yii\web\IdentityInterface;
 use app\interfaces\UserInterface;
 // yii2 classes
@@ -26,6 +24,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Users extends ActiveRecord implements IdentityInterface, UserInterface
 {
+
+    public $userpic = null;
 
     /**
      * @inheritdoc
@@ -86,6 +86,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
             'created_at' => 'Создан',
             'auth_key' => 'Ключ авторизации',
             'access_token' => 'Токен',
+            'userpic' => 'Фотграфия'
         ];
 
     } // end function
@@ -114,7 +115,14 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     public static function findIdentity($id)
     {
 
-        return static::findOne($id);
+        if (Yii::$app->db->getTableSchema(static::tableName(), true) !== null) {
+            return static::findOne($id);
+        } else {
+            return new static([
+                'name' => 'admin',
+                'password' => 'admin'
+            ]);
+        }
 
     } // end function
 

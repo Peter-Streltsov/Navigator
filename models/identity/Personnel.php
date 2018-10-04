@@ -2,6 +2,7 @@
 
 namespace app\models\identity;
 
+use app\models\common\Habilitations;
 use Yii;
 
 /**
@@ -80,6 +81,16 @@ class Personnel extends \yii\db\ActiveRecord
         } else {
             Yii::$app->session->setFlash('success' , 'Данные сотрудника обновлены');
         }
+
+    } // end function
+
+
+
+    public function habilitationValue()
+    {
+
+        $habilitation = Habilitations::find()->select(['habilitation'])->where(['id' => $this->habilitation])->asArray()->one();
+        return $habilitation[0];
 
     } // end function
 

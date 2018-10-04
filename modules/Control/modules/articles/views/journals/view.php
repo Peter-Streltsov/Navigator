@@ -5,7 +5,7 @@ use yii\bootstrap\Modal;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\Control\models\Articles */
+/* @var $model app\models\units\articles\journals\ArticleJournal */
 /* @var $class \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles|array|null */
 /* @var $authors \app\modules\Control\models\Authors[]|array|string */
 
@@ -60,7 +60,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'type',
                     'label' => 'Тип публикации',
                     'value' => function($model) {
-                            //return $model->publicationtype->type;
                         return $model->type();
                         }
                     ],
@@ -108,16 +107,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'authors',
                         'value' => function($model) {
-                            $authors = [];
-                            if (isset($model->authors)) {
-                                foreach ($model->authors as $author) {
-                                    $authors[] = $author['lastname']
-                                        . ' ' . mb_substr($author['name'],0,1,"UTF-8")
-                                        . '.' . mb_substr($author['secondname'],0,1,"UTF-8")
-                                        .'.';
-                                }
+                            $authors = $model->authors();
+                            foreach ($authors as $author) {
+                                $html[] = $author['name'] . ' ' . $author['lastname'];
                             }
-                            return implode("\n", $authors);
+                            return implode("; ", $html);
                         }
                     ],
                     'annotation'
@@ -132,7 +126,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-<?php
-//\yii\helpers\VarDumper::dump($model->getType());
-
-?>
+<br>
+<br>
+<br>
+<br>
+<br>

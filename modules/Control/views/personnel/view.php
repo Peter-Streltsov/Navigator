@@ -12,11 +12,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="personnel-view">
 
+    <br>
+    <br>
+    <br>
+
     <div class="row">
         <div class="col-lg-10">
             <h1><?= Html::encode($this->title) ?></h1>
         </div>
     </div>
+
+    <br>
+    <br>
 
     <div class="row">
         <div class="col-lg-10">
@@ -24,12 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
                 'class' => 'button danger big',
                 'data' => [
-                    'confirm' => 'Are you sure you want to delete this item?',
+                    'confirm' => 'Удалить сотрудника?',
                     'method' => 'post',
                     ],
                 ]) ?>
         </div>
     </div>
+
+    <br>
+    <br>
+    <br>
 
     <div class="row">
         <div class="col-lg-10">
@@ -44,7 +55,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'secondname',
                     'lastname',
                     'position',
-                    'habilitation',
+                    [
+                        'attribute' => 'habilitation',
+                        'value' => function ($model) {
+                            return $model->habilitationValue();
+                        }
+                    ],
+                    //'habilitation',
                     'employment',
                     'expirience',
                     'age',
@@ -54,3 +71,5 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
+
+<?php

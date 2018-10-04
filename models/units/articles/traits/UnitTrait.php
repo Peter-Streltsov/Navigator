@@ -45,7 +45,7 @@ trait UnitTrait
         $authors = Authors::find()->where(['article_id' => $this->id])->all();
         if (count($authors) >= 1) {
             foreach ($authors as $authorlink) {
-                $author = AuthorsCommon::find()->where(['id' => $authorlink->id])->asArray()->one();
+                $author = AuthorsCommon::find()->where(['id' => $authorlink->author_id])->asArray()->one();
                 $result[] = $author;
             }
         }

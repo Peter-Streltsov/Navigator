@@ -23,43 +23,46 @@ use yii\grid\ActionColumn;
 
         <br>
 
-
         <div class="row">
             <div class="col-lg-6">
-                <?php
+                <div class="panel panel-default">
+                    <div class="panel panel-body">
+                        <?php
 
-                echo GridView::widget([
-                    'dataProvider' => $citations,
-                    'tableOptions' => [
-                        'style' => 'border-radius: 3vh;',
-                        'class' => 'table table-hover'
-                    ],
-                    'layout' => "{items}",
-                    'columns' => [
-                        [
-                            'class' => 'yii\grid\SerialColumn',
-                        ],
-                        [
-                            'attribute' => 'title',
-                            'label' => '',
-                        ],
-                        [
-                            'attribute' => 'class',
-                            'label' => ''
-                        ],
-                        [
-                            'class' => ActionColumn::className(),
-                            'buttons' => [
-                                'delete' => function($url, $model) {
-                                    return Html::a('<span style="color: red;" class="glyphicon glyphicon-remove"></span>', 'deletecitation?id=' . $model->article_id . '&citation=' . $model->id);
-                                }
+                        echo GridView::widget([
+                            'dataProvider' => $citations,
+                            'tableOptions' => [
+                                'style' => 'border-radius: 3vh;',
+                                'class' => 'table table-hover'
                             ],
-                            'template' => '{delete}'
-                        ]
-                    ]
-                ]);
+                            'layout' => "{items}",
+                            'columns' => [
+                                [
+                                    'class' => 'yii\grid\SerialColumn',
+                                ],
+                                [
+                                    'attribute' => 'title',
+                                    'label' => '',
+                                ],
+                                [
+                                    'attribute' => 'class',
+                                    'label' => ''
+                                ],
+                                [
+                                    'class' => ActionColumn::className(),
+                                    'buttons' => [
+                                        'delete' => function($url, $model) {
+                                            return Html::a('<span style="color: red;" class="glyphicon glyphicon-remove"></span>', 'deletecitation?id=' . $model->article_id . '&citation=' . $model->id);
+                                        }
+                                    ],
+                                    'template' => '{delete}'
+                                ]
+                            ]
+                        ]);
 
-                ?>
+                        ?>
+                    </div>
+                </div>
             </div>
 
             <div class="col-lg-1">

@@ -64,6 +64,10 @@ AppAsset::register($this);
                     'url' => '/public'
                 ],
                 [
+                    //'label' => '<button data-toggle="modal" data-target="#about"><span class="glyphicon glyphicon info-sign"></span></button>'
+                    'label' => '<span data-toggle="modal" data-target="#about" class="glyphicon glyphicon-info-sign"></span>'
+                ],
+                [
                     'label' => '<span style="color: red;" class="glyphicon glyphicon-send"></span>',
                     'items' => [
                         [
@@ -263,6 +267,10 @@ AppAsset::register($this);
                                     'url' => '/control/admin/positions'
                                 ],
                                 [
+                                    'label' => 'Списки сохраненных данных',
+                                    'url' => '/control/admin/data'
+                                ],
+                                [
                                     'label' => 'Индексы',
                                     'items' => [
                                         [
@@ -327,6 +335,33 @@ AppAsset::register($this);
             </div>
         </div>
     </div>
+
+
+    <div id="about" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <!--<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>-->
+                <br>
+                <br>
+                <br>
+                <div class="modal-body">
+                    <p>Version: 0.4.8</p>
+                </div>
+                <br>
+                <br>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <footer style="color: #2a323b; height: 2.5pc; background-color: #d2d4d9;" class="navbar-fixed-bottom ">
         <div class="container">

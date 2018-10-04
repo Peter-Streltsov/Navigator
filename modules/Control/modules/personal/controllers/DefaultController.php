@@ -5,7 +5,7 @@ namespace app\modules\Control\modules\personal\controllers;
 // project classes
 use app\models\pnrd\PersonalData;
 use app\models\identity\Users;
-use app\modules\Control\models\Authors;
+use app\models\identity\Authors;
 use app\models\identity\Personnel;
 // yii2 classes
 use Yii;

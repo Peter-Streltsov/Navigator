@@ -13,12 +13,22 @@ class m180625_001423_article_types extends Migration
     public function safeUp()
     {
 
-        $this->createTable('article_types', [
+        $this->createTable('articles_journals_types', [
             'id' => $this->primaryKey(),
             'type' => $this->string()->notNull()
         ]);
 
-        $this->batchInsert('article_types', ['type'], [
+        $this->createTable('articles_conferences_types', [
+            'id' => $this->primaryKey(),
+            'type' => $this->string()->notNull()
+        ]);
+
+        $this->createTable('articles_collections_types', [
+            'id' => $this->primaryKey(),
+            'type' => $this->string()->notNull()
+        ]);
+
+        $this->batchInsert('articles_journals_types', ['type'], [
             ['Научная статья'],
             ['Обзорная статья'],
             ['Краткое сообщение'],
@@ -31,6 +41,16 @@ class m180625_001423_article_types extends Migration
             ['Разное']
         ]);
 
+        $this->batchInsert('article_conferences_types', ['type'], [
+            ['Статья в сборнике трудов конференции'],
+            ['Тезисы доклада на конференции'],
+        ]);
+
+        $this->batchInsert('article_collections_types', ['type'], [
+            ['Статья в сборнике статей'],
+            ['Глава в книге'],
+        ]);
+
     } // end function
 
 
@@ -41,7 +61,9 @@ class m180625_001423_article_types extends Migration
     public function safeDown()
     {
 
-        $this->dropTable('article_types');
+        $this->dropTable('articles_journals_types');
+        $this->dropTable('articles_conferences_types');
+        $this->dropTable('articles_collections_types');
 
         return true;
 

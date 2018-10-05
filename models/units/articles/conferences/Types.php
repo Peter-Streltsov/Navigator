@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\units\articles;
+namespace app\models\units\articles\conferences;
 
 use yii\db\ActiveRecord;
 
@@ -19,7 +19,7 @@ class Types extends ActiveRecord
     public static function tableName()
     {
 
-        return 'article_types';
+        return 'articles_conferences_types';
 
     } // end function
 

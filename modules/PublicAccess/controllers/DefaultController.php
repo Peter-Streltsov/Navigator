@@ -5,6 +5,7 @@ namespace app\modules\PublicAccess\controllers;
 // project classes
 use app\models\opendata\Data;
 // yii classes
+use app\modules\Control\modules\Admin\controllers\DataController;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 
@@ -13,7 +14,6 @@ use yii\web\Controller;
  */
 class DefaultController extends Controller
 {
-
     /**
      * Renders the index view for the module
      * Displays public accessible data on institution publications
@@ -22,20 +22,13 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-
         //displaying flash message if redirected from restricted resource
         if (isset($_GET['denyrequest'])) {
             \Yii::$app->session->setFlash('danger', 'Доступ к запрашиваемому ресурсу невозможен');
         }
 
-        // collecting articles
-        $articles = Data::getArticles();
-        $monograph = [];
-        $dissertations = [];
-
-        // gathering publications
-        $publications = array_merge($articles, $monograph, $dissertations);
-
+        // collecting publications
+        $publications = array_merge(Data::getArticles(), Data::getMonographs(), Data::getDissertations());
         $dataProvider = new ArrayDataProvider([
             'allModels' => $publications
         ]);

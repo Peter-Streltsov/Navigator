@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
  * @property int $monograph_id
  * @property string $type
  */
-class MonographAffilations extends ActiveRecord
+class Associations extends ActiveRecord
 {
     /**
      * @inheritdoc

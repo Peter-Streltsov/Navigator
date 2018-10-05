@@ -11,9 +11,9 @@ use yii\bootstrap\Tabs;
 
 <?php
 
-$publications =  GridView::widget([
+/*$publications =  GridView::widget([
         'dataProvider' => $dataprovider
-]);
+]);*/
 
 $listed = \yii\widgets\ListView::widget([
     'dataProvider' => $dataprovider,

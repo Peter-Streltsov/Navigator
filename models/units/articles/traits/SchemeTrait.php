@@ -21,11 +21,9 @@ trait SchemeTrait
      */
     private function currentNamespace()
     {
-
         $current_class = explode('\\', get_called_class());
         array_pop($current_class);
         return implode('\\', $current_class) . '\\';
-
     } // end function
 
 
@@ -37,9 +35,7 @@ trait SchemeTrait
      */
     public function types()
     {
-
         return ArrayHelper::map(Types::find()->asArray()->all(), 'id', 'type');
-
     } // end function
 
 
@@ -49,15 +45,14 @@ trait SchemeTrait
      *
      * @return Types|array|null
      */
-    public function type()
+    public function typeValue()
     {
-        if (isset ($this->type)) {
+        if (isset($this->type)) {
             $type = Types::find()->select(['type'])->where(['id' => $this->type])->asArray()->one();
             return $type['type'];
         }
 
         return null;
-
     } // end function
 
 
@@ -67,10 +62,18 @@ trait SchemeTrait
      */
     public function citations()
     {
+        $citations_class = $this->currentNamespace() . 'Citations';
+        return $citations_class::find()->where(['article_id' => $this->id])->all();
+    } // end function
 
-        $citations = $this->currentNamespace() . 'Citations';
-        return $citations::find()->where(['article_id' => $this->id])->all();
 
+
+    /**
+     *
+     */
+    public function getPages()
+    {
+        return $this;
     } // end function
 
 
@@ -83,7 +86,6 @@ trait SchemeTrait
      */
     public function deleteLinkedData()
     {
-
         // deleting article pages
         $pages = $this->currentNamespace() . 'Pages';
         $pages = new $pages();
@@ -113,19 +115,6 @@ trait SchemeTrait
         foreach ($associations as $association) {
             $association->delete();
         }
-
-    } // end function
-
-
-
-    /**
-     *
-     */
-    public function getPages()
-    {
-
-        return $this;
-
     } // end function
 
 } // end trait

@@ -2,14 +2,16 @@
 
 namespace app\modules\Control\controllers;
 
-use app\modules\Control\models\Authors;
-use app\modules\Control\models\Fileupload;
-use app\modules\Control\models\IndexesArticles;
-use app\modules\Control\models\MonographAffilations;
-use app\modules\Control\models\Monographies;
-use app\modules\Control\models\MonographiesAuthors;
-use app\modules\Control\models\MonographiesCitations;
+// project classes
+use app\models\identity\Authors as AuthorsCommon;
+//use app\modules\Control\models\Fileupload;
+//use app\modules\Control\models\IndexesArticles;
+use app\models\units\monograph\Associations;
+use app\models\units\monograph\Monograph;
+use app\models\units\monograph\Authors;
+use app\models\units\monograph\Citations;
 use app\modules\Control\models\CitationClasses;
+// yii classes
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
@@ -45,10 +47,10 @@ class MonographController extends Controller
     public function actionIndex()
     {
 
-        $model = Monographies::find()->joinWith('authors')->all();
+        $model = Monograph::find()->joinWith('authors')->all();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Monographies::find()->joinWith('authors')
+            'query' => Monograph::find()->joinWith('authors')
         ]);
 
         return $this->render('index', [

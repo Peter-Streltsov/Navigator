@@ -14,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property Authors $author
  * @property Monographies $monography
  */
-class MonographiesAuthors extends ActiveRecord
+class Authors extends ActiveRecord
 {
 
     /**

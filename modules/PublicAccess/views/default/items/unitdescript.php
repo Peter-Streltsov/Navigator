@@ -19,7 +19,9 @@ use yii\helpers\Html;
             <div class="col-lg-3">
                 <b style="color: green;">Издатель</b>
                 <br>
-                <?= Html::tag('b', $model['magazine']) ?>
+                <?php
+                //Html::tag('b', $model['magazine']);
+                ?>
             </div>
             <div class="col-lg-2">
                 <b style="color: green">Год издания</b>

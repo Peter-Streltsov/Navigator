@@ -1,12 +1,13 @@
 <?php
 
-namespace app\modules\Control\models;
+namespace app\models\units\monograph;
 
 use Yii;
+use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "monographies".
+ * This is the model class for table "monograph";
  *
  * @property int $id
  * @property string $title
@@ -15,7 +16,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $doi
  * @property resource $file
  */
-class Monographies extends \yii\db\ActiveRecord
+class Monograph extends ActiveRecord
 {
 
     /**
@@ -38,8 +39,10 @@ class Monographies extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'monographies';
+        return 'monographs';
     }
+
+
 
     /**
      * @inheritdoc
@@ -81,67 +84,6 @@ class Monographies extends \yii\db\ActiveRecord
 
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMonographies()
-    {
-
-        return $this->hasOne(MonographiesAuthors::className(), ['monography_id' => 'id']);
-
-    } // end function
-
-
-
-    /**
-     * @return $this
-     */
-    public function getAuthors()
-    {
-
-        return $this->hasMany(Authors::className(), ['id' => 'author_id'])->via('monographies');
-
-    } // end function
-
-
-
-    /**
-     * @return $this
-     */
-    public function getData()
-    {
-
-        return $this->hasMany(Authors::className(), ['id' => 'author_id'])->viaTable('monographies_authors', ['monography_id' => 'id']);
-
-    } // end function
-
-
-    /**
-     * @param $id
-     * @return array
-     */
-    public function getMonographiesByAuthor($id)
-    {
-
-        $authormonographies = MonographiesAuthors::find()
-            ->where(['author_id' => $id])
-            ->joinWith('monographiesbyauthor')
-            ->asArray()
-            ->all();
-
-        // by default - empty array
-        $monographies = [];
-
-        // formatting array
-        foreach ($authormonographies as $monography) {
-            $monographies[] = $monography['monographiesbyauthor'][0];
-        }
-
-        return $monographies;
-
-    } // end function
-
-
-    /**
      * @param bool $insert
      * @param array $changedAttributes
      */
@@ -160,12 +102,12 @@ class Monographies extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return MonographiesQuery the active query used by this AR class.
+     * @return MonographQuery the active query used by this AR class.
      */
     public static function find()
     {
 
-        return new MonographiesQuery(get_called_class());
+        return new MonographQuery(get_called_class());
 
     } // end function
 

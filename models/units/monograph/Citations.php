@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property string $class
  */
-class MonographiesCitations extends ActiveRecord
+class Citations extends ActiveRecord
 {
     /**
      * @inheritdoc

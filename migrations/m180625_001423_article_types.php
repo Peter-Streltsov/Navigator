@@ -41,12 +41,12 @@ class m180625_001423_article_types extends Migration
             ['Разное']
         ]);
 
-        $this->batchInsert('article_conferences_types', ['type'], [
+        $this->batchInsert('articles_conferences_types', ['type'], [
             ['Статья в сборнике трудов конференции'],
             ['Тезисы доклада на конференции'],
         ]);
 
-        $this->batchInsert('article_collections_types', ['type'], [
+        $this->batchInsert('articles_collections_types', ['type'], [
             ['Статья в сборнике статей'],
             ['Глава в книге'],
         ]);

@@ -15,7 +15,6 @@ class Articles extends Module
      */
     public $controllerNamespace = 'app\modules\Control\modules\articles\controllers';
     //public $defaultRoute = 'app\modules\Control\modules\articles\controllers\JournalsController';
-    public $defaultRoute = 'journals';
 
 
     /**

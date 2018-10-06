@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\units\articles\ArticleCollection */
+/* @var $model app\models\units\articles\collections\ArticleCollection */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Article Collections', 'url' => ['index']];
@@ -12,18 +12,26 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-collection-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <br>
+
+    <h3><?= Html::encode($this->title) ?></h3>
+
+    <br>
+    <br>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+        <?= Html::a('Редактировать данные', ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
+        <?= Html::a('Удалить статью', ['delete', 'id' => $model->id], [
+            'class' => 'button danger big',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Удалить статью? (действие отменить невозможно)',
                 'method' => 'post',
             ],
         ]) ?>
     </p>
+
+    <br>
+    <br>
 
     <?= DetailView::widget([
         'model' => $model,

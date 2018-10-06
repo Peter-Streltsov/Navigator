@@ -2,12 +2,11 @@
 
 namespace app\models\units\articles\traits;
 
-use app\models\units\articles\Types;
 use yii\helpers\ArrayHelper;
 
 /**
- * Trait ArticleTrait
- *
+ * Trait SchemeTrait
+ * Provides common methods working with linked data for articles ActiveRecords classes;
  *
  * @package app\models\units\articles\traits
  */
@@ -31,11 +30,12 @@ trait SchemeTrait
     /**
      * lists available article types (array)
      *
-     * @return Types[]|array
+     * @return array - current namespace Types records
      */
     public function types()
     {
-        return ArrayHelper::map(Types::find()->asArray()->all(), 'id', 'type');
+        $types_class = $this->currentNamespace() . 'Types';
+        return ArrayHelper::map($types_class::find()->asArray()->all(), 'id', 'type');
     } // end function
 
 
@@ -43,12 +43,13 @@ trait SchemeTrait
     /**
      * gets current unit type value (from Types record)
      *
-     * @return Types|array|null
+     * @return array|null
      */
     public function typeValue()
     {
+        $type_class = $this->currentNamespace() . 'Types';
         if (isset($this->type)) {
-            $type = Types::find()->select(['type'])->where(['id' => $this->type])->asArray()->one();
+            $type = $type_class::find()->select(['type'])->where(['id' => $this->type])->asArray()->one();
             return $type['type'];
         }
 

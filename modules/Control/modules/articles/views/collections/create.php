@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model app\models\units\articles\ArticleCollection */
 
 $this->title = 'Добавить статью';
-$this->params['breadcrumbs'][] = ['label' => 'Article Collections', 'url' => ['index']];
-$this->params['breadcrumbs'][] = 'Добавить статью';
+$this->params['breadcrumbs'][] = ['label' => 'Статьи - публикации в сборниках и главы книг', 'url' => ['index']];
+$this->params['breadcrumbs'][] = 'Добавить';
 ?>
 
 <div class="article-collection-update">
@@ -26,3 +26,15 @@ $this->params['breadcrumbs'][] = 'Добавить статью';
 
 
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

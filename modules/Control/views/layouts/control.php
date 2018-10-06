@@ -74,8 +74,8 @@ AppAsset::register($this);
                             'label' => '<br>'
                             ],
                         [
-                            'label' => 'Уведомления',
-                            'url' => '/control/personal/notifications',
+                            'label' => '<b id="suspended">Уведомления</b>',
+                            //'url' => '/control/personal/notifications',
                             'options' => [
                                     'style' => 'width: 10pc;'
                                 ]
@@ -150,9 +150,10 @@ AppAsset::register($this);
                             'url' => '/control'
                         ],
                         [
-                            'label' => 'Статистика',
+                            'label' => '<b id="suspended_link">Статистика</b>',
                             'icon' => 'stats',
-                            'url' => '/control/statistics'
+                            //'url' => '/control/statistics'
+                            'url' => '#'
                         ],
                         [
                             'label' => 'Авторы и сотрудники',
@@ -250,9 +251,11 @@ AppAsset::register($this);
                             ]
                         ],
                         [
-                            'label' =>'Отчеты',
+                            'label' =>'<b id="suspended_link">Отчеты</b>',
                             'icon' => 'list-alt',
-                            'url' => '/control/admin/synthesis'
+                            'id' => 'suspended',
+                            //'url' => '/control/admin/synthesis'
+                            'url' => '#'
                         ],
                         [
                             'label' => 'Параметры',
@@ -260,7 +263,7 @@ AppAsset::register($this);
                             'items' => [
                                 [
                                     'label' => 'Данные организации',
-                                    'url' => '/control/admin/orgdata'
+                                    'url' => '/control/admin/'
                                 ],
                                 [
                                     'label' => 'Перечень должностей',

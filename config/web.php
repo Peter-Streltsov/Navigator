@@ -97,6 +97,11 @@ $config = [
                 ],
                 'admin' => [
                     'class' => 'app\modules\Control\modules\Admin\Admin',
+                    /*'modules' => [
+                        'organisation' => [
+                            'class' => 'app\modules\Control\modules\Admin\modules\organisation\Organisation'
+                        ]
+                    ]*/
                 ],
                 'articles' => [
                     'class' => 'app\modules\Control\modules\articles\Articles'

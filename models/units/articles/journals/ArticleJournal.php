@@ -5,7 +5,6 @@ namespace app\models\units\articles\journals;
 // project classes
 //use app\interfaces\ArticleInterface;
 use app\interfaces\UnitInterface;
-use app\models\pnrd\indexes\IndexesArticles;
 use app\models\common\Languages;
 use app\models\units\articles\Article;
 // yii classes

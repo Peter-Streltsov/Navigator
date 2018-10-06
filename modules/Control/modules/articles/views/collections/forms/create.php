@@ -19,40 +19,61 @@ use yii\helpers\Html;
 
     <div class="row">
         <div class="col-lg-12">
-            <?= $form->field($model, 'title')->textarea(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title')->textarea(['rows' => 5, 'maxlength' => true]) ?>
         </div>
     </div>
+
+    <br>
 
     <div class="row">
         <div class="col-lg-12">
-            <?= $form->field($model, 'collection')->textInput(['rows' => 6]) ?>
+            <?= $form->field($model, 'collection')->textarea(['rows' => 3]) ?>
         </div>
     </div>
 
+    <br>
+
     <div class="row">
-        <div class="col-lg-5">
-            <?= $form->field($model, 'type')->textInput() ?>
-        </div>
         <div class="col-lg-7">
             <?= $form->field($model, 'section')->textInput(['rows' => 6]) ?>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-6">
-            <?= $form->field($model, 'language')->widget(Select2::className(), [
-                    'model' => $languages
-            ]) ?>
-        </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <?= $form->field($model, 'section_number')->textInput() ?>
         </div>
     </div>
 
+    <br>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <?= $form->field($model, 'language')->widget(Select2::className(), [
+                    'model' => $languages
+            ]) ?>
+        </div>
+        <div class="col-lg-2">
+            <?= $form->field($model, 'year')->widget(Select2::className(), [
+                'data' => Yii::$app->yearselector->select,
+                'options' => [
+                    'placeholder' => $model->year
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ]
+            ]) ?>
+        </div>
+        <div class="col-lg-5">
+            <?= $form->field($model, 'type')->dropDownList($model->types()) ?>
+        </div>
+    </div>
 
     <br>
     <br>
-    <br>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-default']) ?>
+        </div>
+    </div>
 
     <?php ActiveForm::end(); ?>
 

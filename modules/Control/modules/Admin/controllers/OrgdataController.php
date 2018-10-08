@@ -5,7 +5,9 @@ namespace app\modules\Control\modules\Admin\controllers;
 // project classes
 use app\models\basis\Organisation;
 // yii2 classes
+use app\models\common\Departments;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 
@@ -30,7 +32,7 @@ class OrgdataController extends Controller
             $model->weblink = null;
         }
 
-        return $this->render('index', [
+        return $this->renderAjax('index', [
             'model' => $model
         ]);
 
@@ -58,10 +60,25 @@ class OrgdataController extends Controller
             $model = new Organisation();
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model
         ]);
 
     } // end action
+
+
+
+    public function actionDepartments()
+    {
+
+        $departments = new ActiveDataProvider([
+            'query' => Departments::find()
+        ]);
+
+        return $this->renderAjax('departments', [
+            'departments' => $departments
+        ]);
+
+    }
 
 } // end class

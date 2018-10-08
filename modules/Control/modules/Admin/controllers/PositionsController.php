@@ -47,7 +47,7 @@ class PositionsController extends Controller
             'query' => Positions::find(),
         ]);
 
-        return $this->render('index', [
+        return $this->renderAjax('index', [
             'dataProvider' => $dataProvider,
         ]);
 

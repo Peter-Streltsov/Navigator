@@ -17,20 +17,34 @@ use yii\web\Controller;
 class DataController extends Controller
 {
 
-    public function actionIndex()
+    /**
+     * @return string
+     */
+    public function actionLanguages()
     {
 
         $languages = new ActiveDataProvider([
             'query' => Languages::find()
         ]);
+        return $this->renderAjax('languages', [
+            'languages' => $languages,
+        ]);
+
+    } // end action
+
+
+
+    /**
+     *
+     */
+    public function actionMagazines()
+    {
 
         $magazines = new ActiveDataProvider([
             'query' => Magazines::find()
         ]);
-
-        return $this->render('index', [
-            'languages' => $languages,
-            'magazines' => $magazines
+        return $this->renderAjax('magazines', [
+            'model' => $magazines
         ]);
 
     } // end action

@@ -13,11 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid">
 
-    <h3><?= Html::encode($this->title) ?></h3>
-
-    <br>
-    <br>
-
     <?= $this->render('forms/create', [
         'model' => $model,
         'tokens' => $tokens

@@ -159,10 +159,10 @@ AppAsset::register($this);
                             'label' => 'Авторы и сотрудники',
                             'icon' => 'user',
                             'items' => [
-                                [
+                                /*[
                                     'label' => 'Зарегистрированные пользователи',
                                     'url' => '/control/admin/users'
-                                ],
+                                ],*/
                                 [
                                     'label' => 'Сотрудники',
                                     'url' => '/control/personnel'
@@ -260,29 +260,7 @@ AppAsset::register($this);
                         [
                             'label' => 'Параметры',
                             'icon' => 'certificate',
-                            'items' => [
-                                [
-                                    'label' => 'Данные организации',
-                                    'url' => '/control/admin/'
-                                ],
-                                [
-                                    'label' => 'Перечень должностей',
-                                    'url' => '/control/admin/positions'
-                                ],
-                                [
-                                    'label' => 'Списки сохраненных данных',
-                                    'url' => '/control/admin/data'
-                                ],
-                                [
-                                    'label' => 'Индексы',
-                                    'items' => [
-                                        [
-                                            'label' => 'Индексы ПНРД - статьи',
-                                            'url' => '/control/indexes?class=articles'
-                                        ],
-                                    ]
-                                ],
-                            ]
+                            'url' => '/control/admin/',
                         ],
                         [
                             'label' => 'WebAPI',

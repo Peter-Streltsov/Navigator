@@ -1,51 +1,48 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\DetailView;
 use yii\widgets\Pjax;
-
-$this->title = 'Данные организации';
-$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<br>
-<br>
+<?php Pjax::begin(['enablePushState' => false]); ?>
 
-<h3>Данные организации</h3>
-
-<br>
-<br>
-
-<?= Html::a('Редактировать', 'orgdata/update', ['class' => 'button primary big']); ?>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<div class="row">
-    <div class="col-lg-5">
-        Название
+<div class="panel panel-default">
+    <div class="panel panel-heading">
+        <h4>Данные организации</h4>
     </div>
-    <div class="col-lg-7">
-        <div class="form-control">
-            <?= $model->organisation; ?>
+    <div class="panel panel-body">
+        <div class="row">
+            <div class="col-lg-10">
+                <?= Html::a('Редактировать', 'orgdata/update', ['class' => 'button primary big']); ?>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-5">
+                Название
+            </div>
+            <div class="col-lg-7">
+                <div class="form-control">
+                    <?= $model->organisation; ?>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-5">
+                Ссылка на сетевой ресурс организации
+            </div>
+            <div class="col-lg-7">
+                <div class="form-control">
+                    <?= $model->weblink; ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<br>
-
-<div class="row">
-    <div class="col-lg-5">
-        Ссылка на сетевой ресурс организации
-    </div>
-    <div class="col-lg-7">
-        <div class="form-control">
-            <?= $model->weblink; ?>
-        </div>
-    </div>
-</div>
+<?php Pjax::end(); ?>

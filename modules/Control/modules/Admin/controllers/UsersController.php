@@ -21,6 +21,8 @@ class UsersController extends Controller
 {
 
     /**
+     * alows only post method for delete action
+     *
      * @inheritdoc
      */
     public function behaviors()
@@ -48,7 +50,7 @@ class UsersController extends Controller
             'query' => Users::find(),
         ]);
 
-        return $this->render('index', [
+        return $this->renderAjax('index', [
             'dataProvider' => $dataProvider,
         ]);
 
@@ -66,7 +68,7 @@ class UsersController extends Controller
     public function actionView($id)
     {
 
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
 
@@ -114,7 +116,7 @@ class UsersController extends Controller
             }
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
             'tokens' => $tokens
         ]);
@@ -147,7 +149,7 @@ class UsersController extends Controller
 
         $tokens = Accesstokens::find()->select('token')->asArray()->all();
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
             'tokens' => $tokens
         ]);

@@ -12,23 +12,18 @@ use yii\web\Controller;
  */
 class DefaultController extends Controller
 {
+
     /**
-     * Renders the index view for the module
+     * Renders index view for Admin module
+     * Index view contains no specific data, only ajax-buttons for requesting forms
+     *
      * @return string
      */
     public function actionIndex()
     {
-        $model = Organisation::find()->one();
 
-        if ($model == null) {
-            $model = new Organisation();
-            $model->organisation = '<b style="color: red;">название организации не задано</b>';
-            $model->weblink = null;
-        }
+        return $this->render('index');
 
-        return $this->render('index', [
-            'model' => $model
-        ]);
     } // end action
 
 }

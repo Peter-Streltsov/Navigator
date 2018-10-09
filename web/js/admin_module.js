@@ -1,4 +1,66 @@
 /**
+ *
+ */
+$('#upload').change(function () {
+    var select = $('#upload').val();
+    switch (select) {
+        case '1':
+            $.ajax({
+                url: "/control/articles/journals/ajaxcreate",
+                type: "post",
+                dataType: "html",
+                success:function (response) {
+                    $('#loaded').html(response);
+                    $('#loaded').show("slow");
+                }
+            });
+            break;
+        case '2':
+            $.ajax({
+                url: "/control/articles/conferences/ajaxcreate",
+                type: "post",
+                dataType: "html",
+                success:function (response) {
+                    $('#loaded').html(response);
+                    $('#loaded').show("slow");
+                }
+            });
+            break;
+        case '3':
+            $.ajax({
+                url: "/control/articles/collections/ajaxcreate",
+                type: "post",
+                dataType: "html",
+                success:function (response) {
+                    $('#loaded').html(response);
+                    $('#loaded').show("slow");
+                }
+            });
+            break;
+        case '4':
+            $('#loaded').html('Функция отключена в данной версии');
+            break;
+        case '5':
+            $.ajax({
+                url: "/control/dissertations/ajaxcreate",
+                type: "post",
+                dataType: "html",
+                success:function (response) {
+                    $('#loaded').html(response);
+                    $('#loaded').show("slow");
+                }
+            });
+            break;
+    }
+    //$('#loadedform').html(select);
+    //alert(select);
+});
+
+/**
+ *
+ */
+
+/**
  * requests organisation data form from OrgDataController
  */
 $('#organisation').on('click', function () {

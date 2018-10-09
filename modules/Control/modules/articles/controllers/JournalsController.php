@@ -151,6 +151,60 @@ class JournalsController extends Controller
 
 
     /**
+     * Creates a new Articles
+     * If successful, will redirect to 'view' page
+     *
+     * @return string|\yii\web\Response
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionAjaxcreate()
+    {
+
+        /**
+         * view parameters
+         */
+
+        // article model
+        $model = new ArticleJournal();
+        // added languages list
+        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+        // magazines list
+        $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
+        // article categories (pnrd)
+        $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+        // pnrd indexes
+        $types = $model->types();
+
+        /**
+         * saving base model or collecting errors (converting to string) if not succeeded
+         */
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['update', 'id' => $model->id]);
+        } elseif (Yii::$app->request->post() && !$model->save()) {
+            foreach ($model->getErrors() as $error) {
+                $message[] = implode(' ', $error);
+            }
+            $errors = implode('<br>', $message);
+            Yii::$app->session->setFlash('danger', 'Сохранение не удалось' . '<br><br>' . $errors);
+        }
+
+        // rendering view
+        return $this->renderAjax('ajaxforms/create', [
+            'model' => $model,
+            'languages' => $languages,
+            'magazines' => $magazines,
+            'types' => $types,
+            'classes' => $classes
+        ]);
+
+    } // end action
+
+
+
+
+    /**
      * Updates an existing Articles model
      * Adds citations, authors etc;
      * If update successful, will redirect to 'update' page

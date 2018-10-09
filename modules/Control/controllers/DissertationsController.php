@@ -109,6 +109,16 @@ class DissertationsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+                'types' => $types,
+                'habilitations' => $habilitations,
+                'cities' => $cities,
+                'authors' => $authors
+            ]);
+        }
+
         return $this->render('create', [
             'model' => $model,
             'types' => $types,
@@ -119,6 +129,61 @@ class DissertationsController extends Controller
 
     } // end action
 
+
+
+    /**
+     * Creates a new Dissertation record
+     * If creation is successful - will redirect to 'view' page
+     *
+     * @return string|\yii\web\Response
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionAjaxcreate()
+    {
+
+        // new dissertation record
+        $model = new Dissertations();
+
+        $types = ArrayHelper::map(DissertationTypes::find()->asArray()->all(), 'id', 'type');
+
+        // lists all available authors
+        $authors = ArrayHelper::map(Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id', function($item) {
+            return $item['name']. ' ' . $item['lastname'];
+        });
+
+        $habilitations = ArrayHelper::map(Habilitations::find()->asArray()->all(), 'id', 'habilitation');
+
+        // lists all added cities
+        $cities = ArrayHelper::map(Cities::find()->asArray()->all(), 'city', 'city');
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $city = new Cities();
+            $city->city = $model->city;
+            $city->save(); // saving new city (if new record)
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+                'types' => $types,
+                'habilitations' => $habilitations,
+                'cities' => $cities,
+                'authors' => $authors
+            ]);
+        }
+
+        return $this->renderAjax('create', [
+            'model' => $model,
+            'types' => $types,
+            'habilitations' => $habilitations,
+            'cities' => $cities,
+            'authors' => $authors
+        ]);
+
+    } // end action
 
 
     /**

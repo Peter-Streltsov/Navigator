@@ -99,7 +99,52 @@ class CollectionsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+                'languages' => $languages
+            ]);
+        }
+
         return $this->render('create', [
+            'model' => $model,
+            'magazines' => $magazines,
+            'languages' => $languages
+        ]);
+
+    } // end action
+
+
+
+    /**
+     * Creates a new ArticleCollection model
+     * If creation successful, will redirect to 'view' page
+     *
+     * @return string|\yii\web\Response
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionAjaxcreate()
+    {
+
+        $model = new ArticleCollection();
+        // added languages list
+        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+        $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+                'languages' => $languages
+            ]);
+        }
+
+        return $this->renderAjax('ajaxforms/create', [
             'model' => $model,
             'magazines' => $magazines,
             'languages' => $languages

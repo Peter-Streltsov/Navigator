@@ -17,11 +17,12 @@ $this->title = $model->name . ' ' . $model->lastname;
     </div>
     <div class="panel panel-body">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-5">
                 <?= Html::a('Редактировать данные', ['update', 'id' => $model->id], [
                     'class' => 'button primary big',
                     'style' => 'width: 20pc;',
                 ]) ?>
+                <br>
                 <?= Html::a('Удалить пользователя', ['delete', 'id' => $model->id], [
                     'class' => 'button danger big',
                     'style' => 'width: 20pc;',
@@ -30,18 +31,12 @@ $this->title = $model->name . ' ' . $model->lastname;
                         'method' => 'post',
                     ],
                 ]) ?>
-            </div>
-        </div>
-
-        <br>
-        <br>
-
-        <div class="row">
-            <div class="col-lg-12">
+                <br>
                 <?= Html::a('Добавить в категорию "сотрудники"', ['users/makestaff', 'id' => $model->id], [
                     'class' => 'button primary big',
                     'style' => 'width: 20pc;',
                 ]); ?>
+                <br>
                 <?= Html::a('Создать автора', ['users/makeauthor', 'id' => $model->id], [
                     'class' => 'button primary big',
                     'style' => 'width: 20pc;',

@@ -34,6 +34,26 @@ class DataController extends Controller
 
 
 
+    public function actionAddlanguage()
+    {
+        $language = new Languages();
+
+        if ($language->load(\Yii::$app->request->post()) && $language->save()) {
+            $languages = new ActiveDataProvider([
+                'query' => Languages::find()
+            ]);
+            return $this->redirect(['data/addlanguage']);
+            /*return $this->renderAjax('languages', [
+                'languages' => $languages
+            ]);*/
+        }
+        return $this->renderAjax('languages_add', [
+            'language' => $language
+        ]);
+    }
+
+
+
     /**
      *
      */

@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 
 /* @var $this yii\web\View */
@@ -11,11 +12,28 @@ $this->params['breadcrumbs'][] = ['label' => 'Positions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="positions-create">
+    <div class="panel panel-default">
+        <div class="panel panel-heading">
+            <h4><?= Html::encode($this->title) ?></h4>
+        </div>
+        <div class="panel panel-body">
+            <?php $form = ActiveForm::begin([
+                'method' => 'post',
+                'action' => '/control/admin/positions/create'
+            ]); ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+            <br>
+            <br>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+            <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
 
+            <br>
+
+            <div class="form-group">
+                <?= Html::submitButton('Сохранить', ['class' => 'button primary big']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
 </div>

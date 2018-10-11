@@ -55,16 +55,20 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <div class="col-lg-6">
         <?php
-        echo \yii\widgets\DetailView::widget([
-            'model' => $personaldata->author,
-            'attributes' => [
-                'name',
-                'secondname',
-                'lastname',
-                'habilitation',
-                'user_id'
-            ]
-        ]);
+        if ($personaldata->author != null) {
+            echo \yii\widgets\DetailView::widget([
+                'model' => $personaldata->author,
+                'attributes' => [
+                    'name',
+                    'secondname',
+                    'lastname',
+                    'habilitation',
+                    'user_id'
+                ]
+            ]);
+        } else {
+            echo "<br> Автор не сопоставлен";
+        }
         ?>
     </div>
     <div class="col-lg-1">

@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Users */
@@ -13,14 +14,35 @@ $this->params['breadcrumbs'][] = 'Редактировать данные '.$mod
 ?>
 <div class="users-update">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+    <div class="panel panel-default">
+        <div class="panel panel-heading">
+            <h4><?= Html::encode($this->title) ?></h4>
+        </div>
+        <div class="panel panel-body">
+            <?php $form = ActiveForm::begin([
+                'validateOnType' => true,
+                'action' => '/control/admin/users/update?id=' . $model->id,
+                'method' => 'post'
+            ]); ?>
 
-    <br>
-    <br>
+            <?= $form->field($model, 'username')->input('email') ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-        'tokens' => $tokens
-    ]) ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'lastname')->textInput(['maxlength' => true]) ?>
+
+            <?php $tokens = \yii\helpers\ArrayHelper::map($tokens, 'token', 'token'); ?>
+
+            <?= $form->field($model, 'access_token')->dropDownList($tokens) ?>
+
+            <br>
+            <br>
+
+            <div class="form-group">
+                <?= Html::submitButton('Сохранить', ['class' => 'button big primary']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
 </div>

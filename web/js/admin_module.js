@@ -52,8 +52,6 @@ $('#upload').change(function () {
             });
             break;
     }
-    //$('#loadedform').html(select);
-    //alert(select);
 });
 
 /**
@@ -69,8 +67,10 @@ $('#organisation').on('click', function () {
         type: "post",
         dataType: "html",
         success:function (response) {
+            $('#holder').hide();
             $('#holder').html(response);
-            $('#holder').show("slow");
+            $('#holder').show("blind");
+                //.show("blind");
         }
     });
 });
@@ -84,8 +84,9 @@ $('#languages').click(function () {
         type: "post",
         dataType: "html",
         success:function (response) {
+            $('#holder').hide();
             $('#holder').html(response);
-            $('#holder').show(2000);
+            $('#holder').show("blind");
         }
     });
 });
@@ -99,8 +100,9 @@ $('#magazines').click(function () {
         type: "post",
         dataType: "html",
         success:function (response) {
+            $('#holder').hide();
             $('#holder').html(response);
-            $('#holder').show(2000);
+            $('#holder').show("blind");
         }
     });
 });
@@ -114,8 +116,9 @@ $('#users').click(function () {
         type: "post",
         dataType: "html",
         success:function (response) {
+            $('#holder').hide();
             $('#holder').html(response);
-            $('#holder').show(2000);
+            $('#holder').show("blind");
         }
     });
 });
@@ -129,8 +132,9 @@ $('#departments').click(function () {
         type: "post",
         dataType: "html",
         success:function (response) {
+            $('#holder').hide();
             $('#holder').html(response);
-            $('#holder').show(2000);
+            $('#holder').show("blind");
         }
     });
 });
@@ -144,8 +148,9 @@ $('#positions').click(function () {
         type: "post",
         dataType: "html",
         success:function (response) {
+            $('#holder').hide();
             $('#holder').html(response);
-            $('#holder').show(2000);
+            $('#holder').show("blind");
         }
     });
 });

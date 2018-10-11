@@ -10,10 +10,10 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use \kartik\sidenav\SideNav;
-use app\modules\Control\models\Upload;
 use \app\modules\Control\models\Messages;
 
 AppAsset::register($this);
+$this->registerJsFile('/js/layout.js');
 
 ?>
 
@@ -35,6 +35,10 @@ AppAsset::register($this);
     <body style="overflow: hidden;">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+
 
 
     <?php $this->beginBody() ?>
@@ -251,9 +255,8 @@ AppAsset::register($this);
                             ]
                         ],
                         [
-                            'label' =>'<b id="suspended_link">Отчеты</b>',
+                            'label' =>'<b id="synthesis">Отчеты</b>',
                             'icon' => 'list-alt',
-                            'id' => 'suspended',
                             //'url' => '/control/admin/synthesis'
                             'url' => '#'
                         ],
@@ -357,11 +360,11 @@ AppAsset::register($this);
 
     <?php yii\helpers\Url::remember(); ?>
 
-    <script>
+    <!--<script>
         $(document).ready(function() {
             $("body").niceScroll().resize(25);
         });
-    </script>
+    </script>-->
 
     <?php $this->endBody() ?>
 

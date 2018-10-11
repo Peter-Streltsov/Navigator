@@ -1,28 +1,26 @@
 <?php
 
 use yii\helpers\Html;
+use yii\bootstrap\Modal;
 
 $this->title = 'Администрирование';
 $this->params['breadcrumbs'][] = $this->title;
-
 $this->registerJsFile('/js/admin_module.js');
 
 ?>
 
 <br>
 <br>
-
-<div></div>
-
 <br>
 
 <div class="row">
     <div class="col-lg-4">
         <?php
-        \yii\bootstrap\Modal::begin([
+        Modal::begin([
             'toggleButton' => [
                 'label' => '<span class="glyphicon glyphicon-cloud-upload"> Загрузить публикации</span>',
-                'class' => 'btn btn-default'
+                'class' => 'btn btn-default',
+                'style' => 'width: 16pc;'
             ],
             'size' => 'modal-lg'
         ]);
@@ -49,13 +47,13 @@ $this->registerJsFile('/js/admin_module.js');
             </div>
         </div>
         <?php
-        \yii\bootstrap\Modal::end();
+        Modal::end();
         ?>
     </div>
     <div class="col-lg-3">
         <div class="btn-group" role="group" aria-label="...">
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span>', '/', ['class' => 'btn btn-default']) ?>
-            <?= Html::a('<span class="glyphicon glyphicon-plus"></span>', '/control/admin/shell', ['class' => 'btn btn-default']); ?>
+            <?= Html::a('<span class="glyphicon glyphicon-hdd"></span>', '/control/admin/shell', ['class' => 'btn btn-default']) ?>
+            <?= Html::a('<span class="glyphicon glyphicon-folder-open"></span>', '#', ['id' => 'filemanager', 'class' => 'btn btn-default']); ?>
         </div>
     </div>
 </div>
@@ -66,22 +64,22 @@ $this->registerJsFile('/js/admin_module.js');
 
 <div class="row">
     <div class="col-lg-4">
-        <div class="well">
-            <?= Html::button('Данные организации', ['style' => 'width: 25vh;', 'id' => 'organisation', 'class' => 'btn btn-default']) ?>
+        <div id="drag" class="well">
+            <?= Html::button('Данные организации', ['style' => 'width: 14pc;', 'id' => 'organisation', 'class' => 'btn btn-default']) ?>
             <br>
-            <?= Html::button('Список отделов', ['style' => 'width: 25vh;', 'id' => 'departments', 'class' => 'btn btn-default']) ?>
+            <?= Html::button('Список отделов', ['style' => 'width: 14pc;', 'id' => 'departments', 'class' => 'btn btn-default']) ?>
             <br>
-            <?= Html::button('Перечень должностей', ['style' => 'width: 25vh;', 'id' => 'positions', 'class' => 'btn btn-default']) ?>
+            <?= Html::button('Перечень должностей', ['style' => 'width: 14pc;', 'id' => 'positions', 'class' => 'btn btn-default']) ?>
             <br>
-            <?= Html::button('Список пользователей', ['style' => 'width: 25vh;', 'id' => 'users', 'class' => 'btn btn-default']) ?>
+            <?= Html::button('Список пользователей', ['style' => 'width: 14pc;', 'id' => 'users', 'class' => 'btn btn-default']) ?>
             <br>
-            <?= Html::button('Сохраненные языки', ['style' => 'width: 25vh;', 'id' => 'languages','class' => 'btn btn-default']) ?>
+            <?= Html::button('Сохраненные языки', ['style' => 'width: 14pc;', 'id' => 'languages','class' => 'btn btn-default']) ?>
             <br>
-            <?= Html::button('Сохраненные журналы', ['style' => 'width: 25vh;', 'id' => 'magazines', 'class' => 'btn btn-default']) ?>
+            <?= Html::button('Сохраненные журналы', ['style' => 'width: 14pc;', 'id' => 'magazines', 'class' => 'btn btn-default']) ?>
         </div>
     </div>
     <div class="col-lg-8">
-        <div id="holder">
+        <div id="holder"></div>
     </div>
 </div>
 

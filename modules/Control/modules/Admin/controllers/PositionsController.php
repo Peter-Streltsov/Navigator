@@ -47,9 +47,13 @@ class PositionsController extends Controller
             'query' => Positions::find(),
         ]);
 
-        return $this->renderAjax('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('index', [
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            return $this->redirect('/control/admin');
+        }
 
     } // end action
 
@@ -64,42 +68,54 @@ class PositionsController extends Controller
     public function actionView($id)
     {
 
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            return $this->redirect('/control/admin');
+        }
 
     } // end action
 
 
 
     /**
-     * Creates a new Positions model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Creates a new Positions model;
+     * If creation successful, will redirect to the 'view' page;
+     *
      * @return mixed
+     * @return string|\yii\web\Response
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionCreate()
     {
-
         $model = new Positions();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
 
     } // end action
 
 
 
     /**
-     * Updates an existing Positions model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Updates an existing Positions model
+     * If update successful, will redirect to 'view' page
+     *
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {
@@ -110,7 +126,7 @@ class PositionsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
 

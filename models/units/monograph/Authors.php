@@ -5,14 +5,14 @@ namespace app\models\units\monograph;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "monographies_authors".
+ * This is the model class for table "monograph_authors".
  *
  * @property int $id
- * @property int $monography_id
+ * @property int $monograph_id
  * @property int $author_id
  *
  * @property Authors $author
- * @property Monographies $monography
+ * @property Monograph $monograph
  */
 class Authors extends ActiveRecord
 {
@@ -22,7 +22,7 @@ class Authors extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'monographies_authors';
+        return 'monograph_authors';
     }
 
     /**
@@ -34,8 +34,8 @@ class Authors extends ActiveRecord
         return [
             [['monography_id', 'author_id'], 'required'],
             [['monography_id', 'author_id'], 'integer'],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Authors::className(), 'targetAttribute' => ['author_id' => 'id']],
-            [['monography_id'], 'exist', 'skipOnError' => true, 'targetClass' => Monographies::className(), 'targetAttribute' => ['monography_id' => 'id']],
+            //[['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Authors::className(), 'targetAttribute' => ['author_id' => 'id']],
+            //[['monography_id'], 'exist', 'skipOnError' => true, 'targetClass' => Monograph::className(), 'targetAttribute' => ['monograph_id' => 'id']],
         ];
 
     } // end function
@@ -50,7 +50,7 @@ class Authors extends ActiveRecord
 
         return [
             'id' => 'ID',
-            'monography_id' => 'Monography ID',
+            'monograph_id' => 'Monograph ID',
             'author_id' => 'Author ID',
         ];
 
@@ -73,10 +73,10 @@ class Authors extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMonography()
+    public function getMonograph()
     {
 
-        return $this->hasOne(Monographies::className(), ['id' => 'monography_id']);
+        return $this->hasOne(Monograph::className(), ['id' => 'monograph_id']);
 
     } // end function
 
@@ -84,10 +84,10 @@ class Authors extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getMonographiesByAuthor()
+    public function getMonographsByAuthor()
     {
 
-        return $this->hasMany(Monographies::className(), ['id' => 'article_id']);
+        return $this->hasMany(Monograph::className(), ['id' => 'article_id']);
 
     } // end function
 

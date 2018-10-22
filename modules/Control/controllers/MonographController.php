@@ -41,13 +41,14 @@ class MonographController extends Controller
     }
 
     /**
-     * Lists all Monographies models.
+     * Lists all Monographs models
      * @return mixed
      */
     public function actionIndex()
     {
 
-        $model = Monograph::find()->joinWith('authors')->all();
+        $model = Monograph::find()->all();
+            //->joinWith('authors')->all();
 
         $dataProvider = new ActiveDataProvider([
             'query' => Monograph::find()->joinWith('authors')

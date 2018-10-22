@@ -37,7 +37,6 @@ class m180325_010328_positions extends Migration
     {
 
         $this->dropTable('positions');
-        //Yii::$app->db->createCommand()->dropTable('positions');
 
         return true;
 

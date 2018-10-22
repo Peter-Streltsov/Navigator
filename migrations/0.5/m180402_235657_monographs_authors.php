@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m180420_013756_monographies_authors
+ * Class m180402_235657_monographs_authors
  */
-class m180420_013756_monographies_authors extends Migration
+class m180402_235657_monographs_authors extends Migration
 {
     /**
      * {@inheritdoc}
@@ -13,10 +13,10 @@ class m180420_013756_monographies_authors extends Migration
     public function safeUp()
     {
 
-        $this->createTable('monographies_authors', [
+        $this->createTable('monograph_authors', [
             'id' => $this->primaryKey(),
-            'monography_id' => $this->integer()->notNull(),
-            'author_id' => $this->integer()->notNull()
+            'monograph_key' => $this->integer()->notNull(),
+            'author_key' => $this->integer()->notNull()
         ]);
 
     } // end function
@@ -29,7 +29,7 @@ class m180420_013756_monographies_authors extends Migration
     public function safeDown()
     {
 
-        $this->dropTable('monographies_authors');
+        $this->dropTable('monographs_authors');
 
         return true;
 

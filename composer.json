@@ -7,7 +7,7 @@
     "support": {
         "source": "https://github.com/streltcov/Scientometrics"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "<2.0.14",
@@ -18,7 +18,7 @@
         "sibilino/yii2-dygraphswidget": "*",
         "miloschuman/yii2-highcharts-widget": "*",
         "kartik-v/yii2-widget-sidenav": "@dev",
-        "kartik-v/yii2-export": "^1.2",
+        "kartik-v/yii2-export": "^1.3.5",
         "kartik-v/yii2-context-menu": "*",
         "et-soft/yii2-widget-select-year": "*",
         "guzzlehttp/guzzle": "6.2.1",

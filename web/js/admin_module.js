@@ -6,34 +6,67 @@ $('#upload').change(function () {
     switch (select) {
         case '1':
             $.ajax({
-                url: "/control/articles/journals/ajaxcreate",
+                url: "/workspace/articles/journals/ajaxcreate",
                 type: "post",
                 dataType: "html",
                 success:function (response) {
                     $('#loaded').html(response);
                     $('#loaded').show("slow");
+                },
+                error: function(jqxhr, status, errorMsg) {
+                    $('#loaded').html('' +
+                        '<br>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b style="color: red;">Загрузка формы не удалась</b>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b>Ошибка - </b>' + errorMsg
+                    );
                 }
             });
             break;
         case '2':
             $.ajax({
-                url: "/control/articles/conferences/ajaxcreate",
+                url: "/workspace/articles/conferences/ajaxcreate",
                 type: "post",
                 dataType: "html",
                 success:function (response) {
                     $('#loaded').html(response);
                     $('#loaded').show("slow");
+                },
+                error: function(jqxhr, status, errorMsg) {
+                    $('#loaded').html('' +
+                        '<br>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b style="color: red;">Загрузка формы не удалась</b>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b>Ошибка - </b>' + errorMsg
+                    );
                 }
             });
             break;
         case '3':
             $.ajax({
-                url: "/control/articles/collections/ajaxcreate",
+                url: "/workspace/articles/collections/ajaxcreate",
                 type: "post",
                 dataType: "html",
                 success:function (response) {
                     $('#loaded').html(response);
                     $('#loaded').show("slow");
+                },
+                error: function(jqxhr, status, errorMsg) {
+                    $('#loaded').html('' +
+                        '<br>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b style="color: red;">Загрузка формы не удалась</b>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b>Ошибка - </b>' + errorMsg
+                    );
                 }
             });
             break;
@@ -42,12 +75,23 @@ $('#upload').change(function () {
             break;
         case '5':
             $.ajax({
-                url: "/control/dissertations/ajaxcreate",
+                url: "/workspace/dissertations/ajaxcreate",
                 type: "post",
                 dataType: "html",
                 success:function (response) {
                     $('#loaded').html(response);
                     $('#loaded').show("slow");
+                },
+                error: function(jqxhr, status, errorMsg) {
+                    $('#loaded').html('' +
+                        '<br>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b style="color: red;">Загрузка формы не удалась</b>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b>Ошибка - </b>' + errorMsg
+                    );
                 }
             });
             break;
@@ -63,7 +107,7 @@ $('#upload').change(function () {
  */
 $('#organisation').on('click', function () {
     $.ajax({
-        url: "/control/admin/orgdata",
+        url: "/workspace/admin/orgdata",
         type: "post",
         dataType: "html",
         success:function (response) {
@@ -80,7 +124,7 @@ $('#organisation').on('click', function () {
  */
 $('#languages').click(function () {
     $.ajax({
-        url: "/control/admin/data/languages",
+        url: "/workspace/admin/data/languages",
         type: "post",
         dataType: "html",
         success:function (response) {
@@ -96,7 +140,7 @@ $('#languages').click(function () {
  */
 $('#magazines').click(function () {
     $.ajax({
-        url: "/control/admin/data/magazines",
+        url: "/workspace/admin/data/magazines",
         type: "post",
         dataType: "html",
         success:function (response) {
@@ -112,7 +156,7 @@ $('#magazines').click(function () {
  */
 $('#users').click(function () {
     $.ajax({
-        url: "/control/admin/users",
+        url: "/workspace/admin/users",
         type: "post",
         dataType: "html",
         success:function (response) {
@@ -128,7 +172,7 @@ $('#users').click(function () {
  */
 $('#departments').click(function () {
     $.ajax({
-        url: "/control/admin/orgdata/departments",
+        url: "/workspace/admin/orgdata/departments",
         type: "post",
         dataType: "html",
         success:function (response) {
@@ -144,7 +188,7 @@ $('#departments').click(function () {
  */
 $('#positions').click(function () {
     $.ajax({
-        url: "/control/admin/positions",
+        url: "/workspace/admin/positions",
         type: "post",
         dataType: "html",
         success:function (response) {

@@ -23,6 +23,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'Y8rKQYVMCvgPK-0Kf3ls6GJw30gSJFEa',
+            //'baseUrl' => '',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -65,7 +66,9 @@ $config = [
         'db' => $db,
 
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
+            //'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
                 '<action:(test|index|login|about|contact)>' => 'site/<action>'
@@ -83,11 +86,11 @@ $config = [
                 return true;
             }
         ],
-        'control' => [
-            'class' => 'app\modules\Control\ControlModule',
+        'workspace' => [
+            'class' => 'app\modules\workspace\WorkspaceModule',
             'modules' => [
                 'admin' => [
-                    'class' => 'app\modules\Control\modules\Admin\Admin',
+                    'class' => 'app\modules\workspace\modules\Admin\Admin',
                     'modules' => [
                         'shell' => [
                             'class' => 'samdark\webshell\Module',
@@ -100,15 +103,18 @@ $config = [
                     ]
                 ],
                 'articles' => [
-                    'class' => 'app\modules\Control\modules\articles\Articles'
+                    'class' => 'app\modules\workspace\modules\articles\Articles'
                 ],
                 'personal' => [
-                    'class' => 'app\modules\Control\modules\personal\PersonalModule',
+                    'class' => 'app\modules\workspace\modules\personal\PersonalModule',
                     'modules' => [
                         'uploads' => [
-                            'class' => 'app\modules\Control\modules\personal\uploads\UploadModule'
+                            'class' => 'app\modules\workspace\modules\personal\uploads\UploadModule'
                         ]
                     ]
+                ],
+                'units' => [
+                    'class' => ''
                 ]
             ],
         ],

@@ -2,6 +2,7 @@
 
 namespace app\models\units\monograph;
 
+use app\interfaces\UnitInterface;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
@@ -16,7 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $doi
  * @property resource $file
  */
-class Monograph extends ActiveRecord
+class Monograph extends ActiveRecord implements UnitInterface
 {
 
     /**
@@ -97,6 +98,53 @@ class Monograph extends ActiveRecord
             Yii::$app->session->setFlash('success', 'Данные монографии обновлены');
         }
 
+    } // end function
+
+
+
+    /**
+     * @return array|\yii\db\ActiveQuery
+     */
+    public function authors()
+    {
+        return $this->hasMany(Authors::className(), ['monograph_id' => $this->id]);
+    } // end function
+
+
+
+    public function getAuthors()
+    {
+        return $this->hasMany(Authors::className(), ['monograph_id' => $this->id]);
+    }
+
+
+
+    /**
+     * @return int|void
+     */
+    public function index()
+    {
+        // TODO: Implement index() method.
+    } // end function
+
+
+
+    /**
+     * @return string|void
+     */
+    public function languageValue()
+    {
+        // TODO: Implement languageValue() method.
+    } // end function
+
+
+
+    /**
+     * @return int|void
+     */
+    public function personalIndex()
+    {
+        // TODO: Implement personalIndex() method.
     } // end function
 
 

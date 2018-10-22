@@ -5,7 +5,7 @@ namespace app\models\units\monograph;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "monograph_affilations".
+ * Model class for table "monograph_associations"
  *
  * @property int $id
  * @property string $name
@@ -19,7 +19,7 @@ class Associations extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'monograph_affilations';
+        return 'monograph_associations';
     }
 
     /**
@@ -49,10 +49,10 @@ class Associations extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return MonographAffilationsQuery the active query used by this AR class.
+     * @return AssociationsQuery the active query used by this AR class
      */
     public static function find()
     {
-        return new MonographAffilationsQuery(get_called_class());
+        return new AssociationsQuery(get_called_class());
     }
 }

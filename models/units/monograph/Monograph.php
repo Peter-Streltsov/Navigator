@@ -107,7 +107,11 @@ class Monograph extends ActiveRecord implements UnitInterface
      */
     public function authors()
     {
+<<<<<<< HEAD
         return $this->hasMany(Authors::className(), ['monograph_id' => $this->id]);
+=======
+        return $this->hasMany(Authors::className(), ['monography_id' => $this->id]);
+>>>>>>> 9802b4dd64f5f193e48a6eb8d5091b0b0a84d5b9
     } // end function
 
 

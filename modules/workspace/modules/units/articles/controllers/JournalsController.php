@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\workspace\modules\articles\controllers;
+namespace app\modules\workspace\modules\units\articles\controllers;
 
 // project models
 use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\models\units\articles\journals\ArticleJournal;
-use app\models\units\articles\journals\Affilations;
+//use app\models\units\articles\journals\Affilations;
 use app\models\units\articles\journals\Associations;
 use app\models\units\articles\journals\Authors;
 use app\models\units\articles\journals\Citations;

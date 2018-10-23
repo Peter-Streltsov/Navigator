@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\control\modules\units;
+namespace app\modules\workspace\modules\units;
 
 /**
  * units module definition class

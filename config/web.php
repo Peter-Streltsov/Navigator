@@ -114,7 +114,12 @@ $config = [
                     ]
                 ],
                 'units' => [
-                    'class' => ''
+                    'class' => 'app\modules\workspace\modules\units\Units',
+                    'modules' => [
+                        'articles' => [
+                            'class' => 'app\modules\workspace\modules\units\articles\Articles'
+                        ]
+                    ]
                 ]
             ],
         ],

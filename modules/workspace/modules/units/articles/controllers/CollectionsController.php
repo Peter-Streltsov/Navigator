@@ -1,25 +1,23 @@
 <?php
 
-namespace app\modules\workspace\modules\articles\controllers;
+namespace app\modules\workspace\modules\units\articles\controllers;
 
 // project classes
-use app\models\units\articles\conferences\ArticleConference;
+use app\models\units\articles\collections\ArticleCollection;
 use app\models\common\Languages;
 use app\models\common\Magazines;
-use app\models\pnrd\indexes\IndexesArticles;
-// yii2 classes
+//yii2 classes
 use Yii;
-use yii\bootstrap\Modal;
+use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
 
 /**
- * ConferencesController implements the CRUD actions for ArticleConference model
+ * CollectionsController implements the CRUD actions for ArticleCollection model.
  */
-class ConferencesController extends Controller
+class CollectionsController extends Controller
 {
 
     /**
@@ -42,14 +40,15 @@ class ConferencesController extends Controller
 
 
     /**
-     * Lists all ArticleConference models
+     * Lists all ArticleCollection models
+     *
      * @return mixed
      */
     public function actionIndex()
     {
 
         $dataProvider = new ActiveDataProvider([
-            'query' => ArticleConference::find(),
+            'query' => ArticleCollection::find(),
         ]);
 
         return $this->render('index', [
@@ -61,7 +60,7 @@ class ConferencesController extends Controller
 
 
     /**
-     * Displays a single ArticleConference model
+     * Displays a single ArticleCollection model
      *
      * @param $id
      * @return string
@@ -80,7 +79,7 @@ class ConferencesController extends Controller
 
 
     /**
-     * Creates a new ArticleConference model
+     * Creates a new ArticleCollection model
      * If creation successful, will redirect to 'view' page
      *
      * @return string|\yii\web\Response
@@ -91,39 +90,26 @@ class ConferencesController extends Controller
     public function actionCreate()
     {
 
-        /**
-         * view parameters
-         */
-
-        $model = new ArticleConference();
+        $model = new ArticleCollection();
         // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
-        // magazines list
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
-        // article categories (pnrd)
-        $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
-        // pnrd indexes
-        $types = $model->types();
 
-        /**
-         * saving base model or collecting errors (converting to string) if not succeeded
-         */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
-        } elseif (Yii::$app->request->post() && !$model->save()) {
-            foreach ($model->getErrors() as $error) {
-                $message[] = implode(' ', $error);
-            }
-            $errors = implode('<br>', $message);
-            Yii::$app->session->setFlash('danger', 'Сохранение не удалось' . '<br><br>' . $errors);
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+                'languages' => $languages
+            ]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'languages' => $languages,
             'magazines' => $magazines,
-            'types' => $types,
-            'classes' => $classes
+            'languages' => $languages
         ]);
 
     } // end action
@@ -131,7 +117,7 @@ class ConferencesController extends Controller
 
 
     /**
-     * Creates a new ArticleConference model
+     * Creates a new ArticleCollection model
      * If creation successful, will redirect to 'view' page
      *
      * @return string|\yii\web\Response
@@ -142,39 +128,26 @@ class ConferencesController extends Controller
     public function actionAjaxcreate()
     {
 
-        /**
-         * view parameters
-         */
-
-        $model = new ArticleConference();
+        $model = new ArticleCollection();
         // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
-        // magazines list
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
-        // article categories (pnrd)
-        $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
-        // pnrd indexes
-        $types = $model->types();
 
-        /**
-         * saving base model or collecting errors (converting to string) if not succeeded
-         */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
-        } elseif (Yii::$app->request->post() && !$model->save()) {
-            foreach ($model->getErrors() as $error) {
-                $message[] = implode(' ', $error);
-            }
-            $errors = implode('<br>', $message);
-            Yii::$app->session->setFlash('danger', 'Сохранение не удалось' . '<br><br>' . $errors);
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+                'languages' => $languages
+            ]);
         }
 
         return $this->renderAjax('ajaxforms/create', [
             'model' => $model,
-            'languages' => $languages,
             'magazines' => $magazines,
-            'types' => $types,
-            'classes' => $classes
+            'languages' => $languages
         ]);
 
     } // end action
@@ -182,7 +155,7 @@ class ConferencesController extends Controller
 
 
     /**
-     * Updates an existing ArticleConference model
+     * Updates an existing ArticleCollection model
      * If update successful, will redirect to 'view' page
      *
      * @param $id
@@ -210,8 +183,8 @@ class ConferencesController extends Controller
 
 
     /**
-     * Deletes an existing ArticleConference model
-     * If deletion successful, will redirect to 'index' page
+     * Deletes an existing ArticleCollection model
+     * If deletion successful, will be redirect to 'index' page
      *
      * @param $id
      * @return \yii\web\Response
@@ -231,18 +204,18 @@ class ConferencesController extends Controller
 
 
     /**
-     * Finds the ArticleConference model based on its primary key value
+     * Finds the ArticleCollection model based on its primary key value
      * If the model is not found, a 404 HTTP exception will be thrown
      *
      * @param $id
-     * @return ArticleConference|null
+     * @return ArticleCollection|null
      * @throws NotFoundHttpException
      * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {
 
-        if (($model = ArticleConference::findOne($id)) !== null) {
+        if (($model = ArticleCollection::findOne($id)) !== null) {
             return $model;
         }
 

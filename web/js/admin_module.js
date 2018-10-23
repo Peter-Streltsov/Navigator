@@ -1,20 +1,21 @@
 /**
- *
+ * upload selector actions
  */
 $('#upload').change(function () {
     var select = $('#upload').val();
     switch (select) {
         case '1':
             $.ajax({
-                url: "/workspace/articles/journals/ajaxcreate",
+                url: "/workspace/units/articles/journals/ajaxcreate",
                 type: "post",
                 dataType: "html",
                 success:function (response) {
-                    $('#loaded').html(response);
-                    $('#loaded').show("slow");
+                    $('#holder').hide();
+                    $('#holder').html(response);
+                    $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    $('#loaded').html('' +
+                    $('#holder').html('' +
                         '<br>' +
                         '<br>' +
                         '<br>' +
@@ -32,11 +33,12 @@ $('#upload').change(function () {
                 type: "post",
                 dataType: "html",
                 success:function (response) {
-                    $('#loaded').html(response);
-                    $('#loaded').show("slow");
+                    $('#holder').hide();
+                    $('#holder').html(response);
+                    $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    $('#loaded').html('' +
+                    $('#holder').html('' +
                         '<br>' +
                         '<br>' +
                         '<br>' +
@@ -54,11 +56,12 @@ $('#upload').change(function () {
                 type: "post",
                 dataType: "html",
                 success:function (response) {
-                    $('#loaded').html(response);
-                    $('#loaded').show("slow");
+                    $('#holder').hide();
+                    $('#holder').html(response);
+                    $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    $('#loaded').html('' +
+                    $('#holder').html('' +
                         '<br>' +
                         '<br>' +
                         '<br>' +
@@ -79,8 +82,64 @@ $('#upload').change(function () {
                 type: "post",
                 dataType: "html",
                 success:function (response) {
-                    $('#loaded').html(response);
-                    $('#loaded').show("slow");
+                    $('#holder').hide();
+                    $('#holder').html(response);
+                    $('#holder').show("blind");
+                },
+                error: function(jqxhr, status, errorMsg) {
+                    $('#holder').html('' +
+                        '<br>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b style="color: red;">Загрузка формы не удалась</b>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b>Ошибка - </b>' + errorMsg
+                    );
+                }
+            });
+            break;
+    }
+});
+
+/**
+ *
+ */
+
+$('#dataselect').change(function () {
+    var select = $('#dataselect').val();
+    switch (select) {
+        case '1':
+            $.ajax({
+                url: "/workspace/admin/orgdata",
+                type: "post",
+                dataType: "html",
+                success:function (response) {
+                    $('#holder').hide();
+                    $('#holder').html(response);
+                    $('#holder').show("blind");
+                },
+                error: function(jqxhr, status, errorMsg) {
+                    $('#holder').html('' +
+                        '<br>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b style="color: red;">Загрузка формы не удалась</b>' +
+                        '<br>' +
+                        '<br>' +
+                        '<b>Ошибка - </b>' + errorMsg
+                    );
+                }
+            });
+            break;
+        case '2':
+            $.ajax({
+                url: "/workspace/articles/conferences/ajaxcreate",
+                type: "post",
+                dataType: "html",
+                success:function (response) {
+                    $('#holder').html(response);
+                    $('#holder').show("slow");
                 },
                 error: function(jqxhr, status, errorMsg) {
                     $('#loaded').html('' +

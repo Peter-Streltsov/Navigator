@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\workspace\modules\articles;
+namespace app\modules\workspace\modules\units\articles;
 
 use yii\base\Module;
 
@@ -13,7 +13,7 @@ class Articles extends Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'app\modules\workspace\modules\articles\controllers';
+    public $controllerNamespace = 'app\modules\workspace\modules\units\articles\controllers';
     //public $defaultRoute = 'app\modules\Control\modules\articles\controllers\JournalsController';
 
 

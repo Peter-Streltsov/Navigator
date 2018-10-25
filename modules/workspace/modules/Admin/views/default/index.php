@@ -13,36 +13,32 @@ $this->registerJsFile('/js/admin_module.js');
 <br>
 
 <div class="row">
-    <div class="col-lg-10">
-        <?= Yii::$app->db->getDriverName(); ?>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel panel-body">
+                <?= \yii\widgets\DetailView::widget([
+                    'model' => $data,
+                    'options' => [
+                        'style' => 'border-radius: 3pc;',
+                        'class' => 'table'
+                    ]
+                ]); ?>
+            </div>
+        </div>
         <br>
-        <?= Yii::$app->db->getIsActive(); ?>
+        <?php
+        //\yii\helpers\VarDumper::dump(Yii::$app->request)
+        ?>
     </div>
-</div>
-
-<br>
-<br>
-<br>
-
-<div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-6">
         <div class="btn-group" role="group" aria-label="...">
             <?= Html::a('<span class="glyphicon glyphicon-console"></span>', '/workspace/admin/shell', ['class' => 'btn btn-default']) ?>
             <?= Html::a('<span class="glyphicon glyphicon-folder-open"></span>', '#', ['id' => 'filemanager', 'class' => 'btn btn-default']); ?>
             <?= Html::a('<span class="glyphicon glyphicon-object-align-horizontal"></span>', '#', ['id' => 'filemanager', 'class' => 'btn btn-default']); ?>
+            <?= Html::a('<span class="glyphicon glyphicon-off"></span>', '#', ['id' => 'clearup', 'class' => 'btn btn-default']); ?>
         </div>
-    </div>
-</div>
-
-<br>
-<br>
-
-<?php
-\yii\helpers\VarDumper::dump(Yii::$app->db->dsn);
-?>
-
-<div class="row">
-    <div class="col-lg-6">
+        <br>
+        <br>
         <div class="well">
             <h5>Загрузка публикаций</h5>
             <?php
@@ -61,10 +57,6 @@ $this->registerJsFile('/js/admin_module.js');
             ]);
 
             ?>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="well">
             <h5>Сохраненные данные</h5>
             <?php
 
@@ -79,7 +71,8 @@ $this->registerJsFile('/js/admin_module.js');
             ];
 
             echo Html::dropDownList('', '', $data_items, [
-                'id' => 'dataselect'
+                'id' => 'dataselect',
+                'style' => 'width: 22pc;'
             ]);
 
             ?>

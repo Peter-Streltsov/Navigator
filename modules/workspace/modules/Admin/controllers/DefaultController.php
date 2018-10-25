@@ -22,7 +22,14 @@ class DefaultController extends Controller
     public function actionIndex()
     {
 
-        return $this->render('index');
+        $common_data = [];
+        $common_data['Драйвер базы данных'] = \Yii::$app->db->getDriverName();
+        $common_data['Браузер'] = \Yii::$app->request->getUserAgent();
+        $common_data['Адрес пользователя'] = \Yii::$app->request->getUserIP();
+
+        return $this->render('index', [
+            'data' => $common_data
+        ]);
 
     } // end action
 

@@ -15,17 +15,18 @@ $('#upload').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    $('#holder').html('' +
-                        '<br>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b style="color: red;">Загрузка формы не удалась</b>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b>Ошибка - </b>' + errorMsg
-                    );
-                }
-            });
+                    var message = '<br><br>' +
+                        '<div class="alert alert-danger" role="alert">' +
+                        '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
+                        '<p>' + status + '</p>' +
+                        '<hr>' +
+                        '<p class="mb-0">Ошибка</p>' + errorMsg +
+                        '</div>' +
+                        '<br>';
+                    $('#holder').hide();
+                    $('#holder').html(message);
+                    $('#holder').show("blind");
+            }});
             break;
         case '2':
             $.ajax({
@@ -38,15 +39,17 @@ $('#upload').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    $('#holder').html('' +
-                        '<br>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b style="color: red;">Загрузка формы не удалась</b>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b>Ошибка - </b>' + errorMsg
-                    );
+                    var message = '<br><br>' +
+                        '<div class="alert alert-danger" role="alert">' +
+                        '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
+                        '<p>' + status + '</p>' +
+                        '<hr>' +
+                        '<p class="mb-0">Ошибка</p>' + errorMsg +
+                        '</div>' +
+                        '<br>';
+                    $('#holder').hide();
+                    $('#holder').html(message);
+                    $('#holder').show("blind");
                 }
             });
             break;
@@ -61,20 +64,28 @@ $('#upload').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    $('#holder').html('' +
-                        '<br>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b style="color: red;">Загрузка формы не удалась</b>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b>Ошибка - </b>' + errorMsg
-                    );
-                }
-            });
+                    var message = '<br><br>' +
+                        '<div class="alert alert-danger" role="alert">' +
+                        '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
+                        '<p>' + status + '</p>' +
+                        '<hr>' +
+                        '<p class="mb-0">Ошибка</p>' + errorMsg +
+                        '</div>' +
+                        '<br>';
+                    $('#holder').hide();
+                    $('#holder').html(message);
+                    $('#holder').show("blind");
+            }});
             break;
         case '4':
-            $('#loaded').html('Функция отключена в данной версии');
+            $('#holder').hide();
+            var info = '<br><br>' +
+                '<div class="alert alert-warning" role="alert">' +
+                'Функция отключена в данной версии' +
+                '</div>' +
+                '<br>';
+            $('#holder').html(info);
+            $('#holder').show("blind");
             break;
         case '5':
             $.ajax({
@@ -87,23 +98,24 @@ $('#upload').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    $('#holder').html('' +
-                        '<br>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b style="color: red;">Загрузка формы не удалась</b>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b>Ошибка - </b>' + errorMsg
-                    );
-                }
-            });
+                    var message = '<br><br>' +
+                        '<div class="alert alert-danger" role="alert">' +
+                        '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
+                        '<p>' + status + '</p>' +
+                        '<hr>' +
+                        '<p class="mb-0">Ошибка</p>' + errorMsg +
+                        '</div>' +
+                        '<br>';
+                    $('#holder').hide();
+                    $('#holder').html(message);
+                    $('#holder').show("blind");
+            }});
             break;
     }
 });
 
 /**
- *
+ * loading saved data forms - selector - #dataselect
  */
 
 $('#dataselect').change(function () {
@@ -120,17 +132,18 @@ $('#dataselect').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    $('#holder').html('' +
-                        '<br>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b style="color: red;">Загрузка формы не удалась</b>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b>Ошибка - </b>' + errorMsg
-                    );
-                }
-            });
+                    var message = '<br><br>' +
+                        '<div class="alert alert-danger" role="alert">' +
+                        '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
+                        '<p>' + status + '</p>' +
+                        '<hr>' +
+                        '<p class="mb-0">Ошибка</p>' + errorMsg +
+                        '</div>' +
+                        '<br>';
+                    $('#holder').hide();
+                    $('#holder').html(message);
+                    $('#holder').show("blind");
+                }});
             break;
         case '2':
             $.ajax({
@@ -142,17 +155,18 @@ $('#dataselect').change(function () {
                     $('#holder').show("slow");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    $('#loaded').html('' +
-                        '<br>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b style="color: red;">Загрузка формы не удалась</b>' +
-                        '<br>' +
-                        '<br>' +
-                        '<b>Ошибка - </b>' + errorMsg
-                    );
-                }
-            });
+                    var message = '<br><br>' +
+                        '<div class="alert alert-danger" role="alert">' +
+                        '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
+                        '<p>' + status + '</p>' +
+                        '<hr>' +
+                        '<p class="mb-0">Ошибка</p>' + errorMsg +
+                        '</div>' +
+                        '<br>';
+                    $('#holder').hide();
+                    $('#holder').html(message);
+                    $('#holder').show("blind");
+                }});
             break;
     }
 });
@@ -256,4 +270,12 @@ $('#positions').click(function () {
             $('#holder').show("blind");
         }
     });
+});
+
+/**
+ * requests and renders users list in content-holder div
+ */
+$('#clearup').click(function () {
+    $('#holder').html('');
+    $('#holder').show("blind");
 });

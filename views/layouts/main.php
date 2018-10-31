@@ -10,6 +10,8 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
+$this->title = 'Главная страница';
+
 AppAsset::register($this);
 
 ?>

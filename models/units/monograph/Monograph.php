@@ -101,55 +101,51 @@ class Monograph extends ActiveRecord implements UnitInterface
     } // end function
 
 
+    /**
+     * Unit Interface implementation
+     */
 
     /**
      * @return array|\yii\db\ActiveQuery
      */
-    public function authors()
-    {
-<<<<<<< HEAD
-        return $this->hasMany(Authors::className(), ['monograph_id' => $this->id]);
-=======
-        return $this->hasMany(Authors::className(), ['monography_id' => $this->id]);
->>>>>>> 9802b4dd64f5f193e48a6eb8d5091b0b0a84d5b9
-    } // end function
-
-
-
     public function getAuthors()
     {
         return $this->hasMany(Authors::className(), ['monograph_id' => $this->id]);
-    }
-
-
-
-    /**
-     * @return int|void
-     */
-    public function index()
-    {
-        // TODO: Implement index() method.
     } // end function
 
 
-
     /**
-     * @return string|void
+     * @return string
      */
-    public function languageValue()
+    public function getLanguage()
     {
         // TODO: Implement languageValue() method.
     } // end function
 
 
+    /**
+     * @return float
+     */
+    public function getIndex()
+    {
+        // TODO: Implement index() method;
+        return 1.0;
+    } // end function
+
 
     /**
      * @return int|void
      */
-    public function personalIndex()
+    public function getPersonalIndex()
     {
         // TODO: Implement personalIndex() method.
     } // end function
+
+
+    /**
+     * End Unit interface
+     */
+
 
 
     /**
@@ -158,9 +154,7 @@ class Monograph extends ActiveRecord implements UnitInterface
      */
     public static function find()
     {
-
         return new MonographQuery(get_called_class());
-
     } // end function
 
 } // end class

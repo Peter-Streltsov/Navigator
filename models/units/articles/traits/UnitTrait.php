@@ -39,7 +39,7 @@ trait UnitTrait
      *
      * @return array
      */
-    public function authors()
+    public function getAuthors()
     {
 
         $authors = Authors::find()->where(['article_id' => $this->id])->all();
@@ -62,7 +62,7 @@ trait UnitTrait
      *
      * @return string
      */
-    public function languageValue()
+    public function getLanguage()
     {
 
         $language = Languages::find()->where(['id' => $this->language])->one();
@@ -89,7 +89,7 @@ trait UnitTrait
      *
      * @return float
      */
-    public function index()
+    public function getIndex()
     {
 
         if (isset($this->type)) {
@@ -107,7 +107,7 @@ trait UnitTrait
      *
      * @return float
      */
-    public function personalIndex()
+    public function getPersonalIndex()
     {
 
         $user = Yii::$app->user->getIdentity();

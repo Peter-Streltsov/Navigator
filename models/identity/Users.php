@@ -32,9 +32,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public static function tableName()
     {
-
         return 'users';
-
     } // end function
 
 
@@ -44,13 +42,11 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function rules()
     {
-
         return [
             [['username', 'password', 'name', 'lastname'], 'required'],
             [['username', 'password_hash', 'name', 'lastname', 'access_token'], 'string', 'max' => 255],
             [['password', 'auth_key'], 'string', 'max' => 100],
         ];
-
     } // end function
 
 
@@ -59,14 +55,12 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function behaviors()
     {
-
         return [
             [
                 'class' => TimestampBehavior::className(),
                 'updatedAtAttribute' => false
             ]
         ];
-
     } // end function
 
 
@@ -75,7 +69,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function attributeLabels()
     {
-
         return [
             'id' => 'ID',
             'username' => 'Логин',
@@ -86,9 +79,8 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
             'created_at' => 'Создан',
             'auth_key' => 'Ключ авторизации',
             'access_token' => 'Токен',
-            'userpic' => 'Фотграфия'
+            'userpic' => 'Фотография'
         ];
-
     } // end function
 
 
@@ -99,9 +91,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public static function find()
     {
-
         return new UsersQuery(get_called_class());
-
     } // end function
 
 
@@ -114,7 +104,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public static function findIdentity($id)
     {
-
         if (Yii::$app->db->getTableSchema(static::tableName(), true) !== null) {
             return static::findOne($id);
         } else {
@@ -123,7 +112,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
                 'password' => 'admin'
             ]);
         }
-
     } // end function
 
 
@@ -135,9 +123,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-
         return static::findOne(['access_token' => $token]);
-
     } // end function
 
 
@@ -147,9 +133,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function getAuthKey()
     {
-
         return $this->auth_key;
-
     } // end function
 
 
@@ -160,9 +144,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function validateAuthKey($authkey)
     {
-
         return $this->getAuthKey() === $authkey;
-
     } // end function
 
 
@@ -172,9 +154,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function getId()
     {
-
         return $this->id;
-
     } // end function
 
 
@@ -186,7 +166,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function beforeSave($insert)
     {
-
         if (!parent::beforeSave($insert)) {
             return false;
         }
@@ -200,10 +179,8 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
         }
 
         return true;
-
     } // end function
-
-
+    
 
 
     /**
@@ -213,14 +190,8 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function validatePassword($password)
     {
-
-        $hash = Yii::$app->security->generatePasswordHash($password);
-
-        if (Yii::$app->security->validatePassword($password, $hash)) {
-            return true;
-        } else {
-            return false;
-        }
+        $hash = Yii::$app->security->generatePasswordHash($this->password);
+        return Yii::$app->security->validatePassword($password, $hash);
 
     } // end function
 
@@ -231,9 +202,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public static function findByUsername($username)
     {
-
         return static::findOne(['username' => $username]);
-
     } // end function
 
 
@@ -247,9 +216,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function getStaff()
     {
-
         return Personnel::find()->where(['user_id' => $this->id])->one();
-
     } // end function
 
 
@@ -259,9 +226,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
      */
     public function getAuthor()
     {
-
         return Authors::find()->where(['user_id' => $this->id])->one();
-
     } // end function
 
     /**

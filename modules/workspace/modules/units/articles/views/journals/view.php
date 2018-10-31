@@ -108,10 +108,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'authors',
                         'value' => function($model) {
                             $authors = $model->authors();
-                            foreach ($authors as $author) {
-                                $html[] = $author['name'] . ' ' . $author['lastname'];
+                            if (count($authors > 0)) {
+                                foreach ($authors as $author) {
+                                    $html[] = $author['name'] . ' ' . $author['lastname'];
+                                }
+                                return implode("; ", $html);
+                            } else {
+                                return null;
                             }
-                            return implode("; ", $html);
                         }
                     ],
                     'annotation'

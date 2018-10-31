@@ -3,7 +3,8 @@
 namespace app\interfaces;
 
 /**
- * Interface ModelInterface
+ * Interface UnitInterface
+ *
  * @package app\modules\Control\interfaces
  */
 interface UnitInterface
@@ -14,27 +15,27 @@ interface UnitInterface
      *
      * @return array
      */
-    public function authors();
+    public function getAuthors();
 
     /**
      * returns current unit language
      *
      * @return string
      */
-    public function languageValue();
+    public function getLanguage();
 
     /**
      * calculates and returns total PNRD index for current unit model
      *
-     * @return integer
+     * @return float
      */
-    public function index();
+    public function getIndex();
 
     /**
      * calculates and returns index for current unit for requested author
      *
-     * @return integer
+     * @return float
      */
-    public function personalIndex();
+    public function getPersonalIndex();
 
 } // end interface

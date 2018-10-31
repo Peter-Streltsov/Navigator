@@ -5,6 +5,7 @@ namespace app\models\units\dissertations;
 use app\interfaces\UnitInterface;
 use app\models\common\Habilitations;
 use app\models\identity\Authors;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -34,9 +35,7 @@ class Dissertations extends ActiveRecord implements UnitInterface
      */
     public static function tableName()
     {
-
         return 'dissertations';
-
     } // end function
 
 
@@ -46,14 +45,12 @@ class Dissertations extends ActiveRecord implements UnitInterface
      */
     public function rules()
     {
-
         return [
             [['type', 'title', 'year', 'city', 'habilitation', 'speciality', 'author'], 'required'],
             [['type', 'year', 'habilitation', 'pages_number', 'author'], 'integer'],
             [['annotation', 'index'], 'string'],
             [['title', 'city', 'organisation', 'speciality', 'language', 'state_registration', 'link', 'file'], 'string', 'max' => 255],
         ];
-
     } // end function
 
 
@@ -63,7 +60,6 @@ class Dissertations extends ActiveRecord implements UnitInterface
      */
     public function attributeLabels()
     {
-
         return [
             'id' => 'ID',
             'type' => 'Тип',
@@ -82,7 +78,6 @@ class Dissertations extends ActiveRecord implements UnitInterface
             'index' => 'Полнотекстовый индекс',
             'file' => 'Файл',
         ];
-
     } // end function
 
 
@@ -91,15 +86,14 @@ class Dissertations extends ActiveRecord implements UnitInterface
      */
 
 
-
-    public function authors()
+    public function getAuthors()
     {
         // TODO: Implement getUnitauthors() method;
     }
 
 
 
-    public function languageValue()
+    public function getLanguage()
     {
         // TODO: Implement getUnitlanguage() method;
     }
@@ -110,7 +104,7 @@ class Dissertations extends ActiveRecord implements UnitInterface
      *
      * @return integer
      */
-    public function index()
+    public function getIndex()
     {
         //TODO: Implement getIndex() method;
         return 1;
@@ -121,7 +115,7 @@ class Dissertations extends ActiveRecord implements UnitInterface
     /**
      * @return float|int
      */
-    public function personalIndex()
+    public function getPersonalIndex()
     {
         // TODO: Implement getPersonalIndex() method;
         return $this->getIndex() * 0.3;
@@ -130,38 +124,21 @@ class Dissertations extends ActiveRecord implements UnitInterface
     /**
      * gets current dissertation type
      *
-     * @return \DissertationTypes
+     * @return ActiveQuery
      */
-    public function getDissertationtype()
+    public function getType()
     {
-
         return $this->hasOne(DissertationTypes::className(), ['id' => 'type']);
-
     } // end function
 
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDissertationhabilitation()
+    public function getHabilitation()
     {
-
         return $this->hasOne(Habilitations::className(), ['id' => 'habilitation']);
-
     } // end function
-
-
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDissertationauthor()
-    {
-
-        return $this->hasOne(Authors::className(), ['id' => 'author']);
-
-    } // end function
-
 
 
     /**
@@ -176,9 +153,7 @@ class Dissertations extends ActiveRecord implements UnitInterface
      */
     public static function find()
     {
-
         return new DissertationTypesQuery(get_called_class());
-
     } // end function
 
 } // end class

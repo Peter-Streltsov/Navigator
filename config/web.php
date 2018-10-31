@@ -103,7 +103,7 @@ $config = [
                     ]
                 ],
                 'articles' => [
-                    'class' => 'app\modules\workspace\modules\articles\Articles'
+                    'class' => 'app\modules\workspace\modules\units\articles\Articles'
                 ],
                 'personal' => [
                     'class' => 'app\modules\workspace\modules\personal\PersonalModule',

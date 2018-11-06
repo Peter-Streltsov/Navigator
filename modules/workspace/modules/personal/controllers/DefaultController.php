@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\modules\personal\controllers;
+namespace app\modules\workspace\modules\personal\controllers;
 
 // project classes
 use app\models\pnrd\PersonalData;
@@ -31,10 +31,10 @@ class DefaultController extends Controller
         // current user
         $model = Users::find()->where(['id' => $id])->one();
 
-        // checking if exist employee for current user; if no - redirect to '/control'
+        // checking if exist employee for current user; if no - redirect to '/workspace'
         if (!Personnel::find()->where(['user_id' => $model->id])->exists()) {
             Yii::$app->session->setFlash('danger' ,'Сотрудника с таким идентификатором не существует');
-            return $this->redirect('/control');
+            return $this->redirect('/workspace');
         }
 
         $author = Authors::find()->where(['user_id' => $model->id])->one(); // author connected with current user

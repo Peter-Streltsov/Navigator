@@ -56,6 +56,7 @@ $this->registerJsFile('/js/admin_module.js');
 
             echo Html::dropDownList('', '', $items, [
                 'id' => 'upload',
+                'style' => 'width: 22pc;'
             ]);
 
             ?>
@@ -91,7 +92,7 @@ $this->registerJsFile('/js/admin_module.js');
 
 <div class="row">
     <div class="col-lg-1"></div>
-    <div class="col-lg-10">
+    <div class="col-lg-12">
         <div id="holder"></div>
     </div>
     <div class="col-lg-1"></div>

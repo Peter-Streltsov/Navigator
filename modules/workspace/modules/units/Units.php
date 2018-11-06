@@ -2,10 +2,12 @@
 
 namespace app\modules\workspace\modules\units;
 
+use yii\base\Module;
+
 /**
  * units module definition class
  */
-class Units extends \yii\base\Module
+class Units extends Module
 {
     /**
      * @inheritdoc

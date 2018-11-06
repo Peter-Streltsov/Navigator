@@ -10,7 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use \kartik\sidenav\SideNav;
-use \app\modules\Control\models\Messages;
+//use \app\modules\Control\models\Messages;
 
 AppAsset::register($this);
 $this->registerJsFile('/js/layout.js');
@@ -151,7 +151,7 @@ $this->registerJsFile('/js/layout.js');
                         [
                             'label' => 'Общие сведения',
                             'icon' => 'home',
-                            'url' => '/control'
+                            'url' => '/workspace'
                         ],
                         [
                             'label' => '<b id="suspended_link">Статистика</b>',

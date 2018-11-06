@@ -62,10 +62,10 @@ AppAsset::register($this);
                         [
                             'label' => "<span class=\"glyphicon glyphicon-align-justify\"></span>",
                             'items' => [
-                                ['label' => 'Панель управления', 'url' => ['/control'], 'options' => [
+                                ['label' => 'Панель управления', 'url' => ['/workspace'], 'options' => [
                                         'style' => 'width: 20pc;'
                                 ]],
-                                ['label' => 'Личный кабинет', 'url' => ['/control/personal/', 'id' => Yii::$app->user->id]],
+                                ['label' => 'Личный кабинет', 'url' => ['/workspace/personal/', 'id' => Yii::$app->user->id]],
                                 '<li class="divider"></li>',
                                 ['label' => 'Вы вошли как:'],
                                 ['label' => "<b style=\"color: #32a873\">".' '.Yii::$app->user->identity->name.' '.Yii::$app->user->identity->lastname.'</b>'],

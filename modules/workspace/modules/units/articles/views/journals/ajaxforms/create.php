@@ -49,7 +49,12 @@ use yii\helpers\Html;
 
             <div class="row">
                 <div class="col-lg-12">
-                    <?= $form->field($model, 'magazine')->dropDownList($magazines)?>
+                    <?= $form->field($model, 'magazine')->widget(Select2::className(), [
+                        'data' => $magazines,
+                        'pluginOptions' => [
+                                'tags' => true
+                        ]
+                    ]); ?>
                 </div>
             </div>
 
@@ -67,13 +72,23 @@ use yii\helpers\Html;
 
             <div class="row">
                 <div class="col-lg-2">
-                    <?= $form->field($model, 'year')->dropDownList(Yii::$app->yearselector->select)?>
+                    <?= $form->field($model, 'year')->widget(Select2::className(), [
+                        'data' => Yii::$app->yearselector->select,
+                        'pluginOptions' => [
+                                'tags' => true
+                        ]
+                    ]); ?>
                 </div>
                 <div class="col-lg-5">
                     <?= $form->field($model, 'doi')->textInput(['maxlength' => true]) ?>
                 </div>
                 <div class="col-lg-5">
-                    <?= $form->field($model, 'language')->dropDownList($languages); ?>
+                    <?= $form->field($model, 'language')->widget(Select2::className(), [
+                        'data' => $languages,
+                        'pluginOptions' => [
+                                'tags' => true
+                        ]
+                    ]); ?>
                 </div>
             </div>
 
@@ -106,12 +121,6 @@ use yii\helpers\Html;
 
             <br>
             <br>
-
-            <div class="row">
-                <div class="col-lg-5">
-                    <?= $form->field($model, 'file')->fileInput(['class' => 'btn btn-default']) ?>
-                </div>
-            </div>
 
             <div class="form-group">
 

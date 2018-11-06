@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\modules\personal\controllers;
+namespace app\modules\workspace\modules\personal\controllers;
 
 // project classes
 use app\modules\Control\models\Notifications; // !!!

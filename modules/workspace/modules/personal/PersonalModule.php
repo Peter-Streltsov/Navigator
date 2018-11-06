@@ -1,18 +1,15 @@
 <?php
 
-namespace app\modules\Control\modules\personal;
+namespace app\modules\workspace\modules\personal;
 
 use yii\base\Module;
 
 /**
  * personal module definition class
+ *
  */
 class PersonalModule extends Module
 {
-    /**
-     * @inheritdoc
-     */
-
     /**
      * @inheritdoc
      */
@@ -21,9 +18,7 @@ class PersonalModule extends Module
         parent::init();
 
         // custom initialization code goes here
-        $this->controllerNamespace = 'app\modules\Control\modules\personal\controllers';
-        //$this->defaultRoute = 'personal';
-
+        $this->controllerNamespace = 'app\modules\workspace\modules\personal\controllers';
     } // end function
 
 } // end class

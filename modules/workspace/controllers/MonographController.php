@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\controllers;
+namespace app\modules\workspace\controllers;
 
 // project classes
 use app\models\identity\Authors as AuthorsCommon;

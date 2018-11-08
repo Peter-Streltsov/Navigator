@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = 'Редактировать данные '.$mod
         <div class="panel panel-body">
             <?php $form = ActiveForm::begin([
                 'validateOnType' => true,
-                'action' => '/control/admin/users/update?id=' . $model->id,
+                'action' => '/workspace/admin/users/update?id=' . $model->id,
                 'method' => 'post'
             ]); ?>
 

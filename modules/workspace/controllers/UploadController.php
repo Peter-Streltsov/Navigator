@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\controllers;
+namespace app\modules\workspace\controllers;
 
 use app\modules\Control\models\Authors;
 use app\modules\Control\models\Fileupload;

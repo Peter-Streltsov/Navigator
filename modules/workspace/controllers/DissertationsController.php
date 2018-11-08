@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\controllers;
+namespace app\modules\workspace\controllers;
 
 use app\models\common\Cities;
 use app\models\units\dissertations\Dissertations;

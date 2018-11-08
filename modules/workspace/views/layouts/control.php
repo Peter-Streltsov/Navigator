@@ -96,6 +96,32 @@ $this->registerJsFile('/js/layout.js');
                             ]
                     ]
                 ],
+                [
+                    'label' => '<span style="color: ' . Yii::$app->counter->messageColor() . ';" class="glyphicon glyphicon-comment"></span>',
+                    'items' => [
+                        [
+                            'label' => '<br>'
+                        ],
+                        [
+                            'label' => '<f id="suspend1">Пользовательские сообщения</f> ' . Yii::$app->counter->messagesCount(),
+                            //'url' => '/control/personal/notifications',
+                            'url' => '#',
+                            'options' => [
+                                'style' => 'width: 20pc;'
+                            ]
+                        ],
+                        [
+                            'label' => '<br>'
+                        ],
+                        [
+                            'label' => '<t id="suspend2">Загруженные данные</t> ' . Yii::$app->counter->messagesCount(),
+                            'url' => '#'
+                        ],
+                        [
+                            'label' => '<br>'
+                        ]
+                    ]
+                ],
                 Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/site/login']]
                 ) : (
@@ -154,7 +180,7 @@ $this->registerJsFile('/js/layout.js');
                             'url' => '/workspace'
                         ],
                         [
-                            'label' => '<b id="suspended_link">Статистика</b>',
+                            'label' => '<b id="statistics">Статистика</b>',
                             'icon' => 'stats',
                             //'url' => '/control/statistics'
                             'url' => '#'
@@ -237,7 +263,7 @@ $this->registerJsFile('/js/layout.js');
                                     'label' => 'Лекции'
                                 ]]
                         ],
-                        [
+                        /*[
                             'label' => 'Сообщения '
                                 . Yii::$app->counter->messagesCount()
                                 . ' ',
@@ -253,7 +279,7 @@ $this->registerJsFile('/js/layout.js');
                                     'url' => '/workspace/admin/messages/uploads'
                                 ]
                             ]
-                        ],
+                        ],*/
                         [
                             'label' =>'<b id="synthesis">Отчеты</b>',
                             'icon' => 'list-alt',

@@ -9,8 +9,7 @@ use Yii;
 use yii\base\Component;
 
 /**
- * Class Messages
- *
+ * Class Counter
  * draws badges with numbers of different types of messages
  *
  * @since 0.4.33
@@ -26,7 +25,6 @@ class Counter extends Component
      */
     public function messagesCount()
     {
-
         // counting messages with status null (not read)
         $count = Message::find()->where(['read' => 0])->count();
 
@@ -39,9 +37,7 @@ class Counter extends Component
         return '<span style="background-color: red;" class="badge badge-light">'
         . (integer)$count
         . '</span>';
-
     } // end function
-
 
 
     /**
@@ -51,7 +47,6 @@ class Counter extends Component
      */
     public function uploadMessagesCount()
     {
-
         // counting upload data with status 0 (not revised)
         $count = Upload::find()->where(['accepted' => '0'])->count();
 
@@ -64,9 +59,7 @@ class Counter extends Component
         return '<span style="background-color: darkslategray;" class="badge badge-light">'
             . (integer)$count
             . '</span>';
-
     } // end function
-
 
 
     /**
@@ -74,10 +67,20 @@ class Counter extends Component
      */
     public function userMessagesCount()
     {
-
         // getting current user model
         $user = Yii::$app->user->getIdentity();
+    } // end function
 
+
+    /**
+     *
+     */
+    public function messageColor()
+    {
+        if ($this->messagesCount() > 0) {
+            return 'lightgreen';
+        }
+        return 'gray';
     } // end function
 
 } // end class

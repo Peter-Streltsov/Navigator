@@ -23,7 +23,7 @@ use yii\widgets\Pjax;
             </div>
             <div class="panel panel-body">
                 <br>
-                <?= Html::a('Создать пользователя', ['/control/admin/users/create'], ['class' => 'button big primary']) ?>
+                <?= Html::a('Создать пользователя', ['/workspace/admin/users/create'], ['class' => 'button big primary']) ?>
                 <br>
                 <br>
                 <div class="well">
@@ -74,7 +74,7 @@ use yii\widgets\Pjax;
                             'template' => '{view}',
                             'buttons' => [
                                 'view' => function($url, $model) {
-                                    $viewurl = Yii::$app->getUrlManager()->createUrl(['/control/admin/users/view','id'=>$model['id']]);
+                                    $viewurl = Yii::$app->getUrlManager()->createUrl(['/workspace/admin/users/view','id'=>$model['id']]);
                                     return Html::a('<span class="glyphicon glyphicon-info-sign"></span>',
                                         $viewurl,
                                         [

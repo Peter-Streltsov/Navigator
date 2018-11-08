@@ -1,9 +1,11 @@
 <?php
 
-namespace app\modules\Control\controllers;
+namespace app\modules\workspace\controllers;
 
-use Yii;
+// project classes
 use app\models\identity\Authors;
+// yii classes
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

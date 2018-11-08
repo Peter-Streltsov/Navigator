@@ -20,7 +20,7 @@ class Indexes
      */
     private $journals;
     /**
-     * @var \app\models\units\articles\conferencies\ArticleConferencyQuery
+     * @var \app\models\units\articles\conferences\ArticleConferenceQuery
      */
     private $conference;
     /**
@@ -32,16 +32,19 @@ class Indexes
      */
     private $dissertations;
 
+
+    /**
+     * Indexes constructor
+     *
+     * @param Units $units
+     */
     public function __construct(Units $units)
     {
-
         $this->journals = $units->articlesJournals();
         $this->conference = $units->articlesConferences();
         $this->collections = $units->articlesCollections();
         $this->dissertations = $units->dissertations();
-
     } // end constructor
-
 
 
     /**
@@ -53,7 +56,6 @@ class Indexes
     } // end function
 
 
-
     /**
      * calculates total PNRD index for all registered publications
      *
@@ -61,7 +63,6 @@ class Indexes
      */
     public function total()
     {
-
         $index = [];
 
         $journals = $this->journals->all();
@@ -70,23 +71,22 @@ class Indexes
         $dissertations = $this->dissertations->all();
 
         foreach ($journals as $journal) {
-            $index[] = $journal->index();
+            $index[] = $journal->getIndex();
         }
 
         foreach ($conferencies as $conference) {
-            $index[] = $conference->index();
+            $index[] = $conference->getIndex();
         }
 
         foreach ($collections as $collection) {
-            $index[] = $collection->index();
+            $index[] = $collection->getIndex();
         }
 
-        foreach ($dissertations as $dissertation) {
-            $index[] = $dissertation->index();
-        }
+        /*foreach ($dissertations as $dissertation) {
+            $index[] = $dissertation->getI();
+        }*/
 
         return (float)array_sum($index);
-
     } // end function
 
 } // end class

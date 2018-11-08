@@ -23,9 +23,8 @@ class AppAsset extends AssetBundle
         'css/site.css', 'css/custom.css', 'css/buttons.css'
     ];
     public $js = [
-        'js/jquery.nicescroll.min.js',
-        //'js/years.selector.js',
-        'js/suspended_function.js'
+        'js/common/jquery.nicescroll.min.js',
+        'js/common/suspended_function.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

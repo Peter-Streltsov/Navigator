@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\Control\controllers;
+namespace app\modules\workspace\controllers;
 
 use yii\web\Controller;
 use app\modules\Control\units\Statistics;

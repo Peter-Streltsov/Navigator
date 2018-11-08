@@ -5,7 +5,7 @@ use yii\bootstrap\Modal;
 
 $this->title = 'Администрирование';
 $this->params['breadcrumbs'][] = $this->title;
-$this->registerJsFile('/js/admin_module.js');
+$this->registerJsFile('/js/modules/admin/module.js');
 
 ?>
 

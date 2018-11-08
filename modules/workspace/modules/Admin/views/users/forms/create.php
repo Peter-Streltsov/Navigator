@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin([
         'validateOnType' => true,
-        'action' => '/control/admin/users/create',
+        'action' => '/workspace/admin/users/create',
         'method' => 'post'
     ]); ?>
 

@@ -32,7 +32,7 @@ $this->title = $model->name . ' ' . $model->lastname;
                     ],
                 ]) ?>
                 <br>
-                <?= Html::a('Добавить в категорию "сотрудники"', ['users/makestaff', 'id' => $model->id], [
+                <?= Html::a('Добавить в категорию "сотрудники"', ['/workspace/admin/users/makestaff', 'id' => $model->id], [
                     'class' => 'button primary big',
                     'style' => 'width: 20pc;',
                 ]); ?>

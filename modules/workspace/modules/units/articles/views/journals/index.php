@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php Pjax::begin(); ?>
 
         <p>
-            <?= Html::a('Добавить статью', ['create'], ['class' => 'button big primary']) ?>
+            <!--<?= Html::a('Добавить статью', ['create'], ['class' => 'button big primary']) ?>-->
         </p>
 
         <br>
@@ -142,7 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         };
 
                         isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
-                        $authors = $data->authors();
+                        $authors = $data->getAuthors();
                         isset ($authors[0]) ? $authors = $links($authors) : $authors = null;
                         return $authors;
                     }

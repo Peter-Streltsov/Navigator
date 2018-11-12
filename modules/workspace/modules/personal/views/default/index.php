@@ -21,15 +21,15 @@ $this->registerJsFile('/js/modules/personal/module.js');
 <br>
 <br>
 
-<div class="well">
+<!--<div class="well">
     <h4><?= Html::encode($this->title); ?></h4>
-</div>
+</div>-->
 
 <br>
 
 <!-- upper buttons -->
 <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-7">
         <div id="upper_buttons">
             <?php
             echo $this->render('forms/controlrow', [
@@ -38,15 +38,27 @@ $this->registerJsFile('/js/modules/personal/module.js');
             ?>
         </div>
     </div>
+    <div class="col-lg-5">
+        <div id="photo-holder">
+            <?php
+            if ($model->userpic == null) {
+                echo $this->render('forms/noimage');
+            } else {
+                echo $this->render('forms/imageholder');
+            }
+            ?>
+        </div>
+    </div>
 </div>
 <!-- end block -->
 
 <br>
 <br>
+<br>
 
 <!-- personal data -->
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-7">
 
         <?php
 
@@ -56,17 +68,17 @@ $this->registerJsFile('/js/modules/personal/module.js');
 
         ?>
     </div>
-    <div class="col-lg-1">
-
-    </div>
-    <div id="photo-holder" class="col-lg-5">
-        <?php
-         if ($model->userpic == null) {
-             echo $this->render('forms/noimage');
-         } else {
-             echo $this->render('forms/imageholder');
-         }
-        ?>
+    <div class="col-lg-5">
+        <div class="panel panel-default">
+            <div class="panel panel-body">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
     </div>
 </div>
 <!-- end block -->

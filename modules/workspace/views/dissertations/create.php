@@ -12,22 +12,25 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="dissertations-create">
 
-    <br>
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <br>
-    <br>
-
     <?php
 
-    echo $this->render('forms/create/createform', [
-        'model' => $model,
-        'types' => $types,
-        'habilitations' => $habilitations,
-        'cities' => $cities,
-        'authors' => $authors
-    ]);
+    if (Yii::$app->request->isAjax) {
+        echo $this->renderAjax('ajaxforms/create', [
+            'model' => $model,
+            'types' => $types,
+            'habilitations' => $habilitations,
+            'cities' => $cities,
+            'authors' => $authors
+        ]);
+    } else {
+        echo $this->render('forms/create/createform', [
+            'model' => $model,
+            'types' => $types,
+            'habilitations' => $habilitations,
+            'cities' => $cities,
+            'authors' => $authors
+        ]);
+    }
 
     ?>
 

@@ -137,12 +137,12 @@ class CollectionsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        if (Yii::$app->request->isAjax) {
+        /*if (Yii::$app->request->isAjax) {
             return $this->renderAjax('create', [
                 'model' => $model,
                 'languages' => $languages
             ]);
-        }
+        }*/
 
         return $this->renderAjax('ajaxforms/create', [
             'model' => $model,

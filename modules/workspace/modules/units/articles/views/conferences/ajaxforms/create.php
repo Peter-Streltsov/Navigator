@@ -11,6 +11,9 @@ use yii\helpers\Html;
 ?>
 
 <div class="panel panel-default">
+    <div class="panel panel-heading">
+        <h4>Добавить статью - публикации материалов конференций</h4>
+    </div>
     <div class="panel panel-body">
         <?php $form = ActiveForm::begin(); ?>
 

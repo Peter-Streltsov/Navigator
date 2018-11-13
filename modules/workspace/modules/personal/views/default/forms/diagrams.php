@@ -11,12 +11,12 @@ use yii\helpers\Html;
                 <?= Html::button('<span class="glyphicon glyphicon-send"></span>');?>
                 <br>
                 <br>
-                <?= Html::button('<span class="glyphicon glyphicon-send"></span>');?>
+                <?= Html::button('<span class="glyphicon glyphicon-equalizer"></span>');?>
                 <br>
                 <br>
-                <?= Html::button('<span class="glyphicon glyphicon-send"></span>');?>
+                <!--<?= Html::button('<span class="glyphicon glyphicon-send"></span>');?>
                 <br>
-                <br>
+                <br>-->
                 <br>
                 <br>
                 <br>

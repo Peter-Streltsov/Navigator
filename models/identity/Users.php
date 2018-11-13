@@ -11,7 +11,8 @@ use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "users".
+ * ActiveRecord class for table "users"
+ * Identity model, implements IdentityInterface
  *
  * @property int $id
  * @property string $login
@@ -84,7 +85,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     } // end function
 
 
-
     /**
      * @inheritdoc
      * @return UsersQuery the active query used by this AR class.
@@ -93,7 +93,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     {
         return new UsersQuery(get_called_class());
     } // end function
-
 
 
     /**
@@ -115,7 +114,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     } // end function
 
 
-
     /**
      * @param mixed $token
      * @param null $type
@@ -127,7 +125,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     } // end function
 
 
-
     /**
      * @return mixed|string
      */
@@ -135,7 +132,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     {
         return $this->auth_key;
     } // end function
-
 
 
     /**
@@ -148,7 +144,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     } // end function
 
 
-
     /**
      * @return int|string current user ID
      */
@@ -156,7 +151,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     {
         return $this->id;
     } // end function
-
 
 
     /**
@@ -181,7 +175,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
         return true;
     } // end function
     
-
 
     /**
      * @param $password
@@ -218,7 +211,6 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     {
         return Personnel::find()->where(['user_id' => $this->id])->one();
     } // end function
-
 
 
     /**

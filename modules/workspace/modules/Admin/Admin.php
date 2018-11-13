@@ -2,6 +2,7 @@
 
 namespace app\modules\workspace\modules\Admin;
 
+use Yii;
 use yii\base\Module;
 
 /**
@@ -39,6 +40,8 @@ class Admin extends Module
         if(!\Yii::$app->access->isAdmin()) {
             return \Yii::$app->getResponse()->redirect('/workspace?denyrequest=1');
         }
+
+        Yii::$app->telemetry->whoami()->save();
 
         return true;
 

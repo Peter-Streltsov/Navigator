@@ -1,13 +1,13 @@
 <?php
 
-namespace app\models\identity;
+namespace app\models\basis;
 
 /**
- * ActiveQuery class for [[Authors]]
+ * This is the ActiveQuery class for [[Telemetry]].
  *
- * @see Authors
+ * @see Telemetry
  */
-class AuthorsQuery extends \yii\db\ActiveQuery
+class TelemetryQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -16,20 +16,19 @@ class AuthorsQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Authors[]|array
+     * @return Telemetry[]|array
      */
     public function all($db = null)
     {
         return parent::all($db);
-    } // end function
+    }
 
     /**
      * @inheritdoc
-     * @return Authors|array|null
+     * @return Telemetry|array|null
      */
     public function one($db = null)
     {
         return parent::one($db);
-    } // end function
-
-} // end class
+    }
+}

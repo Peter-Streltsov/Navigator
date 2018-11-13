@@ -5,7 +5,7 @@ namespace app\models\identity;
 use Yii;
 
 /**
- * This is the model class for table "authors.php".
+ * ActiveRecord class for table "authors";
  *
  * @property int $id
  * @property string $name
@@ -20,11 +20,8 @@ class Authors extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-
         return 'authors';
-
     } // end function
-
 
 
     /**
@@ -32,14 +29,12 @@ class Authors extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-
         return [
             [['name', 'lastname'], 'required'],
+            [['user_id', 'habilitation', 'personnel_id'], 'integer'],
             [['name', 'secondname', 'lastname'], 'string', 'max' => 255],
         ];
-
     } // end function
-
 
 
     /**
@@ -47,7 +42,6 @@ class Authors extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-
         return [
             'id' => 'ID',
             'name' => 'Имя',
@@ -55,30 +49,68 @@ class Authors extends \yii\db\ActiveRecord
             'lastname' => 'Фамилия',
             'habilitation' => 'Ученая степень'
         ];
-
     } // end function
-
 
 
     /**
      * GETTERS
      */
 
-    public function getAuthorhabilitation()
+    public function getArticlesJournalsAuthors()
     {
-
+        return $this->hasMany(\app\models\units\articles\journals\Authors::className(), []);
     }
 
 
-    public function getPublications()
+    /**
+     * lists staff member dissertations
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDissertations()
     {
+        return $this->hasMany(Dissertations::className(), []);
+    } // end function
 
-    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticlesJournals()
+    {
+        return $this->hasMany(ArticleJournal::className(), [])->viaTable();
+    } // end function
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticlesConferences()
+    {
+        return $this->hasMany(ArticleConference::className(), [])->viaTable();
+    } // end function
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticlesCollections()
+    {
+        return $this->hasMany(ArticleCollection::className(), [])->viaTable();
+    } // end function
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMonographs()
+    {
+        return $this->hasMany(Monograph::className(), [])->viaTable();
+    } // end function
 
     /**
      * ENDGETTERS
      */
-
 
 
     /**
@@ -87,16 +119,13 @@ class Authors extends \yii\db\ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
-
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
             Yii::$app->session->setFlash('success', 'Автор добавлен');
         } else {
             Yii::$app->session->setFlash('danger', 'Данные автора обновлены');
         }
-
     } // end function
-
 
 
 
@@ -106,9 +135,7 @@ class Authors extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-
         return new AuthorsQuery(get_called_class());
-
     } // end function
 
 } // end class

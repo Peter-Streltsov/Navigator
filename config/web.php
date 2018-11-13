@@ -63,6 +63,9 @@ $config = [
         'yearselector' => [
             'class' => 'app\components\YearSelect'
         ],
+        'telemetry' => [
+            'class' => 'app\components\Telemetry'
+        ],
         'db' => $db,
 
         'urlManager' => [

@@ -3,7 +3,7 @@
 namespace app\models\identity;
 
 /**
- * This is the ActiveQuery class for [[Users]].
+ * ActiveQuery class for [[Users]]
  *
  * @see Users
  */
@@ -15,18 +15,14 @@ class UsersQuery extends \yii\db\ActiveQuery
     }*/
 
 
-
     /**
      * @inheritdoc
      * @return Users[]|array
      */
     public function all($db = null)
     {
-
         return parent::all($db);
-
     } // end function
-
 
 
     /**
@@ -35,9 +31,7 @@ class UsersQuery extends \yii\db\ActiveQuery
      */
     public function one($db = null)
     {
-
         return parent::one($db);
-
     } // end function
 
 } // end class

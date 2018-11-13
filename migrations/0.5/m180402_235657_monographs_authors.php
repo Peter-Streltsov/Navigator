@@ -29,7 +29,7 @@ class m180402_235657_monographs_authors extends Migration
     public function safeDown()
     {
 
-        $this->dropTable('monographs_authors');
+        $this->dropTable('monograph_authors');
 
         return true;
 

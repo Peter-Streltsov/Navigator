@@ -2,11 +2,13 @@
 
 namespace app\models\identity;
 
+// project classes
 use app\models\common\Habilitations;
+// yii classes
 use Yii;
 
 /**
- * This is the model class for table "personnel".
+ * ActiveRecord class for table "personnel";
  *
  * @property int $id
  * @property string $name
@@ -25,9 +27,7 @@ class Personnel extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-
         return 'personnel';
-
     } // end function
 
 
@@ -37,13 +37,11 @@ class Personnel extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-
         return [
             [['name', 'lastname'], 'required'],
             [['employment', 'age', 'user_id'], 'integer'],
             [['name', 'secondname', 'lastname', 'position', 'habilitation', 'expirience'], 'string', 'max' => 255],
         ];
-
     } // end function
 
 
@@ -53,7 +51,6 @@ class Personnel extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-
         return [
             'id' => 'ID',
             'name' => 'Имя',
@@ -67,33 +64,40 @@ class Personnel extends \yii\db\ActiveRecord
             'habilitation' => 'Ученая степень',
             'year_graduated' => 'Год окончания ВУЗа'
         ];
-
     } // end function
 
 
 
     public function afterSave($insert, $changedAttributes)
     {
-
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
             Yii::$app->session->setFlash('success', 'Сотрудник добавлен');
         } else {
             Yii::$app->session->setFlash('success' , 'Данные сотрудника обновлены');
         }
-
     } // end function
 
 
-
-    public function habilitationValue()
+    /**
+     * @return mixed
+     */
+    public function getHabilitationvalue()
     {
-
         $habilitation = Habilitations::find()->select(['habilitation'])->where(['id' => $this->habilitation])->asArray()->one();
         return $habilitation[0];
-
     } // end function
 
+
+    /**
+     * returns Authors model linked to current staff member
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor()
+    {
+        return $this->hasOne(Authors::className(), ['' => '']);
+    } // end function
 
 
     /**
@@ -102,9 +106,7 @@ class Personnel extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-
         return new PersonnelQuery(get_called_class());
-
     } // end function
 
 } // end class

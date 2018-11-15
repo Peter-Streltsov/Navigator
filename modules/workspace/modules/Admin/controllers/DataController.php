@@ -3,6 +3,7 @@
 namespace app\modules\workspace\modules\Admin\controllers;
 
 // project classes
+use app\models\basis\Telemetry;
 use app\models\common\Languages;
 // yii classes
 use app\models\common\Magazines;
@@ -33,7 +34,9 @@ class DataController extends Controller
     } // end action
 
 
-
+    /**
+     * @return string|\yii\web\Response
+     */
     public function actionAddlanguage()
     {
         $language = new Languages();
@@ -50,8 +53,7 @@ class DataController extends Controller
         return $this->renderAjax('languages_add', [
             'language' => $language
         ]);
-    }
-
+    } // end action
 
 
     /**
@@ -59,14 +61,27 @@ class DataController extends Controller
      */
     public function actionMagazines()
     {
-
         $magazines = new ActiveDataProvider([
             'query' => Magazines::find()
         ]);
         return $this->renderAjax('magazines', [
             'model' => $magazines
         ]);
+    } // end action
 
+
+    /**
+     * @return string
+     */
+    public function actionTelemetry()
+    {
+        $telemetry = new ActiveDataProvider([
+            'query' => Telemetry::find()
+        ]);
+
+        return $this->renderAjax('telemetry', [
+            'telemetry' => $telemetry
+        ]);
     } // end action
 
 } // end class

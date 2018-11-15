@@ -2,6 +2,7 @@
 
 namespace app\modules\workspace\modules\units;
 
+use Yii;
 use yii\base\Module;
 
 /**
@@ -23,4 +24,5 @@ class Units extends Module
 
         // custom initialization code goes here
     }
-}
+
+} // end class

@@ -29,16 +29,19 @@ $this->registerJsFile('/js/modules/personal/module.js');
 
 <!-- upper buttons -->
 <div class="row">
-    <div class="col-lg-7">
+    <div class="col-lg-8">
         <div id="upper_buttons">
             <?php
             echo $this->render('forms/controlrow', [
-                'model' => $model
+                'model' => $model,
+                'notifications' => $notifications,
+                'message' => $message,
+                'author' => $author
             ]);
             ?>
         </div>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-4">
         <div id="photo-holder">
             <?php
             if ($model->userpic == null) {
@@ -122,5 +125,7 @@ $this->registerJsFile('/js/modules/personal/module.js');
 <br>
 
 <?php
+
+\yii\helpers\VarDumper::dump($author);
 
 ?>

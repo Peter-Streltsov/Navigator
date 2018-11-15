@@ -18,7 +18,7 @@ $this->registerJsFile('/js/modules/admin/module.js');
             <?= Html::a('<span class="glyphicon glyphicon-console"></span>', '/workspace/admin/shell', ['class' => 'btn btn-default']) ?>
             <?= Html::a('<span class="glyphicon glyphicon-folder-open"></span>', '#', ['id' => 'filemanager', 'class' => 'btn btn-default']); ?>
             <?= Html::a('<span class="glyphicon glyphicon-object-align-horizontal"></span>', '#', ['id' => 'filemanager', 'class' => 'btn btn-default']); ?>
-            <?= Html::a('<span class="glyphicon glyphicon-comment"></span>', '#', ['id' => 'filemanager', 'class' => 'btn btn-default']); ?>
+            <?= Html::a('<span class="glyphicon glyphicon-comment"></span>', '#', ['id' => 'messages', 'class' => 'btn btn-default']); ?>
             <?= Html::a('<span class="glyphicon glyphicon-off"></span>', '#', ['id' => 'clearup', 'class' => 'btn btn-default']); ?>
         </div>
         <br>

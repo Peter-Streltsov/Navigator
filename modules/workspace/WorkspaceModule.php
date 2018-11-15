@@ -2,6 +2,7 @@
 
 namespace app\modules\workspace;
 
+use Yii;
 use yii\base\Module;
 use yii\helpers\Url;
 
@@ -36,6 +37,8 @@ class WorkspaceModule extends Module
             \Yii::$app->getResponse()->redirect(Url::to('/site/index?denyrequest=1'));
             return false;
         }
+
+        Yii::$app->telemetry->whoami()->save();
 
         return true;
 

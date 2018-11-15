@@ -3,12 +3,15 @@
 namespace app\modules\workspace\modules\personal\controllers;
 
 // project classes
+use app\models\messages\Message;
+use app\models\messages\Notification;
 use app\models\pnrd\PersonalData;
 use app\models\identity\Users;
 use app\models\identity\Authors;
 use app\models\identity\Personnel;
 // yii2 classes
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 
@@ -37,14 +40,23 @@ class DefaultController extends Controller
             return $this->redirect('/workspace');
         }
 
-        $author = Authors::find()->where(['user_id' => $model->id])->one(); // author connected with current user
+        $message = new Message();
+
+        $notifications = new ActiveDataProvider([
+            'query' => Notification::find()->where(['user_id' => $id])
+        ]);
+
+        $author = $model->author; // author connected with current user
         $staff = Personnel::find()->where(['user_id' => $id])->one(); // staff record connected with current user
         $personal = new PersonalData(); // PersonalData object
-        $articles = $personal->getArticles(); // all articles for author connected with current user
+        //$articles = $personal->getArticles(); // all articles for author connected with current user
 
         return $this->render('index', [
             'model' => $model,
             'personaldata' => $personal,
+            'notifications' => $notifications,
+            'author' => $author,
+            'message' => $message,
             //'articles' => $articles,
             //'currentarticles' => $currentarticles,
             //'dataprovider' => $dataProvider,

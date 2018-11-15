@@ -13,97 +13,91 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-
-<div class="messages-index">
-
-    <br>
-
-    <h3><?= Html::encode($this->title); ?></h3>
-
-    <br>
-    <br>
-
-
-    <?php
+<div class="panel panel-default">
+    <div class="panel panel-heading">
+        <h4><?= Html::encode($this->title); ?></h4>
+    </div>
+    <div class="panel panel-body">
+        <?php
 
         echo GridView::widget([
-        'dataProvider' => $messagesProvider,
-        'tableOptions' => [
+            'dataProvider' => $messagesProvider,
+            'tableOptions' => [
                 'class' => 'table'
-        ],
-        'options' => [
+            ],
+            'options' => [
                 'class' => 'table'
-        ],
-        'columns' => [
+            ],
+            'columns' => [
 
-            'username',
-            'created_at:datetime',
-            'category',
-            'custom_theme',
+                'username',
+                'created_at:datetime',
+                'category',
+                'custom_theme',
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'buttons' => [
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'buttons' => [
                         'view' => function($url, $model) {
-                                    ob_start();
-                                    \yii\bootstrap\Modal::begin([
-                                            'toggleButton' => [
-                                                'label' => '<span class="glyphicon glyphicon-eye-open"></span>',
-                                                'class' => 'button primary big',
-                                                'style' => 'font-size: 16px; border-radius: 2pc;'
-                                            ],
-                                        'header' => "Сообщение №" . $model->id,
-                                        'options' => [
-                                                'style' => 'margin-top: 10pc;'
-                                        ]
-                                    ]);
+                            ob_start();
+                            \yii\bootstrap\Modal::begin([
+                                'toggleButton' => [
+                                    'label' => '<span class="glyphicon glyphicon-eye-open"></span>',
+                                    'class' => 'button primary big',
+                                    'style' => 'font-size: 16px; border-radius: 2pc;'
+                                ],
+                                'header' => "Сообщение №" . $model->id,
+                                'options' => [
+                                    'style' => 'margin-top: 10pc;'
+                                ]
+                            ]);
 
-                                    echo "<br>";
+                            echo "<br>";
 
-                                    echo "<b>" . $model->text . "</b>";
+                            echo "<b>" . $model->text . "</b>";
 
-                                    echo "<br><br>";
+                            echo "<br><br>";
 
-                                    echo Html::a(
-                                            '<span class="glyphicon glyphicon-check"></span>',
-                                            [
-                                                '/control/admin/messages',
-                                                'set' => 1,
-                                                'id' => $model->id
-                                            ],
-                                            [
-                                                'class' => 'button',
-                                                'style' => 'border-radius: 2pc;'
-                                            ]);
+                            echo Html::a(
+                                '<span class="glyphicon glyphicon-check"></span>',
+                                [
+                                    '/control/admin/messages',
+                                    'set' => 1,
+                                    'id' => $model->id
+                                ],
+                                [
+                                    'class' => 'button',
+                                    'style' => 'border-radius: 2pc;'
+                                ]);
 
-                                    \yii\bootstrap\Modal::end();
-                                    $content = ob_get_contents();
-                                    ob_get_clean();
-                                    return $content;
+                            \yii\bootstrap\Modal::end();
+                            $content = ob_get_contents();
+                            ob_get_clean();
+                            return $content;
                         },
-                    'read' => function($url, $model) {
+                        'read' => function($url, $model) {
                             if ($model->read != '1') {
                                 return Html::a(
-                                        '<span class="glyphicon glyphicon-check"></span>',
-                                        [
-                                            '/control/admin/messages',
-                                            'set' => 1,
-                                            'id' => $model->id
-                                        ],
-                                        [
-                                            'class' => 'button',
-                                            'style' => 'border-radius: 2pc;'
-                                        ]);
+                                    '<span class="glyphicon glyphicon-check"></span>',
+                                    [
+                                        '/control/admin/messages',
+                                        'set' => 1,
+                                        'id' => $model->id
+                                    ],
+                                    [
+                                        'class' => 'button',
+                                        'style' => 'border-radius: 2pc;'
+                                    ]);
                             } else {
                                 return '';
                             }
-                    }
-                        ],
-                'template' => '{view}'
+                        }
+                    ],
+                    'template' => '{view}'
+                ],
             ],
-        ],
-    ]);
+        ]);
 
-    ?>
-
+        ?>
+    </div>
 </div>

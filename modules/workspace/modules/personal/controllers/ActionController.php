@@ -11,8 +11,7 @@ use app\modules\Control\models\Authors;
 use app\modules\Control\models\Upload;
 use app\modules\Control\models\UploadCategories;
 use app\models\messages\Message;
-use app\models\messages\MessageClasses; // !!!
-use app\modules\Control\units\PNRD;
+use app\models\messages\MessageClasses;
 use app\models\identity\Users; // !!!
 // yii classes
 use Yii;
@@ -37,7 +36,6 @@ class ActionController extends Controller
      */
     public function actionUpload()
     {
-
         $model = new Upload();
 
         if (isset($_POST['upload_flag'])) {
@@ -97,7 +95,6 @@ class ActionController extends Controller
     } // end action
 
 
-
     /**
      * renders all user notifications
      *
@@ -117,7 +114,6 @@ class ActionController extends Controller
         ]);
 
     } // end action
-
 
 
     /**
@@ -149,7 +145,29 @@ class ActionController extends Controller
     } // end action
 
 
+    /**
+     * @param string $what
+     * @param int $id
+     */
+    public function actionSee($what, $id)
+    {
+        switch ($what) {
+            case 'notification':
+                return $this->notifications($id);
+                break;
+        }
+    } // end action
 
+
+    public function notifications($id)
+    {
+        return $this->render();
+    } // end function
+
+
+    /**
+     *
+     */
     public function actionLoaduserimage()
     {
 

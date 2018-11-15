@@ -1,3 +1,34 @@
+
+/**
+ * loading user messages to 'holder' div
+ */
+$('#messages').click(function () {
+    $('#holder').html('');
+    $('#holder').show("blind");
+    $.ajax({
+        url: "/workspace/admin/messages/users",
+        type: "post",
+        dataType: "html",
+        success:function (response) {
+            $('#holder').hide();
+            $('#holder').html(response);
+            $('#holder').show("blind");
+        },
+        error: function(jqxhr, status, errorMsg) {
+            var message = '<br><br>' +
+                '<div class="alert alert-danger" role="alert">' +
+                '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
+                '<p>' + status + '</p>' +
+                '<hr>' +
+                '<p class="mb-0">Ошибка</p>' + errorMsg +
+                '</div>' +
+                '<br>';
+            $('#holder').hide();
+            $('#holder').html(message);
+            $('#holder').show("blind");
+        }});
+});
+
 /**
  * upload selector actions
  */

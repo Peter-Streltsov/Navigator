@@ -21,9 +21,11 @@ class m180716_201100_articles_conferences extends Migration
             'year' => $this->integer()->notNull(),
             'number' => $this->string(),
             'type' => $this->integer()->notNull(),
+            'class' => $this->integer()->notNull(),
             'language' => $this->integer(),
             'annotation' => $this->text(),
-            'text_index' => $this->text(),
+            'index' => $this->text(),
+            'accepted' => $this->integer()->defaultValue(1),
             'file' => $this->string()
 
         ]);

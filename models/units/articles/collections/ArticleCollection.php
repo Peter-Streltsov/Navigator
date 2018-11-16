@@ -10,15 +10,16 @@ use app\models\units\articles\traits\SchemeTrait;
 use app\models\units\articles\traits\UnitTrait;
 
 /**
- * This is the model class for table "articles_collections".
+ * ActiveRecord class for table "articles_collections";
  *
  * @property int $id
- * @property string $title
- * @property int $type
- * @property string $collection
- * @property string $section
  * @property int $section_number
  * @property int $language
+ * @property int $type
+ * @property int $class
+ * @property string $title
+ * @property string $collection
+ * @property string $section
  * @property string $text_index
  * @property string $annotation
  * @property string $link
@@ -36,11 +37,8 @@ class ArticleCollection extends Article implements UnitInterface
      */
     public static function tableName()
     {
-
         return 'articles_collections';
-
     } // end function
-
 
 
     /**
@@ -48,14 +46,12 @@ class ArticleCollection extends Article implements UnitInterface
      */
     public function rules()
     {
-
         return [
-            [['title', 'type', 'collection'], 'required'],
+            [['title', 'type', 'class', 'collection'], 'required'],
             [['title', 'collection', 'section', 'text_index', 'annotation'], 'string'],
-            [['type', 'year', 'section_number', 'language'], 'integer'],
+            [['type', 'class', 'year', 'section_number', 'language'], 'integer'],
             [['link', 'file'], 'string', 'max' => 255],
         ];
-
     } // end function
 
 
@@ -65,22 +61,21 @@ class ArticleCollection extends Article implements UnitInterface
      */
     public function attributeLabels()
     {
-
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
             'type' => 'Вид',
+            'class' => 'Категория ПНРД',
             'year' => 'Год издания',
             'collection' => 'Сборник',
             'section' => 'Раздел сборника',
             'section_number' => 'Номер раздела',
             'language' => 'Язык',
-            'text_index' => 'Текстовый индекс',
+            'index' => 'Текстовый индекс',
             'annotation' => 'Аннотация',
             'link' => 'Ссылка',
             'file' => 'Файл',
         ];
-
     } // end function
 
 
@@ -90,9 +85,7 @@ class ArticleCollection extends Article implements UnitInterface
      */
     public static function find()
     {
-
         return new ArticleCollectionQuery(get_called_class());
-
     } // end function
 
 } // end class

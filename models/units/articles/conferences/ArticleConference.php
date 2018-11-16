@@ -10,10 +10,12 @@ use app\models\units\articles\Article;
  * ActiveRecord model class for table "articles_conferences";
  *
  * @property int $id
+ * @property int $language
+ * @property int $type
+ * @property int $class
  * @property string $title
  * @property string $conference_collection
  * @property string $number
- * @property int $language
  * @property string $annotation
  * @property string $text_index
  * @property string $file
@@ -26,9 +28,7 @@ class ArticleConference extends Article implements UnitInterface
      */
     public static function tableName()
     {
-
         return 'articles_conferences';
-
     } // end function
 
 
@@ -38,22 +38,20 @@ class ArticleConference extends Article implements UnitInterface
      */
     public function rules()
     {
-
         return [
-            [['title', 'conference_collection'], 'required'],
-            [['title', 'section', 'language', 'conference_collection', 'annotation', 'text_index'], 'string'],
-            [['year'], 'integer'],
+            [['title', 'conference_collection', 'type', 'class'], 'required'],
+            [['title', 'section', 'language', 'conference_collection', 'annotation', 'index'], 'string'],
+            [['year', 'type', 'class'], 'integer'],
             [['number', 'file'], 'string', 'max' => 255],
         ];
+    } // end function
 
-    }
 
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
-
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
@@ -64,13 +62,11 @@ class ArticleConference extends Article implements UnitInterface
             'number' => 'Номер сборника',
             'language' => 'Язык',
             'annotation' => 'Аннотация',
-            'text_index' => 'Текстовый индекс',
+            'type' => 'Категория ПНРД',
+            'index' => 'Текстовый индекс',
             'file' => 'Файл',
         ];
-
     } // end function
-
-
 
 
     /**
@@ -80,9 +76,7 @@ class ArticleConference extends Article implements UnitInterface
      */
     public static function find()
     {
-
         return new ArticleConferenceQuery(get_called_class());
-
     } // end function
 
 } // end class

@@ -13,7 +13,7 @@ use yii\db\Migration;
  *
  * Class m180319_021020_articles
  */
-class m180319_021020_articles extends Migration
+class m180319_021020_articles_journals extends Migration
 {
 
     /**
@@ -32,13 +32,13 @@ class m180319_021020_articles extends Migration
             'magazine' => $this->string(255),
             'number' => $this->integer()->notNull(),
             'direct_number' => $this->integer(),
-            //'pages' => $this->integer(),
             'year' => $this->integer()->notNull(),
             'language' => $this->string()->notNull(),
             'doi' => $this->string(255),
             'created_at' => $this->integer(),
             'annotation' => $this->text(),
             'index' => $this->text(),
+            'accepted' => $this->integer()->defaultValue(1),
             'link' => $this->string(),
             'file' => $this->binary(),
         ]);

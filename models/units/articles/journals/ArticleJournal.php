@@ -11,7 +11,7 @@ use app\models\units\articles\Article;
 use Yii;
 
 /**
- * ActiveRecord class for table "articles".
+ * ActiveRecord class for table "articles";
  *
  * @property int $id
  * @property int $type
@@ -39,11 +39,8 @@ class ArticleJournal extends Article implements UnitInterface
      */
     public static function tableName()
     {
-
         return 'articles_journals';
-
     } // end function
-
 
 
     /**
@@ -53,16 +50,13 @@ class ArticleJournal extends Article implements UnitInterface
      */
     public function rules()
     {
-
         return [
             [['type', 'title', 'number', 'class', 'year', 'language'], 'required'],
             [['type', 'number', 'direct_number', 'class', 'year', 'created_at'], 'integer'],
             [['title', 'annotation', 'index', 'file'], 'string'],
             [['magazine', 'language', 'doi', 'link'], 'string', 'max' => 255],
         ];
-
     } // end function
-
 
 
     /**
@@ -72,7 +66,6 @@ class ArticleJournal extends Article implements UnitInterface
      */
     public function attributeLabels()
     {
-
         return [
             'id' => 'ID',
             'type' => 'Тип',
@@ -93,7 +86,6 @@ class ArticleJournal extends Article implements UnitInterface
             'file' => 'Файл',
             'authors' => 'Авторы'
         ];
-
     } // end function
 
 
@@ -165,19 +157,14 @@ class ArticleJournal extends Article implements UnitInterface
 
     } // end function*/
 
-
-
-
+    
     /**
      * TODO: complete
      */
     public function getAffilations()
     {
-
         return $this->hasMany(Associations::classname(), ['article_id' => 'id']);
-
     } // end function
-
 
 
     /**
@@ -193,7 +180,6 @@ class ArticleJournal extends Article implements UnitInterface
      */
     public function beforeSave($insert)
     {
-
         if (parent::beforeSave($insert)) {
 
             if ($this->isNewRecord) {
@@ -216,23 +202,22 @@ class ArticleJournal extends Article implements UnitInterface
         }
 
         return true;
-
     } // end function
 
 
-
+    /**
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
     public function afterSave($insert, $changedAttributes)
     {
-
         parent::afterSave($insert, $changedAttributes);
 
         // saving language
         $newlanguage = new Languages();
         $newlanguage->language = strtolower($this->language);
         $newlanguage->save();
-
     } // end function
-
 
 
     /**
@@ -242,12 +227,9 @@ class ArticleJournal extends Article implements UnitInterface
      */
     public function afterDelete()
     {
-
         parent::afterDelete();
         $this->deleteLinkedData();
-
     } // end function
-
 
 
     /**
@@ -256,9 +238,7 @@ class ArticleJournal extends Article implements UnitInterface
      */
     public static function find()
     {
-
         return new ArticleJournalQuery(get_called_class());
-
     } // end function
 
 } // end class

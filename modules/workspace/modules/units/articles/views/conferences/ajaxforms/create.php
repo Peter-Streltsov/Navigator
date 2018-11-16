@@ -51,8 +51,11 @@ use yii\helpers\Html;
         <br>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-7">
                 <?= $form->field($model, 'section')->textInput() ?>
+            </div>
+            <div class="col-lg-5">
+                <?= $form->field($model, 'type')->dropDownList($types) ?>
             </div>
         </div>
 

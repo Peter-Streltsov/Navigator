@@ -37,27 +37,3 @@ Modal::end();
 <!--<?= Html::a('<span class="glyphicon glyphicon-send"></span>', ['/workspace/personal/action/see', 'what' => 'notifications', 'id' => $model->id], ['id' => 'notifications', 'class' => 'button primary big']); ?>-->
 <!--<?= Html::a('Загрузить данные <span class="glyphicon glyphicon-upload"></span>', ['/workspace/personal/upload'], ['class' => 'button primary big']) ?>-->
 <?= Html::a('<span class="glyphicon glyphicon-upload"></span>', '#', ['id' => 'uploadbutton', 'class' => 'button primary big']) ?>
-
-<br>
-<br>
-
-<div class="row">
-    <div class="col-lg-10">
-        <div class="well">
-            <?php
-            //\yii\helpers\VarDumper::dump($author);
-            if ($author->id != null) {
-                echo Html::tag('text', 'Автор', ['style' => 'color: green;']);
-            } else {
-                echo Html::tag('text', 'Автор не сопоставлен', ['style' => 'color: red;']);
-            }
-            ?>
-            <div align="right">
-                <?= Html::a('Подробнее>>>', '#', ['style' => 'font-size: 12px;']) ?>
-            </div>
-        </div>
-        <div class="well">
-
-        </div>
-    </div>
-</div>

@@ -1,5 +1,6 @@
 <?php
 
+use yii\widgets\Pjax;
 use yii\grid\GridView;
 
 $this->registerJsFile('/js/modules/admin/filter.js');
@@ -11,9 +12,10 @@ $this->registerJsFile('/js/modules/admin/filter.js');
         <h4>Пользователи и запросы</h4>
     </div>
     <br>
+    <br>
     <div class="row">
         <div class="col-lg-1"></div>
-        <div class="col-lg-10">
+        <div class="col-lg-7">
             <div class="well">
                 <div class="form-group">
                     <label for="usr">Поиск:</label>
@@ -21,18 +23,34 @@ $this->registerJsFile('/js/modules/admin/filter.js');
                 </div>
             </div>
         </div>
-        <div class="col-lg-1"></div>
     </div>
     <div class="panel panel-body">
+        <?php Pjax::begin(); ?>
         <div class="row">
             <div class="col-lg-12">
                 <?php
                 echo GridView::widget([
                     'dataProvider' => $telemetry,
-                    'id' => 'syntable'
+                    'tableOptions' => [
+                        'class' => 'table table-hover'
+                    ],
+                    'id' => 'syntable',
+                    'columns' => [
+                        'user' => [
+                            'label' => 'Пользователь',
+                            'value' => function ($model) {
+                                        return $model->usermodel->name . ' ' . $model->usermodel->lastname;
+                                }
+                            ],
+                        'ip',
+                        'browser',
+                        'path',
+                        'created_at:datetime'
+                    ]
                 ]);
                 ?>
             </div>
         </div>
+        <?php Pjax::end(); ?>
     </div>
 </div>

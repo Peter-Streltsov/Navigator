@@ -34,7 +34,6 @@ trait UnitTrait
     } // end function*/
 
 
-
     /**
      *
      * @return array
@@ -43,18 +42,15 @@ trait UnitTrait
     {
 
         $authors = Authors::find()->where(['article_id' => $this->id])->all();
+        $result = [];
         if (count($authors) >= 1) {
             foreach ($authors as $authorlink) {
                 $author = AuthorsCommon::find()->where(['id' => $authorlink->author_id])->asArray()->one();
                 $result[] = $author;
             }
         }
-
-        //var_dump($result);
         return $result;
-
     } // end function
-
 
 
     /**
@@ -71,7 +67,6 @@ trait UnitTrait
     } // end function
 
 
-
     /**
      * returns string value for current article publications class
      *
@@ -80,8 +75,7 @@ trait UnitTrait
     public function publicationClass()
     {
 
-    } // emd function
-
+    } // end function
 
 
     /**
@@ -98,7 +92,6 @@ trait UnitTrait
         }
 
     } // end function
-
 
 
     /**

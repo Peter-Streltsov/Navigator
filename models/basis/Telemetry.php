@@ -2,8 +2,12 @@
 
 namespace app\models\basis;
 
+// project classes
 use app\models\identity\Users;
+// yii classes
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * ActiveRecord class for table "telemetry";
@@ -17,13 +21,33 @@ use yii\db\ActiveRecord;
  */
 class Telemetry extends ActiveRecord
 {
+
+    /**
+     * attaching timestamp behavior - 'created_at' only
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => false,
+                    ],
+                ],
+        ];
+    } // end function
+
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'telemetry';
-    }
+    } // end function
+
 
     /**
      * @inheritdoc
@@ -47,9 +71,9 @@ class Telemetry extends ActiveRecord
             'id' => 'ID',
             'user' => 'User',
             'ip' => 'Ip',
-            'browser' => 'Browser',
-            'path' => 'Path',
-            'created_at' => 'Created At',
+            'browser' => 'Клиент',
+            'path' => 'Запрошенный путь',
+            'created_at' => 'Время',
         ];
     } // end function
 
@@ -57,10 +81,11 @@ class Telemetry extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getUsermodel()
     {
         return $this->hasOne(Users::className(), ['id' => 'user']);
     } // end function
+
 
     /**
      * @inheritdoc

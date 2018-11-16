@@ -3,7 +3,7 @@
 namespace app\models\units\articles\collections;
 
 // project classes
-use app\models\identity\Authors;
+use app\models\identity\Authors as AuthorsCommon;
 // yii classes
 use Yii;
 use yii\db\ActiveRecord;
@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  *
  * @property ArticleCollection $article
  */
-class ArticlesAuthors extends ActiveRecord
+class Authors extends ActiveRecord
 {
 
     /**
@@ -86,7 +86,7 @@ class ArticlesAuthors extends ActiveRecord
     public function getAuthor()
     {
 
-        $author = Authors::find()->where(['id' => $this->author_id])->one();
+        $author = AuthorsCommon::find()->where(['id' => $this->author_id])->one();
 
         if ($author != null) {
             return $author->name . ' ' . $author->lastname;
@@ -117,7 +117,7 @@ class ArticlesAuthors extends ActiveRecord
     public function beforeSave($insert)
     {
 
-        if (ArticlesAuthors::find()->where([
+        if (Authors::find()->where([
             'author_id' => $this->author_id,
             'article_id' => $this->article_id
         ])->exists()) {

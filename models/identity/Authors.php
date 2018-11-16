@@ -2,7 +2,15 @@
 
 namespace app\models\identity;
 
+// project classes
+use app\models\units\dissertations\Dissertations;
+use app\models\units\monograph\Monograph;
+use app\models\units\articles\journals\ArticleJournal;
+use app\models\units\articles\conferences\ArticleConference;
+use app\models\units\articles\collections\ArticleCollection;
+// yii classes
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * ActiveRecord class for table "authors";
@@ -12,7 +20,7 @@ use Yii;
  * @property string $secondname
  * @property string $lastname
  */
-class Authors extends \yii\db\ActiveRecord
+class Authors extends ActiveRecord
 {
 
     /**
@@ -53,13 +61,54 @@ class Authors extends \yii\db\ActiveRecord
 
 
     /**
-     * GETTERS
+     * JUNCTION RECORDS
      */
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getArticlesJournalsAuthors()
     {
-        return $this->hasMany(\app\models\units\articles\journals\Authors::className(), []);
-    }
+        return $this->hasMany(\app\models\units\articles\journals\Authors::className(), ['author_id' => 'id']);
+    } // end function
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticlesConferencesAuthors()
+    {
+        return $this->hasMany(\app\models\units\articles\conferences\Authors::className(), ['author_id' => 'id']);
+    } // end function
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getArticlesCollectionsAuthors()
+    {
+        return $this->hasMany(\app\models\units\articles\collections\Authors::className(), ['author_id' => 'id']);
+    } // end function
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMonographsAuthors()
+    {
+        return $this->hasMany(\app\models\units\monograph\Authors::className(), ['author_id' => 'id']);
+    } // end function
+
+
+    /**
+     * END JUNCTION
+     */
+
+
+
+    /**
+     * GETTERS
+     */
 
 
     /**
@@ -69,43 +118,55 @@ class Authors extends \yii\db\ActiveRecord
      */
     public function getDissertations()
     {
-        return $this->hasMany(Dissertations::className(), []);
+        return $this->hasMany(Dissertations::className(), ['author' => 'id']);
     } // end function
 
 
     /**
+     * lists ArticlesJournals having current author linked
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getArticlesJournals()
     {
-        return $this->hasMany(ArticleJournal::className(), [])->viaTable();
+        return $this->hasMany(ArticleJournal::className(), ['id' => 'article_id'])
+            ->via('articlesJournalsAuthors');
     } // end function
 
 
     /**
+     * lists ArticleConference having current author linked
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getArticlesConferences()
     {
-        return $this->hasMany(ArticleConference::className(), [])->viaTable();
+        return $this->hasMany(ArticleConference::className(), ['id' => 'article_id'])
+            ->via('articlesConferencesAuthors');
     } // end function
 
 
     /**
+     * lists ArticlesCollection having current author linked
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getArticlesCollections()
     {
-        return $this->hasMany(ArticleCollection::className(), [])->viaTable();
+        return $this->hasMany(ArticleCollection::className(), ['id' => 'article_id'])
+            ->via('articlesCollectionsAuthors');
     } // end function
 
 
     /**
+     * lists Monograph having current author linked
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getMonographs()
     {
-        return $this->hasMany(Monograph::className(), [])->viaTable();
+        return $this->hasMany(Monograph::className(), ['id' => ''])
+            ->via('monographsAuthors');
     } // end function
 
     /**
@@ -126,7 +187,6 @@ class Authors extends \yii\db\ActiveRecord
             Yii::$app->session->setFlash('danger', 'Данные автора обновлены');
         }
     } // end function
-
 
 
     /**

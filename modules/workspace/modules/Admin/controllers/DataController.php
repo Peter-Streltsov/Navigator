@@ -76,7 +76,10 @@ class DataController extends Controller
     public function actionTelemetry()
     {
         $telemetry = new ActiveDataProvider([
-            'query' => Telemetry::find()
+            'query' => Telemetry::find(),
+            'sort' => [
+                'defaultOrder' => ['id' => SORT_DESC]
+            ]
         ]);
 
         return $this->renderAjax('telemetry', [

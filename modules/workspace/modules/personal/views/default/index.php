@@ -53,10 +53,18 @@ $this->registerJsFile('/js/modules/personal/module.js');
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <?php
+        echo $this->render('forms/info', [
+                'author' => $author
+        ]);
+        ?>
+    </div>
+</div>
 <!-- end block -->
 
-<br>
-<br>
 <br>
 
 <!-- personal data -->
@@ -126,6 +134,7 @@ $this->registerJsFile('/js/modules/personal/module.js');
 
 <?php
 
-\yii\helpers\VarDumper::dump($author);
+\yii\helpers\VarDumper::dump($author->articlesJournals);
+//echo count($author->journals);
 
 ?>

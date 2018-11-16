@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'type',
                     'label' => 'Тип публикации',
                     'value' => function($model) {
-                        return $model->type();
+                        return $model->type;
                         }
                     ],
                 [
@@ -107,8 +107,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'authors',
                         'value' => function($model) {
-                            $authors = $model->authors();
-                            if (count($authors > 0)) {
+                            $authors = $model->authors;
+                            if ($authors != null && count($authors > 0)) {
                                 foreach ($authors as $author) {
                                     $html[] = $author['name'] . ' ' . $author['lastname'];
                                 }

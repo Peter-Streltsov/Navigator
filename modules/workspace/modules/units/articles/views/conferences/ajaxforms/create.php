@@ -59,6 +59,15 @@ use yii\helpers\Html;
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-lg-5">
+
+            </div>
+            <div class="col-lg-7">
+                <?= $form->field($model, 'class')->dropDownList($classes) ?>
+            </div>
+        </div>
+
         <br>
         <br>
 
@@ -98,7 +107,7 @@ use yii\helpers\Html;
 
         <div class="row">
             <div class="col-lg-12">
-                <?= $form->field($model, 'text_index')->textarea(['rows' => 6]) ?>
+                <?= $form->field($model, 'index')->textarea(['rows' => 6]) ?>
             </div>
         </div>
 

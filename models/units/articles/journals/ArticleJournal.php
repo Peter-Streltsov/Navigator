@@ -70,7 +70,6 @@ class ArticleJournal extends Article implements UnitInterface
             'id' => 'ID',
             'type' => 'Тип',
             'class' => 'Категория ПНРД',
-            'pnrdindex' => 'Индекс ПНРД',
             'title' => 'Заголовок',
             'magazine' => 'Журнал',
             'number' => 'Номер',
@@ -157,7 +156,7 @@ class ArticleJournal extends Article implements UnitInterface
 
     } // end function*/
 
-    
+
     /**
      * TODO: complete
      */

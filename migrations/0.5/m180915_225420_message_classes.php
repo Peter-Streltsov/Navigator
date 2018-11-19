@@ -12,7 +12,6 @@ class m180915_225420_message_classes extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('message_classes', [
             'id' => $this->primaryKey(),
             'class' => $this->string()->notNull()
@@ -23,9 +22,7 @@ class m180915_225420_message_classes extends Migration
             ['Запрос на исправление личных данных'],
             ['Запрос на исправление данных публикации']
         ]);
-
     } // end function
-
 
 
     /**
@@ -33,11 +30,9 @@ class m180915_225420_message_classes extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('message_classes');
         echo "m180915_225420_message_classes reverted.\n";
         return true;
-
     } // end function
 
 } // end class

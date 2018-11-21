@@ -9,7 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use \kartik\sidenav\SideNav;
+//use \kartik\sidenav\SideNav;
 //use \app\modules\Control\models\Messages;
 
 AppAsset::register($this);
@@ -160,177 +160,20 @@ $this->registerJsFile('/js/layout.js');
         <br>
 
         <div style="background-color: white;" class="container">
-            <div style="background-color: #f0f0f0;" class="row">
-                <div id="control-panel" class="col-xs-12 col-md-3">
-
-                    <br>
-                    <br>
-
+            <br>
+            <div class="row">
+                <!--<div class="col-lg-3">
                     <?php
-
-                    // number of unread uploads
-                    //$uploads_count = '<span style="background-color: darkslategray;" class="badge badge-light">' .
-                        //Upload::find()->where(['accepted' => '0'])->count() .
-                        //'</span>';
-
-                    $items = [
-                        [
-                            'label' => 'Общие сведения',
-                            'icon' => 'home',
-                            'url' => '/workspace'
-                        ],
-                        [
-                            'label' => '<b id="statistics">Статистика</b>',
-                            'icon' => 'stats',
-                            //'url' => '/control/statistics'
-                            'url' => '#'
-                        ],
-                        [
-                            'label' => 'Авторы и сотрудники',
-                            'icon' => 'user',
-                            'items' => [
-                                /*[
-                                    'label' => 'Зарегистрированные пользователи',
-                                    'url' => '/control/admin/users'
-                                ],*/
-                                [
-                                    'label' => 'Сотрудники',
-                                    'url' => '/workspace/personnel'
-                                ],
-                                [
-                                    'label' => 'Авторы',
-                                    'url' => '/workspace/authors'
-                                ]
-                            ]
-                        ],
-                        [
-                            'label' => 'Публикации',
-                            'icon' => 'book',
-                            'items' => [
-                                [
-                                    'label' => 'Статьи',
-                                    'items' => [
-                                        [
-                                            'label' => 'Статьи в журналах',
-                                            'url' => '/workspace/articles/journals'
-                                        ],
-                                        [
-                                            'label' => 'Статьи в сборниках и главы в книгах',
-                                            'url' => '/workspace/articles/collections'
-                                        ],
-                                        [
-                                            'label' => 'Статьи в сборниках трудов конференций',
-                                            'url' => '/workspace/articles/conferences'
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'label' => 'Монографии и Сборники',
-                                    'url' => '/workspace/monograph'
-                                ],
-                                [
-                                    'label' => 'Конференции',
-                                    'url' => '/workspace/conference'
-                                ],
-                                [
-                                    'label' => 'Диссертации',
-                                    'url' => '/workspace/dissertations'
-                                ],
-                                [
-                                    'label' => 'Редактирование',
-                                    'url' => '/workspace/editions'
-                                ],
-                            ]
-                        ],
-                        /*[
-                            'label' => 'Научные мероприятия',
-                            'icon' => 'list',
-                            'items' => [
-                                [
-                                    'label' => 'Доклады'
-                                ],
-                                [
-                                    'label' => 'Участие в конференциях',
-                                    'url' => '/control/conferences'
-                                ]
-                            ]
-                        ],*/
-                        [
-                            'label' => 'Научно-популяризаторская работа',
-                            'icon' => 'blackboard',
-                            'items' => [
-                                [
-                                    'label' => 'Лекции'
-                                ]]
-                        ],
-                        /*[
-                            'label' => 'Сообщения '
-                                . Yii::$app->counter->messagesCount()
-                                . ' ',
-                                //. $uploads_count,
-                            'icon' => 'comment',
-                            'items' => [
-                                [
-                                    'label' => 'Пользовательские сообщения' . Yii::$app->counter->messagesCount(),
-                                    'url' => '/workspace/admin/messages/users'
-                                ],
-                                [
-                                    'label' => 'Загруженные данные',// . $uploads_count,
-                                    'url' => '/workspace/admin/messages/uploads'
-                                ]
-                            ]
-                        ],*/
-                        [
-                            'label' =>'<b id="synthesis">Отчеты</b>',
-                            'icon' => 'list-alt',
-                            //'url' => '/control/admin/synthesis'
-                            'url' => '#'
-                        ],
-                        [
-                            'label' => 'Параметры',
-                            'icon' => 'certificate',
-                            'url' => '/workspace/admin/',
-                        ],
-                        [
-                            'label' => 'WebAPI',
-                            'icon' => 'cloud',
-                            'items' => [
-                                [
-                                    'label' => 'Scopus',
-                                    'url' => '/workspace/webapi/scopusapi'
-                                ],
-                                [
-                                    'label' => 'CrossRef',
-                                    'url' => '/workspace/webapi/crossref'
-                                ]
-                            ]
-                        ],
-                    ];
-
-                    echo SideNav::widget([
-                        'type' => SideNav::TYPE_DEFAULT,
-                        'encodeLabels' => false,
-                        'heading' => 'Панель управления',
-                        'activateParents' => false,
-                        'activateItems' => true,
-                        'hideEmptyItems' => false,
-                        'containerOptions' => [
-                                'style' => [
-                                        'width' => '17pc'
-                                ],
-                                'data-spy' => 'affix'
-                        ],
-                        'items' => $items
-                    ]);
-
+                    //$this->render('parts/side_menu');
                     ?>
-
-                    <br>
-                    <div id="main-menu" class="list-group">
-                    </div>
-
+                </div>-->
+                <div class="col-lg-12">
+                    <?= $this->render('parts/lower_menu'); ?>
                 </div>
-                <div style="min-height: 50pc;" id="content-holder" class="col-xs-12 col-md-9">
+            </div>
+            <div style="background-color: #f0f0f0;" class="row">
+                <br>
+                <div style="min-height: 50pc;" id="content-holder" class="col-xs-12 col-md-12">
                     <br>
 
                     <?= Breadcrumbs::widget([

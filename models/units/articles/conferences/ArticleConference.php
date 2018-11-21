@@ -55,7 +55,7 @@ class ArticleConference extends Article implements UnitInterface
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
-            'conferency_collection' => 'Сборник материалов конференции',
+            'conference_collection' => 'Сборник материалов конференции',
             'section' => 'Раздел сборника',
             'year' => 'Год издания',
             'pages' => 'Страницы',

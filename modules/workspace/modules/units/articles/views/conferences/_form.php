@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'conferency_collection')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'conference_collection')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'number')->textInput(['maxlength' => true]) ?>
 
@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'annotation')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'text_index')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'index')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'file')->textInput(['maxlength' => true]) ?>
 

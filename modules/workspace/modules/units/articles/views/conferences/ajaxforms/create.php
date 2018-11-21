@@ -25,8 +25,8 @@ use yii\helpers\Html;
 
         ?>
 
-        <div class="well">
-            <b style="color: red;">Авторов необходимо сопоставить статье после создания базовой записи</b>
+        <div class="alert alert-warning">
+            <span class="glyphicon glyphicon-alert"> Авторов, цитирования и организации необходимо сопоставить статье после создания базовой записи</span>
         </div>
 
         <br>
@@ -51,20 +51,8 @@ use yii\helpers\Html;
         <br>
 
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-lg-12">
                 <?= $form->field($model, 'section')->textInput() ?>
-            </div>
-            <div class="col-lg-5">
-                <?= $form->field($model, 'type')->dropDownList($types) ?>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-5">
-
-            </div>
-            <div class="col-lg-7">
-                <?= $form->field($model, 'class')->dropDownList($classes) ?>
             </div>
         </div>
 
@@ -97,6 +85,22 @@ use yii\helpers\Html;
         <br>
 
         <div class="row">
+            <div class="col-lg-5">
+                <?= $form->field($model, 'type')->widget(Select2::className(), [
+                        'data' => $types
+                ]) ?>
+            </div>
+            <div class="col-lg-7">
+                <?= $form->field($model, 'class')->widget(Select2::className(), [
+                        'data' => $classes
+                ]) ?>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
             <div class="col-lg-12">
                 <?= $form->field($model, 'annotation')->textarea(['rows' => 6]) ?>
             </div>
@@ -108,15 +112,6 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-lg-12">
                 <?= $form->field($model, 'index')->textarea(['rows' => 6]) ?>
-            </div>
-        </div>
-
-        <br>
-        <br>
-
-        <div class="row">
-            <div class="col-lg-5">
-                <?= $form->field($model, 'file')->fileInput(['class' => 'btn btn-default']) ?>
             </div>
         </div>
 

@@ -16,9 +16,12 @@ use yii\helpers\Html;
 
         <br>
 
-        <div class="well">
-            <b style="color: red;">Авторов необходимо сопоставить статье после создания базовой записи</b>
+        <div class="alert alert-warning">
+            <span class="glyphicon glyphicon-alert"> Авторов, цитирования и организации необходимо сопоставить статье после создания базовой записи</span>
         </div>
+
+        <br>
+        <br>
 
         <div class="row">
             <div class="col-lg-12">

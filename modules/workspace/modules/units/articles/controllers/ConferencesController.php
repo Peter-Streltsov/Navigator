@@ -102,6 +102,7 @@ class ConferencesController extends Controller
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+        $classes = ArrayHelper::map($classes, 'id', 'description');
         // pnrd indexes
         $types = $model->types();
 
@@ -153,6 +154,7 @@ class ConferencesController extends Controller
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+        $classes = ArrayHelper::map($classes, 'id', 'description');
         // pnrd indexes
         $types = $model->types();
 

@@ -22,16 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <br>
 
-    <p>
-        <?= Html::a("Редактировать <span class='glyphicon glyphicon-edit'></span>", ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
-        <?= Html::a("Удалить <span class='glyphicon glyphicon-remove-circle'></span>", ['delete', 'id' => $model->id], [
-            'class' => 'button primary danger big',
-            'data' => [
-                'confirm' => 'Подтверждение - удалить статью?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+
 
     <br>
     <br>
@@ -108,7 +99,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'authors',
                         'value' => function($model) {
                             $authors = $model->authors;
-                            if ($authors != null && count($authors > 0)) {
+                            //var_dump($authors);
+                            if ($authors != null) {
                                 foreach ($authors as $author) {
                                     $html[] = $author['name'] . ' ' . $author['lastname'];
                                 }

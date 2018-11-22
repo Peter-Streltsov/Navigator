@@ -1,9 +1,6 @@
 <?php
 
-// number of unread uploads
-//$uploads_count = '<span style="background-color: darkslategray;" class="badge badge-light">' .
-//Upload::find()->where(['accepted' => '0'])->count() .
-//'</span>';
+use kartik\sidenav\SideNav;
 
 $items = [
     [
@@ -105,26 +102,29 @@ $items = [
     ],
 ];
 
-echo SideNav::widget([
-    'type' => SideNav::TYPE_DEFAULT,
-    'encodeLabels' => false,
-    'heading' => 'Панель управления',
-    'activateParents' => false,
-    'activateItems' => true,
-    'hideEmptyItems' => false,
-    'containerOptions' => [
-        'style' => [
-            'width' => '17pc'
-        ],
-        'data-spy' => 'affix'
-    ],
-    'items' => $items
-]);
-
 ?>
 
-                    <br>
-                    <div id="main-menu" class="list-group">
-                    </div>
 
-                </div>-->
+<br>
+<div id="main-menu" class="list-group">
+
+    <?php
+
+    echo SideNav::widget([
+        'type' => SideNav::TYPE_DEFAULT,
+        'encodeLabels' => false,
+        'heading' => 'Панель управления',
+        'activateParents' => false,
+        'activateItems' => true,
+        'hideEmptyItems' => false,
+        'containerOptions' => [
+            'style' => [
+                'width' => '17pc'
+            ],
+            'data-spy' => 'affix'
+        ],
+        'items' => $items
+    ]);
+
+    ?>
+</div>

@@ -7,36 +7,74 @@ use yii\widgets\DetailView;
 /* @var $model app\models\units\articles\ArticleConferencies */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Article Conferencies', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Статьи - публикации материалов конференций', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-conferencies-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <br>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <h3><?= Html::encode($this->title) ?></h3>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title:ntext',
-            'conferency_collection:ntext',
-            'number',
-            'language',
-            'annotation:ntext',
-            'text_index:ntext',
-            'file',
-        ],
-    ]) ?>
+    <br>
+    <br>
 
+    <?php
+
+    if (Yii::$app->access->isAdmin()) {
+        echo $this->render('forms/view/buttons', [
+                'model' => $model
+        ]);
+    }
+
+    ?>
+
+    <br>
+    <br>
+
+    <div class="panel panel-default">
+        <div class="panel panel-body">
+
+            <br>
+
+            <?= DetailView::widget([
+                'model' => $model,
+                'options' => [
+                    'class' => 'table',
+                    'encodeLabesl' => true
+                ],
+                'attributes' => [
+                    'id',
+                    'title:ntext',
+                    'conference_collection:ntext',
+                    'number',
+                    //'language',
+                    [
+                            'attribute' => 'language',
+                        'value' => function($model) {
+                                    return $model->getLanguage()->language;
+                        }
+                    ],
+                    'year',
+                    [
+                        'attribute' => 'Индекс ПНРД',
+                        'value' => function($model) {
+                                    return $model->getIndex();
+                        }
+                    ],
+                    [
+                        'attribute' => 'annotation',
+                        'value' => function($model) {
+                                    if ($model->annotation != null) {
+                                        return $model->annotation;
+                                    }
+                                    return 'Аннотация не загружена';
+                        }
+                    ],
+                    'index:ntext',
+                    'file',
+                ],
+            ]) ?>
+        </div>
+    </div>
 </div>

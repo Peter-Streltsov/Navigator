@@ -1,6 +1,5 @@
 <?php
 
-// extensions
 use kartik\export\ExportMenu;
 // yii classes
 use yii\helpers\Html;
@@ -20,17 +19,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <br>
         <br>
 
-        <h2><?= Html::encode($this->title) ?></h2>
+        <h3><?= Html::encode($this->title) ?></h3>
 
-        <br>
         <br>
         <br>
 
         <?php Pjax::begin(); ?>
-
-        <p>
-            <!--<?= Html::a('Добавить статью', ['create'], ['class' => 'button big primary']) ?>-->
-        </p>
 
         <br>
 
@@ -183,8 +177,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
         ]);
-
-        //\yii\helpers\VarDumper::dump($dataProvider);
 
         ?>
 

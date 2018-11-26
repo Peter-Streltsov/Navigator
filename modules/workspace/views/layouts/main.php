@@ -3,13 +3,15 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+//
 $this->registerJsFile('/js/layout.js');
+
+// application name
+$this->title = 'Наукометрия';
 
 ?>
 
@@ -41,6 +43,7 @@ $this->registerJsFile('/js/layout.js');
 
     <div class="wrap">
 
+        <!-- rendering main menu -->
         <?php
 
         echo $this->render('parts/navbar');
@@ -51,31 +54,14 @@ $this->registerJsFile('/js/layout.js');
         <br>
         <br>
 
-        <div style="background-color: white;" class="container">
-            <br>
-            <div id="upper_menu" style="background-color: #f0f0f0;" class="row">
-                <!--<div class="col-lg-12">
-                    <?= $this->render('parts/lower_menu'); ?>
-                </div>-->
-            </div>
-            <div style="background-color: #f0f0f0;" class="row">
-                <div id="side_menu" class="col-lg-3">
-                    <?= $this->render('parts/side_menu'); ?>
-                </div>
-                <br>
-                <div style="min-height: 50pc;" id="content-holder" class="col-lg-9">
-                    <br>
+        <!-- rendering content (user access dependent) -->
+        <div id="content">
+            <?php
 
-                    <?= Breadcrumbs::widget([
-                        'homeLink' => ['label' => 'Панель управления', 'url' => '/workspace'],
-                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                        ]) ?>
+            echo Yii::$app->user->isGuest ? $this->render('parts/guest', ['content' => $content])
+                :  $this->render('parts/user', ['content' => $content]);
 
-                    <?= Alert::widget() ?>
-
-                    <?= $content ?>
-                </div>
-            </div>
+            ?>
         </div>
     </div>
 

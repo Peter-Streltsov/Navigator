@@ -24,7 +24,7 @@ class WorkspaceModule extends Module
     {
         parent::init();
 
-        $this->layout = 'control';
+        $this->layout = 'main';
 
     } // end function
 

@@ -40,47 +40,9 @@ AppAsset::register($this);
 
         isset(Yii::$app->data->orgdata->organisation) != '' ? $brandLabel = Yii::$app->data->label . ' - ' : $brandLabel = '';
 
-        NavBar::begin([
-            'brandLabel' => '<b class="navbrand">' . $brandLabel . 'Наукометрия' . '</b>' . '<b style="font-size: 1vh; color: red;"> alpha</b>',
-            'brandUrl' => Yii::$app->homeUrl,
-            'options' => [
-                'class' => 'navbar-inverse navbar-fixed-top',
-                'style' => 'background-color: #2a323b; box-shadow: 0 0 1pc;'
-            ],
-        ]);
-        echo Nav::widget([
-            'options' => [
-                'class' => 'navbar-nav navbar-right',
-            ],
-            'encodeLabels' => false,
-            'items' => [
-                ['label' => 'Публичные данные', 'url' => ['/public']],
-                ['label' => 'Обратная связь', 'url' => ['/site/contact']],
-                Yii::$app->user->isGuest ? (
-                ['label' => 'Войти', 'url' => ['/site/login']]
-                ) : (
-                        [
-                            'label' => "<span class=\"glyphicon glyphicon-align-justify\"></span>",
-                            'items' => [
-                                ['label' => 'Панель управления', 'url' => ['/workspace'], 'options' => [
-                                        'style' => 'width: 20pc;'
-                                ]],
-                                ['label' => 'Личный кабинет', 'url' => ['/workspace/personal/', 'id' => Yii::$app->user->id]],
-                                '<li class="divider"></li>',
-                                ['label' => 'Вы вошли как:'],
-                                ['label' => "<b style=\"color: #32a873\">".' '.Yii::$app->user->identity->name.' '.Yii::$app->user->identity->lastname.'</b>'],
-                                ['label' => '<b>'.Yii::$app->user->identity->username.'</b>'],
-                                '<br>',
-                                '<li class="divider"></li>',
-                                ['label' => 'Выход', 'url' => ['/site/logout'], 'linkOptions' => [
-                                        'data-method' => 'post'
-                                ]]
-                        ]
-                    ]
-                ),
-            ],
-        ]);
-        NavBar::end();
+
+        echo $this->render('navbar');
+
         ?>
 
         <br>
@@ -89,11 +51,6 @@ AppAsset::register($this);
 
         <div style="background-color: white;" class="container">
             <br>
-            <?php
-
-            //\yii\helpers\VarDumper::dump($this->params);
-
-            ?>
 
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -111,7 +68,7 @@ AppAsset::register($this);
             <p style="margin-top: 0.5pc;">
             <b class="pull-left">&copy;  <?= date('Y') ?></b>
 
-            <b class="pull-right"><?= Yii::powered() ?></b>
+            <!--<b class="pull-right"><?= Yii::powered() ?></b>-->
             </p>
             <br>
         </div>

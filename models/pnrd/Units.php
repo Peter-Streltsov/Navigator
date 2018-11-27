@@ -24,49 +24,38 @@ class Units
 
     public function __construct()
     {
-
         $this->articlesJournals = new ArticleJournal();
         $this->articlesConferences = new ArticleConference();
         $this->articlesCollections = new ArticleCollection();
         $this->monographs = null;
         $this->dissertations = new Dissertations();
-
     } // end constructor
 
     /**
-     *
+     * returns ActiveQuery for ArticlesJournals
      */
     public function articlesJournals()
     {
-
         return $this->articlesJournals->find();
-
     } // end function
 
 
-
     /**
-     *
+     * returns ActiveQuery for ArticlesConference
      */
     public function articlesConferences()
     {
-
         return $this->articlesConferences->find();
-
     } // end function
-
 
 
     /**
-     *
+     * returns ActiveQuery for ArticlesCollections
      */
     public function articlesCollections()
     {
-
         return $this->articlesCollections->find();
-
     } // end function
-
 
 
     /**
@@ -74,21 +63,16 @@ class Units
      */
     public function monographs()
     {
-
         return null;
-
     } // end function
 
 
-
     /**
-     *
+     * returns ActiveQuery for Dissertations
      */
     public function dissertations()
     {
-
         return $this->dissertations->find();
-
     } // end function
 
 } // end class

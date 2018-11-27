@@ -73,11 +73,42 @@ class Counter extends Component
 
 
     /**
+     * returns color for displaying 'messages' icon in application navbar
+     * basing on number of unread messages
      *
+     * @return string
      */
     public function messageColor()
     {
         if ($this->messagesCount() > 0) {
+            return 'lightgreen';
+        }
+        return 'gray';
+    } // end function
+
+
+    /**
+     * calculates number of unchecked notifications for current user
+     * TODO: replace stub;
+     *
+     * @return int|null
+     */
+    public function notificationsCount()
+    {
+        $user = Yii::$app->user->getIdentity();
+        return 0;
+    } // end function
+
+
+    /**
+     * returns color for displaying 'notifications' icon in application navbar
+     * basing on number of unchecked notifications
+     *
+     * @return string
+     */
+    public function notificationColor()
+    {
+        if ($this->notificationsCount() > 0) {
             return 'lightgreen';
         }
         return 'gray';

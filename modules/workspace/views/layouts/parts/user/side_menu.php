@@ -75,12 +75,12 @@ $items = [
                 'label' => 'Лекции'
             ]]
     ],
-    [
+    /*[
         'label' =>'<b id="synthesis">Отчеты</b>',
         'icon' => 'list-alt',
         //'url' => '/control/admin/synthesis'
         'url' => '#'
-    ],
+    ],*/
     [
         'label' => 'Параметры',
         'icon' => 'certificate',

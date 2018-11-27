@@ -19,6 +19,7 @@ $this->registerJsFile('/js/modules/admin/module.js');
             <?= Html::a('<span class="glyphicon glyphicon-folder-open"></span>', '#', ['id' => 'filemanager', 'class' => 'btn btn-default']); ?>
             <?= Html::a('<span class="glyphicon glyphicon-object-align-horizontal"></span>', '#', ['id' => 'telemetry', 'class' => 'btn btn-default']); ?>
             <?= Html::a('<span class="glyphicon glyphicon-comment"></span>', '#', ['id' => 'messages', 'class' => 'btn btn-default']); ?>
+            <?= Html::a('<span class="glyphicon glyphicon-list-alt"></span>', '#', ['id' => 'synthesis', 'class' => 'btn btn-default']); ?>
             <?= Html::a('<span class="glyphicon glyphicon-off"></span>', '#', ['id' => 'clearup', 'class' => 'btn btn-default']); ?>
         </div>
         <br>

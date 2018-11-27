@@ -78,7 +78,7 @@ class ArticleJournal extends Article implements UnitInterface
             'year' => 'Год',
             'language' => 'Язык',
             'doi' => 'ЦИО',
-            'created_at' => 'Created At',
+            'created_at' => 'Создано',
             'annotation' => 'Аннотация',
             'index' => 'Полнотекстовый индекс',
             'link' => 'Ссылка',

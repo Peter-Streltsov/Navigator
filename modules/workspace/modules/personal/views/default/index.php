@@ -1,12 +1,9 @@
 <?php
 
-use yii\helpers\Html;
-use yii\bootstrap\Modal;
-
 /* @var $this yii\web\View */
 /* @var $indexes  */
-/* @var $model \app\modules\Control\models\Users|array|null */
-/* @var $personal \app\modules\Control\models\Personnel|array|null */
+/* @var $model \app\models\identity\Users|array|null */
+/* @var $personal \app\models\identity\Personnel|array|null */
 /* @var $meanindex float */
 /* @var $articles array */
 /* @var $currentarticles array */
@@ -20,11 +17,6 @@ $this->registerJsFile('/js/modules/personal/module.js');
 
 <br>
 <br>
-
-<!--<div class="well">
-    <h4><?= Html::encode($this->title); ?></h4>
-</div>-->
-
 <br>
 
 <!-- upper buttons -->
@@ -58,7 +50,8 @@ $this->registerJsFile('/js/modules/personal/module.js');
     <div class="col-lg-12">
         <?php
         echo $this->render('forms/info', [
-                'author' => $author
+            'author' => $author,
+            'staff' => $personal
         ]);
         ?>
     </div>
@@ -82,6 +75,9 @@ $this->registerJsFile('/js/modules/personal/module.js');
     <div class="col-lg-5">
         <div class="panel panel-default">
             <div class="panel panel-body">
+                <?php
+                echo $personaldata->getIndex();
+                ?>
                 <br>
                 <br>
                 <br>

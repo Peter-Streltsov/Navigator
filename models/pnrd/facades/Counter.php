@@ -36,14 +36,12 @@ class Counter
      */
     public function articlesJournals()
     {
-
         return (int)$this->articlesJournals->count();
-
     } // end function
 
 
 
-    public function articlesConferency()
+    public function articlesConference()
     {
 
     } // end function

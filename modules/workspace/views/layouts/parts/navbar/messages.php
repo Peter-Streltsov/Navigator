@@ -9,7 +9,7 @@ echo Nav::widget([
     'encodeLabels' => false,
     'items' => [
         [
-            'label' => '<span style="color: red;" class="glyphicon glyphicon-send"></span>',
+            'label' => '<span style="color: ' . Yii::$app->counter->notificationColor() . ';" class="glyphicon glyphicon-send"></span>',
             'items' => [
                 [
                     'label' => '<br>'

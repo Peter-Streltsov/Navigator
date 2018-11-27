@@ -48,7 +48,7 @@ class DefaultController extends Controller
 
         $author = $model->author; // author connected with current user
         $staff = Personnel::find()->where(['user_id' => $id])->one(); // staff record connected with current user
-        $personal = new PersonalData(); // PersonalData object
+        $personal = new PersonalData($model); // PersonalData object
         //$articles = $personal->getArticles(); // all articles for author connected with current user
 
         return $this->render('index', [

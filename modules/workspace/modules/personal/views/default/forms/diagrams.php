@@ -1,34 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use yii\web\JsExpression;
 
 ?>
 
 <div class="row">
-    <div class="col-lg-2">
-        <!--<div class="panel panel-default">
-            <div class="panel-body">
-                <?= Html::button('<span class="glyphicon glyphicon-dashboard"></span>');?>
-                <br>
-                <br>
-
-                <br>
-                <br>
-                <?= Html::button('<span class="glyphicon glyphicon-send"></span>');?>
-            </div>
-        </div>-->
-    </div>
     <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div align="left">
-                    <?= Html::button('<span class="glyphicon glyphicon-dashboard"></span>');?>
-                    <?= Html::button('<span class="glyphicon glyphicon-equalizer"></span>');?>
-                </div>
-                <h5 align="right">Распределение научных результатов</h5>
-            </div>
-            <div class="panel panel-body">
-                <div id="diaholder">
                     <?php
                     echo \miloschuman\highcharts\Highcharts::widget([
                         'scripts' => [
@@ -39,12 +17,17 @@ use yii\helpers\Html;
                             'title' => [
                                 'text' => ''
                             ],
+                            'tooltip' => [
+                                'formatter' => new JsExpression('function(){
+                                        return this.series.name;
+                                 }')
+                            ],
                             'yAxis' => [
                                 'title' => ['Количество']
                             ],
-                            'xAxis' => [
+                            /*'xAxis' => [
                                 'categories' => ['Статьи', 'Индекс - статьи', 'Монографии', 'Участие в научных мероприятиях']
-                            ],
+                            ],*/
                             'labels' => [
                                 'items' => [
                                     'html' =>'test chart'
@@ -55,29 +38,22 @@ use yii\helpers\Html;
                                     'type' => 'column',
                                     'name' => 'Статьи',
                                     'data' => [(int)count($articles), 0, 0],
-                                ],
-                                [
-                                    'type' => 'column',
-                                    'name' => 'Индекс - статьи',
-                                    'data' => [0, $indexes['articles'], 0, 0]
                                 ],*/
                                 [
-                                    'type' => 'column',
-                                    'name' => 'Монографии',
-                                    'data' => [0, 0, 2, 0],
+                                    'type' => 'pie',
+                                    'name' => ['Публикации'],
+                                    'data' => [
+                                        ['name' => 'Монографии', 'y' => 2],
+                                        ['name' => 'Статьи - публикации в журналах', 'y' => 1],
+                                        ['name' => 'Статьи - материалы конференций', 'y' => 1],
+                                        ['name' => 'Статьи в сборниках и главы книг', 'y' => 1],
+                                        ['name' => 'Диссертации', 'y' => 1]
+                                    ],
                                 ],
-                                [
-                                    'type' => 'column',
-                                    'name' => 'Научные мероприятия',
-                                    'data' => [0, 0, 0, 1],
-                                ]
                             ],
                             'credits' => ['enabled' => false]
                         ],
                     ]);
                     ?>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

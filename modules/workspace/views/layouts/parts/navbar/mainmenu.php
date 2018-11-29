@@ -20,7 +20,7 @@ echo Nav::widget([
                     ['label' => 'Панель управления', 'url' => ['/workspace'], 'options' => [
                         'style' => 'width: 20pc;'
                     ]],
-                    ['label' => 'Личный кабинет', 'url' => ['/workspace/personal/', 'id' => Yii::$app->user->id]],
+                    ['label' => 'Личный кабинет', 'url' => ['/workspace/personal/']],
                     //'<br>',
                     '<li class="divider"></li>',
                     ['label' => 'Вы вошли как:'],

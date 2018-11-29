@@ -15,7 +15,7 @@ $('#messages').click(function () {
             $('#holder').show("blind");
         },
         error: function(jqxhr, status, errorMsg) {
-            var message = '<br><br>' +
+            let message = '<br><br>' +
                 '<div class="alert alert-danger" role="alert">' +
                 '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                 '<p>' + status + '</p>' +
@@ -45,7 +45,7 @@ $('#telemetry').click(function () {
             $('#holder').show("blind");
         },
         error: function(jqxhr, status, errorMsg) {
-            var message = '<br><br>' +
+            let message = '<br><br>' +
                 '<div class="alert alert-danger" role="alert">' +
                 '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                 '<p>' + status + '</p>' +
@@ -79,7 +79,7 @@ $('#upload').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +
@@ -103,7 +103,7 @@ $('#upload').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +
@@ -128,7 +128,7 @@ $('#upload').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +
@@ -162,7 +162,7 @@ $('#upload').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +
@@ -199,7 +199,7 @@ $('#dataselect').change(function () {
                     $('#holder').show("blind");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +
@@ -222,7 +222,7 @@ $('#dataselect').change(function () {
                     $('#holder').show("slow");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +
@@ -245,7 +245,7 @@ $('#dataselect').change(function () {
                     $('#holder').show("slow");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +
@@ -268,7 +268,7 @@ $('#dataselect').change(function () {
                     $('#holder').show("slow");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +
@@ -291,7 +291,7 @@ $('#dataselect').change(function () {
                     $('#holder').show("slow");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +
@@ -314,7 +314,7 @@ $('#dataselect').change(function () {
                     $('#holder').show("slow");
                 },
                 error: function(jqxhr, status, errorMsg) {
-                    var message = '<br><br>' +
+                    let message = '<br><br>' +
                         '<div class="alert alert-danger" role="alert">' +
                         '<h4 class="alert-heading">Загрузка формы не удалась</h4>' +
                         '<p>' + status + '</p>' +

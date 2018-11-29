@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\Html;
+
 /* @var $this yii\web\View */
 /* @var $indexes  */
 /* @var $model \app\models\identity\Users|array|null */
@@ -113,16 +115,28 @@ $this->registerJsFile('/js/modules/personal/module.js');
 <br>
 <br>
 
-<div class="row">
+<div id="diagrams" class="row">
     <div class="col-lg-12">
-        <?php
-        echo $this->render('forms/diagrams', [
+        <div class="panel panel-default">
+            <div class="panel panel-heading">
+                <div align="left">
+                    <?= Html::button('<span class="glyphicon glyphicon-dashboard"></span>', ['id' => 'chart1']);?>
+                    <?= Html::button('<span class="glyphicon glyphicon-equalizer"></span>', ['id' => 'chart2']);?>
+                </div>
+                <h5 align="right">Распределение научных результатов</h5>
+            </div>
+            <div class="panel panel-body">
+                <div>
+                    <?php
+                    echo $this->render('forms/diagrams', [
 
-        ]);
-        ?>
+                    ]);
+                    ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 
 <br>
 <br>
@@ -130,7 +144,7 @@ $this->registerJsFile('/js/modules/personal/module.js');
 
 <?php
 
-\yii\helpers\VarDumper::dump($author->articlesJournals);
+//\yii\helpers\VarDumper::dump($author->articlesJournals);
 //echo count($author->journals);
 
 ?>

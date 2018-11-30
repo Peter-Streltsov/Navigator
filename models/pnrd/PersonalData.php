@@ -3,13 +3,12 @@
 namespace app\models\pnrd;
 
 // project classes
+use app\models\identity\Authors;
+use app\models\identity\Personnel;
 use app\models\identity\Users;
-use app\models\units\articles\collections\ArticleCollection;
-use app\models\units\articles\conferences\ArticleConference;
-use app\models\units\articles\journals\ArticleJournal;
-use app\models\units\dissertations\Dissertations;
 // yii classes
 use Yii;
+use yii\base\Model;
 
 /**
  * Class PersonalData
@@ -17,26 +16,45 @@ use Yii;
  *
  * @package app\models\pnrd
  */
-class PersonalData
+class PersonalData extends Model
 {
 
+    /**
+     * @var Users
+     */
     public $user; // user data
+    /**
+     * @var Personnel
+     */
     public $employee; // staff data for employee of current authorized user
+    /**
+     * @var Authors
+     */
     public $author; // author's data for author of current authorized user
-    private $units;
 
-    public function __construct(Users $user)
+
+    /**
+     * PersonalData constructor
+     * @param Users|null $user
+     */
+    public function __construct(Users $user = null)
     {
-        $this->user = $user;
-        if ($this->user != null) {
-            $this->employee = $this->user->getStaff();
-            $this->author = $this->user->getAuthor();
-        } else {
-            $this->employee = null;
-            $this->author = null;
-        }
-        $this->units = new Units();
+        parent::__construct();
+        $this->initIdentityModels($user);
     } // end construct
+
+
+    /**
+     * sets private properties $user, $employee and $author
+     * @param Users $user
+     */
+    private function initIdentityModels(Users $user)
+    {
+        // if $user parameter is null - fills $user property with current identity model
+        $user != null ? $this->user = $user : $this->user = Yii::$app->user->getIdentity();
+        $this->employee = $this->user->getStaff();
+        $this->author = $this->user->getAuthor();
+    } // end function
 
 
     /**
@@ -44,35 +62,72 @@ class PersonalData
      */
 
     /**
-     * collects articles of all types where user_id = $this->>user->id and returns them as array of ActiveRecords
-     *
-     * @return array
+     * return current identity ArticlesJournals
+     * @return mixed
      */
-    public function getArticles()
+    public function getArticlesJournals()
     {
-        // TODO: implement method;
-        $articles_journals = ArticleJournal::find()->all();
-        $articles_collections = ArticleCollection::find()->all();
-        $articles_conferencies = ArticleConference::find()->all();
-
-        return array_merge($articles_journals, $articles_collections, $articles_conferencies);
+        return $this->author->articlesJournals;
     } // end function
 
 
     /**
-     * finds dissertations linked with current user model
-     *
-     * @return array
+     * return current identity ArticlesConferences
+     * @return mixed
+     */
+    public function getArticlesConferences()
+    {
+        return $this->author->articlesConferences;
+    } // end function
+
+
+    /**
+     * return current identity ArticlesCollections
+     * @return mixed
+     */
+    public function getArticlesCollections()
+    {
+        return $this->author->articlesCollections;
+    } // end function
+
+
+    /**
+     * returns current identity Monographs
+     * @return mixed
+     */
+    public function getMonographs()
+    {
+        return $this->author->monographs;
+    } // end function
+
+
+    /**
+     * returns current identity Dissertations
+     * @return mixed
      */
     public function getDissertations()
     {
-        return Dissertations::find()->where(['author' => $this->author->id])->all();
+        return $this->author->dissertations;
+    } // end function
+
+
+    /**
+     * @return array
+     */
+    public function getPublications()
+    {
+        return [
+            $this->author->articlesJournals,
+            $this->author->articlesConferences,
+            $this->author->articlesCollections,
+            $this->author->monographs,
+            $this->author->dissertations
+        ];
     } // end function
 
 
     /**
      * calculates total index for current user model
-     *
      * @return int
      */
     public function getIndex()
@@ -80,27 +135,68 @@ class PersonalData
         if ($this->user == null && $this->author == null) {
             return 0;
         }
-        return 0;
-        // TODO: implement method;
+        $index = array_reduce($this->publications, function ($item) {
+
+        });
+        return $index;
     } // end function
 
     /**
      * ENDGETTERS
      */
 
-    public function countArticles()
-    {
 
+
+    /**
+     * COUNTERS
+     */
+
+    /**
+     * @return float
+     */
+    public function countArticlesJournals()
+    {
+        return (float)count($this->author->articlesJournals);
     } // end function
 
+
+    /**
+     * @return float
+     */
+    public function countArticlesConferences()
+    {
+        return (float)count($this->author->articlesConferences);
+    } // end function
+
+
+    /**
+     * @return float
+     */
+    public function countArticlesCollections()
+    {
+        return (float)count($this->author->articlesCollections);
+    } // end function
+
+
+    /**
+     * @return float
+     */
     public function countMonographs()
     {
-
+        return (float)count($this->author->monographs);
     } // end function
 
+
+    /**
+     * @return float
+     */
     public function countDissertations()
     {
-
+        return (float)count($this->author->dissertations);
     } // end function
+
+    /**
+     * END COUNTERS
+     */
 
 } // end class

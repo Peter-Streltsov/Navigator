@@ -18,22 +18,6 @@ use Yii;
  */
 trait UnitTrait
 {
-
-    /**
-     * private method returning namespace of class, using current trait method
-     *
-     * @return string
-     */
-    /*private static function currentNamespace()
-    {
-
-        $current_class = explode('\\', get_called_class());
-        array_pop($current_class);
-        return implode('\\', $current_class) . '\\';
-
-    } // end function*/
-
-
     /**
      *
      * @return array
@@ -59,7 +43,7 @@ trait UnitTrait
      */
     public function getLanguage()
     {
-        return Languages::find()->where(['id' => $this->language])->one();
+        return $this->hasOne(Languages::className(), ['id' => $this->language]);
     } // end function
 
 
@@ -97,6 +81,33 @@ trait UnitTrait
     public function getPersonalIndex()
     {
         $user = Yii::$app->user->getIdentity();
+    } // end function
+
+
+    /**
+     * @param $author_id
+     * @return Authors|array|null
+     */
+    public function getAuthorJunction($author_id)
+    {
+        //return $this->hasOne(Authors::className(), ['author_id' => $author_id]);
+        return Authors::find()->where(['author_id' => $author_id])->one();
+    } // end function
+
+
+    /**
+     * @param $author_id
+     * @return float|int
+     */
+    public function getIndexByAuthor($author_id)
+    {
+        $index_value = IndexesArticles::find()->where(['id' => $this->class])->one();
+        $index_value = $index_value->value;
+        $part = $this->getAuthorJunction($author_id)->part;
+        if ($part == null) {
+            $part = 10;
+        }
+        return ($part * $index_value) / 100;
     } // end function
 
 } // end trait

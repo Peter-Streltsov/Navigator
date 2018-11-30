@@ -35,6 +35,24 @@ $this->registerJsFile('/js/modules/personal/module.js');
             ?>
         </div>
     </div>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="row">
+    <div class="col-lg-7">
+        <?php
+        echo $this->render('forms/info', [
+            'author' => $author,
+            'staff' => $personal
+        ]);
+        ?>
+    </div>
+    <div class="col-lg-1">
+
+    </div>
     <div class="col-lg-4">
         <div id="photo-holder">
             <?php
@@ -47,24 +65,17 @@ $this->registerJsFile('/js/modules/personal/module.js');
         </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <?php
-        echo $this->render('forms/info', [
-            'author' => $author,
-            'staff' => $personal
-        ]);
-        ?>
-    </div>
-</div>
 <!-- end block -->
 
+<br>
+<br>
+<br>
+<br>
 <br>
 
 <!-- personal data -->
 <div class="row">
-    <div class="col-lg-7">
+    <div class="col-lg-12">
 
         <?php
 
@@ -74,30 +85,7 @@ $this->registerJsFile('/js/modules/personal/module.js');
 
         ?>
     </div>
-    <div class="col-lg-5">
-        <div class="panel panel-default">
-            <div class="panel panel-body">
-                <?php
-                echo $personaldata->getIndex();
-                ?>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
-        </div>
-    </div>
 </div>
-<!-- end block -->
-
-<!-- basic user information -->
-<?php
- /*echo $this->render('forms/commondata', [
-    'personal' => $personal
-]);*/
- ?>
 <!-- end block -->
 
 <br>
@@ -144,7 +132,7 @@ $this->registerJsFile('/js/modules/personal/module.js');
 
 <?php
 
-//\yii\helpers\VarDumper::dump($author->articlesJournals);
+//\yii\helpers\VarDumper::dump($author->articlesJournals[0]->getIndexByAuthor($author->id));
 //echo count($author->journals);
 
 ?>

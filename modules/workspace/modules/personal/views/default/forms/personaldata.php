@@ -10,6 +10,9 @@ use yii\widgets\DetailView;
         if ($personaldata->author != null) {
             echo DetailView::widget([
                 'model' => $personaldata->author,
+                'options' => [
+                        'class' => 'table table-hover'
+                ],
                 'attributes' => [
                     'name',
                     'secondname',
@@ -35,7 +38,7 @@ use yii\widgets\DetailView;
                     'attributes' => [
                         [
                             'label' => 'Общий индекс',
-                            'value' => 0
+                            'value' => $personaldata->index
                         ],
                         [
                             'label' => 'Статей',
@@ -44,6 +47,14 @@ use yii\widgets\DetailView;
                             + $personaldata->countArticlesCollections()
                             //+ $personaldata->countMonographs()
                             + $personaldata->countDissertations()
+                        ],
+                        /*[
+                            'label' => 'Монографий и книг',
+                            'value' => $personaldata->countMonographs()
+                        ],*/
+                        [
+                            'label' => 'Диссертаций',
+                            'value' => $personaldata->countDissertations()
                         ]
                     ]
                 ]

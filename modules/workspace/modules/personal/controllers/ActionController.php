@@ -146,31 +146,21 @@ class ActionController extends Controller
 
 
     /**
-     * @param string $what
-     * @param int $id
-     */
-    public function actionSee($what, $id)
-    {
-        switch ($what) {
-            case 'notification':
-                return $this->notifications($id);
-                break;
-        }
-    } // end action
-
-
-    public function notifications($id)
-    {
-        return $this->render();
-    } // end function
-
-
-    /**
      *
      */
-    public function actionLoaduserimage()
+    public function actionLoadimage()
     {
+        $user = Yii::$app->user->getIdentity();
+        $file = new \app\models\filesystem\Fileupload();
 
+        if (Yii::$app->request->isPost) {
+            $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
+            if ($file->upload('userimages')) {
+                $user->userpic = $file->name;
+                $user->save();
+                return $this->redirect('workspace/personal');
+            }
+        }
     } // end action
 
 } // end class

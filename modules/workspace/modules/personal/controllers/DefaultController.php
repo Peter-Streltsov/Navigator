@@ -3,6 +3,7 @@
 namespace app\modules\workspace\modules\personal\controllers;
 
 // project classes
+use app\models\filesystem\Fileupload;
 use app\models\messages\Message;
 use app\models\messages\Notification;
 use app\models\pnrd\PersonalData;
@@ -33,6 +34,7 @@ class DefaultController extends Controller
             return $this->redirect('/workspace');
         }
 
+        $file = new Fileupload();
         $message = new Message();
         $notifications = new ActiveDataProvider([
             'query' => Notification::find()->where(['user_id' => $model->id])
@@ -44,6 +46,7 @@ class DefaultController extends Controller
 
         return $this->render('index', [
             'model' => $model,
+            'file' => $file,
             'personaldata' => $personal,
             'notifications' => $notifications,
             'author' => $author,
@@ -51,23 +54,5 @@ class DefaultController extends Controller
             'personal' => $staff,
         ]);
     } // end action
-
-
-    /**
-     *
-     */
-    public function actionAuthor()
-    {
-        echo "current author";
-    } // end function
-
-
-    /**
-     *
-     */
-    public function actionStaff()
-    {
-        echo "current staff member";
-    } // end function
 
 } // end class

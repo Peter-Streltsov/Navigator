@@ -34,20 +34,30 @@ use yii\web\JsExpression;
                                 ]
                             ],
                             'series' => [
-                                /*[
-                                    'type' => 'column',
-                                    'name' => 'Статьи',
-                                    'data' => [(int)count($articles), 0, 0],
-                                ],*/
                                 [
                                     'type' => 'pie',
                                     'name' => ['Публикации'],
                                     'data' => [
-                                        ['name' => 'Монографии', 'y' => 2],
-                                        ['name' => 'Статьи - публикации в журналах', 'y' => 1],
-                                        ['name' => 'Статьи - материалы конференций', 'y' => 1],
-                                        ['name' => 'Статьи в сборниках и главы книг', 'y' => 1],
-                                        ['name' => 'Диссертации', 'y' => 1]
+                                        [
+                                            'name' => 'Монографии',
+                                            'y' => 0
+                                        ],
+                                        [
+                                            'name' => 'Статьи - публикации в журналах',
+                                            'y' => $personal->countArticlesJournals()
+                                        ],
+                                        [
+                                            'name' => 'Статьи - материалы конференций',
+                                            'y' => $personal->countArticlesConferences()
+                                        ],
+                                        [
+                                            'name' => 'Статьи в сборниках и главы книг',
+                                            'y' => $personal->countArticlesCollections()
+                                        ],
+                                        [
+                                            'name' => 'Диссертации',
+                                            'y' => $personal->countDissertations()
+                                        ]
                                     ],
                                 ],
                             ],

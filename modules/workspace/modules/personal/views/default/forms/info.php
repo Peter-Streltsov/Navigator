@@ -15,7 +15,7 @@ use yii\helpers\Html;
             }
             ?>
             <div align="right">
-                <?= Html::a('Подробнее>>>', '#', ['style' => 'font-size: 12px;']) ?>
+                <?= Html::a('Подробнее>>>', ['/workspace/authors/view', 'id' => $author->id], ['style' => 'font-size: 12px;']) ?>
             </div>
             <hr>
             <?php
@@ -32,7 +32,7 @@ use yii\helpers\Html;
             }
             ?>
             <div align="right">
-                <?= Html::a('Подробнее>>>', '#', ['style' => 'font-size: 12px;']) ?>
+                <?= Html::a('Подробнее>>>', ['/workspace/personnel/view', 'id' => $author->id], ['style' => 'font-size: 12px;']) ?>
             </div>
         </div>
     </div>

@@ -1,26 +1,26 @@
 <?php
 
+use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 ?>
-
-<!--<div class="panel panel-default">
-    <div class="panel panel-body">
-        <div class="alert alert-danger">
-            Изображение не загружено
-        </div>
-        <br>
-        <br>
-        <?= Html::button('Загрузить фотографию', ['id' => 'imageload']) ?>
-        <br>
-    </div>
-</div>-->
 
 <div class="alert alert-danger">
     Изображение не загружено
     <br>
     <br>
-    <?= Html::button('<span class="glyphicon glyphicon-upload"></span>', ['id' => 'imageload']) ?>
+    <?php
+
+    $form = ActiveForm::begin([
+            'action' => '/workspace/personal/action/loadimage',
+            'options' => [
+                    'enctype' => 'multipart/form-data'
+            ]
+    ]);
+    echo $form->field($file, 'uploadedfile')->fileInput()->label('');
+    echo Html::submitButton('Загрузить');
+    ActiveForm::end();
+    ?>
 </div>
 <br>
 <br>

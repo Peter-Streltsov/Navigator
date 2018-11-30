@@ -38,6 +38,11 @@ $this->registerJsFile('/js/modules/personal/module.js');
 </div>
 
 <br>
+<div class="row">
+    <div class="col-lg-12">
+        <hr>
+    </div>
+</div>
 <br>
 <br>
 
@@ -57,7 +62,9 @@ $this->registerJsFile('/js/modules/personal/module.js');
         <div id="photo-holder">
             <?php
             if ($model->userpic == null) {
-                echo $this->render('forms/noimage');
+                echo $this->render('forms/noimage', [
+                        'file' => $file
+                ]);
             } else {
                 echo $this->render('forms/imageholder');
             }
@@ -69,6 +76,13 @@ $this->registerJsFile('/js/modules/personal/module.js');
 
 <br>
 <br>
+
+<div class="row">
+    <div class="col-lg-12">
+        <hr>
+    </div>
+</div>
+
 <br>
 <br>
 <br>
@@ -76,30 +90,28 @@ $this->registerJsFile('/js/modules/personal/module.js');
 <!-- personal data -->
 <div class="row">
     <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel panel-body">
+                <br>
+                <?php
 
-        <?php
+                echo $this->render('forms/personaldata', [
+                    'personaldata' => $personaldata
+                ]);
 
-        echo $this->render('forms/personaldata', [
-                'personaldata' => $personaldata
-        ]);
-
-        ?>
+                ?>
+            </div>
+        </div>
     </div>
 </div>
 <!-- end block -->
 
 <br>
-
-<!---->
-<?php
- /*echo $this->render('forms/panels', [
-    'indexes' => $indexes,
-    'currentarticles' => $currentarticles,
-    'meanindex' => $meanindex
-]);*/
- ?>
-<!-- end block -->
-
+<div class="row">
+    <div class="col-lg-12">
+        <hr>
+    </div>
+</div>
 <br>
 <br>
 
@@ -117,7 +129,7 @@ $this->registerJsFile('/js/modules/personal/module.js');
                 <div>
                     <?php
                     echo $this->render('forms/diagrams', [
-
+                            'personal' => $personaldata
                     ]);
                     ?>
                 </div>
@@ -129,10 +141,3 @@ $this->registerJsFile('/js/modules/personal/module.js');
 <br>
 <br>
 <br>
-
-<?php
-
-//\yii\helpers\VarDumper::dump($author->articlesJournals[0]->getIndexByAuthor($author->id));
-//echo count($author->journals);
-
-?>

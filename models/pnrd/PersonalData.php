@@ -128,17 +128,43 @@ class PersonalData extends Model
 
     /**
      * calculates total index for current user model
-     * @return int
+     * @return float
      */
     public function getIndex()
     {
+        // if something went wrong with identity models will return 0
         if ($this->user == null && $this->author == null) {
             return 0;
         }
-        $index = array_reduce($this->publications, function ($item) {
 
-        });
-        return $index;
+        // resulting array
+        $index = [];
+
+        // calculating indexes for ArticlesJournals
+        foreach ($this->author->articlesJournals as $article) {
+            $index[] = $article->getIndexByAuthor($this->author->id);
+        }
+
+        // calculating indexes for ArticlesConferences
+        foreach ($this->author->articlesConferences as $article) {
+            $index[] = $article->getIndexByAuthor($this->author->id);
+        }
+
+        foreach ($this->author->articlesCollections as $article) {
+            $index[] = $article->getIndexByAuthor($this->author->id);
+        }
+
+        // calculating indexes for Monographs
+        /*foreach ($this->author->monographs as $monograph) {
+            $index[] = $monograph->getIndexByAuthor($this->author->id);
+        }*/
+
+        // calculating indexes for Dissertations
+        /*foreach ($this->author->dissertations as $dissertation) {
+            $index[] = $dissertation->getIndexByAuthor($this->author->id);
+        }*/
+
+        return (float)array_sum($index);
     } // end function
 
     /**

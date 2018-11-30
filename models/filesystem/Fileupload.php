@@ -17,7 +17,7 @@ class Fileupload extends Model
     {
 
         return [
-            [['uploadedfile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf', 'maxFiles' => 1],
+            [['uploadedfile'], 'file', 'skipOnEmpty' => false, 'extensions' => ['jpg', 'jpeg', 'pdf'], 'maxFiles' => 1],
         ];
 
     } // end function
@@ -36,7 +36,8 @@ class Fileupload extends Model
 
     /**
      * uploads file and sets uploaded file name to Upload model
-
+     *
+     * @param string $folder - directory to load file to (must be available to write)
      * @return bool
      */
     public function upload($folder = '')
@@ -47,7 +48,7 @@ class Fileupload extends Model
         }
 
         if ($this->validate()) {
-            $this->uploadedfile->saveAs('upload/' . $folder . $this->uploadedfile->baseName . '.' . $this->uploadedfile->extension);
+            $this->uploadedfile->saveAs('files/' . $folder . $this->uploadedfile->baseName . '.' . $this->uploadedfile->extension);
             $this->name = (string)$this->uploadedfile->baseName . '.' . $this->uploadedfile->extension;
             \Yii::$app->session->setFlash('success', 'Файл загружен');
             return true;

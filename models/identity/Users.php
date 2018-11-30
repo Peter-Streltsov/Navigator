@@ -26,7 +26,7 @@ use yii\behaviors\TimestampBehavior;
 class Users extends ActiveRecord implements IdentityInterface, UserInterface
 {
 
-    public $userpic = null;
+    //public $userpic = null;
 
     /**
      * @inheritdoc
@@ -45,7 +45,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     {
         return [
             [['username', 'password', 'name', 'lastname'], 'required'],
-            [['username', 'password_hash', 'name', 'lastname', 'access_token'], 'string', 'max' => 255],
+            [['username', 'image', 'password_hash', 'name', 'lastname', 'access_token'], 'string', 'max' => 255],
             [['password', 'auth_key'], 'string', 'max' => 100],
         ];
     } // end function
@@ -80,7 +80,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
             'created_at' => 'Создан',
             'auth_key' => 'Ключ авторизации',
             'access_token' => 'Токен',
-            'userpic' => 'Фотография'
+            'image' => 'Фотография'
         ];
     } // end function
 

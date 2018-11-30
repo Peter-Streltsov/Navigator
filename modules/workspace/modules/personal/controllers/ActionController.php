@@ -3,18 +3,15 @@
 namespace app\modules\workspace\modules\personal\controllers;
 
 // project classes
-use app\modules\Control\models\Notifications; // !!!
-use app\modules\Control\models\Fileupload;
-use app\modules\Control\models\Articles; // !!!
-use app\modules\Control\models\ArticlesAuthors; // !!!
-use app\modules\Control\models\Authors;
 use app\modules\Control\models\Upload;
 use app\modules\Control\models\UploadCategories;
+use app\models\filesystem\Fileupload;
 use app\models\messages\Message;
 use app\models\messages\MessageClasses;
-use app\models\identity\Users; // !!!
+use app\models\identity\Users;
 // yii classes
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\helpers\ArrayHelper;
@@ -150,15 +147,16 @@ class ActionController extends Controller
      */
     public function actionLoadimage()
     {
-        $user = Yii::$app->user->getIdentity();
-        $file = new \app\models\filesystem\Fileupload();
+        $id = Yii::$app->user->getId();
+        $user = Users::find()->where(['id' => $id])->one();
+        $file = new Fileupload();
 
         if (Yii::$app->request->isPost) {
             $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
             if ($file->upload('userimages')) {
-                $user->userpic = $file->name;
+                $user->image = $file->name;
                 $user->save();
-                return $this->redirect('workspace/personal');
+                return $this->redirect('/workspace/personal');
             }
         }
     } // end action

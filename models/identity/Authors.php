@@ -55,7 +55,8 @@ class Authors extends ActiveRecord
             'name' => 'Имя',
             'secondname' => 'Отчество',
             'lastname' => 'Фамилия',
-            'habilitation' => 'Ученая степень'
+            'habilitation' => 'Ученая степень',
+            'user_id' => 'Идентификатор пользователя'
         ];
     } // end function
 

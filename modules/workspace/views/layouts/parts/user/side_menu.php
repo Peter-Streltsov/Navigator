@@ -15,18 +15,14 @@ $items = [
         'url' => '#'
     ],
     [
-        'label' => 'Авторы и сотрудники',
+        'label' => 'Авторы',
         'icon' => 'user',
-        'items' => [
-            [
-                'label' => 'Сотрудники',
-                'url' => '/workspace/personnel'
-            ],
-            [
-                'label' => 'Авторы',
-                'url' => '/workspace/authors'
-            ]
-        ]
+        'url' => '/workspace/authors'
+    ],
+    [
+        'label' => 'Сотрудники',
+        'icon' => 'user',
+        'url' => '/workspace/personnel'
     ],
     [
         'label' => 'Публикации',

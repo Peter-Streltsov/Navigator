@@ -61,12 +61,14 @@ $this->registerJsFile('/js/modules/personal/module.js');
     <div class="col-lg-4">
         <div id="photo-holder">
             <?php
-            if ($model->userpic == null) {
+            if ($model->image == null) {
                 echo $this->render('forms/noimage', [
                         'file' => $file
                 ]);
             } else {
-                echo $this->render('forms/imageholder');
+                echo $this->render('forms/imageholder', [
+                        'user' => $model
+                ]);
             }
             ?>
         </div>

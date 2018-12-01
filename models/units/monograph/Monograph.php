@@ -3,6 +3,7 @@
 namespace app\models\units\monograph;
 
 use app\interfaces\UnitInterface;
+use app\models\common\Languages;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
@@ -19,6 +20,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Monograph extends ActiveRecord implements UnitInterface
 {
+
+    public $language = 1; // TODO: add to migration and model 'language' value !!!!!
 
     /**
      * @return array
@@ -115,11 +118,12 @@ class Monograph extends ActiveRecord implements UnitInterface
 
 
     /**
-     * @return string
+     * @return mixed|string|null
      */
-    public function getLanguage()
+    public function getLanguageValue()
     {
-        // TODO: Implement languageValue() method.
+        $language = Languages::find()->where(['id' => $this->language])->one();
+        return $language != null ? $language->language : null;
     } // end function
 
 

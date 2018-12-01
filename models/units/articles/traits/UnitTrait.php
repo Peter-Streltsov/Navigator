@@ -36,14 +36,10 @@ trait UnitTrait
     } // end function
 
 
-    /**
-     * returns language name for current article
-     *
-     * @return string
-     */
-    public function getLanguage()
+    public function getLanguageValue()
     {
-        return $this->hasOne(Languages::className(), ['id' => $this->language]);
+        $language = Languages::find()->where(['id' => $this->language])->one();
+        return $language != null ? $language->language : null;
     } // end function
 
 

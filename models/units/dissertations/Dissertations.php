@@ -4,6 +4,7 @@ namespace app\models\units\dissertations;
 
 use app\interfaces\UnitInterface;
 use app\models\common\Habilitations;
+use app\models\common\Languages;
 use app\models\identity\Authors;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -92,11 +93,14 @@ class Dissertations extends ActiveRecord implements UnitInterface
     }
 
 
-
-    public function getLanguage()
+    /**
+     * @return mixed|string|null
+     */
+    public function getLanguageValue()
     {
-        // TODO: Implement getUnitlanguage() method;
-    }
+        $language = Languages::find()->where(['id' => $this->language])->one();
+        return $language != null ? $language->language : null;
+    } // end function
 
 
     /**
@@ -138,6 +142,20 @@ class Dissertations extends ActiveRecord implements UnitInterface
     public function getHabilitation()
     {
         return $this->hasOne(Habilitations::className(), ['id' => 'habilitation']);
+    } // end function
+
+
+    /**
+     * TODO: replace index with actual values!!!
+     *
+     * @param $author_id
+     * @return float|int
+     */
+    public function getIndexByAuthor($author_id)
+    {
+        $index_value = 1;
+        $part = 100;
+        return ($part * $index_value) / 100;
     } // end function
 
 

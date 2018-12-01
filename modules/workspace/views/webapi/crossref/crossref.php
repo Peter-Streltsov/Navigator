@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-lg-10">
         <br>
         <?php
-        echo Html::beginForm('/control/webapi/crossref', 'post');
+        echo Html::beginForm('/workspace/webapi/crossrefajax', 'post');
         echo Html::label('Введите идентификатор:  ');
         echo "<br>";
         echo Html::input('text', 'DOI', '', ['id' => 'inputdoi']);
@@ -67,7 +67,7 @@ if ($article != null) {
 
     $('#searchbutton').on('click', function() {
         $.ajax({
-            url: "/control/webapi/crossrefajax",
+            url: "/workspace/webapi/crossrefajax",
             type: "post",
             dataType: "html",
             data: {DOI: $('#inputdoi').val()},

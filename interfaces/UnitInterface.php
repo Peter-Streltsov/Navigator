@@ -18,11 +18,11 @@ interface UnitInterface
     public function getAuthors();
 
     /**
-     * returns current unit language
+     * returns value for current unit language id
      *
-     * @return string
+     * @return mixed
      */
-    public function getLanguage();
+    public function getLanguageValue();
 
     /**
      * calculates and returns total PNRD index for current unit model

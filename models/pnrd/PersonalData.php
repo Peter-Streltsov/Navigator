@@ -160,9 +160,9 @@ class PersonalData extends Model
         }*/
 
         // calculating indexes for Dissertations
-        /*foreach ($this->author->dissertations as $dissertation) {
+        foreach ($this->author->dissertations as $dissertation) {
             $index[] = $dissertation->getIndexByAuthor($this->author->id);
-        }*/
+        }
 
         return (float)array_sum($index);
     } // end function

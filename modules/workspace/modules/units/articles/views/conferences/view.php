@@ -4,12 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\units\articles\ArticleConferencies */
+/* @var $model app\models\units\articles\conferences\ArticleConference */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи - публикации материалов конференций', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="article-conferencies-view">
 
     <br>
@@ -50,9 +51,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'number',
                     //'language',
                     [
-                            'attribute' => 'language',
+                        'attribute' => 'language',
                         'value' => function($model) {
-                                    return $model->getLanguage()->language;
+                                    return $model->languageValue;
                         }
                     ],
                     'year',

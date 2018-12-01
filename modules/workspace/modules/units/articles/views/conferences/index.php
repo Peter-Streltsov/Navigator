@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 use yii\grid\GridView;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 use kartik\export\ExportMenu;
 
 /* @var $this yii\web\View */

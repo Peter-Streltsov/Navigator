@@ -218,13 +218,13 @@ class JournalsController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->access->isAdmin()) {
+            return $this->redirect('/workspace');
+        }
 
         $newmagazine = new Magazines();
         $newcitation = new Citations();
         $newauthor = new Authors();
-
-        // main model - current article
-        $model = ArticleJournal::find()->where(['id' => $id])->one();
 
         // uploading article file
         if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
@@ -236,10 +236,6 @@ class JournalsController extends Controller
             $articlemodel->save();
             Yii::$app->session->setFlash('info', 'Статье ' . $articlemodel->title . ' сопоставлен файл ' . $file->name);
         }
-
-        /**
-         * basic view parameters
-         */
 
         $linked_authors = new ActiveDataProvider([
             'query' => Authors::find()->where(['article_id' => $id])

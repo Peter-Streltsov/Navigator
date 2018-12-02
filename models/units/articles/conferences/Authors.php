@@ -2,6 +2,8 @@
 
 namespace app\models\units\articles\conferences;
 
+use app\models\identity\Authors as AuthorsCommon;
+// yii classes
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -39,7 +41,7 @@ class Authors extends ActiveRecord
             [['article_id', 'author_id'], 'required'],
             [['article_id', 'author_id'], 'integer'],
             [['part'], 'integer'],
-            [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleJournal::className(), 'targetAttribute' => ['article_id' => 'id']],
+            [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleConference::className(), 'targetAttribute' => ['article_id' => 'id']],
         ];
 
     } // end function
@@ -54,9 +56,9 @@ class Authors extends ActiveRecord
 
         return [
             'id' => 'ID',
-            'part' => 'part',
-            'article_id' => 'Article ID',
-            'author_id' => 'Author ID',
+            'part' => 'Процент',
+            'article_id' => 'Идентификатор статьи',
+            'author_id' => 'Идентификатор автора',
         ];
 
     } // end function
@@ -79,15 +81,13 @@ class Authors extends ActiveRecord
      */
     public function getAuthor()
     {
-
-        $author = Authors::find()->where(['id' => $this->author_id])->one();
+        $author = AuthorsCommon::find()->where(['id' => $this->author_id])->one();
 
         if ($author != null) {
             return $author->name . ' ' . $author->lastname;
         } else {
             return 'Not set';
         }
-
     } // end function
 
 
@@ -110,7 +110,7 @@ class Authors extends ActiveRecord
     public function beforeSave($insert)
     {
 
-        if (ArticlesAuthors::find()->where([
+        if (Authors::find()->where([
             'author_id' => $this->author_id,
             'article_id' => $this->article_id
         ])->exists()) {

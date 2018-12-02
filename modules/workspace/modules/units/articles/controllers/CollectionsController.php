@@ -19,13 +19,11 @@ use yii\filters\VerbFilter;
  */
 class CollectionsController extends Controller
 {
-
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -34,9 +32,7 @@ class CollectionsController extends Controller
                 ],
             ],
         ];
-
     } // end function
-
 
 
     /**
@@ -46,7 +42,6 @@ class CollectionsController extends Controller
      */
     public function actionIndex()
     {
-
         $dataProvider = new ActiveDataProvider([
             'query' => ArticleCollection::find(),
         ]);
@@ -54,9 +49,7 @@ class CollectionsController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-
     } // end action
-
 
 
     /**
@@ -69,13 +62,10 @@ class CollectionsController extends Controller
      */
     public function actionView($id)
     {
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-
     } // end action
-
 
 
     /**
@@ -89,7 +79,6 @@ class CollectionsController extends Controller
      */
     public function actionCreate()
     {
-
         $model = new ArticleCollection();
         // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
@@ -111,9 +100,7 @@ class CollectionsController extends Controller
             'magazines' => $magazines,
             'languages' => $languages
         ]);
-
     } // end action
-
 
 
     /**
@@ -127,7 +114,6 @@ class CollectionsController extends Controller
      */
     public function actionAjaxcreate()
     {
-
         $model = new ArticleCollection();
         // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
@@ -137,21 +123,12 @@ class CollectionsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        /*if (Yii::$app->request->isAjax) {
-            return $this->renderAjax('create', [
-                'model' => $model,
-                'languages' => $languages
-            ]);
-        }*/
-
         return $this->renderAjax('ajaxforms/create', [
             'model' => $model,
             'magazines' => $magazines,
             'languages' => $languages
         ]);
-
     } // end action
-
 
 
     /**
@@ -167,9 +144,10 @@ class CollectionsController extends Controller
      */
     public function actionUpdate($id)
     {
-
+        if (!Yii::$app->access->isAdmin()) {
+            return $this->redirect('/workspace');
+        }
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -177,9 +155,7 @@ class CollectionsController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-
     } // end action
-
 
 
     /**
@@ -194,13 +170,12 @@ class CollectionsController extends Controller
      */
     public function actionDelete($id)
     {
-
+        if (!Yii::$app->access->isSupervisor()) {
+            return $this->redirect('/workspace');
+        }
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
-
     } // end action
-
 
 
     /**
@@ -214,13 +189,10 @@ class CollectionsController extends Controller
      */
     protected function findModel($id)
     {
-
         if (($model = ArticleCollection::findOne($id)) !== null) {
             return $model;
         }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-
+        throw new NotFoundHttpException('Запрошенный ресурс не существует');
     } // end function
 
 } // end class

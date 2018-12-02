@@ -2,6 +2,7 @@
 
 
 use kartik\select2\Select2;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
@@ -20,7 +21,6 @@ use yii\bootstrap\ActiveForm;
     </div>
     <div class="panel panel-body">
         <div class="row">
-
             <div class="col-lg-6">
 
                 <br>
@@ -29,9 +29,7 @@ use yii\bootstrap\ActiveForm;
 
                 <div class="panel panel-default">
                     <div class="panel-panel-body">
-                        <?php
-
-                        echo \yii\grid\GridView::widget([
+                        <?= GridView::widget([
                             'dataProvider' => $linked_authors,
                             'layout' => "{items}",
                             'tableOptions' => [
@@ -45,8 +43,8 @@ use yii\bootstrap\ActiveForm;
                                     'attribute' => 'lastname',
                                     'label' => '',
                                     'value' => function($model) {
-                                        $author = $model->author();
-                                        return $author->name . ' ' . $author->secondname . ' ' . $author->lastname;
+                                        return $model->getAuthor();
+                                        //return $author->name . ' ' . $author->secondname . ' ' . $author->lastname;
                                     }
                                 ],
                                 [
@@ -68,44 +66,47 @@ use yii\bootstrap\ActiveForm;
 
                     </div>
                 </div>
-
             </div>
 
-            <div class="col-lg-1">
-
-            </div>
+            <div class="col-lg-1"></div>
 
             <div class="col-lg-5">
 
-                    <br>
-                    <br>
+                <br>
+                <br>
 
-                    <?php
+                <?php
 
-                    $form = ActiveForm::begin([
-                        'action' => ['author?id=' . $id],
-                        'method' => 'post',
-                        'options' => [
-                            'data-pjax' => true,
-                            'enctype' => 'multipart/form-data'
-                        ],
-                    ]);
-                    echo $form->field($newauthor, 'author_id')->widget(Select2::className(), [
-                        'data' => $author_items,
-                        'pluginOptions' => [],
-                        'options' => [
-                                'tags' => true
-                        ]
-                    ]);
-                    echo $form->field($newauthor, 'article_id')->hiddenInput(['value' => $id])->label('');
-                    echo $form->field($newauthor, 'part')->textInput();
-                    echo Html::submitButton('<span style="color: green;" class="glyphicon glyphicon-plus"></span>');
+                $form = ActiveForm::begin([
+                    'action' => ['author?id=' . $id],
+                    'method' => 'post',
+                    'options' => [
+                        'data-pjax' => true,
+                        'enctype' => 'multipart/form-data'
+                    ],
+                ]);
+                echo $form->field($newauthor, 'author_id')->widget(Select2::className(), [
+                    'data' => $author_items,
+                    'pluginOptions' => [],
+                    'options' => [
+                        'tags' => true
+                    ]
+                ]);
+                echo $form->field($newauthor, 'article_id')->hiddenInput(['value' => $id])->label('');
+                echo $form->field($newauthor, 'part')->textInput();
+                echo Html::submitButton('<span style="color: green;" class="glyphicon glyphicon-plus"></span>');
 
-                    ActiveForm::end();
+                ActiveForm::end();
 
-                    ?>
+                ?>
             </div>
 
         </div>
     </div>
 </div>
+
+<?php
+
+if ($error != null) {
+    \yii\helpers\VarDumper::dump($error);
+}

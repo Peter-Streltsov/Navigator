@@ -18,7 +18,7 @@ use yii\widgets\Pjax;
 /* @var $newlanguage \app\models\common\Languages */
 /* @var $languages array */
 /* @var $magazines array */
-/* @var $newauthor \app\models\units\articles\ArticlesAuthors */
+/* @var $newauthor \app\models\identity\Authors */
 
 $this->title = 'Редактировать данные - '.$model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи - публикации в журналах', 'url' => ['index']];
@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 <div class="articles-update">
 
     <div class="row">
-
         <div class="col-lg-10">
             <br>
             <br>
@@ -39,18 +38,15 @@ $this->params['breadcrumbs'][] = 'Редактировать';
             <br>
             <br>
         </div>
-
     </div>
 
     <?php Pjax::begin(); ?>
 
     <div>
-
         <?= $this->render('forms/update/buttons', [
             'file' => $file,
             'model' => $model
         ]) ?>
-
     </div>
 
     <?php Pjax::end(); ?>

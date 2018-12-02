@@ -20,15 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <br>
 
-    <?php
-
-    if (Yii::$app->access->isAdmin()) {
-        echo $this->render('forms/view/buttons', [
-                'model' => $model
-        ]);
-    }
-
-    ?>
+    <?= Yii::$app->access->isAdmin() ? $this->render('forms/view/buttons', ['model' => $model]) : ''; ?>
 
     <br>
     <br>

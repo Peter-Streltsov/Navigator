@@ -3,13 +3,18 @@
 namespace app\modules\workspace\modules\units\articles\controllers;
 
 // project classes
-use app\models\units\articles\conferences\ArticleConference;
+use app\models\filesystem\Fileupload;
 use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
+use app\models\units\articles\conferences\ArticleConference;
+use app\models\units\articles\conferences\Citations;
+use app\models\units\CitationClasses;
+use app\models\units\articles\conferences\Associations;
+use app\models\units\articles\conferences\Authors;
+use app\models\identity\Authors as AuthorsCommon;
 // yii2 classes
 use Yii;
-use yii\bootstrap\Modal;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -21,7 +26,6 @@ use yii\helpers\ArrayHelper;
  */
 class ConferencesController extends Controller
 {
-
     /**
      * @inheritdoc
      */
@@ -38,7 +42,6 @@ class ConferencesController extends Controller
         ];
 
     } // end function
-
 
 
     /**
@@ -59,7 +62,6 @@ class ConferencesController extends Controller
     } // end action
 
 
-
     /**
      * Displays a single ArticleConference model
      *
@@ -70,13 +72,10 @@ class ConferencesController extends Controller
      */
     public function actionView($id)
     {
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-
     } // end action
-
 
 
     /**
@@ -90,11 +89,9 @@ class ConferencesController extends Controller
      */
     public function actionCreate()
     {
-
         /**
          * view parameters
          */
-
         $model = new ArticleConference();
         // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
@@ -126,9 +123,7 @@ class ConferencesController extends Controller
             'types' => $types,
             'classes' => $classes
         ]);
-
     } // end action
-
 
 
     /**
@@ -142,11 +137,9 @@ class ConferencesController extends Controller
      */
     public function actionAjaxcreate()
     {
-
         /**
          * view parameters
          */
-
         $model = new ArticleConference();
         // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
@@ -178,9 +171,7 @@ class ConferencesController extends Controller
             'types' => $types,
             'classes' => $classes
         ]);
-
     } // end action
-
 
 
     /**
@@ -196,8 +187,40 @@ class ConferencesController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->access->isAdmin()) {
+            return $this->redirect('/workspace');
+        }
 
+        $newmagazine = new Magazines();
+        $newcitation = new Citations();
+        $newauthor = new Authors();
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+        $author_items = ArrayHelper::map(
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+        $citations = new ActiveDataProvider([
+            'query' => Citations::find()->where(['article_id' => $id])
+        ]);
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()->where(['article_id' => $id])
+        ]);
+        $citation_classes = ArrayHelper::map(CitationClasses::find()->asArray()->all(),'class','class');
+        $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+        $file = new Fileupload();
         $model = $this->findModel($id);
+
+        // updating article data - articleform
+        if (Yii::$app->request->post()) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                $newmagazine->magazine = $model->magazine;
+                $newmagazine->save();
+            }
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -205,10 +228,93 @@ class ConferencesController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'id' => $id,
+            'classes' => $classes,
+            'linked_authors' => $linked_authors,
+            'languages' => $languages,
+            'author_items' => $author_items,
+            'newcitation' => $newcitation,
+            'newauthor' => $newauthor,
+            'citations' => $citations,
+            'associations' => $associations,
+            'citation_classes' => $citation_classes,
+            'file' => $file
+        ]);
+    } // end action
+
+
+    /**
+     * @param $id
+     * @return string
+     */
+    public function actionAuthor($id)
+    {
+
+        $author = new Authors();
+        $newauthor = new Authors();
+        $error = null;
+
+        if (Yii::$app->request->post() && $author->load(Yii::$app->request->post())) {
+            if (!$author->save()) {
+                $error = $author->getErrors();
+            }
+        }
+
+        $author_items = ArrayHelper::map(AuthorsCommon::find()->asArray()->all(), 'id', function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
+        return $this->renderAjax('forms/update/authorsform', [
+            'id' => $id,
+            'error' => $error,
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items,
+            'newauthor' => $newauthor,
         ]);
 
     } // end action
 
+
+    /**
+     * deletes existing author from junction model
+     *
+     * @param $author_id
+     * @param $id
+     * @return string
+     * @throws \Throwable
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteauthor($author_id, $id)
+    {
+        if (!Yii::$app->access->isAdmin()) {
+            return $this->redirect('/workspace/articles/conferences/view?id=' . $id);
+        }
+        //$deleting_author = Authors::findOne(['id' => $author_id]);
+        $deleting_author = Authors::find()->where(['id' => $author_id])->one();
+        $deleting_author->delete();
+        $newauthor = new Authors();
+        $author_items = ArrayHelper::map(
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
+        return $this->renderAjax('forms/update/authorsform', [
+            'id' => $id,
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items,
+            'newauthor' => $newauthor,
+        ]);
+    } // end action
 
 
     /**
@@ -223,13 +329,12 @@ class ConferencesController extends Controller
      */
     public function actionDelete($id)
     {
-
+        if (!Yii::$app->access->isSupervisor()) {
+            return $this->redirect('/workspace');
+        }
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
-
     } // end action
-
 
 
     /**
@@ -243,13 +348,10 @@ class ConferencesController extends Controller
      */
     protected function findModel($id)
     {
-
         if (($model = ArticleConference::findOne($id)) !== null) {
             return $model;
         }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
-
+        throw new NotFoundHttpException('Запрошенный ресурс не существует');
     } // end function
 
 } // end class

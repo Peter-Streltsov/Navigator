@@ -56,7 +56,7 @@ class ArticleConference extends Article implements UnitInterface
     public function rules()
     {
         return [
-            [['title', 'conference_collection', 'type', 'class'], 'required'],
+            [['title', 'conference_collection', 'class'], 'required'],
             [['title', 'section', 'language', 'conference_collection', 'annotation', 'index'], 'string'],
             [['year', 'type', 'created_at', 'updated_at', 'class'], 'integer'],
             [['number', 'file'], 'string', 'max' => 255],
@@ -79,7 +79,8 @@ class ArticleConference extends Article implements UnitInterface
             'number' => 'Номер сборника',
             'language' => 'Язык',
             'annotation' => 'Аннотация',
-            'type' => 'Категория ПНРД',
+            'type' => 'Вид',
+            'class' => 'Категория ПНРД',
             'index' => 'Текстовый индекс',
             'created_at' => 'Создано',
             'updated_at' => 'Изменено',

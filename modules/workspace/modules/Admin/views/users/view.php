@@ -61,10 +61,9 @@ $this->title = $model->name . ' ' . $model->lastname;
                     'attributes' => [
                         'id',
                         'username',
-                        //'password',
                         'name',
                         'lastname',
-                        'access_token',
+                        'role',
                     ],
                 ]) ?>
             </div>

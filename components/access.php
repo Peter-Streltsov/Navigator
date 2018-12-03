@@ -17,7 +17,7 @@ class Access extends Component
     public function __construct()
     {
         if (\Yii::$app->user->getIdentity()) {
-            static::$user = (\Yii::$app->user->getIdentity())->access_token;
+            static::$user = (\Yii::$app->user->getIdentity())->role;
         } else {
             static::$user = 'guest';
         }

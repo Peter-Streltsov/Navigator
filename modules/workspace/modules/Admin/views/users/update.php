@@ -31,9 +31,9 @@ $this->params['breadcrumbs'][] = 'Редактировать данные '.$mod
 
             <?= $form->field($model, 'lastname')->textInput(['maxlength' => true]) ?>
 
-            <?php $tokens = \yii\helpers\ArrayHelper::map($tokens, 'token', 'token'); ?>
+            <?php $tokens = \yii\helpers\ArrayHelper::map($tokens, 'role', 'role'); ?>
 
-            <?= $form->field($model, 'access_token')->dropDownList($tokens) ?>
+            <?= $form->field($model, 'role')->dropDownList($tokens) ?>
 
             <br>
             <br>

@@ -2,23 +2,25 @@
 
 namespace app\models\identity;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "accesstokens".
+ * ActiveRecord class for table "accesstokens";
  *
  * @property int $id
  * @property string $token
  */
-class Accesstokens extends \yii\db\ActiveRecord
+class Roles extends ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'accesstokens';
-    }
+        return 'roles';
+    } // end function
+
 
     /**
      * @inheritdoc
@@ -29,7 +31,8 @@ class Accesstokens extends \yii\db\ActiveRecord
             [['token'], 'required'],
             [['token'], 'string', 'max' => 255],
         ];
-    }
+    } // end function
+
 
     /**
      * @inheritdoc
@@ -40,14 +43,16 @@ class Accesstokens extends \yii\db\ActiveRecord
             'id' => 'ID',
             'token' => 'Token',
         ];
-    }
+    } // end function
+
 
     /**
      * @inheritdoc
-     * @return AccesstokensQuery the active query used by this AR class.
+     * @return RolesQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new AccesstokensQuery(get_called_class());
-    }
-}
+        return new RolesQuery(get_called_class());
+    } // end function
+
+} // end class

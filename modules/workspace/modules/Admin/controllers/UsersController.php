@@ -4,7 +4,7 @@ namespace app\modules\workspace\modules\Admin\controllers;
 
 // project models
 use app\models\identity\Users;
-use app\models\identity\Accesstokens;
+use app\models\identity\Roles;
 use app\models\identity\Authors;
 use app\models\identity\Personnel;
 // yii classes
@@ -38,14 +38,12 @@ class UsersController extends Controller
     }
 
 
-
     /**
      * Lists all Users models.
      * @return mixed
      */
     public function actionIndex()
     {
-
         $dataProvider = new ActiveDataProvider([
             'query' => Users::find(),
         ]);
@@ -53,9 +51,7 @@ class UsersController extends Controller
         return $this->renderAjax('index', [
             'dataProvider' => $dataProvider,
         ]);
-
     } // end action
-
 
 
     /**
@@ -67,13 +63,10 @@ class UsersController extends Controller
      */
     public function actionView($id)
     {
-
         return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
-
     } // end action
-
 
 
     /**
@@ -88,9 +81,8 @@ class UsersController extends Controller
      */
     public function actionCreate()
     {
-
         $model = new Users();
-        $tokens = Accesstokens::find()->asArray()->all();
+        $tokens = Roles::find()->asArray()->all();
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -120,9 +112,7 @@ class UsersController extends Controller
             'model' => $model,
             'tokens' => $tokens
         ]);
-
     } // end action
-
 
 
     /**
@@ -138,7 +128,6 @@ class UsersController extends Controller
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
 
         //VarDumper::dump($model);
@@ -147,34 +136,30 @@ class UsersController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $tokens = Accesstokens::find()->select('token')->asArray()->all();
+        $tokens = Roles::find()->select('token')->asArray()->all();
 
         return $this->renderAjax('update', [
             'model' => $model,
             'tokens' => $tokens
         ]);
-
     } // end action
 
 
-
     /**
-     * Deletes an existing Users model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Deletes an existing Users model;
+     * If deletion successful, will redirect to 'index' page;
+     *
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
-
     } // end action
-
-
-
 
 
     /**
@@ -185,7 +170,6 @@ class UsersController extends Controller
      */
     public function actionMakeauthor($id)
     {
-
         $user = Users::find()->where(['id' => $id])->asArray()->one();
 
         if (Authors::find()->where(['user_id' => $id])->exists()) {
@@ -205,11 +189,7 @@ class UsersController extends Controller
         $createdauthor = Authors::find()->where(['user_id' => $id])->one();
 
         return $this->redirect('/workspace/authors/update?id='.$createdauthor->id);
-
     } // end function
-
-
-
 
 
     /**
@@ -220,7 +200,6 @@ class UsersController extends Controller
      */
     public function actionMakestaff($id)
     {
-
         $user = Users::find()->where(['id' => $id])->asArray()->one(); // getting user to make personnel
 
         if (Personnel::find()->where(['user_id' => $id])->exists()) {
@@ -240,10 +219,7 @@ class UsersController extends Controller
             Yii::$app->session->setFlash('danger', 'Не удалось добавить сотрудника');
             return $this->redirect('/workspace/admin/users/view?id=' . $id);
         }
-
-
     } // end action
-
 
 
     /**

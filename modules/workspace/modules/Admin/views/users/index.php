@@ -67,8 +67,8 @@ use yii\widgets\Pjax;
                         'username',
                         'name',
                         'lastname',
-                        //'created_at:date',
-                        'access_token',
+                        'created_at:date',
+                        'role',
                         [
                             'class' => 'yii\grid\ActionColumn',
                             'template' => '{view}',

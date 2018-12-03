@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Users */
+/* @var $model app\models\identity\Users */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -47,8 +47,8 @@ use yii\widgets\ActiveForm;
             <br>
             <div class="row">
                 <div class="col-lg-10">
-                    <?php $tokens = \yii\helpers\ArrayHelper::map($tokens, 'token', 'token') ?>
-                    <?= $form->field($model, 'access_token')->dropDownList($tokens)->label('Токен (уровень доступа)') ?>
+                    <?php $tokens = \yii\helpers\ArrayHelper::map($tokens, 'role', 'role') ?>
+                    <?= $form->field($model, 'role')->dropDownList($tokens)->label('Роль пользователя') ?>
                 </div>
             </div>
             <br>

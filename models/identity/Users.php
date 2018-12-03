@@ -11,8 +11,8 @@ use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * ActiveRecord class for table "users"
- * Identity model, implements IdentityInterface
+ * ActiveRecord class for table "users";
+ * Identity model, implements IdentityInterface;
  *
  * @property int $id
  * @property string $login
@@ -25,8 +25,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class Users extends ActiveRecord implements IdentityInterface, UserInterface
 {
-
-    //public $userpic = null;
 
     /**
      * @inheritdoc
@@ -45,7 +43,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
     {
         return [
             [['username', 'password', 'name', 'lastname'], 'required'],
-            [['username', 'image', 'password_hash', 'name', 'lastname', 'access_token'], 'string', 'max' => 255],
+            [['username', 'image', 'password_hash', 'name', 'lastname', 'role'], 'string', 'max' => 255],
             [['password', 'auth_key'], 'string', 'max' => 100],
         ];
     } // end function
@@ -79,7 +77,7 @@ class Users extends ActiveRecord implements IdentityInterface, UserInterface
             'lastname' => 'Фамилия',
             'created_at' => 'Создан',
             'auth_key' => 'Ключ авторизации',
-            'access_token' => 'Токен',
+            'role' => 'Доступ',
             'image' => 'Фотография'
         ];
     } // end function

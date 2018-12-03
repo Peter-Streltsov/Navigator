@@ -24,11 +24,11 @@ class m180317_003955_users extends Migration
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
             'auth_key' => $this->string(),
-            'access_token' => $this->string(255),
+            'role' => $this->string(255),
             'image' => $this->string()
         ]);
 
-        $this->batchInsert('users', ['username', 'password', 'name', 'access_token'], [
+        $this->batchInsert('users', ['username', 'password', 'name', 'role'], [
             ['admin', 'root', 'admin', 'supervisor']
         ]);
     } // end function

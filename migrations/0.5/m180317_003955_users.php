@@ -14,7 +14,6 @@ class m180317_003955_users extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('users', [
             'id' => $this->primaryKey(),
             'username' => $this->string(255)->notNull(),
@@ -32,9 +31,7 @@ class m180317_003955_users extends Migration
         $this->batchInsert('users', ['username', 'password', 'name', 'access_token'], [
             ['admin', 'root', 'admin', 'supervisor']
         ]);
-
     } // end function
-
 
 
     /**
@@ -42,11 +39,8 @@ class m180317_003955_users extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('users');
-
         return true;
-
     } // end function
 
 } // end class

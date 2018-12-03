@@ -7,13 +7,11 @@ use yii\db\Migration;
  */
 class m180325_010328_positions extends Migration
 {
-
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-
         $this->createTable('positions', [
             'id' => $this->primaryKey(),
             'position' => $this->string(255)->notNull()
@@ -25,9 +23,7 @@ class m180325_010328_positions extends Migration
            ['старший научный сотрудник'],
            ['ведущий научный сотрудник']
         ]);
-
     } // end function
-
 
 
     /**
@@ -35,11 +31,8 @@ class m180325_010328_positions extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('positions');
-
         return true;
-
     } // end function
 
 } // end class

@@ -12,13 +12,14 @@ class m181006_043712_departments extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('departments', [
             'id' => $this->primaryKey(),
-            'department' => $this->string()->notNull()
+            'department' => $this->string()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer()
         ]);
+    } // end function
 
-    }
 
     /**
      * @inheritdoc
@@ -27,6 +28,6 @@ class m181006_043712_departments extends Migration
     {
         $this->dropTable('departments');
         return true;
-    }
+    } // end function
 
-}
+} // end class

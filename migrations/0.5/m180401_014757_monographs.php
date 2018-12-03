@@ -12,7 +12,6 @@ class m180401_014757_monographs extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('monographs', [
             'id' => $this->primaryKey(),
             'title' => $this->string()->notNull(),
@@ -22,11 +21,11 @@ class m180401_014757_monographs extends Migration
             'year' => $this->integer()->notNull(),
             'isbn' => $this->string()->defaultValue(null),
             'volume' => $this->float(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
             'file' => $this->string()
         ]);
-
     } // end function
-
 
 
     /**
@@ -35,9 +34,7 @@ class m180401_014757_monographs extends Migration
     public function safeDown()
     {
         $this->dropTable('monographs');
-
         return true;
-
     } // end function
 
 } // end class

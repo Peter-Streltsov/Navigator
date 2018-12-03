@@ -28,6 +28,8 @@ class m180716_201100_articles_conferences extends Migration
             'annotation' => $this->text(),
             'index' => $this->text(),
             'accepted' => $this->integer()->defaultValue(1),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
             'file' => $this->string()
         ]);
     } // end function

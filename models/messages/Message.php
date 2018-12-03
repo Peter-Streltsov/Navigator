@@ -2,12 +2,13 @@
 
 namespace app\models\messages;
 
+// yii classes
 use Yii;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "messages".
+ * ActiveRecord class for table "messages";
  *
  * @property int $id
  * @property int $user_id
@@ -25,22 +26,25 @@ class Message extends ActiveRecord
      */
     public static function tableName()
     {
-
         return 'messages';
-
     } // end function
 
 
+    /**
+     * @return array
+     */
     public function behaviors()
     {
-
         return [
-            'class' => TimestampBehavior::className(),
-            //'updatedAtAttribute' => false
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => false,
+                ],
+            ],
         ];
-
     } // end function
-
 
 
     /**
@@ -48,14 +52,12 @@ class Message extends ActiveRecord
      */
     public function rules()
     {
-
         return [
             [['user_id', 'created_at'], 'integer'],
             [['username', 'category', 'text'], 'required'],
             [['text'], 'string'],
             [['username', 'category', 'custom_theme'], 'string', 'max' => 255],
         ];
-
     } // end function
 
 
@@ -65,7 +67,6 @@ class Message extends ActiveRecord
      */
     public function attributeLabels()
     {
-
         return [
             'id' => 'ID',
             'user_id' => 'ID пользователя',
@@ -75,9 +76,7 @@ class Message extends ActiveRecord
             'custom_theme' => 'Тема сообщения',
             'text' => 'Текст сообщения',
         ];
-
     } // end function
-
 
 
     /**
@@ -86,12 +85,10 @@ class Message extends ActiveRecord
      */
     public function afterSave($insert, $changedAttributes)
     {
-
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
             Yii::$app->session->setFlash('success', 'Сообщение отправлено');
         }
-
     } // end function
 
 
@@ -101,9 +98,7 @@ class Message extends ActiveRecord
      */
     public static function find()
     {
-
         return new MessageQuery(get_called_class());
-
     } // end function
 
 } // end class

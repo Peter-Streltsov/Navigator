@@ -9,6 +9,7 @@ use app\models\common\Languages;
 use app\models\units\articles\Article;
 // yii classes
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * ActiveRecord class for table "articles";
@@ -24,6 +25,7 @@ use Yii;
  * @property string $language
  * @property string $doi
  * @property int $created_at
+ * @property int $updated_at
  * @property string $annotation
  * @property string $index
  * @property string $link
@@ -43,6 +45,20 @@ class ArticleJournal extends Article implements UnitInterface
     } // end function
 
 
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
+                ],
+            ],
+        ];
+    } // end function
+
+
     /**
      * not defined in parent class Article
      *
@@ -52,7 +68,7 @@ class ArticleJournal extends Article implements UnitInterface
     {
         return [
             [['type', 'title', 'number', 'class', 'year', 'language'], 'required'],
-            [['type', 'number', 'direct_number', 'class', 'year', 'created_at'], 'integer'],
+            [['type', 'number', 'direct_number', 'class', 'year', 'created_at', 'updated_at'], 'integer'],
             [['title', 'annotation', 'index', 'file'], 'string'],
             [['magazine', 'language', 'doi', 'link'], 'string', 'max' => 255],
         ];
@@ -79,6 +95,7 @@ class ArticleJournal extends Article implements UnitInterface
             'language' => 'Язык',
             'doi' => 'ЦИО',
             'created_at' => 'Создано',
+            'updated_at' => 'Изменено',
             'annotation' => 'Аннотация',
             'index' => 'Полнотекстовый индекс',
             'link' => 'Ссылка',
@@ -86,89 +103,6 @@ class ArticleJournal extends Article implements UnitInterface
             'authors' => 'Авторы'
         ];
     } // end function
-
-
-
-    /**
-     * GETTERS
-     */
-
-
-    /**
-     * TODO: Complete method getUnitauthors()
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    /*public function getAuthors()
-    {
-
-        return $this->hasMany(Authors::className(), ['id' => 'author_id'])
-            ->viaTable('articles_authors', ['article_id' => 'id']);
-
-    } // end function*/
-
-
-
-    /**
-     * returns language value for current model
-     *
-     * @return string
-     */
-    /*public function getLanguage()
-    {
-
-        $language = $this->hasOne(Languages::className(), ['id' => 'language']);
-
-        return $language->language;
-
-    } // end function*/
-
-
-
-    /**
-     * returns pnrd index for current article
-     *
-     * @return float
-     */
-    /*public function getIndex()
-    {
-
-        $current_year = date('Y');
-
-        if (($current_year - $this->year) < 5) {
-            return 0;
-        }
-
-        $base_index = IndexesArticles::find()->where(['id' => $this->class])->one();
-
-        return $base_index->value;
-
-    } // end function*/
-
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    /*public function getPublicationclass()
-    {
-
-        return $this->hasOne(IndexesArticles::className(), ['id' => 'class']);
-
-    } // end function*/
-
-
-    /**
-     * TODO: complete
-     */
-    public function getAffilations()
-    {
-        return $this->hasMany(Associations::classname(), ['article_id' => 'id']);
-    } // end function
-
-
-    /**
-     * END GETTERS
-     */
 
 
     /**

@@ -15,14 +15,12 @@ class m180622_005319_languages extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('languages', [
             'id' => $this->primaryKey(),
-            'language' => $this->string()->notNull()
+            'language' => $this->string()->notNull(),
+            'created_at' => $this->integer()
         ]);
-
     } // end function
-
 
 
     /**
@@ -30,11 +28,8 @@ class m180622_005319_languages extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('languages');
-
         return true;
-
     } // end function
 
 } // end class

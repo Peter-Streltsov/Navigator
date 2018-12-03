@@ -8,6 +8,8 @@ use app\models\units\articles\Article;
 use app\models\units\articles\traits\ArticleQueryTrait;
 use app\models\units\articles\traits\SchemeTrait;
 use app\models\units\articles\traits\UnitTrait;
+// yii classes
+use yii\db\ActiveRecord;
 
 /**
  * ActiveRecord class for table "articles_collections";
@@ -41,6 +43,20 @@ class ArticleCollection extends Article implements UnitInterface
     } // end function
 
 
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
+                ],
+            ],
+        ];
+    } // end function
+
+
     /**
      * @inheritdoc
      */
@@ -49,7 +65,7 @@ class ArticleCollection extends Article implements UnitInterface
         return [
             [['title', 'type', 'class', 'collection'], 'required'],
             [['title', 'collection', 'section', 'text_index', 'annotation'], 'string'],
-            [['type', 'class', 'year', 'section_number', 'language'], 'integer'],
+            [['type', 'class', 'created_at', 'updated_at', 'year', 'section_number', 'language'], 'integer'],
             [['link', 'file'], 'string', 'max' => 255],
         ];
     } // end function
@@ -74,6 +90,8 @@ class ArticleCollection extends Article implements UnitInterface
             'index' => 'Текстовый индекс',
             'annotation' => 'Аннотация',
             'link' => 'Ссылка',
+            'created_at' => 'Создано',
+            'updated_at' => 'Изменено',
             'file' => 'Файл',
         ];
     } // end function

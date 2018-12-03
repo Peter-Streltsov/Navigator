@@ -12,7 +12,6 @@ class m180319_140128_personnel extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('personnel', [
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
@@ -26,11 +25,8 @@ class m180319_140128_personnel extends Migration
             'department' => $this->integer(),
             'age' => $this->integer()->defaultValue(null),
             'user_id' => $this->integer()
-
         ]);
-
     } // end function
-
 
 
     /**
@@ -38,11 +34,8 @@ class m180319_140128_personnel extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('personnel');
-
         return true;
-
     } // end function
 
-}
+} // end class

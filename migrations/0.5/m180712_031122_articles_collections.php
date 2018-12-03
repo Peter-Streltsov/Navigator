@@ -13,7 +13,6 @@ class m180712_031122_articles_collections extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('articles_collections', [
             'id' => $this->primaryKey(),
             'title' => $this->text()->notNull(), // заголовок
@@ -27,11 +26,11 @@ class m180712_031122_articles_collections extends Migration
             'index' => $this->text(), // полнотектовый индекс
             'annotation' => $this->text(), // аннотация
             'link' => $this->string(), // ссылка на ресурс
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
             'file' => $this->string() // имя файла
         ]);
-
     } // end function
-
 
 
     /**
@@ -39,11 +38,8 @@ class m180712_031122_articles_collections extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('articles_collections');
-
         return true;
-
     } // end function
 
 } // end class

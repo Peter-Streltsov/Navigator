@@ -36,6 +36,7 @@ class m180319_021020_articles_journals extends Migration
             'language' => $this->string()->notNull(),
             'doi' => $this->string(255),
             'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
             'annotation' => $this->text(),
             'index' => $this->text(),
             'accepted' => $this->integer()->defaultValue(1),

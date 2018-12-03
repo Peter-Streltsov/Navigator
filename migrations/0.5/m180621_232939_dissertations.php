@@ -20,7 +20,6 @@ class m180621_232939_dissertations extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('dissertations', [
             'id' => $this->primaryKey(),
             'type' => $this->integer()->notNull(),
@@ -37,11 +36,11 @@ class m180621_232939_dissertations extends Migration
             'annotation' => $this->text(),
             'link' => $this->string(),
             'index' => $this->text(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
             'file' => $this->string()
         ]);
-
     } // end function
-
 
 
     /**
@@ -49,11 +48,8 @@ class m180621_232939_dissertations extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('dissertations');
-
         return true;
-
     } // end function
 
 } // end class

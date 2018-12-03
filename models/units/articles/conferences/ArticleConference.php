@@ -5,6 +5,8 @@ namespace app\models\units\articles\conferences;
 // project classes
 use app\interfaces\UnitInterface;
 use app\models\units\articles\Article;
+// yii classes
+use yii\db\ActiveRecord;
 
 /**
  * ActiveRecord model class for table "articles_conferences";
@@ -18,6 +20,8 @@ use app\models\units\articles\Article;
  * @property string $number
  * @property string $annotation
  * @property string $text_index
+ * @property int $created_at
+ * @property int $updated_at
  * @property string $file
  */
 class ArticleConference extends Article implements UnitInterface
@@ -32,6 +36,19 @@ class ArticleConference extends Article implements UnitInterface
     } // end function
 
 
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
+                ],
+            ],
+        ];
+    } // end function
+
 
     /**
      * @inheritdoc
@@ -41,7 +58,7 @@ class ArticleConference extends Article implements UnitInterface
         return [
             [['title', 'conference_collection', 'type', 'class'], 'required'],
             [['title', 'section', 'language', 'conference_collection', 'annotation', 'index'], 'string'],
-            [['year', 'type', 'class'], 'integer'],
+            [['year', 'type', 'created_at', 'updated_at', 'class'], 'integer'],
             [['number', 'file'], 'string', 'max' => 255],
         ];
     } // end function
@@ -64,6 +81,8 @@ class ArticleConference extends Article implements UnitInterface
             'annotation' => 'Аннотация',
             'type' => 'Категория ПНРД',
             'index' => 'Текстовый индекс',
+            'created_at' => 'Создано',
+            'updated_at' => 'Изменено',
             'file' => 'Файл',
         ];
     } // end function

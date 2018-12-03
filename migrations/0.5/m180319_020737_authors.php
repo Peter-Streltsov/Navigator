@@ -12,7 +12,6 @@ class m180319_020737_authors extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('authors', [
             'id' => $this->primaryKey(),
             'name' => $this->string(255)->notNull(),
@@ -21,10 +20,10 @@ class m180319_020737_authors extends Migration
             'habilitation' => $this->integer(),
             'user_id' => $this->integer(),
             'personnel_id' => $this->integer(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer()
         ]);
-
     } // end function
-
 
 
     /**
@@ -32,11 +31,8 @@ class m180319_020737_authors extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('authors');
-
         return true;
-        
     } // end function
 
 } // end class

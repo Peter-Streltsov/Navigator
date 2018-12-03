@@ -5,7 +5,7 @@ namespace app\models\units\articles\traits;
 // project classes
 use app\models\common\Languages;
 use app\models\pnrd\indexes\IndexesArticles;
-use app\models\units\articles\journals\Authors;
+//use app\models\units\articles\journals\Authors;
 use app\models\identity\Authors as AuthorsCommon;
 // yii classes
 use Yii;
@@ -24,7 +24,8 @@ trait UnitTrait
      */
     public function getAuthors()
     {
-        $authors = Authors::find()->where(['article_id' => $this->id])->all();
+        $authors = $this->currentNamespace() . 'Authors';
+        $authors = $authors::find()->where(['article_id' => $this->id])->all();
         $result = [];
         if (count($authors) >= 1) {
             foreach ($authors as $authorlink) {
@@ -86,8 +87,8 @@ trait UnitTrait
      */
     public function getAuthorJunction($author_id)
     {
-        //return $this->hasOne(Authors::className(), ['author_id' => $author_id]);
-        return Authors::find()->where(['author_id' => $author_id])->one();
+        $authors = $this->currentNamespace() . 'Authors';
+        return $authors::find()->where(['author_id' => $author_id])->one();
     } // end function
 
 

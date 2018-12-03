@@ -12,7 +12,6 @@ class m180523_000437_articles_citations extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('articles_journals_citations', [
             'id' => $this->primaryKey(),
             'article_id' => $this->integer()->notNull(),
@@ -33,9 +32,7 @@ class m180523_000437_articles_citations extends Migration
             'title' => $this->string(),
             'class' => $this->string()
         ]);
-
     } // end function
-
 
 
     /**
@@ -43,13 +40,10 @@ class m180523_000437_articles_citations extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('articles_journals_citations');
         $this->dropTable('articles_conferences_citations');
         $this->dropTable('articles_collections_citations');
-
         return true;
-
     } // end function
 
 } // end class

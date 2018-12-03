@@ -5,27 +5,24 @@ use yii\db\Migration;
 /**
  * Class m180406_003027_accesstokens
  */
-class m180406_003027_accesstokens extends Migration
+class m180406_003027_userroles extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-
-        $this->createTable('accesstokens', [
+        $this->createTable('roles', [
             'id' => $this->primaryKey(),
-            'token' => $this->string()->notNull()
+            'role' => $this->string()->notNull()
         ]);
 
-        $this->batchInsert('accesstokens', ['token'], [
+        $this->batchInsert('roles', ['role'], [
             ['user'],
             ['administrator'],
             ['supervisor']
         ]);
-
     } // end function
-
 
 
     /**
@@ -33,11 +30,8 @@ class m180406_003027_accesstokens extends Migration
      */
     public function safeDown()
     {
-
-        $this->dropTable('accesstokens');
-
+        $this->dropTable('roles');
         return true;
-
     } // end function
 
 } // end class

@@ -32,11 +32,8 @@ class Article extends ActiveRecord implements UnitInterface
      */
     public static function tableName()
     {
-
         return 'articles_' . static::$class;
-
     } // end function
-
 
 
     /**
@@ -45,7 +42,6 @@ class Article extends ActiveRecord implements UnitInterface
      */
     public function afterSave($insert, $changedAttributes)
     {
-
         parent::afterSave($insert, $changedAttributes);
 
         $this->savePublisher();
@@ -54,9 +50,7 @@ class Article extends ActiveRecord implements UnitInterface
         $newlanguage = new Languages();
         $newlanguage->language = strtolower($this->language);
         $newlanguage->save();
-
     } // end function
-
 
 
     /**
@@ -66,12 +60,9 @@ class Article extends ActiveRecord implements UnitInterface
      */
     public function afterDelete()
     {
-
         parent::afterDelete();
         $this->deleteLinkedData();
-
     } // end function
-
 
 
     /**
@@ -79,7 +70,6 @@ class Article extends ActiveRecord implements UnitInterface
      */
     public function savePublisher()
     {
-
         if (isset($this->magazine)) {
             $newmagazine = new Magazines();
             $newmagazine->magazine = $this->magazine;
@@ -96,9 +86,7 @@ class Article extends ActiveRecord implements UnitInterface
             $conference->section = $this->section;
             $conference->save();
         }*/
-
     } // end function
-
 
 
     /**
@@ -106,9 +94,7 @@ class Article extends ActiveRecord implements UnitInterface
      */
     public function getPublicationclass()
     {
-
         return $this->hasOne(IndexesArticles::className(), ['id' => 'class']);
-
     } // end function
 
 } // end class

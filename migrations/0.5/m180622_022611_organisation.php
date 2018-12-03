@@ -12,15 +12,12 @@ class m180622_022611_organisation extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('organisation', [
             'id' => $this->primaryKey(),
             'organisation' => $this->string(),
             'weblink' => $this->string()
         ]);
-
     } // end function
-
 
 
     /**
@@ -28,11 +25,8 @@ class m180622_022611_organisation extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('organisation');
-
         return true;
-
     } // end function
 
 } // end class

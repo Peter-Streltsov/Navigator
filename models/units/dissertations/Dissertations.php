@@ -27,6 +27,8 @@ use yii\db\ActiveRecord;
  * @property string $annotation
  * @property string $link
  * @property string $index
+ * @property int $created_at
+ * @property int $updated_at
  * @property string $file
  */
 class Dissertations extends ActiveRecord implements UnitInterface
@@ -48,7 +50,7 @@ class Dissertations extends ActiveRecord implements UnitInterface
     {
         return [
             [['type', 'title', 'year', 'city', 'habilitation', 'speciality', 'author'], 'required'],
-            [['type', 'year', 'habilitation', 'pages_number', 'author'], 'integer'],
+            [['type', 'year', 'created_at', 'updated_at', 'habilitation', 'pages_number', 'author'], 'integer'],
             [['annotation', 'index'], 'string'],
             [['title', 'city', 'organisation', 'speciality', 'language', 'state_registration', 'link', 'file'], 'string', 'max' => 255],
         ];
@@ -77,6 +79,8 @@ class Dissertations extends ActiveRecord implements UnitInterface
             'annotation' => 'Аннотация',
             'link' => 'Ссылка на сетевой ресурс',
             'index' => 'Полнотекстовый индекс',
+            'created_at' => 'Создано',
+            'updated_at' => 'Изменено',
             'file' => 'Файл',
         ];
     } // end function

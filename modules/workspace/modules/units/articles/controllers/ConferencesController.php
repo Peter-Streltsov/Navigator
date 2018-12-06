@@ -155,7 +155,7 @@ class ConferencesController extends Controller
          * saving base model or collecting errors (converting to string) if not succeeded
          */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['/workspace/units/articles/conferences/update', 'id' => $model->id]);
         } elseif (Yii::$app->request->post() && !$model->save()) {
             foreach ($model->getErrors() as $error) {
                 $message[] = implode(' ', $error);

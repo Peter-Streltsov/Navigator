@@ -2,14 +2,15 @@
 
 namespace app\models\units\monograph;
 
-use app\interfaces\UnitInterface;
+// project classes
+use app\interfaces\PublicationInterface;
 use app\models\common\Languages;
+// yii classes
 use Yii;
 use yii\db\ActiveRecord;
-use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "monograph";
+ * ActiveRecord class for table "monograph";
  *
  * @property int $id
  * @property string $title
@@ -18,10 +19,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $doi
  * @property resource $file
  */
-class Monograph extends ActiveRecord implements UnitInterface
+class Monograph extends ActiveRecord implements PublicationInterface
 {
-
-    public $language = 1; // TODO: add to migration and model 'language' value !!!!!
 
     /**
      * @return array
@@ -37,15 +36,13 @@ class Monograph extends ActiveRecord implements UnitInterface
     } // end function
 
 
-
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'monographs';
-    }
-
+    } // end function
 
 
     /**
@@ -62,7 +59,6 @@ class Monograph extends ActiveRecord implements UnitInterface
         ];
 
     } // end function
-
 
 
     /**
@@ -84,7 +80,6 @@ class Monograph extends ActiveRecord implements UnitInterface
         ];
 
     } // end function
-
 
 
     /**

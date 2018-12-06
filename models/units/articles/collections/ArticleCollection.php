@@ -3,7 +3,7 @@
 namespace app\models\units\articles\collections;
 
 // project classes
-use app\interfaces\UnitInterface;
+use app\interfaces\PublicationInterface;
 use app\models\units\articles\Article;
 use app\models\units\articles\traits\ArticleQueryTrait;
 use app\models\units\articles\traits\SchemeTrait;
@@ -27,7 +27,7 @@ use yii\db\ActiveRecord;
  * @property string $link
  * @property string $file
  */
-class ArticleCollection extends Article implements UnitInterface
+class ArticleCollection extends Article implements PublicationInterface
 {
 
     use SchemeTrait;

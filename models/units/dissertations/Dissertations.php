@@ -2,15 +2,14 @@
 
 namespace app\models\units\dissertations;
 
-use app\interfaces\UnitInterface;
+use app\interfaces\PublicationInterface;
 use app\models\common\Habilitations;
 use app\models\common\Languages;
-use app\models\identity\Authors;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "dissertations".
+ * ActiveRecord class for table "dissertations";
  *
  * @property int $id
  * @property int $type
@@ -31,7 +30,7 @@ use yii\db\ActiveRecord;
  * @property int $updated_at
  * @property string $file
  */
-class Dissertations extends ActiveRecord implements UnitInterface
+class Dissertations extends ActiveRecord implements PublicationInterface
 {
     /**
      * @inheritdoc

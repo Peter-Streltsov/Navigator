@@ -4,7 +4,7 @@ namespace app\models\units\articles\journals;
 
 // project classes
 //use app\interfaces\ArticleInterface;
-use app\interfaces\UnitInterface;
+use app\interfaces\PublicationInterface;
 use app\models\common\Languages;
 use app\models\units\articles\Article;
 // yii classes
@@ -31,7 +31,7 @@ use yii\db\ActiveRecord;
  * @property string $link
  * @property resource $file
  */
-class ArticleJournal extends Article implements UnitInterface
+class ArticleJournal extends Article implements PublicationInterface
 {
 
     /**

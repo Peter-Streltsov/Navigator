@@ -5,6 +5,10 @@ namespace app\models\opendata;
 use app\models\units\articles\collections\ArticleCollection;
 use app\models\units\articles\conferences\ArticleConference;
 use app\models\units\articles\journals\ArticleJournal;
+use app\models\units\dissertations\Dissertations;
+use app\models\units\monograph\Monograph;
+// yii classes
+use yii\base\Model;
 
 /**
  * Class Data
@@ -13,7 +17,7 @@ use app\models\units\articles\journals\ArticleJournal;
  * @package app\models\publicdata
  *
  */
-class Data
+class Data extends Model
 {
 
     /**
@@ -33,25 +37,24 @@ class Data
 
 
     /**
-     * TODO: implement method;
+     * lists all added Monographs in array of ActiveRecords
      *
-     * @return null
+     * @return Monograph[]|array
      */
     public static function getMonographs()
     {
-        return [];
+        return Monograph::find()->all();
     } // end function
 
 
-
     /**
-     * TODO: implement method;
+     * lists all added Dissertations in array of ActiveRecords
      *
-     * @return array
+     * @return Dissertations[]|\app\models\units\dissertations\DissertationTypes[]|array
      */
     public static function getDissertations()
     {
-        return [];
+        return Dissertations::find()->all();
     } // end function
 
 

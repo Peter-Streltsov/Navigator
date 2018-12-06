@@ -120,7 +120,7 @@ class CollectionsController extends Controller
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/workspace/units/articles/collections/update', 'id' => $model->id]);
         }
 
         return $this->renderAjax('ajaxforms/create', [

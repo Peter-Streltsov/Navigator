@@ -11,24 +11,25 @@ use yii\bootstrap\Tabs;
 
 <?php
 
-/*$publications =  GridView::widget([
-        'dataProvider' => $dataprovider
-]);*/
-
 $listed = \yii\widgets\ListView::widget([
     'dataProvider' => $dataprovider,
     'itemView' => 'items/unitdescript'
 ]);
 
-echo "<br><br>";
-
-echo Tabs::widget([
-        'items' => [
-            [
-                'label' => 'Публикации',
-                'content' => $listed
-            ]
-        ]
-]);
-
 ?>
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#articles">Статьи</a></li>
+    <li><a href="#monograph">Книги и монографии</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="articles" role="tabpanel">
+        <br>
+        <br>
+        <?= $listed ?>
+    </div>
+    <div class="tab-pane" id="monograph" role="tabpanel">
+        <h5>Under development</h5>
+    </div>
+</div>

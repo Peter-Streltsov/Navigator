@@ -3,11 +3,11 @@
 namespace app\interfaces;
 
 /**
- * Interface UnitInterface
+ * Interface PublicationInterface
  *
  * @package app\modules\Control\interfaces
  */
-interface UnitInterface
+interface PublicationInterface
 {
 
     /**

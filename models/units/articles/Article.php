@@ -3,10 +3,9 @@
 namespace app\models\units\articles;
 
 // project classes
-use app\interfaces\UnitInterface;
+use app\interfaces\PublicationInterface;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
-use app\models\units\articles\traits\ArticleQueryTrait;
 use app\models\units\articles\traits\SchemeTrait;
 use app\models\units\articles\traits\UnitTrait;
 use app\models\common\Languages;
@@ -18,7 +17,7 @@ use yii\db\ActiveRecord;
  *
  * @package app\models\units\articles
  */
-class Article extends ActiveRecord implements UnitInterface
+class Article extends ActiveRecord implements PublicationInterface
 {
 
     use SchemeTrait;

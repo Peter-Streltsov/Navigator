@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'view' => function($url, $model) {
-                        $buttonurl = Yii::$app->getUrlManager()->createUrl(['/control/authors/view','id'=>$model['id']]);;
+                        $buttonurl = Yii::$app->getUrlManager()->createUrl(['/workspace/authors/view','id'=>$model['id']]);;
                         return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $buttonurl, ['style' => 'border-radius: 2pc;', 'class' => 'button primary big', 'title' => Yii::t('yii', 'view')]);
                     }
                 ],

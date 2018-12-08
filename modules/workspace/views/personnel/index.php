@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'view' => function($url, $model) {
                             $button = Html::a(
                                     '<span class="glyphicon glyphicon-info-sign"></span>',
-                                    ['/control/personnel/view', 'id' => $model->id],
+                                    ['/workspace/personnel/view', 'id' => $model->id],
                                     [
                                         'style' => 'border-radius: 2pc;',
                                         'class' => 'button primary big'

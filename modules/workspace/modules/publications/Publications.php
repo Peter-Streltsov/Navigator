@@ -8,7 +8,7 @@ use yii\base\Module;
 /**
  * units module definition class
  */
-class Units extends Module
+class Publications extends Module
 {
     /**
      * @inheritdoc

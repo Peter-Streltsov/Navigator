@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\workspace\modules\Admin;
+namespace app\modules\workspace\modules\admin;
 
 use Yii;
 use yii\base\Module;
@@ -25,9 +25,7 @@ class Admin extends Module
         parent::init();
 
         //\Yii::configure($this, []);
-
     } // end function
-
 
 
     /**
@@ -36,7 +34,6 @@ class Admin extends Module
      */
     public function beforeAction($action)
     {
-
         if(!\Yii::$app->access->isAdmin()) {
             return \Yii::$app->getResponse()->redirect('/workspace?denyrequest=1');
         }
@@ -44,7 +41,6 @@ class Admin extends Module
         Yii::$app->telemetry->whoami()->save();
 
         return true;
-
     } // end function
 
 } // end class

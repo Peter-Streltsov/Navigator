@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\workspace\modules\Admin\controllers;
+namespace app\modules\workspace\modules\admin\controllers;
 
 // project classes
 use app\models\messages\MessageClasses;
@@ -25,7 +25,6 @@ class MessagesController extends Controller
      */
     public function behaviors()
     {
-
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -34,7 +33,6 @@ class MessagesController extends Controller
                 ],
             ],
         ];
-
     } // end function
 
 
@@ -74,7 +72,6 @@ class MessagesController extends Controller
      */
     public function actionCreate()
     {
-
         $user = Yii::$app->user->getIdentity();
 
         $model = new Message();
@@ -90,7 +87,6 @@ class MessagesController extends Controller
             'model' => $model,
             'classes' => $classes
         ]);
-
     } // end action
 
 
@@ -104,11 +100,9 @@ class MessagesController extends Controller
      */
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-
     } // end action
 
 
@@ -117,18 +111,16 @@ class MessagesController extends Controller
      * Finds the Messages model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Messages the loaded model
+     * @return Message the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-
-        if (($model = Messages::findOne($id)) !== null) {
+        if (($model = Message::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-
     } // end function
 
 } // end class

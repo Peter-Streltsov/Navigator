@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\workspace\modules\Admin\controllers;
+namespace app\modules\workspace\modules\admin\controllers;
 
 // project models
 use app\models\identity\Users;
@@ -35,11 +35,12 @@ class UsersController extends Controller
                 ],
             ],
         ];
-    }
+    } // end function
 
 
     /**
-     * Lists all Users models.
+     * Lists all Users models;
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -55,7 +56,7 @@ class UsersController extends Controller
 
 
     /**
-     * Displays a single User
+     * Displays a single User;
      *
      * @param integer $id
      * @return mixed
@@ -70,7 +71,7 @@ class UsersController extends Controller
 
 
     /**
-     * Creates a new User
+     * Creates a new User;
      * generates random password for user
      * If creation successful, will redirect to the 'view' page
      *
@@ -116,7 +117,7 @@ class UsersController extends Controller
 
 
     /**
-     * Updates an existing User model
+     * Updates an existing User model;
      * If update successful, will redirect to 'view' page
      *
      * @param $id
@@ -195,7 +196,7 @@ class UsersController extends Controller
     /**
      * making new staff member from existing user
      *
-     * @param $id ineger
+     * @param $id integer
      * @return \yii\web\Response
      */
     public function actionMakestaff($id)

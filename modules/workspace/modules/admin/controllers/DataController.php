@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\workspace\modules\Admin\controllers;
+namespace app\modules\workspace\modules\admin\controllers;
 
 // project classes
 use app\models\basis\Telemetry;
@@ -23,14 +23,12 @@ class DataController extends Controller
      */
     public function actionLanguages()
     {
-
         $languages = new ActiveDataProvider([
             'query' => Languages::find()
         ]);
         return $this->renderAjax('languages', [
             'languages' => $languages,
         ]);
-
     } // end action
 
 

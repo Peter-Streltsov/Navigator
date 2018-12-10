@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\workspace\modules\Admin\controllers;
+namespace app\modules\workspace\modules\admin\controllers;
 
 // project classes
 use app\models\common\Positions;
@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PositionsController implements the CRUD actions for Positions model.
+ * PositionsController implements the CRUD actions for Positions model;
  */
 class PositionsController extends Controller
 {
@@ -22,7 +22,6 @@ class PositionsController extends Controller
      */
     public function behaviors()
     {
-
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -31,9 +30,7 @@ class PositionsController extends Controller
                 ],
             ],
         ];
-
     } // end function
-
 
 
     /**
@@ -42,7 +39,6 @@ class PositionsController extends Controller
      */
     public function actionIndex()
     {
-
         $dataProvider = new ActiveDataProvider([
             'query' => Positions::find(),
         ]);
@@ -54,20 +50,17 @@ class PositionsController extends Controller
         } else {
             return $this->redirect('/workspace/admin');
         }
-
     } // end action
 
 
-
     /**
-     * Displays a single Positions model.
+     * Displays a single Positions model;
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
         if (Yii::$app->request->isAjax) {
             return $this->renderAjax('view', [
                 'model' => $this->findModel($id),
@@ -75,9 +68,7 @@ class PositionsController extends Controller
         } else {
             return $this->redirect('/workspace/admin');
         }
-
     } // end action
-
 
 
     /**
@@ -101,9 +92,7 @@ class PositionsController extends Controller
             return $this->renderAjax('create', [
                 'model' => $model,
             ]);
-
     } // end action
-
 
 
     /**
@@ -119,7 +108,6 @@ class PositionsController extends Controller
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -129,45 +117,38 @@ class PositionsController extends Controller
         return $this->renderAjax('update', [
             'model' => $model,
         ]);
-
     } // end action
 
 
-
     /**
-     * Deletes an existing Positions model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * Deletes an existing Positions model;
+     * If deletion is successful, the browser will be redirected to the 'index' page;
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-
     } // end action
 
 
-
     /**
-     * Finds the Positions model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * Finds the Positions model based on its primary key value;
+     * If the model is not found, a 404 HTTP exception will be thrown;
      * @param integer $id
      * @return Positions the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-
         if (($model = Positions::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-
     } // end function
 
 } // end class

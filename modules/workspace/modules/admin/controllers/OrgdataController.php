@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\workspace\modules\Admin\controllers;
+namespace app\modules\workspace\modules\admin\controllers;
 
 // project classes
 use app\models\basis\Organisation;
@@ -12,7 +12,7 @@ use yii\web\Controller;
 
 
 /**
- * Default controller for the `Control` module
+ * Default controller for the `Control` module;
  */
 class OrgdataController extends Controller
 {
@@ -23,7 +23,6 @@ class OrgdataController extends Controller
      */
     public function actionIndex()
     {
-
         $model = Organisation::find()->one();
 
         if ($model == null) {
@@ -35,14 +34,14 @@ class OrgdataController extends Controller
         return $this->renderAjax('index', [
             'model' => $model
         ]);
-
     } // end action
 
 
-
+    /**
+     * @return string
+     */
     public function actionUpdate()
     {
-
         $model = Organisation::find()->one();
 
         if (Yii::$app->request->post()) {
@@ -63,11 +62,12 @@ class OrgdataController extends Controller
         return $this->renderAjax('update', [
             'model' => $model
         ]);
-
     } // end action
 
 
-
+    /**
+     * @return string
+     */
     public function actionDepartments()
     {
 
@@ -82,7 +82,6 @@ class OrgdataController extends Controller
     } // end action
 
 
-
     /**
      * @return string
      * @throws \yii\base\InvalidConfigException
@@ -91,7 +90,6 @@ class OrgdataController extends Controller
      */
     public function actionCreatedepartment()
     {
-
         $departments = new ActiveDataProvider([
             'query' => Departments::find()
         ]);
@@ -108,7 +106,6 @@ class OrgdataController extends Controller
         return $this->renderAjax('create_department', [
             'department' => $department
         ]);
-
     } // end action
 
 } // end class

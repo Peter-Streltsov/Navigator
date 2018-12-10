@@ -1,9 +1,9 @@
 <?php
 
-namespace app\modules\workspace\modules\units\articles\controllers;
+namespace app\modules\workspace\modules\publications\articles\controllers;
 
 // project classes
-use app\models\units\articles\collections\ArticleCollection;
+use app\models\publications\articles\collections\ArticleCollection;
 use app\models\common\Languages;
 use app\models\common\Magazines;
 //yii2 classes
@@ -15,7 +15,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CollectionsController implements the CRUD actions for ArticleCollection model.
+ * CollectionsController implements the CRUD actions for ArticleCollection model;
  */
 class CollectionsController extends Controller
 {

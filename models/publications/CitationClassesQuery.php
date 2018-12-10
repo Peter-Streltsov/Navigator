@@ -1,11 +1,11 @@
 <?php
 
-namespace app\models\units;
+namespace app\models\publications;
 
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[CitationClasses]]
+ * ActiveQuery class for CitationClasses;
  *
  * @see CitationClasses
  */
@@ -18,11 +18,8 @@ class CitationClassesQuery extends ActiveQuery
      */
     public function all($db = null)
     {
-
         return parent::all($db);
-
     } // end function
-
 
 
     /**
@@ -31,9 +28,7 @@ class CitationClassesQuery extends ActiveQuery
      */
     public function one($db = null)
     {
-
         return parent::one($db);
-
     } // end function
 
 } // end class

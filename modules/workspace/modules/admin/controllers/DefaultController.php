@@ -1,9 +1,7 @@
 <?php
 
-namespace app\modules\workspace\modules\Admin\controllers;
+namespace app\modules\workspace\modules\admin\controllers;
 
-// project classes
-use app\models\basis\Organisation;
 // yii classes
 use yii\web\Controller;
 

@@ -1,17 +1,17 @@
 <?php
 
-namespace app\modules\workspace\modules\units\articles\controllers;
+namespace app\modules\workspace\modules\publications\articles\controllers;
 
 // project classes
 use app\models\filesystem\Fileupload;
 use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
-use app\models\units\articles\conferences\ArticleConference;
-use app\models\units\articles\conferences\Citations;
-use app\models\units\CitationClasses;
-use app\models\units\articles\conferences\Associations;
-use app\models\units\articles\conferences\Authors;
+use app\models\publications\articles\conferences\ArticleConference;
+use app\models\publications\articles\conferences\Citations;
+use app\models\publications\CitationClasses;
+use app\models\publications\articles\conferences\Associations;
+use app\models\publications\articles\conferences\Authors;
 use app\models\identity\Authors as AuthorsCommon;
 // yii2 classes
 use Yii;
@@ -31,7 +31,6 @@ class ConferencesController extends Controller
      */
     public function behaviors()
     {
-
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -40,7 +39,6 @@ class ConferencesController extends Controller
                 ],
             ],
         ];
-
     } // end function
 
 
@@ -50,7 +48,6 @@ class ConferencesController extends Controller
      */
     public function actionIndex()
     {
-
         $dataProvider = new ActiveDataProvider([
             'query' => ArticleConference::find(),
         ]);
@@ -58,7 +55,6 @@ class ConferencesController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-
     } // end action
 
 
@@ -249,7 +245,6 @@ class ConferencesController extends Controller
      */
     public function actionAuthor($id)
     {
-
         $author = new Authors();
         $newauthor = new Authors();
         $error = null;
@@ -275,7 +270,6 @@ class ConferencesController extends Controller
             'author_items' => $author_items,
             'newauthor' => $newauthor,
         ]);
-
     } // end action
 
 

@@ -1,18 +1,17 @@
 <?php
 
-namespace app\modules\workspace\modules\units\articles\controllers;
+namespace app\modules\workspace\modules\publications\articles\controllers;
 
 // project models
 use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
-use app\models\units\articles\journals\ArticleJournal;
-//use app\models\units\articles\journals\Affilations;
-use app\models\units\articles\journals\Associations;
-use app\models\units\articles\journals\Authors;
-use app\models\units\articles\journals\Citations;
-use app\models\units\articles\journals\Pages;
-use app\models\units\CitationClasses;
+use app\models\publications\articles\journals\ArticleJournal;
+use app\models\publications\articles\journals\Associations;
+use app\models\publications\articles\journals\Authors;
+use app\models\publications\articles\journals\Citations;
+use app\models\publications\articles\journals\Pages;
+use app\models\publications\CitationClasses;
 use app\models\identity\Authors as AuthorsCommon;
 use app\models\filesystem\Fileupload;
 // yii classes
@@ -37,7 +36,6 @@ class JournalsController extends Controller
      */
     public function behaviors()
     {
-
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -46,9 +44,7 @@ class JournalsController extends Controller
                 ],
             ],
         ];
-
     }  // end function
-
 
 
     /**
@@ -58,7 +54,6 @@ class JournalsController extends Controller
      */
     public function actionIndex()
     {
-
         $dataProvider = new ActiveDataProvider([
             'query' => ArticleJournal::find()//->joinWith('authors'),
         ]);
@@ -66,9 +61,7 @@ class JournalsController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-
     } // end action
-
 
 
     /**
@@ -79,7 +72,6 @@ class JournalsController extends Controller
      */
     public function actionView($id)
     {
-
         $model = ArticleJournal::find($id)
             ->where(['id' => $id])
             ->one();
@@ -92,9 +84,7 @@ class JournalsController extends Controller
             'model' => $model,
             //'authors' => $authors,
         ]);
-
     } // end action
-
 
 
     /**
@@ -108,7 +98,6 @@ class JournalsController extends Controller
      */
     public function actionCreate()
     {
-
         /**
          * view parameters
          */
@@ -145,9 +134,7 @@ class JournalsController extends Controller
             'types' => $types,
             'classes' => $classes
         ]);
-
     } // end action
-
 
 
     /**
@@ -161,7 +148,6 @@ class JournalsController extends Controller
      */
     public function actionAjaxcreate()
     {
-
         /**
          * view parameters
          */
@@ -198,10 +184,7 @@ class JournalsController extends Controller
             'types' => $types,
             'classes' => $classes
         ]);
-
     } // end action
-
-
 
 
     /**
@@ -300,9 +283,7 @@ class JournalsController extends Controller
             'author_items' => $author_items,
             'id' => $id
         ]);
-
     } // end action
-
 
 
     /**
@@ -315,7 +296,6 @@ class JournalsController extends Controller
      */
     public function actionAuthor($id)
     {
-
         $author = new Authors();
 
         if (Yii::$app->request->post()) {
@@ -342,9 +322,7 @@ class JournalsController extends Controller
             'author_items' => $author_items,
             'newauthor' => $newauthor,
         ]);
-
     } // end action
-
 
 
     /**
@@ -357,7 +335,6 @@ class JournalsController extends Controller
      */
     public function actionDeleteauthor($author_id, $id)
     {
-
         $deleting_author = Authors::findOne(['id' => $author_id]);
         $deleting_author->delete();
 
@@ -379,7 +356,6 @@ class JournalsController extends Controller
             'author_items' => $author_items,
             'newauthor' => $newauthor,
         ]);
-
     } // end action
 
 
@@ -393,7 +369,6 @@ class JournalsController extends Controller
      */
     public function actionAssociation($id)
     {
-
         $associations = new Associations();
         if ($associations->load(Yii::$app->request->post())) {
             if (!$associations->save()) {
@@ -409,9 +384,7 @@ class JournalsController extends Controller
             'associations' => $associations,
             'id' => $id
         ]);
-
     } // end action
-
 
 
     /**
@@ -422,7 +395,6 @@ class JournalsController extends Controller
      */
     public function actionDeleteassociation($id)
     {
-
         $model = Associations::find()->where(['id' => $id ])->one();
         if ($model != null) {
             $model->delete();
@@ -436,9 +408,7 @@ class JournalsController extends Controller
             'associations' => $associations,
             'id' => $id
         ]);
-
     } // end action
-
 
 
     /**
@@ -450,7 +420,6 @@ class JournalsController extends Controller
      */
     public function actionCitation($id)
     {
-
         // saving citation
         $citation = new Citations();
 
@@ -484,9 +453,7 @@ class JournalsController extends Controller
             'newcitation' => $newcitation,
             'id' => $id
         ]);
-
     } // end action
-
 
 
     public function actionDeletecitation($id, $citation)
@@ -521,7 +488,6 @@ class JournalsController extends Controller
             'newcitation' => $newcitation,
             'id' => $id
         ]);
-
     } // end action
 
 
@@ -541,11 +507,9 @@ class JournalsController extends Controller
      */
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-
     } // end action
 
 
@@ -561,13 +525,11 @@ class JournalsController extends Controller
      */
     protected function findModel($id)
     {
-
         if (($model = ArticleJournal::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-
     } // end action
 
 } // end class

@@ -1,9 +1,5 @@
 <?php
 
-use yii\widgets\DetailView;
-use yii\bootstrap\Modal;
-use miloschuman\highcharts\Highcharts;
-
 /* @var $data  */
 /* @var $this \yii\web\View */
 /* @var $table array */

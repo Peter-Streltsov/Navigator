@@ -33,21 +33,21 @@ $items = [
                 'items' => [
                     [
                         'label' => 'Статьи в журналах',
-                        'url' => '/workspace/articles/journals'
+                        'url' => '/workspace/publications/articles/journals'
                     ],
                     [
                         'label' => 'Статьи в сборниках и главы в книгах',
-                        'url' => '/workspace/articles/collections'
+                        'url' => '/workspace/publications/articles/collections'
                     ],
                     [
                         'label' => 'Статьи в сборниках трудов конференций',
-                        'url' => '/workspace/articles/conferences'
+                        'url' => '/workspace/publications/articles/conferences'
                     ]
                 ]
             ],
             [
                 'label' => 'Монографии и Сборники',
-                'url' => '/workspace/monograph'
+                'url' => '/workspace/publications/monograph'
             ],
             [
                 'label' => 'Конференции',
@@ -55,7 +55,7 @@ $items = [
             ],
             [
                 'label' => 'Диссертации',
-                'url' => '/workspace/dissertations'
+                'url' => '/workspace/publications/dissertations'
             ],
             [
                 'label' => 'Редактирование',

@@ -1,12 +1,12 @@
 <?php
 
-namespace app\models\units;
+namespace app\models\publications;
 
 use yii\db\ActiveRecord;
 
 
 /**
- * This is the model class for table "citation_classes".
+ * ActiveRecord class for table "citation_classes";
  *
  * @property int $id
  * @property string $class
@@ -20,11 +20,8 @@ class CitationClasses extends ActiveRecord
      */
     public static function tableName()
     {
-
         return 'citation_classes';
-
     } // end function
-
 
 
     /**
@@ -32,15 +29,12 @@ class CitationClasses extends ActiveRecord
      */
     public function rules()
     {
-
         return [
             [['class', 'value'], 'required'],
             [['value'], 'integer'],
             [['class'], 'string', 'max' => 255],
         ];
-
     } // end function
-
 
 
     /**
@@ -48,15 +42,12 @@ class CitationClasses extends ActiveRecord
      */
     public function attributeLabels()
     {
-
         return [
             'id' => 'ID',
             'class' => 'Class',
             'value' => 'Value',
         ];
-
     } // end function
-
 
 
     /**
@@ -66,5 +57,6 @@ class CitationClasses extends ActiveRecord
     public static function find()
     {
         return new CitationClassesQuery(get_called_class());
-    }
-}
+    } // end function
+
+} // end class

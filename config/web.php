@@ -93,7 +93,7 @@ $config = [
             'class' => 'app\modules\workspace\WorkspaceModule',
             'modules' => [
                 'admin' => [
-                    'class' => 'app\modules\workspace\modules\Admin\Admin',
+                    'class' => 'app\modules\workspace\modules\admin\Admin',
                     'modules' => [
                         'shell' => [
                             'class' => 'samdark\webshell\Module',
@@ -116,8 +116,8 @@ $config = [
                         ]
                     ]
                 ],
-                'units' => [
-                    'class' => 'app\modules\workspace\modules\units\Units',
+                'publications' => [
+                    'class' => 'app\modules\workspace\modules\units\Publications',
                     'modules' => [
                         'articles' => [
                             'class' => 'app\modules\workspace\modules\units\articles\Articles'

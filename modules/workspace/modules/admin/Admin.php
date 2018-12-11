@@ -14,7 +14,7 @@ class Admin extends Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'app\modules\workspace\modules\Admin\controllers';
+    public $controllerNamespace = 'app\modules\workspace\modules\admin\controllers';
 
 
     /**
@@ -23,8 +23,6 @@ class Admin extends Module
     public function init()
     {
         parent::init();
-
-        //\Yii::configure($this, []);
     } // end function
 
 

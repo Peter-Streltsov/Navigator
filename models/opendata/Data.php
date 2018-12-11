@@ -2,11 +2,11 @@
 
 namespace app\models\opendata;
 
-use app\models\units\articles\collections\ArticleCollection;
-use app\models\units\articles\conferences\ArticleConference;
-use app\models\units\articles\journals\ArticleJournal;
-use app\models\units\dissertations\Dissertations;
-use app\models\units\monograph\Monograph;
+use app\models\publications\articles\collections\ArticleCollection;
+use app\models\publications\articles\conferences\ArticleConference;
+use app\models\publications\articles\journals\ArticleJournal;
+use app\models\publications\dissertations\Dissertations;
+use app\models\publications\monograph\Monograph;
 // yii classes
 use yii\base\Model;
 

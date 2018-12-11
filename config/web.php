@@ -106,7 +106,7 @@ $config = [
                     ]
                 ],
                 'articles' => [
-                    'class' => 'app\modules\workspace\modules\units\articles\Articles'
+                    'class' => 'app\modules\workspace\modules\publications\articles\Articles'
                 ],
                 'personal' => [
                     'class' => 'app\modules\workspace\modules\personal\PersonalModule',
@@ -117,10 +117,10 @@ $config = [
                     ]
                 ],
                 'publications' => [
-                    'class' => 'app\modules\workspace\modules\units\Publications',
+                    'class' => 'app\modules\workspace\modules\publications\Publications',
                     'modules' => [
                         'articles' => [
-                            'class' => 'app\modules\workspace\modules\units\articles\Articles'
+                            'class' => 'app\modules\workspace\modules\publications\articles\Articles'
                         ]
                     ]
                 ]

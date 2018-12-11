@@ -2,18 +2,15 @@
 
 namespace app\models\publications\articles\journals;
 
-use app\models\publications\articles\traits\ArticleQueryTrait;
-use yii\db\ActiveQuery;
+use app\models\publications\PublicationQuery;
 
 /**
  * ActiveQuery class for Article;
  *
  * @see Article
  */
-class ArticleJournalQuery extends ActiveQuery
+class ArticleJournalQuery extends PublicationQuery
 {
-
-    use ArticleQueryTrait;
 
     /**
      * @inheritdoc

@@ -4,6 +4,7 @@ namespace app\models\publications;
 
 // project classes
 use app\interfaces\PublicationInterface;
+use app\models\common\Languages;
 use app\models\publications\traits\PublicationTrait;
 use app\models\publications\traits\SchemeTrait;
 // yii classes
@@ -15,7 +16,7 @@ use yii\db\ActiveRecord;
  * Basic ActiveRecord class for publication models;
  * All other publication models MUST extend current class;
  */
-abstract class Publication extends ActiveRecord implements PublicationInterface
+class Publication extends ActiveRecord implements PublicationInterface
 {
 
     // traits

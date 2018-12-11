@@ -68,7 +68,7 @@ use yii\helpers\Html;
                 ]) ?>
             </div>
             <div class="col-lg-5">
-                <?= $form->field($model, 'type')->dropDownList($model->types()) ?>
+                <?= $form->field($model, 'type')->dropDownList($model->availableTypes) ?>
             </div>
         </div>
 

@@ -1,12 +1,14 @@
 <?php
 
-namespace app\modules\workspace\controllers;
+namespace app\modules\workspace\modules\publications\controllers;
 
+// project classes
 use app\models\common\Cities;
-use app\models\units\dissertations\Dissertations;
-use app\models\units\dissertations\DissertationTypes;
+use app\models\publications\dissertations\Dissertations;
+use app\models\publications\dissertations\DissertationTypes;
 use app\models\identity\Authors;
 use app\models\common\Habilitations;
+// yii classes
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
@@ -15,7 +17,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DissertationsController implements the CRUD actions for Dissertations model.
+ * DissertationsController implements the CRUD actions for Dissertations model;
  */
 class DissertationsController extends Controller
 {

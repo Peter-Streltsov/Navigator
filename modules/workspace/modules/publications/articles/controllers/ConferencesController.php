@@ -97,7 +97,7 @@ class ConferencesController extends Controller
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
         $classes = ArrayHelper::map($classes, 'id', 'description');
         // pnrd indexes
-        $types = $model->types();
+        $types = $model->availableTypes;
 
         /**
          * saving base model or collecting errors (converting to string) if not succeeded
@@ -145,7 +145,7 @@ class ConferencesController extends Controller
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
         $classes = ArrayHelper::map($classes, 'id', 'description');
         // pnrd indexes
-        $types = $model->types();
+        $types = $model->availableTypes;
 
         /**
          * saving base model or collecting errors (converting to string) if not succeeded

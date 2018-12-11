@@ -6,7 +6,7 @@ namespace app\models\publications\dissertations;
 use app\models\common\Habilitations;
 use app\models\common\Languages;
 use app\models\publications\monograph\Authors;
-use app\modules\workspace\modules\units\Publications;
+use app\models\publications\Publication;
 // yii classes
 use yii\db\ActiveQuery;
 
@@ -32,7 +32,7 @@ use yii\db\ActiveQuery;
  * @property int $updated_at
  * @property string $file
  */
-class Dissertations extends Publications
+class Dissertations extends Publication
 {
     /**
      * @inheritdoc

@@ -1,8 +1,7 @@
 <?php
 
-namespace app\modules\workspace\modules\units;
+namespace app\modules\workspace\modules\publications;
 
-use Yii;
 use yii\base\Module;
 
 /**
@@ -10,10 +9,12 @@ use yii\base\Module;
  */
 class Publications extends Module
 {
+
     /**
      * @inheritdoc
      */
     public $controllerNamespace = 'app\modules\control\modules\units\controllers';
+
 
     /**
      * @inheritdoc
@@ -21,7 +22,6 @@ class Publications extends Module
     public function init()
     {
         parent::init();
-
         // custom initialization code goes here
     }
 

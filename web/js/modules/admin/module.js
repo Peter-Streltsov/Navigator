@@ -70,7 +70,7 @@ $('#upload').change(function () {
     switch (select) {
         case '1':
             $.ajax({
-                url: "/workspace/units/articles/journals/ajaxcreate",
+                url: "/workspace/publications/articles/journals/ajaxcreate",
                 type: "post",
                 dataType: "html",
                 success:function (response) {
@@ -94,7 +94,7 @@ $('#upload').change(function () {
             break;
         case '2':
             $.ajax({
-                url: "/workspace/articles/conferences/ajaxcreate",
+                url: "/workspace/publications/articles/conferences/ajaxcreate",
                 type: "post",
                 dataType: "html",
                 success:function (response) {
@@ -119,7 +119,7 @@ $('#upload').change(function () {
             break;
         case '3':
             $.ajax({
-                url: "/workspace/articles/collections/ajaxcreate",
+                url: "/workspace/publications/articles/collections/ajaxcreate",
                 type: "post",
                 dataType: "html",
                 success:function (response) {
@@ -153,7 +153,7 @@ $('#upload').change(function () {
             break;
         case '5':
             $.ajax({
-                url: "/workspace/dissertations/ajaxcreate",
+                url: "/workspace/publications/dissertations/ajaxcreate",
                 type: "post",
                 dataType: "html",
                 success:function (response) {

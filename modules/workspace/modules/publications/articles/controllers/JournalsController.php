@@ -17,7 +17,6 @@ use app\models\filesystem\Fileupload;
 // yii classes
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -111,7 +110,7 @@ class JournalsController extends Controller
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
         // pnrd indexes
-        $types = $model->types();
+        $types = $model->availableTypes;
 
         /**
          * saving base model or collecting errors (converting to string) if not succeeded
@@ -161,7 +160,7 @@ class JournalsController extends Controller
         // article categories (pnrd)
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
         // pnrd indexes
-        $types = $model->types();
+        $types = $model->availableTypes;
 
         /**
          * saving base model or collecting errors (converting to string) if not succeeded

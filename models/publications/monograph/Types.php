@@ -5,21 +5,21 @@ namespace app\models\publications\monograph;
 use yii\db\ActiveRecord;
 
 /**
- * ActiveRecord class for table "booktypes";
+ * ActiveRecord class for table "monograph_types";
  * Table contains linked data for Monograph; (one-to-one; monograph type);
  * Provides publication types for Monograph models;
  *
  * @property int $id
  * @property string $type
  */
-class Booktypes extends ActiveRecord
+class Types extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'booktypes';
+        return 'monograph_types';
     } // end function
 
 
@@ -49,11 +49,11 @@ class Booktypes extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return BooktypesQuery the active query used by this AR class;
+     * @return TypesQuery the active query used by this AR class;
      */
     public static function find()
     {
-        return new BooktypesQuery(get_called_class());
+        return new TypesQuery(get_called_class());
     } // end function
 
 } // end class

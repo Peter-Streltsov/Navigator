@@ -8,7 +8,10 @@ use app\interfaces\PublicationQueryInterface;
 use yii\db\ActiveQuery;
 
 /**
- * Class PublicationQuery
+ * Class PublicationQuery;
+ * Basic ActiveQuery class for publication models; provides fluent interface
+ * methods for publications ActiveQuery classes;
+ * All other ActiveQuery classes for publication models MUST extend this class
  *
  * @package app\models\publications
  */

@@ -18,7 +18,7 @@ trait SchemeTrait
      *
      * @return string
      */
-    private function currentNamespace()
+    final private function currentNamespace()
     {
         $current_class = explode('\\', get_called_class());
         array_pop($current_class);
@@ -26,41 +26,39 @@ trait SchemeTrait
     } // end function
 
 
-
     /**
-     * lists available article types (array)
+     * lists types available for current publication
+     * RENAMED - from types();
      *
      * @return array - current namespace Types records
      */
-    public function types()
+    public function getAvailableTypes()
     {
         $types_class = $this->currentNamespace() . 'Types';
         return ArrayHelper::map($types_class::find()->asArray()->all(), 'id', 'type');
     } // end function
 
 
-
     /**
      * gets current unit type value (from Types record)
+     * RENAMED - from typeValue();
      *
-     * @return array|null
+     * @return string|null
      */
-    public function typeValue()
+    public function getTypeValue()
     {
         $type_class = $this->currentNamespace() . 'Types';
         if (isset($this->type)) {
-            $type = $type_class::find()->select(['type'])->where(['id' => $this->type])->asArray()->one();
-            return $type['type'];
+            return $type_class::find()->select(['type'])->where(['id' => $this->type])->one()->typr;
         }
 
         return null;
     } // end function
 
 
-
     /**
      * method deletes all linked to current article model records
-     * should be used ONLY in afterDelete() of article model (!)
+     * should be used ONLY in afterDelete() method of publication model (!!!)
      *
      * @return void
      */

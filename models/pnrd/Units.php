@@ -2,10 +2,11 @@
 
 namespace app\models\pnrd;
 
-use app\models\units\articles\collections\ArticleCollection;
-use app\models\units\articles\conferences\ArticleConference;
-use app\models\units\articles\journals\ArticleJournal;
-use app\models\units\dissertations\Dissertations;
+use app\models\publications\articles\collections\ArticleCollection;
+use app\models\publications\articles\conferences\ArticleConference;
+use app\models\publications\articles\journals\ArticleJournal;
+use app\models\publications\dissertations\Dissertations;
+use app\models\publications\monograph\Monograph;
 
 /**
  * Class Units
@@ -27,12 +28,12 @@ class Units
         $this->articlesJournals = new ArticleJournal();
         $this->articlesConferences = new ArticleConference();
         $this->articlesCollections = new ArticleCollection();
-        $this->monographs = null;
+        $this->monographs = new Monograph();
         $this->dissertations = new Dissertations();
     } // end constructor
 
     /**
-     * returns ActiveQuery for ArticlesJournals
+     * returns ArticleJournalsQuery
      */
     public function articlesJournals()
     {
@@ -41,7 +42,7 @@ class Units
 
 
     /**
-     * returns ActiveQuery for ArticlesConference
+     * returns ArticleConferenceQuery
      */
     public function articlesConferences()
     {
@@ -50,7 +51,7 @@ class Units
 
 
     /**
-     * returns ActiveQuery for ArticlesCollections
+     * returns ArticleCollectionQuery
      */
     public function articlesCollections()
     {
@@ -59,16 +60,16 @@ class Units
 
 
     /**
-     * TODO: replace stub with implementation
+     * return MonographQuery
      */
     public function monographs()
     {
-        return null;
+        return $this->monographs->find();
     } // end function
 
 
     /**
-     * returns ActiveQuery for Dissertations
+     * returns DissertationQuery
      */
     public function dissertations()
     {

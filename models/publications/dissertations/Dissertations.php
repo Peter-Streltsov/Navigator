@@ -2,11 +2,13 @@
 
 namespace app\models\publications\dissertations;
 
-use app\interfaces\PublicationInterface;
+// project classes
 use app\models\common\Habilitations;
 use app\models\common\Languages;
+use app\models\publications\monograph\Authors;
+use app\modules\workspace\modules\units\Publications;
+// yii classes
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
 
 /**
  * ActiveRecord class for table "dissertations";
@@ -30,7 +32,7 @@ use yii\db\ActiveRecord;
  * @property int $updated_at
  * @property string $file
  */
-class Dissertations extends ActiveRecord implements PublicationInterface
+class Dissertations extends Publications
 {
     /**
      * @inheritdoc
@@ -39,7 +41,6 @@ class Dissertations extends ActiveRecord implements PublicationInterface
     {
         return 'dissertations';
     } // end function
-
 
 
     /**
@@ -54,7 +55,6 @@ class Dissertations extends ActiveRecord implements PublicationInterface
             [['title', 'city', 'organisation', 'speciality', 'language', 'state_registration', 'link', 'file'], 'string', 'max' => 255],
         ];
     } // end function
-
 
 
     /**
@@ -85,15 +85,19 @@ class Dissertations extends ActiveRecord implements PublicationInterface
     } // end function
 
 
+
     /**
      * GETTERS
      */
 
-
+    /**
+     * redefined from basic class
+     * @return ActiveQuery
+     */
     public function getAuthors()
     {
-        // TODO: Implement getUnitauthors() method;
-    }
+        return $this->hasOne(Authors::className(), ['id' => $this->author]);
+    } // end function
 
 
     /**
@@ -109,24 +113,25 @@ class Dissertations extends ActiveRecord implements PublicationInterface
     /**
      * TODO: complete method (needs model for dissertation indexes)
      *
-     * @return integer
+     * @return float
      */
     public function getIndex()
     {
         //TODO: Implement getIndex() method;
-        return 1;
-    }
-
+        return 1.0;
+    } // end function
 
 
     /**
-     * @return float|int
+     * equal to getIndex() method - Dissertations can have only one author
+     *
+     * @return float
      */
     public function getPersonalIndex()
     {
-        // TODO: Implement getPersonalIndex() method;
-        return $this->getIndex() * 0.3;
-    }
+        return $this->getIndex();
+    } // end function
+
 
     /**
      * gets current dissertation type
@@ -140,25 +145,13 @@ class Dissertations extends ActiveRecord implements PublicationInterface
 
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getHabilitation()
-    {
-        return $this->hasOne(Habilitations::className(), ['id' => 'habilitation']);
-    } // end function
-
-
-    /**
-     * TODO: replace index with actual values!!!
+     * returns value for current habilitation level (from Habilitations model);
      *
-     * @param $author_id
-     * @return float|int
+     * @return string
      */
-    public function getIndexByAuthor($author_id)
+    public function getHabilitationValue()
     {
-        $index_value = 1;
-        $part = 100;
-        return ($part * $index_value) / 100;
+        return Habilitations::find()->where(['id' => $this->habilitation])->one()->habilitation;
     } // end function
 
 

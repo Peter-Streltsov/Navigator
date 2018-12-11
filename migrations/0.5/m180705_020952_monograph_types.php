@@ -5,20 +5,19 @@ use yii\db\Migration;
 /**
  * Class m180705_020952_book_types
  */
-class m180705_020952_book_types extends Migration
+class m180705_020952_monograph_types extends Migration
 {
     /**
      * @inheritdoc
      */
     public function safeUp()
     {
-
-        $this->createTable('booktypes', [
+        $this->createTable('monograph_types', [
             'id' => $this->primaryKey(),
             'type' => $this->string()->notNull()
         ]);
 
-        $this->batchInsert('booktypes', ['type'], [
+        $this->batchInsert('monograph_types', ['type'], [
             ['монография'],
             ['сборник статей'],
             ['учебное пособие'],
@@ -27,9 +26,7 @@ class m180705_020952_book_types extends Migration
             ['методические указания'],
             ['комментарии к закону']
         ]);
-
     } // end function
-
 
 
     /**
@@ -37,11 +34,8 @@ class m180705_020952_book_types extends Migration
      */
     public function safeDown()
     {
-
-        $this->dropTable('booktypes');
-
+        $this->dropTable('monograph_types');
         return true;
-
     } // end function
 
 } // end class

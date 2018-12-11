@@ -5,20 +5,16 @@ namespace app\models\publications\monograph;
 use yii\db\ActiveQuery;
 
 /**
- * ActiveQuery class for Booktypes;
+ * ActiveQuery class for Types;
  *
- * @see Booktypes
+ * @see Types
  */
-class BooktypesQuery extends ActiveQuery
+class TypesQuery extends ActiveQuery
 {
-    /*public function active()
-    {
-        return $this->andWhere('[[status]]=1');
-    }*/
 
     /**
      * @inheritdoc
-     * @return Booktypes[]|array
+     * @return Types[]|array
      */
     public function all($db = null)
     {
@@ -28,7 +24,7 @@ class BooktypesQuery extends ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Booktypes|array|null
+     * @return Types|array|null
      */
     public function one($db = null)
     {

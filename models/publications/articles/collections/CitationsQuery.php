@@ -2,19 +2,19 @@
 
 namespace app\models\publications\articles\collections;
 
-use app\models\publications\articles\ArticleQuery;
+use yii\db\ActiveQuery;
 
 /**
- * ActiveQuery class for ArticleCollection;
+ * ActiveQuery class for ArticlesCitations;
  *
- * @see ArticleCollection
+ * @see ArticlesCitations
  */
-class ArticleCollectionQuery extends ArticleQuery
+class CitationsQuery extends ActiveQuery
 {
 
     /**
      * @inheritdoc
-     * @return ArticleCollection[]|array
+     * @return Citations[]|array
      */
     public function all($db = null)
     {
@@ -24,7 +24,7 @@ class ArticleCollectionQuery extends ArticleQuery
 
     /**
      * @inheritdoc
-     * @return ArticleCollection|array|null
+     * @return Citations|array|null
      */
     public function one($db = null)
     {

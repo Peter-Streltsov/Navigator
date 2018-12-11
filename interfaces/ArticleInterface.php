@@ -4,29 +4,21 @@ namespace app\interfaces;
 
 /**
  * Interface ArticleInterface
+ * Describes methods for getting linked with current article data (Pages, Authors);
  *
  * @package app\interfaces
  */
 interface ArticleInterface
 {
 
-    //public function getPages();
-
     /**
-     * @param int $year
-     * @return int
+     * @return mixed
      */
-    public function byYear(int $year);
-
-    /**
-     * @return int
-     */
-    public function currentYear();
-
+    public function getPages();
 
     /**
      * @return mixed
      */
-    public function byAuthor();
+    public function getAuthors();
 
 } // end interface

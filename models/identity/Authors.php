@@ -3,11 +3,11 @@
 namespace app\models\identity;
 
 // project classes
-use app\models\units\dissertations\Dissertations;
-use app\models\units\monograph\Monograph;
-use app\models\units\articles\journals\ArticleJournal;
-use app\models\units\articles\conferences\ArticleConference;
-use app\models\units\articles\collections\ArticleCollection;
+use app\models\publications\dissertations\Dissertations;
+use app\models\publications\monograph\Monograph;
+use app\models\publications\articles\journals\ArticleJournal;
+use app\models\publications\articles\conferences\ArticleConference;
+use app\models\publications\articles\collections\ArticleCollection;
 // yii classes
 use Yii;
 use yii\db\ActiveRecord;
@@ -79,7 +79,7 @@ class Authors extends ActiveRecord
      */
     public function getArticlesConferencesAuthors()
     {
-        return $this->hasMany(\app\models\units\articles\conferences\Authors::className(), ['author_id' => 'id']);
+        return $this->hasMany(\app\models\publications\articles\conferences\Authors::className(), ['author_id' => 'id']);
     } // end function
 
 
@@ -88,7 +88,7 @@ class Authors extends ActiveRecord
      */
     public function getArticlesCollectionsAuthors()
     {
-        return $this->hasMany(\app\models\units\articles\collections\Authors::className(), ['author_id' => 'id']);
+        return $this->hasMany(\app\models\publications\articles\collections\Authors::className(), ['author_id' => 'id']);
     } // end function
 
 
@@ -97,7 +97,7 @@ class Authors extends ActiveRecord
      */
     public function getMonographsAuthors()
     {
-        return $this->hasMany(\app\models\units\monograph\Authors::className(), ['author_id' => 'id']);
+        return $this->hasMany(\app\models\publications\monograph\Authors::className(), ['author_id' => 'id']);
     } // end function
 
 

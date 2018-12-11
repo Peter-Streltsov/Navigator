@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\publications\articles\traits;
+namespace app\models\publications\traits;
 
 use yii\helpers\ArrayHelper;
 
@@ -14,7 +14,7 @@ trait SchemeTrait
 {
 
     /**
-     * private method returning namespace of class, using current trait method
+     * private method returning namespace of child class which uses this trait
      *
      * @return string
      */
@@ -54,27 +54,6 @@ trait SchemeTrait
         }
 
         return null;
-    } // end function
-
-
-
-    /**
-     *
-     */
-    public function citations()
-    {
-        $citations_class = $this->currentNamespace() . 'Citations';
-        return $citations_class::find()->where(['article_id' => $this->id])->all();
-    } // end function
-
-
-
-    /**
-     *
-     */
-    public function getPages()
-    {
-        return $this;
     } // end function
 
 

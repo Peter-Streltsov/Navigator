@@ -11,31 +11,27 @@ interface PublicationInterface
 {
 
     /**
-     * lists current unit authors
-     *
-     * @return array
-     */
-    public function getAuthors();
-
-    /**
-     * returns value for current unit language id
-     *
      * @return mixed
      */
-    public function getLanguageValue();
+    public function getCitations();
+
+    /**
+     * @return mixed
+     */
+    public function getAssociations();
 
     /**
      * calculates and returns total PNRD index for current unit model
      *
      * @return float
      */
-    public function getIndex();
+    public function getIndexValue();
 
     /**
      * calculates and returns index for current unit for requested author
      *
      * @return float
      */
-    public function getPersonalIndex();
+    public function getIndexByAuthor();
 
 } // end interface

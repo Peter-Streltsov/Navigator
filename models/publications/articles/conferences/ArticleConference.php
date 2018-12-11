@@ -3,7 +3,6 @@
 namespace app\models\publications\articles\conferences;
 
 // project classes
-use app\interfaces\PublicationInterface;
 use app\models\publications\articles\Article;
 // yii classes
 use yii\db\ActiveRecord;
@@ -24,7 +23,7 @@ use yii\db\ActiveRecord;
  * @property int $updated_at
  * @property string $file
  */
-class ArticleConference extends Article implements PublicationInterface
+class ArticleConference extends Article
 {
 
     /**

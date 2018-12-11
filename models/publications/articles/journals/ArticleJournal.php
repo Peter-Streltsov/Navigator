@@ -3,7 +3,6 @@
 namespace app\models\publications\articles\journals;
 
 // project classes
-use app\interfaces\PublicationInterface;
 use app\models\common\Languages;
 use app\models\publications\articles\Article;
 // yii classes
@@ -30,7 +29,7 @@ use yii\db\ActiveRecord;
  * @property string $link
  * @property resource $file
  */
-class ArticleJournal extends Article implements PublicationInterface
+class ArticleJournal extends Article
 {
 
     /**
@@ -101,66 +100,6 @@ class ArticleJournal extends Article implements PublicationInterface
             'file' => 'Файл',
             'authors' => 'Авторы'
         ];
-    } // end function
-
-
-    /**
-     * sets flash messages using Alert widget (yii2)
-     *
-     * @param bool $insert
-     * @return bool
-     */
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-
-            if ($this->isNewRecord) {
-                if ($insert) {
-                    Yii::$app->session->setFlash('success', 'Статья сохранена');
-                    return true;
-                } else {
-                    Yii::$app->session->setFlash('danger', 'Сохранение не удалось');
-                    return false;
-                }
-            } else {
-                if ($insert) {
-                    Yii::$app->session->setFlash('danger', 'Обновление данных не удалось');
-                    return false;
-                } else {
-                    Yii::$app->session->setFlash('success', 'Данные обновлены');
-                    return true;
-                }
-            }
-        }
-
-        return true;
-    } // end function
-
-
-    /**
-     * @param bool $insert
-     * @param array $changedAttributes
-     */
-    public function afterSave($insert, $changedAttributes)
-    {
-        parent::afterSave($insert, $changedAttributes);
-
-        // saving language
-        $newlanguage = new Languages();
-        $newlanguage->language = strtolower($this->language);
-        $newlanguage->save();
-    } // end function
-
-
-    /**
-     * uses SchemeTrait deleteLinkedData() method
-     *
-     * @inheritdoc
-     */
-    public function afterDelete()
-    {
-        parent::afterDelete();
-        $this->deleteLinkedData();
     } // end function
 
 

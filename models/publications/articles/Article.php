@@ -3,25 +3,32 @@
 namespace app\models\publications\articles;
 
 // project classes
-use app\interfaces\PublicationInterface;
+use app\interfaces\ArticleInterface;
+use app\interfaces\ArticleValuesInterface;
+use app\models\publications\Publication;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
+use app\models\publications\articles\traits\ArticleValuesTrait;
 use app\models\publications\articles\traits\SchemeTrait;
-use app\models\publications\articles\traits\UnitTrait;
+use app\models\publications\articles\traits\ArticleTrait;
 use app\models\common\Languages;
-// yii classes
-use app\models\publications\Publication;
 
 /**
  * Class Article
+ * Basic class for articles models;
+ *
+ * All extending classes MUST have the following properties:
+ * @property int $type - describes current article type
+ * @property int $class - describes current article class (PNRD index
+ * from app\models\pnrd\indexes\IndexesArticles)
  *
  * @package app\models\units\articles
  */
-class Article extends Publication implements PublicationInterface
+abstract class Article extends Publication implements ArticleInterface, ArticleValuesInterface
 {
 
-    use SchemeTrait;
-    use UnitTrait;
+    use ArticleTrait; // ArticleInterface implementation
+    use ArticleValuesTrait; // ArticleValuesInterface implementation
 
     /**
      * should not be used and must be redefined in child classes

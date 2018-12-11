@@ -3,11 +3,7 @@
 namespace app\models\publications\articles\collections;
 
 // project classes
-use app\interfaces\PublicationInterface;
 use app\models\publications\articles\Article;
-use app\models\publications\articles\traits\ArticleQueryTrait;
-use app\models\publications\articles\traits\SchemeTrait;
-use app\models\publications\articles\traits\UnitTrait;
 // yii classes
 use yii\db\ActiveRecord;
 
@@ -27,12 +23,8 @@ use yii\db\ActiveRecord;
  * @property string $link
  * @property string $file
  */
-class ArticleCollection extends Article implements PublicationInterface
+class ArticleCollection extends Article
 {
-
-    use SchemeTrait;
-    use UnitTrait;
-    use ArticleQueryTrait;
 
     /**
      * @inheritdoc

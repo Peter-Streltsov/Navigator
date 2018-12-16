@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\units\articles\conferences\ArticleConference */
+/* @var $model app\models\publications\articles\conferences\ArticleConference */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -137,6 +137,3 @@ use yii\helpers\Html;
 
     </div>
 </div>
-
-<?php
-//\yii\helpers\VarDumper::dump(Yii::$app->yearselector->select);

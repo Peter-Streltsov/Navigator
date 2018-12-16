@@ -192,11 +192,7 @@ class JournalsController extends Controller
      * If update successful, will redirect to 'update' page
      *
      * @param $id
-     * @return string
-     * @throws \Throwable
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
+     * @return string|\yii\web\Response
      */
     public function actionUpdate($id)
     {

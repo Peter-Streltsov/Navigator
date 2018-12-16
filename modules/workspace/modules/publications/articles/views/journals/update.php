@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\units\articles\journals\ArticleJournal */
+/* @var $model app\models\publications\articles\journals\ArticleJournal */
 /* @var $author_items array */
 /* @var $file \app\models\filesystem\Fileupload */
-/* @var $classes \app\modules\Control\models\Articles[]|\app\modules\Control\models\IndexesArticles[]|array */
+/* @var $classes \app\models\pnrd\indexes\IndexesArticles[]|array */
 /* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
 /* @var $authors \app\modules\Control\models\Authors[]|array */
 /* @var $citations \app\modules\Control\models\ArticlesCitations[]|array */

@@ -2,9 +2,8 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
-/* @var $model app\models\units\articles\conferences\ArticleConference */
+/* @var $model app\models\publications\articles\conferences\ArticleConference */
 
 $this->title = 'Добавить статью';
 $this->params['breadcrumbs'][] = ['label' => 'Статьи - материалы конференций', 'url' => ['index']];

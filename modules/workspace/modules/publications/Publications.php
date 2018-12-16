@@ -13,7 +13,7 @@ class Publications extends Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'app\modules\control\modules\units\controllers';
+    public $controllerNamespace = 'app\modules\workspace\modules\publications\controllers';
 
 
     /**

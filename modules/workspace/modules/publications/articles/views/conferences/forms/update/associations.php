@@ -1,7 +1,7 @@
 <?php
 
 // project classes
-use app\models\units\articles\journals\Associations;
+use app\models\publications\articles\journals\Associations;
 // yii classes
 use yii\grid\GridView;
 use yii\grid\ActionColumn;

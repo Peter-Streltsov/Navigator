@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'habilitation',
                         'value' => function ($model) {
-                            return $model->habilitationValue();
+                            return $model->habilitationValue;
                         }
                     ],
                     //'habilitation',

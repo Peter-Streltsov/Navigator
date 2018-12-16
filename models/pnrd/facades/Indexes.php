@@ -71,15 +71,15 @@ class Indexes
         $dissertations = $this->dissertations->all();
 
         foreach ($journals as $journal) {
-            $index[] = $journal->getIndex();
+            $index[] = $journal->getIndexValue();
         }
 
         foreach ($conferencies as $conference) {
-            $index[] = $conference->getIndex();
+            $index[] = $conference->getIndexValue();
         }
 
         foreach ($collections as $collection) {
-            $index[] = $collection->getIndex();
+            $index[] = $collection->getIndexValue();
         }
 
         /*foreach ($dissertations as $dissertation) {

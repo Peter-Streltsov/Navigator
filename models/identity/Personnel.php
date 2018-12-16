@@ -5,6 +5,7 @@ namespace app\models\identity;
 // project classes
 use app\models\common\Habilitations;
 // yii classes
+use app\models\common\Positions;
 use Yii;
 
 /**
@@ -80,12 +81,22 @@ class Personnel extends \yii\db\ActiveRecord
 
 
     /**
+     * @return string
+     */
+    public function getPositionValue()
+    {
+        $position = Positions::find()->where(['id' => $this->position])->one();
+        return $position != null ? $position->position : null;
+    } // end function
+
+
+    /**
      * @return mixed
      */
-    public function getHabilitationvalue()
+    public function getHabilitationValue()
     {
-        $habilitation = Habilitations::find()->select(['habilitation'])->where(['id' => $this->habilitation])->asArray()->one();
-        return $habilitation[0];
+        $habilitation = Habilitations::find()->where(['id' => $this->habilitation])->one();
+        return $habilitation != null ? $habilitation->habilitation : null;
     } // end function
 
 

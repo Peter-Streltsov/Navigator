@@ -70,7 +70,7 @@ class Authors extends ActiveRecord
      */
     public function getArticlesJournalsAuthors()
     {
-        return $this->hasMany(\app\models\units\articles\journals\Authors::className(), ['author_id' => 'id']);
+        return $this->hasMany(\app\models\publications\articles\journals\Authors::className(), ['author_id' => 'id']);
     } // end function
 
 

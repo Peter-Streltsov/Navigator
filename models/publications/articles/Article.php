@@ -6,6 +6,7 @@ namespace app\models\publications\articles;
 use app\interfaces\ArticleInterface;
 use app\interfaces\ArticleValuesInterface;
 use app\models\publications\Publication;
+use app\models\identity\Authors as AuthorsCommon;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
 use app\models\common\Languages;

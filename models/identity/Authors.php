@@ -124,13 +124,52 @@ class Authors extends ActiveRecord
 
 
     /**
-     * lists ArticlesJournals having current author linked
+     * lists Dissertations published in last five years for current author
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIndexedDissertations()
+    {
+        $years = range(date('Y') - 4, date('Y'));
+        return $this->hasMany(Dissertations::className(), ['id' => 'article_id'])
+            ->where(['year' => $years])
+            ->via('articlesJournalsAuthors');
+    } // end function
+
+
+    /**
+     * lists ArticlesJournals having current author linked to
      *
      * @return \yii\db\ActiveQuery
      */
     public function getArticlesJournals()
     {
         return $this->hasMany(ArticleJournal::className(), ['id' => 'article_id'])
+            ->via('articlesJournalsAuthors');
+    } // end function
+
+
+    /**
+     * lists ArticlesJournals published in current year and having current author linked to
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCurrentArticlesJournals()
+    {
+        return $this->hasMany(ArticleJournal::className(), ['id' => 'article_id'])
+            ->where(['year' => date('Y')])
+            ->via('articlesJournalsAuthors');
+    } // end function
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIndexedArticlesJournals()
+    {
+        $years = range(date('Y') - 4, date('Y'));
+        return $this->hasMany(ArticleJournal::className(), ['id' => 'article_id'])
+            ->where(['year' => $years])
             ->via('articlesJournalsAuthors');
     } // end function
 
@@ -148,6 +187,18 @@ class Authors extends ActiveRecord
 
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIndexedArticlesConferences()
+    {
+        $years = range(date('Y') - 4, date('Y'));
+        return $this->hasMany(ArticleConference::className(), ['id' => 'article_id'])
+            ->where(['year' => $years])
+            ->via('articlesJournalsAuthors');
+    } // end function
+
+
+    /**
      * lists ArticlesCollection having current author linked
      *
      * @return \yii\db\ActiveQuery
@@ -160,6 +211,20 @@ class Authors extends ActiveRecord
 
 
     /**
+     * lists ArticleCollection for last five years for current author
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIndexedArticlesCollections()
+    {
+        $years = range(date('Y') - 4, date('Y'));
+        return $this->hasMany(ArticleCollection::className(), ['id' => 'article_id'])
+            ->where(['year' => $years])
+            ->via('articlesJournalsAuthors');
+    } // end function
+
+
+    /**
      * lists Monograph having current author linked
      *
      * @return \yii\db\ActiveQuery
@@ -168,6 +233,20 @@ class Authors extends ActiveRecord
     {
         return $this->hasMany(Monograph::className(), ['id' => ''])
             ->via('monographsAuthors');
+    } // end function
+
+
+    /**
+     * lists Monograph published in last five years for current author
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIndexedMonograph()
+    {
+        $years = range(date('Y') - 4, date('Y'));
+        return $this->hasMany(Monograph::className(), ['id' => 'article_id'])
+            ->where(['year' => $years])
+            ->via('articlesJournalsAuthors');
     } // end function
 
     /**

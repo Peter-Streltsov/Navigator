@@ -139,28 +139,29 @@ class PersonalData extends Model
 
         // resulting array
         $index = [];
+        echo count($this->author->indexedArticlesJournals);
 
         // calculating indexes for ArticlesJournals
-        foreach ($this->author->articlesJournals as $article) {
+        foreach ($this->author->indexedArticlesJournals as $article) {
             $index[] = $article->getIndexByAuthor($this->author->id);
         }
 
         // calculating indexes for ArticlesConferences
-        foreach ($this->author->articlesConferences as $article) {
+        foreach ($this->author->indexedArticlesConferences as $article) {
             $index[] = $article->getIndexByAuthor($this->author->id);
         }
 
-        foreach ($this->author->articlesCollections as $article) {
+        foreach ($this->author->indexedArticlesCollections as $article) {
             $index[] = $article->getIndexByAuthor($this->author->id);
         }
 
         // calculating indexes for Monographs
-        /*foreach ($this->author->monographs as $monograph) {
+        /*foreach ($this->author->indexedMonographs as $monograph) {
             $index[] = $monograph->getIndexByAuthor($this->author->id);
         }*/
 
         // calculating indexes for Dissertations
-        foreach ($this->author->dissertations as $dissertation) {
+        foreach ($this->author->indexedDissertations as $dissertation) {
             $index[] = $dissertation->getIndexByAuthor($this->author->id);
         }
 

@@ -19,6 +19,8 @@ class PublicationQuery extends ActiveQuery implements PublicationQueryInterface
 {
 
     /**
+     * adds query parameter - int $year
+     *
      * @param int $year
      * @return $this
      */
@@ -29,7 +31,7 @@ class PublicationQuery extends ActiveQuery implements PublicationQueryInterface
 
 
     /**
-     * ads query parameter - 'year' == current year
+     * adds query parameter - 'year' == current year
      */
     public function currentYear()
     {

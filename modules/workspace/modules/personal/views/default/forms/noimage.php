@@ -17,7 +17,8 @@ use yii\helpers\Html;
                     'enctype' => 'multipart/form-data'
             ]
     ]);
-    echo $form->field($file, 'uploadedfile')->fileInput()->label('');
+    echo $form->field($file, 'uploadedfile')->fileInput()->label('Выбрать файл...');
+    echo "<br>";
     echo Html::submitButton('Загрузить');
     ActiveForm::end();
     ?>

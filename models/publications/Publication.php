@@ -5,11 +5,10 @@ namespace app\models\publications;
 // project classes
 use app\interfaces\PublicationInterface;
 use app\models\common\Languages;
-use app\models\publications\traits\PublicationTrait;
-use app\models\publications\traits\SchemeTrait;
 // yii classes
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class Publication
@@ -18,10 +17,6 @@ use yii\db\ActiveRecord;
  */
 class Publication extends ActiveRecord implements PublicationInterface
 {
-
-    // traits
-    use PublicationTrait;
-    //use SchemeTrait;
 
     /**
      * @return array

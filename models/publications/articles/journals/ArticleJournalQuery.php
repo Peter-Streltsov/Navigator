@@ -2,14 +2,14 @@
 
 namespace app\models\publications\articles\journals;
 
-use app\models\publications\PublicationQuery;
+use app\models\publications\articles\ArticleQuery;
 
 /**
  * ActiveQuery class for Article;
  *
  * @see Article
  */
-class ArticleJournalQuery extends PublicationQuery
+class ArticleJournalQuery extends ArticleQuery
 {
 
     /**

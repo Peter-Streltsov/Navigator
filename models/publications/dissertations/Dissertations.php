@@ -3,6 +3,8 @@
 namespace app\models\publications\dissertations;
 
 // project classes
+use app\interfaces\PNRDInterface;
+use app\interfaces\PublicationInterface;
 use app\models\common\Habilitations;
 use app\models\common\Languages;
 use app\models\publications\monograph\Authors;
@@ -32,7 +34,7 @@ use yii\db\ActiveQuery;
  * @property int $updated_at
  * @property string $file
  */
-class Dissertations extends Publication
+class Dissertations extends Publication implements PublicationInterface, PNRDInterface
 {
     /**
      * @inheritdoc
@@ -152,6 +154,28 @@ class Dissertations extends Publication
     public function getHabilitationValue()
     {
         return Habilitations::find()->where(['id' => $this->habilitation])->one()->habilitation;
+    } // end function
+
+
+    /**
+     *
+     *
+     * @return float
+     */
+    public function getIndexValue()
+    {
+        return 1.0;
+    } // end function
+
+
+    /**
+     * calculates index for exact author
+     *
+     * @return float
+     */
+    public function getIndexByAuthor($author_id = null)
+    {
+        return 1.0;
     } // end function
 
 

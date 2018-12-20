@@ -26,4 +26,4 @@ interface ArticleValuesInterface
      */
     public function getLanguageValue();
 
-}
+} // end class

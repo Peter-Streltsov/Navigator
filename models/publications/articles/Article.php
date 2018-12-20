@@ -5,6 +5,7 @@ namespace app\models\publications\articles;
 // project classes
 use app\interfaces\ArticleInterface;
 use app\interfaces\ArticleValuesInterface;
+use app\interfaces\PNRDInterface;
 use app\models\publications\Publication;
 use app\models\identity\Authors as AuthorsCommon;
 use app\models\common\Magazines;
@@ -22,7 +23,7 @@ use app\models\common\Languages;
  *
  * @package app\models\units\articles
  */
-abstract class Article extends Publication implements ArticleInterface, ArticleValuesInterface
+abstract class Article extends Publication implements ArticleInterface, ArticleValuesInterface, PNRDInterface
 {
 
     /**

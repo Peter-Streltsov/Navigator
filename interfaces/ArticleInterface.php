@@ -21,19 +21,4 @@ interface ArticleInterface
      */
     public function getAuthors();
 
-    /**
-     * calculates and returns total PNRD index for current unit model
-     *
-     * @return float
-     */
-    public function getIndexValue();
-
-    /**
-     * calculates and returns index for current unit for requested author
-     *
-     * @return float
-     */
-    public function getIndexByAuthor($author_id);
-
-
 } // end interface

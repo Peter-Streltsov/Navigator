@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\workspace\controllers;
+namespace app\modules\workspace\modules\publications\controllers;
 
 // project classes
 use app\models\identity\Authors as AuthorsCommon;
 //use app\modules\Control\models\Fileupload;
 //use app\modules\Control\models\IndexesArticles;
-use app\models\units\monograph\Associations;
-use app\models\units\monograph\Monograph;
-use app\models\units\monograph\Authors;
-use app\models\units\monograph\Citations;
+use app\models\publications\monograph\Associations;
+use app\models\publications\monograph\Monograph;
+use app\models\publications\monograph\Authors;
+use app\models\publications\monograph\Citations;
 use app\modules\Control\models\CitationClasses;
 // yii classes
 use Yii;
@@ -89,7 +89,7 @@ class MonographController extends Controller
     public function actionCreate()
     {
 
-        $model = new Monographies();
+        $model = new Monograph();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

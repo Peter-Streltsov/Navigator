@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\Control\models\Monographies */
+/* @var $model app\models\publications\monograph\Monograph */
 
 $this->title = 'Добавить монографию';
 $this->params['breadcrumbs'][] = ['label' => 'Монографии', 'url' => ['index']];

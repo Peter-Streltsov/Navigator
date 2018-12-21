@@ -3,12 +3,11 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\Control\models\Monographies */
 /* @var $author_items array */
-/* @var $file \app\modules\Control\models\Fileupload */
-/* @var $model_authors \app\modules\Control\models\Monographies */
-/* @var $authors \app\modules\Control\models\Authors[]|array */
-/* @var $classes \app\modules\Control\models\Articles[]|array */
+/* @var $file \app\models\filesystem\Fileupload */
+/* @var $model_authors \app\models\publications\monograph\Monograph */
+/* @var $authors \app\models\identity\Authors[]|array */
+/* @var $classes \app\models\publications\articles\Articles[]|array */
 /* @var $citations \yii\data\ActiveDataProvider */
 /* @var $citation_classes array */
 /* @var $newcitation \app\modules\Control\models\MonographiesCitations */

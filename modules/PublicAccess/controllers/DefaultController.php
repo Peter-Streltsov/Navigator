@@ -28,7 +28,7 @@ class DefaultController extends Controller
         }
 
         // collecting publications
-        $publications = array_merge(Data::getArticles(), Data::getMonographs(), Data::getDissertations());
+        $publications = array_merge(Data::getArticles(), Data::getMonographs());
         $dataProvider = new ArrayDataProvider([
             'allModels' => $publications
         ]);

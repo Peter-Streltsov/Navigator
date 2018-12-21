@@ -29,9 +29,9 @@ class Data extends Model
     {
 
         $articles_journals = ArticleJournal::find()->all();
-        $articles_conferencies = ArticleConference::find()->all();
+        $articles_conferences = ArticleConference::find()->all();
         $articles_collections = ArticleCollection::find()->all();
-        return array_merge($articles_journals, $articles_conferencies, $articles_collections);
+        return array_merge($articles_journals, $articles_conferences, $articles_collections);
 
     } // end function
 
@@ -50,7 +50,7 @@ class Data extends Model
     /**
      * lists all added Dissertations in array of ActiveRecords
      *
-     * @return Dissertations[]|\app\models\units\dissertations\DissertationTypes[]|array
+     * @return Dissertations[]|\app\models\publications\dissertations\DissertationTypes[]|array
      */
     public static function getDissertations()
     {

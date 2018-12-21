@@ -7,7 +7,7 @@ use app\interfaces\PNRDInterface;
 use app\interfaces\PublicationInterface;
 use app\models\common\Habilitations;
 use app\models\common\Languages;
-use app\models\publications\monograph\Authors;
+use app\models\identity\Authors;
 use app\models\publications\Publication;
 // yii classes
 use yii\db\ActiveQuery;
@@ -94,11 +94,11 @@ class Dissertations extends Publication implements PublicationInterface, PNRDInt
 
     /**
      * redefined from basic class
-     * @return ActiveQuery
+     * @return Authors
      */
     public function getAuthors()
     {
-        return $this->hasOne(Authors::className(), ['id' => $this->author]);
+        return Authors::find()->where(['id' => $this->author])->one();
     } // end function
 
 

@@ -2,13 +2,14 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Диссертации';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="dissertations-index">
 
     <br>
@@ -43,8 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'author',
                 'value' => function($model) {
-                    $author = $model->dissertationauthor;
-                    return $author-> name .  ' ' . $author->lastname;
+                    $author = $model->authors;
+                    return $author->initials .  ' ' . $author->lastname;
                 }
             ],
             'year',
@@ -54,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                         'view' => function($url, $model) {
-                            return Html::a('<span class="glyphicon glyphicon-file"></span>', ['/control/dissertations/view', 'id' => $model->id], ['class' => 'button primary big']);
+                            return Html::a('<span class="glyphicon glyphicon-file"></span>', ['/workspace/publications/dissertations/view', 'id' => $model->id], ['class' => 'button primary big']);
                         }
                 ],
                 'template' => '{view}',

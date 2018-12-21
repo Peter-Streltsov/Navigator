@@ -111,6 +111,21 @@ class Authors extends ActiveRecord
      * GETTERS
      */
 
+    /**
+     * gets and returns initials of current author
+     *
+     * @return string
+     */
+    public function getInitials()
+    {
+        $initials = '';
+        $initials .= $this->name[0] . '.';
+        if ($this->secondname != null && $this->secondname != '') {
+            $initials .= $this->secondname[0] . '.';
+        }
+        return $initials;
+    } // end function
+
 
     /**
      * lists staff member dissertations

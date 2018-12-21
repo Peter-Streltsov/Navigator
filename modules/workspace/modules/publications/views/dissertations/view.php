@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'author',
                 'value' => function($model) {
-                    $author = $model->dissertationauthor;
+                    $author = $model->authors;
                     return $author->name . ' ' . $author->lastname;
                 }
             ],
@@ -54,15 +54,15 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'habilitation',
                 'value' => function($model) {
-                    $habilitation = $model->dissertationhabilitation;
-                    return $habilitation->habilitation;
+                    return $model->habilitationValue;
+                    //$habilitation = $model->dissertationhabilitation;
+                    //return $habilitation->habilitation;
                 }
             ],
             [
                 'attribute' => 'type',
                 'value' => function($model) {
-                    $type = $model->dissertationtype;
-                    return $type->type;
+                            return $model->type;
                 }
             ]
         ],

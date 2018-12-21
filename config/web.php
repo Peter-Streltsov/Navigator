@@ -7,6 +7,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'charset' => 'UTF-8',
     'language' => 'ru',
     'name' => 'Наукометрия',
     'aliases' => [

@@ -3,6 +3,7 @@
 namespace app\modules\workspace\modules\publications\articles\controllers;
 
 // project classes
+use app\interfaces\PublicationControllerInterface;
 use app\models\publications\articles\collections\ArticleCollection;
 use app\models\common\Languages;
 use app\models\common\Magazines;
@@ -17,7 +18,7 @@ use yii\filters\VerbFilter;
 /**
  * CollectionsController implements the CRUD actions for ArticleCollection model;
  */
-class CollectionsController extends Controller
+class CollectionsController extends Controller implements PublicationControllerInterface
 {
     /**
      * @inheritdoc
@@ -112,7 +113,7 @@ class CollectionsController extends Controller
      * @throws \yii\db\Exception
      * @throws \yii\db\StaleObjectException
      */
-    public function actionAjaxcreate()
+    public function actionCreateAjax()
     {
         $model = new ArticleCollection();
         // added languages list

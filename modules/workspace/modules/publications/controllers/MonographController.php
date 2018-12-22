@@ -3,6 +3,7 @@
 namespace app\modules\workspace\modules\publications\controllers;
 
 // project classes
+use app\interfaces\PublicationControllerInterface;
 use app\models\identity\Authors as AuthorsCommon;
 //use app\modules\Control\models\Fileupload;
 //use app\modules\Control\models\IndexesArticles;
@@ -21,10 +22,11 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
- * MonographController implements the CRUD actions for Monographies model.
+ * MonographController implements the CRUD actions for Monograph;
  */
-class MonographController extends Controller
+class MonographController extends Controller implements PublicationControllerInterface
 {
+
     /** 
      * @inheritdoc
      */
@@ -38,7 +40,8 @@ class MonographController extends Controller
                 ],
             ],
         ];
-    }
+    } // end function
+
 
     /**
      * Lists all Monographs models
@@ -46,10 +49,6 @@ class MonographController extends Controller
      */
     public function actionIndex()
     {
-
-        $model = Monograph::find()->all();
-            //->joinWith('authors')->all();
-
         $dataProvider = new ActiveDataProvider([
             'query' => Monograph::find()
                 //->joinWith('authors')
@@ -57,40 +56,34 @@ class MonographController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'model' => $model
         ]);
-
     } // end action
 
 
-
     /**
-     * Displays a single Monographies model.
+     * Displays a single Monograph model;
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-
     } // end action
 
 
-
     /**
-     * Creates a new Monographies model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * Creates a new Monograph model;
+     *
+     * If creation is successful, the browser will be redirected to the 'view' page;
      * @return mixed
      */
     public function actionCreate()
     {
-
         $model = new Monograph();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -98,22 +91,39 @@ class MonographController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
-
     } // end action
 
 
+    /**
+     * If request method is AJAX - renders form for a new Monograph model;
+     * If request method is POST - tries to load and save model;
+     * If creation is successful, the browser will be redirected to the 'view' page;
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionCreateAjax()
+    {
+        $model = new Monograph();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    } // end action
 
 
     /**
-     * Updates an existing Monographies model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Updates an existing Monograph model;
+     * If update successful, will be redirect to 'view' page;
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
-
         // affilation
         if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
             $newaffilation = MonographAffilations::find()->where(['monograph_id' => $id])->one();
@@ -191,7 +201,7 @@ class MonographController extends Controller
         // view parameters
 
         // monography authors
-        $model_authors = Monographies::find($id)
+        $model_authors = Monograph::find($id)
             ->where(['monographies.id' => $id])
             ->joinWith('data')
             ->all();
@@ -208,7 +218,7 @@ class MonographController extends Controller
 
         $classes = IndexesArticles::find()->asArray()->all();
 
-        $model = Monographies::find($id)
+        $model = Monograph::find($id)
             ->where(['monographies.id' => $id])
             ->joinWith('data')
             ->all();
@@ -247,34 +257,40 @@ class MonographController extends Controller
     } // end action
 
 
-
     /**
-     * Deletes an existing Monographies model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * Deletes an existing Monograph model;
+     * If deletion successful, will redirect to 'index' page;
+     *
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (Yii::$app->access->isAdmin()) {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        }
+        return null;
+    } // end action
 
-        return $this->redirect(['index']);
-    }
 
     /**
-     * Finds the Monographies model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * Finds the Monograph model based on its primary key value;
+     * If the model is not found, a 404 HTTP exception will be thrown;
+     *
      * @param integer $id
-     * @return Monographies the loaded model
+     * @return Monograph the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Monographies::findOne($id)) !== null) {
+        if (($model = Monograph::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-}
+    } // end function
+
+} // end class

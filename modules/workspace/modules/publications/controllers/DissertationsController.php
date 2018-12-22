@@ -3,6 +3,7 @@
 namespace app\modules\workspace\modules\publications\controllers;
 
 // project classes
+use app\interfaces\PublicationControllerInterface;
 use app\models\common\Cities;
 use app\models\publications\dissertations\Dissertations;
 use app\models\publications\dissertations\Types;
@@ -19,7 +20,7 @@ use yii\filters\VerbFilter;
 /**
  * DissertationsController implements the CRUD actions for Dissertations model;
  */
-class DissertationsController extends Controller
+class DissertationsController extends Controller implements PublicationControllerInterface
 {
 
     /**
@@ -130,7 +131,7 @@ class DissertationsController extends Controller
      * @throws \yii\db\Exception
      * @throws \yii\db\StaleObjectException
      */
-    public function actionAjaxcreate()
+    public function actionCreateAjax()
     {
         // new dissertation record
         $model = new Dissertations();

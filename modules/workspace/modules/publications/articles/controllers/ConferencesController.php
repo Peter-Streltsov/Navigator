@@ -3,6 +3,7 @@
 namespace app\modules\workspace\modules\publications\articles\controllers;
 
 // project classes
+use app\interfaces\PublicationControllerInterface;
 use app\models\filesystem\Fileupload;
 use app\models\common\Languages;
 use app\models\common\Magazines;
@@ -24,7 +25,7 @@ use yii\helpers\ArrayHelper;
 /**
  * ConferencesController implements the CRUD actions for ArticleConference model
  */
-class ConferencesController extends Controller
+class ConferencesController extends Controller implements PublicationControllerInterface
 {
     /**
      * @inheritdoc
@@ -131,7 +132,7 @@ class ConferencesController extends Controller
      * @throws \yii\db\Exception
      * @throws \yii\db\StaleObjectException
      */
-    public function actionAjaxcreate()
+    public function actionCreateAjax()
     {
         /**
          * view parameters

@@ -3,6 +3,7 @@
 namespace app\modules\workspace\modules\publications\articles\controllers;
 
 // project models
+use app\interfaces\PublicationControllerInterface;
 use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\pnrd\indexes\IndexesArticles;
@@ -27,7 +28,7 @@ use yii\web\UploadedFile;
  * JournalsController - implements the CRUD actions for articles, published in journals only
  * base model - app\models\units\articles\ArticleJournal
  */
-class JournalsController extends Controller
+class JournalsController extends Controller implements PublicationControllerInterface
 {
 
     /**
@@ -145,7 +146,7 @@ class JournalsController extends Controller
      * @throws \yii\db\Exception
      * @throws \yii\db\StaleObjectException
      */
-    public function actionAjaxcreate()
+    public function actionCreateAjax()
     {
         /**
          * view parameters

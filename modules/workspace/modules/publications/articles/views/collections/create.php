@@ -2,8 +2,10 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\units\articles\ArticleCollection */
+/**
+ * @var $this yii\web\View
+ * @var $model app\models\publications\articles\collections\ArticleCollection
+ */
 
 $this->title = 'Добавить статью';
 $this->params['breadcrumbs'][] = ['label' => 'Статьи - публикации в сборниках и главы книг', 'url' => ['index']];

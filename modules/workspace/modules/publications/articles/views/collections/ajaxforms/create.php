@@ -1,7 +1,6 @@
 <?php
 
 use kartik\select2\Select2;
-use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 

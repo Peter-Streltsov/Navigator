@@ -108,7 +108,7 @@ class MonographController extends Controller implements PublicationControllerInt
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('ajaxforms/create', [
             'model' => $model,
         ]);
     } // end action

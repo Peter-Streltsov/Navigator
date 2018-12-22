@@ -10,7 +10,7 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property string $type
  */
-class DissertationTypes extends ActiveRecord
+class Types extends ActiveRecord
 {
 
     /**
@@ -48,11 +48,11 @@ class DissertationTypes extends ActiveRecord
 
     /**
      * @inheritdoc
-     * @return DissertationTypesQuery the active query used by this AR class.
+     * @return TypesQuery the active query used by this AR class.
      */
     public static function find()
     {
-        return new DissertationTypesQuery(get_called_class());
+        return new TypesQuery(get_called_class());
     } // end function
 
 } // end class

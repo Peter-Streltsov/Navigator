@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
  *
  * @see DissertationTypes
  */
-class DissertationTypesQuery extends ActiveQuery
+class TypesQuery extends ActiveQuery
 {
 
     /**

@@ -5,7 +5,7 @@ namespace app\modules\workspace\modules\publications\controllers;
 // project classes
 use app\models\common\Cities;
 use app\models\publications\dissertations\Dissertations;
-use app\models\publications\dissertations\DissertationTypes;
+use app\models\publications\dissertations\Types;
 use app\models\identity\Authors;
 use app\models\common\Habilitations;
 // yii classes
@@ -27,7 +27,6 @@ class DissertationsController extends Controller
      */
     public function behaviors()
     {
-
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -36,9 +35,7 @@ class DissertationsController extends Controller
                 ],
             ],
         ];
-
     } // end function
-
 
 
     /**
@@ -47,7 +44,6 @@ class DissertationsController extends Controller
      */
     public function actionIndex()
     {
-
         $dataProvider = new ActiveDataProvider([
             'query' => Dissertations::find(),
         ]);
@@ -55,9 +51,7 @@ class DissertationsController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-
     } // end action
-
 
 
     /**
@@ -68,13 +62,10 @@ class DissertationsController extends Controller
      */
     public function actionView($id)
     {
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-
     } // end action
-
 
 
     /**
@@ -88,11 +79,10 @@ class DissertationsController extends Controller
      */
     public function actionCreate()
     {
-
         // new dissertation record
         $model = new Dissertations();
 
-        $types = ArrayHelper::map(DissertationTypes::find()->asArray()->all(), 'id', 'type');
+        $types = ArrayHelper::map(Types::find()->asArray()->all(), 'id', 'type');
 
         // lists all available authors
         $authors = ArrayHelper::map(Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id', function($item) {
@@ -128,9 +118,7 @@ class DissertationsController extends Controller
             'cities' => $cities,
             'authors' => $authors
         ]);
-
     } // end action
-
 
 
     /**
@@ -144,11 +132,10 @@ class DissertationsController extends Controller
      */
     public function actionAjaxcreate()
     {
-
         // new dissertation record
         $model = new Dissertations();
 
-        $types = ArrayHelper::map(DissertationTypes::find()->asArray()->all(), 'id', 'type');
+        $types = ArrayHelper::map(Types::find()->asArray()->all(), 'id', 'type');
 
         // lists all available authors
         $authors = ArrayHelper::map(Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id', function($item) {
@@ -184,7 +171,6 @@ class DissertationsController extends Controller
             'cities' => $cities,
             'authors' => $authors
         ]);
-
     } // end action
 
 
@@ -201,9 +187,8 @@ class DissertationsController extends Controller
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
-        $types = ArrayHelper::map(DissertationTypes::find()->asArray()->all(), 'id', 'type');
+        $types = ArrayHelper::map(Types::find()->asArray()->all(), 'id', 'type');
         $cities = ArrayHelper::map(Cities::find()->asArray()->all(), 'id', 'city');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -215,9 +200,7 @@ class DissertationsController extends Controller
             'types' => $types,
             'model' => $model,
         ]);
-
     } // end action
-
 
 
     /**
@@ -232,13 +215,9 @@ class DissertationsController extends Controller
      */
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
-
     } // end action
-
 
 
     /**
@@ -252,13 +231,10 @@ class DissertationsController extends Controller
      */
     protected function findModel($id)
     {
-
         if (($model = Dissertations::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
-
     } // end function
 
 } // end class

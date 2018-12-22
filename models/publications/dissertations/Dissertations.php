@@ -5,6 +5,7 @@ namespace app\models\publications\dissertations;
 // project classes
 use app\interfaces\PNRDInterface;
 use app\interfaces\PublicationInterface;
+use app\models\common\Cities;
 use app\models\common\Habilitations;
 use app\models\common\Languages;
 use app\models\identity\Authors;
@@ -67,10 +68,13 @@ class Dissertations extends Publication implements PublicationInterface, PNRDInt
         return [
             'id' => 'ID',
             'type' => 'Тип',
+            'typeValue' => 'Тип',
             'title' => 'Заголовок',
             'year' => 'Год защиты',
             'city' => 'Город',
+            'cityName' => 'Город',
             'habilitation' => 'Ученая степень',
+            'habilitationValue' => 'Ученая степень',
             'organisation' => 'Организация',
             'speciality' => 'Специальность',
             'pages_number' => 'Количество страниц',
@@ -142,7 +146,22 @@ class Dissertations extends Publication implements PublicationInterface, PNRDInt
      */
     public function getType()
     {
-        return $this->hasOne(DissertationTypes::className(), ['id' => 'type']);
+        return $this->hasOne(Types::className(), ['id' => $this->type]);
+    } // end function
+
+
+    /**
+     * @return string|null
+     */
+    public function getTypeValue()
+    {
+        return Types::find()->where(['id' => $this->type])->one()->type;
+    } // end function
+
+
+    public function getCityName()
+    {
+        return Cities::find()->where(['id' => $this->city])->one()->city;
     } // end function
 
 
@@ -187,11 +206,11 @@ class Dissertations extends Publication implements PublicationInterface, PNRDInt
 
     /**
      * @inheritdoc
-     * @return DissertationTypesQuery the active query used by this AR class;
+     * @return TypesQuery the active query used by this AR class;
      */
     public static function find()
     {
-        return new DissertationTypesQuery(get_called_class());
+        return new TypesQuery(get_called_class());
     } // end function
 
 } // end class

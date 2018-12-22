@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <br>
     <br>
@@ -30,42 +30,59 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <?php
+
+    if (Yii::$app->access->isAdmin()) {
+        echo $this->render('forms/view/control', [
+                'model' => $model
+        ]);
+    }
+
+    ?>
+
+    <br>
     <br>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'options' => [
-                'class' => 'table'
-        ],
-        'attributes' => [
-            'id',
-            'title',
-            [
-                'attribute' => 'author',
-                'value' => function($model) {
-                    $author = $model->authors;
-                    return $author->name . ' ' . $author->lastname;
-                }
-            ],
-            'year',
-            'city',
-            'organisation',
-            'speciality',
-            [
-                'attribute' => 'habilitation',
-                'value' => function($model) {
-                    return $model->habilitationValue;
-                    //$habilitation = $model->dissertationhabilitation;
-                    //return $habilitation->habilitation;
-                }
-            ],
-            [
-                'attribute' => 'type',
-                'value' => function($model) {
-                            return $model->type;
-                }
-            ]
-        ],
-    ]) ?>
-
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel panel-body">
+                    <?= DetailView::widget([
+                        'model' => $model,
+                        'options' => [
+                            'class' => 'table'
+                        ],
+                        'attributes' => [
+                            'id',
+                            'title',
+                            [
+                                'attribute' => 'author',
+                                'value' => function($model) {
+                                    $author = $model->authors;
+                                    return $author->name . ' ' . $author->lastname;
+                                }
+                            ],
+                            'year',
+                            'cityName',
+                            'language',
+                            'organisation',
+                            'state_registration',
+                            'pages_number',
+                            'speciality',
+                            'habilitationValue',
+                            'typeValue'
+                        ],
+                    ]) ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

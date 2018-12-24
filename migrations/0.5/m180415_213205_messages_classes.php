@@ -12,19 +12,16 @@ class m180415_213205_messages_classes extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('messages_classes', [
             'id' => $this->primaryKey(),
             'class' => $this->string()->notNull()
         ]);
 
         $this->batchInsert('messages_classes', ['class'], [
-            ['сообщение'],
-            ['исправить данные']
+            ['Сообщение'],
+            ['Запрос на исправление данных']
         ]);
-
     } // end function
-
 
 
     /**
@@ -32,11 +29,8 @@ class m180415_213205_messages_classes extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('messages_classes');
-
         return true;
-
     } // end function
 
 } // end class

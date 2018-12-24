@@ -50,8 +50,8 @@ class Monograph extends Publication implements PublicationInterface
     {
         return [
             [['title', 'year'], 'required'],
-            [['year'], 'integer'],
-            [['file'], 'string'],
+            [['year', 'city', 'volume_number', 'created_at', 'updated_at', 'series_number', 'pages_number'], 'integer'],
+            [['file', 'volume_name', 'series_name'], 'string'],
             [['title', 'subtitle', 'isbn'], 'string', 'max' => 255],
         ];
     } // end function
@@ -65,12 +65,19 @@ class Monograph extends Publication implements PublicationInterface
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
-            'subtitle' => 'Подзаголовок',
             'year' => 'Год издания',
             'publisher' => 'Издатель',
+            'city' => 'Место издания (город)',
             'class' => 'Категория',
+            'pages_number' => 'Количество страниц',
             'isbn' => 'ISBN',
-            'file' => 'Файл',
+            'volume_name' => 'Название тома',
+            'volume_number' => 'Номер тома',
+            'series_name' => 'Название серии',
+            'series_number' => 'Номер серии',
+            'created_at' => 'Создано',
+            'updated_at' => 'Изменено',
+            'file' => 'Прикрепленный файл',
             'authors' => 'Авторы'
         ];
     } // end function
@@ -91,11 +98,11 @@ class Monograph extends Publication implements PublicationInterface
     } // end function
 
 
-    /**
-     * Unit Interface implementation
-     */
+    /*****************************************************************************************************************/
 
     /**
+     * lists linked to current monograph Authors
+     *
      * @return array|\yii\db\ActiveQuery
      */
     public function getAuthors()
@@ -137,6 +144,7 @@ class Monograph extends Publication implements PublicationInterface
      * End Unit interface
      */
 
+    /*****************************************************************************************************************/
 
 
     /**

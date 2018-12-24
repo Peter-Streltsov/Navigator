@@ -27,6 +27,7 @@ class m181221_191227_dissertation_citations extends Migration
      */
     public function safeDown()
     {
+        $this->dropTable('dissertations_citations');
         echo "Table 'dissertations_citations' reverted;/n";
         return true;
     } // end function

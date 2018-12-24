@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m180401_014757_monographs
  */
-class m180401_014757_monographs extends Migration
+class m180401_014757_monograph extends Migration
 {
     /**
      * {@inheritdoc}
@@ -15,12 +15,16 @@ class m180401_014757_monographs extends Migration
         $this->createTable('monographs', [
             'id' => $this->primaryKey(),
             'title' => $this->string()->notNull(),
-            'subtitle' => $this->string()->defaultValue(null),
             'publisher' => $this->string(),
             'type' => $this->integer(),
             'year' => $this->integer()->notNull(),
             'isbn' => $this->string()->defaultValue(null),
-            'volume' => $this->float(),
+            'city' => $this->integer(),
+            'volume_name' => $this->string(),
+            'volume_number' => $this->integer(),
+            'series_name' => $this->string(),
+            'series_number' => $this->string(),
+            'pages_number' => $this->integer(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
             'file' => $this->string()

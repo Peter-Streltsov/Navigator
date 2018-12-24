@@ -19,11 +19,12 @@ class OrgdataController extends Controller
 
     /**
      * Renders the index view for the module
+     *
      * @return string
      */
     public function actionIndex()
     {
-        $model = Organisation::find()->one();
+        $model = Organisation::find()->where(['id' => 1])->one();
 
         if ($model == null) {
             $model = new Organisation();
@@ -38,34 +39,34 @@ class OrgdataController extends Controller
 
 
     /**
+     * Updates Organisation model;
+     * Updates organisation data (organisation name, link to web resource etc.);
+     * Redirects browser to workspace/admin 'index' page (in both cases - success and error);
+     *
      * @return string
      */
     public function actionUpdate()
     {
-        $model = Organisation::find()->one();
-
+        $current_model = Organisation::find()->where(['id' => 1])->one();
+        $new_model = new Organisation();
         if (Yii::$app->request->post()) {
-            $model = new Organisation();
-            $model->load(Yii::$app->request->post());
-            $model->id = 1;
-            if ($model->save()) {
-                Yii::$app->session->setFlash('success', 'Данные обновлены');
-            } else {
-                Yii::$app->session->setFlash('danger', 'Не удалось обновить данные');
+            if ($new_model->load(Yii::$app->request->post())) {
+                $current_model->organisation = $new_model->organisation;
+                $current_model->weblink = $new_model->weblink;
+                $current_model->save();
+                return $this->redirect('/workspace/admin');
             }
         }
 
-        if ($model == null) {
-            $model = new Organisation();
-        }
-
         return $this->renderAjax('update', [
-            'model' => $model
+            'model' => $current_model
         ]);
     } // end action
 
 
     /**
+     * Lists created departments;
+     *
      * @return string
      */
     public function actionDepartments()
@@ -84,9 +85,6 @@ class OrgdataController extends Controller
 
     /**
      * @return string
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionCreatedepartment()
     {

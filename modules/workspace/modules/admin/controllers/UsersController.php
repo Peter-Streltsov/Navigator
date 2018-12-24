@@ -48,7 +48,6 @@ class UsersController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Users::find(),
         ]);
-
         return $this->renderAjax('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -64,9 +63,15 @@ class UsersController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('view_ajax', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            return $this->render('view', [
+                'model' => $this->findModel($id)
+            ]);
+        }
     } // end action
 
 
@@ -76,9 +81,6 @@ class UsersController extends Controller
      * If creation successful, will redirect to the 'view' page
      *
      * @return string|\yii\web\Response
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionCreate()
     {

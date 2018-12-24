@@ -29,7 +29,8 @@ class AuthorsController extends Controller
                 ],
             ],
         ];
-    }
+    } // end function
+
 
     /**
      * Lists all Authors models.
@@ -44,10 +45,12 @@ class AuthorsController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-    }
+    } // end action
+
 
     /**
-     * Displays a single Authors model.
+     * Displays a single Authors model;
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -57,16 +60,17 @@ class AuthorsController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-    }
+    } // end action
+
 
     /**
-     * Creates a new Authors model
-     * If creation is successful, the browser will be redirected to the 'view' page
+     * Creates a new Authors model;
+     * If creation is successful, will redirect to 'view' page;
+     *
      * @return mixed
      */
     public function actionCreate()
     {
-
         if (Yii::$app->access->isAdmin()) {
             $model = new Authors();
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -79,14 +83,13 @@ class AuthorsController extends Controller
         } else {
             return $this->redirect('/control?denyrequest=1');
         }
-
     } // end action
 
 
-
     /**
-     * Updates an existing Authors model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Updates an existing Authors model;
+     * If update is successful, will redirect to 'view' page;
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -102,34 +105,34 @@ class AuthorsController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
-
-    /**
-     * Deletes an existing Authors model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-
     } // end action
 
 
-
-    public function actionViewpublications($id)
+    /**
+     * Deletes an existing Authors model;
+     * If deletion is successful, browser be redirect to 'index' page;
+     *
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDelete($id)
     {
-
-    }
+        if (Yii::$app->access->isAdmin()) {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        } else {
+            return $this->redirect('/control?denyrequest=1');
+        }
+    } // end action
 
 
     /**
-     * Finds the Authors model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * Finds the Authors model based on its primary key value;
+     * If the model is not found, a 404 HTTP exception will be thrown;
+     *
      * @param integer $id
      * @return Authors the loaded model
      * @throws NotFoundHttpException if the model cannot be found
@@ -141,5 +144,6 @@ class AuthorsController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-}
+    } // end function
+
+} // end class

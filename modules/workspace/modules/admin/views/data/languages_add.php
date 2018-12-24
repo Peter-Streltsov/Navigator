@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 Pjax::begin(['enablePushState' => false]);
 $form = new ActiveForm([
-    'action' => '/control/admin/data/addlanguage',
+    'action' => '/workspace/admin/data/addlanguage',
     'method' => 'post',
 ]);
 ?>

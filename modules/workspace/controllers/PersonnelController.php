@@ -4,7 +4,7 @@ namespace app\modules\workspace\controllers;
 
 // project classes
 use app\models\common\Habilitations;
-use app\modules\Control\models\Authors;
+use app\models\identity\Authors;
 use app\models\identity\Personnel;
 use app\models\common\Positions;
 // yii classes
@@ -26,7 +26,6 @@ class PersonnelController extends Controller
      */
     public function behaviors()
     {
-
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -35,9 +34,7 @@ class PersonnelController extends Controller
                 ],
             ],
         ];
-
     } // end function
-
 
 
     /**
@@ -47,7 +44,6 @@ class PersonnelController extends Controller
      */
     public function actionIndex()
     {
-
         $dataProvider = new ActiveDataProvider([
             'query' => Personnel::find(),
         ]);
@@ -55,9 +51,7 @@ class PersonnelController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
-
     } // end action
-
 
 
     /**
@@ -70,29 +64,23 @@ class PersonnelController extends Controller
      */
     public function actionView($id)
     {
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
-
     } // end action
 
 
-
     /**
-     * Updates an existing Personnel model
-     * If successful, will redirect to 'view' page
+     * Updates an existing Personnel model;
+     * If successful, will redirect to 'view' page;
      *
      * @param $id
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
      * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -108,21 +96,17 @@ class PersonnelController extends Controller
             'classes' => $classes,
             'habilitations' => $habilitations
         ]);
-
     } // end action
 
 
     /**
-     * Creates author from existing Personnel model
+     * Creates author from existing Personnel model;
      *
      * @param $id
      * @return \yii\web\Response
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionMakeauthor($id)
     {
-
         $personnel = Personnel::find()->where(['id' => $id])->one();
         //$personnel = Personnel::findOne(['id' => $id]);
 
@@ -133,14 +117,12 @@ class PersonnelController extends Controller
         $newauthor->save();
 
         return $this->redirect('personnel/view?id='.$id);
-
     } // end action
 
 
-
     /**
-     * Deletes an existing staff member (Personnel model)
-     * If deletion successful, will redirect to 'index' page
+     * Deletes an existing staff member (models\identity\Personnel);
+     * If deletion successful, will redirect to 'index' page;
      *
      * @param $id
      * @return \yii\web\Response
@@ -151,18 +133,18 @@ class PersonnelController extends Controller
      */
     public function actionDelete($id)
     {
-
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
-
+        if (Yii::$app->access->isSupervisor()) {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        } else {
+            return $this->redirect('/control?denyrequest=1');
+        }
     } // end action
 
 
-
     /**
-     * Finds the Personnel model based on its primary key ($id)
-     * If model is not found - 404 HTTP exception will be thrown
+     * Finds the Personnel model based on its primary key ($id);
+     * If model is not found - 404 HTTP exception will be thrown;
      *
      * @param $id
      * @return Personnel|null
@@ -171,13 +153,10 @@ class PersonnelController extends Controller
      */
     protected function findModel($id)
     {
-
         if (($model = Personnel::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
-
     } // end function
 
 } // end class

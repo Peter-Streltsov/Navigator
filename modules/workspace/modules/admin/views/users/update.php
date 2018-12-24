@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Users */
-/* @var $tokens \app\modules\Control\models\Accesstokens[]|array */
+/* @var $model app\models\identity\Users */
+/* @var $tokens \app\models\identity\Roles[]|array */
 
 $this->title = 'Редактировать данные пользователя '.$model->username;
 /*$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];

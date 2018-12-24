@@ -15,7 +15,7 @@ use yii\grid\GridView;
             <div class="panel panel-body">
                 <br>
                 <p>
-                    <?= \yii\helpers\Html::a('Добавить язык', '/control/admin/data/addlanguage', ['class' => 'button primary big']) ?>
+                    <?= \yii\helpers\Html::a('Добавить язык', '/workspace/admin/data/addlanguage', ['class' => 'button primary big']) ?>
                 </p>
                 <br>
                 <div class="row">

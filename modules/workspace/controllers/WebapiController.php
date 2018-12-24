@@ -2,26 +2,27 @@
 
 namespace app\modules\workspace\controllers;
 
-use app\modules\Control\models\Authors;
+// extensions
 use RenanBr\CrossRefClient;
-use yii\web\Controller;
 use Scopus\ScopusApi;
+// yii classes
+use Yii;
+use yii\web\Controller;
 
 /**
  * Class WebapiController
+ * Provides actions for retrieving data from webapi of scientonmetrics databases (Scopus, CrossRef etc.)
  *
  * @package app\modules\Control\controllers
  */
 class WebapiController extends Controller
 {
 
-
     /**
      * @return string
      */
     public function actionScopusapi()
     {
-
         //$authors = Authors::find()->all();
         $authors[] = ['name' => '', 'lastname' => ''];
 
@@ -40,20 +41,17 @@ class WebapiController extends Controller
         return $this->render('scopusindex', [
             'author' => $authors
         ]);
-
     } // end action
 
 
-
     /**
-     *
+     * @return string
      */
     public function actionCrossref()
     {
-
         $article = null;
 
-        if (\Yii::$app->request->post() && $_POST['DOI'] != null) {
+        if (Yii::$app->request->post() && $_POST['DOI'] != null) {
             $client = new CrossRefClient();
             $article = $client->request('works/' . $_POST['DOI']);
             if ($article['status'] == 'ok') {
@@ -67,17 +65,14 @@ class WebapiController extends Controller
                 'article' => $article
             ]);
         }
-
     } // end action
 
 
-
     /**
-     *
+     * @return bool|string
      */
     public function actionCrossrefajax()
     {
-
         if (\Yii::$app->request->post() && $_POST['DOI'] != null) {
             $client = new CrossRefClient();
             $article = $client->request('works/' . $_POST['DOI']);
@@ -93,7 +88,6 @@ class WebapiController extends Controller
         }
 
         return false;
-
     } // end action
 
 } // end class

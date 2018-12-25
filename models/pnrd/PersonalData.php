@@ -139,7 +139,7 @@ class PersonalData extends Model
 
         // resulting array
         $index = [];
-        echo count($this->author->indexedArticlesJournals);
+        //echo count($this->author->indexedArticlesJournals);
 
         // calculating indexes for ArticlesJournals
         foreach ($this->author->indexedArticlesJournals as $article) {
@@ -225,5 +225,25 @@ class PersonalData extends Model
     /**
      * END COUNTERS
      */
+
+
+    /**
+     *
+     */
+    public function getMedianIndex()
+    {
+        $index = 0;
+        $count = 0;
+        $users = Users::find()->all();
+        foreach ($users as $user) {
+            $author = $user->getAuthor();
+            if ($author != null) {
+                $personal = new PersonalData($user);
+                $index += $personal->getIndex();
+                $count++;
+            }
+        }
+        return $index / $count;
+    }
 
 } // end class

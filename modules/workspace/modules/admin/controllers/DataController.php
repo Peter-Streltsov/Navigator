@@ -5,6 +5,7 @@ namespace app\modules\workspace\modules\admin\controllers;
 // project classes
 use app\models\basis\Telemetry;
 use app\models\common\Languages;
+use app\models\pnrd\indexes\IndexesArticles;
 // yii classes
 use app\models\common\Magazines;
 use yii\data\ActiveDataProvider;
@@ -84,5 +85,26 @@ class DataController extends Controller
             'telemetry' => $telemetry
         ]);
     } // end action
+
+
+    /**
+     * @return string
+     */
+    public function actionIndexes()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => IndexesArticles::find(),
+        ]);
+
+        $model = IndexesArticles::find()->all();
+
+        $columns = IndexesArticles::find()->asArray()->all();
+
+        return $this->renderAjax('indexes', [
+            'dataProvider' => $dataProvider,
+            'columns' => $columns,
+            'model' => $model
+        ]);
+    }
 
 } // end class

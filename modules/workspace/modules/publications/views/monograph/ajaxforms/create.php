@@ -43,8 +43,47 @@ use yii\helpers\Html;
                     ]
                 ]) ?>
             </div>
-            <div class="col-lg-5">
+            <div class="col-lg-7">
                 <?= $form->field($model, 'publisher')->textInput(); ?>
+            </div>
+            <div class="col-lg-3">
+                <?= $form->field($model, 'pages_number')->textInput(); ?>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-5">
+                <?= $form->field($model, 'city')->textInput(); ?>
+            </div>
+            <div class="col-lg-7">
+                <?= $form->field($model, 'class')->textInput(); ?>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <?= $form->field($model, 'volume_name')->textInput(); ?>
+            </div>
+            <div class="col-lg-4">
+                <?= $form->field($model, 'volume_number')->textInput(); ?>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-lg-7">
+                <?= $form->field($model, 'series_name')->textInput(); ?>
+            </div>
+            <div class="col-lg-5">
+                <?= $form->field($model, 'series_number')->textInput(); ?>
             </div>
         </div>
 

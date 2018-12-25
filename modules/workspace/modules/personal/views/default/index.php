@@ -35,6 +35,11 @@ $this->registerJsFile('/js/modules/personal/module.js');
             ?>
         </div>
     </div>
+    <div class="col-lg-4">
+        <?= $this->render('forms/indexes', [
+                'personaldata' => $personaldata
+        ]); ?>
+    </div>
 </div>
 
 <br>

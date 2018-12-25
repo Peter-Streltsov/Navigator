@@ -17,6 +17,7 @@ class m180401_014757_monograph extends Migration
             'title' => $this->string()->notNull(),
             'publisher' => $this->string(),
             'type' => $this->integer(),
+            'class' => $this->integer(),
             'year' => $this->integer()->notNull(),
             'isbn' => $this->string()->defaultValue(null),
             'city' => $this->integer(),

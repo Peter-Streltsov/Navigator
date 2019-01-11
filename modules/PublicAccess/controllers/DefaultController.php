@@ -5,7 +5,7 @@ namespace app\modules\PublicAccess\controllers;
 // project classes
 use app\models\opendata\Data;
 // yii classes
-use app\modules\Control\modules\Admin\controllers\DataController;
+//use app\modules\Control\modules\Admin\controllers\DataController;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 

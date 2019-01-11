@@ -15,8 +15,18 @@ class m180622_022611_organisation extends Migration
         $this->createTable('organisation', [
             'id' => $this->primaryKey(),
             'organisation' => $this->string(),
-            'weblink' => $this->string()
+            'weblink' => $this->string(),
+            'first_page_message' => $this->text()
         ]);
+
+        $this->batchInsert('organisation', [
+            'organisation',
+            'first_page_message'
+        ],
+            [
+                ['{DEFAULT_ORGANISATION}', '{DEFAULT_MESSAGE}'],
+            ]
+        );
     } // end function
 
 

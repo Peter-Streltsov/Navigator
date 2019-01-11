@@ -2,16 +2,42 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Наукометрия';
 ?>
+
+<?php
+$info = "<div class=\"alert alert-info\" role=\"alert\">Отсутствуют данные организации
+ (название, ссылка на сетевой ресурс)
+ <br>
+ <br>
+ Сообщение главной страницы не задано
+ <br>
+ <br>
+ Для настройки параметров перейдите в Панель управления->Данные организации (в селекторе сохраненных данных)
+ </div>";
+
+if ($organisation->first_page_message == '{DEFAULT_MESSAGE}') {
+    $message = $info;
+} else {
+    $message = $organisation->first_page_message;
+}
+?>
+
 <br>
 <br>
 <br>
     <div class="container">
-        <center>
-        <h2>ЦЕИ РАН</h2>
-        <p> Наукометрическая база данных сотрудников ЦЕИ РАН </p>
-        </center>
+        <div class="row">
+            <div class="col-lg-2">
+
+            </div>
+            <div class="col-lg-8">
+                <?= $message; ?>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
     </div>
 
     <br>

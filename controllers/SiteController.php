@@ -2,13 +2,16 @@
 
 namespace app\controllers;
 
+// project classes
+use app\models\basis\Organisation;
+use app\models\LoginForm;
+use app\models\ContactForm;
+// yii classes
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -36,7 +39,8 @@ class SiteController extends Controller
                 ],
             ],
         ];
-    }
+    } // end function
+
 
     /**
      * {@inheritdoc}
@@ -52,28 +56,30 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
-    }
+    } // end function
+
 
     /**
-     * Displays homepage
+     * Displays homepage;
      *
      * @return string
      */
     public function actionIndex()
     {
-
         if (isset($_GET['denyrequest'])) {
             \Yii::$app->session->setFlash('danger', 'Доступ к запрашиваемому ресурсу невозможен');
         }
 
-        return $this->render('index');
+        $organisation = Organisation::find()->where(['id' => 1])->one();
 
+        return $this->render('index', [
+            'organisation' => $organisation
+        ]);
     } // end action
 
 
-
     /**
-     * Login action
+     * Login action;
      *
      * @return Response|string
      */
@@ -99,9 +105,8 @@ class SiteController extends Controller
     } // end action
 
 
-
     /**
-     * Logout action.
+     * Logout action;
      *
      * @return Response
      */
@@ -115,9 +120,8 @@ class SiteController extends Controller
     } // end action
 
 
-
     /**
-     * Displays contact page.
+     * Displays contact page;
      *
      * @return Response|string
      */

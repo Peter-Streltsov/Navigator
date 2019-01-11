@@ -12,7 +12,6 @@ class m180525_000920_citation_classes extends Migration
      */
     public function safeUp()
     {
-
         $this->createTable('citation_classes', [
             'id' => $this->primaryKey(),
             'class' => $this->string()->notNull(),
@@ -30,9 +29,7 @@ class m180525_000920_citation_classes extends Migration
                 ['Google Scholar', 4]
             ]
         );
-
     } // end function
-
 
 
     /**
@@ -40,11 +37,8 @@ class m180525_000920_citation_classes extends Migration
      */
     public function safeDown()
     {
-
         $this->dropTable('citation_classes');
-
         return true;
-
     } // end function
 
 } // end class

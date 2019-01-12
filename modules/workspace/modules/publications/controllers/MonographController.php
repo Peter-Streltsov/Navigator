@@ -2,17 +2,19 @@
 
 namespace app\modules\workspace\modules\publications\controllers;
 
-// project classes
+/** project classes */
 use app\interfaces\PublicationControllerInterface;
+use app\models\common\Cities;
+use app\models\common\Magazines;
 use app\models\identity\Authors as AuthorsCommon;
 //use app\modules\Control\models\Fileupload;
-//use app\modules\Control\models\IndexesArticles;
+use app\models\pnrd\indexes\IndexesArticles;
 use app\models\publications\monograph\Associations;
 use app\models\publications\monograph\Monograph;
 use app\models\publications\monograph\Authors;
 use app\models\publications\monograph\Citations;
-use app\modules\Control\models\CitationClasses;
-// yii classes
+use app\models\publications\CitationClasses;
+/** yii classes */
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\data\ActiveDataProvider;
@@ -44,7 +46,7 @@ class MonographController extends Controller implements PublicationControllerInt
 
 
     /**
-     * Lists all Monographs models
+     * Lists all Monographs models;
      * @return mixed
      */
     public function actionIndex()
@@ -77,8 +79,11 @@ class MonographController extends Controller implements PublicationControllerInt
 
     /**
      * Creates a new Monograph model;
+     * If request method is AJAX - renders form for a new Monograph model (via renderAjax from ajaxforms directory;
+     * If request method is GET - renders form for a new Monograph model (from forms directory);
+     * If request method is POST - tries to load and save model;
+     * If creation successful, will be redirect to 'view' page;
      *
-     * If creation is successful, the browser will be redirected to the 'view' page;
      * @return mixed
      */
     public function actionCreate()
@@ -88,17 +93,31 @@ class MonographController extends Controller implements PublicationControllerInt
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        $cities = Cities::find()->all();
+        $magazines = Magazines::find()->all();
+
+        if (Yii::$app->request->isAjax) {
+            return $this->renderAjax('', [
+                'model' => $model,
+                'magazines' => $magazines,
+                'cities' => $cities
+            ]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'magazines' => $magazines,
+                'cities' => $cities
+            ]);
+        }
     } // end action
 
 
     /**
      * If request method is AJAX - renders form for a new Monograph model;
      * If request method is POST - tries to load and save model;
-     * If creation is successful, the browser will be redirected to the 'view' page;
+     * If creation successful, will be redirect to 'view' page;
      *
+     * @deprecated (still in use, to be replaced with monograph/create route)
      * @return string|\yii\web\Response
      */
     public function actionCreateAjax()
@@ -108,8 +127,13 @@ class MonographController extends Controller implements PublicationControllerInt
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $cities = Cities::find()->all();
+        $magazines = Magazines::find()->all();
+
         return $this->renderAjax('ajaxforms/create', [
             'model' => $model,
+            'cities' => $cities,
+            'magazines' => $magazines
         ]);
     } // end action
 
@@ -118,29 +142,31 @@ class MonographController extends Controller implements PublicationControllerInt
      * Updates an existing Monograph model;
      * If update successful, will be redirect to 'view' page;
      *
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param int $id
+     * @return mixed|string|\yii\web\Response
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {
-        // affilation
+        // associations
         if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
-            $newaffilation = MonographAffilations::find()->where(['monograph_id' => $id])->one();
-            if ($newaffilation == null) {
-                $newaffilation = new MonographAffilations();
+            $new_association = Associations::find()->where(['monograph_id' => $id])->one();
+            if ($new_association == null) {
+                $new_association = new Associations();
             }
-            $newaffilation->monograph_id = $id;
-            if ($newaffilation->load(Yii::$app->request->post()) && $newaffilation->save()) {
+            $new_association->monograph_id = $id;
+            // saving association model and adding flash messages
+            if ($new_association->load(Yii::$app->request->post()) && $new_association->save()) {
                 Yii::$app->session->setFlash('success', 'Данные обновлены');
             } else {
                 Yii::$app->session->setFlash('danger', 'Не удалось обновить данные');
             }
         }
 
-        // adding citation
+        // citations
         if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
-            $citation = new MonographiesCitations();
+            $citation = new Citations();
             if ($citation->load(Yii::$app->request->post())) {
                 if ($citation->save()) {
                     return $this->redirect(['update', 'id' => $id]);
@@ -161,8 +187,8 @@ class MonographController extends Controller implements PublicationControllerInt
             }
         }
 
-        // uploading monography file
-        if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
+        // uploading monograph file
+        /*if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
             $file = new Fileupload();
             $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
             $file->upload('monographies/');
@@ -174,13 +200,13 @@ class MonographController extends Controller implements PublicationControllerInt
                 . $monographymodel->title
                 . ' сопоставлен файл '
                 . $file->name);
-        }
+        }*/
 
         // deleting author
         if (Yii::$app->request->post()) {
 
             if (isset($_POST['delete']) && $_POST['delete'] == 1) {
-                $author_delete = MonographiesAuthors::find()->where([
+                $author_delete = Authors::find()->where([
                     'author_id' => $_POST['author'],
                     'monography_id' => $id
                 ])->one();
@@ -189,7 +215,7 @@ class MonographController extends Controller implements PublicationControllerInt
             }
 
             if (isset($_POST['Monographies']['authors'])) {
-                $newauthor = new MonographiesAuthors();
+                $newauthor = new Authors();
                 $newauthor->monography_id = $id;
                 $newauthor->author_id = $_POST['Monographies']['authors'];
                 $newauthor->save();
@@ -224,14 +250,14 @@ class MonographController extends Controller implements PublicationControllerInt
             ->all();
 
         $citations = new ActiveDataProvider([
-            'query' => MonographiesCitations::find()->where(['monography_id' => $id])
+            'query' => Citations::find()->where(['monography_id' => $id])
         ]);
         $citation_classes = CitationClasses::find()->asArray()->all();
         $citation_classes = ArrayHelper::map($citation_classes, 'class', 'class');
 
-        $newcitation = new MonographiesCitations();
+        $newcitation = new Citations();
 
-        $affilation = MonographAffilations::find()->where(['monograph_id' => $id])->one();
+        $affilation = Associations::find()->where(['monograph_id' => $id])->one();
 
         // saving model data
         if (Yii::$app->request->post()) {
@@ -239,7 +265,6 @@ class MonographController extends Controller implements PublicationControllerInt
                 return $this->redirect(['update', 'id' => $id]);
             }
         }
-
 
         return $this->render('update', [
             'model' => $model[0],
@@ -253,7 +278,6 @@ class MonographController extends Controller implements PublicationControllerInt
             'authors' => $authors,
             'author_items' => $items
         ]);
-
     } // end action
 
 

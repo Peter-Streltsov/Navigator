@@ -1,16 +1,17 @@
 <?php
 
+// yii classes
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\Control\models\Monographies */
+/* @var $model app\models\publications\monograph\Monograph */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Монографии', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="monographies-view">
+<div class="monographs-view">
 
     <br>
 
@@ -42,7 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'subtitle',
             'year',
             'isbn',
             'file',

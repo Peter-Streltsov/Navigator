@@ -50,9 +50,9 @@ class Monograph extends Publication implements PublicationInterface
     {
         return [
             [['title', 'year'], 'required'],
-            [['year', 'city', 'volume_number', 'created_at', 'updated_at', 'series_number', 'pages_number'], 'integer'],
-            [['file', 'volume_name', 'series_name'], 'string'],
-            [['title', 'subtitle', 'isbn'], 'string', 'max' => 255],
+            [['year', 'volume_number', 'created_at', 'updated_at', 'series_number', 'pages_number'], 'integer'],
+            [['file', 'language', 'city', 'volume_name', 'series_name'], 'string'],
+            [['title', 'isbn'], 'string', 'max' => 255],
         ];
     } // end function
 
@@ -68,6 +68,7 @@ class Monograph extends Publication implements PublicationInterface
             'year' => 'Год издания',
             'publisher' => 'Издатель',
             'city' => 'Место издания (город)',
+            'language' => 'Язык',
             'class' => 'Категория',
             'pages_number' => 'Количество страниц',
             'isbn' => 'ISBN',

@@ -16,7 +16,9 @@ use yii\helpers\Html;
         <br>
 
         <div class="alert alert-warning">
-            <span class="glyphicon glyphicon-alert"> Авторов, цитирования и организации необходимо сопоставить публикации после создания базовой записи</span>
+            <span class="glyphicon glyphicon-alert">
+                Авторов, цитирования и организации необходимо сопоставить публикации после создания базовой записи
+            </span>
         </div>
 
         <br>
@@ -93,6 +95,9 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-lg-3">
                 <?= $form->field($model, 'isbn')->textInput(); ?>
+            </div>
+            <div class="col-lg-5">
+                <?= $form->field($model, 'language')->textInput(); ?>
             </div>
         </div>
 

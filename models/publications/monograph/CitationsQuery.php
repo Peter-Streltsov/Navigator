@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
  *
  * @see MonographiesCitations
  */
-class MonographiesCitationsQuery extends ActiveQuery
+class CitationsQuery extends ActiveQuery
 {
     /*public function active()
     {

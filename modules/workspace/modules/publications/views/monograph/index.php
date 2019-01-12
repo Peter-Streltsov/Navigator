@@ -39,7 +39,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     $gridColumns = [
         'title',
-        'subtitle',
         'year',
         'isbn',
         [
@@ -91,7 +90,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             'title',
-            'subtitle',
             'year',
             'isbn',
             [
@@ -143,7 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => "{view}<br><br>{file}",
                 'buttons' => [
                     'view' => function($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', ['/control/monographies/view', 'id' => $model->id], ['class' => 'button primary big', 'style' => 'border-radius: 2pc;']);
+                        return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', ['/workspace/publications/monograph/view', 'id' => $model->id], ['class' => 'button primary big', 'style' => 'border-radius: 2pc;']);
                     },
                     'file' => function($url, $model) {
                         ob_start();

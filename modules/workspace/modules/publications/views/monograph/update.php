@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Монографии', 'url' => ['
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
-<div class="monographies-update">
+<div class="monograph-update">
 
     <div class="row">
 
@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <br>
 
     <div class="monographies-form">
-        <?= $this->render('forms/update/monographyform', [
+        <?= $this->render('forms/update/monograph_form', [
                 'model' => $model,
                 'classes' => $classes
         ]) ?>
@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <br>
 
     <div>
-        <?= $this->render('forms/update/affilationform', [
+        <?= $this->render('forms/update/associations_form', [
             'affilation' => $affilation
         ]); ?>
     </div>
@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <br>
 
     <div>
-        <?= $this->render('forms/update/modalsform', [
+        <?= $this->render('forms/update/modals_form', [
             'file' => $file,
             'author_items' => $author_items,
             'model_authors' => $model_authors,
@@ -78,7 +78,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <br>
 
     <div>
-        <?= $this->render('forms/update/citationsform', [
+        <?= $this->render('forms/update/citations_form', [
             'model' => $model,
             'citations' => $citations,
             'citation_classes' => $citation_classes,

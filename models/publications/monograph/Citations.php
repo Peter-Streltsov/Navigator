@@ -2,6 +2,7 @@
 
 namespace app\models\publications\monograph;
 
+use app\interfaces\LinkedRecordsInterface;
 use yii\db\ActiveRecord;
 
 /**
@@ -13,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property string $class
  */
-class Citations extends ActiveRecord
+class Citations extends ActiveRecord implements LinkedRecordsInterface
 {
     /**
      * @inheritdoc
@@ -52,12 +53,30 @@ class Citations extends ActiveRecord
 
 
     /**
+     * @return string
+     */
+    public function getErrorsMessage()
+    {
+        $message = [];
+        $errors = $this->getErrors();
+        foreach ($errors as $key => $error) {
+            $text = '';
+            foreach ($error as $message) {
+                $text = $text . $message . ' ';
+            }
+            $message[] = 'Поле "' . $key . '" => ' . $text;
+        }
+        return implode('<br>', $message);
+    } // end function
+
+
+    /**
      * @inheritdoc
-     * @return MonographiesCitationsQuery the active query used by this AR class;
+     * @return CitationsQuery -  active query used by this AR class;
      */
     public static function find()
     {
-        return new MonographiesCitationsQuery(get_called_class());
+        return new CitationsQuery(get_called_class());
     } // end function
 
 } // end class

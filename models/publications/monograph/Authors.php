@@ -2,6 +2,7 @@
 
 namespace app\models\publications\monograph;
 
+use app\interfaces\LinkedRecordsInterface;
 use yii\db\ActiveRecord;
 
 /**
@@ -16,7 +17,7 @@ use yii\db\ActiveRecord;
  * @property Authors $author
  * @property Monograph $monograph
  */
-class Authors extends ActiveRecord
+class Authors extends ActiveRecord implements LinkedRecordsInterface
 {
 
     /**
@@ -70,6 +71,24 @@ class Authors extends ActiveRecord
     public function getMonograph()
     {
         return $this->hasOne(Monograph::className(), ['id' => 'monograph_id']);
+    } // end function
+
+
+    /**
+     * @return string
+     */
+    public function getErrorsMessage()
+    {
+        $message = [];
+        $errors = $this->getErrors();
+        foreach ($errors as $key => $error) {
+            $text = '';
+            foreach ($error as $message) {
+                $text = $text . $message . ' ';
+            }
+            $message[] = 'Поле "' . $key . '" => ' . $text;
+        }
+        return implode('<br>', $message);
     } // end function
 
 

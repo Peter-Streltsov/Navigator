@@ -43,6 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
+            'city',
+            'pages_number',
+            'language',
+            'volume_name',
+            'volume_number',
             'year',
             'isbn',
             'file',

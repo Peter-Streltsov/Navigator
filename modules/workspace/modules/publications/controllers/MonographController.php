@@ -164,26 +164,14 @@ class MonographController extends Controller implements PublicationControllerInt
             }
         }
 
-        // citations
+        // citations - saving or getting error message
         if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
             $citation = new Citations();
-            if ($citation->load(Yii::$app->request->post())) {
-                if ($citation->save()) {
-                    return $this->redirect(['update', 'id' => $id]);
-                } else {
-                    ob_start();
-                    $errors = $citation->getErrors();
-                    foreach ($errors as $key => $error) {
-                        $text = '';
-                        foreach ($error as $message) {
-                            $text = $text . $message . ' ';
-                        }
-                        echo 'Поле "' . $key . '" => ' . $text;
-                    }
-                    $cit = ob_get_contents();
-                    ob_get_clean();
-                    Yii::$app->session->setFlash('danger', $cit);
-                }
+            if ($citation->load(Yii::$app->request->post()) && $citation->save()) {
+                return $this->redirect(['update', 'id' => $id]);
+            } else {
+                $error_message = $citation->getErrorsMessage();
+                Yii::$app->session->setFlash('danger', $error_message);
             }
         }
 
@@ -227,27 +215,28 @@ class MonographController extends Controller implements PublicationControllerInt
         // view parameters
 
         // monography authors
-        $model_authors = Monograph::find($id)
+        /*$model_authors = Monograph::find($id)
             ->where(['monographies.id' => $id])
             ->joinWith('data')
-            ->all();
+            ->all();*/
 
         // authors list
-        $authors = Authors::find()->select(['id', 'name', 'lastname'])->asArray()->all();
+        $authors = AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all();
 
         $items = \yii\helpers\ArrayHelper::map($authors, 'id', function($items) {
             return $items['name']. ' ' . $items['lastname'];
         });
 
         // uploading file
-        $file = new Fileupload();
+        //$file = new Fileupload();
 
         $classes = IndexesArticles::find()->asArray()->all();
 
-        $model = Monograph::find($id)
+        /*$model = Monograph::find($id)
             ->where(['monographies.id' => $id])
-            ->joinWith('data')
-            ->all();
+            //->joinWith('data')
+            ->all();*/
+        $model = Monograph::find()->where(['id' => $id])->one();
 
         $citations = new ActiveDataProvider([
             'query' => Citations::find()->where(['monography_id' => $id])
@@ -267,10 +256,10 @@ class MonographController extends Controller implements PublicationControllerInt
         }
 
         return $this->render('update', [
-            'model' => $model[0],
-            'model_authors' => $model_authors[0],
+            'model' => $model,
+            //'model_authors' => $model_authors[0],
             'affilation' => $affilation,
-            'file' => $file,
+            //'file' => $file,
             'classes' => $classes,
             'citations' => $citations,
             'citation_classes' => $citation_classes,

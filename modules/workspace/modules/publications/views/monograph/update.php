@@ -36,10 +36,12 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <div>
 
-        <?= $this->render('forms/update/buttons', [
-            'file' => $file,
-            'model' => $model
-        ]) ?>
+        <?php
+        //echo $this->render('forms/update/buttons', [
+            //'file' => $file,
+            //'model' => $model
+        //])
+        // ?>
 
     </div>
 
@@ -67,9 +69,9 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <div>
         <?= $this->render('forms/update/modals_form', [
-            'file' => $file,
+            //'file' => $file,
             'author_items' => $author_items,
-            'model_authors' => $model_authors,
+            //'model_authors' => $model_authors,
             'model' => $model
         ]); ?>
     </div>

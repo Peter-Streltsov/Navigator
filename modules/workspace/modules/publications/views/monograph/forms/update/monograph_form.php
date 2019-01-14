@@ -5,8 +5,8 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */
-/* @var $model \app\modules\Control\models\Articles|\app\modules\Control\models\Monographies|mixed|\yii\db\ActiveRecord */
-/* @var $classes \app\modules\Control\models\Articles[]|array */
+/* @var $model \app\models\publications\monograph\Monograph|mixed|\yii\db\ActiveRecord */
+/* @var $classes \app\models\pnrd\indexes\IndexesArticles[]|array */
 ?>
 
 <div class="panel panel-default">
@@ -31,17 +31,6 @@ use yii\helpers\ArrayHelper;
         </div>
     </div>
 
-
-    <!-- Subtite input - text area (max 255 chars) -->
-    <div class="row">
-        <div class="col-lg-12">
-            <?= $form->field($model, 'subtitle')->textArea([
-                'rows' => 2,
-                'maxlength' => true,
-                'style' => 'background-color: #ffffe0;'
-            ]) ?>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-lg-12">

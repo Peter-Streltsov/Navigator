@@ -18,7 +18,7 @@ use app\modules\Control\models\ArticlesAffilations;
 
                 <?php
 
-                $mod_affilation = new ArticlesAffilations();
+                $mod_affilation = new \app\models\publications\monograph\Associations();
                 $affilation_form = ActiveForm::begin();
                 echo Html::hiddenInput('affilation_flag', '1');
 

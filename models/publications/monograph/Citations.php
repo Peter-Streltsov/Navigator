@@ -6,7 +6,7 @@ use app\interfaces\LinkedRecordsInterface;
 use yii\db\ActiveRecord;
 
 /**
- * ActiveRecord class for table "monographies_citations";
+ * ActiveRecord class for table "monograph_citations";
  * Table contains linked data for Monograph; (one-to-many; citation descriptions);
  *
  * @property int $id
@@ -21,7 +21,7 @@ class Citations extends ActiveRecord implements LinkedRecordsInterface
      */
     public static function tableName()
     {
-        return 'monographies_citations';
+        return 'monograph_citations';
     } // end function
 
 
@@ -31,8 +31,8 @@ class Citations extends ActiveRecord implements LinkedRecordsInterface
     public function rules()
     {
         return [
-            [['publisher', 'monography_id', 'title', 'class'], 'required'],
-            [['monography_id'], 'integer'],
+            [['publisher', 'monograph_id', 'title', 'class'], 'required'],
+            [['monograph_id'], 'integer'],
             [['publisher', 'title', 'class'], 'string', 'max' => 255],
         ];
     } // end function
@@ -45,7 +45,7 @@ class Citations extends ActiveRecord implements LinkedRecordsInterface
     {
         return [
             'id' => 'ID',
-            'publisher' => 'Издатель',
+            'monograph_id' => 'ID монографии',
             'title' => 'Описание',
             'class' => 'Категория',
         ];

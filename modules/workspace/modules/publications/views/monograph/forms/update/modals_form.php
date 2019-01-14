@@ -1,10 +1,8 @@
 <?php
 
 /* @var $author_items array */
-/* @var $file \app\modules\Control\models\Fileupload|mixed|string */
-/* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
 /* @var $this \yii\web\View */
-/* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
+/* @var $model \app\models\publications\monograph\Monograph */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -23,7 +21,7 @@ use yii\bootstrap\Modal;
 
             <?php
 
-            foreach ($model_authors['data'] as $author) {
+            /*foreach ($model_authors['data'] as $author) {
                 echo Html::beginForm(['monographies/update', 'id' => $model_authors->id, 'authid' => $author->id], 'post');
                 echo Html::input('text', 'username', $author->name.' '.$author->lastname, ['class' => 'form-control', 'readonly' => true]);
                 echo Html::input('hidden', 'delete', '1');
@@ -31,21 +29,8 @@ use yii\bootstrap\Modal;
                 echo Html::submitButton('Удалить', ['class' => 'button primary big']);
                 echo Html::endForm();
                 echo "<br>";
-            }
+            }*/
             ?>
-
-        </div>
-
-        <div class="form-group">
-
-            <br>
-            <h4>Добавить автора</h4>
-            <br>
-
-            <?php $form = ActiveForm::begin(); ?>
-            <?= $form->field($model, 'authors')->dropDownList($author_items, ['style' => 'width: 22pc;']); ?>
-            <?= Html::submitButton('Добавить', ['class' => 'button primary big']); ?>
-            <?php ActiveForm::end(); ?>
 
         </div>
     </div>
@@ -118,7 +103,7 @@ use yii\bootstrap\Modal;
 
             $uploadform = ActiveForm::begin();
             echo Html::hiddenInput('upload_flag', true);
-            echo $uploadform->field($file, 'uploadedfile')->fileInput();
+            //echo $uploadform->field($file, 'uploadedfile')->fileInput();
             echo Html::submitButton('Сохранить', ['class' => 'button']);
             $uploadform::end();
 

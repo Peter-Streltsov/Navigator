@@ -66,12 +66,6 @@ use yii\widgets\ActiveForm;
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-10">
-                        <?= $citations->field($newcitation, 'publisher')->textInput(); ?>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col-lg-5">
                         <?= $citations->field($newcitation, 'class')->dropDownList($citation_classes); ?>
                     </div>

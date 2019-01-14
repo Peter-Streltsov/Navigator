@@ -151,16 +151,17 @@ class MonographController extends Controller implements PublicationControllerInt
     {
         // associations
         if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
-            $new_association = Associations::find()->where(['monograph_id' => $id])->one();
-            if ($new_association == null) {
-                $new_association = new Associations();
+            $association = Associations::find()->where(['monograph_id' => $id])->one();
+            if ($association == null) {
+                $association = new Associations();
             }
-            $new_association->monograph_id = $id;
+            $association->monograph_id = $id;
             // saving association model and adding flash messages
-            if ($new_association->load(Yii::$app->request->post()) && $new_association->save()) {
+            if ($association->load(Yii::$app->request->post()) && $association->save()) {
                 Yii::$app->session->setFlash('success', 'Данные обновлены');
             } else {
-                Yii::$app->session->setFlash('danger', 'Не удалось обновить данные');
+                $association_errors = $association->getErrorsMessage();
+                Yii::$app->session->setFlash('danger', $association_errors);
             }
         }
 
@@ -230,16 +231,14 @@ class MonographController extends Controller implements PublicationControllerInt
         // uploading file
         //$file = new Fileupload();
 
+        // publication classes - now from articles
         $classes = IndexesArticles::find()->asArray()->all();
 
-        /*$model = Monograph::find($id)
-            ->where(['monographies.id' => $id])
-            //->joinWith('data')
-            ->all();*/
+        // monograph model
         $model = Monograph::find()->where(['id' => $id])->one();
 
         $citations = new ActiveDataProvider([
-            'query' => Citations::find()->where(['monography_id' => $id])
+            'query' => Citations::find()->where(['monograph_id' => $id])
         ]);
         $citation_classes = CitationClasses::find()->asArray()->all();
         $citation_classes = ArrayHelper::map($citation_classes, 'class', 'class');

@@ -32,7 +32,7 @@ class Organisation extends \yii\db\ActiveRecord
         return [
             [['organisation'], 'required'],
             [['organisation', 'weblink'], 'string', 'max' => 255],
-            [['first_page_message'], 'text']
+            [['first_page_message'], 'string']
         ];
     } // end function
 

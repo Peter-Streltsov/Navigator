@@ -7,11 +7,11 @@ use yii\helpers\Html;
 /* @var $file \app\models\filesystem\Fileupload */
 /* @var $model_authors \app\models\publications\monograph\Monograph */
 /* @var $authors \app\models\identity\Authors[]|array */
-/* @var $classes \app\models\publications\articles\Articles[]|array */
+/* @var $classes \app\models\pnrd\indexes\IndexesArticles[]|array */
 /* @var $citations \yii\data\ActiveDataProvider */
 /* @var $citation_classes array */
-/* @var $newcitation \app\modules\Control\models\MonographiesCitations */
-/* @var $affilation \app\modules\Control\models\MonographAffilations|array|null */
+/* @var $newcitation \app\models\publications\monograph\Citations */
+/* @var $association \app\models\publications\monograph\Associations|array|null */
 
 $this->title = 'Редактировать данные - ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Монографии', 'url' => ['index']];

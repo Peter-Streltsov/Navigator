@@ -30,7 +30,8 @@
         "yiisoft/yii2-imagine": "^2.0@dev",
         "samdark/yii2-webshell": "dev-master",
         "renanbr/crossref-client": "^1.0@dev",
-        "symfony/filesystem": "^4.1"
+        "symfony/filesystem": "^4.1",
+        "kartik-v/yii2-icons": "^1.4"
 
     },
     "require-dev": {

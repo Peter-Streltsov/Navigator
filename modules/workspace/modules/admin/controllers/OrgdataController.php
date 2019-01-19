@@ -48,7 +48,7 @@ class OrgdataController extends Controller
     public function actionUpdate()
     {
         $current_model = Organisation::find()->where(['id' => 1])->one();
-        $new_model = new Organisation();
+        /*$new_model = new Organisation();
         if (Yii::$app->request->post()) {
             if ($new_model->load(Yii::$app->request->post())) {
                 $current_model->organisation = $new_model->organisation;
@@ -56,6 +56,12 @@ class OrgdataController extends Controller
                 $current_model->save();
                 return $this->redirect('/workspace/admin');
             }
+        }*/
+
+        if (Yii::$app->request->post() && $current_model->load(Yii::$app->request->post())) {
+            $current_model->id = 1;
+            $current_model->save();
+            return $this->redirect('/workspace/admin');
         }
 
         return $this->renderAjax('update', [

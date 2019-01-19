@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
     <div class="panel panel-body">
         <div class="row">
             <div class="col-lg-10">
-                <?= Html::a('Редактировать', 'orgdata/update', ['class' => 'button primary big']); ?>
+                <?= Html::a('Редактировать', '/workspace/admin/orgdata/update', ['class' => 'button primary big']); ?>
             </div>
         </div>
         <br>

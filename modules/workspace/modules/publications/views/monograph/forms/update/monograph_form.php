@@ -24,8 +24,9 @@ use yii\helpers\ArrayHelper;
 
     <div class="row">
         <div class="col-lg-12">
-            <?= $form->field($model, 'title')->textInput([
+            <?= $form->field($model, 'title')->textarea([
                 'maxlength' => true,
+                'rows' => 3,
                 'style' => 'background-color: #ffffe0;'
             ]) ?>
         </div>

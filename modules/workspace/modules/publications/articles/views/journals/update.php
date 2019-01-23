@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $file \app\models\filesystem\Fileupload */
 /* @var $classes \app\models\pnrd\indexes\IndexesArticles[]|array */
 /* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
-/* @var $authors \app\modules\Control\models\Authors[]|array */
+/* @var $authors \app\models\identity\Authors[]|array */
 /* @var $citations \app\modules\Control\models\ArticlesCitations[]|array */
 /* @var $newcitation \app\modules\Control\models\ArticlesCitations */
 /* @var $citation_classes array */
@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'i
 $this->params['breadcrumbs'][] = 'Редактировать';
 
 ?>
+
 <div class="articles-update">
 
     <div class="row">

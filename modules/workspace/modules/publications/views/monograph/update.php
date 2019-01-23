@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Монографии', 'url' => ['
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
+
 <div class="monograph-update">
 
     <div class="row">
@@ -37,11 +38,11 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <div>
 
         <?php
-        //echo $this->render('forms/update/buttons', [
-            //'file' => $file,
-            //'model' => $model
-        //])
-        // ?>
+        echo $this->render('forms/update/buttons', [
+            'file' => $file,
+            'model' => $model
+        ])
+         ?>
 
     </div>
 

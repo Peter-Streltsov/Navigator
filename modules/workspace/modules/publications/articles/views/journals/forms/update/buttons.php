@@ -5,9 +5,9 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 
-/* @var $file \app\modules\Control\models\Fileupload|mixed|string */
+/* @var $file \app\models\filesystem\Fileupload|mixed|string */
 /* @var $this \yii\web\View */
-/* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
+/* @var $model \app\models\publications\articles\journals\ArticleJournal|mixed|\yii\db\ActiveRecord */
 ?>
 <div class="row">
     <div class="col-lg-5">

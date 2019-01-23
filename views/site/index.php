@@ -19,7 +19,7 @@ $info = "<div class=\"alert alert-info\" role=\"alert\">Отсутствуют �
 if ($organisation->first_page_message == '{DEFAULT_MESSAGE}') {
     $message = $info;
 } else {
-    $message = $organisation->first_page_message;
+    $message = "<div style='text-align: center; font-size: medium;' class='well'>" . $organisation->first_page_message . "</div>";
 }
 ?>
 

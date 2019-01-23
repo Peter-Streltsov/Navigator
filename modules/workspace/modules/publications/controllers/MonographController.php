@@ -6,6 +6,7 @@ namespace app\modules\workspace\modules\publications\controllers;
 use app\interfaces\PublicationControllerInterface;
 use app\models\common\Cities;
 use app\models\common\Magazines;
+use app\models\filesystem\Fileupload;
 use app\models\identity\Authors as AuthorsCommon;
 //use app\modules\Control\models\Fileupload;
 use app\models\pnrd\indexes\IndexesArticles;
@@ -149,6 +150,10 @@ class MonographController extends Controller implements PublicationControllerInt
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->access->isAdmin()) {
+            return $this->redirect('/workspace');
+        }
+
         // associations
         if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
             $association = Associations::find()->where(['monograph_id' => $id])->one();
@@ -175,6 +180,8 @@ class MonographController extends Controller implements PublicationControllerInt
                 Yii::$app->session->setFlash('danger', $error_message);
             }
         }
+
+        $file = new Fileupload();
 
         // uploading monograph file
         /*if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
@@ -249,7 +256,7 @@ class MonographController extends Controller implements PublicationControllerInt
 
         // saving model data
         if (Yii::$app->request->post()) {
-            if ($model[0]->load(Yii::$app->request->post()) && $model[0]->save()) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['update', 'id' => $id]);
             }
         }
@@ -258,7 +265,7 @@ class MonographController extends Controller implements PublicationControllerInt
             'model' => $model,
             //'model_authors' => $model_authors[0],
             'affilation' => $affilation,
-            //'file' => $file,
+            'file' => $file,
             'classes' => $classes,
             'citations' => $citations,
             'citation_classes' => $citation_classes,

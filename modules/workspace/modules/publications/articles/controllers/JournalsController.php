@@ -188,9 +188,9 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * Updates an existing Articles model
+     * Updates an existing Articles model;
      * Adds citations, authors etc;
-     * If update successful, will redirect to 'update' page
+     * If update successful, will redirect to 'update' page;
      *
      * @param $id
      * @return string|\yii\web\Response

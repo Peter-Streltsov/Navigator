@@ -54,7 +54,7 @@ class Message extends ActiveRecord
     {
         return [
             [['user_id', 'created_at'], 'integer'],
-            [['username', 'category', 'text'], 'required'],
+            [['user_id', 'username', 'category', 'text'], 'required'],
             [['text'], 'string'],
             [['username', 'category', 'custom_theme'], 'string', 'max' => 255],
         ];
@@ -88,6 +88,8 @@ class Message extends ActiveRecord
         parent::afterSave($insert, $changedAttributes);
         if ($insert) {
             Yii::$app->session->setFlash('success', 'Сообщение отправлено');
+        } else {
+            Yii::$app->session->setFlash('danger', 'Не далось отправить сообщение');
         }
     } // end function
 

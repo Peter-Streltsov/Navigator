@@ -7,6 +7,8 @@ use app\interfaces\PublicationControllerInterface;
 use app\models\publications\articles\collections\ArticleCollection;
 use app\models\common\Languages;
 use app\models\common\Magazines;
+use app\models\publications\articles\collections\Authors;
+use app\models\publications\articles\collections\Citations;
 //yii2 classes
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -133,8 +135,8 @@ class CollectionsController extends Controller implements PublicationControllerI
 
 
     /**
-     * Updates an existing ArticleCollection model
-     * If update successful, will redirect to 'view' page
+     * Updates an existing ArticleCollection model;
+     * If update successful, will redirect to 'view' page;
      *
      * @param $id
      * @return string|\yii\web\Response
@@ -145,17 +147,47 @@ class CollectionsController extends Controller implements PublicationControllerI
      */
     public function actionUpdate($id)
     {
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * checking user access rights (must be at least 'administrator');
+         */
         if (!Yii::$app->access->isAdmin()) {
             return $this->redirect('/workspace');
         }
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * requesting main model (models\publications\articles\collections\ArticleCollection);
+         */
         $model = $this->findModel($id);
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        $newcitation = new Citations();
+        $newauthor = new Authors();
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * saving data from POST (if successful - will redirect to 'view' page);
+         */
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * if request method is get and/or data cannot be saved;
+         * rendering view;
+         */
         return $this->render('update', [
             'model' => $model,
         ]);
+
     } // end action
 
 
@@ -171,11 +203,30 @@ class CollectionsController extends Controller implements PublicationControllerI
      */
     public function actionDelete($id)
     {
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * checking user acess rights (must be 'supervisor');
+         */
         if (!Yii::$app->access->isSupervisor()) {
             return $this->redirect('/workspace');
         }
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
         $this->findModel($id)->delete();
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
         return $this->redirect(['index']);
+
     } // end action
 
 

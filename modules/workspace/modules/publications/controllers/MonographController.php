@@ -142,6 +142,7 @@ class MonographController extends Controller implements PublicationControllerInt
     /**
      * Updates an existing Monograph model;
      * If update successful, will be redirect to 'view' page;
+     * TODO: rework uploading files (do not use from articles/journals controller; leave empty);
      *
      * @param int $id
      * @return mixed|string|\yii\web\Response
@@ -150,11 +151,32 @@ class MonographController extends Controller implements PublicationControllerInt
      */
     public function actionUpdate($id)
     {
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * checking user access rights;
+         * if not allowed - redirect to Workspace module index page;
+         */
         if (!Yii::$app->access->isAdmin()) {
             return $this->redirect('/workspace');
         }
 
-        // associations
+        /**
+         * preparing new models to save linked data;
+         *
+         * @var Citations $newCitation
+         * @var Associations $newAssociation
+         * @var Authors $newAuthor
+         */
+        $newCitation = new Citations();
+        $newAssociation = new Associations();
+        $newAuthor = new Authors();
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * associations
+         */
         if (Yii::$app->request->post() && isset($_POST['affilation_flag'])) {
             $association = Associations::find()->where(['monograph_id' => $id])->one();
             if ($association == null) {
@@ -170,7 +192,12 @@ class MonographController extends Controller implements PublicationControllerInt
             }
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+
         // citations - saving or getting error message
+        /**
+         *
+         */
         if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
             $citation = new Citations();
             if ($citation->load(Yii::$app->request->post()) && $citation->save()) {
@@ -181,7 +208,11 @@ class MonographController extends Controller implements PublicationControllerInt
             }
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+
         $file = new Fileupload();
+
+        //------------------------------------------------------------------------------------------------------------//
 
         // uploading monograph file
         /*if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
@@ -198,7 +229,12 @@ class MonographController extends Controller implements PublicationControllerInt
                 . $file->name);
         }*/
 
+        //------------------------------------------------------------------------------------------------------------//
+
         // deleting author
+        /**
+         *
+         */
         if (Yii::$app->request->post()) {
 
             if (isset($_POST['delete']) && $_POST['delete'] == 1) {
@@ -220,7 +256,7 @@ class MonographController extends Controller implements PublicationControllerInt
 
         }
 
-        // view parameters
+        //------------------------------------------------------------------------------------------------------------//
 
         // monography authors
         /*$model_authors = Monograph::find($id)
@@ -228,52 +264,163 @@ class MonographController extends Controller implements PublicationControllerInt
             ->joinWith('data')
             ->all();*/
 
-        // authors list
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * listed authors (from app\identity\Authors model);
+         */
         $authors = AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all();
 
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * listed authors in associate array (via ArrayHelper::map());
+         */
         $items = \yii\helpers\ArrayHelper::map($authors, 'id', function($items) {
             return $items['name']. ' ' . $items['lastname'];
         });
 
-        // uploading file
-        //$file = new Fileupload();
+        //------------------------------------------------------------------------------------------------------------//
 
-        // publication classes - now from articles
+        /**
+         * publication classes - from articles module - classes for monographs not specified;
+         */
         $classes = IndexesArticles::find()->asArray()->all();
 
-        // monograph model
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * monograph model
+         */
         $model = Monograph::find()->where(['id' => $id])->one();
 
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * citations linked to current monograph;
+         */
         $citations = new ActiveDataProvider([
             'query' => Citations::find()->where(['monograph_id' => $id])
         ]);
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * getting citation classes (associate array);
+         */
         $citation_classes = CitationClasses::find()->asArray()->all();
         $citation_classes = ArrayHelper::map($citation_classes, 'class', 'class');
 
-        $newcitation = new Citations();
+        //------------------------------------------------------------------------------------------------------------//
 
-        $affilation = Associations::find()->where(['monograph_id' => $id])->one();
+        /**
+         *
+         */
+        $associations = Associations::find()->where(['monograph_id' => $id])->one();
 
-        // saving model data
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * saving main model (if method is post and properties loaded successfully);
+         */
         if (Yii::$app->request->post()) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['update', 'id' => $id]);
             }
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * rendering view (for all methods);
+         */
         return $this->render('update', [
             'model' => $model,
             //'model_authors' => $model_authors[0],
-            'affilation' => $affilation,
+            'affilation' => $associations,
             'file' => $file,
             'classes' => $classes,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
-            'newcitation' => $newcitation,
+            'newcitation' => $newCitation,
+            'newAssociation' => $newAssociation,
             'authors' => $authors,
             'author_items' => $items
         ]);
+
     } // end action
+
+
+    /**
+     * Adds new linked author to a monograph;
+     *
+     * @param integer $id
+     * @return string
+     */
+    public function actionAuthor($id)
+    {
+        $author = new Authors();
+
+        if (Yii::$app->request->post()) {
+            if ($author->load(Yii::$app->request->post())) {
+                $author->save();
+            }
+        }
+
+        $author_items = ArrayHelper::map(
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
+        $newauthor = new Authors();
+
+        return $this->renderAjax('forms/update/authorsform', [
+            'id' => $id,
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items,
+            'newauthor' => $newauthor,
+        ]);
+    } // end action
+
+
+    /**
+     * Deleting associated with monograph author record (models\monograph\Authors);
+     *
+     * @param integer $author_id
+     * @param integer $id
+     * @return string
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteauthor($author_id, $id)
+    {
+        $deleting_author = Authors::findOne(['id' => $author_id]);
+        $deleting_author->delete();
+
+        $author_items = ArrayHelper::map(
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
+        $newauthor = new Authors();
+
+        return $this->renderAjax('forms/update/authorsform', [
+            'id' => $id,
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items,
+            'newauthor' => $newauthor,
+        ]);
+    } // end function
 
 
     /**
@@ -288,9 +435,16 @@ class MonographController extends Controller implements PublicationControllerInt
      */
     public function actionDelete($id)
     {
-        if (Yii::$app->access->isAdmin()) {
+        /**
+         * checking user access rights (must be 'supervisor');
+         * if not allowed - redirect to 'index' page;
+         */
+        if (Yii::$app->access->isSupervisor()) {
             $this->findModel($id)->delete();
             return $this->redirect(['index']);
+        } else {
+            Yii::$app->session->setFlash('danger', 'Операция не разрешена для текущих прав пользователя');
+            $this->redirect('/workspace');
         }
         return null;
     } // end action

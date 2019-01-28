@@ -197,15 +197,30 @@ class JournalsController extends Controller implements PublicationControllerInte
      */
     public function actionUpdate($id)
     {
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * checking user access rights;
+         */
         if (!Yii::$app->access->isAdmin()) {
             return $this->redirect('/workspace');
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
         $newmagazine = new Magazines();
         $newcitation = new Citations();
         $newauthor = new Authors();
 
+        //------------------------------------------------------------------------------------------------------------//
+
         // uploading article file
+        /**
+         *
+         */
         if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
             $file = new Fileupload();
             $file->uploadedfile = UploadedFile::getInstance($file, 'uploadedfile');
@@ -213,29 +228,60 @@ class JournalsController extends Controller implements PublicationControllerInte
             $articlemodel = ArticleJournal::find()->where(['id' => $id])->one();
             $articlemodel->file = $file->name;
             $articlemodel->save();
-            Yii::$app->session->setFlash('info', 'Статье ' . $articlemodel->title . ' сопоставлен файл ' . $file->name);
+            Yii::$app->session->setFlash(
+                'info',
+                'Статье ' . $articlemodel->title . ' сопоставлен файл ' . $file->name
+            );
         }
+
+        //------------------------------------------------------------------------------------------------------------//
 
         $linked_authors = new ActiveDataProvider([
             'query' => Authors::find()->where(['article_id' => $id])
         ]);
 
-        // authors for current article
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * authors for current article
+         */
         $author_items = ArrayHelper::map(
             AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
             function ($item) {
                 return $item['name'] . ' ' . $item['lastname'];
             });
 
+        //------------------------------------------------------------------------------------------------------------//
+
         // file to upload if necessary
         $file = new Fileupload();
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
+
+        //------------------------------------------------------------------------------------------------------------//
+
         // article categories (pnrd)
+        /**
+         *
+         */
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+
+        //------------------------------------------------------------------------------------------------------------//
+
         // article
+        /**
+         *
+         */
         $model = ArticleJournal::find()
             ->where(['id' => $id])
             ->one();
+
+        //------------------------------------------------------------------------------------------------------------//
 
         // updating article data - articleform
         if (Yii::$app->request->post()) {
@@ -245,25 +291,50 @@ class JournalsController extends Controller implements PublicationControllerInte
             }
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+
         // added languages list
+        /**
+         *
+         */
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+
+        //------------------------------------------------------------------------------------------------------------//
 
         // added citations
         //$citations = $model->citations();
+        /**
+         *
+         */
         $citations = new ActiveDataProvider([
             'query' => Citations::find()->where(['article_id' => $id])
         ]);
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
         $citation_classes = ArrayHelper::map(
             CitationClasses::find()->asArray()->all(),
             'class',
             'class'
         );
 
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
         $associations = new ActiveDataProvider([
             'query' => Associations::find()->where(['article_id' => $id])
         ]);
 
-        // view
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * rendering view;
+         */
         return $this->render('update', [
             'linked_authors' => $linked_authors,
             'associations' => $associations,
@@ -279,6 +350,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             'author_items' => $author_items,
             'id' => $id
         ]);
+
     } // end action
 
 

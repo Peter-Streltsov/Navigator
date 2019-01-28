@@ -172,8 +172,8 @@ class ConferencesController extends Controller implements PublicationControllerI
 
 
     /**
-     * Updates an existing ArticleConference model
-     * If update successful, will redirect to 'view' page
+     * Updates an existing ArticleConference model;
+     * If update successful, will redirect to 'view' page;
      *
      * @param $id
      * @return string|\yii\web\Response
@@ -184,32 +184,87 @@ class ConferencesController extends Controller implements PublicationControllerI
      */
     public function actionUpdate($id)
     {
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * checking user access rights (else - redirect to Workspace module index page);
+         */
         if (!Yii::$app->access->isAdmin()) {
             return $this->redirect('/workspace');
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * creating new models (magazines, citations, authors);
+         * @var Magazines $newmagazine
+         * @var Citations $newcitation
+         * @var Authors $newauthor
+         */
         $newmagazine = new Magazines();
         $newcitation = new Citations();
         $newauthor = new Authors();
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * collecting article authors;
+         * @var ActiveDataProvider
+         */
         $linked_authors = new ActiveDataProvider([
             'query' => Authors::find()->where(['article_id' => $id])
         ]);
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * transfering $authors into array via ArrayHelper::map();
+         * @var array $author_items
+         */
         $author_items = ArrayHelper::map(
             AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
             function ($item) {
                 return $item['name'] . ' ' . $item['lastname'];
             });
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * collecting citations for current article;
+         * @var ActiveDataProvider $citations
+         */
         $citations = new ActiveDataProvider([
             'query' => Citations::find()->where(['article_id' => $id])
         ]);
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * associations for current article;
+         */
         $associations = new ActiveDataProvider([
             'query' => Associations::find()->where(['article_id' => $id])
         ]);
+
+        //------------------------------------------------------------------------------------------------------------//
+
+
         $citation_classes = ArrayHelper::map(CitationClasses::find()->asArray()->all(),'class','class');
+
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+
         $file = new Fileupload();
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
         $model = $this->findModel($id);
+
+        //------------------------------------------------------------------------------------------------------------//
 
         // updating article data - articleform
         if (Yii::$app->request->post()) {
@@ -219,10 +274,17 @@ class ConferencesController extends Controller implements PublicationControllerI
             }
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * rendering view;
+         */
         return $this->render('update', [
             'model' => $model,
             'id' => $id,
@@ -237,6 +299,7 @@ class ConferencesController extends Controller implements PublicationControllerI
             'citation_classes' => $citation_classes,
             'file' => $file
         ]);
+
     } // end action
 
 

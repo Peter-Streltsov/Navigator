@@ -10,11 +10,16 @@ use app\modules\Control\models\ArticlesAffilations;
 ?>
 
 <div class="panel panel-default">
+    <div class="panel panel-heading">
+        <h4>Ассоциированные организации</h4>
+    </div>
     <div class="panel panel-body">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
 
-                <h4>Affilation</h4>
+                <br>
+                <br>
+                <br>
 
                 <?php
 
@@ -43,6 +48,9 @@ use app\modules\Control\models\ArticlesAffilations;
                 }
 
                 ?>
+            </div>
+            <div class="col-lg-6">
+
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 <?php
 
+// yii classes
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 
@@ -8,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $author_items array */
 /* @var $file \app\models\filesystem\Fileupload */
 /* @var $classes \app\models\pnrd\indexes\IndexesArticles[]|array */
-/* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
+/* @var $model_authors \app\models\publications\articles\journals\ArticleJournal */
 /* @var $authors \app\models\identity\Authors[]|array */
 /* @var $citations \app\modules\Control\models\ArticlesCitations[]|array */
 /* @var $newcitation \app\modules\Control\models\ArticlesCitations */
@@ -41,24 +42,26 @@ $this->params['breadcrumbs'][] = 'Редактировать';
         </div>
     </div>
 
+    <!-- -->
     <?php Pjax::begin(); ?>
-
     <div>
         <?= $this->render('forms/update/buttons', [
             'file' => $file,
             'model' => $model
         ]) ?>
     </div>
-
     <?php Pjax::end(); ?>
 
     <br>
     <br>
 
+
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!-- Rendering main article form using Yii Pjax widget ------------------------------------------------------------>
     <?php Pjax::begin([
             'enablePushState' => false,
     ]); ?>
-
     <div class="articles-form">
         <?= $this->render('forms/update/articleform', [
             'classes' => $classes,
@@ -67,25 +70,29 @@ $this->params['breadcrumbs'][] = 'Редактировать';
             'model' => $model
         ]) ?>
     </div>
-
     <?php Pjax::end(); ?>
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------------------------->
 
     <br>
     <br>
 
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!-- Rendering associations form form using Yii Pjax widget ------------------------------------------------------->
     <?php Pjax::begin([
             'enablePushState' => false,
             'id' => 'associations',
     ]); ?>
-
     <div id="associations">
         <?= $this->render('forms/update/associations', [
             'associations' => $associations,
             'id' => $id
         ]); ?>
     </div>
-
     <?php Pjax::end(); ?>
+    <!----------------------------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------------------------->
 
     <br>
     <br>

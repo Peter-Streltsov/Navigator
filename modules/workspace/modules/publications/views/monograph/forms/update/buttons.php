@@ -16,7 +16,7 @@ use yii\helpers\Html;
 
         if (!isset($model->text)) {
             $class = 'button danger';
-            $modaltextbutton = '<br><h5>Текст статьи не задан</h5><br>';
+            $modaltextbutton = '<h5><span class="glyphicon glyphicon-book"></span>  Текст статьи не задан</h5>';
             $modaltextheader = 'Загрузить текст';
             ob_start();
             /*\mihaildev\ckeditor\CKEditor::widget([

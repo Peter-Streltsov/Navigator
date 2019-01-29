@@ -77,7 +77,9 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <?php Pjax::begin(); ?>
     <div>
         <?= $this->render('forms/update/associations_form', [
-            'affilation' => $affilation
+            'associations' => $associations,
+            'newAssociation' => $newAssociation,
+            'id' => $id
         ]); ?>
     </div>
     <?php Pjax::end(); ?>

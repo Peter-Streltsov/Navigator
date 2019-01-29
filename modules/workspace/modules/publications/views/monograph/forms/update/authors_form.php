@@ -10,11 +10,17 @@ use yii\bootstrap\Modal;
 
 ?>
 
-<div class="row">
-
-    <div class="col-lg-6">
-
+<div class="panel panel-default">
+    <div class="panel panel-heading">
         <h4>Авторы:</h4>
+    </div>
+    <div class="panel panel-body">
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
         <br>
 
         <div class="form-inline">
@@ -34,81 +40,3 @@ use yii\bootstrap\Modal;
 
         </div>
     </div>
-
-    <div class="col-lg-4">
-
-        <br>
-        <br>
-        <br>
-
-        <div>
-            <?php
-            if (!isset($model->text)) {
-                $class = 'button danger';
-                $modaltextbutton = '<h5>Текст статьи не задан</h5>';
-                $modaltextheader = 'Загрузить текст';
-                ob_start();
-                /*\mihaildev\ckeditor\CKEditor::widget([
-                        'editorOptions' => [
-                                'preset' => 'basic'
-                        ]
-                ]);*/
-                $modaltextcontent = ob_get_contents();
-                ob_get_clean();
-            } else {
-                $class = 'button primary';
-                $modaltextbutton = '<h5 style="color: green;">Текст статьи</h5>';
-                $modaltextheader = '';
-                ob_start();
-                $modaltextcontent = ob_get_contents();
-            }
-
-            Modal::begin([
-                'header' => $modaltextheader,
-                'toggleButton' => [
-                    'label' => $modaltextbutton,
-                    'class' => $class
-                ]
-            ]);
-
-            echo $modaltextcontent;
-
-            Modal::end();
-
-            ?>
-
-        </div>
-
-        <br>
-        <br>
-
-        <div>
-            <?php
-            if (isset($model->file)) {
-                if ($model->file == '') {
-                    $modal = "<h5 style='color: red;'>Имя файла не задано!</h5>";
-                } else {
-                    $modal = "<h5 style='color: green;'>Прикрепленный файл </h5>" . $model->file;
-                }
-            } else {
-                $modal = "<h5 style='color: red;'>Файл не загружен</h5>";
-            }
-            \yii\bootstrap\Modal::begin([
-                'header' => 'Файл статьи',
-                'toggleButton' => [
-                    'label' => $modal,
-                    'class' => 'button'
-                ]
-            ]);
-
-            $uploadform = ActiveForm::begin();
-            echo Html::hiddenInput('upload_flag', true);
-            //echo $uploadform->field($file, 'uploadedfile')->fileInput();
-            echo Html::submitButton('Сохранить', ['class' => 'button']);
-            $uploadform::end();
-
-            \yii\bootstrap\Modal::end();
-            ?>
-        </div>
-    </div>
-</div>

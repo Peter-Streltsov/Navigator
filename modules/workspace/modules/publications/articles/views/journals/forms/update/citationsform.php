@@ -6,9 +6,9 @@ use yii\grid\GridView;
 use yii\grid\ActionColumn;
 
 /* @var $this \yii\web\View */
-/* @var $citations \app\modules\Control\models\ArticlesCitations[]|array|static */
+/* @var $citations \app\models\publications\articles\journals\Citations */
 /* @var $citation_classes  */
-/* @var $newcitation \app\modules\Control\models\ArticlesCitations */
+/* @var $newcitation \app\models\publications\articles\journals\Citations */
 /* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
 ?>
 

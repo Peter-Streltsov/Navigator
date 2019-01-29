@@ -45,9 +45,9 @@ class Associations extends ActiveRecord implements LinkedRecordsInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'monograph_id' => 'Monograph ID',
-            'type' => 'Type',
+            'name' => 'Название организации',
+            'monograph_id' => 'Идентификатор публикации',
+            'type' => '',
         ];
     } // end function
 

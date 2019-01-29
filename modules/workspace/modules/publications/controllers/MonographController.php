@@ -316,7 +316,10 @@ class MonographController extends Controller implements PublicationControllerInt
         /**
          *
          */
-        $associations = Associations::find()->where(['monograph_id' => $id])->one();
+        //$associations = Associations::find()->where(['monograph_id' => $id])->one();
+        $associations = new ActiveDataProvider([
+            'query' => Citations::find()->where(['monograph_id' => $id])
+        ]);
 
         //------------------------------------------------------------------------------------------------------------//
 
@@ -335,9 +338,10 @@ class MonographController extends Controller implements PublicationControllerInt
          * rendering view (for all methods);
          */
         return $this->render('update', [
+            'id' => $id,
             'model' => $model,
             //'model_authors' => $model_authors[0],
-            'affilation' => $associations,
+            'associations' => $associations,
             'file' => $file,
             'classes' => $classes,
             'citations' => $citations,

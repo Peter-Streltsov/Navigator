@@ -16,17 +16,13 @@ echo Nav::widget([
                 ],
                 [
                     'label' => '<b id="suspended">Уведомления</b>',
-                    //'url' => '/control/personal/notifications',
+                    'url' => '/personal/notifications',
                     'options' => [
                         'style' => 'width: 10pc;'
                     ]
                 ],
                 [
                     'label' => '<br>'
-                ],
-                [
-                    'label' => 'Загрузить данные',
-                    'url' => '/workspace/personal/upload'
                 ],
                 [
                     'label' => '<br>'

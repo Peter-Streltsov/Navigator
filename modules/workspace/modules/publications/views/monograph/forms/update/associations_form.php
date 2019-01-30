@@ -8,7 +8,6 @@ use yii\widgets\ActiveForm;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
 use yii\helpers\Html;
-
 ?>
 
 <div class="panel panel-default">
@@ -18,15 +17,12 @@ use yii\helpers\Html;
     <div class="panel panel-body">
         <div class="row">
             <div class="col-lg-6">
-
                 <br>
                 <br>
                 <br>
-
                 <div class="panel panel-default">
                     <div class="panel panel-body">
                         <?php
-
                         echo GridView::widget([
                             'dataProvider' => $associations,
                             'tableOptions' => [
@@ -53,11 +49,9 @@ use yii\helpers\Html;
                                 ]
                             ]
                         ]);
-
                         ?>
                     </div>
                 </div>
-
                 <?php
 
                 /*$mod_affilation = new \app\models\publications\monograph\Associations();
@@ -89,7 +83,6 @@ use yii\helpers\Html;
             <div class="col-lg-1"></div>
             <div class="col-lg-5">
                 <?php
-
                 $authorsform = ActiveForm::begin([
                     'options' => [
                         'data-pjax' => true,
@@ -98,15 +91,11 @@ use yii\helpers\Html;
                     'action' => ['association?id=' . $id],
                     'method' => 'post'
                 ]);
-
                 $assoc = new Associations();
-
                 echo $authorsform->field($newAssociation, 'article_id')->hiddenInput(['value' => $id])->label('');
                 echo $authorsform->field($newAssociation, 'name')->textInput();
                 echo Html::submitButton('<span style="color: green;" class="glyphicon glyphicon-plus"></span>');
-
                 ActiveForm::end();
-
                 ?>
             </div>
         </div>

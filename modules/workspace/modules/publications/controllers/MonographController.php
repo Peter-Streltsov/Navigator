@@ -264,6 +264,11 @@ class MonographController extends Controller implements PublicationControllerInt
             ->joinWith('data')
             ->all();*/
 
+        //$modelAuthors = Authors::find()->where(['monograph_key' => $id])->all();
+        $modelAuthors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['monograph_key' => $id])
+        ]);
+
         //------------------------------------------------------------------------------------------------------------//
 
         /**
@@ -340,13 +345,14 @@ class MonographController extends Controller implements PublicationControllerInt
         return $this->render('update', [
             'id' => $id,
             'model' => $model,
-            //'model_authors' => $model_authors[0],
+            'modelAuthors' => $modelAuthors,
             'associations' => $associations,
             'file' => $file,
             'classes' => $classes,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
             'newcitation' => $newCitation,
+            'newAuthor' => $newAuthor,
             'newAssociation' => $newAssociation,
             'authors' => $authors,
             'author_items' => $items

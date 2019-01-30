@@ -1,16 +1,15 @@
 <?php
 
-
 use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $author_items array */
-/* @var $file \app\modules\Control\models\Fileupload|mixed|string */
+/* @var $file \app\models\filesystem\Fileupload */
 /* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
 /* @var $this \yii\web\View */
-/* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
-/* @var $newauthor \app\models\units\articles\ArticlesAuthors */
+/* @var $model \app\modules\Control\models\Articles */
+/* @var $newauthor \app\models\publications\articles\journals\Authors */
 
 ?>
 
@@ -22,11 +21,9 @@ use yii\bootstrap\ActiveForm;
         <div class="row">
 
             <div class="col-lg-6">
-
                 <br>
                 <br>
                 <br>
-
                 <div class="panel panel-default">
                     <div class="panel-panel-body">
                         <?php
@@ -61,27 +58,19 @@ use yii\bootstrap\ActiveForm;
                             ]
                         ]);
                         ?>
-
                         <br>
                         <br>
                         <br>
-
                     </div>
                 </div>
-
             </div>
 
-            <div class="col-lg-1">
-
-            </div>
+            <div class="col-lg-1"></div>
 
             <div class="col-lg-5">
-
                     <br>
                     <br>
-
                     <?php
-
                     $form = ActiveForm::begin([
                         'action' => ['author?id=' . $id],
                         'method' => 'post',
@@ -100,12 +89,9 @@ use yii\bootstrap\ActiveForm;
                     echo $form->field($newauthor, 'article_id')->hiddenInput(['value' => $id])->label('');
                     echo $form->field($newauthor, 'part')->textInput();
                     echo Html::submitButton('<span style="color: green;" class="glyphicon glyphicon-plus"></span>');
-
                     ActiveForm::end();
-
                     ?>
             </div>
-
         </div>
     </div>
 </div>

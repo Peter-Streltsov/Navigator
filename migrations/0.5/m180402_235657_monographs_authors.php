@@ -16,6 +16,7 @@ class m180402_235657_monographs_authors extends Migration
         $this->createTable('monograph_authors', [
             'id' => $this->primaryKey(),
             'monograph_key' => $this->integer()->notNull(),
+            'part' => $this->integer()->defaultValue(10),
             'author_key' => $this->integer()->notNull()
         ]);
 

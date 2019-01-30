@@ -35,8 +35,8 @@ class Authors extends ActiveRecord implements LinkedRecordsInterface
     public function rules()
     {
         return [
-            [['monography_id', 'author_id'], 'required'],
-            [['monography_id', 'author_id'], 'integer'],
+            [['monography_id', 'author_key'], 'required'],
+            [['monography_id', 'author_key', 'part'], 'integer'],
             //[['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Authors::className(), 'targetAttribute' => ['author_id' => 'id']],
             //[['monography_id'], 'exist', 'skipOnError' => true, 'targetClass' => Monograph::className(), 'targetAttribute' => ['monograph_id' => 'id']],
         ];
@@ -50,8 +50,8 @@ class Authors extends ActiveRecord implements LinkedRecordsInterface
     {
         return [
             'id' => 'ID',
-            'monograph_id' => 'Monograph ID',
-            'author_id' => 'Author ID',
+            'monograph_key' => 'Monograph ID',
+            'author_key' => 'Author ID',
         ];
     } // end function
 

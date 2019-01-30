@@ -6,7 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Modal;
+use kartik\select2\Select2;
 
 ?>
 
@@ -15,28 +15,73 @@ use yii\bootstrap\Modal;
         <h4>Авторы:</h4>
     </div>
     <div class="panel panel-body">
-
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-6">
-        <br>
-
-        <div class="form-inline">
-
-            <?php
-
-            /*foreach ($model_authors['data'] as $author) {
-                echo Html::beginForm(['monographies/update', 'id' => $model_authors->id, 'authid' => $author->id], 'post');
-                echo Html::input('text', 'username', $author->name.' '.$author->lastname, ['class' => 'form-control', 'readonly' => true]);
-                echo Html::input('hidden', 'delete', '1');
-                echo Html::input('hidden', 'author', $author->id);
-                echo Html::submitButton('Удалить', ['class' => 'button primary big']);
-                echo Html::endForm();
-                echo "<br>";
-            }*/
-            ?>
-
+        <div class="row">
+            <div class="col-lg-6">
+                <br>
+                <br>
+                <br>
+                <div class="panel panel-default">
+                    <div class="panel panel-body">
+                        <?php
+                        echo \yii\grid\GridView::widget([
+                            'dataProvider' => $modelAuthors,
+                            'layout' => "{items}",
+                            'tableOptions' => [
+                                'class' => 'table table-hover'
+                            ],
+                            'columns' => [
+                                [
+                                    'class' => 'yii\grid\SerialColumn',
+                                ],
+                                [
+                                    'attribute' => 'lastname',
+                                    'label' => '',
+                                    'value' => function($model) {
+                                        $author = $model->author();
+                                        return $author->name . ' ' . $author->secondname . ' ' . $author->lastname;
+                                    }
+                                ],
+                                [
+                                    'class' => \yii\grid\ActionColumn::className(),
+                                    'buttons' => [
+                                        'delete' => function($url, $model) {
+                                            return Html::a('<span style="color: red;" class="glyphicon glyphicon-remove"></span>', 'deleteauthor?author_id='. $model->id . '&id='. $model->article_id);
+                                        }
+                                    ],
+                                    'template' => '{delete}'
+                                ]
+                            ]
+                        ]);
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
+                <br>
+                <br>
+                <?php
+                $form = ActiveForm::begin([
+                    'action' => ['author?id=' . $id],
+                    'method' => 'post',
+                    'options' => [
+                        'data-pjax' => true,
+                        'enctype' => 'multipart/form-data'
+                    ],
+                ]);
+                echo $form->field($newAuthor, 'author_key')->widget(Select2::className(), [
+                    'data' => $author_items,
+                    'pluginOptions' => [],
+                    'options' => [
+                        'tags' => true
+                    ]
+                ]);
+                echo $form->field($newAuthor, 'article_id')->hiddenInput(['value' => $id])->label('');
+                //echo $form->field($newAuthor, 'part')->textInput();
+                echo Html::submitButton('<span style="color: green;" class="glyphicon glyphicon-plus"></span>');
+                ActiveForm::end();
+                ?>
+            </div>
         </div>
     </div>
+</div>

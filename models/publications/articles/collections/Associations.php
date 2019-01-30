@@ -2,6 +2,7 @@
 
 namespace app\models\publications\articles\collections;
 
+use app\interfaces\LinkedRecordsInterface;
 use yii\db\ActiveRecord;
 
 /**
@@ -13,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property int $article_id
  * @property string $type
  */
-class Associations extends ActiveRecord
+class Associations extends ActiveRecord implements LinkedRecordsInterface
 {
 
     /**
@@ -49,6 +50,24 @@ class Associations extends ActiveRecord
             'article_id' => 'Article ID',
             'type' => 'Type',
         ];
+    } // end function
+
+
+    /**
+     * @return string
+     */
+    public function getErrorsMessage()
+    {
+        $message = [];
+        $errors = $this->getErrors();
+        foreach ($errors as $key => $error) {
+            $text = '';
+            foreach ($error as $message) {
+                $text = $text . $message . ' ';
+            }
+            $message[] = 'Поле "' . $key . '" => ' . $text;
+        }
+        return implode('<br>', $message);
     } // end function
 
 

@@ -2,6 +2,7 @@
 
 namespace app\models\publications\articles\journals;
 
+use app\interfaces\LinkedRecordsInterface;
 use app\models\identity\Authors as AuthorsCommon;
 use Yii;
 use yii\db\ActiveRecord;
@@ -17,7 +18,7 @@ use yii\db\ActiveRecord;
  *
  * @property ArticleJournal $article
  */
-class Authors extends ActiveRecord
+class Authors extends ActiveRecord implements LinkedRecordsInterface
 {
 
     /**
@@ -148,6 +149,23 @@ class Authors extends ActiveRecord
         //return $this->hasOne(AuthorsCommon::className(), ['id' => 'author_id']);
     } // end function
 
+
+    /**
+     * @return string
+     */
+    public function getErrorsMessage()
+    {
+        $message = [];
+        $errors = $this->getErrors();
+        foreach ($errors as $key => $error) {
+            $text = '';
+            foreach ($error as $message) {
+                $text = $text . $message . ' ';
+            }
+            $message[] = 'Поле "' . $key . '" => ' . $text;
+        }
+        return implode('<br>', $message);
+    } // end function
 
 
     /**

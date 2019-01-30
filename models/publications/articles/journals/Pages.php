@@ -2,6 +2,7 @@
 
 namespace app\models\publications\articles\journals;
 
+use app\interfaces\LinkedRecordsInterface;
 use yii\db\ActiveRecord;
 
 /**
@@ -13,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property int $begin_page
  * @property int $end_page
  */
-class Pages extends ActiveRecord
+class Pages extends ActiveRecord implements LinkedRecordsInterface
 {
 
     /**
@@ -48,6 +49,24 @@ class Pages extends ActiveRecord
             'begin_page' => 'Начальная страница',
             'end_page' => 'Последняя страница',
         ];
+    } // end function
+
+
+    /**
+     * @return string
+     */
+    public function getErrorsMessage()
+    {
+        $message = [];
+        $errors = $this->getErrors();
+        foreach ($errors as $key => $error) {
+            $text = '';
+            foreach ($error as $message) {
+                $text = $text . $message . ' ';
+            }
+            $message[] = 'Поле "' . $key . '" => ' . $text;
+        }
+        return implode('<br>', $message);
     } // end function
 
 

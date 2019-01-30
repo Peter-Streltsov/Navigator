@@ -2,6 +2,7 @@
 
 namespace app\models\publications\articles\conferences;
 
+use app\interfaces\LinkedRecordsInterface;
 use yii\db\ActiveRecord;
 
 /**
@@ -13,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property int $begin_page
  * @property int $end_page
  */
-class Pages extends ActiveRecord
+class Pages extends ActiveRecord implements LinkedRecordsInterface
 {
 
     /**
@@ -50,6 +51,24 @@ class Pages extends ActiveRecord
             'end_page' => 'End Page',
         ];
 
+    } // end function
+
+
+    /**
+     * @return string
+     */
+    public function getErrorsMessage()
+    {
+        $message = [];
+        $errors = $this->getErrors();
+        foreach ($errors as $key => $error) {
+            $text = '';
+            foreach ($error as $message) {
+                $text = $text . $message . ' ';
+            }
+            $message[] = 'Поле "' . $key . '" => ' . $text;
+        }
+        return implode('<br>', $message);
     } // end function
 
 

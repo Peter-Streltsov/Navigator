@@ -2,6 +2,7 @@
 
 namespace app\models\publications\dissertations;
 
+use app\interfaces\LinkedRecordsInterface;
 use yii\db\ActiveRecord;
 
 /**
@@ -13,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $title
  * @property string $class
  */
-class Citations extends ActiveRecord
+class Citations extends ActiveRecord implements LinkedRecordsInterface
 {
     /**
      * @inheritdoc
@@ -48,6 +49,24 @@ class Citations extends ActiveRecord
             'title' => 'Описание',
             'class' => 'Категория',
         ];
+    } // end function
+
+
+    /**
+     * @return string
+     */
+    public function getErrorsMessage()
+    {
+        $message = [];
+        $errors = $this->getErrors();
+        foreach ($errors as $key => $error) {
+            $text = '';
+            foreach ($error as $message) {
+                $text = $text . $message . ' ';
+            }
+            $message[] = 'Поле "' . $key . '" => ' . $text;
+        }
+        return implode('<br>', $message);
     } // end function
 
 

@@ -217,9 +217,8 @@ class JournalsController extends Controller implements PublicationControllerInte
 
         //------------------------------------------------------------------------------------------------------------//
 
-        // uploading article file
         /**
-         *
+         * uploading article file
          */
         if (Yii::$app->request->post() && isset($_POST['upload_flag'])) {
             $file = new Fileupload();

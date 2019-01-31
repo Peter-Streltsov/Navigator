@@ -50,8 +50,8 @@ class Authors extends ActiveRecord implements LinkedRecordsInterface
     {
         return [
             'id' => 'ID',
-            'monograph_key' => 'Monograph ID',
-            'author_key' => 'Author ID',
+            'monograph_key' => 'Идентификатор Монографии',
+            'author_key' => 'Автор',
         ];
     } // end function
 

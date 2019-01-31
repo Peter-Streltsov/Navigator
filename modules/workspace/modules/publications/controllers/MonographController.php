@@ -461,6 +461,61 @@ class MonographController extends Controller implements PublicationControllerInt
 
 
     /**
+     * @param $id
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionAssociation($id)
+    {
+        $associations = new Associations();
+        if ($associations->load(Yii::$app->request->post())) {
+            if (!$associations->save()) {
+                //$message = $associations->getErrorsMessage();
+                Yii::$app->session->setFlash('danger', 'Добавление организации не удалось');
+            }
+        }
+
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()->where(['monograph_id' => $id])
+        ]);
+
+        $newAssociation = new Associations();
+
+        return $this->renderAjax('forms/update/associations_form', [
+            'newAssociation' => $newAssociation,
+            'associations' => $associations,
+            'id' => $id
+        ]);
+    } // end action
+
+
+    /**
+     * @param $id
+     * @return false|int
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteassociation($id)
+    {
+        $model = Associations::find()->where(['id' => $id ])->one();
+        if ($model != null) {
+            $model->delete();
+        }
+
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()
+        ]);
+
+        return $this->renderAjax('forms/update/associations', [
+            'associations' => $associations,
+            'id' => $id
+        ]);
+    } // end action
+
+
+    /**
      * Finds the Monograph model based on its primary key value;
      * If the model is not found, a 404 HTTP exception will be thrown;
      *

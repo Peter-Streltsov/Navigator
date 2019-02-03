@@ -1,24 +1,24 @@
 <?php
 
+// yii classes
 use yii\helpers\Html;
 use yii\bootstrap\Modal;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\units\articles\journals\ArticleJournal */
-/* @var $class \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles|array|null */
-/* @var $authors \app\modules\Control\models\Authors[]|array|string */
+/* @var $model app\models\publications\articles\journals\ArticleJournal */
+/* @var $class \app\models\pnrd\indexes\IndexesArticles|array|null */
+/* @var $authors \app\models\identity\Authors[]|array|string */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Статьи - публикации в журналах', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="articles-view">
 
     <br>
-
     <h3><?= Html::encode($this->title) ?></h3>
-
     <br>
     <br>
 
@@ -26,12 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
     <br>
-
     <div class="panel panel-default">
         <div class="panel panel-body">
-
             <br>
-
             <?= DetailView::widget([
                 'model' => $model,
                 'view' => [
@@ -114,14 +111,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]);
             ?>
-
             <br>
             <br>
             <br>
         </div>
     </div>
 </div>
-
 <br>
 <br>
 <br>

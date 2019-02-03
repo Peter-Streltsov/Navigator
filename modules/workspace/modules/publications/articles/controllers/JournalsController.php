@@ -65,7 +65,7 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * Displays a single ArticleJournals model
+     * Displays a single ArticleJournals model;
      *
      * @param integer $id
      * @return mixed
@@ -75,10 +75,6 @@ class JournalsController extends Controller implements PublicationControllerInte
         $model = ArticleJournal::find($id)
             ->where(['id' => $id])
             ->one();
-
-        //$authors = AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all();
-
-        //if ($authors == null) { $authors = 'не задано';}
 
         return $this->render('view', [
             'model' => $model,

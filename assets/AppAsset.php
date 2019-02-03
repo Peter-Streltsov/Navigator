@@ -27,7 +27,8 @@ class AppAsset extends AssetBundle
         'js/common/suspended_function.js'
     ];
     public $depends = [
+        'lo\icofont\IcoFontAsset',
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapAsset'
     ];
 }

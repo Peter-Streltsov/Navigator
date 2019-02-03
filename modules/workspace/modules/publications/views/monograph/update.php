@@ -63,9 +63,10 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <?php Pjax::begin([
             'enablePushState' => false
     ]); ?>
-    <div class="monographies-form">
+    <div class="monographs-form">
         <?= $this->render('forms/update/monograph_form', [
                 'model' => $model,
+                'languages' => $languages,
                 'classes' => $classes
         ]) ?>
     </div>

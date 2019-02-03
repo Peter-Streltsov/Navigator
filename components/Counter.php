@@ -69,6 +69,8 @@ class Counter extends Component
     {
         // getting current user model
         $user = Yii::$app->user->getIdentity();
+        $messages = Message::find()->where(['user_id' => $user->id])->count();
+        return $messages;
     } // end function
 
 
@@ -80,7 +82,7 @@ class Counter extends Component
      */
     public function messageColor()
     {
-        if ($this->messagesCount() > 0) {
+        if ($this->userMessagesCount() > 0) {
             return 'lightgreen';
         }
         return 'gray';

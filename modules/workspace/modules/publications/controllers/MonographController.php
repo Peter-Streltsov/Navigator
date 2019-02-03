@@ -5,6 +5,7 @@ namespace app\modules\workspace\modules\publications\controllers;
 /** project classes */
 use app\interfaces\PublicationControllerInterface;
 use app\models\common\Cities;
+use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\filesystem\Fileupload;
 use app\models\identity\Authors as AuthorsCommon;
@@ -194,9 +195,8 @@ class MonographController extends Controller implements PublicationControllerInt
 
         //------------------------------------------------------------------------------------------------------------//
 
-        // citations - saving or getting error message
         /**
-         *
+         * citations - saving or getting error message;
          */
         if (Yii::$app->request->post() && isset($_POST['citation_flag'])) {
             $citation = new Citations();
@@ -231,9 +231,8 @@ class MonographController extends Controller implements PublicationControllerInt
 
         //------------------------------------------------------------------------------------------------------------//
 
-        // deleting author
         /**
-         *
+         * deleting author;
          */
         if (Yii::$app->request->post()) {
 
@@ -258,13 +257,6 @@ class MonographController extends Controller implements PublicationControllerInt
 
         //------------------------------------------------------------------------------------------------------------//
 
-        // monography authors
-        /*$model_authors = Monograph::find($id)
-            ->where(['monographies.id' => $id])
-            ->joinWith('data')
-            ->all();*/
-
-        //$modelAuthors = Authors::find()->where(['monograph_key' => $id])->all();
         $modelAuthors = new ActiveDataProvider([
             'query' => Authors::find()->where(['monograph_key' => $id])
         ]);
@@ -312,6 +304,7 @@ class MonographController extends Controller implements PublicationControllerInt
 
         /**
          * getting citation classes (associate array);
+         * converting citation classes in associate array;
          */
         $citation_classes = CitationClasses::find()->asArray()->all();
         $citation_classes = ArrayHelper::map($citation_classes, 'class', 'class');
@@ -321,7 +314,6 @@ class MonographController extends Controller implements PublicationControllerInt
         /**
          *
          */
-        //$associations = Associations::find()->where(['monograph_id' => $id])->one();
         $associations = new ActiveDataProvider([
             'query' => Citations::find()->where(['monograph_id' => $id])
         ]);
@@ -339,6 +331,11 @@ class MonographController extends Controller implements PublicationControllerInt
 
         //------------------------------------------------------------------------------------------------------------//
 
+        $languages = Languages::find()->asArray()->all();
+        $languages = ArrayHelper::map($languages, 'language', 'language');
+
+        //------------------------------------------------------------------------------------------------------------//
+
         /**
          * rendering view (for all methods);
          */
@@ -348,6 +345,7 @@ class MonographController extends Controller implements PublicationControllerInt
             'modelAuthors' => $modelAuthors,
             'associations' => $associations,
             'file' => $file,
+            'languages' => $languages,
             'classes' => $classes,
             'citations' => $citations,
             'citation_classes' => $citation_classes,

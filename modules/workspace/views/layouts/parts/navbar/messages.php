@@ -46,10 +46,10 @@ echo Nav::widget([
                 [
                     'label' => '<br>'
                 ],
-                [
+                /*[
                     'label' => '<t id="suspend2">Загруженные данные</t> ' . Yii::$app->counter->messagesCount(),
                     'url' => '#'
-                ],
+                ],*/
                 [
                     'label' => '<br>'
                 ]

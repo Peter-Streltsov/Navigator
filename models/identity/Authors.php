@@ -270,6 +270,16 @@ class Authors extends ActiveRecord
 
 
     /**
+     *
+     */
+    public function hasUser()
+    {
+        $user = Users::find()->where(['id' => $this->user_id])->count();
+        return $user > 0 ? true : false;
+    } // end function
+
+
+    /**
      * @param bool $insert
      * @param array $changedAttributes
      */

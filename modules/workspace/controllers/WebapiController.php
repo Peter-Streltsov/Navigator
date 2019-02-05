@@ -11,7 +11,7 @@ use yii\web\Controller;
 
 /**
  * Class WebapiController
- * Provides actions for retrieving data from webapi of scientonmetrics databases (Scopus, CrossRef etc.)
+ * Provides actions for retrieving data from webapi of scientonmetric databases (Scopus, CrossRef etc.)
  *
  * @package app\modules\Control\controllers
  */
@@ -50,12 +50,18 @@ class WebapiController extends Controller
     public function actionCrossref()
     {
         $article = null;
-
-        if (Yii::$app->request->post() && $_POST['DOI'] != null) {
+        if (Yii::$app->request->post()) {
+            $path = 'works/' . $_POST['DOI'];
             $client = new CrossRefClient();
-            $article = $client->request('works/' . $_POST['DOI']);
-            if ($article['status'] == 'ok') {
-
+            if ($client->exists('works/10.1007/b136753')) {
+                $article = $client->request('works/' . $_POST['DOI']);
+                if ($article['status'] == 'ok') {
+                    $message = $article['message'];
+                    return $this->renderAjax('crossref/ajax/article', [
+                        'article' => $article,
+                        'message' => $message
+                    ]);
+                }
             }
             return $this->render('crossref/crossref', [
                 'article' => $article
@@ -75,19 +81,23 @@ class WebapiController extends Controller
     {
         if (\Yii::$app->request->post() && $_POST['DOI'] != null) {
             $client = new CrossRefClient();
-            $article = $client->request('works/' . $_POST['DOI']);
-            if ($article['status'] == 'ok') {
-                $message = $article['message'];
-                return $this->renderAjax('crossref/ajax/article', [
-                    'article' => $article,
-                    'message' => $message
-                ]);
-            }
+            $path = 'works/' . $_POST['DOI'];
+            $path2 = 'works/10.1007/b136753';
+            echo $path;
+            echo $client->exists('works/10.1007/b136753');
+            /*if ($client->exists('works/' . $_POST['DOI'])) {
+                $article = $client->request('works/' . $_POST['DOI']);
+                if ($article['status'] == 'ok') {
+                    $message = $article['message'];
+                    return $this->renderAjax('crossref/ajax/article', [
+                        'article' => $article,
+                        'message' => $message
+                    ]);
+                }
+            }*/
         } else {
             return $this->renderAjax('crossref/ajax/error');
         }
-
-        return false;
     } // end action
 
 } // end class

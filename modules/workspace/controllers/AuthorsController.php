@@ -57,8 +57,10 @@ class AuthorsController extends Controller
      */
     public function actionView($id)
     {
+        $author = Authors::find()->where(['id' => $id])->one();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            //'model' => $this->findModel($id),
+            'model' => $author
         ]);
     } // end action
 

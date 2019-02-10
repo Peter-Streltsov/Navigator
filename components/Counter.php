@@ -75,6 +75,17 @@ class Counter extends Component
 
 
     /**
+     * Counts active (unread) user messages;
+     *
+     * @return integer
+     */
+    public function activeMessagesCount()
+    {
+        return Message::find()->active()->count();
+    } // end function
+
+
+    /**
      * returns color for displaying 'messages' icon in application navbar
      * basing on number of unread messages
      *
@@ -82,7 +93,7 @@ class Counter extends Component
      */
     public function messageColor()
     {
-        if ($this->userMessagesCount() > 0) {
+        if ($this->activeMessagesCount() > 0) {
             return 'lightgreen';
         }
         return 'gray';

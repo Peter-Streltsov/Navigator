@@ -5,32 +5,38 @@ namespace app\models\messages;
 use yii\db\ActiveQuery;
 
 /**
- * This is the ActiveQuery class for [[Messages]].
+ * ActiveQuery class for app\models\messages\Messages;
  *
  * @see Messages
  */
 class MessageQuery extends ActiveQuery
 {
-    /*public function active()
+
+    /**
+     * @return MessageQuery
+     */
+    public function active()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->andWhere(['read' => 0]);
+    } // end function
 
     /**
      * @inheritdoc
-     * @return Messages[]|array
+     * @return Message[]|array
      */
     public function all($db = null)
     {
         return parent::all($db);
-    }
+    } // end function
+
 
     /**
      * @inheritdoc
-     * @return Messages|array|null
+     * @return Message|array|null
      */
     public function one($db = null)
     {
         return parent::one($db);
-    }
-}
+    } // end function
+
+} // end class

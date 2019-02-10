@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\Control\models\Authors */
+/* @var $model app\models\identity\Authors */
 
 $this->title = $model->name . ' ' . $model->lastname;
 $this->params['breadcrumbs'][] = ['label' => 'Авторы', 'url' => ['index']];
@@ -34,6 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
         $userStatus = $model->hasUser() ? 'Пользователь сопоставлен' : 'Пользователь не сопоставлен';
         $userFlashClass = $model->hasUser() ? 'alert alert-success' : 'alert alert-warning';
+        $personnelStatus = $model->hasPersonnel() ? '' : '';
+        $personnelFlashStatus = $model->hasPersonnel() ? '' : '';
         ?>
         <div class="col-lg-5">
             <div class="<?= $userFlashClass ?>" role='alert'>

@@ -53,7 +53,7 @@ class Message extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'created_at'], 'integer'],
+            [['read', 'user_id', 'created_at'], 'integer'],
             [['user_id', 'username', 'category', 'text'], 'required'],
             [['text'], 'string'],
             [['username', 'category', 'custom_theme'], 'string', 'max' => 255],

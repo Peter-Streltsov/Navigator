@@ -270,12 +270,26 @@ class Authors extends ActiveRecord
 
 
     /**
+     * checks existence of linked Users model;
      *
+     * @return bool
      */
     public function hasUser()
     {
         $user = Users::find()->where(['id' => $this->user_id])->count();
         return $user > 0 ? true : false;
+    } // end function
+
+
+    /**
+     * checks existence of linked Personnel model;
+     *
+     * @return bool
+     */
+    public function hasPersonnel()
+    {
+        $personnel = Personnel::find()->where(['user_id' => $this->user_id])->count();
+        return $personnel > 0 ? true : false;
     } // end function
 
 

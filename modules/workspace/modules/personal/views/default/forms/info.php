@@ -9,9 +9,9 @@ use yii\helpers\Html;
         <div class="well">
             <?php
             if ($author->id != null) {
-                echo Html::tag('text', 'Автор', ['style' => 'color: green;']);
+                echo Html::tag('text', 'Автор', ['style' => 'color: lightgreen;']);
             } else {
-                echo Html::tag('text', 'Автор не сопоставлен', ['style' => 'color: red;']);
+                echo Html::tag('text', 'Автор не сопоставлен', ['style' => 'color: lightcoral;']);
             }
             ?>
             <div align="right">
@@ -22,13 +22,13 @@ use yii\helpers\Html;
             if ($staff->id != null) {
                 if ($staff->position == null) {
                     $position = 'Должность не задана!';
-                    echo Html::tag('text', $position, ['style' => 'color: red;']);
+                    echo Html::tag('text', $position, ['style' => 'color: lightcoral;']);
                 } else {
                     $position = $staff->position;
                     echo Html::tag('text', $position, ['style' => 'color: green;']);
                 }
             } else {
-                echo Html::tag('text', 'Сотрудник не сопоставлен', ['style' => 'color: red;']);
+                echo Html::tag('text', 'Сотрудник не сопоставлен', ['style' => 'color: lightcoral;']);
             }
             ?>
             <div align="right">

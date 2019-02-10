@@ -13,38 +13,19 @@ $this->registerJsFile('/js/modules/admin/module.js');
 <br>
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-5">
         <div class="btn-group" role="group" aria-label="...">
-            <?= Html::a('<span class="glyphicon glyphicon-console"></span>', '/workspace/admin/shell', ['class' => 'btn btn-default']) ?>
-            <?= Html::a('<span class="glyphicon glyphicon-folder-open"></span>', '#', ['id' => 'filemanager', 'class' => 'btn btn-default']); ?>
-            <?= Html::a('<span class="glyphicon glyphicon-object-align-horizontal"></span>', '#', ['id' => 'telemetry', 'class' => 'btn btn-default']); ?>
-            <?= Html::a('<span class="glyphicon glyphicon-comment"></span>', '#', ['id' => 'messages', 'class' => 'btn btn-default']); ?>
-            <?= Html::a('<span class="glyphicon glyphicon-list-alt"></span>', '#', ['id' => 'synthesis', 'class' => 'btn btn-default']); ?>
-            <?= Html::a('<span class="glyphicon glyphicon-off"></span>', '#', ['id' => 'clearup', 'class' => 'btn btn-default']); ?>
+            <?= Html::a('<span style="color: lightgreen;" class="glyphicon glyphicon-console"></span>', '/workspace/admin/shell', ['class' => 'btn btn-default']) ?>
+            <?= Html::a('<span style="color: lightslategrey;" class="glyphicon glyphicon-folder-open"></span>', '#', ['id' => 'filemanager', 'class' => 'btn btn-default']); ?>
+            <?= Html::a('<span style="color: lightslategrey;" class="glyphicon glyphicon-object-align-horizontal"></span>', '#', ['id' => 'telemetry', 'class' => 'btn btn-default']); ?>
+            <?= Html::a('<span style="color: lightslategrey;" class="glyphicon glyphicon-comment"></span>', '#', ['id' => 'messages', 'class' => 'btn btn-default']); ?>
+            <?= Html::a('<span style="color: lightslategrey;" class="glyphicon glyphicon-list-alt"></span>', '#', ['id' => 'synthesis', 'class' => 'btn btn-default']); ?>
+            <?= Html::a('<span style="color: lightcoral;" class="glyphicon glyphicon-off"></span>', '#', ['id' => 'clearup', 'class' => 'btn btn-default']); ?>
         </div>
         <br>
         <br>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel panel-body">
-                <?= \yii\widgets\DetailView::widget([
-                    'model' => $data,
-                    'options' => [
-                        'style' => 'border-radius: 3pc;',
-                        'class' => 'table'
-                    ]
-                ]); ?>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-6">
         <div class="well">
-            <h5>Загрузка публикаций</h5>
+            <h5 style="color: gray;">Загрузка публикаций</h5>
             <?php
 
             $items = [
@@ -58,15 +39,12 @@ $this->registerJsFile('/js/modules/admin/module.js');
 
             echo Html::dropDownList('', '', $items, [
                 'id' => 'upload',
-                'style' => 'width: 22pc;'
+                'style' => 'width: 18pc;'
             ]);
 
             ?>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="well">
-            <h5>Сохраненные данные</h5>
+
+            <h5 style="color: gray;">Сохраненные данные</h5>
             <?php
             $data_items = [
                 0 => '',
@@ -81,10 +59,26 @@ $this->registerJsFile('/js/modules/admin/module.js');
 
             echo Html::dropDownList('', '', $data_items, [
                 'id' => 'dataselect',
-                'style' => 'width: 22pc;'
+                'style' => 'width: 18pc;'
             ]);
 
             ?>
+
+        </div>
+        <br>
+        <br>
+    </div>
+    <div class="col-lg-7">
+        <div class="panel panel-default">
+            <div class="panel panel-body">
+                <?= \yii\widgets\DetailView::widget([
+                    'model' => $data,
+                    'options' => [
+                        'style' => 'color: gray; border-radius: 3pc;',
+                        'class' => 'table'
+                    ]
+                ]); ?>
+            </div>
         </div>
     </div>
 </div>

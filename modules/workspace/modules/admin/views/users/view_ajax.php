@@ -22,7 +22,7 @@ $this->title = $model->name . ' ' . $model->lastname;
         <div class="row">
             <div class="col-lg-3">
                 <?= Html::button('<span class="glyphicon glyphicon-chevron-left"> Назад к списку пользователей</span>', [
-                    'id' => 'backtouserlist',
+                    'id' => 'back',
                     'class' => 'btn btn-default']);
                 ?>
             </div>
@@ -87,6 +87,7 @@ $this->title = $model->name . ' ' . $model->lastname;
                         'username',
                         'name',
                         'lastname',
+                        'password',
                         'role',
                     ],
                 ]) ?>

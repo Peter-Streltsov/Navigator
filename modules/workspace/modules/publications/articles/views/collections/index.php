@@ -16,23 +16,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <br>
 
-    <h2><?= Html::encode($this->title) ?></h2>
+    <h3 style="color: gray;"><?= Html::encode($this->title) ?></h3>
 
-    <br>
     <br>
     <br>
 
     <?php Pjax::begin(); ?>
 
-    <p>
-        <?= Html::a('Добавить статью', ['create'], ['class' => 'button primary big']) ?>
-    </p>
-
     <br>
 
     <div class="well">
         <div class="form-group">
-            <label for="usr">Поиск:</label>
+            <label style="color: gray;" for="usr">Поиск:</label>
             <input type="text" class="form-control" id="searchinput">
         </div>
     </div>

@@ -139,7 +139,7 @@ class UsersController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $tokens = Roles::find()->select('token')->asArray()->all();
+        $tokens = Roles::find()->select('role')->asArray()->all();
 
         return $this->renderAjax('update', [
             'model' => $model,

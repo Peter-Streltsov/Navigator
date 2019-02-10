@@ -24,72 +24,60 @@ $this->registerJsFile('/js/modules/personal/module.js');
 <!-- upper buttons -->
 <div class="row">
     <div class="col-lg-8">
-        <div id="upper_buttons">
-            <?php
-            echo $this->render('forms/controlrow', [
-                'model' => $model,
-                'notifications' => $notifications,
-                'message' => $message,
-                'author' => $author
-            ]);
-            ?>
+        <div class="row">
+            <div class="col-lg-4">
+                <div id="upper_buttons">
+                    <?php
+                    echo $this->render('forms/controlrow', [
+                        'model' => $model,
+                        'notifications' => $notifications,
+                        'message' => $message,
+                        'author' => $author
+                    ]);
+                    ?>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <?= $this->render('forms/indexes', [
+                    'personaldata' => $personaldata
+                ]); ?>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <?php
+                echo $this->render('forms/info', [
+                    'author' => $author,
+                    'staff' => $personal
+                ]);
+                ?>
+            </div>
         </div>
     </div>
-    <div class="col-lg-4">
-        <?= $this->render('forms/indexes', [
-                'personaldata' => $personaldata
-        ]); ?>
-    </div>
-</div>
-
-<br>
-<div class="row">
-    <div class="col-lg-12">
-        <hr>
-    </div>
-</div>
-<br>
-<br>
-
-<div class="row">
-    <div class="col-lg-7">
-        <?php
-        echo $this->render('forms/info', [
-            'author' => $author,
-            'staff' => $personal
-        ]);
-        ?>
-    </div>
-    <div class="col-lg-1">
-
-    </div>
-    <div class="col-lg-4">
+    <div class="col-lg-offset-1 col-lg-3">
         <div id="photo-holder">
             <?php
             if ($model->image == null) {
                 echo $this->render('forms/noimage', [
-                        'file' => $file
+                    'file' => $file
                 ]);
             } else {
                 echo $this->render('forms/imageholder', [
-                        'user' => $model
+                    'user' => $model
                 ]);
             }
             ?>
         </div>
     </div>
 </div>
-<!-- end block -->
-
 <br>
 <br>
-
 <div class="row">
     <div class="col-lg-12">
         <hr>
     </div>
 </div>
-
 <br>
 <br>
 <br>
@@ -130,7 +118,7 @@ $this->registerJsFile('/js/modules/personal/module.js');
                     <?= Html::button('<span class="glyphicon glyphicon-dashboard"></span>', ['id' => 'chart1']);?>
                     <?= Html::button('<span class="glyphicon glyphicon-equalizer"></span>', ['id' => 'chart2']);?>
                 </div>
-                <h5 align="right">Распределение научных результатов</h5>
+                <h5 style="color: gray;" align="right">Распределение научных результатов</h5>
             </div>
             <div class="panel panel-body">
                 <div>

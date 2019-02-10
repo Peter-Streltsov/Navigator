@@ -11,7 +11,8 @@ use yii\widgets\DetailView;
             echo DetailView::widget([
                 'model' => $personaldata->author,
                 'options' => [
-                        'class' => 'table table-hover'
+                    'style' => 'color: gray;',
+                    'class' => 'table table-hover'
                 ],
                 'attributes' => [
                     'name',
@@ -39,6 +40,7 @@ use yii\widgets\DetailView;
                 [
                     'model' => $personaldata,
                     'options' => [
+                        'style' => 'color: gray;',
                         'class' => 'table table-hover'
                     ],
                     'attributes' => [

@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <br>
 
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h3 style="color: gray;"><?= Html::encode($this->title) ?></h3>
 
     <br>
     <br>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="well">
         <div class="form-group">
-            <label for="usr">Поиск:</label>
+            <label style="color: gray;" for="usr">Поиск:</label>
             <input type="text" class="form-control" id="searchinput">
         </div>
     </div>

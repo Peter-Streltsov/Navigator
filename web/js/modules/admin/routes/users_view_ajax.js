@@ -1,4 +1,7 @@
-$('#backtouserlist').click(function () {
+/*$('#back').click(function () {
+    //alert('Pressed');
+    "use strict";
+    console.log('button pressed');
     $.ajax({
         url: "/workspace/admin/users/index",
         type: "post",
@@ -20,4 +23,4 @@ $('#backtouserlist').click(function () {
             $('#holder').html(message);
             $('#holder').show("blind");
         }});
-});
+});*/

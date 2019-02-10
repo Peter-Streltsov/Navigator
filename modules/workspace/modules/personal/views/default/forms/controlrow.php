@@ -17,6 +17,7 @@ use yii\bootstrap\Modal;
  */
 Modal::begin([
         'toggleButton' => [
+            'style' => 'color: lightgreen;',
             'label' => '<span class="glyphicon glyphicon-comment"></span>',
             'class' => 'button primary big'
         ]
@@ -43,6 +44,7 @@ Modal::end();
  */
 Modal::begin([
         'toggleButton' => [
+            'style' => 'color: lightblue;',
             'label' => '<span class="glyphicon glyphicon-send"></span>',
             'class' => 'button primary big'
         ]
@@ -61,4 +63,4 @@ Modal::end();
 ?>
 <!--<?= Html::a('<span class="glyphicon glyphicon-send"></span>', ['/workspace/personal/action/see', 'what' => 'notifications', 'id' => $model->id], ['id' => 'notifications', 'class' => 'button primary big']); ?>-->
 <!--<?= Html::a('Загрузить данные <span class="glyphicon glyphicon-upload"></span>', ['/workspace/personal/upload'], ['class' => 'button primary big']) ?>-->
-<?= Html::a('<span class="glyphicon glyphicon-upload"></span>', '#', ['id' => 'uploadbutton', 'class' => 'button primary big']) ?>
+<?= Html::a('<span style="color: lightslategrey;" class="glyphicon glyphicon-upload"></span>', '#', ['id' => 'uploadbutton', 'class' => 'button primary big']) ?>

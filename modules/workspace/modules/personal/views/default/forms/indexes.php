@@ -8,14 +8,14 @@ $warning = '<div style="border-radius: 2pc; background-color: lightgoldenrodyell
 $alert = '<div style="border-radius: 2pc; background-color: lightcoral;">#</div>';
 
 ?>
-<div class="panel panel-success">
+<div class="panel panel-default">
     <div class="panel panel-body">
         <div class="row">
             <div class="col-lg-5">
-                <h5>Индекс <?= $index; ?></h5>
+                <b style="color: gray;">Индекс <?= $index; ?></b>
             </div>
             <div class="col-lg-5">
-                <h5><?= $median; ?></h5>
+                <b style="color: gray;"><?= $median; ?></b>
             </div>
             <div class="col-lg-2">
                 <?php

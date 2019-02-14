@@ -21,7 +21,7 @@ use yii\helpers\Html;
 
     <div class="panel panel-default">
         <div class="panel panel-heading">
-            <h4>Добавить статью - публикации в журналах</h4>
+            <h4 style="color: gray;">Добавить статью - публикации в журналах</h4>
         </div>
         <div class="panel panel-body">
             <?php $form = ActiveForm::begin(); ?>
@@ -97,7 +97,9 @@ use yii\helpers\Html;
 
             <div class="row">
                 <div class="col-lg-5">
-                    <?= $form->field($model, 'type')->dropDownList($types); ?>
+                    <?= $form->field($model, 'type')->widget(Select2::className(), [
+                            'data' => $types
+                    ])//->dropDownList($types); ?>
                 </div>
                 <div class="col-lg-7">
                     <?= $form->field($model, 'class')->dropDownList($classes_items); ?>

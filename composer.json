@@ -31,7 +31,8 @@
         "samdark/yii2-webshell": "dev-master",
         "renanbr/crossref-client": ">=1.0",
         "symfony/filesystem": "^4.1",
-        "loveorigami/yii2-icofont": "*"
+        "loveorigami/yii2-icofont": "*",
+        "mihaildev/yii2-elfinder": "^1.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
 
-    <h3>Список авторов</h3>
+    <h3 style="color: gray;">Список авторов</h3>
 
     <br>
     <br>

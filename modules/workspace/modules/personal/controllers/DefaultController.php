@@ -4,6 +4,7 @@ namespace app\modules\workspace\modules\personal\controllers;
 
 // project classes
 use app\models\filesystem\Fileupload;
+use app\models\identity\Users;
 use app\models\messages\Message;
 use app\models\messages\Notification;
 use app\models\pnrd\PersonalData;
@@ -11,6 +12,7 @@ use app\models\identity\Personnel;
 // yii2 classes
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\debug\models\search\User;
 use yii\web\Controller;
 
 /**
@@ -33,6 +35,7 @@ class DefaultController extends Controller
          * retrieving current user model (app\identity\Users);
          */
         $model = Yii::$app->user->getIdentity();
+        //$model = Users::find()->where(['id' => $id])->one();
 
         //------------------------------------------------------------------------------------------------------------//
 

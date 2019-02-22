@@ -136,3 +136,7 @@ $this->registerJsFile('/js/modules/personal/module.js');
 <br>
 <br>
 <br>
+
+<?php
+
+\yii\helpers\VarDumper::dump($author->indexedArticlesJournals);

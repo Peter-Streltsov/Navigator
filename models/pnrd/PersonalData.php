@@ -12,7 +12,7 @@ use yii\base\Model;
 
 /**
  * Class PersonalData
- * Provides PNRD data for current user or requested user (if is set $id parameter in constructor)
+ * Provides PNRD data for current user or requested user (if is set $id parameter in constructor);
  *
  * @package app\models\pnrd
  */
@@ -20,21 +20,28 @@ class PersonalData extends Model
 {
 
     /**
-     * @var Users
+     * @var Users $user
      */
     public $user; // user data
+
     /**
-     * @var Personnel
+     * staff data for employee of current authorized user;
+     *
+     * @var Personnel $employee
      */
-    public $employee; // staff data for employee of current authorized user
+    public $employee;
+
     /**
+     * author's data for author of current authorized user;
+     *
      * @var Authors
      */
-    public $author; // author's data for author of current authorized user
+    public $author;
 
 
     /**
-     * PersonalData constructor
+     * PersonalData constructor;
+     *
      * @param Users|null $user
      */
     public function __construct(Users $user = null)
@@ -57,12 +64,12 @@ class PersonalData extends Model
     } // end function
 
 
-    /**
-     * GETTERS
-     */
+    /******************************************************************************************************************/
+    /** GETTERS *******************************************************************************************************/
 
     /**
-     * return current identity ArticlesJournals
+     * return current identity ArticlesJournals;
+     *
      * @return mixed
      */
     public function getArticlesJournals()
@@ -72,7 +79,8 @@ class PersonalData extends Model
 
 
     /**
-     * return current identity ArticlesConferences
+     * return current identity ArticlesConferences;
+     *
      * @return mixed
      */
     public function getArticlesConferences()
@@ -82,7 +90,8 @@ class PersonalData extends Model
 
 
     /**
-     * return current identity ArticlesCollections
+     * return current identity ArticlesCollections;
+     *
      * @return mixed
      */
     public function getArticlesCollections()
@@ -92,7 +101,8 @@ class PersonalData extends Model
 
 
     /**
-     * returns current identity Monographs
+     * returns current identity Monographs;
+     *
      * @return mixed
      */
     public function getMonographs()
@@ -102,7 +112,8 @@ class PersonalData extends Model
 
 
     /**
-     * returns current identity Dissertations
+     * returns current identity Dissertations;
+     *
      * @return mixed
      */
     public function getDissertations()
@@ -112,6 +123,8 @@ class PersonalData extends Model
 
 
     /**
+     * Returns array aof all publications for current identity/Authors model;
+     *
      * @return array
      */
     public function getPublications()
@@ -127,15 +140,16 @@ class PersonalData extends Model
 
 
     /**
-     * calculates total index for current user model
+     * calculates total index for current user model;
+     *
      * @return float
      */
     public function getIndex()
     {
         // if something went wrong with identity models will return 0
-        if ($this->user == null && $this->author == null) {
+        /*if ($this->user == null && $this->author == null) {
             return 0;
-        }
+        }*/
 
         // resulting array
         $index = [];
@@ -168,15 +182,14 @@ class PersonalData extends Model
         return (float)array_sum($index);
     } // end function
 
-    /**
-     * ENDGETTERS
-     */
+
+    /** END GETTERS ***************************************************************************************************/
+    /******************************************************************************************************************/
 
 
 
-    /**
-     * COUNTERS
-     */
+    /******************************************************************************************************************/
+    /** COUNTERS ******************************************************************************************************/
 
     /**
      * @return float
@@ -222,13 +235,15 @@ class PersonalData extends Model
         return (float)count($this->author->dissertations);
     } // end function
 
-    /**
-     * END COUNTERS
-     */
+
+    /** END COUNTERS **************************************************************************************************/
+    /******************************************************************************************************************/
 
 
     /**
+     * Calculates median index for all registered users;
      *
+     * @return float
      */
     public function getMedianIndex()
     {
@@ -244,6 +259,6 @@ class PersonalData extends Model
             }
         }
         return $index / $count;
-    }
+    } // end function
 
 } // end class

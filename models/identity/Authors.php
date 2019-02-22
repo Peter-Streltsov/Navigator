@@ -61,16 +61,18 @@ class Authors extends ActiveRecord
     } // end function
 
 
-    /**
-     * JUNCTION RECORDS
-     */
+    /******************************************************************************************************************/
+    /** JUNCTION RECORDS **********************************************************************************************/
 
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getArticlesJournalsAuthors()
     {
-        return $this->hasMany(\app\models\publications\articles\journals\Authors::className(), ['author_id' => 'id']);
+        return $this->hasMany(
+            \app\models\publications\articles\journals\Authors::className(),
+            ['author_id' => 'id']
+        );
     } // end function
 
 
@@ -79,7 +81,10 @@ class Authors extends ActiveRecord
      */
     public function getArticlesConferencesAuthors()
     {
-        return $this->hasMany(\app\models\publications\articles\conferences\Authors::className(), ['author_id' => 'id']);
+        return $this->hasMany(
+            \app\models\publications\articles\conferences\Authors::className(),
+            ['author_id' => 'id']
+        );
     } // end function
 
 
@@ -88,7 +93,10 @@ class Authors extends ActiveRecord
      */
     public function getArticlesCollectionsAuthors()
     {
-        return $this->hasMany(\app\models\publications\articles\collections\Authors::className(), ['author_id' => 'id']);
+        return $this->hasMany(
+            \app\models\publications\articles\collections\Authors::className(),
+            ['author_id' => 'id']
+        );
     } // end function
 
 
@@ -97,19 +105,20 @@ class Authors extends ActiveRecord
      */
     public function getMonographsAuthors()
     {
-        return $this->hasMany(\app\models\publications\monograph\Authors::className(), ['author_id' => 'id']);
+        return $this->hasMany(
+            \app\models\publications\monograph\Authors::className(),
+            ['author_id' => 'id']
+        );
     } // end function
 
 
-    /**
-     * END JUNCTION
-     */
+    /** END JUNCTION **************************************************************************************************/
+    /******************************************************************************************************************/
 
 
 
-    /**
-     * GETTERS
-     */
+    /******************************************************************************************************************/
+    /** GETTERS *******************************************************************************************************/
 
     /**
      * gets and returns initials of current author
@@ -185,7 +194,7 @@ class Authors extends ActiveRecord
         $years = range(date('Y') - 4, date('Y'));
         return $this->hasMany(ArticleJournal::className(), ['id' => 'article_id'])
             ->where(['year' => $years])
-            ->via('articlesJournalsAuthors');
+            ->viaTable('articles_journals_authors', ['author_id' => 'id']);
     } // end function
 
 
@@ -198,7 +207,7 @@ class Authors extends ActiveRecord
     {
         return $this->hasMany(ArticleConference::className(), ['id' => 'article_id'])
             ->via('articlesConferencesAuthors');
-    } // end function
+    } // end function*/
 
 
     /**
@@ -209,7 +218,7 @@ class Authors extends ActiveRecord
         $years = range(date('Y') - 4, date('Y'));
         return $this->hasMany(ArticleConference::className(), ['id' => 'article_id'])
             ->where(['year' => $years])
-            ->via('articlesJournalsAuthors');
+            ->viaTable('articles_conferences_authors', ['author_id' => 'id']);
     } // end function
 
 
@@ -235,7 +244,7 @@ class Authors extends ActiveRecord
         $years = range(date('Y') - 4, date('Y'));
         return $this->hasMany(ArticleCollection::className(), ['id' => 'article_id'])
             ->where(['year' => $years])
-            ->via('articlesJournalsAuthors');
+            ->viaTable('articles_collections_authors', ['author_id' => 'id']);
     } // end function
 
 
@@ -264,9 +273,9 @@ class Authors extends ActiveRecord
             ->via('articlesJournalsAuthors');
     } // end function
 
-    /**
-     * ENDGETTERS
-     */
+
+    /** END GETTERS ***************************************************************************************************/
+    /******************************************************************************************************************/
 
 
     /**
@@ -291,6 +300,10 @@ class Authors extends ActiveRecord
         $personnel = Personnel::find()->where(['user_id' => $this->user_id])->count();
         return $personnel > 0 ? true : false;
     } // end function
+
+
+    /******************************************************************************************************************/
+    /******************************************************************************************************************/
 
 
     /**

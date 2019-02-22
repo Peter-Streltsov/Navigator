@@ -161,6 +161,7 @@ abstract class Article extends Publication implements ArticleInterface, ArticleV
      */
     public function getIndexByAuthor($author_id)
     {
+        //return 100;
         $index_value = IndexesArticles::find()->where(['id' => $this->class])->one();
         $index_value = $index_value->value;
         $part = $this->getAuthorJunction($author_id)->part;

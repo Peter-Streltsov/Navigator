@@ -1,13 +1,15 @@
 <?php
 
 use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
+use yii\helpers\Html;
 
 ?>
 
-
+<?php Pjax::begin(); ?>
 <?php
-$form = new ActiveForm([
-    'action' => '/control/admin/orgdata/createdepartment',
+$form = ActiveForm::begin([
+    'action' => '/workspace/admin/orgdata/department-make',
     'method' => 'post'
 ]);
 ?>
@@ -26,11 +28,17 @@ $form = new ActiveForm([
 
     </div>
     <div class="col-lg-5">
-        <?= \yii\helpers\Html::submitButton('Сохранить'); ?>
+        <?= Html::submitButton('Сохранить'); ?>
     </div>
 </div>
 
-<?php \yii\helpers\Html::endForm(); ?>
+<?php ActiveForm::end(); ?>
+
+<?php Pjax::end(); ?>
+
+<?php
+var_dump($department);
+?>
 
 <br>
 <br>

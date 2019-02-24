@@ -18,7 +18,7 @@ use yii\grid\GridView;
             <div class="panel panel-body">
                 <div class="row">
                     <div class="col-lg-5">
-                        <?= \yii\helpers\Html::a('Добавить отдел', ['orgdata/createdepartment'], ['class' => 'button primary big']); ?>
+                        <?= \yii\helpers\Html::a('Добавить отдел', ['orgdata/create-department'], ['class' => 'button primary big']); ?>
                     </div>
                 </div>
                 <div class="row">

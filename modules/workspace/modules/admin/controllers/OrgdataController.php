@@ -92,24 +92,37 @@ class OrgdataController extends Controller
     /**
      * @return string
      */
-    public function actionCreatedepartment()
+    public function actionCreateDepartment()
     {
         $departments = new ActiveDataProvider([
             'query' => Departments::find()
         ]);
-
         $department = new Departments();
-
-        if ($department->load(Yii::$app->request->post())) {
-            $department->save();
-            return $this->renderAjax('departments', [
-                'departments' => $departments
-            ]);
-        }
 
         return $this->renderAjax('create_department', [
             'department' => $department
         ]);
     } // end action
+
+
+    /**
+     *
+     */
+    public function actionDepartmentMake()
+    {
+        $department = new Departments();
+        if (Yii::$app->request->isPost) {
+            if ($department->load(Yii::$app->request->post()) && $department->save()) {
+                Yii::$app->session->setFlash('success', 'Отдел добавлен');
+            } else {
+                var_dump($department);
+                exit();
+                return;
+            }
+        } else {
+            Yii::$app->session->setFlash('danger', 'Не удалось добавить отдел');
+        }
+        return $this->redirect('/workspace/admin');
+    } // end function
 
 } // end class

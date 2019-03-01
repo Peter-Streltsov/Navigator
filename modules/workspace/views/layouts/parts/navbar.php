@@ -31,7 +31,7 @@ echo Nav::widget([
         ],
         [
             //'label' => '<button data-toggle="modal" data-target="#about"><span class="glyphicon glyphicon info-sign"></span></button>'
-            'label' => '<span data-toggle="modal" data-target="#about" class="glyphicon glyphicon-info-sign"></span>'
+            'label' => '<span data-toggle="modal" data-target="#about" style="color: lightblue;" class="glyphicon glyphicon-info-sign"></span>'
         ],
         $this->render('navbar/mainmenu'),
         !Yii::$app->user->isGuest ? $this->render('navbar/messages') : ''

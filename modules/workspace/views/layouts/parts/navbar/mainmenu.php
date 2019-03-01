@@ -2,6 +2,16 @@
 
 use yii\bootstrap\Nav;
 
+
+if (Yii::$app->access->isAdmin()) {
+    $adminOption = ['label' => 'Параметры приложения', 'url' => ['/workspace/admin'], 'options' => [
+        'style' => 'width: 20pc;'
+    ]];
+} else {
+    $adminOption = ['label' => null];
+}
+
+
 echo Nav::widget([
     'options' => [
         'class' => 'navbar-nav navbar-right',
@@ -17,9 +27,7 @@ echo Nav::widget([
                     [
                         'label' => '<br>'
                     ],
-                    ['label' => 'Панель управления', 'url' => ['/workspace'], 'options' => [
-                        'style' => 'width: 20pc;'
-                    ]],
+                    $adminOption,
                     ['label' => 'Личный кабинет', 'url' => ['/workspace/personal/']],
                     //'<br>',
                     '<li class="divider"></li>',

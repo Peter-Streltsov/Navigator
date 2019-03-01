@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel panel-heading">
-                    <h4><?= Html::encode($this->title) ?></h4>
+                    <h4 style="color: gray;"><?= Html::encode($this->title) ?></h4>
                 </div>
                 <div class="panel panel-body">
 

@@ -109,7 +109,7 @@ $items = [
     echo SideNav::widget([
         'type' => SideNav::TYPE_DEFAULT,
         'encodeLabels' => false,
-        'heading' => 'Панель управления',
+        'heading' => '<t style="color: gray;">Панель управления</t>',
         'activateParents' => false,
         'activateItems' => true,
         'hideEmptyItems' => false,

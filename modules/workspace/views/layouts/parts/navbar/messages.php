@@ -15,8 +15,8 @@ echo Nav::widget([
                     'label' => '<br>'
                 ],
                 [
-                    'label' => '<b id="suspended">Уведомления</b>',
-                    'url' => '/personal/notifications',
+                    'label' => '<t id="suspended">Уведомления</t>',
+                    'url' => '#',
                     'options' => [
                         'style' => 'width: 10pc;'
                     ]

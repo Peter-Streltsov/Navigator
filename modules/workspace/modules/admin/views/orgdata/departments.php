@@ -1,6 +1,8 @@
 <?php
 
 use yii\grid\GridView;
+use yii\widgets\Pjax;
+use yii\helpers\Html;
 
 ?>
 
@@ -8,25 +10,33 @@ use yii\grid\GridView;
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel panel-heading">
-                <h4>Список отделов</h4>
+                <h4 style="color: gray;">Список отделов</h4>
             </div>
-            <?php
-            \yii\widgets\Pjax::begin([
-                    'enablePushState' => false
-            ]);
-            ?>
             <div class="panel panel-body">
+                <br>
+                <br>
                 <div class="row">
-                    <div class="col-lg-5">
-                        <?= \yii\helpers\Html::a('Добавить отдел', ['orgdata/create-department'], ['class' => 'button primary big']); ?>
+                    <div class="col-lg-4">
+                        <?php
+                        Pjax::begin([
+                            'enablePushState' => false
+                        ]);
+                        ?>
+
+                        <?= Html::a(
+                                '<span style="color: lightgreen;" class="glyphicon glyphicon-plus">  <t style="color: gray;">Добавить отдел</t></span>',
+                                ['orgdata/create-department'],
+                                ['class' => 'btn btn-default']
+                        );?>
+
+                        <?php Pjax::end(); ?>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-lg-8">
                         <?php
                         echo GridView::widget([
                             'dataProvider' => $departments,
                             'tableOptions' => [
+                                'style' => 'color: gray;',
                                 'class' => 'table table-hover'
                             ],
                             'layout' => '{items}',
@@ -51,9 +61,11 @@ use yii\grid\GridView;
                             ]
                         ]);
                         ?>
-                    </div>
-                    <div class="col-lg-2">
-
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -61,10 +73,9 @@ use yii\grid\GridView;
     </div>
 </div>
 
-<?php
-\yii\widgets\Pjax::end();
-?>
-
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

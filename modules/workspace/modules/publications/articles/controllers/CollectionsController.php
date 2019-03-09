@@ -4,6 +4,7 @@ namespace app\modules\workspace\modules\publications\articles\controllers;
 
 // project classes
 use app\interfaces\PublicationControllerInterface;
+use app\models\pnrd\indexes\IndexesArticles;
 use app\models\publications\articles\collections\ArticleCollection;
 use app\models\common\Languages;
 use app\models\common\Magazines;
@@ -120,6 +121,7 @@ class CollectionsController extends Controller implements PublicationControllerI
         $model = new ArticleCollection();
         // added languages list
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+        $indexes = ArrayHelper::map(IndexesArticles::find()->asArray()->all(), 'id', 'description');
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -128,6 +130,7 @@ class CollectionsController extends Controller implements PublicationControllerI
 
         return $this->renderAjax('ajaxforms/create', [
             'model' => $model,
+            'indexes' => $indexes,
             'magazines' => $magazines,
             'languages' => $languages
         ]);

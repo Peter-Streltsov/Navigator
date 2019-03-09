@@ -52,7 +52,10 @@ use yii\helpers\Html;
         <div class="row">
             <div class="col-lg-5">
                 <?= $form->field($model, 'language')->widget(Select2::className(), [
-                    'model' => $languages
+                    'model' => $languages,
+                    'pluginOptions' => [
+                        'tags' => true
+                    ]
                 ]) ?>
             </div>
             <div class="col-lg-2">
@@ -71,6 +74,15 @@ use yii\helpers\Html;
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-lg-7">
+                <?= $form->field($model, 'class')->dropDownList($indexes) ?>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
         <br>
         <br>
 
@@ -79,6 +91,10 @@ use yii\helpers\Html;
                 <?= Html::submitButton('Сохранить', ['class' => 'btn btn-default']) ?>
             </div>
         </div>
+
+        <br>
+        <br>
+        <br>
 
         <?php ActiveForm::end(); ?>
     </div>

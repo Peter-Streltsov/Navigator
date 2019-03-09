@@ -30,7 +30,7 @@ $this->title = 'Наукометрия';
         <?php $this->head() ?>
     </head>
 
-    <body style="overflow: hidden;">
+    <body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>

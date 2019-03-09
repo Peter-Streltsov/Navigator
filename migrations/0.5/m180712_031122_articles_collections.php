@@ -22,7 +22,7 @@ class m180712_031122_articles_collections extends Migration
             'collection' => $this->text()->notNull(), // название сборника
             'section' => $this->text(), // раздел сборника
             'section_number' => $this->integer(),
-            'language' => $this->integer(), // язык публикации
+            'language' => $this->string(), // язык публикации
             'index' => $this->text(), // полнотектовый индекс
             'annotation' => $this->text(), // аннотация
             'link' => $this->string(), // ссылка на ресурс

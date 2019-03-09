@@ -55,10 +55,10 @@ class ArticleCollection extends Article
     public function rules()
     {
         return [
-            [['title', 'type', 'class', 'collection'], 'required'],
-            [['title', 'collection', 'section', 'text_index', 'annotation'], 'string'],
-            [['type', 'class', 'created_at', 'updated_at', 'year', 'section_number', 'language'], 'integer'],
-            [['link', 'file'], 'string', 'max' => 255],
+            [['title', 'class', 'collection'], 'required'],
+            [['title', 'collection', 'section', 'index', 'annotation'], 'string'],
+            [['type', 'class', 'created_at', 'updated_at', 'year', 'section_number'], 'integer'],
+            [['link', 'language', 'file'], 'string', 'max' => 255],
         ];
     } // end function
 

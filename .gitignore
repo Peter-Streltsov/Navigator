@@ -1,0 +1,13 @@
+.idea/*
+runtime/cache
+runtime/debug
+runtime/logs
+web/files/articles_conferences/
+web/files/articles_journals/
+web/files/articles_collections/
+web/files/monograph/
+web/files/userimages/*.jpg
+web/files/userimages/*.bmp
+web/files/userimages/*.png
+web/files/userimages/*.jpeg
+web/files/userimages/*.pdf

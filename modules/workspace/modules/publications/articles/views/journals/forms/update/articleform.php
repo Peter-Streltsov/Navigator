@@ -5,9 +5,9 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 
-/* @var $classes \app\modules\Control\models\Articles[]|\app\modules\Control\models\IndexesArticles[]|array */
+/* @var $model \app\models\publications\articles\journals\ArticleJournal[] */
 /* @var $this \yii\web\View */
-/* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
+/* @var $indexes \app\models\pnrd\indexes\IndexesArticles */
 /* @var $title string */
 /* @var $languages array */
 /* @var $newlanguage \app\models\common\Languages */
@@ -35,7 +35,6 @@ use yii\bootstrap\ActiveForm;
 
     <!-- -->
     <div class="row">
-
         <div class="col-lg-12">
             <?= $form->field($model, 'title')->textarea([
                 'maxlength' => true,
@@ -46,7 +45,6 @@ use yii\bootstrap\ActiveForm;
 
     <!-- -->
     <div class="row">
-
         <div class="col-lg-7">
             <?= $form->field($model, 'magazine')->widget(Select2::className(), [
                 'data' => $magazines,
@@ -97,7 +95,6 @@ use yii\bootstrap\ActiveForm;
 
     <!-- year publishing and DOI index input - in one row -->
     <div class="row">
-
         <div class="col-lg-4">
             <?= $form->field($model, 'year')->widget(Select2::className(), [
                 'data' => Yii::$app->yearselector->select,
@@ -127,14 +124,10 @@ use yii\bootstrap\ActiveForm;
 
 
 <div class="form-group">
-
     <div class="row">
-
         <div class="col-lg-5">
-
             <br>
             <br>
-
             <?php
 
             echo Html::submitButton(
@@ -145,17 +138,10 @@ use yii\bootstrap\ActiveForm;
                     ])
             ?>
             <br>
-
         </div>
-
     </div>
-
     <?php ActiveForm::end(); ?>
-
     <br>
-
-
 </div>
-
     </div>
 </div>

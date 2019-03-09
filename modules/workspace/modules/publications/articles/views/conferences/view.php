@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
 
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h3 style="color: gray;"><?= Html::encode($this->title) ?></h3>
 
     <br>
     <br>
@@ -33,8 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= DetailView::widget([
                 'model' => $model,
                 'options' => [
-                    'class' => 'table',
-                    'encodeLabesl' => true
+                    'style' => 'color: gray;',
+                    'class' => 'table table-hover',
+                    'encodeLabels' => true
                 ],
                 'attributes' => [
                     'id',
@@ -52,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'Индекс ПНРД',
                         'value' => function($model) {
-                                    return $model->getIndex();
+                                    //return $model->getIndex();
                         }
                     ],
                     [

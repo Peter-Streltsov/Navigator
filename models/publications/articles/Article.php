@@ -200,11 +200,17 @@ abstract class Article extends Publication implements ArticleInterface, ArticleV
     /**
      * returns language property value from linked to current article Languages model;
      *
-     * @return string
+     * @return string|null
      */
     public function getLanguageValue()
     {
-        return Languages::find()->where(['id' => $this->language])->one()->language;
+        if (isset($this->language)) {
+            $language = Languages::find()->where(['language' => $this->language])->one();
+            if ($language != null) {
+                return $language->language;
+            }
+        }
+        return null;
     } // end function
 
 } // end class

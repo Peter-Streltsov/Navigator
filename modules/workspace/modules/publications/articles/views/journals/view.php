@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="articles-view">
 
     <br>
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h3 style="color: gray;"><?= Html::encode($this->title) ?></h3>
     <br>
     <br>
 
@@ -35,8 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         ''
                 ],
                 'options' => [
+                    'style' => 'color: gray;',
                     'class' => 'table',
-                    'encodeLabesl' => true
+                    'encodeLabels' => true
                 ],
                 'attributes' => [
                     'id',

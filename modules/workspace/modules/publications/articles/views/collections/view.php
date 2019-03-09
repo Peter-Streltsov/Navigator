@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'section:ntext',
             'section_number',
             'language',
-            'text_index:ntext',
+            'index:ntext',
             'annotation:ntext',
             'link',
             'file',

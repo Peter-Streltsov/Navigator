@@ -11,8 +11,8 @@ use yii\widgets\Pjax;
 /* @var $classes \app\models\pnrd\indexes\IndexesArticles[]|array */
 /* @var $model_authors \app\models\publications\articles\journals\ArticleJournal */
 /* @var $authors \app\models\identity\Authors[]|array */
-/* @var $citations \app\modules\Control\models\ArticlesCitations[]|array */
-/* @var $newcitation \app\modules\Control\models\ArticlesCitations */
+/* @var $citations \app\models\publications\articles\journals\Citations[]|array */
+/* @var $newcitation \app\models\publications\articles\journals\Citations */
 /* @var $citation_classes array */
 /* @var $affilation mixed */
 /* @var $affilations mixed */

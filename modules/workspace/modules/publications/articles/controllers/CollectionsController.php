@@ -10,6 +10,7 @@ use app\models\common\Languages;
 use app\models\common\Magazines;
 use app\models\publications\articles\collections\Authors;
 use app\models\publications\articles\collections\Citations;
+use app\models\publications\CitationClasses;
 //yii2 classes
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -172,6 +173,42 @@ class CollectionsController extends Controller implements PublicationControllerI
         $newcitation = new Citations();
         $newauthor = new Authors();
 
+        $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        // added citations
+        //$citations = $model->citations();
+        /**
+         *
+         */
+        $citations = new ActiveDataProvider([
+            'query' => Citations::find()->where(['article_id' => $id])
+        ]);
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
+        $citation_classes = ArrayHelper::map(
+            CitationClasses::find()->asArray()->all(),
+            'class',
+            'class'
+        );
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        // added languages list
+        /**
+         *
+         */
+        $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
+
+        //------------------------------------------------------------------------------------------------------------//
+
         //------------------------------------------------------------------------------------------------------------//
 
         /**
@@ -188,6 +225,10 @@ class CollectionsController extends Controller implements PublicationControllerI
          * rendering view;
          */
         return $this->render('update', [
+            'classes' => $classes,
+            'citations' => $citations,
+            'citation_classes' => $citation_classes,
+            'languages' => $languages,
             'model' => $model,
         ]);
 

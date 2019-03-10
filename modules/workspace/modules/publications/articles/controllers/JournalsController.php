@@ -48,7 +48,7 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * Lists all Articles models
+     * Lists all Articles models;
      *
      * @return mixed
      */
@@ -84,8 +84,8 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * Creates a new Articles
-     * If successful, will redirect to 'view' page
+     * Creates a new Articles;
+     * If successful, will redirect to 'view' page;
      *
      * @return string|\yii\web\Response
      * @throws \yii\base\InvalidConfigException
@@ -131,6 +131,8 @@ class JournalsController extends Controller implements PublicationControllerInte
             'classes' => $classes
         ]);
     } // end action
+
+    /******************************************************************************************************************/
 
 
     /**
@@ -181,6 +183,8 @@ class JournalsController extends Controller implements PublicationControllerInte
             'classes' => $classes
         ]);
     } // end action
+
+    /******************************************************************************************************************/
 
 
     /**
@@ -258,7 +262,7 @@ class JournalsController extends Controller implements PublicationControllerInte
          */
         $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
 
-        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------------------------------------------//
 
         // article categories (pnrd)
         /**
@@ -266,7 +270,7 @@ class JournalsController extends Controller implements PublicationControllerInte
          */
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
 
-        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------------------------------------------//
 
         // article
         /**
@@ -276,7 +280,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             ->where(['id' => $id])
             ->one();
 
-        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------------------------------------------//
 
         // updating article data - articleform
         if (Yii::$app->request->post()) {
@@ -286,7 +290,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             }
         }
 
-        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------------------------------------------//
 
         // added languages list
         /**
@@ -294,7 +298,7 @@ class JournalsController extends Controller implements PublicationControllerInte
          */
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
 
-        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------------------------------------------//
 
         // added citations
         //$citations = $model->citations();
@@ -305,7 +309,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             'query' => Citations::find()->where(['article_id' => $id])
         ]);
 
-        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------------------------------------------//
 
         /**
          *
@@ -316,7 +320,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             'class'
         );
 
-        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------------------------------------------//
 
         /**
          *
@@ -325,7 +329,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             'query' => Associations::find()->where(['article_id' => $id])
         ]);
 
-        //------------------------------------------------------------------------------------------------------------//
+        //-------------------------------------------------------------------//
 
         /**
          * rendering view;
@@ -351,13 +355,12 @@ class JournalsController extends Controller implements PublicationControllerInte
     /******************************************************************************************************************/
 
 
-    /**
-     * AJAX actions
-     */
+    /******************************************************************************************************************/
+    /***** AJAX actions ***********************************************************************************************/
 
 
     /**
-     *
+     * Adds new author (articles/journals/Authors model) to current article;
      */
     public function actionAuthor($id)
     {

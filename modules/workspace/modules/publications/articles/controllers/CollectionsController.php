@@ -289,6 +289,42 @@ class CollectionsController extends Controller implements PublicationControllerI
 
 
     /**
+     * Adds new author (articles/collections/Authors model) to current article;
+     */
+    public function actionAuthor($id)
+    {
+        $author = new Authors();
+
+        if (Yii::$app->request->post()) {
+            if ($author->load(Yii::$app->request->post())) {
+                $author->save();
+            }
+        }
+
+        $author_items = ArrayHelper::map(
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
+        $newauthor = new Authors();
+
+        return $this->renderAjax('forms/update/authorsform', [
+            'id' => $id,
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items,
+            'newauthor' => $newauthor,
+        ]);
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
      * @param $author_id
      * @param $id
      * @return string
@@ -342,6 +378,32 @@ class CollectionsController extends Controller implements PublicationControllerI
 
         $associations = new ActiveDataProvider([
             'query' => Associations::find()->where(['article_id' => $id])
+        ]);
+
+        return $this->renderAjax('forms/update/associations', [
+            'associations' => $associations,
+            'id' => $id
+        ]);
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
+     * @param $id
+     * @return false|int
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteassociation($id)
+    {
+        $model = Associations::find()->where(['id' => $id ])->one();
+        if ($model != null) {
+            $model->delete();
+        }
+
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()
         ]);
 
         return $this->renderAjax('forms/update/associations', [

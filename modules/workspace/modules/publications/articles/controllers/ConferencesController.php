@@ -374,6 +374,64 @@ class ConferencesController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
+
+
+    /**
+     * @param $id
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionAssociation($id)
+    {
+        $associations = new Associations();
+        if ($associations->load(Yii::$app->request->post())) {
+            if (!$associations->save()) {
+                Yii::$app->session->setFlash('danger', 'Добавление организации не удалось');
+            }
+        }
+
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()->where(['article_id' => $id])
+        ]);
+
+        return $this->renderAjax('forms/update/associations', [
+            'associations' => $associations,
+            'id' => $id
+        ]);
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
+     * @param $id
+     * @return false|int
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteassociation($id)
+    {
+        $model = Associations::find()->where(['id' => $id ])->one();
+        if ($model != null) {
+            $model->delete();
+        }
+
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()
+        ]);
+
+        return $this->renderAjax('forms/update/associations', [
+            'associations' => $associations,
+            'id' => $id
+        ]);
+    } // end action
+
+    /******************************************************************************************************************/
+
 
     /**
      * Deletes an existing ArticleConference model

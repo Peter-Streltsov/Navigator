@@ -46,25 +46,13 @@ use yii\bootstrap\ActiveForm;
 
         <!-- -->
         <div class="row">
-
-            <div class="col-lg-7">
-                <?= $form->field($model, 'magazine')->widget(Select2::className(), [
-                    'data' => $magazines,
-                    'options' => ['placeholder'],
-                    'pluginOptions' => [
-                        'tags' => true,
-                        'allowClear' => true,
-                    ]
-                ]);
-                ?>
-            </div>
             <div class="col-lg-2">
-                <?= $form->field($model, 'number')->textInput([
+                <?= $form->field($model, 'section')->textInput([
                     'style' => 'background-color: #ffffe0;'
                 ]); ?>
             </div>
             <div class="col-lg-3">
-                <?= $form->field($model, 'direct_number')->textInput([
+                <?= $form->field($model, 'section_number')->textInput([
                     'style' => 'background-color: #ffffe0;'
                 ]); ?>
             </div>
@@ -109,9 +97,6 @@ use yii\bootstrap\ActiveForm;
                     ]
                 ]);
                 ?>
-            </div>
-            <div class="col-lg-8">
-                <?= $form->field($model, 'doi')->textInput(['maxlength' => true, 'style' => 'background-color: #ffffe0;']) ?>
             </div>
         </div>
 

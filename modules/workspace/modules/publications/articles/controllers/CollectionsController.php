@@ -11,6 +11,8 @@ use app\models\common\Magazines;
 use app\models\publications\articles\collections\Authors;
 use app\models\publications\articles\collections\Citations;
 use app\models\publications\CitationClasses;
+use app\models\identity\Authors as AuthorsCommon;
+use app\models\publications\articles\collections\Associations;
 //yii2 classes
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -72,6 +74,8 @@ class CollectionsController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * Creates a new ArticleCollection model
@@ -107,6 +111,8 @@ class CollectionsController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * Creates a new ArticleCollection model
@@ -136,6 +142,8 @@ class CollectionsController extends Controller implements PublicationControllerI
             'languages' => $languages
         ]);
     } // end action
+
+    /******************************************************************************************************************/
 
 
     /**
@@ -170,8 +178,14 @@ class CollectionsController extends Controller implements PublicationControllerI
 
         //------------------------------------------------------------------------------------------------------------//
 
+        /**
+         *
+         */
+        $newmagazine = new Magazines();
         $newcitation = new Citations();
         $newauthor = new Authors();
+
+        //------------------------------------------------------------------------------------------------------------//
 
         $classes = IndexesArticles::find()->select(['id', 'description'])->asArray()->all();
 
@@ -199,8 +213,6 @@ class CollectionsController extends Controller implements PublicationControllerI
 
         //------------------------------------------------------------------------------------------------------------//
 
-        //------------------------------------------------------------------------------------------------------------//
-
         // added languages list
         /**
          *
@@ -208,6 +220,37 @@ class CollectionsController extends Controller implements PublicationControllerI
         $languages = ArrayHelper::map(Languages::find()->asArray()->all(), 'language', 'language');
 
         //------------------------------------------------------------------------------------------------------------//
+
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         * authors for current article
+         */
+        $author_items = ArrayHelper::map(
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
+        $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
+
+        //------------------------------------------------------------------------------------------------------------//
+
+        /**
+         *
+         */
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()->where(['article_id' => $id])
+        ]);
 
         //------------------------------------------------------------------------------------------------------------//
 
@@ -225,14 +268,24 @@ class CollectionsController extends Controller implements PublicationControllerI
          * rendering view;
          */
         return $this->render('update', [
+            'id' => $id,
             'classes' => $classes,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
             'languages' => $languages,
+            'magazines' => $magazines,
+            'newmagazine' => $newmagazine,
+            'newcitation' => $newcitation,
+            'newauthor' => $newauthor,
+            'associations' => $associations,
             'model' => $model,
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items
         ]);
 
     } // end action
+
+    /******************************************************************************************************************/
 
 
     /**
@@ -272,6 +325,8 @@ class CollectionsController extends Controller implements PublicationControllerI
         return $this->redirect(['index']);
 
     } // end action
+
+    /******************************************************************************************************************/
 
 
     /**

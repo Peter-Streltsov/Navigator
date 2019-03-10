@@ -6,6 +6,7 @@ namespace app\models\publications\articles\collections;
 use app\interfaces\LinkedRecordsInterface;
 use app\models\identity\Authors as AuthorsCommon;
 // yii classes
+use app\models\publications\articles\Article;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -41,7 +42,7 @@ class Authors extends ActiveRecord implements LinkedRecordsInterface
             [['article_id', 'author_id'], 'required'],
             [['article_id', 'author_id'], 'integer'],
             [['part'], 'integer'],
-            [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleJournal::className(), 'targetAttribute' => ['article_id' => 'id']],
+            [['article_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArticleCollection::className(), 'targetAttribute' => ['article_id' => 'id']],
         ];
     } // end function
 

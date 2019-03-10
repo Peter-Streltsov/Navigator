@@ -289,6 +289,71 @@ class CollectionsController extends Controller implements PublicationControllerI
 
 
     /**
+     * @param $author_id
+     * @param $id
+     * @return string
+     * @throws \Throwable
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionDeleteauthor($author_id, $id)
+    {
+        $deleting_author = Authors::findOne(['id' => $author_id]);
+        $deleting_author->delete();
+
+        $author_items = ArrayHelper::map(
+            AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
+            function ($item) {
+                return $item['name'] . ' ' . $item['lastname'];
+            });
+
+        $linked_authors = new ActiveDataProvider([
+            'query' => Authors::find()->where(['article_id' => $id])
+        ]);
+
+        $newauthor = new Authors();
+
+        return $this->renderAjax('forms/update/authorsform', [
+            'id' => $id,
+            'linked_authors' => $linked_authors,
+            'author_items' => $author_items,
+            'newauthor' => $newauthor,
+        ]);
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
+     * @param $id
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionAssociation($id)
+    {
+        $associations = new Associations();
+        if ($associations->load(Yii::$app->request->post())) {
+            if (!$associations->save()) {
+                Yii::$app->session->setFlash('danger', 'Добавление организации не удалось');
+            }
+        }
+
+        $associations = new ActiveDataProvider([
+            'query' => Associations::find()->where(['article_id' => $id])
+        ]);
+
+        return $this->renderAjax('forms/update/associations', [
+            'associations' => $associations,
+            'id' => $id
+        ]);
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
      * Deletes an existing ArticleCollection model
      * If deletion successful, will be redirect to 'index' page
      *

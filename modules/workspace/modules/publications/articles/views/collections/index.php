@@ -82,7 +82,39 @@ $this->params['breadcrumbs'][] = $this->title;
             //'link',
             //'file',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'view' => function($url, $model) {
+                        $buttonurl = Yii::$app->getUrlManager()->createUrl(['/workspace/articles/collections/view','id'=>$model['id']]);;
+                        return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $buttonurl, ['class' => 'button primary big', 'style' => 'border-radius: 2pc;', 'title' => Yii::t('yii', 'Подробно')]);
+                    },
+                    'file' => function($url, $model) {
+                        ob_start();
+
+                        if (isset($model->file)) {
+                            Modal::begin([
+                                'header' => "<h2>$model->title</h2><br>",
+                                'size' => 'large',
+                                'toggleButton' => [
+                                    'label' => "<span class='glyphicon glyphicon-file'></span>",
+                                    'style' => 'border-radius: 2pc;',
+                                    'class' => 'button primary big'
+                                ],
+                                'footer' => 'Close'
+                            ]);
+                            echo \yii2assets\pdfjs\PdfJs::widget([
+                                'url' => Url::base().'/upload/articles/' . $model->file
+                            ]);
+
+                            Modal::end();
+                        }
+                        $modal = ob_get_clean();
+                        return $modal;
+                    }
+                ],
+                'template' => "{view}<br><br>{file}"
+            ],
         ],
     ]);
 

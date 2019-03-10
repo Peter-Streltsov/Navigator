@@ -25,8 +25,8 @@ use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
 /**
- * JournalsController - implements the CRUD actions for articles, published in journals only
- * base model - app\models\units\articles\ArticleJournal
+ * JournalsController - implements the CRUD actions for articles, published in journals only;
+ * base model - app\models\units\articles\ArticleJournal;
  */
 class JournalsController extends Controller implements PublicationControllerInterface
 {
@@ -348,6 +348,8 @@ class JournalsController extends Controller implements PublicationControllerInte
 
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * AJAX actions
@@ -387,6 +389,8 @@ class JournalsController extends Controller implements PublicationControllerInte
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * @param $author_id
@@ -421,6 +425,8 @@ class JournalsController extends Controller implements PublicationControllerInte
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
 
     /**
@@ -449,6 +455,8 @@ class JournalsController extends Controller implements PublicationControllerInte
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * @param $id
@@ -472,6 +480,8 @@ class JournalsController extends Controller implements PublicationControllerInte
             'id' => $id
         ]);
     } // end action
+
+    /******************************************************************************************************************/
 
 
     /**
@@ -518,7 +528,18 @@ class JournalsController extends Controller implements PublicationControllerInte
         ]);
     } // end action
 
+    /******************************************************************************************************************/
 
+
+    /**
+     * Deletes citation model linked to current article model;
+     *
+     * @param $id
+     * @param $citation
+     * @return string
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
     public function actionDeletecitation($id, $citation)
     {
 
@@ -553,6 +574,8 @@ class JournalsController extends Controller implements PublicationControllerInte
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * End AJAX
@@ -575,6 +598,7 @@ class JournalsController extends Controller implements PublicationControllerInte
         return $this->redirect(['index']);
     } // end action
 
+    /******************************************************************************************************************/
 
 
     /**

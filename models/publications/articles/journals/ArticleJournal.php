@@ -96,6 +96,7 @@ class ArticleJournal extends Article
             'updated_at' => 'Изменено',
             'annotation' => 'Аннотация',
             'index' => 'Полнотекстовый индекс',
+            'Pnrdindex' => 'Индекс ПНРД',
             'link' => 'Ссылка',
             'file' => 'Файл',
             'authors' => 'Авторы'

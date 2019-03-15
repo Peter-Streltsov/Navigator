@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\web\JsExpression;
+use miloschuman\highcharts\Highcharts;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\identity\Authors */
@@ -76,5 +78,78 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </div>
     </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel panel-body">
+                    <?php
+
+                    echo Highcharts::widget([
+                        'scripts' => [
+                            'modules/exporting',
+                            'themes/grid-light',
+                        ],
+                        'options' => [
+                            'title' => [
+                                'text' => 'Распределение публикаций'
+                            ],
+                            'style' => 'width: 20pc;',
+                            'labels' => [
+                                'items' => [
+                                    'html' =>'test chart'
+                                ]
+                            ],
+                            'series' => [
+                                [
+                                    'type' => 'pie',
+                                    'name' => 'Распределение научных результатов',
+                                    'data' => [
+                                        [
+                                            'name' => 'Статьи (публикации в журналах)',
+                                            'y' => count($model->articlesJournals),
+                                        ],
+                                        [
+                                            'name' => 'Статьи (публикации материалов конференций)',
+                                            'y' => count($model->articlesConferences)
+                                        ],
+                                        [
+                                            'name' => 'Статьи (главы книг и монографий)',
+                                            'y' => count($model->articlesCollections)
+                                        ],
+                                        [
+                                            'name' => 'Монографии',
+                                            //'y' => count($model->getMonographs()),
+                                            'y' => 0
+                                            //'color' => new JsExpression('(Highcharts.theme && Highcharts.theme.textColor) || "gray"')
+                                        ],
+                                        [
+                                            'name' => 'Диссертации',
+                                            'y' => count($model->dissertations)
+                                        ]
+                                    ],
+                                ],
+                            ],
+                            'credits' => ['enabled' => false]
+                        ],
+                    ]);
+
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 </div>

@@ -6,6 +6,7 @@ namespace app\models\publications\monograph;
 use app\interfaces\PublicationInterface;
 use app\models\publications\Publication;
 use app\models\common\Languages;
+use app\models\identity\Authors as AuthorsCommon;
 // yii classes
 use Yii;
 
@@ -110,11 +111,11 @@ class Monograph extends Publication implements PublicationInterface
      */
     public function getAuthors()
     {
-        $authors = Authors::find()->where(['article_id' => $this->id])->all();
+        $authors = Authors::find()->where(['monograph_key' => $this->id])->all();
         $result = [];
         if (count($authors) >= 1) {
-            foreach ($authors as $authorlink) {
-                $author = AuthorsCommon::find()->where(['id' => $authorlink->author_id])->asArray()->one();
+            foreach ($authors as $authorLinked) {
+                $author = AuthorsCommon::find()->where(['id' => $authorLinked->author_id])->asArray()->one();
                 $result[] = $author;
             }
         }

@@ -29,6 +29,8 @@ class m180401_014757_monograph extends Migration
             'pages_number' => $this->integer(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
+            'annotation' => $this->text(),
+            'index' => $this->text(),
             'file' => $this->string()
         ]);
     } // end function

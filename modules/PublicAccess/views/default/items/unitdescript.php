@@ -19,7 +19,6 @@ use yii\bootstrap\Modal;
                     <h6>Авторы</h6>
                     <?php
                     if ($model->authors != null) {
-                        //var_dump($model->authors);
                         foreach ($model->authors as $author) {
                             echo (string)$author['name'][0] . '. ' . $author['lastname'] . '<br>';
                         }

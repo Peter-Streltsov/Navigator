@@ -51,7 +51,7 @@ class Monograph extends Publication implements PublicationInterface
         return [
             [['title', 'year'], 'required'],
             [['year', 'volume_number', 'created_at', 'updated_at', 'series_number', 'pages_number'], 'integer'],
-            [['file', 'language', 'city', 'volume_name', 'series_name'], 'string'],
+            [['file', 'language', 'city', 'annotation', 'index', 'volume_name', 'series_name'], 'string'],
             [['title', 'isbn'], 'string', 'max' => 255],
         ];
     } // end function
@@ -78,6 +78,8 @@ class Monograph extends Publication implements PublicationInterface
             'series_number' => 'Номер серии',
             'created_at' => 'Создано',
             'updated_at' => 'Изменено',
+            'annotation' => 'Аннотация',
+            'index' => 'Полнотекстовый индекс',
             'file' => 'Прикрепленный файл',
             'authors' => 'Авторы'
         ];
@@ -108,7 +110,16 @@ class Monograph extends Publication implements PublicationInterface
      */
     public function getAuthors()
     {
-        return $this->hasMany(Authors::className(), ['monograph_id' => $this->id]);
+        $authors = Authors::find()->where(['article_id' => $this->id])->all();
+        $result = [];
+        if (count($authors) >= 1) {
+            foreach ($authors as $authorlink) {
+                $author = AuthorsCommon::find()->where(['id' => $authorlink->author_id])->asArray()->one();
+                $result[] = $author;
+            }
+        }
+        return $result;
+        //return $this->hasMany(Authors::className(), ['monograph_id' => $this->id]);
     } // end function
 
 

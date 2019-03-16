@@ -121,8 +121,8 @@ abstract class Article extends Publication implements ArticleInterface, ArticleV
         $authors = $authors_class::find()->where(['article_id' => $this->id])->all();
         $result = [];
         if (count($authors) >= 1) {
-            foreach ($authors as $authorlink) {
-                $author = AuthorsCommon::find()->where(['id' => $authorlink->author_id])->asArray()->one();
+            foreach ($authors as $authorLinked) {
+                $author = AuthorsCommon::find()->where(['id' => $authorLinked->author_id])->asArray()->one();
                 $result[] = $author;
             }
         }

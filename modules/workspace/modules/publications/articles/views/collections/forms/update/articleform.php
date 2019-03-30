@@ -46,15 +46,27 @@ use yii\bootstrap\ActiveForm;
 
         <!-- -->
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-4">
                 <?= $form->field($model, 'section')->textInput([
                     'style' => 'background-color: #ffffe0;'
                 ]); ?>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <?= $form->field($model, 'section_number')->textInput([
                     'style' => 'background-color: #ffffe0;'
                 ]); ?>
+            </div>
+            <div class="col-lg-4">
+                <?= $form->field($model, 'year')->widget(Select2::className(), [
+                    'data' => Yii::$app->yearselector->select,
+                    'options' => [
+                        'placeholder' => $model->year
+                    ],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ]
+                ]);
+                ?>
             </div>
         </div>
 
@@ -86,17 +98,11 @@ use yii\bootstrap\ActiveForm;
         <!-- year publishing and DOI index input - in one row -->
         <div class="row">
 
-            <div class="col-lg-4">
-                <?= $form->field($model, 'year')->widget(Select2::className(), [
-                    'data' => Yii::$app->yearselector->select,
-                    'options' => [
-                        'placeholder' => $model->year
-                    ],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                    ]
-                ]);
-                ?>
+            <div class="col-lg-7">
+                <?= $form->field($model, 'link')->textInput(); ?>
+            </div>
+            <div class="col-lg-5">
+                <?= $form->field($model, 'type')->textInput(); ?>
             </div>
         </div>
 

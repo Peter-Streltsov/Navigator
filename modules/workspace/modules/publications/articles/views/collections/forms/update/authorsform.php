@@ -79,14 +79,14 @@ use yii\bootstrap\ActiveForm;
                         'enctype' => 'multipart/form-data'
                     ],
                 ]);
-                echo $form->field($newauthor, 'author_id')->widget(Select2::className(), [
+                echo $form->field($newauthor, 'article_id')->widget(Select2::className(), [
                     'data' => $author_items,
                     'pluginOptions' => [],
                     'options' => [
                         'tags' => true
                     ]
                 ]);
-                echo $form->field($newauthor, 'article_id')->hiddenInput(['value' => $id])->label('');
+                echo $form->field($newauthor, 'author_id')->hiddenInput(['value' => $id])->label('');
                 echo $form->field($newauthor, 'part')->textInput();
                 echo Html::submitButton('<span style="color: green;" class="glyphicon glyphicon-plus"></span>');
                 ActiveForm::end();

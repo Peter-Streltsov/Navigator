@@ -49,12 +49,10 @@ use yii\bootstrap\ActiveForm;
                 <?= $form->field($model, 'conference_collection')->textInput();
                 ?>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-5">
                 <?= $form->field($model, 'number')->textInput([
                     'style' => 'background-color: #ffffe0;'
                 ]); ?>
-            </div>
-            <div class="col-lg-3">
             </div>
         </div>
 

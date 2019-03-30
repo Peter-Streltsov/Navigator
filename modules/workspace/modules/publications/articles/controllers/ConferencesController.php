@@ -80,9 +80,6 @@ class ConferencesController extends Controller implements PublicationControllerI
      * If creation successful, will redirect to 'view' page
      *
      * @return string|\yii\web\Response
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionCreate()
     {
@@ -128,9 +125,6 @@ class ConferencesController extends Controller implements PublicationControllerI
      * If creation successful, will redirect to 'view' page
      *
      * @return string|\yii\web\Response
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionCreateAjax()
     {
@@ -179,8 +173,6 @@ class ConferencesController extends Controller implements PublicationControllerI
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
      * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {
@@ -248,6 +240,13 @@ class ConferencesController extends Controller implements PublicationControllerI
 
         //------------------------------------------------------------------------------------------------------------//
 
+        /**
+         *
+         */
+        $magazines = ArrayHelper::map(Magazines::find()->asArray()->all(), 'magazine', 'magazine');
+
+        //------------------------------------------------------------------------------------------------------------//
+
 
         $citation_classes = ArrayHelper::map(CitationClasses::find()->asArray()->all(),'class','class');
 
@@ -292,6 +291,7 @@ class ConferencesController extends Controller implements PublicationControllerI
             'linked_authors' => $linked_authors,
             'languages' => $languages,
             'author_items' => $author_items,
+            'magazines' => $magazines,
             'newcitation' => $newcitation,
             'newauthor' => $newauthor,
             'citations' => $citations,

@@ -42,8 +42,8 @@ use yii\bootstrap\ActiveForm;
                                     'attribute' => 'lastname',
                                     'label' => '',
                                     'value' => function($model) {
-                                        $author = $model->author();
-                                        return $author->name . ' ' . $author->secondname . ' ' . $author->lastname;
+                                        //$author = $model->author();
+                                        //return $author->name . ' ' . $author->secondname . ' ' . $author->lastname;
                                     }
                                 ],
                                 [

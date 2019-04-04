@@ -5,9 +5,9 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 
-/* @var $file \app\models\filesystem\Fileupload|mixed|string */
-/* @var $this \yii\web\View */
-/* @var $model \app\models\publications\articles\journals\ArticleJournal|mixed|\yii\db\ActiveRecord */
+/* @var $file app\models\filesystem\Fileupload|mixed|string */
+/* @var $this yii\web\View */
+/* @var $model app\models\publications\articles\collections\ArticleCollection */
 ?>
 <div class="row">
     <div class="col-lg-5">
@@ -110,7 +110,7 @@ use yii\helpers\Html;
 
         echo"<br>";
 
-        echo $uploadform->field($file, 'uploadedfile')->fileInput(['class' => 'btn btn-default']);
+        // echo $uploadform->field($file, 'uploadedfile')->fileInput(['class' => 'btn btn-default']);
 
         echo "<br><br>";
 

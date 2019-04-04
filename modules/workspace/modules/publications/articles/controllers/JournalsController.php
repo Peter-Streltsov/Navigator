@@ -396,14 +396,13 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * @param $author_id
-     * @param $id
+     * @param integer $author_id
+     * @param integer $article_id
      * @return string
      * @throws \Throwable
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\db\StaleObjectException
      */
-    public function actionDeleteauthor($author_id, $id)
+    public function actionDeleteauthor($author_id, $article_id)
     {
         $deleting_author = Authors::findOne(['id' => $author_id]);
         $deleting_author->delete();
@@ -415,13 +414,13 @@ class JournalsController extends Controller implements PublicationControllerInte
             });
 
         $linked_authors = new ActiveDataProvider([
-            'query' => Authors::find()->where(['article_id' => $id])
+            'query' => Authors::find()->where(['article_id' => $article_id])
         ]);
 
         $newauthor = new Authors();
 
         return $this->renderAjax('forms/update/authorsform', [
-            'id' => $id,
+            'id' => $article_id,
             'linked_authors' => $linked_authors,
             'author_items' => $author_items,
             'newauthor' => $newauthor,
@@ -433,11 +432,11 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * @param $id
+     * Creates new Association (Articles/journals/Association model) for current article using article's id parameter;
+     * Association model values loading from POST;
+     *
+     * @param $id - article id;
      * @return string
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionAssociation($id)
     {
@@ -462,10 +461,13 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * @param $id
+     * Deletes association (article/journals/Associations model) from current article;
+     *
+     * @param $id - current article's id;
+     *
      * @return false|int
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\db\StaleObjectException
      */
     public function actionDeleteassociation($id)
     {
@@ -488,11 +490,10 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * @param $id
+     * Adds new citation (articles/journals/Citation model record) to current article;
+     *
+     * @param $id - article id;
      * @return string
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionCitation($id)
     {
@@ -535,7 +536,7 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * Deletes citation model linked to current article model;
+     * Deletes citation model linked to current article model using model's id and citation id;
      *
      * @param $id
      * @param $citation
@@ -587,12 +588,14 @@ class JournalsController extends Controller implements PublicationControllerInte
 
 
     /**
-     * Deletes an existing Articles model
-     * If deletion successful, will redirect to 'index' page
+     * Deletes an existing Articles model;
+     * If deletion successful, will redirect to 'index' page;
      *
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param int $id
+     * @return yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -611,7 +614,6 @@ class JournalsController extends Controller implements PublicationControllerInte
      * @param integer $id
      * @return ArticleJournal|null
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {

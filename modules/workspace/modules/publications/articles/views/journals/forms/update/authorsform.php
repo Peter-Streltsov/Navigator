@@ -5,11 +5,11 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $author_items array */
-/* @var $file \app\models\filesystem\Fileupload */
-/* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
-/* @var $this \yii\web\View */
+/* @var $file app\models\filesystem\Fileupload */
+/* @var $model_authors app\models\publications\articles\collections\ArticleCollection */
+/* @var $this yii\web\View */
 /* @var $model \app\modules\Control\models\Articles */
-/* @var $newauthor \app\models\publications\articles\journals\Authors */
+/* @var $newauthor app\models\publications\articles\journals\Authors */
 
 ?>
 

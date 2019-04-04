@@ -89,6 +89,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <div id="authors">
         <?= $this->render('forms/update/authorsform', [
             'linked_authors' => $linked_authors,
+            'model' => $model,
             'error' => null,
             'author_items' => $author_items,
             'newauthor' => $newauthor,

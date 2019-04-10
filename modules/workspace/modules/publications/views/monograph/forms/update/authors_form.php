@@ -1,10 +1,14 @@
 <?php
 
 /* @var $author_items array */
-/* @var $this \yii\web\View */
-/* @var $model \app\models\publications\monograph\Monograph */
+/* @var $authors array */
+/* */
+/* @var $this yii\web\View */
+/* @var $model app\models\publications\monograph\Monograph */
 
 use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\grid\ActionColumn;
 use yii\bootstrap\ActiveForm;
 use kartik\select2\Select2;
 
@@ -23,8 +27,8 @@ use kartik\select2\Select2;
                 <div class="panel panel-default">
                     <div class="panel panel-body">
                         <?php
-                        echo \yii\grid\GridView::widget([
-                            'dataProvider' => $modelAuthors,
+                        echo GridView::widget([
+                            'dataProvider' => $authors,
                             'layout' => "{items}",
                             'tableOptions' => [
                                 'class' => 'table table-hover'
@@ -42,7 +46,7 @@ use kartik\select2\Select2;
                                     }
                                 ],
                                 [
-                                    'class' => \yii\grid\ActionColumn::className(),
+                                    'class' => ActionColumn::className(),
                                     'buttons' => [
                                         'delete' => function($url, $model) {
                                             return Html::a('<span style="color: red;" class="glyphicon glyphicon-remove"></span>', 'deleteauthor?author_id='. $model->id . '&id='. $model->article_id);
@@ -69,14 +73,14 @@ use kartik\select2\Select2;
                         'enctype' => 'multipart/form-data'
                     ],
                 ]);
-                echo $form->field($newAuthor, 'author_key')->widget(Select2::className(), [
+                echo $form->field($author, 'author_key')->widget(Select2::className(), [
                     'data' => $author_items,
                     'pluginOptions' => [],
                     'options' => [
                         'tags' => true
                     ]
                 ]);
-                echo $form->field($newAuthor, 'article_id')->hiddenInput(['value' => $id])->label('');
+                echo $form->field($author, 'article_id')->hiddenInput(['value' => $id])->label('');
                 //echo $form->field($newAuthor, 'part')->textInput();
                 echo Html::submitButton('<span style="color: green;" class="glyphicon glyphicon-plus"></span>');
                 ActiveForm::end();

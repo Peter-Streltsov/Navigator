@@ -107,10 +107,10 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <div>
         <?= $this->render('forms/update/authors_form', [
             //'file' => $file,
+            'author' => $author,
+            'authors' => $authors,
             'author_items' => $author_items,
             'id' => $id,
-            'newAuthor' => $newAuthor,
-            'modelAuthors' => $modelAuthors,
             'model' => $model
         ]); ?>
     </div>

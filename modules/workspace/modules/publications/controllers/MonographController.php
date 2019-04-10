@@ -146,9 +146,9 @@ class MonographController extends Controller implements PublicationControllerInt
      * TODO: rework uploading files (do not use from articles/journals controller; leave empty);
      *
      * @param int $id
-     * @return mixed|string|\yii\web\Response
+     * @return mixed|string|yii\web\Response
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {
@@ -350,7 +350,7 @@ class MonographController extends Controller implements PublicationControllerInt
             'citations' => $citations,
             'citation_classes' => $citation_classes,
             'newcitation' => $newCitation,
-            'newAuthor' => $newAuthor,
+            'author' => $newAuthor,
             'newAssociation' => $newAssociation,
             'authors' => $authors,
             'author_items' => $items
@@ -387,7 +387,7 @@ class MonographController extends Controller implements PublicationControllerInt
 
         $newauthor = new Authors();
 
-        return $this->renderAjax('forms/update/authorsform', [
+        return $this->renderAjax('forms/update/authors_form', [
             'id' => $id,
             'linked_authors' => $linked_authors,
             'author_items' => $author_items,
@@ -410,6 +410,12 @@ class MonographController extends Controller implements PublicationControllerInt
         $deleting_author = Authors::findOne(['id' => $author_id]);
         $deleting_author->delete();
 
+        $author = new AuthorsCommon();
+
+        $authors = new ActiveDataProvider([
+            'query' => AuthorsCommon::find()
+        ]);
+
         $author_items = ArrayHelper::map(
             AuthorsCommon::find()->select(['id', 'name', 'lastname'])->asArray()->all(), 'id',
             function ($item) {
@@ -422,13 +428,36 @@ class MonographController extends Controller implements PublicationControllerInt
 
         $newauthor = new Authors();
 
-        return $this->renderAjax('forms/update/authorsform', [
+        return $this->renderAjax('forms/update/authors_form', [
             'id' => $id,
+            'author' => $author,
+            'authors' => $authors,
             'linked_authors' => $linked_authors,
             'author_items' => $author_items,
             'newauthor' => $newauthor,
         ]);
     } // end function
+
+
+    /**
+     * @param $id
+     * @return mixed|void
+     */
+    public function actionCitation($id)
+    {
+        // TODO: Implement actionCitation() method.
+    } // end action
+
+
+    /**
+     * @param int $id
+     * @param int $citation
+     * @return mixed|void
+     */
+    public function actionDeletecitation($id, $citation)
+    {
+        // TODO: Implement actionDeletecitation() method.
+    }
 
 
     /**

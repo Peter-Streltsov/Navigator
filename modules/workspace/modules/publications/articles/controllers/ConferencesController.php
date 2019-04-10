@@ -302,6 +302,8 @@ class ConferencesController extends Controller implements PublicationControllerI
 
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * @param $id
@@ -335,6 +337,8 @@ class ConferencesController extends Controller implements PublicationControllerI
             'newauthor' => $newauthor,
         ]);
     } // end action
+
+    /******************************************************************************************************************/
 
 
     /**
@@ -377,13 +381,96 @@ class ConferencesController extends Controller implements PublicationControllerI
     /******************************************************************************************************************/
 
 
+    /**
+     * @param $id
+     * @return mixed|string
+     */
+    public function actionCitation($id)
+    {
+        // saving citation
+        $citation = new Citations();
+
+        if (Yii::$app->request->post() && $citation->load(Yii::$app->request->post())) {
+            $citation->save();
+        }
+
+        // citation class for active form
+        $newcitation = new Citations();
+
+        $citations = new ActiveDataProvider([
+            'query' => Citations::find()->where(['article_id' => $id])
+        ]);
+
+        // data for dropdown list
+        $citation_classes = ArrayHelper::map(
+            CitationClasses::find()->asArray()->all(),
+            'class',
+            'class'
+        );
+
+        // current article model
+        $model = ArticleJournal::find()
+            ->where(['id' => $id])
+            ->one();
+
+        return $this->renderAjax('forms/update/citationsform', [
+            'model' => $model,
+            'citations' => $citations,
+            'citation_classes' => $citation_classes,
+            'newcitation' => $newcitation,
+            'id' => $id
+        ]);
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
+     * @param int $id
+     * @param int $citation
+     * @return mixed|string
+     * @throws \Throwable
+     * @throws yii\db\StaleObjectException
+     */
+    public function actionDeletecitation($id, $citation)
+    {
+        $citation_to_delete = Citations::findOne(['id' => $citation]);
+        $citation_to_delete->delete();
+
+        // citation class for active form
+        $newcitation = new Citations();
+
+        $citations = new ActiveDataProvider([
+            'query' => Citations::find()->where(['article_id' => $id])
+        ]);
+
+        // data for dropdown list
+        $citation_classes = ArrayHelper::map(
+            CitationClasses::find()->asArray()->all(),
+            'class',
+            'class'
+        );
+
+        // current article model
+        $model = ArticleJournal::find()
+            ->where(['id' => $id])
+            ->one();
+
+        return $this->renderAjax('forms/update/citationsform', [
+            'model' => $model,
+            'citations' => $citations,
+            'citation_classes' => $citation_classes,
+            'newcitation' => $newcitation,
+            'id' => $id
+        ]);
+    } // end action
+
+    /******************************************************************************************************************/
+
 
     /**
      * @param $id
      * @return string
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionAssociation($id)
     {
@@ -411,7 +498,7 @@ class ConferencesController extends Controller implements PublicationControllerI
      * @param $id
      * @return false|int
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\db\StaleObjectException
      */
     public function actionDeleteassociation($id)
     {
@@ -451,6 +538,8 @@ class ConferencesController extends Controller implements PublicationControllerI
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     } // end action
+
+    /******************************************************************************************************************/
 
 
     /**

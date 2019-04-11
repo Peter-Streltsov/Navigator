@@ -115,13 +115,10 @@ class CollectionsController extends Controller implements PublicationControllerI
 
 
     /**
-     * Creates a new ArticleCollection model
-     * If creation successful, will redirect to 'view' page
+     * Creates a new ArticleCollection model;
+     * If creation successful, will redirect to 'view' page;
      *
-     * @return string|\yii\web\Response
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
+     * @return string
      */
     public function actionCreateAjax()
     {
@@ -151,11 +148,9 @@ class CollectionsController extends Controller implements PublicationControllerI
      * If update successful, will redirect to 'view' page;
      *
      * @param $id
-     * @return string|\yii\web\Response
+     * @return string
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\base\InvalidConfigException
      */
     public function actionUpdate($id)
     {
@@ -313,7 +308,7 @@ class CollectionsController extends Controller implements PublicationControllerI
 
         $newauthor = new Authors();
 
-        return $this->renderAjax('forms/update/authorsform', [
+        return $this->renderAjax('forms/update/authors_form', [
             'id' => $id,
             'linked_authors' => $linked_authors,
             'author_items' => $author_items,
@@ -349,7 +344,7 @@ class CollectionsController extends Controller implements PublicationControllerI
 
         $newauthor = new Authors();
 
-        return $this->renderAjax('forms/update/authorsform', [
+        return $this->renderAjax('forms/update/authors_form', [
             'id' => $id,
             'linked_authors' => $linked_authors,
             'author_items' => $author_items,
@@ -392,7 +387,7 @@ class CollectionsController extends Controller implements PublicationControllerI
             ->where(['id' => $id])
             ->one();
 
-        return $this->renderAjax('forms/update/citationsform', [
+        return $this->renderAjax('forms/update/citations_form', [
             'model' => $model,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
@@ -433,7 +428,7 @@ class CollectionsController extends Controller implements PublicationControllerI
             ->where(['id' => $id])
             ->one();
 
-        return $this->renderAjax('forms/update/citationsform', [
+        return $this->renderAjax('forms/update/citations_form', [
             'model' => $model,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
@@ -463,7 +458,7 @@ class CollectionsController extends Controller implements PublicationControllerI
             'query' => Associations::find()->where(['article_id' => $id])
         ]);
 
-        return $this->renderAjax('forms/update/associations', [
+        return $this->renderAjax('forms/update/associations_form', [
             'associations' => $associations,
             'id' => $id
         ]);
@@ -476,7 +471,7 @@ class CollectionsController extends Controller implements PublicationControllerI
      * @param $id
      * @return false|int
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\db\StaleObjectException
      */
     public function actionDeleteassociation($id)
     {
@@ -489,7 +484,7 @@ class CollectionsController extends Controller implements PublicationControllerI
             'query' => Associations::find()
         ]);
 
-        return $this->renderAjax('forms/update/associations', [
+        return $this->renderAjax('forms/update/associations_form', [
             'associations' => $associations,
             'id' => $id
         ]);
@@ -499,14 +494,14 @@ class CollectionsController extends Controller implements PublicationControllerI
 
 
     /**
-     * Deletes an existing ArticleCollection model
-     * If deletion successful, will be redirect to 'index' page
+     * Deletes an existing ArticleCollection model;
+     * If deletion successful, will be redirect to 'index' page;
      *
      * @param $id
-     * @return \yii\web\Response
+     * @return string
      * @throws NotFoundHttpException
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -540,13 +535,12 @@ class CollectionsController extends Controller implements PublicationControllerI
 
 
     /**
-     * Finds the ArticleCollection model based on its primary key value
-     * If the model is not found, a 404 HTTP exception will be thrown
+     * Finds the ArticleCollection model based on its primary key value;
+     * If the model is not found, a 404 HTTP exception will be thrown;
      *
      * @param $id
      * @return ArticleCollection|null
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {

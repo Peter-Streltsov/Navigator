@@ -384,7 +384,7 @@ class JournalsController extends Controller implements PublicationControllerInte
 
         $newauthor = new Authors();
 
-        return $this->renderAjax('forms/update/authorsform', [
+        return $this->renderAjax('forms/update/authors_form', [
             'id' => $id,
             'linked_authors' => $linked_authors,
             'author_items' => $author_items,
@@ -419,7 +419,7 @@ class JournalsController extends Controller implements PublicationControllerInte
 
         $newauthor = new Authors();
 
-        return $this->renderAjax('forms/update/authorsform', [
+        return $this->renderAjax('forms/update/authors_form', [
             'id' => $article_id,
             'linked_authors' => $linked_authors,
             'author_items' => $author_items,
@@ -451,7 +451,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             'query' => Associations::find()->where(['article_id' => $id])
         ]);
 
-        return $this->renderAjax('forms/update/associations', [
+        return $this->renderAjax('forms/update/associations_form', [
             'associations' => $associations,
             'id' => $id
         ]);
@@ -480,7 +480,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             'query' => Associations::find()
         ]);
 
-        return $this->renderAjax('forms/update/associations', [
+        return $this->renderAjax('forms/update/associations_form', [
             'associations' => $associations,
             'id' => $id
         ]);
@@ -523,7 +523,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             ->where(['id' => $id])
             ->one();
 
-        return $this->renderAjax('forms/update/citationsform', [
+        return $this->renderAjax('forms/update/citations_form', [
             'model' => $model,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
@@ -569,7 +569,7 @@ class JournalsController extends Controller implements PublicationControllerInte
             ->where(['id' => $id])
             ->one();
 
-        return $this->renderAjax('forms/update/citationsform', [
+        return $this->renderAjax('forms/update/citations_form', [
             'model' => $model,
             'citations' => $citations,
             'citation_classes' => $citation_classes,

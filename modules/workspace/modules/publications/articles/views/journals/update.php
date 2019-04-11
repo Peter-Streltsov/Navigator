@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     <!-- -->
     <?php Pjax::begin(); ?>
     <div>
-        <?= $this->render('forms/update/buttons', [
+        <?= $this->render('forms/update/buttons_form', [
             'file' => $file,
             'model' => $model
         ]) ?>
@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
             'enablePushState' => false,
     ]); ?>
     <div class="articles-form">
-        <?= $this->render('forms/update/articleform', [
+        <?= $this->render('forms/update/article_form', [
             'classes' => $classes,
             'languages' => $languages,
             'magazines' => $magazines,
@@ -85,7 +85,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
             'id' => 'associations',
     ]); ?>
     <div id="associations">
-        <?= $this->render('forms/update/associations', [
+        <?= $this->render('forms/update/associations_form', [
             'associations' => $associations,
             'id' => $id
         ]); ?>
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     ]); ?>
 
     <div id="authors">
-        <?= $this->render('forms/update/authorsform', [
+        <?= $this->render('forms/update/authors_form', [
             'linked_authors' => $linked_authors,
             'author_items' => $author_items,
             'newauthor' => $newauthor,
@@ -122,7 +122,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     ]); ?>
 
     <div id="citations">
-        <?= $this->render('forms/update/citationsform', [
+        <?= $this->render('forms/update/citations_form', [
             'model' => $model,
             'citations' => $citations,
             'citation_classes' => $citation_classes,

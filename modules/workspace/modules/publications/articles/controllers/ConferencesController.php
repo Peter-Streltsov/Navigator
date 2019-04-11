@@ -42,9 +42,12 @@ class ConferencesController extends Controller implements PublicationControllerI
         ];
     } // end function
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Lists all ArticleConference models
+     * Lists all ArticleConference models;
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -58,6 +61,8 @@ class ConferencesController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * Displays a single ArticleConference model
@@ -65,7 +70,6 @@ class ConferencesController extends Controller implements PublicationControllerI
      * @param $id
      * @return string
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
      */
     public function actionView($id)
     {
@@ -74,12 +78,14 @@ class ConferencesController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Creates a new ArticleConference model
-     * If creation successful, will redirect to 'view' page
+     * Creates a new ArticleConference model;
+     * If creation successful, will redirect to 'view' page;
      *
-     * @return string|\yii\web\Response
+     * @return string
      */
     public function actionCreate()
     {
@@ -119,12 +125,14 @@ class ConferencesController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * Creates a new ArticleConference model
      * If creation successful, will redirect to 'view' page
      *
-     * @return string|\yii\web\Response
+     * @return string
      */
     public function actionCreateAjax()
     {
@@ -164,15 +172,16 @@ class ConferencesController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * Updates an existing ArticleConference model;
      * If update successful, will redirect to 'view' page;
      *
      * @param $id
-     * @return string|\yii\web\Response
+     * @return string
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
      */
     public function actionUpdate($id)
     {
@@ -329,7 +338,7 @@ class ConferencesController extends Controller implements PublicationControllerI
             'query' => Authors::find()->where(['article_id' => $id])
         ]);
 
-        return $this->renderAjax('forms/update/authorsform', [
+        return $this->renderAjax('forms/update/authors_form', [
             'id' => $id,
             'error' => $error,
             'linked_authors' => $linked_authors,
@@ -370,7 +379,7 @@ class ConferencesController extends Controller implements PublicationControllerI
             'query' => Authors::find()->where(['article_id' => $id])
         ]);
 
-        return $this->renderAjax('forms/update/authorsform', [
+        return $this->renderAjax('forms/update/authors_form', [
             'id' => $id,
             'linked_authors' => $linked_authors,
             'author_items' => $author_items,
@@ -409,11 +418,11 @@ class ConferencesController extends Controller implements PublicationControllerI
         );
 
         // current article model
-        $model = ArticleJournal::find()
+        $model = ArticleConference::find()
             ->where(['id' => $id])
             ->one();
 
-        return $this->renderAjax('forms/update/citationsform', [
+        return $this->renderAjax('forms/update/citations_form', [
             'model' => $model,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
@@ -452,11 +461,11 @@ class ConferencesController extends Controller implements PublicationControllerI
         );
 
         // current article model
-        $model = ArticleJournal::find()
+        $model = ArticleConference::find()
             ->where(['id' => $id])
             ->one();
 
-        return $this->renderAjax('forms/update/citationsform', [
+        return $this->renderAjax('forms/update/citations_form', [
             'model' => $model,
             'citations' => $citations,
             'citation_classes' => $citation_classes,
@@ -485,7 +494,7 @@ class ConferencesController extends Controller implements PublicationControllerI
             'query' => Associations::find()->where(['article_id' => $id])
         ]);
 
-        return $this->renderAjax('forms/update/associations', [
+        return $this->renderAjax('forms/update/associations_form', [
             'associations' => $associations,
             'id' => $id
         ]);
@@ -511,7 +520,7 @@ class ConferencesController extends Controller implements PublicationControllerI
             'query' => Associations::find()
         ]);
 
-        return $this->renderAjax('forms/update/associations', [
+        return $this->renderAjax('forms/update/associations_form', [
             'associations' => $associations,
             'id' => $id
         ]);
@@ -525,10 +534,10 @@ class ConferencesController extends Controller implements PublicationControllerI
      * If deletion successful, will redirect to 'index' page
      *
      * @param $id
-     * @return \yii\web\Response
+     * @return yii\web\Response
      * @throws NotFoundHttpException
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -549,7 +558,6 @@ class ConferencesController extends Controller implements PublicationControllerI
      * @param $id
      * @return ArticleConference|null
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {

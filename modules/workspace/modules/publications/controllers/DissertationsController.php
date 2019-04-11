@@ -38,9 +38,12 @@ class DissertationsController extends Controller implements PublicationControlle
         ];
     } // end function
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Lists all Dissertations models.
+     * Lists all Dissertations models;
+     *
      * @return mixed
      */
     public function actionIndex()
@@ -54,9 +57,12 @@ class DissertationsController extends Controller implements PublicationControlle
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Displays a single Dissertations model.
+     * Displays a single Dissertations model;
+     *
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -68,15 +74,14 @@ class DissertationsController extends Controller implements PublicationControlle
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Creates a new Dissertation record
-     * If creation is successful - will redirect to 'view' page
+     * Creates a new Dissertation record;
+     * If creation is successful - will redirect to 'view' page;
      *
-     * @return string|\yii\web\Response
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
+     * @return string
      */
     public function actionCreate()
     {
@@ -121,15 +126,14 @@ class DissertationsController extends Controller implements PublicationControlle
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Creates a new Dissertation record
-     * If creation is successful - will redirect to 'view' page
+     * Creates a new Dissertation record;
+     * If creation is successful - will redirect to 'view' page;
      *
-     * @return string|\yii\web\Response
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
+     * @return string
      */
     public function actionCreateAjax()
     {
@@ -174,17 +178,16 @@ class DissertationsController extends Controller implements PublicationControlle
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Updates an existing Dissertation (units/Dissertations)
-     * If successful, will redirect to 'view' page
+     * Updates an existing Dissertation (units/Dissertations);
+     * If successful, will redirect to 'view' page;
      *
      * @param integer $id
-     * @return string|\yii\web\Response
+     * @return string|yii\web\Response
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionUpdate($id)
     {
@@ -203,16 +206,18 @@ class DissertationsController extends Controller implements PublicationControlle
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Deletes an existing Dissertation
-     * If deletion successful, will redirect to 'index' page
+     * Deletes an existing Dissertation;
+     * If deletion successful, will redirect to 'index' page;
      *
      * @param integer $id
-     * @return \yii\web\Response
+     * @return yii\web\Response
      * @throws NotFoundHttpException
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -220,15 +225,86 @@ class DissertationsController extends Controller implements PublicationControlle
         return $this->redirect(['index']);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Finds the Dissertations model based on its primary key value
-     * If the model is not found, a 404 HTTP exception will be thrown
+     * @param int $id
+     * @return mixed|void
+     */
+    public function actionAuthor($id)
+    {
+
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
+     * @param int $author_id
+     * @param int $article_id
+     * @return mixed|void
+     */
+    public function actionDeleteauthor($author_id, $article_id)
+    {
+
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
+     * @param $id
+     * @return mixed|void
+     */
+    public function actionAssociation($id)
+    {
+
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    public function actionDeleteassociation($id)
+    {
+
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
+     * @param $id
+     * @return mixed|void
+     */
+    public function actionCitation($id)
+    {
+
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
+     * @param int $id
+     * @param int $citation
+     * @return mixed|void
+     */
+    public function actionDeletecitation($id, $citation)
+    {
+
+    } // end action
+
+    /******************************************************************************************************************/
+
+
+    /**
+     * Finds the Dissertations model based on its primary key value;
+     * If the model is not found, a 404 HTTP exception will be thrown;
      *
      * @param $id
      * @return Dissertations|null
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
      */
     protected function findModel($id)
     {

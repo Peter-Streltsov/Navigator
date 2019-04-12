@@ -7,17 +7,18 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $author_items array */
-/* @var $file \app\modules\Control\models\Fileupload|mixed|string */
-/* @var $model_authors \app\modules\Control\models\Articles|\app\modules\Control\models\IndexesArticles */
-/* @var $this \yii\web\View */
-/* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
-/* @var $newauthor \app\models\units\articles\ArticlesAuthors */
+/* @var $file app\modules\Control\models\Fileupload|mixed|string */
+/* @var $model_authors \app\modules\Control\models\Articles|app\modules\Control\models\IndexesArticles */
+/* @var $this yii\web\View */
+/* @var $linked_authors */
+/* @var $model \app\modules\Control\models\Articles|mixed|yii\db\ActiveRecord */
+/* @var $newauthor app\models\units\articles\ArticlesAuthors */
 
 ?>
 
 <div class="panel panel-default">
     <div class="panel panel-heading">
-        <h4>Авторы:</h4>
+        <h4 style="color: gray;">Авторы:</h4>
     </div>
     <div class="panel panel-body">
         <div class="row">

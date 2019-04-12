@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
     ]); ?>
     <div>
         <?php
-        echo $this->render('forms/update/buttons', [
+        echo $this->render('forms/update/buttons_form', [
             'file' => $file,
             'model' => $model
         ])

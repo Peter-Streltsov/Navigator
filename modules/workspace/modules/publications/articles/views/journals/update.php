@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
         <div class="col-lg-10">
             <br>
             <br>
-            <h3><?= Html::encode($this->title) ?></h3>
+            <h3 style="color: gray;"><?= Html::encode($this->title) ?></h3>
             <br>
             <br>
             <br>

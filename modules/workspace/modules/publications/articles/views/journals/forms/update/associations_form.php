@@ -8,11 +8,13 @@ use yii\grid\ActionColumn;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
+/* @var $associations */
+
 ?>
 
 <div class="panel panel-default">
     <div class="panel panel-heading">
-        <h4>Ассоциированные организации:</h4>
+        <h4 style="color: gray;">Ассоциированные организации:</h4>
     </div>
     <div class="panel panel-body">
         <div class="row">

@@ -5,8 +5,8 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 
-/* @var $file \app\modules\Control\models\Fileupload|mixed|string */
-/* @var $this \yii\web\View */
+/* @var $file app\modules\Control\models\Fileupload|mixed|string */
+/* @var $this yii\web\View */
 /* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
 ?>
 <div class="row">

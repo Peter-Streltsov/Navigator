@@ -5,12 +5,13 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 
-/* @var $model \app\models\publications\articles\journals\ArticleJournal[] */
-/* @var $this \yii\web\View */
-/* @var $indexes \app\models\pnrd\indexes\IndexesArticles */
+/* @var $model app\models\publications\articles\journals\ArticleJournal[] */
+/* @var $this yii\web\View */
+/* @var $indexes app\models\pnrd\indexes\IndexesArticles */
 /* @var $title string */
 /* @var $languages array */
-/* @var $newlanguage \app\models\common\Languages */
+/* @var $classes */
+/* @var $newlanguage app\models\common\Languages */
 /* @var $magazines array */
 
 ?>

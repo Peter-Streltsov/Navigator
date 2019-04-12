@@ -26,6 +26,7 @@ use yii\filters\VerbFilter;
  */
 class CollectionsController extends Controller implements PublicationControllerInterface
 {
+
     /**
      * @inheritdoc
      */
@@ -41,9 +42,11 @@ class CollectionsController extends Controller implements PublicationControllerI
         ];
     } // end function
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Lists all ArticleCollection models
+     * Lists all ArticleCollection models;
      *
      * @return mixed
      */
@@ -58,14 +61,15 @@ class CollectionsController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
-     * Displays a single ArticleCollection model
+     * Displays a single ArticleCollection model;
      *
      * @param $id
      * @return string
      * @throws NotFoundHttpException
-     * @throws \yii\base\InvalidConfigException
      */
     public function actionView($id)
     {
@@ -78,13 +82,10 @@ class CollectionsController extends Controller implements PublicationControllerI
 
 
     /**
-     * Creates a new ArticleCollection model
-     * If creation successful, will redirect to 'view' page
+     * Creates a new ArticleCollection model;
+     * If creation successful, will redirect to 'view' page;
      *
-     * @return string|\yii\web\Response
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
+     * @return string
      */
     public function actionCreate()
     {
@@ -150,7 +151,6 @@ class CollectionsController extends Controller implements PublicationControllerI
      * @param $id
      * @return string
      * @throws NotFoundHttpException
-     * @throws yii\base\InvalidConfigException
      */
     public function actionUpdate($id)
     {
@@ -324,8 +324,7 @@ class CollectionsController extends Controller implements PublicationControllerI
      * @param $id
      * @return string
      * @throws \Throwable
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\StaleObjectException
+     * @throws yii\db\StaleObjectException
      */
     public function actionDeleteauthor($author_id, $id)
     {
@@ -396,6 +395,8 @@ class CollectionsController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * @param int $id
@@ -437,13 +438,12 @@ class CollectionsController extends Controller implements PublicationControllerI
         ]);
     } // end action
 
+    /******************************************************************************************************************/
+
 
     /**
      * @param $id
      * @return string
-     * @throws \yii\base\InvalidConfigException
-     * @throws \yii\db\Exception
-     * @throws \yii\db\StaleObjectException
      */
     public function actionAssociation($id)
     {

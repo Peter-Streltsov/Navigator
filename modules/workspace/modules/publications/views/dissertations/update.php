@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = 'Редактировать данные';
 
 <div>
     <?php
-    echo $this->render('forms/update/dissertationform', [
+    echo $this->render('forms/update/dissertation_form', [
         'cities' => $cities,
         'types' => $types,
         'model' => $model

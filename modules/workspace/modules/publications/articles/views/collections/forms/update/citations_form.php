@@ -5,11 +5,11 @@ use yii\widgets\ActiveForm;
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
 
-/* @var $this \yii\web\View */
-/* @var $citations \app\models\publications\articles\journals\Citations */
+/* @var $this yii\web\View */
+/* @var $citations app\models\publications\articles\journals\Citations */
 /* @var $citation_classes  */
-/* @var $newcitation \app\models\publications\articles\journals\Citations */
-/* @var $model \app\modules\Control\models\Articles|mixed|\yii\db\ActiveRecord */
+/* @var $newcitation app\models\publications\articles\journals\Citations */
+/* @var $model \app\modules\Control\models\Articles|mixed|yii\db\ActiveRecord */
 ?>
 
 <br>
@@ -17,7 +17,7 @@ use yii\grid\ActionColumn;
 
 <div class="panel panel-default">
     <div class="panel panel-heading">
-        <h4>Цитирования:</h4>
+        <h4 style="color: gray;">Цитирования:</h4>
     </div>
     <div class="panel panel-body">
         <br>

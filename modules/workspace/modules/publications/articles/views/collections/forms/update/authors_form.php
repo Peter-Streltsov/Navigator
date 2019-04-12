@@ -8,6 +8,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $file \app\models\filesystem\Fileupload */
 /* @var $model_authors \app\models\publications\articles\collections\ArticleCollection */
 /* @var $this \yii\web\View */
+/* @var $linked_authors */
 /* @var $model \app\models\publications\articles\collections\ArticleCollection */
 /* @var $newauthor \app\models\publications\articles\collections\Authors */
 
@@ -15,7 +16,7 @@ use yii\bootstrap\ActiveForm;
 
 <div class="panel panel-default">
     <div class="panel panel-heading">
-        <h4>Авторы:</h4>
+        <h4 style="color: gray;">Авторы:</h4>
     </div>
     <div class="panel panel-body">
         <div class="row">

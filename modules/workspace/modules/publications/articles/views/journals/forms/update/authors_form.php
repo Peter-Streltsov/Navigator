@@ -1,6 +1,8 @@
 <?php
 
 use kartik\select2\Select2;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
@@ -8,6 +10,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $file app\models\filesystem\Fileupload */
 /* @var $model_authors app\models\publications\articles\collections\ArticleCollection */
 /* @var $this yii\web\View */
+/* @var $linked_authors */
 /* @var $model \app\modules\Control\models\Articles */
 /* @var $newauthor app\models\publications\articles\journals\Authors */
 
@@ -15,7 +18,7 @@ use yii\bootstrap\ActiveForm;
 
 <div class="panel panel-default">
     <div class="panel panel-heading">
-        <h4>Авторы:</h4>
+        <h4 style="color: gray;">Авторы:</h4>
     </div>
     <div class="panel panel-body">
         <div class="row">
@@ -28,7 +31,7 @@ use yii\bootstrap\ActiveForm;
                     <div class="panel-panel-body">
                         <?php
 
-                        echo \yii\grid\GridView::widget([
+                        echo GridView::widget([
                             'dataProvider' => $linked_authors,
                             'layout' => "{items}",
                             'tableOptions' => [
@@ -47,7 +50,7 @@ use yii\bootstrap\ActiveForm;
                                     }
                                 ],
                                 [
-                                    'class' => \yii\grid\ActionColumn::className(),
+                                    'class' => ActionColumn::className(),
                                     'buttons' => [
                                         'delete' => function($url, $model) {
                                             return Html::a('<span style="color: red;" class="glyphicon glyphicon-remove"></span>', 'deleteauthor?author_id='. $model->id . '&id='. $model->article_id);

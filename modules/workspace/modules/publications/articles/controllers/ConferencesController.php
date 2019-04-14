@@ -275,12 +275,12 @@ class ConferencesController extends Controller implements PublicationControllerI
         //------------------------------------------------------------------------------------------------------------//
 
         // updating article data - articleform
-        if (Yii::$app->request->post()) {
+        /*if (Yii::$app->request->post()) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 $newmagazine->magazine = $model->magazine;
                 $newmagazine->save();
             }
-        }
+        }*/
 
         //------------------------------------------------------------------------------------------------------------//
 

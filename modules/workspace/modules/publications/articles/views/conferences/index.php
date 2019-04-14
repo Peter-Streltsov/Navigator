@@ -8,6 +8,7 @@ use yii\helpers\Url;
 use kartik\export\ExportMenu;
 
 /* @var $this yii\web\View */
+/* @var $model app\models\publications\articles\conferences\ArticleConference*/
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Статьи - публикации материалов конференций';
@@ -42,9 +43,31 @@ $this->params['breadcrumbs'][] = $this->title;
     $gridColumns = [
         'id',
         'title:ntext',
+        'year',
         'conference_collection:ntext',
+        'section',
         'number',
-        'language'
+        'class',
+        'number',
+        [
+            'attribute' => 'language',
+            'value' => function ($model) {
+                return $model->languageValue;
+            }
+        ],
+        [
+            'attribute' => 'Авторы',
+            'encodeLabel' => false,
+            'format' => 'raw',
+            'value' => function($model) {
+                $data = '';
+                $authors = $model->getAuthors();
+                foreach ($authors as $author) {
+                    $data .= $author['name'] . ' ' . $author['lastname'] . '; ';
+                }
+                return $data;
+            }
+        ],
     ];
 
     echo ExportMenu::widget([
@@ -53,6 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
     ?>
 
+    <br>
     <br>
     <br>
 
@@ -65,19 +89,31 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
             'id',
-            'title:ntext',
+            'title',
+            'year',
             [
-                'attribute' => 'Общие сведения',
-                'value' => function($model) {
-                            return $model->conference_collection . '; ' . $model->number;
+                'attribute' => 'language',
+                'value' => function ($model) {
+                    return $model->languageValue;
                 }
             ],
-            'language',
+            [
+                'attribute' => '',
+                'format' => 'raw',
+                'value' => function($model) {
+                    $data = '';
+                    $collection = '<b>Сборник</b> - ' . $model->conference_collection . '<br>';
+                    $number = '<b>Номер - </b>' . $model->number . '<br>';
+                    $section = '<b>Раздел сборника - </b>' . $model->section . '<br>';
+                    $data .= $collection . $number . $section;
+                    return $data . '</div>';
+                }
+            ],
             [
                 'attribute' => 'Авторы',
                 'encodeLabel' => false,
                 'format' => 'raw',
-                'value' => function($data) {
+                'value' => function($model) {
 
                     // generates 'view' buttons for article authors
                     $links = function($auth) {
@@ -108,8 +144,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         return implode("<br>", $user);
                     };
 
-                    isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
-                    $authors = $data->getAuthors();
+                    isset($model['authors'][0]) ? $authors = $links($model['authors']) : $authors = null;
+                    $authors = $model->getAuthors();
                     isset ($authors[0]) ? $authors = $links($authors) : $authors = null;
                     return $authors;
                 }
@@ -143,9 +179,30 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                         $modal = ob_get_clean();
                         return $modal;
+                    },
+                    'annotation' => function ($url, $model) {
+                        ob_start();
+
+                        if (isset($model->annotation)) {
+                            Modal::begin([
+                                'header' => "<h2>$model->title</h2><br>",
+                                'size' => 'large',
+                                'toggleButton' => [
+                                    'label' => "<span class='glyphicon glyphicon-file'></span>",
+                                    'style' => 'border-radius: 2pc;',
+                                    'class' => 'button primary big'
+                                ],
+                            ]);
+
+                            echo "<div class=\"panel panel-default\">" . $model->annotation . "</div>";
+
+                            Modal::end();
+                        }
+                        $modal = ob_get_clean();
+                        return $modal;
                     }
                 ],
-                'template' => "{view}<br><br>{file}"
+                'template' => "{view}<br><br>{annotation}<br><br>{file}"
             ],
         ],
     ]); ?>
@@ -164,3 +221,14 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php Pjax::end(); ?>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

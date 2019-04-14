@@ -44,30 +44,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            //'subtitle',
-            //'publisher',
+            'magazine',
+            'number',
+            'language',
+            'doi',
             'year',
             [
-                'attribute' => 'authors',
+                'attribute' => 'Авторы',
                 'encodeLabel' => false,
                 'format' => 'raw',
-                'value' => function($data) {
-
-                    $links = function($auth) {
-
-                        $fio = [];
-
-                        /*foreach ($auth as $author) {
-                            $fio[$author['id']] = $author['lastname'].' '.mb_substr($author['name'],0,1,"UTF-8")."."
-                                .mb_substr($author['secondname'],0,1,"UTF-8").".";
-                        }
-
-                        return implode(' ', $fio);*/
-                    };
-
-                    //isset($data['authors'][0]) ? $authors = $links($data['authors']) : $authors = null;
-
-                    //return $authors;
+                'value' => function($model) {
+                    $data = '';
+                    $authors = $model->getAuthors();
+                    foreach ($authors as $author) {
+                        $data .= $author['name'] . ' ' . $author['lastname'] . '; ';
+                    }
+                    return $data;
                 }
             ],
 
@@ -81,6 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <br>
         <br>
+        <br>
 
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -92,14 +85,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'id',
                 'title',
+                'magazine',
                 'year',
-                [
-                    'attribute' => 'pnrdindex',
-                    'value' => function($model) {
-                        return $model->index;
-                    }
-                ],
-                'doi',
+                'language',
                 [
                     'attribute' => 'authors',
                     'encodeLabel' => false,
@@ -173,7 +161,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $modal;
                         }
                     ],
-                    'template' => "{view}<br><br>{file}"
+                    'template' => "{view}<br><br>{annotation}<br><br>{file}"
                 ],
             ],
         ]);
@@ -199,3 +187,14 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 <?php Pjax::end(); ?>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

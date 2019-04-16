@@ -46,7 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'magazine',
             'number',
-            'language',
+            'direct_number',
+            [
+                'attribute' => 'language',
+                'value' => function ($model) {
+                    return $model->languageValue;
+                }
+            ],
             'doi',
             'year',
             [
@@ -82,12 +88,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id' => 'syntable'
             ],
             'columns' => [
-
                 'id',
                 'title',
-                'magazine',
                 'year',
                 'language',
+                [
+                    'attribute' => '',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        $data = '';
+                        $collection = '<b>Журнал</b> - ' . $model->magazine . '<br>';
+                        $doi = $model->doi == null ? '' : '<b>DOI (ЦИО)</b> - ' . $model->doi . '<br>';
+                        $number = $model->number == null ? '' : '<b>Номер</b> - ' . $model->number . '<br>';
+                        $data .= $collection . $doi . $number;
+                        return $data;
+                    }
+                ],
                 [
                     'attribute' => 'authors',
                     'encodeLabel' => false,
@@ -113,8 +129,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $label = "<button type=\"button\" id=\"dropdownMenuButton\" style='width: 12pc;' data-toggle=\"dropdown\" class=\"btn btn-default\">".$fio[$author['id']]." <span class='caret'></span>"."</button>".$ul;
                                 $tag['br'] = "<br>";
                                 $tag['articles'] = "<li>"
-                                    .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-education'> Данные автора</span>", ['authors/view', 'id' => $author['id']])
-                                    .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-align-justify'> Все публикации автора</span>", ['articles/view', 'id' => $author['id']])
+                                    .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-education'> Данные автора</span>", ['/workspace/authors/view', 'id' => $author['id']])
+                                    .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-align-justify'> Все публикации автора</span>", ['/workspace/authors/publications', 'id' => $author['id']])
                                     ."</li>";
                                 //$tag[] = "<li>".Html::a()."</li>";
                                 $user[] = $top.$label.implode($tag).$bottom;
@@ -136,6 +152,27 @@ $this->params['breadcrumbs'][] = $this->title;
                         'view' => function($url, $model) {
                             $buttonurl = Yii::$app->getUrlManager()->createUrl(['/workspace/articles/journals/view','id'=>$model['id']]);;
                             return Html::a('<span class="glyphicon glyphicon-info-sign"></span>', $buttonurl, ['class' => 'button primary big', 'style' => 'border-radius: 2pc;', 'title' => Yii::t('yii', 'Подробно')]);
+                        },
+                        'annotation' => function ($url, $model) {
+                            ob_start();
+
+                            if (isset($model->annotation)) {
+                                Modal::begin([
+                                    'header' => "<h2>$model->title</h2><br>",
+                                    'size' => 'large',
+                                    'toggleButton' => [
+                                    'label' => "<span class='glyphicon glyphicon-file'></span>",
+                                    'style' => 'border-radius: 2pc;',
+                                    'class' => 'button primary big'
+                                    ],
+                                ]);
+
+                                echo "<div class=\"panel panel-default\">" . $model->annotation . "</div>";
+
+                                Modal::end();
+                            }
+                            $modal = ob_get_clean();
+                            return $modal;
                         },
                         'file' => function($url, $model) {
                             ob_start();

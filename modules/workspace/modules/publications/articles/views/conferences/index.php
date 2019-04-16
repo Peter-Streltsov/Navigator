@@ -106,7 +106,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $number = '<b>Номер - </b>' . $model->number . '<br>';
                     $section = '<b>Раздел сборника - </b>' . $model->section . '<br>';
                     $data .= $collection . $number . $section;
-                    return $data . '</div>';
+                    return $data;
                 }
             ],
             [
@@ -134,8 +134,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             $label = "<button type=\"button\" id=\"dropdownMenuButton\" style='width: 12pc;' data-toggle=\"dropdown\" class=\"btn btn-default\">".$fio[$author['id']]." <span class='caret'></span>"."</button>".$ul;
                             $tag['br'] = "<br>";
                             $tag['articles'] = "<li>"
-                                .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-education'> Данные автора</span>", ['authors/view', 'id' => $author['id']])
-                                .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-align-justify'> Все публикации автора</span>", ['articles/view', 'id' => $author['id']])
+                                .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-education'> Данные автора</span>", ['/workspace/authors/view', 'id' => $author['id']])
+                                .Html::a("<span style='font-size: 12px;' class='glyphicon glyphicon-align-justify'> Все публикации автора</span>", ['/workspace/authors/publications', 'id' => $author['id']])
                                 ."</li>";
                             //$tag[] = "<li>".Html::a()."</li>";
                             $user[] = $top.$label.implode($tag).$bottom;

@@ -45,8 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'type',
         'collection:ntext',
         'section:ntext',
-        //'section_number',
-        //'language',
+        'section_number',
+        'language',
         //'text_index:ntext',
         //'annotation:ntext',
         //'link',
@@ -73,15 +73,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title:ntext',
             'type',
-            'collection:ntext',
-            'section:ntext',
-            'section_number',
-            'language',
-            //'text_index:ntext',
-            //'annotation:ntext',
-            //'link',
-            //'file',
-
+            [
+                'attribute' => 'language',
+                'value' => function ($model) {
+                    return $model->languageValue;
+                }
+            ],
+            [
+                'attribute' => '',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $data = '';
+                    $type = '<b>Вид - </b>' . $model->type . '<br>';
+                    $collection = '<b>Сборник</b> - ' . $model->collection . '<br>';
+                    $section = '<b>Раздел - </b>' . $model->section . '<br>';
+                    $section_number = '<b>Номер раздела - </b>' . $model->section_number . '<br>';
+                    $data .= $type . $collection . $section . $section_number;
+                    return $data;
+                }
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [

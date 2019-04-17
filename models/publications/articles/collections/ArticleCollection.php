@@ -89,6 +89,16 @@ class ArticleCollection extends Article
 
 
     /**
+     * @return string|null
+     */
+    public function getType()
+    {
+        $type = Types::find()->where(['id' => $this->type])->one();
+        return $type == null ? null : $type->type;
+    } // end function
+
+
+    /**
      * @inheritdoc
      * @return ArticleCollectionQuery the active query used by this AR class;
      */

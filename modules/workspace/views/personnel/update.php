@@ -3,11 +3,15 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\Control\models\Personnel */
+/* @var $classes array */
+/* @var $habilitations array */
+/* @var $model app\models\identity\Personnel */
 
 $this->title = 'Редактировать данные - ' . $model->name.' '.$model->lastname;
 $this->params['breadcrumbs'][] = ['label' => 'Сотрудники', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name . ' ' . $model->lastname, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = [
+        'label' => $model->name . ' ' . $model->lastname, 'url' => ['view', 'id' => $model->id]
+];
 $this->params['breadcrumbs'][] = 'Редактировать данные';
 ?>
 <div class="personnel-update">

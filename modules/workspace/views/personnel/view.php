@@ -25,18 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <br>
 
-    <div class="row">
-        <div class="col-lg-10">
-            <?= Html::a('Редактировать данные', ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
-            <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-                'class' => 'button danger big',
-                'data' => [
-                    'confirm' => 'Удалить сотрудника?',
-                    'method' => 'post',
-                    ],
-                ]) ?>
-        </div>
-    </div>
+    <?php
+    if (Yii::$app->access->isAdmin()) {
+        echo $this->render('forms/buttons_form', [
+                'model' => $model
+        ]);
+    }
+    ?>
 
     <br>
     <br>
@@ -44,32 +39,35 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-lg-10">
-            <?= DetailView::widget([
-                'model' => $model,
-                'options' => [
-                    'class' => 'table'
-                ],
-                'attributes' => [
-                    'id',
-                    'name',
-                    'secondname',
-                    'lastname',
-                    'position',
-                    [
-                        'attribute' => 'habilitation',
-                        'value' => function ($model) {
-                            return $model->habilitationValue;
-                        }
-                    ],
-                    //'habilitation',
-                    'employment',
-                    'expirience',
-                    'age',
-                ],
-            ]) ?>
+            <div class="panel panel-default">
+                <div class="panel panel-body">
+                    <?= DetailView::widget([
+                        'model' => $model,
+                        'options' => [
+                            'class' => 'table'
+                        ],
+                        'attributes' => [
+                            'id',
+                            'name',
+                            'secondname',
+                            'lastname',
+                            'position',
+                            [
+                                'attribute' => 'habilitation',
+                                'value' => function ($model) {
+                                    return $model->habilitationValue;
+                                }
+                            ],
+                            'employment',
+                            'expirience',
+                            'age',
+                        ],
+                    ]) ?>
+                </div>
+            </div>
         </div>
     </div>
 
 </div>
 
-<?php
+<?= str_repeat('<br>', 11) ?>

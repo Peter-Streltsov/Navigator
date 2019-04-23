@@ -18,9 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <br>
     <br>
-
-    <?= Html::a('Добавить автора', ['create'], ['class' => 'button primary big']) ?>
-
+    <br>
     <br>
     <br>
 

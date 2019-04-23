@@ -7,6 +7,7 @@ use app\models\common\Habilitations;
 // yii classes
 use app\models\common\Positions;
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * ActiveRecord class for table "personnel";
@@ -20,7 +21,7 @@ use Yii;
  * @property string $expirience
  * @property int $age
  */
-class Personnel extends \yii\db\ActiveRecord
+class Personnel extends ActiveRecord
 {
 
     /**
@@ -68,7 +69,10 @@ class Personnel extends \yii\db\ActiveRecord
     } // end function
 
 
-
+    /**
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
@@ -81,6 +85,8 @@ class Personnel extends \yii\db\ActiveRecord
 
 
     /**
+     * Finds and returns position value for current Personnel model;
+     *
      * @return string
      */
     public function getPositionValue()
@@ -91,6 +97,8 @@ class Personnel extends \yii\db\ActiveRecord
 
 
     /**
+     * Finds and returns science grade value for current Personnel model;
+     *
      * @return mixed
      */
     public function getHabilitationValue()
@@ -101,7 +109,7 @@ class Personnel extends \yii\db\ActiveRecord
 
 
     /**
-     * returns Authors model linked to current staff member
+     * returns Authors model linked to current staff member;
      *
      * @return \yii\db\ActiveQuery
      */
@@ -113,7 +121,7 @@ class Personnel extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return PersonnelQuery the active query used by this AR class.
+     * @return PersonnelQuery the active query used by this AR class;
      */
     public static function find()
     {

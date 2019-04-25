@@ -14,22 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="article-collection-view">
 
     <br>
-
     <h3><?= Html::encode($this->title) ?></h3>
-
     <br>
     <br>
 
-    <p>
-        <?= Html::a('Редактировать данные', ['update', 'id' => $model->id], ['class' => 'button primary big']) ?>
-        <?= Html::a('Удалить статью', ['delete', 'id' => $model->id], [
-            'class' => 'button danger big',
-            'data' => [
-                'confirm' => 'Удалить статью? (действие отменить невозможно)',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <?= Yii::$app->access->isAdmin() ? $this->render('forms/view/buttons_form', ['model' => $model]) : ''; ?>
 
     <br>
     <br>
@@ -93,9 +82,25 @@ $this->params['breadcrumbs'][] = $this->title;
                                     return $index == null ? null : $modal;
                                 }
                             ],
-                            'created_at:time',
-                            'updated_at',
-                            'link',
+                            [
+                                'attribute' => 'created_at',
+                                'value' => function ($model) {
+                                    return date('d/m/Y - G:i:s', $model->created_at);
+                                }
+                            ],
+                            [
+                                'attribute' => 'updated_at',
+                                'value' => function ($model) {
+                                    return date('d/m/Y - G:i:s', $model->updated_at);
+                                }
+                            ],
+                            [
+                                'attribute' => 'link',
+                                'format' => 'raw',
+                                'value' => function ($model) {
+                                    return Html::a($model->link, $model->link, ['style' => 'color: gray;']);
+                                }
+                            ],
                             'file',
                         ],
                     ]) ?>

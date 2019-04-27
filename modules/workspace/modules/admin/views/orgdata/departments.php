@@ -4,6 +4,8 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Html;
 
+/* @var $departments yii\data\ActiveDataProvider */
+
 ?>
 
 <div class="row">
@@ -31,6 +33,8 @@ use yii\helpers\Html;
 
                         <?php Pjax::end(); ?>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-8">
                         <?php
                         echo GridView::widget([
@@ -50,10 +54,17 @@ use yii\helpers\Html;
                                     'class' => 'yii\grid\ActionColumn',
                                     'buttons' => [
                                         'update' => function($url, $model) {
-                                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '/control/admin/orgdata/updatedepartment?id=' . $model->id);
+                                            return Html::a(
+                                                    '<span class="glyphicon glyphicon-pencil"></span>',
+                                                    '/control/admin/orgdata/updatedepartment?id=' . $model->id
+                                            );
                                         },
                                         'delete' => function($url, $model) {
-                                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', '/control/admin/orgdata/deletedepartment?id=' . $model->id, ['data' => ['method' => 'post']]);
+                                            return Html::a(
+                                                    '<span class="glyphicon glyphicon-trash"></span>',
+                                                    '/control/admin/orgdata/deletedepartment?id=' . $model->id,
+                                                    ['data' => ['method' => 'post']]
+                                            );
                                         }
                                     ],
                                     'template' => '{update} {delete}'

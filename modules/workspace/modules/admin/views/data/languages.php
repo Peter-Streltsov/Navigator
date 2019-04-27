@@ -1,6 +1,10 @@
 <?php
 
 use yii\grid\GridView;
+use yii\widgets\Pjax;
+use yii\helpers\Html;
+
+/* @var $languages yii\data\ActiveDataProvider */
 
 ?>
 
@@ -10,13 +14,28 @@ use yii\grid\GridView;
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel panel-heading">
-                <h4>Список сохраненных языков</h4>
+                <h4 style="color: gray;">Список сохраненных языков</h4>
             </div>
             <div class="panel panel-body">
                 <br>
-                <p>
-                    <?= \yii\helpers\Html::a('Добавить язык', '/workspace/admin/data/addlanguage', ['class' => 'button primary big']) ?>
-                </p>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <?php
+                        Pjax::begin([
+                            'enablePushState' => false
+                        ]);
+                        ?>
+
+                        <?= Html::a(
+                            '<span style="color: lightgreen;" class="glyphicon glyphicon-plus">  <t style="color: gray;">Добавить язык</t></span>',
+                            ['/workspace/admin/data/addlanguage'],
+                            ['class' => 'btn btn-default']
+                        );?>
+
+                        <?php Pjax::end(); ?>
+                    </div>
+                </div>
                 <br>
                 <div class="row">
                     <div class="col-lg-8">
@@ -25,6 +44,7 @@ use yii\grid\GridView;
                         echo GridView::widget([
                             'dataProvider' => $languages,
                             'tableOptions' => [
+                                'style' => 'color: gray;',
                                 'class' => 'table table-hover'
                             ],
                             'layout' => '{items}',
@@ -32,7 +52,26 @@ use yii\grid\GridView;
                                 [
                                     'attribute' => 'language',
                                     'label' => ''
-                                ]
+                                ],
+                                [
+                                    'class' => 'yii\grid\ActionColumn',
+                                    'buttons' => [
+                                        'update' => function($url, $model) {
+                                            return Html::a(
+                                                    '<span class="glyphicon glyphicon-pencil"></span>',
+                                                    '/workspace/admin/orgdata/language_update?id=' . $model->id
+                                            );
+                                        },
+                                        'delete' => function($url, $model) {
+                                            return Html::a(
+                                                    '<span class="glyphicon glyphicon-trash"></span>',
+                                                    '/workspace/admin/orgdata/language_delete?id=' . $model->id,
+                                                    ['data' => ['method' => 'post']]
+                                            );
+                                        }
+                                    ],
+                                    'template' => '{update} {delete}'
+                                ],
                             ]
                         ])
 

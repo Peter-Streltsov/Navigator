@@ -3,6 +3,8 @@
 use yii\grid\GridView;
 use yii\bootstrap\Tabs;
 
+/* @var $dataprovider yii\data\ActiveDataProvider*/
+
 ?>
 
 <h3>Перечень публикаций</h3>
@@ -11,10 +13,10 @@ use yii\bootstrap\Tabs;
 
 <?php
 
-$listed = \yii\widgets\ListView::widget([
+/*$listed = \yii\widgets\ListView::widget([
     'dataProvider' => $dataprovider,
     'itemView' => 'items/unitdescript'
-]);
+]);*/
 
 ?>
 
@@ -27,7 +29,24 @@ $listed = \yii\widgets\ListView::widget([
     <div class="tab-pane active" id="articles" role="tabpanel">
         <br>
         <br>
-        <?= $listed ?>
+        <div class="alert alert-warning" role="alert">
+            Раздел находится в разработке
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <?php
+        //$listed
+        ?>
     </div>
     <div class="tab-pane" id="monograph" role="tabpanel">
         <h5>Under development</h5>
